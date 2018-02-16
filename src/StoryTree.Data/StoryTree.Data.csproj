@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventTree.cs" />
     <Compile Include="FrequencyLinePoint.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Tree\IProbabilitySpecification.cs" />

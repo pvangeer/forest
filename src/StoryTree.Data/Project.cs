@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using StoryTree.Data.Tree;
+using System.Collections.ObjectModel;
 
 namespace StoryTree.Data
 {
@@ -8,13 +8,12 @@ namespace StoryTree.Data
     {
         public Project()
         {
-            Name = "Project 1";
-            MainTreeEvent = new TreeEvent();
+            EventTrees = new ObservableCollection<EventTree>();
         }
 
         public string Name { get; set; }
 
-        public TreeEvent MainTreeEvent { get; }
+        public ObservableCollection<EventTree> EventTrees { get; }
 
         public IEnumerable<FrequencyLinePoint> FrequencyLine { get; set; }
     }

@@ -20,3 +20,6 @@ src/StoryTree.Data/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70
 src/StoryTree.Data/obj/Debug/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
 src/StoryTree.Data/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
 src/StoryTree.Data/obj/Debug/StoryTree.Data.csproj.FileListAbsolute.txt
+src/StoryTree.Gui/obj/Debug/EventTreeControl.g.cs
+src/StoryTree.Gui/obj/Debug/StoryTree.Gui_MarkupCompile.i.lref
+src/StoryTree.Gui/obj/Debug/EventTreeControl.baml

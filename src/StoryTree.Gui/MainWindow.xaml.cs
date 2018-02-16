@@ -17,23 +17,40 @@ namespace StoryTree.Gui
             // Testcode
             DataContext = new ProjectViewModel(new Project
             {
-                MainTreeEvent =
+                EventTrees =
                 {
-                    Name = "First element",
-                    TrueEvent = new TreeEvent
-                    {
-                        Name = "Second element",
-                        TrueEvent = new TreeEvent
-                        {
-                            Name = "Third element",
-                            TrueEvent = new TreeEvent
-                            {
-                                Name = "EndNode"
-                            }
-                        }
-                    }
+                    GetEventTree("First event tree",3),
+                    GetEventTree("Second event tree",2),
+                    GetEventTree("3",4)
                 }
             });
+        }
+
+        private static EventTree GetEventTree(string treeDescription, int numberTreeEvents)
+        {
+            var mainTreeEvent = new TreeEvent
+            {
+                Name = "First element"
+            };
+
+            var tree = new EventTree
+            {
+                Description = treeDescription,
+                MainTreeEvent = mainTreeEvent
+            };
+
+            var currentTreeEvent = mainTreeEvent;
+            for (int i = 0; i < numberTreeEvents - 1; i++)
+            {
+                var trueEvent = new TreeEvent
+                {
+                    Name = string.Format("Event no. {0}",i+1)
+                };
+                currentTreeEvent.TrueEvent = trueEvent;
+                currentTreeEvent = trueEvent;
+            }
+
+            return tree;
         }
     }
 }
