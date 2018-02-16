@@ -127,8 +127,8 @@
                                 <Setter Property="ContentTemplate" Value="{DynamicResource EndEventTemplate}" />
                             </DataTrigger>
                         </Style.Triggers>
-                        <Setter Property="Content" Value="{Binding Self}"></Setter>
-                        <Setter Property="DataContext" Value="{Binding Self}"></Setter>
+                        <Setter Property="Content" Value="{Binding }"></Setter>
+                        <Setter Property="DataContext" Value="{Binding }"></Setter>
                     </Style>
                 </ContentControl.Style>
             </ContentControl>
@@ -140,7 +140,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
         </Grid.RowDefinitions>
-        <ContentControl Grid.Row="1" DataContext="{Binding MainTreeEventViewModel}" Content="{Binding Self}" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+        <ContentControl Grid.Row="1" DataContext="{Binding MainTreeEventViewModel}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
     </Grid>
 </UserControl>
 

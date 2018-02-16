@@ -7,17 +7,17 @@
              xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
              xmlns:userControls="clr-namespace:StoryTree.Gui.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="500">
     <UserControl.DataContext>
         <viewModels:ProjectViewModel></viewModels:ProjectViewModel>
     </UserControl.DataContext>
     <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="100"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*" MinWidth="150"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto" MinWidth="100"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <GridSplitter Grid.Column="1" Width="10"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   />
         <GridSplitter Grid.Column="3" Width="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  />
@@ -25,7 +25,12 @@
         <ScrollViewer Grid.Column="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <userControls:EventTreeControl DataContext="{Binding SelectedEventTree}"></userControls:EventTreeControl>
         </ScrollViewer>
-        <ContentControl Grid.Column="4" Width="50" Background="Coral"></ContentControl>
+        <Border Grid.Column="4" Background="Coral">
+            <ContentControl>
+                <TextBlock Text="Hier moeten eigenschappen komen"></TextBlock>
+            </ContentControl>
+        </Border>
+        
     </Grid>
 </UserControl>
 

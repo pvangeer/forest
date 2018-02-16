@@ -1,20 +1,142 @@
-﻿<Window x:Class="StoryTree.Gui.MainWindow"
+﻿<fluent:RibbonWindow x:Class="StoryTree.Gui.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:modelViews="clr-namespace:StoryTree.Gui.ViewModels"
-        xmlns:gui="clr-namespace:StoryTree.Gui"
-        xmlns:userControls="clr-namespace:StoryTree.Gui.UserControls"
+        xmlns:controls="clr-namespace:StoryTree.Gui.UserControls"
+        xmlns:fluent="urn:fluent-ribbon"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Window.DataContext>
         <modelViews:ProjectViewModel></modelViews:ProjectViewModel>
     </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml"/>
+                
+                <ResourceDictionary>
+                    <!--Template to switch the content representation -->
+                    <DataTemplate x:Key="ContentTemplateSwitch" DataType="modelViews:ProjectViewModel">
+                        <ContentControl>
+                            <ContentControl.Style>
+                                <Style TargetType="{x:Type ContentControl}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedTabItem.Header, ElementName=Ribbon}" Value="Gegevens">
+                                            <Setter Property="ContentTemplate" Value="{DynamicResource GeneralDataTemplate}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding SelectedTabItem.Header, ElementName=Ribbon}" Value="Deelnemers">
+                                            <Setter Property="ContentTemplate" Value="{DynamicResource ParticipantsTemplate}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding SelectedTabItem.Header, ElementName=Ribbon}" Value="Faalpaden">
+                                            <Setter Property="ContentTemplate" Value="{DynamicResource EventTreeTemplate}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Setter Property="DataContext" Value="{Binding}"></Setter>
+                                </Style>
+                            </ContentControl.Style>
+                        </ContentControl>
+                    </DataTemplate>
+
+                    <!--Template for showing general project data (sketch etc.)-->
+                    <DataTemplate x:Key="GeneralDataTemplate" DataType="modelViews:ProjectViewModel">
+                        <ContentControl DataContext="{Binding}">
+                            <TextBlock Text="{Binding ProjectName}" TextAlignment="Center" Background="{Binding Color}">
+                            </TextBlock>
+                        </ContentControl>
+                    </DataTemplate>
+
+                    <!--Template for showing and entering all participants-->
+                    <DataTemplate x:Key="ParticipantsTemplate" DataType="modelViews:ProjectViewModel">
+                        <ContentControl>
+                            <TextBlock Text="Participants" TextAlignment="Center"></TextBlock>
+                        </ContentControl>
+                    </DataTemplate>
+
+                    <!--Template for showing the event tree-->
+                    <DataTemplate x:Key="EventTreeTemplate" DataType="modelViews:ProjectViewModel">
+                        <controls:StoryBoardControl Content="{Binding}"></controls:StoryBoardControl>
+                    </DataTemplate>
+
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <userControls:StoryBoardControl DataContext="{Binding}"></userControls:StoryBoardControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <fluent:Ribbon Focusable="True" x:Name="Ribbon" AutomaticStateManagement="False" x:FieldModifier="protected">
+            <!--Backstage-->
+            <fluent:Ribbon.Menu>
+                <fluent:Backstage Background="#008fc5" x:Name="Menu" x:FieldModifier="private">
+
+                    <fluent:BackstageTabControl>
+                        <fluent:Button Header="Nieuw bestand"
+                                       x:Name="ButtonMenuFileNewProject"
+                                       Icon="/Core.Common.Gui;component\Resources\DocumentHS.png"
+                                       fluent:KeyTip.Keys="N"
+                                       Click="OnFileNewClicked" x:FieldModifier="private" />
+
+                        <fluent:Button Header="Opslaan" 
+                                       x:Name="ButtonMenuFileSaveProject"
+                                       Icon="/Core.Common.Gui;component\Resources\saveHS.png"
+                                       fluent:KeyTip.Keys="S"
+                                       Click="OnFileSaveClicked" x:FieldModifier="private" />
+
+                        <fluent:Button Header="Opslaan Als"
+                                       x:Name="ButtonMenuFileSaveProjectAs"
+                                       Icon="/Core.Common.Gui;component\Resources\SaveAsHH.png"
+                                       fluent:KeyTip.Keys="A" 
+                                       Click="OnFileSaveAsClicked" x:FieldModifier="private" />
+
+                        <fluent:Button Header="Openen"
+                                       x:Name="ButtonMenuFileOpenProject"
+                                       Icon="/Core.Common.Gui;component\Resources\openfolderHS.png"
+                                       fluent:KeyTip.Keys="O"
+                                       Click="OnFileOpenClicked" x:FieldModifier="private" />
+
+                        <fluent:SeparatorTabItem />
+
+                        <fluent:Button Header="Afsluiten"
+                                       Icon="/Core.Common.Gui;component\Resources\ClosePreviewHH.png"
+                                       fluent:KeyTip.Keys="X"
+                                       Click="OnFileExitClicked" />
+
+                    </fluent:BackstageTabControl>
+                </fluent:Backstage>
+            </fluent:Ribbon.Menu>
+
+            <!-- Start -->
+            <fluent:RibbonTabItem Header="Gegevens" fluent:KeyTip.Keys="S" />
+
+            <!--View-->
+            <fluent:RibbonTabItem Header="Deelnemers" fluent:KeyTip.Keys="V" >
+                <!--
+                <fluent:RibbonGroupBox Header="{x:Static properties:Resources.Ribbon_GroupBox_Show_Hide}" fluent:KeyTip.Keys="ZS">
+                    <fluent:ToggleButton x:Name="ButtonShowProperties" Header="{x:Static properties:Resources.Ribbon_Properties}" Icon="/Core.Common.Gui;component\Resources\PropertiesHS.png" Click="ButtonShowProperties_Click" SizeDefinition="Middle,Small,Small" fluent:KeyTip.Keys="P" />
+                    <fluent:ToggleButton x:Name="ButtonShowMessages" Header="{x:Static properties:Resources.Ribbon_Messages}" Icon="/Core.Common.Gui;component\Resources\application_view_list.png" Click="ButtonShowMessages_Click" SizeDefinition="Middle,Small,Small" fluent:KeyTip.Keys="M" />
+                </fluent:RibbonGroupBox>
+-->
+            </fluent:RibbonTabItem>
+
+            <fluent:RibbonTabItem Header="Faalpaden">
+            </fluent:RibbonTabItem>
+
+        </fluent:Ribbon>
+        <ContentControl 
+            Grid.Row="1"
+            ContentTemplate="{DynamicResource ContentTemplateSwitch}">
+        </ContentControl>
     </Grid>
-</Window>
+</fluent:RibbonWindow>
+
+
+
+
 
 
 
