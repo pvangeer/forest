@@ -7,13 +7,17 @@
         xmlns:controls="clr-namespace:StoryTree.Gui.UserControls"
         xmlns:fluent="urn:fluent-ribbon"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" x:Name="MainRibbonWindow">
+        Title="MainWindow" Height="600" Width="900" x:Name="MainRibbonWindow">
     <Window.DataContext>
         <modelViews:ProjectViewModel></modelViews:ProjectViewModel>
     </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml"/>
     </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        Executed="CloseCommandHandler"/>
+    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -27,24 +31,28 @@
 
                     <fluent:BackstageTabControl>
                         <fluent:Button Header="Nieuw bestand"
+                                       IsEnabled="False"
                                        x:Name="ButtonMenuFileNewProject"
                                        Icon="/Core.Common.Gui;component\Resources\DocumentHS.png"
                                        fluent:KeyTip.Keys="N"
                                        Click="OnFileNewClicked" x:FieldModifier="private" />
 
                         <fluent:Button Header="Opslaan" 
+                                       IsEnabled="False"
                                        x:Name="ButtonMenuFileSaveProject"
                                        Icon="/Core.Common.Gui;component\Resources\saveHS.png"
                                        fluent:KeyTip.Keys="S"
                                        Click="OnFileSaveClicked" x:FieldModifier="private" />
 
                         <fluent:Button Header="Opslaan Als"
+                                       IsEnabled="False"
                                        x:Name="ButtonMenuFileSaveProjectAs"
                                        Icon="/Core.Common.Gui;component\Resources\SaveAsHH.png"
                                        fluent:KeyTip.Keys="A" 
                                        Click="OnFileSaveAsClicked" x:FieldModifier="private" />
 
                         <fluent:Button Header="Openen"
+                                       IsEnabled="False"
                                        x:Name="ButtonMenuFileOpenProject"
                                        Icon="/Core.Common.Gui;component\Resources\openfolderHS.png"
                                        fluent:KeyTip.Keys="O"
@@ -55,7 +63,7 @@
                         <fluent:Button Header="Afsluiten"
                                        Icon="/Core.Common.Gui;component\Resources\ClosePreviewHH.png"
                                        fluent:KeyTip.Keys="X"
-                                       Click="OnFileExitClicked" />
+                                       Command="ApplicationCommands.Close"/>
 
                     </fluent:BackstageTabControl>
                 </fluent:Backstage>

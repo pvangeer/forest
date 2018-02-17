@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using StoryTree.Data;
 using StoryTree.Data.Tree;
 using StoryTree.Gui.UserControls;
@@ -98,6 +99,11 @@ namespace StoryTree.Gui
             {
                 HostControl.Content = new StoryBoardControl {DataContext = DataContext};
             }
+        }
+
+        private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
