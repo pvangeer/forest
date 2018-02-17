@@ -1,6 +1,8 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using StoryTree.Data;
 using StoryTree.Data.Tree;
+using StoryTree.Gui.UserControls;
 using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui
@@ -76,6 +78,26 @@ namespace StoryTree.Gui
         private void OnFileExitClicked(object sender, RoutedEventArgs e)
         {
             throw new System.NotImplementedException();
+        }
+
+        private void Ribbon_OnSelectedTabChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // TODO: This can be achieved via bindings and datatemplates, but passing DataContext was a big problem for some reason
+            HostControl.Content = null;
+            if (Equals(Ribbon.SelectedTabItem, GeneralDataTabItem))
+            {
+                // Show general data control
+            }
+
+            if (Equals(Ribbon.SelectedTabItem, ParticipatntsTabItem))
+            {
+                // Show participants control
+            }
+
+            if (Equals(Ribbon.SelectedTabItem, EventsTreeTabItem))
+            {
+                HostControl.Content = new StoryBoardControl {DataContext = DataContext};
+            }
         }
     }
 }

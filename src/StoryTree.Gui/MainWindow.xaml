@@ -7,61 +7,12 @@
         xmlns:controls="clr-namespace:StoryTree.Gui.UserControls"
         xmlns:fluent="urn:fluent-ribbon"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" x:Name="MainRibbonWindow">
     <Window.DataContext>
         <modelViews:ProjectViewModel></modelViews:ProjectViewModel>
     </Window.DataContext>
     <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml"/>
-                
-                <ResourceDictionary>
-                    <!--Template to switch the content representation -->
-                    <DataTemplate x:Key="ContentTemplateSwitch" DataType="modelViews:ProjectViewModel">
-                        <ContentControl>
-                            <ContentControl.Style>
-                                <Style TargetType="{x:Type ContentControl}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding SelectedTabItem.Header, ElementName=Ribbon}" Value="Gegevens">
-                                            <Setter Property="ContentTemplate" Value="{DynamicResource GeneralDataTemplate}" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding SelectedTabItem.Header, ElementName=Ribbon}" Value="Deelnemers">
-                                            <Setter Property="ContentTemplate" Value="{DynamicResource ParticipantsTemplate}" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding SelectedTabItem.Header, ElementName=Ribbon}" Value="Faalpaden">
-                                            <Setter Property="ContentTemplate" Value="{DynamicResource EventTreeTemplate}" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                    <Setter Property="DataContext" Value="{Binding}"></Setter>
-                                </Style>
-                            </ContentControl.Style>
-                        </ContentControl>
-                    </DataTemplate>
-
-                    <!--Template for showing general project data (sketch etc.)-->
-                    <DataTemplate x:Key="GeneralDataTemplate" DataType="modelViews:ProjectViewModel">
-                        <ContentControl DataContext="{Binding}">
-                            <TextBlock Text="{Binding ProjectName}" TextAlignment="Center" Background="{Binding Color}">
-                            </TextBlock>
-                        </ContentControl>
-                    </DataTemplate>
-
-                    <!--Template for showing and entering all participants-->
-                    <DataTemplate x:Key="ParticipantsTemplate" DataType="modelViews:ProjectViewModel">
-                        <ContentControl>
-                            <TextBlock Text="Participants" TextAlignment="Center"></TextBlock>
-                        </ContentControl>
-                    </DataTemplate>
-
-                    <!--Template for showing the event tree-->
-                    <DataTemplate x:Key="EventTreeTemplate" DataType="modelViews:ProjectViewModel">
-                        <controls:StoryBoardControl Content="{Binding}"></controls:StoryBoardControl>
-                    </DataTemplate>
-
-                </ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -69,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <fluent:Ribbon Focusable="True" x:Name="Ribbon" AutomaticStateManagement="False" x:FieldModifier="protected">
+        <fluent:Ribbon Focusable="True" x:Name="Ribbon" AutomaticStateManagement="False" x:FieldModifier="protected" SelectedTabChanged="Ribbon_OnSelectedTabChanged">
             <!--Backstage-->
             <fluent:Ribbon.Menu>
                 <fluent:Backstage Background="#008fc5" x:Name="Menu" x:FieldModifier="private">
@@ -111,10 +62,10 @@
             </fluent:Ribbon.Menu>
 
             <!-- Start -->
-            <fluent:RibbonTabItem Header="Gegevens" fluent:KeyTip.Keys="S" />
+            <fluent:RibbonTabItem Name="GeneralDataTabItem" Header="Gegevens" fluent:KeyTip.Keys="S" />
 
             <!--View-->
-            <fluent:RibbonTabItem Header="Deelnemers" fluent:KeyTip.Keys="V" >
+            <fluent:RibbonTabItem Name="ParticipatntsTabItem" Header="Deelnemers" fluent:KeyTip.Keys="V" >
                 <!--
                 <fluent:RibbonGroupBox Header="{x:Static properties:Resources.Ribbon_GroupBox_Show_Hide}" fluent:KeyTip.Keys="ZS">
                     <fluent:ToggleButton x:Name="ButtonShowProperties" Header="{x:Static properties:Resources.Ribbon_Properties}" Icon="/Core.Common.Gui;component\Resources\PropertiesHS.png" Click="ButtonShowProperties_Click" SizeDefinition="Middle,Small,Small" fluent:KeyTip.Keys="P" />
@@ -123,13 +74,11 @@
 -->
             </fluent:RibbonTabItem>
 
-            <fluent:RibbonTabItem Header="Faalpaden">
+            <fluent:RibbonTabItem Name="EventsTreeTabItem" Header="Faalpaden">
             </fluent:RibbonTabItem>
 
         </fluent:Ribbon>
-        <ContentControl 
-            Grid.Row="1"
-            ContentTemplate="{DynamicResource ContentTemplateSwitch}">
+        <ContentControl Name="HostControl" Grid.Row="1">
         </ContentControl>
     </Grid>
 </fluent:RibbonWindow>
