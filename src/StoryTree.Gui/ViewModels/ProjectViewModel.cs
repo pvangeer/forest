@@ -1,8 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Media;
 using StoryTree.Data;
-using StoryTree.Data.Tree;
 
 namespace StoryTree.Gui.ViewModels
 {
@@ -24,10 +22,6 @@ namespace StoryTree.Gui.ViewModels
         public ObservableCollection<EventTreeViewModel> EventTrees { get; }
 
         public ProjectViewModel Self => this;
-
-        public EventTreeViewModel SelectedEventTree => EventTrees?.FirstOrDefault();
-
-        public Brush Color => new SolidColorBrush(Colors.BlanchedAlmond);
 
         public string ProjectName => Project.Name;
     }

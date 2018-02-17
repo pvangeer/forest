@@ -20,17 +20,23 @@
         </Grid.ColumnDefinitions>
         <GridSplitter Grid.Column="1" Width="10"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   />
         <GridSplitter Grid.Column="3" Width="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  />
-        <ListView Grid.Column="0" ItemsSource="{Binding EventTrees}" HorizontalContentAlignment="Stretch">
+        <ListView 
+            x:Name="ListView" 
+            Grid.Column="0" 
+            ItemsSource="{Binding EventTrees}" 
+            SelectedIndex="0"
+            HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <TextBlock Text="{Binding Name}" Padding="5" Margin="0,0,0,1" Background="Gainsboro"></TextBlock>
+                        <TextBlock Text="{Binding Name}" Padding="5" Margin="0,0,0,1" Background="Gainsboro">
+                        </TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         <ScrollViewer Grid.Column="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <userControls:EventTreeControl DataContext="{Binding SelectedEventTree}"></userControls:EventTreeControl>
+            <userControls:EventTreeControl DataContext="{Binding SelectedItem, ElementName=ListView}"/>
         </ScrollViewer>
         <Border Grid.Column="4" Background="Coral">
             <ContentControl>
