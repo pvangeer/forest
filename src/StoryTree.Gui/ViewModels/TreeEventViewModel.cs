@@ -19,8 +19,14 @@ namespace StoryTree.Gui.ViewModels
 
         public TreeEventViewModel FalseEvent => TreeEvent.FalseEvent == null ? null : new TreeEventViewModel(TreeEvent.FalseEvent);
 
-        public bool IsConnectingEvent => TreeEvent.TrueEvent != null;
+        public bool IsEndPointEvent => TreeEvent.TrueEvent == null && TreeEvent.FalseEvent == null;
 
+        public bool HasTrueEventOnly => TreeEvent.TrueEvent != null && TreeEvent.FalseEvent == null;
+
+        public bool HasFalseEventOnly => TreeEvent.TrueEvent == null && TreeEvent.FalseEvent != null;
+
+        public bool HasTwoEvents => TreeEvent.TrueEvent != null && TreeEvent.FalseEvent != null;
+        
         public TreeEventViewModel Self => this;
     }
 }

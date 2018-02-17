@@ -44,12 +44,12 @@ namespace StoryTree.Gui
             var currentTreeEvent = mainTreeEvent;
             for (int i = 0; i < numberTreeEvents - 1; i++)
             {
-                var trueEvent = new TreeEvent
+                var falseEvent = new TreeEvent
                 {
                     Name = string.Format("Event no. {0}",i+1)
                 };
-                currentTreeEvent.TrueEvent = trueEvent;
-                currentTreeEvent = trueEvent;
+                currentTreeEvent.FalseEvent = falseEvent;
+                currentTreeEvent = falseEvent;
             }
 
             return tree;

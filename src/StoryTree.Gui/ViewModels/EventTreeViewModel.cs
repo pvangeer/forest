@@ -16,6 +16,8 @@ namespace StoryTree.Gui.ViewModels
 
         private EventTree EventTree { get; }
 
+        public string Name => EventTree?.Description;
+
         public TreeEventViewModel MainTreeEventViewModel => EventTree?.MainTreeEvent == null
             ? null
             : new TreeEventViewModel(EventTree.MainTreeEvent);

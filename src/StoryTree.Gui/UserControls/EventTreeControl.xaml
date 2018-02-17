@@ -10,6 +10,36 @@
         <viewModels:EventTreeViewModel></viewModels:EventTreeViewModel>
     </UserControl.DataContext>
     <UserControl.Resources>
+        <DataTemplate x:Key="ChoiceNodeTemplate" DataType="viewModels:TreeEventViewModel">
+            <Border Background="DarkGray">
+                <Grid Width="120">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{Binding Name}" Padding="1,2,1,3" FontWeight="Bold" FontSize="14"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="{Binding Description}" Padding="1,2,1,3" FontSize="10"></TextBlock>
+                    <Grid.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <Trigger Property="Grid.IsMouseOver" Value="True">
+                                    <Setter Property="Grid.Background" Value="DarkSeaGreen"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="FalseEndPointTemplate" DataType="viewModels:TreeEventViewModel">
+            <TextBlock Text="Falen" Background="LightCoral" Height="50"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TrueEndPointTemplate" DataType="viewModels:TreeEventViewModel">
+            <TextBlock Text="Niet falen" Background="DarkSeaGreen" Height="50"/>
+        </DataTemplate>
+
         <DataTemplate x:Key="EndEventTemplate" DataType="viewModels:TreeEventViewModel">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -22,44 +52,13 @@
                     <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
                     <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="1" Grid.Column="0" CornerRadius="5" BorderThickness="2" BorderBrush="SaddleBrown">
-                    <Border.Style>
-                        <Style TargetType="Border">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ThicknessAnimation Duration="0:0:0.400" To="3" Storyboard.TargetProperty="BorderThickness" />
-                                                <ColorAnimation Duration="0:0:0.400" From="SaddleBrown" To="Green" Storyboard.TargetProperty="BorderBrush"></ColorAnimation>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.EnterActions>
-                                    <Trigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ThicknessAnimation Duration="0:0:0.250" To="2" Storyboard.TargetProperty="BorderThickness" />
-                                                <ColorAnimation Duration="0:0:0.400" From="Green" To="SaddleBrown" Storyboard.TargetProperty="BorderBrush"></ColorAnimation>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.ExitActions>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                </Border>
-                <Grid Grid.Row="1" Grid.Column="0" Width="120">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="25"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="{Binding Name}"></TextBlock>
-                    <TextBlock Grid.Row="1" Text="{Binding Description}"></TextBlock>
-                </Grid>
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="Falen" Background="MediumAquamarine" Height="50"/>
+                <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
+                <ContentPresenter Grid.Row="0" Grid.Column="2" ContentTemplate="{DynamicResource FalseEndPointTemplate}" Content="{Binding}"></ContentPresenter>
+                <ContentPresenter Grid.Row="2" Grid.Column="2" ContentTemplate="{DynamicResource TrueEndPointTemplate}" Content="{Binding}"></ContentPresenter>
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="ConnectingEventTemplate" DataType="viewModels:TreeEventViewModel">
+
+        <DataTemplate x:Key="FalseEventOnlyTemplate" DataType="viewModels:TreeEventViewModel">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -71,59 +70,63 @@
                     <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
                     <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="1" 
-                        Grid.Column="0" 
-                        CornerRadius="1" 
-                        BorderThickness="2" 
-                        BorderBrush="SaddleBrown"
-                        Background="AliceBlue">
-                    <Border.Style>
-                        <Style TargetType="Border">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Trigger.EnterActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ThicknessAnimation Duration="0:0:0.400" To="3" Storyboard.TargetProperty="BorderThickness" />
-                                                <ColorAnimation Duration="0:0:0.400" From="SaddleBrown" To="Green" Storyboard.TargetProperty="BorderBrush"></ColorAnimation>
-                                                <ColorAnimation Duration="0:0:0.400" From="AliceBlue" To="DarkGray" Storyboard.TargetProperty="Background"></ColorAnimation>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.EnterActions>
-                                    <Trigger.ExitActions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <ThicknessAnimation Duration="0:0:0.250" To="2" Storyboard.TargetProperty="BorderThickness" />
-                                                <ColorAnimation Duration="0:0:0.400" From="Green" To="SaddleBrown" Storyboard.TargetProperty="BorderBrush"></ColorAnimation>
-                                                <ColorAnimation Duration="0:0:0.400" From="DarkGray" To="AliceBlue" Storyboard.TargetProperty="Background"></ColorAnimation>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </Trigger.ExitActions>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                </Border>
-                <Grid Grid.Row="1" Grid.Column="0" Width="120">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="{Binding Name}"></TextBlock>
-                    <TextBlock Grid.Row="1" Text="{Binding Description}"></TextBlock>
-                </Grid>
-                <ContentControl Grid.Row="0" Grid.Column="2" DataContext="{Binding TrueEvent}" Content="{Binding Self}" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+                <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
+                <ContentControl Grid.Row="0" Grid.Column="2" DataContext="{Binding FalseEvent}" Content="{Binding Self}" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+                <ContentPresenter Grid.Row="2" Grid.Column="2" ContentTemplate="{DynamicResource TrueEndPointTemplate}" Content="{Binding}"></ContentPresenter>
             </Grid>
         </DataTemplate>
+
+        <DataTemplate x:Key="TrueEventOnlyTemplate" DataType="viewModels:TreeEventViewModel">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
+                    <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
+                    <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
+                </Grid.RowDefinitions>
+                <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
+                <ContentPresenter Grid.Row="0" Grid.Column="2" ContentTemplate="{DynamicResource FalseEndPointTemplate}" Content="{Binding}"></ContentPresenter>
+                <ContentControl Grid.Row="2" Grid.Column="2" DataContext="{Binding TrueEvent}" Content="{Binding Self}" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TwoEventsTemplate" DataType="viewModels:TreeEventViewModel">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
+                    <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
+                    <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
+                </Grid.RowDefinitions>
+                <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
+                <ContentControl Grid.Row="0" Grid.Column="2" DataContext="{Binding FalseEvent}" Content="{Binding Self}" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+                <ContentControl Grid.Row="2" Grid.Column="2" DataContext="{Binding TrueEvent}" Content="{Binding Self}" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+            </Grid>
+        </DataTemplate>
+
         <DataTemplate x:Key="TemplateSwitch" DataType="viewModels:TreeEventViewModel">
             <ContentControl>
                 <ContentControl.Style>
                     <Style TargetType="{x:Type ContentControl}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsConnectingEvent}" Value="True">
-                                <Setter Property="ContentTemplate" Value="{DynamicResource ConnectingEventTemplate}" />
+                            <DataTrigger Binding="{Binding HasTrueEventOnly}" Value="True">
+                                <Setter Property="ContentTemplate" Value="{DynamicResource TrueEventOnlyTemplate}" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding IsConnectingEvent}" Value="False">
+                            <DataTrigger Binding="{Binding HasFalseEventOnly}" Value="True">
+                                <Setter Property="ContentTemplate" Value="{DynamicResource FalseEventOnlyTemplate}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding HasTwoEvents}" Value="True">
+                                <Setter Property="ContentTemplate" Value="{DynamicResource TwoEventsTemplate}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsEndPointEvent}" Value="True">
                                 <Setter Property="ContentTemplate" Value="{DynamicResource EndEventTemplate}" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -134,13 +137,8 @@
             </ContentControl>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="10"></RowDefinition>
-        </Grid.RowDefinitions>
-        <ContentControl Grid.Row="1" DataContext="{Binding MainTreeEventViewModel}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+    <Grid>
+        <ContentControl Margin="10" DataContext="{Binding MainTreeEventViewModel}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
     </Grid>
 </UserControl>
 
