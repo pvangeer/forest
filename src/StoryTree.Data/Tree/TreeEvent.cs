@@ -1,6 +1,10 @@
-﻿namespace StoryTree.Data.Tree
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using StoryTree.Data.Annotations;
+
+namespace StoryTree.Data.Tree
 {
-    public class TreeEvent
+    public class TreeEvent : INotifyPropertyChanged
     {
         public TreeEvent()
         {
@@ -15,5 +19,12 @@
         public string Description { get; set; }
 
         public IProbabilitySpecification ProbabilityInformation { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

@@ -1,10 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using StoryTree.Data.Annotations;
 
 namespace StoryTree.Data
 {
-    public class Project
+    public class Project : INotifyPropertyChanged
     {
         public Project()
         {
@@ -16,5 +18,13 @@ namespace StoryTree.Data
         public ObservableCollection<EventTree> EventTrees { get; }
 
         public IEnumerable<FrequencyLinePoint> FrequencyLine { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

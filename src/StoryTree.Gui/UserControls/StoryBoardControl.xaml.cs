@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui.UserControls
 {
@@ -10,6 +11,18 @@ namespace StoryTree.Gui.UserControls
         public StoryBoardControl()
         {
             InitializeComponent();
+        }
+
+        public ProjectViewModel ProjectViewModel => DataContext as ProjectViewModel;
+
+        private void ListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ProjectViewModel == null)
+            {
+                return;
+            }
+
+            ProjectViewModel.SelectedEventTree = ListView.SelectedItem as EventTreeViewModel;
         }
     }
 }

@@ -4,9 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:modelViews="clr-namespace:StoryTree.Gui.ViewModels"
-        xmlns:controls="clr-namespace:StoryTree.Gui.UserControls"
-        xmlns:fluent="urn:fluent-ribbon"
-        mc:Ignorable="d"
+                     xmlns:fluent="urn:fluent-ribbon"
+                     mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="900" x:Name="MainRibbonWindow">
     <Window.DataContext>
         <modelViews:ProjectViewModel></modelViews:ProjectViewModel>
@@ -83,6 +82,14 @@
             </fluent:RibbonTabItem>
 
             <fluent:RibbonTabItem Name="EventsTreeTabItem" Header="Faalpaden">
+                <fluent:RibbonGroupBox Header="Faalpaden">
+                    <fluent:Button Header="Faalpad toevoegen" Size="Large" Command="{Binding AddEventTreeCommand}"></fluent:Button>
+                    <fluent:Button Header="Faalpad verwijderen" Size="Large" Command="{Binding RemoveEventTreeCommand}"></fluent:Button>
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Gebeurtenissen">
+                    <fluent:Button Header="Gebeurtenis toevoegen" Size="Large" Command="{Binding AddTreeEventCommand}"></fluent:Button>
+                    <fluent:Button Header="Gebeurtenis verwijderen" Size="Large" Command="{Binding RemoveTreeEventCommand}"></fluent:Button>
+                </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 
         </fluent:Ribbon>

@@ -63,14 +63,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\AddEventTreeCommand.cs" />
+    <Compile Include="Command\ProjectViewModelCommand.cs" />
     <Compile Include="UserControls\EventTreeControl.xaml.cs">
       <DependentUpon>EventTreeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\StoryBoardControl.xaml.cs">
       <DependentUpon>StoryBoardControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Command\AddTreeEventCommand.cs" />
+    <Compile Include="Command\EventTreeCommand.cs" />
     <Compile Include="ViewModels\EventTreeViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
+    <Compile Include="Command\RemoveEventTreeCommand.cs" />
+    <Compile Include="Command\RemoveTreeEventCommand.cs" />
     <Compile Include="ViewModels\TreeEventViewModel.cs" />
     <Page Include="UserControls\EventTreeControl.xaml">
       <SubType>Designer</SubType>

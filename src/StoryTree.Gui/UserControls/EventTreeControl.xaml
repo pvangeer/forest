@@ -71,7 +71,7 @@
                     <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
                 </Grid.RowDefinitions>
                 <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
-                <ContentControl Grid.Row="0" Grid.Column="2" DataContext="{Binding FalseEvent}" Content="{Binding Self}" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+                <ContentControl Grid.Row="0" Grid.Column="2" DataContext="{Binding FalseEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
                 <ContentPresenter Grid.Row="2" Grid.Column="2" ContentTemplate="{DynamicResource TrueEndPointTemplate}" Content="{Binding}"></ContentPresenter>
             </Grid>
         </DataTemplate>
@@ -90,7 +90,7 @@
                 </Grid.RowDefinitions>
                 <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
                 <ContentPresenter Grid.Row="0" Grid.Column="2" ContentTemplate="{DynamicResource FalseEndPointTemplate}" Content="{Binding}"></ContentPresenter>
-                <ContentControl Grid.Row="2" Grid.Column="2" DataContext="{Binding TrueEvent}" Content="{Binding Self}" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+                <ContentControl Grid.Row="2" Grid.Column="2" DataContext="{Binding TrueEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
             </Grid>
         </DataTemplate>
 
@@ -107,8 +107,8 @@
                     <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
                 </Grid.RowDefinitions>
                 <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
-                <ContentControl Grid.Row="0" Grid.Column="2" DataContext="{Binding FalseEvent}" Content="{Binding Self}" ContentTemplate="{DynamicResource TemplateSwitch}"/>
-                <ContentControl Grid.Row="2" Grid.Column="2" DataContext="{Binding TrueEvent}" Content="{Binding Self}" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+                <ContentControl Grid.Row="0" Grid.Column="2" DataContext="{Binding FalseEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+                <ContentControl Grid.Row="2" Grid.Column="2" DataContext="{Binding TrueEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
             </Grid>
         </DataTemplate>
 

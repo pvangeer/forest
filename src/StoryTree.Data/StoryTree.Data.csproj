@@ -43,6 +43,7 @@
     <Compile Include="EventTree.cs" />
     <Compile Include="FrequencyLinePoint.cs" />
     <Compile Include="Project.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Tree\IProbabilitySpecification.cs" />
     <Compile Include="Tree\Probability.cs" />
     <Compile Include="Tree\ProbabilitySpecificationType.cs" />

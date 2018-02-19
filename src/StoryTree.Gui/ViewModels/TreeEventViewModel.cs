@@ -1,12 +1,44 @@
-﻿using StoryTree.Data.Tree;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using StoryTree.Data.Annotations;
+using StoryTree.Data.Tree;
 
 namespace StoryTree.Gui.ViewModels
 {
-    public class TreeEventViewModel
+    public class TreeEventViewModel : INotifyPropertyChanged
     {
         public TreeEventViewModel(TreeEvent treeEvent)
         {
-            this.TreeEvent = treeEvent;
+            if (treeEvent != null)
+            {
+                treeEvent.PropertyChanged -= TreeEventPropertyChanged;
+            }
+            TreeEvent = treeEvent;
+            if (treeEvent != null)
+            {
+                treeEvent.PropertyChanged += TreeEventPropertyChanged;
+            }
+        }
+
+        private void TreeEventPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "TrueEvent":
+                    OnPropertyChanged(nameof(TrueEvent));
+                    OnPropertyChanged(nameof(IsEndPointEvent));
+                    OnPropertyChanged(nameof(HasTrueEventOnly));
+                    OnPropertyChanged(nameof(HasFalseEventOnly));
+                    OnPropertyChanged(nameof(HasTwoEvents));
+                    break;
+                case "FalseEvent":
+                    OnPropertyChanged(nameof(FalseEvent));
+                    OnPropertyChanged(nameof(IsEndPointEvent));
+                    OnPropertyChanged(nameof(HasTrueEventOnly));
+                    OnPropertyChanged(nameof(HasFalseEventOnly));
+                    OnPropertyChanged(nameof(HasTwoEvents));
+                    break;
+            }
         }
 
         private TreeEvent TreeEvent { get; }
@@ -27,6 +59,12 @@ namespace StoryTree.Gui.ViewModels
 
         public bool HasTwoEvents => TreeEvent.TrueEvent != null && TreeEvent.FalseEvent != null;
         
-        public TreeEventViewModel Self => this;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
