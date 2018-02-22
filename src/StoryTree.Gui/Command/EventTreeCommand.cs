@@ -15,7 +15,7 @@ namespace StoryTree.Gui.Command
 
         public virtual bool CanExecute(object parameter)
         {
-            return ProjectViewModel != null && ProjectViewModel.SelectedTreeEvent != null;
+            return ProjectViewModel?.SelectedTreeEvent != null;
         }
 
         public abstract void Execute(object parameter);

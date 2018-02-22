@@ -1,4 +1,4 @@
-﻿namespace StoryTree.Gui.Services
+﻿namespace StoryTree.Data.Services
 {
     public enum TreeEventType
     {

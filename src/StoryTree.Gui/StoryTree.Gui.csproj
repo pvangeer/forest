@@ -65,8 +65,6 @@
     </ApplicationDefinition>
     <Compile Include="Command\AddEventTreeCommand.cs" />
     <Compile Include="Command\ProjectViewModelCommand.cs" />
-    <Compile Include="Services\EventTreeManipulationService.cs" />
-    <Compile Include="Services\TreeEventType.cs" />
     <Compile Include="UserControls\EventTreeControl.xaml.cs">
       <DependentUpon>EventTreeControl.xaml</DependentUpon>
     </Compile>
@@ -79,6 +77,7 @@
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="Command\RemoveEventTreeCommand.cs" />
     <Compile Include="Command\RemoveTreeEventCommand.cs" />
+    <Compile Include="Command\TreeEventClickedCommand.cs" />
     <Compile Include="ViewModels\TreeEventViewModel.cs" />
     <Page Include="UserControls\EventTreeControl.xaml">
       <SubType>Designer</SubType>

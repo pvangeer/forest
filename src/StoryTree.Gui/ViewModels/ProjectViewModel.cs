@@ -3,10 +3,9 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows;
 using System.Windows.Input;
 using StoryTree.Data;
-using StoryTree.Data.Annotations;
+using StoryTree.Data.Properties;
 using StoryTree.Gui.Command;
 
 namespace StoryTree.Gui.ViewModels
@@ -24,10 +23,6 @@ namespace StoryTree.Gui.ViewModels
 
         public ProjectViewModel(Project project)
         {
-            if (project != null)
-            {
-                project.EventTrees.CollectionChanged -= EventTreesCollectionChanged;
-            }
             Project = project;
             var eventTreeViewModels = new ObservableCollection<EventTreeViewModel>();
             if (project != null)
@@ -59,7 +54,6 @@ namespace StoryTree.Gui.ViewModels
 
         public ICommand AddTreeEventCommand => addTreeEventCommand;
 
-        
         private EventTreeViewModel selectedEventTree;
 
         public EventTreeViewModel SelectedEventTree
@@ -68,22 +62,14 @@ namespace StoryTree.Gui.ViewModels
             set
             {
                 selectedEventTree = value;
-                SelectedTreeEvent = selectedEventTree.SelectedTreeEvent;
-                addTreeEventCommand.FireCanExecuteChanged();
-                removeTreeEventCommand.FireCanExecuteChanged();
                 OnPropertyChanged(nameof(SelectedEventTree));
                 OnPropertyChanged(nameof(SelectedTreeEvent));
+                addTreeEventCommand.FireCanExecuteChanged();
+                removeTreeEventCommand.FireCanExecuteChanged();
             }
         }
 
-        public TreeEventViewModel SelectedTreeEvent
-        {
-            get => SelectedEventTree?.SelectedTreeEvent;
-            set
-            {
-                
-            }
-        }
+        public TreeEventViewModel SelectedTreeEvent => SelectedEventTree?.SelectedTreeEvent;
 
         public void AddNewEventTree()
         {
@@ -129,11 +115,15 @@ namespace StoryTree.Gui.ViewModels
 
             switch (e.PropertyName)
             {
-                case "SelectedTreeEvent":
-                    SelectedTreeEvent = eventTreeViewModel.SelectedTreeEvent;
+                case "MainTreeEventViewModel":
+                    OnPropertyChanged(nameof(SelectedTreeEvent));
                     addTreeEventCommand.FireCanExecuteChanged();
                     removeTreeEventCommand.FireCanExecuteChanged();
+                    break;
+                case "SelectedTreeEvent":
                     OnPropertyChanged(nameof(SelectedTreeEvent));
+                    addTreeEventCommand.FireCanExecuteChanged();
+                    removeTreeEventCommand.FireCanExecuteChanged();
                     break;
             }
         }

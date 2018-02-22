@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using StoryTree.Data.Annotations;
+using StoryTree.Data.Properties;
 
 namespace StoryTree.Data.Tree
 {

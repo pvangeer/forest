@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StoryTree.Data;
-using StoryTree.Data.Annotations;
-using StoryTree.Gui.Services;
+using StoryTree.Data.Properties;
+using StoryTree.Data.Services;
 
 namespace StoryTree.Gui.ViewModels
 {
@@ -11,14 +11,25 @@ namespace StoryTree.Gui.ViewModels
         private TreeEventViewModel selectedTreeEvent;
         private EventTree EventTree { get; }
 
-        public EventTreeViewModel()
-        {
-            
-        }
+        public EventTreeViewModel() { }
 
-        public EventTreeViewModel(EventTree eventTree)
+        public EventTreeViewModel([NotNull]EventTree eventTree)
         {
             EventTree = eventTree;
+            eventTree.PropertyChanged += EventTreePropertyChanged;
+        }
+
+        private void EventTreePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "MainTreeEvent":
+                    OnPropertyChanged(nameof(MainTreeEventViewModel));
+                    break;
+                case "Description":
+                    OnPropertyChanged(nameof(Name));
+                    break;
+            }
         }
 
         public string Name => EventTree?.Description;
@@ -42,8 +53,6 @@ namespace StoryTree.Gui.ViewModels
             return Equals(EventTree, eventTree);
         }
 
-        
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -54,21 +63,37 @@ namespace StoryTree.Gui.ViewModels
 
         public void AddTreeEvent(TreeEventViewModel treeEventViewModel)
         {
-            var newTreeEvent = EventTreeManipulationService.AddTreeEvent(EventTree,treeEventViewModel,TreeEventType.Failing);
-            if (Equals(EventTree.MainTreeEvent, newTreeEvent))
-            {
-                OnPropertyChanged(nameof(MainTreeEventViewModel));
-            }
-
-            SelectedTreeEvent = treeEventViewModel.FailingEvent;
-            OnPropertyChanged(nameof(SelectedTreeEvent));
+            EventTreeManipulationService.AddTreeEvent(EventTree,treeEventViewModel?.TreeEvent,TreeEventType.Failing);
+            SelectedTreeEvent = treeEventViewModel == null ? MainTreeEventViewModel : treeEventViewModel.FailingEvent;
         }
 
         public void RemoveTreeEvent(TreeEventViewModel treeEventViewModel)
         {
-            var parentEvent = EventTreeManipulationService.RemoveTreeEvent(EventTree,treeEventViewModel);
-            // TODO: Select parent event
+            var parent = EventTreeManipulationService.RemoveTreeEvent(EventTree, treeEventViewModel.TreeEvent);
+            SelectedTreeEvent = parent == null ? MainTreeEventViewModel : FindLastEventViewModel(MainTreeEventViewModel, TreeEventType.Failing);
+        }
 
+        private TreeEventViewModel FindLastEventViewModel(TreeEventViewModel mainTreeEventViewModel, TreeEventType type)
+        {
+            switch (type)
+            {
+                case TreeEventType.Failing:
+                    if (mainTreeEventViewModel.FailingEvent == null)
+                    {
+                        return mainTreeEventViewModel;
+                    }
+
+                    return FindLastEventViewModel(mainTreeEventViewModel.FailingEvent, type);
+                case TreeEventType.Passing:
+                    if (mainTreeEventViewModel.PassingEvent == null)
+                    {
+                        return mainTreeEventViewModel;
+                    }
+
+                    return FindLastEventViewModel(mainTreeEventViewModel.PassingEvent, type);
+                default:
+                    throw new InvalidEnumArgumentException();
+            }
         }
     }
 }

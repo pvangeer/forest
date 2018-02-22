@@ -10,7 +10,7 @@ namespace StoryTree.Gui.Command
 
         public override bool CanExecute(object parameter)
         {
-            return ProjectViewModel?.SelectedEventTree != null && (ProjectViewModel?.SelectedEventTree.MainTreeEventViewModel == null || ProjectViewModel?.SelectedEventTree.SelectedTreeEvent != null);
+            return ProjectViewModel?.SelectedEventTree != null;
         }
 
         public override void Execute(object parameter)
