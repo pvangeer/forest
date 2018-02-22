@@ -12,6 +12,9 @@
     <UserControl.Resources>
         <DataTemplate x:Key="ChoiceNodeTemplate" DataType="viewModels:TreeEventViewModel">
             <Border Background="DarkGray">
+                <Border.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding TreeEventClickedCommand}"></MouseBinding>
+                </Border.InputBindings>
                 <Grid Width="120">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
@@ -71,7 +74,7 @@
                     <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
                 </Grid.RowDefinitions>
                 <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
-                <ContentControl Grid.Row="0" Grid.Column="2" DataContext="{Binding FalseEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+                <ContentControl Grid.Row="0" Grid.Column="2" DataContext="{Binding FailingEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
                 <ContentPresenter Grid.Row="2" Grid.Column="2" ContentTemplate="{DynamicResource TrueEndPointTemplate}" Content="{Binding}"></ContentPresenter>
             </Grid>
         </DataTemplate>
@@ -90,7 +93,7 @@
                 </Grid.RowDefinitions>
                 <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
                 <ContentPresenter Grid.Row="0" Grid.Column="2" ContentTemplate="{DynamicResource FalseEndPointTemplate}" Content="{Binding}"></ContentPresenter>
-                <ContentControl Grid.Row="2" Grid.Column="2" DataContext="{Binding TrueEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+                <ContentControl Grid.Row="2" Grid.Column="2" DataContext="{Binding PassingEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
             </Grid>
         </DataTemplate>
 
@@ -107,8 +110,8 @@
                     <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
                 </Grid.RowDefinitions>
                 <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
-                <ContentControl Grid.Row="0" Grid.Column="2" DataContext="{Binding FalseEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
-                <ContentControl Grid.Row="2" Grid.Column="2" DataContext="{Binding TrueEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+                <ContentControl Grid.Row="0" Grid.Column="2" DataContext="{Binding FailingEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
+                <ContentControl Grid.Row="2" Grid.Column="2" DataContext="{Binding PassingEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
             </Grid>
         </DataTemplate>
 

@@ -1,22 +1,25 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using StoryTree.Data;
+using StoryTree.Data.Annotations;
 using StoryTree.Gui.Command;
 
 namespace StoryTree.Gui.ViewModels
 {
-    public class ProjectViewModel
+    public class ProjectViewModel : INotifyPropertyChanged
     {
         private readonly AddTreeEventCommand addTreeEventCommand;
         private readonly RemoveTreeEventCommand removeTreeEventCommand;
         
         public ProjectViewModel()
         {
-            addTreeEventCommand = new AddTreeEventCommand(SelectedEventTree);
-            removeTreeEventCommand = new RemoveTreeEventCommand(SelectedEventTree);
+            addTreeEventCommand = new AddTreeEventCommand(this);
+            removeTreeEventCommand = new RemoveTreeEventCommand(this);
         }
 
         public ProjectViewModel(Project project)
@@ -30,11 +33,16 @@ namespace StoryTree.Gui.ViewModels
             if (project != null)
             {
                 project.EventTrees.CollectionChanged += EventTreesCollectionChanged;
-                eventTreeViewModels = new ObservableCollection<EventTreeViewModel>(project.EventTrees.Select(te => new EventTreeViewModel(te)));
+                eventTreeViewModels = new ObservableCollection<EventTreeViewModel>(project.EventTrees.Select(te =>
+                {
+                    var eventTreeViewModel = new EventTreeViewModel(te);
+                    eventTreeViewModel.PropertyChanged += EventTreeViewModelPropertyChanged;
+                    return eventTreeViewModel;
+                }));
             }
             EventTrees = eventTreeViewModels;
-            addTreeEventCommand = new AddTreeEventCommand(SelectedEventTree);
-            removeTreeEventCommand = new RemoveTreeEventCommand(SelectedEventTree);
+            addTreeEventCommand = new AddTreeEventCommand(this);
+            removeTreeEventCommand = new RemoveTreeEventCommand(this);
         }
 
         private Project Project { get; }
@@ -43,7 +51,7 @@ namespace StoryTree.Gui.ViewModels
 
         public string ProjectName => Project.Name;
 
-        public ICommand AddEventTreeCommand => new Command.AddEventTreeCommand(this);
+        public ICommand AddEventTreeCommand => new AddEventTreeCommand(this);
 
         public ICommand RemoveEventTreeCommand => new RemoveEventTreeCommand(this);
 
@@ -53,15 +61,27 @@ namespace StoryTree.Gui.ViewModels
 
         
         private EventTreeViewModel selectedEventTree;
-        
+
         public EventTreeViewModel SelectedEventTree
         {
             get => selectedEventTree;
             set
             {
                 selectedEventTree = value;
-                addTreeEventCommand.SelectedEventTreeViewModel = value;
-                removeTreeEventCommand.SelectedEventTreeViewModel = value;
+                SelectedTreeEvent = selectedEventTree.SelectedTreeEvent;
+                addTreeEventCommand.FireCanExecuteChanged();
+                removeTreeEventCommand.FireCanExecuteChanged();
+                OnPropertyChanged(nameof(SelectedEventTree));
+                OnPropertyChanged(nameof(SelectedTreeEvent));
+            }
+        }
+
+        public TreeEventViewModel SelectedTreeEvent
+        {
+            get => SelectedEventTree?.SelectedTreeEvent;
+            set
+            {
+                
             }
         }
 
@@ -81,18 +101,49 @@ namespace StoryTree.Gui.ViewModels
             {
                 foreach (var eventTree in e.OldItems.OfType<EventTree>())
                 {
-                    EventTrees.Remove(EventTrees.First(et => et.IsViewModelFor(eventTree)));
+                    var eventTreeViewModel = EventTrees.First(et => et.IsViewModelFor(eventTree));
+                    eventTreeViewModel.PropertyChanged -= EventTreeViewModelPropertyChanged;
+                    EventTrees.Remove(eventTreeViewModel);
                 }
                 
             }
+
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 foreach (var eventTree in e.NewItems.OfType<EventTree>())
                 {
-                    EventTrees.Add(new EventTreeViewModel(eventTree));
+                    var eventTreeViewModel = new EventTreeViewModel(eventTree);
+                    eventTreeViewModel.PropertyChanged += EventTreeViewModelPropertyChanged;
+                    EventTrees.Add(eventTreeViewModel);
                 }
 
             }
+        }
+
+        private void EventTreeViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (!(sender is EventTreeViewModel eventTreeViewModel))
+            {
+                return;
+            }
+
+            switch (e.PropertyName)
+            {
+                case "SelectedTreeEvent":
+                    SelectedTreeEvent = eventTreeViewModel.SelectedTreeEvent;
+                    addTreeEventCommand.FireCanExecuteChanged();
+                    removeTreeEventCommand.FireCanExecuteChanged();
+                    OnPropertyChanged(nameof(SelectedTreeEvent));
+                    break;
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -1,14 +1,16 @@
-using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StoryTree.Data;
 using StoryTree.Data.Annotations;
-using StoryTree.Data.Tree;
+using StoryTree.Gui.Services;
 
 namespace StoryTree.Gui.ViewModels
 {
     public class EventTreeViewModel : INotifyPropertyChanged
     {
+        private TreeEventViewModel selectedTreeEvent;
+        private EventTree EventTree { get; }
+
         public EventTreeViewModel()
         {
             
@@ -19,45 +21,28 @@ namespace StoryTree.Gui.ViewModels
             EventTree = eventTree;
         }
 
-        private EventTree EventTree { get; }
-
         public string Name => EventTree?.Description;
 
         public TreeEventViewModel MainTreeEventViewModel => EventTree?.MainTreeEvent == null
             ? null
-            : new TreeEventViewModel(EventTree.MainTreeEvent);
+            : new TreeEventViewModel(EventTree.MainTreeEvent, this);
+
+        public TreeEventViewModel SelectedTreeEvent
+        {
+            get => selectedTreeEvent;
+            set
+            {
+                selectedTreeEvent = value;
+                OnPropertyChanged(nameof(SelectedTreeEvent));
+            }
+        }
 
         public bool IsViewModelFor(EventTree eventTree)
         {
             return Equals(EventTree, eventTree);
         }
 
-        public void RemoveTreeEvent()
-        {
-            var lastEvent = FindTreeEvent(EventTree.MainTreeEvent,treeEvent => treeEvent.FalseEvent == null);
-            var parent = FindTreeEvent(EventTree.MainTreeEvent, treeEvent => treeEvent.FalseEvent == lastEvent);
-            parent.FalseEvent = null;
-            parent.OnPropertyChanged(nameof(parent.FalseEvent));
-        }
-
-        public void AddTreeEvent()
-        {
-            if (EventTree.MainTreeEvent == null)
-            {
-                EventTree.MainTreeEvent = new TreeEvent {Name = "Nieuwe gebeurtenis"};
-                OnPropertyChanged(nameof(MainTreeEventViewModel));
-                return;
-            }
-
-            var lastEvent = FindTreeEvent(EventTree.MainTreeEvent, treeEvent => treeEvent.FalseEvent == null);
-            lastEvent.FalseEvent = new TreeEvent {Name = "Nieuwe gebeurtenis"};
-            lastEvent.OnPropertyChanged(nameof(lastEvent.FalseEvent));
-        }
-
-        private TreeEvent FindTreeEvent(TreeEvent treeEvent, Func<TreeEvent,bool> findAction)
-        {
-            return findAction(treeEvent) ? treeEvent : FindTreeEvent(treeEvent.FalseEvent, findAction);
-        }
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -65,6 +50,25 @@ namespace StoryTree.Gui.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void AddTreeEvent(TreeEventViewModel treeEventViewModel)
+        {
+            var newTreeEvent = EventTreeManipulationService.AddTreeEvent(EventTree,treeEventViewModel,TreeEventType.Failing);
+            if (Equals(EventTree.MainTreeEvent, newTreeEvent))
+            {
+                OnPropertyChanged(nameof(MainTreeEventViewModel));
+            }
+
+            SelectedTreeEvent = treeEventViewModel.FailingEvent;
+            OnPropertyChanged(nameof(SelectedTreeEvent));
+        }
+
+        public void RemoveTreeEvent(TreeEventViewModel treeEventViewModel)
+        {
+            var parentEvent = EventTreeManipulationService.RemoveTreeEvent(EventTree,treeEventViewModel);
+            // TODO: Select parent event
+
         }
     }
 }

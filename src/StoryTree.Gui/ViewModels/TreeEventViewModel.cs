@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using StoryTree.Data.Annotations;
 using StoryTree.Data.Tree;
 
@@ -7,32 +9,37 @@ namespace StoryTree.Gui.ViewModels
 {
     public class TreeEventViewModel : INotifyPropertyChanged
     {
-        public TreeEventViewModel(TreeEvent treeEvent)
+        private bool selected;
+
+        public TreeEventViewModel(TreeEvent treeEvent, EventTreeViewModel parentEventTreeViewModel)
         {
             if (treeEvent != null)
             {
                 treeEvent.PropertyChanged -= TreeEventPropertyChanged;
             }
             TreeEvent = treeEvent;
+            ParentEventTreeViewModel = parentEventTreeViewModel;
             if (treeEvent != null)
             {
                 treeEvent.PropertyChanged += TreeEventPropertyChanged;
             }
         }
 
+        public EventTreeViewModel ParentEventTreeViewModel { get; }
+
         private void TreeEventPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case "TrueEvent":
-                    OnPropertyChanged(nameof(TrueEvent));
+                case "PassingEvent":
+                    OnPropertyChanged(nameof(PassingEvent));
                     OnPropertyChanged(nameof(IsEndPointEvent));
                     OnPropertyChanged(nameof(HasTrueEventOnly));
                     OnPropertyChanged(nameof(HasFalseEventOnly));
                     OnPropertyChanged(nameof(HasTwoEvents));
                     break;
-                case "FalseEvent":
-                    OnPropertyChanged(nameof(FalseEvent));
+                case "FailingEvent":
+                    OnPropertyChanged(nameof(FailingEvent));
                     OnPropertyChanged(nameof(IsEndPointEvent));
                     OnPropertyChanged(nameof(HasTrueEventOnly));
                     OnPropertyChanged(nameof(HasFalseEventOnly));
@@ -41,24 +48,37 @@ namespace StoryTree.Gui.ViewModels
             }
         }
 
-        private TreeEvent TreeEvent { get; }
+        public TreeEvent TreeEvent { get; }
 
         public string Name => TreeEvent.Name;
 
         public string Description => TreeEvent.Description;
 
-        public TreeEventViewModel TrueEvent => TreeEvent.TrueEvent == null ? null : new TreeEventViewModel(TreeEvent.TrueEvent);
+        public TreeEventViewModel PassingEvent => TreeEvent.PassingEvent == null ? null : new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel);
 
-        public TreeEventViewModel FalseEvent => TreeEvent.FalseEvent == null ? null : new TreeEventViewModel(TreeEvent.FalseEvent);
+        public TreeEventViewModel FailingEvent => TreeEvent.FailingEvent == null ? null : new TreeEventViewModel(TreeEvent.FailingEvent, ParentEventTreeViewModel);
 
-        public bool IsEndPointEvent => TreeEvent.TrueEvent == null && TreeEvent.FalseEvent == null;
+        public bool IsEndPointEvent => TreeEvent.PassingEvent == null && TreeEvent.FailingEvent == null;
 
-        public bool HasTrueEventOnly => TreeEvent.TrueEvent != null && TreeEvent.FalseEvent == null;
+        public bool HasTrueEventOnly => TreeEvent.PassingEvent != null && TreeEvent.FailingEvent == null;
 
-        public bool HasFalseEventOnly => TreeEvent.TrueEvent == null && TreeEvent.FalseEvent != null;
+        public bool HasFalseEventOnly => TreeEvent.PassingEvent == null && TreeEvent.FailingEvent != null;
 
-        public bool HasTwoEvents => TreeEvent.TrueEvent != null && TreeEvent.FalseEvent != null;
-        
+        public bool HasTwoEvents => TreeEvent.PassingEvent != null && TreeEvent.FailingEvent != null;
+
+        public ICommand TreeEventClickedCommand => new TreeEventClickedCommand(this);
+
+        public bool Selected
+        {
+            get => selected;
+            set
+            {
+                selected = value;
+                ParentEventTreeViewModel.SelectedTreeEvent = this;
+                OnPropertyChanged(nameof(Selected));
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -66,5 +86,27 @@ namespace StoryTree.Gui.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+    }
+
+    public class TreeEventClickedCommand : ICommand
+    {
+        public TreeEventViewModel TreeEventViewModel { get; }
+
+        public TreeEventClickedCommand(TreeEventViewModel treeEventViewModel)
+        {
+            TreeEventViewModel = treeEventViewModel;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object parameter)
+        {
+            TreeEventViewModel.Selected = true;
+        }
+
+        public event EventHandler CanExecuteChanged;
     }
 }

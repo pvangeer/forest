@@ -65,6 +65,8 @@
     </ApplicationDefinition>
     <Compile Include="Command\AddEventTreeCommand.cs" />
     <Compile Include="Command\ProjectViewModelCommand.cs" />
+    <Compile Include="Services\EventTreeManipulationService.cs" />
+    <Compile Include="Services\TreeEventType.cs" />
     <Compile Include="UserControls\EventTreeControl.xaml.cs">
       <DependentUpon>EventTreeControl.xaml</DependentUpon>
     </Compile>

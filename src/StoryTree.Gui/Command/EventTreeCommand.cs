@@ -6,29 +6,25 @@ namespace StoryTree.Gui.Command
 {
     public abstract class EventTreeCommand : ICommand
     {
-        public EventTreeCommand(EventTreeViewModel selectedEventTreeViewModel)
-        {
-            SelectedEventTreeViewModel = selectedEventTreeViewModel;
-        }
+        protected ProjectViewModel ProjectViewModel { get; }
 
-        private EventTreeViewModel selectedEventTreeViewModel;
-        public EventTreeViewModel SelectedEventTreeViewModel
+        protected EventTreeCommand(ProjectViewModel projectViewModel)
         {
-            protected get => selectedEventTreeViewModel;
-            set
-            {
-                selectedEventTreeViewModel = value;
-                CanExecuteChanged?.Invoke(this, null);
-            }
+            ProjectViewModel = projectViewModel;
         }
 
         public virtual bool CanExecute(object parameter)
         {
-            return SelectedEventTreeViewModel != null;
+            return ProjectViewModel != null && ProjectViewModel.SelectedTreeEvent != null;
         }
 
         public abstract void Execute(object parameter);
-        
+
         public event EventHandler CanExecuteChanged;
+
+        public void FireCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, null);
+        }
     }
 }

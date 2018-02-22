@@ -12,9 +12,9 @@ namespace StoryTree.Data.Tree
         
         public string Name { get; set; }
 
-        public TreeEvent FalseEvent { get; set; }
+        public TreeEvent FailingEvent { get; set; }
 
-        public TreeEvent TrueEvent { get; set; }
+        public TreeEvent PassingEvent { get; set; }
 
         public string Description { get; set; }
 

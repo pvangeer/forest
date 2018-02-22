@@ -4,13 +4,13 @@ namespace StoryTree.Gui.Command
 {
     public class RemoveTreeEventCommand : EventTreeCommand
     {
-        public RemoveTreeEventCommand(EventTreeViewModel selectedEventTree) : base(selectedEventTree)
+        public RemoveTreeEventCommand(ProjectViewModel projectViewModel) : base(projectViewModel)
         {
         }
 
         public override void Execute(object parameter)
         {
-            SelectedEventTreeViewModel.RemoveTreeEvent();
+            ProjectViewModel.SelectedEventTree.RemoveTreeEvent(ProjectViewModel.SelectedTreeEvent);
         }
     }
 }

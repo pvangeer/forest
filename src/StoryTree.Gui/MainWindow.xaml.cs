@@ -49,7 +49,7 @@ namespace StoryTree.Gui
                 {
                     Name = string.Format("Event no. {0}",i+1)
                 };
-                currentTreeEvent.FalseEvent = falseEvent;
+                currentTreeEvent.FailingEvent = falseEvent;
                 currentTreeEvent = falseEvent;
             }
 

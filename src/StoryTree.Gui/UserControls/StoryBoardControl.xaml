@@ -36,9 +36,16 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ScrollViewer Grid.Column="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <userControls:EventTreeControl DataContext="{Binding SelectedItem, ElementName=ListView}"/>
-        </ScrollViewer>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="{Binding SelectedEventTree.Name}" TextAlignment="Center" FontWeight="Bold"></TextBlock>
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <userControls:EventTreeControl DataContext="{Binding SelectedItem, ElementName=ListView}"/>
+            </ScrollViewer>
+        </Grid>
         <Border Grid.Column="4" Background="Coral">
             <ContentControl>
                 <TextBlock Text="Hier moeten eigenschappen komen"></TextBlock>
