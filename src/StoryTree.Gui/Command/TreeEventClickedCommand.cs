@@ -20,7 +20,7 @@ namespace StoryTree.Gui.Command
 
         public void Execute(object parameter)
         {
-            TreeEventViewModel.Selected = true;
+            TreeEventViewModel.Select();
         }
 
         public event EventHandler CanExecuteChanged;

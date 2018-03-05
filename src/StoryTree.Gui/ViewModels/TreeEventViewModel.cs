@@ -9,16 +9,14 @@ namespace StoryTree.Gui.ViewModels
 {
     public class TreeEventViewModel : INotifyPropertyChanged
     {
-        private bool selected;
+        private TreeEventViewModel failingEventViewModel;
+        private TreeEventViewModel passingEventViewModel;
 
-        public TreeEventViewModel(TreeEvent treeEvent, EventTreeViewModel parentEventTreeViewModel)
+        public TreeEventViewModel([NotNull]TreeEvent treeEvent, [NotNull]EventTreeViewModel parentEventTreeViewModel)
         {
             TreeEvent = treeEvent;
             ParentEventTreeViewModel = parentEventTreeViewModel;
-            if (treeEvent != null)
-            {
-                treeEvent.PropertyChanged += TreeEventPropertyChanged;
-            }
+            treeEvent.PropertyChanged += TreeEventPropertyChanged;
         }
 
         private EventTreeViewModel ParentEventTreeViewModel { get; }
@@ -27,10 +25,12 @@ namespace StoryTree.Gui.ViewModels
         {
             switch (e.PropertyName)
             {
-                case "PassingEvent":
+                case nameof(PassingEvent):
+                    passingEventViewModel = null;
                     if (PassingEvent == null)
                     {
-                        ParentEventTreeViewModel.SelectedTreeEvent = this;
+                        // TODO: Shouldn't this be done by the command?
+                        Select();
                     }
                     OnPropertyChanged(nameof(PassingEvent));
                     OnPropertyChanged(nameof(IsEndPointEvent));
@@ -38,10 +38,12 @@ namespace StoryTree.Gui.ViewModels
                     OnPropertyChanged(nameof(HasFalseEventOnly));
                     OnPropertyChanged(nameof(HasTwoEvents));
                     break;
-                case "FailingEvent":
+                case nameof(FailingEvent):
+                    failingEventViewModel = null;
                     if (FailingEvent == null)
                     {
-                        ParentEventTreeViewModel.SelectedTreeEvent = this;
+                        // TODO: Shouldn't this be done by the command?
+                        Select();
                     }
                     OnPropertyChanged(nameof(FailingEvent));
                     OnPropertyChanged(nameof(IsEndPointEvent));
@@ -49,10 +51,10 @@ namespace StoryTree.Gui.ViewModels
                     OnPropertyChanged(nameof(HasFalseEventOnly));
                     OnPropertyChanged(nameof(HasTwoEvents));
                     break;
-                case "Name":
+                case nameof(Name):
                     OnPropertyChanged(nameof(Name));
                     break;
-                case "Description":
+                case nameof(Description):
                     OnPropertyChanged(nameof(Description));
                     break;
             }
@@ -64,9 +66,31 @@ namespace StoryTree.Gui.ViewModels
 
         public string Description => TreeEvent.Description;
 
-        public TreeEventViewModel PassingEvent => TreeEvent.PassingEvent == null ? null : new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel);
+        public TreeEventViewModel PassingEvent
+        {
+            get
+            {
+                if (TreeEvent?.PassingEvent == null)
+                {
+                    return null;
+                }
+                return passingEventViewModel ?? new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel);
+            }
+        }
 
-        public TreeEventViewModel FailingEvent => TreeEvent.FailingEvent == null ? null : new TreeEventViewModel(TreeEvent.FailingEvent, ParentEventTreeViewModel);
+        public TreeEventViewModel FailingEvent
+        {
+            get
+            {
+                if (TreeEvent?.FailingEvent == null)
+                {
+                    return null;
+                }
+
+                return failingEventViewModel ?? (failingEventViewModel =
+                           new TreeEventViewModel(TreeEvent.FailingEvent, ParentEventTreeViewModel));
+            }
+        }
 
         public bool IsEndPointEvent => TreeEvent.PassingEvent == null && TreeEvent.FailingEvent == null;
 
@@ -78,16 +102,7 @@ namespace StoryTree.Gui.ViewModels
 
         public ICommand TreeEventClickedCommand => new TreeEventClickedCommand(this);
 
-        public bool Selected
-        {
-            get => selected;
-            set
-            {
-                selected = value;
-                ParentEventTreeViewModel.SelectedTreeEvent = this;
-                OnPropertyChanged(nameof(Selected));
-            }
-        }
+        public bool Selected => TreeEvent != null && Equals(TreeEvent,ParentEventTreeViewModel?.SelectedTreeEvent?.TreeEvent);
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -95,6 +110,18 @@ namespace StoryTree.Gui.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void FireSelectedStateChangeRecursive()
+        {
+            OnPropertyChanged(nameof(Selected));
+            FailingEvent?.FireSelectedStateChangeRecursive();
+            PassingEvent?.FireSelectedStateChangeRecursive();
+        }
+
+        public void Select()
+        {
+            ParentEventTreeViewModel.SelectedTreeEvent = this;
         }
     }
 }

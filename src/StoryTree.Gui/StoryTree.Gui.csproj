@@ -65,6 +65,7 @@
     </ApplicationDefinition>
     <Compile Include="Command\AddEventTreeCommand.cs" />
     <Compile Include="Command\ProjectViewModelCommand.cs" />
+    <Compile Include="SelectedPropertyToColorConverter.cs" />
     <Compile Include="UserControls\EventTreeControl.xaml.cs">
       <DependentUpon>EventTreeControl.xaml</DependentUpon>
     </Compile>

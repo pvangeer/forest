@@ -9,6 +9,8 @@ namespace StoryTree.Gui.ViewModels
     public class EventTreeViewModel : INotifyPropertyChanged
     {
         private TreeEventViewModel selectedTreeEvent;
+        private TreeEventViewModel mainTreeEventViewModel = null;
+
         private EventTree EventTree { get; }
 
         public EventTreeViewModel() { }
@@ -23,10 +25,11 @@ namespace StoryTree.Gui.ViewModels
         {
             switch (e.PropertyName)
             {
-                case "MainTreeEvent":
+                case nameof(EventTree.MainTreeEvent):
+                    mainTreeEventViewModel = null;
                     OnPropertyChanged(nameof(MainTreeEventViewModel));
                     break;
-                case "Description":
+                case nameof(EventTree.Description):
                     OnPropertyChanged(nameof(Name));
                     break;
             }
@@ -34,9 +37,24 @@ namespace StoryTree.Gui.ViewModels
 
         public string Name => EventTree?.Description;
 
-        public TreeEventViewModel MainTreeEventViewModel => EventTree?.MainTreeEvent == null
-            ? null
-            : new TreeEventViewModel(EventTree.MainTreeEvent, this);
+        public TreeEventViewModel MainTreeEventViewModel
+        {
+            get
+            {
+                if (EventTree == null)
+                {
+                    return null;
+                }
+
+                if (mainTreeEventViewModel == null && EventTree.MainTreeEvent == null)
+                {
+                    return null;
+                }
+
+                return mainTreeEventViewModel ??
+                       (mainTreeEventViewModel = new TreeEventViewModel(EventTree.MainTreeEvent, this));
+            }
+        }
 
         public TreeEventViewModel SelectedTreeEvent
         {
@@ -44,6 +62,7 @@ namespace StoryTree.Gui.ViewModels
             set
             {
                 selectedTreeEvent = value;
+                MainTreeEventViewModel?.FireSelectedStateChangeRecursive();
                 OnPropertyChanged(nameof(SelectedTreeEvent));
             }
         }

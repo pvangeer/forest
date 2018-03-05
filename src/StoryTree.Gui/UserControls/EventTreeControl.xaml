@@ -4,14 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
+             xmlns:gui="clr-namespace:StoryTree.Gui"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
         <viewModels:EventTreeViewModel></viewModels:EventTreeViewModel>
     </UserControl.DataContext>
     <UserControl.Resources>
+        <gui:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
         <DataTemplate x:Key="ChoiceNodeTemplate" DataType="viewModels:TreeEventViewModel">
-            <Border Background="DarkGray">
+            <Border Background="DarkGray" BorderBrush="{Binding Selected, Converter={StaticResource SelectedPropertyToBrushConverter}}" BorderThickness="1">
                 <Border.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding TreeEventClickedCommand}"></MouseBinding>
                 </Border.InputBindings>
@@ -134,7 +136,6 @@
                             </DataTrigger>
                         </Style.Triggers>
                         <Setter Property="Content" Value="{Binding }"></Setter>
-                        <Setter Property="DataContext" Value="{Binding }"></Setter>
                     </Style>
                 </ContentControl.Style>
             </ContentControl>
