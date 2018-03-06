@@ -5,11 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
              xmlns:userControls="clr-namespace:StoryTree.Gui.UserControls"
+             xmlns:gui="clr-namespace:StoryTree.Gui"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <UserControl.DataContext>
         <viewModels:ProjectViewModel></viewModels:ProjectViewModel>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <gui:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
+    </UserControl.Resources>
     <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="100"></ColumnDefinition>
@@ -29,10 +33,12 @@
             HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <TextBlock Text="{Binding Name}" Padding="5" Margin="0,0,0,1" Background="Gainsboro">
-                        </TextBlock>
-                    </Grid>
+                    <Border BorderBrush="{Binding Selected, Converter={StaticResource SelectedPropertyToBrushConverter}}" BorderThickness="1" Margin="0,1,0,1">
+                        <Grid>
+                            <TextBlock Text="{Binding Name}" Padding="5" Margin="0,0,0,0" Background="Gainsboro">
+                            </TextBlock>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

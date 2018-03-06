@@ -10,6 +10,7 @@ namespace StoryTree.Gui.ViewModels
     {
         private TreeEventViewModel selectedTreeEvent;
         private TreeEventViewModel mainTreeEventViewModel = null;
+        private bool selected;
 
         private EventTree EventTree { get; }
 
@@ -64,6 +65,16 @@ namespace StoryTree.Gui.ViewModels
                 selectedTreeEvent = value;
                 MainTreeEventViewModel?.FireSelectedStateChangeRecursive();
                 OnPropertyChanged(nameof(SelectedTreeEvent));
+            }
+        }
+
+        public bool Selected
+        {
+            get { return selected; }
+            set
+            {
+                selected = value;
+                OnPropertyChanged(nameof(Selected));
             }
         }
 

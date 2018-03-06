@@ -64,6 +64,10 @@ namespace StoryTree.Gui.ViewModels
                 selectedEventTree = value;
                 OnPropertyChanged(nameof(SelectedEventTree));
                 OnPropertyChanged(nameof(SelectedTreeEvent));
+                foreach (var eventTreeViewModel in EventTrees)
+                {
+                    eventTreeViewModel.Selected = Equals(SelectedEventTree, eventTreeViewModel);
+                }
                 addTreeEventCommand.FireCanExecuteChanged();
                 removeTreeEventCommand.FireCanExecuteChanged();
             }
