@@ -1,3 +1,4 @@
+using StoryTree.Data.Services;
 using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui.Command
@@ -15,7 +16,7 @@ namespace StoryTree.Gui.Command
 
         public override void Execute(object parameter)
         {
-            ProjectViewModel?.SelectedEventTree.AddTreeEvent(ProjectViewModel?.SelectedTreeEvent);
+            ProjectViewModel?.SelectedEventTree.AddTreeEvent(ProjectViewModel?.SelectedTreeEvent, TreeEventType.Failing);
         }
     }
 }

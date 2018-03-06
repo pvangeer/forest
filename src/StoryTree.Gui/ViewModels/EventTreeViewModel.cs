@@ -9,7 +9,7 @@ namespace StoryTree.Gui.ViewModels
     public class EventTreeViewModel : INotifyPropertyChanged
     {
         private TreeEventViewModel selectedTreeEvent;
-        private TreeEventViewModel mainTreeEventViewModel = null;
+        private TreeEventViewModel mainTreeEventViewModel;
         private bool selected;
 
         private EventTree EventTree { get; }
@@ -70,7 +70,7 @@ namespace StoryTree.Gui.ViewModels
 
         public bool Selected
         {
-            get { return selected; }
+            get => selected;
             set
             {
                 selected = value;
@@ -86,24 +86,24 @@ namespace StoryTree.Gui.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void AddTreeEvent(TreeEventViewModel treeEventViewModel)
+        public void AddTreeEvent(TreeEventViewModel treeEventViewModel, TreeEventType treeEventType)
         {
-            EventTreeManipulationService.AddTreeEvent(EventTree,treeEventViewModel?.TreeEvent,TreeEventType.Failing);
-            SelectedTreeEvent = treeEventViewModel == null ? MainTreeEventViewModel : treeEventViewModel.FailingEvent;
+            EventTreeManipulationService.AddTreeEvent(EventTree,treeEventViewModel?.TreeEvent,treeEventType);
+            SelectedTreeEvent = treeEventViewModel == null ? MainTreeEventViewModel : treeEventType == TreeEventType.Failing ? treeEventViewModel.FailingEvent : treeEventViewModel.PassingEvent;
         }
 
-        public void RemoveTreeEvent(TreeEventViewModel treeEventViewModel)
+        public void RemoveTreeEvent(TreeEventViewModel treeEventViewModel, TreeEventType eventType)
         {
             var parent = EventTreeManipulationService.RemoveTreeEvent(EventTree, treeEventViewModel.TreeEvent);
-            SelectedTreeEvent = parent == null ? MainTreeEventViewModel : FindLastEventViewModel(MainTreeEventViewModel, TreeEventType.Failing);
+            SelectedTreeEvent = parent == null ? MainTreeEventViewModel : FindLastEventViewModel(MainTreeEventViewModel, eventType);
         }
 
-        private TreeEventViewModel FindLastEventViewModel(TreeEventViewModel mainTreeEventViewModel, TreeEventType type)
+        private static TreeEventViewModel FindLastEventViewModel(TreeEventViewModel mainTreeEventViewModel, TreeEventType type)
         {
             switch (type)
             {
