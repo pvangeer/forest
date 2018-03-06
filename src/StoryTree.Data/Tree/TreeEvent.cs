@@ -19,6 +19,7 @@ namespace StoryTree.Data.Tree
         public string Description { get; set; }
 
         public IProbabilitySpecification ProbabilityInformation { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
