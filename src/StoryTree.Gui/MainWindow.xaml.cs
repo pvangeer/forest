@@ -25,6 +25,11 @@ namespace StoryTree.Gui
                     GetEventTree("First event tree",3),
                     GetEventTree("Second event tree",2),
                     GetEventTree("3",4)
+                },
+                Experts =
+                {
+                    new Expert{Name = "Klaas", Email = "email@domein.nl", Expertise = "Alles", Organisation = "Eigen bedrijf", Telephone = "088-3358339"},
+                    new Expert{Name = "Piet", Email = "piet@email.nl", Expertise = "Niets", Organisation = "Ander bedrijf", Telephone = "088-3358339"},
                 }
             });
         }
@@ -92,7 +97,7 @@ namespace StoryTree.Gui
 
             if (Equals(Ribbon.SelectedTabItem, ParticipatntsTabItem))
             {
-                // Show participants control
+                HostControl.Content = new ParticipantsControl { DataContext = DataContext };
             }
 
             if (Equals(Ribbon.SelectedTabItem, EventsTreeTabItem))

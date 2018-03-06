@@ -21,23 +21,26 @@ namespace StoryTree.Gui.ViewModels
             removeTreeEventCommand = new RemoveTreeEventCommand(this);
         }
 
-        public ProjectViewModel(Project project)
+        public ProjectViewModel([NotNull]Project project)
         {
             Project = project;
-            var eventTreeViewModels = new ObservableCollection<EventTreeViewModel>();
-            if (project != null)
+
+            var eventTreeViewModels = new ObservableCollection<EventTreeViewModel>(project.EventTrees.Select(te =>
             {
-                project.EventTrees.CollectionChanged += EventTreesCollectionChanged;
-                eventTreeViewModels = new ObservableCollection<EventTreeViewModel>(project.EventTrees.Select(te =>
-                {
-                    var eventTreeViewModel = new EventTreeViewModel(te);
-                    eventTreeViewModel.PropertyChanged += EventTreeViewModelPropertyChanged;
-                    return eventTreeViewModel;
-                }));
-            }
+                var eventTreeViewModel = new EventTreeViewModel(te);
+                eventTreeViewModel.PropertyChanged += EventTreeViewModelPropertyChanged;
+                return eventTreeViewModel;
+            }));
+
             EventTrees = eventTreeViewModels;
             addTreeEventCommand = new AddTreeEventCommand(this);
             removeTreeEventCommand = new RemoveTreeEventCommand(this);
+
+            expertViewModels = new ObservableCollection<ExpertViewModel>(Project.Experts.Select(e => new ExpertViewModel(e)));
+            expertViewModels.CollectionChanged += ExpertViewModelsCollectionChanged;
+
+            project.Experts.CollectionChanged += ExpertsCollectionChanged;
+            project.EventTrees.CollectionChanged += EventTreesCollectionChanged;
         }
 
         private Project Project { get; }
@@ -55,6 +58,7 @@ namespace StoryTree.Gui.ViewModels
         public ICommand AddTreeEventCommand => addTreeEventCommand;
 
         private EventTreeViewModel selectedEventTree;
+        private ObservableCollection<ExpertViewModel> expertViewModels;
 
         public EventTreeViewModel SelectedEventTree
         {
@@ -74,6 +78,24 @@ namespace StoryTree.Gui.ViewModels
         }
 
         public TreeEventViewModel SelectedTreeEvent => SelectedEventTree?.SelectedTreeEvent;
+
+        public ObservableCollection<ExpertViewModel> Experts
+        {
+            get
+            {
+                if (Project == null)
+                {
+                    return null;
+                }
+
+                if (expertViewModels == null)
+                {
+                    expertViewModels = new ObservableCollection<ExpertViewModel>(Project?.Experts.Select(e => new ExpertViewModel(e)));
+                }
+
+                return expertViewModels;
+            }
+        }
 
         public void AddNewEventTree()
         {
@@ -109,6 +131,30 @@ namespace StoryTree.Gui.ViewModels
 
             }
         }
+
+        private void ExpertsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+        }
+
+        private void ExpertViewModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (var item in e.NewItems.OfType<ExpertViewModel>())
+                {
+                    Project.Experts.Add(item.Expert);
+                }
+            }
+
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var item in e.OldItems.OfType<ExpertViewModel>())
+                {
+                    Project.Experts.Remove(item.Expert);
+                }
+            }
+        }
+
 
         private void EventTreeViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

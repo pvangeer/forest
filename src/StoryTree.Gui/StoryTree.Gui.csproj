@@ -69,12 +69,16 @@
     <Compile Include="UserControls\EventTreeControl.xaml.cs">
       <DependentUpon>EventTreeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ParticipantsControl.xaml.cs">
+      <DependentUpon>ParticipantsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\StoryBoardControl.xaml.cs">
       <DependentUpon>StoryBoardControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Command\AddTreeEventCommand.cs" />
     <Compile Include="Command\EventTreeCommand.cs" />
     <Compile Include="ViewModels\EventTreeViewModel.cs" />
+    <Compile Include="ViewModels\ExpertViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="Command\RemoveEventTreeCommand.cs" />
     <Compile Include="Command\RemoveTreeEventCommand.cs" />
@@ -96,6 +100,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\ParticipantsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\StoryBoardControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
