@@ -62,9 +62,25 @@ namespace StoryTree.Gui.ViewModels
 
         public TreeEvent TreeEvent { get; }
 
-        public string Name => TreeEvent.Name;
+        public string Name
+        {
+            get => TreeEvent.Name;
+            set
+            {
+                TreeEvent.Name = value;
+                TreeEvent.OnPropertyChanged(nameof(TreeEvent.Name));
+            }
+        }
 
-        public string Description => TreeEvent.Description;
+        public string Description
+        {
+            get => TreeEvent.Description;
+            set
+            {
+                TreeEvent.Description = value;
+                TreeEvent.OnPropertyChanged(nameof(TreeEvent.Description));
+            }
+        }
 
         public TreeEventViewModel PassingEvent
         {

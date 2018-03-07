@@ -13,7 +13,9 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <gui:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
+        <gui:ContentTemplateSelector x:Key="ContentTemplateSelector" />
     </UserControl.Resources>
+
     <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="100"></ColumnDefinition>
@@ -65,11 +67,21 @@
                 <userControls:EventTreeControl DataContext="{Binding SelectedItem, ElementName=ListView}"/>
             </ScrollViewer>
         </Grid>
-        <Border Grid.Column="4" Background="Coral">
-            <ContentControl>
-                <TextBlock Text="Hier moeten eigenschappen komen"></TextBlock>
-            </ContentControl>
-        </Border>
+        <ContentPresenter Grid.Column="4" Content="{Binding SelectedObject}" ContentTemplateSelector="{StaticResource ContentTemplateSelector}">
+            <ContentPresenter.Resources>
+                <DataTemplate x:Key="EventTreePropertiesTemplate" DataType="{x:Type viewModels:EventTreeViewModel}">
+                    <Grid Background="Azure">
+                        <TextBox Text="{Binding Name, Mode=TwoWay}" Background="Aquamarine"></TextBox>
+                    </Grid>
+                </DataTemplate>
+                <DataTemplate x:Key="TreeEventPropertiesTemplate" DataType="{x:Type viewModels:TreeEventViewModel}">
+                    <StackPanel>
+                        <TextBox Text="{Binding Name, Mode=TwoWay}" Background="BlanchedAlmond"></TextBox>
+                        <TextBlock Text="TreeEvent"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ContentPresenter.Resources>
+        </ContentPresenter>
     </Grid>
 </UserControl>
 

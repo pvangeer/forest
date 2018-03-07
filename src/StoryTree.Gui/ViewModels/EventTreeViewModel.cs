@@ -36,7 +36,20 @@ namespace StoryTree.Gui.ViewModels
             }
         }
 
-        public string Name => EventTree?.Description;
+        public string Name
+        {
+            get => EventTree?.Description;
+            set
+            {
+                if (EventTree == null)
+                {
+                    return;
+                }
+
+                EventTree.Description = value;
+                EventTree.OnPropertyChanged(nameof(EventTree.Description));
+            }
+        }
 
         public TreeEventViewModel MainTreeEventViewModel
         {

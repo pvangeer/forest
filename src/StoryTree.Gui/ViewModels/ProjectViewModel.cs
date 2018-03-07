@@ -66,8 +66,10 @@ namespace StoryTree.Gui.ViewModels
             set
             {
                 selectedEventTree = value;
+                SelectedObject = selectedEventTree;
                 OnPropertyChanged(nameof(SelectedEventTree));
                 OnPropertyChanged(nameof(SelectedTreeEvent));
+                OnPropertyChanged(nameof(SelectedObject));
                 foreach (var eventTreeViewModel in EventTrees)
                 {
                     eventTreeViewModel.Selected = Equals(SelectedEventTree, eventTreeViewModel);
@@ -96,6 +98,8 @@ namespace StoryTree.Gui.ViewModels
                 return expertViewModels;
             }
         }
+
+        public object SelectedObject { get; set; }
 
         public void AddNewEventTree()
         {
@@ -158,7 +162,7 @@ namespace StoryTree.Gui.ViewModels
 
         private void EventTreeViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (!(sender is EventTreeViewModel eventTreeViewModel))
+            if (!(sender is EventTreeViewModel))
             {
                 return;
             }
@@ -172,6 +176,8 @@ namespace StoryTree.Gui.ViewModels
                     break;
                 case "SelectedTreeEvent":
                     OnPropertyChanged(nameof(SelectedTreeEvent));
+                    SelectedObject = SelectedTreeEvent;
+                    OnPropertyChanged(nameof(SelectedObject));
                     addTreeEventCommand.FireCanExecuteChanged();
                     removeTreeEventCommand.FireCanExecuteChanged();
                     break;
