@@ -23,7 +23,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <fluent:Ribbon Focusable="True" x:Name="Ribbon" AutomaticStateManagement="False" x:FieldModifier="protected" SelectedTabChanged="Ribbon_OnSelectedTabChanged">
+        <fluent:Ribbon 
+            Focusable="True" 
+            x:Name="Ribbon" 
+            AutomaticStateManagement="False" 
+            x:FieldModifier="protected" 
+            SelectedTabChanged="Ribbon_OnSelectedTabChanged">
             <!--Backstage-->
             <fluent:Ribbon.Menu>
                 <fluent:Backstage Background="#008fc5" x:Name="Menu" x:FieldModifier="private">
@@ -68,20 +73,66 @@
                 </fluent:Backstage>
             </fluent:Ribbon.Menu>
 
+            <fluent:Ribbon.ContextualGroups>
+                <fluent:RibbonContextualTabGroup 
+                    Name="GeneralInformationGroup" 
+                    Header="Algemeen" 
+                    Visibility="Visible" 
+                    Background="CornflowerBlue" 
+                    BorderBrush="DodgerBlue"/>
+                <fluent:RibbonContextualTabGroup 
+                    Name="EventTreesGroup" 
+                    Header="Gebeurtenissen" 
+                    Visibility="Visible" 
+                    Background="DarkSeaGreen" 
+                    BorderBrush="ForestGreen"/>
+                <fluent:RibbonContextualTabGroup 
+                    Name="EstimationGroup" 
+                    Header="Overgangskansen" 
+                    Visibility="Visible" 
+                    Background="Pink" 
+                    BorderBrush="HotPink"/>
+                <fluent:RibbonContextualTabGroup 
+                    Name="ResultsGroup" 
+                    Header="Resultaten" 
+                    Visibility="Visible" 
+                    Background="BlueViolet" 
+                    BorderBrush="Purple"/>
+            </fluent:Ribbon.ContextualGroups>
+
             <!-- Start -->
-            <fluent:RibbonTabItem Name="GeneralDataTabItem" Header="Gegevens" fluent:KeyTip.Keys="S" />
+            <fluent:RibbonTabItem 
+                Name="GeneralDataTabItem" 
+                Header="Projectgegevens" 
+                fluent:KeyTip.Keys="S" 
+                Group="{Binding Source={x:Reference GeneralInformationGroup}}"/>
 
             <!--View-->
-            <fluent:RibbonTabItem Name="ParticipatntsTabItem" Header="Deelnemers" fluent:KeyTip.Keys="V" >
-                <!--
-                <fluent:RibbonGroupBox Header="{x:Static properties:Resources.Ribbon_GroupBox_Show_Hide}" fluent:KeyTip.Keys="ZS">
-                    <fluent:ToggleButton x:Name="ButtonShowProperties" Header="{x:Static properties:Resources.Ribbon_Properties}" Icon="/Core.Common.Gui;component\Resources\PropertiesHS.png" Click="ButtonShowProperties_Click" SizeDefinition="Middle,Small,Small" fluent:KeyTip.Keys="P" />
-                    <fluent:ToggleButton x:Name="ButtonShowMessages" Header="{x:Static properties:Resources.Ribbon_Messages}" Icon="/Core.Common.Gui;component\Resources\application_view_list.png" Click="ButtonShowMessages_Click" SizeDefinition="Middle,Small,Small" fluent:KeyTip.Keys="M" />
-                </fluent:RibbonGroupBox>
--->
-            </fluent:RibbonTabItem>
+            <fluent:RibbonTabItem 
+                Name="ParticipatntsTabItem" 
+                Header="Experts" 
+                fluent:KeyTip.Keys="V"  
+                Group="{Binding Source={x:Reference GeneralInformationGroup}}"/>
 
-            <fluent:RibbonTabItem Name="EventsTreeTabItem" Header="Faalpaden">
+            <fluent:RibbonTabItem
+                Name="HydraulicsTabItem"
+                Header="Hydraulische gegevens"
+                Group="{Binding Source={x:Reference GeneralInformationGroup}}"/>
+
+            <fluent:RibbonTabItem
+                Name="EventsTabItem"
+                Header="Gebeurtenissen"
+                Group="{Binding Source={x:Reference EventTreesGroup}}"/>
+
+            <fluent:RibbonTabItem
+                Name="TreeEventsTabItem"
+                Header="Faalpaden"
+                Group="{Binding Source={x:Reference EventTreesGroup}}"/>
+
+            <fluent:RibbonTabItem 
+                Name="EventsTreeTabItem" 
+                Header="Overgangskansen"
+                Group="{Binding Source={x:Reference EstimationGroup}}">
                 <fluent:RibbonGroupBox Header="Faalpaden">
                     <fluent:Button Header="Faalpad toevoegen" Size="Large" Command="{Binding AddEventTreeCommand}"></fluent:Button>
                     <fluent:Button Header="Faalpad verwijderen" Size="Large" Command="{Binding RemoveEventTreeCommand}"></fluent:Button>
@@ -92,9 +143,13 @@
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 
+            <fluent:RibbonTabItem
+                Name="ResultsTabItem"
+                Header="Resultaten"
+                Group="{Binding Source={x:Reference ResultsGroup}}"/>
         </fluent:Ribbon>
-        <ContentControl Name="HostControl" Grid.Row="1">
-        </ContentControl>
+
+        <ContentPresenter Name="HostControl" Grid.Row="1"/>
     </Grid>
 </fluent:RibbonWindow>
 
