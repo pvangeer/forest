@@ -31,7 +31,7 @@
             Grid.Column="0" 
             ItemsSource="{Binding EventTrees}" 
             SelectedIndex="0"
-            SelectionChanged="ListView_OnSelectionChanged"
+            SelectedItem="{Binding SelectedEventTree}"
             HorizontalContentAlignment="Stretch"
             BorderThickness="0">
             <ListView.ItemTemplate>

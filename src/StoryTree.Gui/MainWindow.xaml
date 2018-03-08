@@ -16,10 +16,11 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/ExpertsDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/EstimationDataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <gui:TabItemToTemplateConverter x:Key="TabItemToTemplateConverter" 
                                             ExpertsTemplate ="{StaticResource ExpertsDataTemplate}"
-                                            GeneralDataTemplate="{StaticResource ExpertsDataTemplate}"/>
+                                            TreeEventsTemplate="{StaticResource EstimationDataTemplate}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
@@ -137,7 +138,7 @@
                 Group="{Binding Source={x:Reference EventTreesGroup}}"/>
 
             <fluent:RibbonTabItem 
-                Name="EventsTreeTabItem" 
+                Name="EstimationTabItem" 
                 Header="Overgangskansen"
                 Group="{Binding Source={x:Reference EstimationGroup}}">
                 <fluent:RibbonGroupBox Header="Faalpaden">

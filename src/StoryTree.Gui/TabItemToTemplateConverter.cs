@@ -27,8 +27,8 @@ namespace StoryTree.Gui
                     return EventsTemplate;
                 case nameof(MainWindow.TreeEventsTabItem):
                     return TreeEventsTemplate;
-                case nameof(MainWindow.EventsTreeTabItem):
-                    return EventsTreeTemplate;
+                case nameof(MainWindow.EstimationTabItem):
+                    return EstimationTemplate;
                 case nameof(MainWindow.ResultsTabItem):
                     return ResultsTemplate;
                 default:
@@ -51,7 +51,7 @@ namespace StoryTree.Gui
 
         public DataTemplate TreeEventsTemplate { get; set; }
 
-        public DataTemplate EventsTreeTemplate { get; set; }
+        public DataTemplate EstimationTemplate { get; set; }
 
         public DataTemplate ResultsTemplate { get; set; }
     }
