@@ -1,8 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
-                    xmlns:gui="clr-namespace:StoryTree.Gui">
-    <gui:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
+                    xmlns:gui="clr-namespace:StoryTree.Gui"
+                    xmlns:converters="clr-namespace:StoryTree.Gui.Converters">
+    <converters:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
 
     <DataTemplate x:Key="ChoiceNodeTemplate" DataType="viewModels:TreeEventViewModel">
         <Border Background="DarkGray" BorderBrush="{Binding Selected, Converter={StaticResource SelectedPropertyToBrushConverter}}" BorderThickness="1">
@@ -145,10 +146,10 @@
         </ContentControl>
     </DataTemplate>
 
-    <gui:SelectedItemToMainTreeEventViewModelConverter x:Key="SelectedItemToMainTreeEventViewModelConverter" />
+    <converters:SelectedItemToMainTreeEventViewModelConverter x:Key="SelectedItemToMainTreeEventViewModelConverter" />
     <DataTemplate x:Key="EstimationDataTemplate" DataType="viewModels:ProjectViewModel">
         <DataTemplate.Resources>
-            <gui:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
+            <converters:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
             <gui:ContentTemplateSelector x:Key="ContentTemplateSelector" />
         </DataTemplate.Resources>
 

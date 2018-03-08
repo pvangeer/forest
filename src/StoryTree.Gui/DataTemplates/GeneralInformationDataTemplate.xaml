@@ -83,7 +83,14 @@
                 <Grid Grid.Column="1">
                 </Grid>
             </Grid>
-            <xctk:RichTextBox Grid.Row="1" Text="{Binding ProjectInformation, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+            <xctk:RichTextBox 
+                Grid.Row="1" 
+                Text="{Binding ProjectInformation, UpdateSourceTrigger=PropertyChanged}"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <xctk:RichTextBoxFormatBarManager.FormatBar>
+                    <xctk:RichTextBoxFormatBar/>
+                </xctk:RichTextBoxFormatBarManager.FormatBar>
+            </xctk:RichTextBox>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

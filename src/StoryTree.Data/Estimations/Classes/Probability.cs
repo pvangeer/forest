@@ -22,7 +22,7 @@
 using System;
 using System.Globalization;
 
-namespace StoryTree.Data.Tree
+namespace StoryTree.Data.Estimations.Classes
 {
     public struct Probability : IEquatable<Probability>, IEquatable<double>, IFormattable, IComparable, IComparable<Probability>, IComparable<double>
     {

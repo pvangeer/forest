@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using Fluent;
 
-namespace StoryTree.Gui
+namespace StoryTree.Gui.Converters
 {
     public class TabItemToTemplateConverter : IValueConverter
     {

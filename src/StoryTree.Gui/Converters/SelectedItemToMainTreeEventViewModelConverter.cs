@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using StoryTree.Gui.ViewModels;
 
-namespace StoryTree.Gui
+namespace StoryTree.Gui.Converters
 {
     public class SelectedItemToMainTreeEventViewModelConverter : IValueConverter
     {

@@ -6,6 +6,7 @@
         xmlns:modelViews="clr-namespace:StoryTree.Gui.ViewModels"
                      xmlns:fluent="urn:fluent-ribbon"
                      xmlns:gui="clr-namespace:StoryTree.Gui"
+                     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
                      mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="900" x:Name="MainRibbonWindow">
     <Window.DataContext>
@@ -19,7 +20,7 @@
                 <ResourceDictionary Source="/DataTemplates/ExpertsDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/EstimationDataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <gui:TabItemToTemplateConverter x:Key="TabItemToTemplateConverter" 
+            <converters:TabItemToTemplateConverter x:Key="TabItemToTemplateConverter" 
                                             GeneralDataTemplate="{StaticResource GeneralInformationDataTemplate}"
                                             ExpertsTemplate ="{StaticResource ExpertsDataTemplate}"
                                             EstimationTemplate="{StaticResource EstimationDataTemplate}"/>

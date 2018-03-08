@@ -48,18 +48,16 @@
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="Services\EventTreeManipulationService.cs" />
     <Compile Include="Services\TreeEventType.cs" />
-    <Compile Include="Tree\ClassesProbabilitySpecification.cs" />
+    <Compile Include="Estimations\Classes\ClassesProbabilitySpecification.cs" />
     <Compile Include="Tree\ExpertClassEstimation.cs" />
     <Compile Include="Tree\ExpertClassEstimationPerWaterLevel.cs" />
-    <Compile Include="Tree\IProbabilitySpecification.cs" />
-    <Compile Include="Tree\Probability.cs" />
-    <Compile Include="Tree\ProbabilityClass.cs" />
-    <Compile Include="Tree\ProbabilitySpecificationType.cs" />
+    <Compile Include="Estimations\IProbabilitySpecification.cs" />
+    <Compile Include="Estimations\Classes\Probability.cs" />
+    <Compile Include="Estimations\Classes\ProbabilityClass.cs" />
+    <Compile Include="Estimations\Classes\ProbabilitySpecificationType.cs" />
     <Compile Include="Tree\TreeEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Estimations\Classes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
