@@ -5,13 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:modelViews="clr-namespace:StoryTree.Gui.ViewModels"
                      xmlns:fluent="urn:fluent-ribbon"
+                     xmlns:gui="clr-namespace:StoryTree.Gui"
                      mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="900" x:Name="MainRibbonWindow">
     <Window.DataContext>
         <modelViews:ProjectViewModel></modelViews:ProjectViewModel>
     </Window.DataContext>
     <Window.Resources>
-        <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/ExpertsDataTemplate.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <gui:TabItemToTemplateConverter x:Key="TabItemToTemplateConverter" 
+                                            ExpertsTemplate ="{StaticResource ExpertsDataTemplate}"
+                                            GeneralDataTemplate="{StaticResource ExpertsDataTemplate}"/>
+        </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Close"
@@ -26,9 +35,7 @@
         <fluent:Ribbon 
             Focusable="True" 
             x:Name="Ribbon" 
-            AutomaticStateManagement="False" 
-            x:FieldModifier="protected" 
-            SelectedTabChanged="Ribbon_OnSelectedTabChanged">
+            x:FieldModifier="protected">
             <!--Backstage-->
             <fluent:Ribbon.Menu>
                 <fluent:Backstage Background="#008fc5" x:Name="Menu" x:FieldModifier="private">
@@ -109,7 +116,7 @@
 
             <!--View-->
             <fluent:RibbonTabItem 
-                Name="ParticipatntsTabItem" 
+                Name="ExpertsTabItem" 
                 Header="Experts" 
                 fluent:KeyTip.Keys="V"  
                 Group="{Binding Source={x:Reference GeneralInformationGroup}}"/>
@@ -149,7 +156,16 @@
                 Group="{Binding Source={x:Reference ResultsGroup}}"/>
         </fluent:Ribbon>
 
-        <ContentPresenter Name="HostControl" Grid.Row="1"/>
+        <ContentPresenter 
+            Name="HostControl" 
+            Grid.Row="1" 
+            Content="{Binding }" 
+            ContentTemplate="{
+                Binding ElementName=Ribbon, 
+                Path=SelectedTabItem, 
+                Converter={StaticResource TabItemToTemplateConverter}, 
+                ConverterParameter={RelativeSource Self}
+            }"/>
     </Grid>
 </fluent:RibbonWindow>
 

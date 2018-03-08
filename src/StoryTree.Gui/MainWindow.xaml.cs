@@ -1,9 +1,7 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using StoryTree.Data;
 using StoryTree.Data.Tree;
-using StoryTree.Gui.UserControls;
 using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui
@@ -16,25 +14,43 @@ namespace StoryTree.Gui
         public MainWindow()
         {
             InitializeComponent();
+            CreateTestViewModel();
+        }
 
-            // Testcode
+        #region TestCode
+        private void CreateTestViewModel()
+        {
             DataContext = new ProjectViewModel(new Project
             {
                 EventTrees =
                 {
-                    GetEventTree("First event tree",3),
-                    GetEventTree("Second event tree",2),
-                    GetEventTree("3",4)
+                    CreateEventTree("First event tree", 3),
+                    CreateEventTree("Second event tree", 2),
+                    CreateEventTree("3", 4)
                 },
                 Experts =
                 {
-                    new Expert{Name = "Klaas", Email = "email@domein.nl", Expertise = "Alles", Organisation = "Eigen bedrijf", Telephone = "088-3358339"},
-                    new Expert{Name = "Piet", Email = "piet@email.nl", Expertise = "Niets", Organisation = "Ander bedrijf", Telephone = "088-3358339"},
+                    new Expert
+                    {
+                        Name = "Klaas",
+                        Email = "email@domein.nl",
+                        Expertise = "Alles",
+                        Organisation = "Eigen bedrijf",
+                        Telephone = "088-3358339"
+                    },
+                    new Expert
+                    {
+                        Name = "Piet",
+                        Email = "piet@email.nl",
+                        Expertise = "Niets",
+                        Organisation = "Ander bedrijf",
+                        Telephone = "088-3358339"
+                    },
                 }
             });
         }
 
-        private static EventTree GetEventTree(string treeDescription, int numberTreeEvents)
+        private static EventTree CreateEventTree(string treeDescription, int numberTreeEvents)
         {
             var mainTreeEvent = new TreeEvent
             {
@@ -60,6 +76,7 @@ namespace StoryTree.Gui
 
             return tree;
         }
+        #endregion
 
         private void OnFileNewClicked(object sender, RoutedEventArgs e)
         {
@@ -84,26 +101,6 @@ namespace StoryTree.Gui
         private void OnFileExitClicked(object sender, RoutedEventArgs e)
         {
             throw new System.NotImplementedException();
-        }
-
-        private void Ribbon_OnSelectedTabChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // TODO: This can be achieved via bindings and datatemplates, but passing DataContext was a big problem for some reason
-            HostControl.Content = null;
-            if (Equals(Ribbon.SelectedTabItem, GeneralDataTabItem))
-            {
-                // Show general data control
-            }
-
-            if (Equals(Ribbon.SelectedTabItem, ParticipatntsTabItem))
-            {
-                HostControl.Content = new ParticipantsControl { DataContext = DataContext };
-            }
-
-            if (Equals(Ribbon.SelectedTabItem, EventsTreeTabItem))
-            {
-                HostControl.Content = new StoryBoardControl {DataContext = DataContext};
-            }
         }
 
         private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
