@@ -16,15 +16,16 @@
     
     <DataTemplate x:Key="GeneralInformationDataTemplate" DataType="viewModels:ProjectViewModel">
         <Grid>
-           <Grid.RowDefinitions>
+            <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Margin="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" MinWidth="50"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="1"/>
-                    <ColumnDefinition Width="*" MinWidth="50"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Vertical">
                     <StackPanel 
@@ -38,7 +39,7 @@
                             HorizontalAlignment="Left"/>
                         <TextBox 
                             Text="{Binding ProjectName}" 
-                            Width="300"
+                            Width="400"
                             BorderThickness="0"
                             Background="LightGray"/>
                     </StackPanel>
@@ -58,7 +59,7 @@
                             TextWrapping="Wrap" 
                             Background="LightGray"
                             BorderThickness="0"
-                            Width="300" 
+                            Width="400" 
                             Height="60"/>
                     </StackPanel>
                     <StackPanel 
@@ -83,14 +84,28 @@
                 <Grid Grid.Column="1">
                 </Grid>
             </Grid>
-            <xctk:RichTextBox 
-                Grid.Row="1" 
-                Text="{Binding ProjectInformation, UpdateSourceTrigger=PropertyChanged}"
-                ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <xctk:RichTextBoxFormatBarManager.FormatBar>
-                    <xctk:RichTextBoxFormatBar/>
-                </xctk:RichTextBoxFormatBarManager.FormatBar>
-            </xctk:RichTextBox>
+            <Grid Grid.Row="1" Background="LightGray"></Grid>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label 
+                    Grid.Row="0"
+                    Content="Algemene Gegevens"/>
+                <xctk:RichTextBox 
+                    Margin="5"
+                    BorderThickness="0"
+                    Background="LightGray"
+                    Grid.Row="1" 
+                    Text="{Binding ProjectInformation, UpdateSourceTrigger=PropertyChanged}"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <xctk:RichTextBoxFormatBarManager.FormatBar>
+                        <xctk:RichTextBoxFormatBar/>
+                    </xctk:RichTextBoxFormatBarManager.FormatBar>
+                </xctk:RichTextBox>
+            </Grid>
+            
         </Grid>
     </DataTemplate>
 </ResourceDictionary>
