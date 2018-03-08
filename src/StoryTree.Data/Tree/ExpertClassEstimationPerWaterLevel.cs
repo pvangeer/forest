@@ -1,4 +1,6 @@
-﻿namespace StoryTree.Data.Tree
+﻿using StoryTree.Data.Estimations.Classes;
+
+namespace StoryTree.Data.Tree
 {
     public class ExpertClassEstimationPerWaterLevel
     {

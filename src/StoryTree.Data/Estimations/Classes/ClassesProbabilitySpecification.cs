@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using StoryTree.Data.Tree;
 
-namespace StoryTree.Data.Tree
+namespace StoryTree.Data.Estimations.Classes
 {
     public class ClassesProbabilitySpecification : IProbabilitySpecification
     {

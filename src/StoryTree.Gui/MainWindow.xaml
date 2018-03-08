@@ -15,10 +15,12 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/GeneralInformationDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/ExpertsDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/EstimationDataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <gui:TabItemToTemplateConverter x:Key="TabItemToTemplateConverter" 
+                                            GeneralDataTemplate="{StaticResource GeneralInformationDataTemplate}"
                                             ExpertsTemplate ="{StaticResource ExpertsDataTemplate}"
                                             EstimationTemplate="{StaticResource EstimationDataTemplate}"/>
         </ResourceDictionary>

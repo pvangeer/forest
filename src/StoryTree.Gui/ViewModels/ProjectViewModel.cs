@@ -47,7 +47,29 @@ namespace StoryTree.Gui.ViewModels
 
         public ObservableCollection<EventTreeViewModel> EventTrees { get; }
 
-        public string ProjectName => Project.Name;
+        public string ProjectName
+        {
+            get => Project.Name;
+            set => Project.Name = value;
+        }
+
+        public string ProjectDescription
+        {
+            get => Project.Description;
+            set => Project.Description = value;
+        }
+
+        public string AssessmentSection
+        {
+            get => Project.AssessmentSection;
+            set => Project.AssessmentSection = value;
+        }
+
+        public string ProjectInformation
+        {
+            get => Project.ProjectInformation;
+            set => Project.ProjectInformation = value;
+        }
 
         public ICommand AddEventTreeCommand => new AddEventTreeCommand(this);
 
@@ -169,12 +191,12 @@ namespace StoryTree.Gui.ViewModels
 
             switch (e.PropertyName)
             {
-                case "MainTreeEventViewModel":
+                case nameof(EventTreeViewModel.MainTreeEventViewModel):
                     OnPropertyChanged(nameof(SelectedTreeEvent));
                     addTreeEventCommand.FireCanExecuteChanged();
                     removeTreeEventCommand.FireCanExecuteChanged();
                     break;
-                case "SelectedTreeEvent":
+                case nameof(EventTreeViewModel.SelectedTreeEvent):
                     OnPropertyChanged(nameof(SelectedTreeEvent));
                     SelectedObject = SelectedTreeEvent;
                     OnPropertyChanged(nameof(SelectedObject));
