@@ -66,15 +66,9 @@
     <Compile Include="Command\AddEventTreeCommand.cs" />
     <Compile Include="Command\ProjectViewModelCommand.cs" />
     <Compile Include="ContentTemplateSelector.cs" />
-    <Compile Include="SelectedItemToMainTreeEventViewModelConverter.cs" />
-    <Compile Include="SelectedPropertyToColorConverter.cs" />
-    <Compile Include="TabItemToTemplateConverter.cs" />
-    <Compile Include="UserControls\EventTreeControl.xaml.cs">
-      <DependentUpon>EventTreeControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\StoryBoardControl.xaml.cs">
-      <DependentUpon>StoryBoardControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Converters\SelectedItemToMainTreeEventViewModelConverter.cs" />
+    <Compile Include="Converters\SelectedPropertyToColorConverter.cs" />
+    <Compile Include="Converters\TabItemToTemplateConverter.cs" />
     <Compile Include="Command\AddTreeEventCommand.cs" />
     <Compile Include="Command\EventTreeCommand.cs" />
     <Compile Include="ViewModels\EventTreeViewModel.cs" />
@@ -92,10 +86,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\EventTreeControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -108,10 +98,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\StoryBoardControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

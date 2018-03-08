@@ -20,7 +20,7 @@
             </ResourceDictionary.MergedDictionaries>
             <gui:TabItemToTemplateConverter x:Key="TabItemToTemplateConverter" 
                                             ExpertsTemplate ="{StaticResource ExpertsDataTemplate}"
-                                            TreeEventsTemplate="{StaticResource EstimationDataTemplate}"/>
+                                            EstimationTemplate="{StaticResource EstimationDataTemplate}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
