@@ -89,8 +89,10 @@
     <Compile Include="Converters\TabItemToTemplateConverter.cs" />
     <Compile Include="Command\AddTreeEventCommand.cs" />
     <Compile Include="Command\EventTreeCommand.cs" />
+    <Compile Include="Converters\StringToProbabilityConverter.cs" />
     <Compile Include="ViewModels\EventTreeViewModel.cs" />
     <Compile Include="ViewModels\ExpertViewModel.cs" />
+    <Compile Include="ViewModels\HydraulicConditionViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="Command\RemoveEventTreeCommand.cs" />
     <Compile Include="Command\RemoveTreeEventCommand.cs" />
@@ -109,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataTemplates\GeneralInformationDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\HydraulicsDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

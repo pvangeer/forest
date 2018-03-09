@@ -19,11 +19,13 @@
                 <ResourceDictionary Source="/DataTemplates/GeneralInformationDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/ExpertsDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/EstimationDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/HydraulicsDataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:TabItemToTemplateConverter x:Key="TabItemToTemplateConverter" 
-                                            GeneralDataTemplate="{StaticResource GeneralInformationDataTemplate}"
-                                            ExpertsTemplate ="{StaticResource ExpertsDataTemplate}"
-                                            EstimationTemplate="{StaticResource EstimationDataTemplate}"/>
+                                                   GeneralDataTemplate="{StaticResource GeneralInformationDataTemplate}"
+                                                   ExpertsTemplate ="{StaticResource ExpertsDataTemplate}"
+                                                   EstimationTemplate="{StaticResource EstimationDataTemplate}"
+                                                   HydraulicsTemplate="{StaticResource HydraulicsDataTemplate}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>

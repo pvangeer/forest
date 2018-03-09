@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="EventTree.cs" />
     <Compile Include="Expert.cs" />
-    <Compile Include="FrequencyLinePoint.cs" />
+    <Compile Include="Hydraulics\HydraulicCondition.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\Annotations.cs" />

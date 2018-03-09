@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using StoryTree.Data;
+using StoryTree.Data.Hydraulics;
 using StoryTree.Data.Properties;
 using StoryTree.Gui.Command;
 
@@ -38,6 +39,9 @@ namespace StoryTree.Gui.ViewModels
 
             expertViewModels = new ObservableCollection<ExpertViewModel>(Project.Experts.Select(e => new ExpertViewModel(e)));
             expertViewModels.CollectionChanged += ExpertViewModelsCollectionChanged;
+
+            hydraulicsViewModels = new ObservableCollection<HydraulicConditionViewModel>(Project.HydraulicConditions.Select(e => new HydraulicConditionViewModel(e)));
+            hydraulicsViewModels.CollectionChanged += HydraulicsViewModelsCollectionChanged;
 
             project.Experts.CollectionChanged += ExpertsCollectionChanged;
             project.EventTrees.CollectionChanged += EventTreesCollectionChanged;
@@ -81,6 +85,7 @@ namespace StoryTree.Gui.ViewModels
 
         private EventTreeViewModel selectedEventTree;
         private ObservableCollection<ExpertViewModel> expertViewModels;
+        private ObservableCollection<HydraulicConditionViewModel> hydraulicsViewModels;
 
         public EventTreeViewModel SelectedEventTree
         {
@@ -161,6 +166,20 @@ namespace StoryTree.Gui.ViewModels
             }
         }
 
+        public ObservableCollection<HydraulicConditionViewModel> HydraulicConditionsList
+        {
+            get
+            {
+                if (Project == null)
+                {
+                    return null;
+                }
+
+                return hydraulicsViewModels ??
+                       (hydraulicsViewModels = new ObservableCollection<HydraulicConditionViewModel>(Project?.HydraulicConditions.Select(e => new HydraulicConditionViewModel(e))));
+            }
+        }
+
         public void AddNewEventTree()
         {
             Project.EventTrees.Add(new EventTree {Description = "Nieuwe gebeurtenis"});
@@ -198,6 +217,25 @@ namespace StoryTree.Gui.ViewModels
 
         private void ExpertsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+        }
+
+        private void HydraulicsViewModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (var item in e.NewItems.OfType<HydraulicConditionViewModel>())
+                {
+                    Project.HydraulicConditions.Add(item.HydraulicCondition);
+                }
+            }
+
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var item in e.OldItems.OfType<HydraulicConditionViewModel>())
+                {
+                    Project.HydraulicConditions.Remove(item.HydraulicCondition);
+                }
+            }
         }
 
         private void ExpertViewModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

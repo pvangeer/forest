@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using StoryTree.Data.Hydraulics;
 using StoryTree.Data.Properties;
 
 namespace StoryTree.Data
@@ -14,6 +15,7 @@ namespace StoryTree.Data
             ProjectLeader = new Person();
             EventTrees = new ObservableCollection<EventTree>();
             Experts = new ObservableCollection<Expert>();
+            HydraulicConditions = new ObservableCollection<HydraulicCondition>();
         }
 
         public string Name { get; set; }
@@ -29,7 +31,7 @@ namespace StoryTree.Data
         public ObservableCollection<Expert> Experts { get; }
         public Person ProjectLeader { get; }
 
-        /*public IEnumerable<FrequencyLinePoint> FrequencyLine { get; set; }*/
+        public ObservableCollection<HydraulicCondition> HydraulicConditions { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

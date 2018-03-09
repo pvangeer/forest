@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
+                    xmlns:converters="clr-namespace:StoryTree.Gui.Converters">
+    <converters:StringToProbabilityConverter x:Key="DoubleToProbabilityConverter" />
+    
+    <Style x:Key="ColumnElementStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="5,5,5,5" />
+    </Style>
+
+    <DataTemplate x:Key="HydraulicsDataTemplate" DataType="viewModels:ProjectViewModel">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Grid.Column="0"
+                      ItemsSource="{Binding HydraulicConditionsList}"
+                      AutoGenerateColumns="False"
+                      RowBackground="AliceBlue"
+                      GridLinesVisibility="Vertical"
+                      VerticalGridLinesBrush="LightGray"
+                      AlternatingRowBackground="LightSteelBlue">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Waterstand" Binding="{Binding WaterLevel}" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                    <DataGridTextColumn Header="Kans" Binding="{Binding Probability, Converter={StaticResource DoubleToProbabilityConverter}}" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                    <DataGridTextColumn Header="Golfhoogte" Binding="{Binding WaveHeight}" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                    <DataGridTextColumn Header="Golfperiode" Binding="{Binding WavePeriod}" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="10" Grid.Column="1"/>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

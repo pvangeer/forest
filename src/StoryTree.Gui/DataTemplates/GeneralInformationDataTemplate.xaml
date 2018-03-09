@@ -162,7 +162,7 @@
                     Content="Algemene Gegevens"/>
                 <xctk:RichTextBox 
                     Margin="4"
-                    BorderThickness="1"
+                    BorderThickness="0"
                     Background="{StaticResource BackgroundEditableColor}"
                     Grid.Row="1" 
                     Text="{Binding ProjectInformation, UpdateSourceTrigger=PropertyChanged}"
