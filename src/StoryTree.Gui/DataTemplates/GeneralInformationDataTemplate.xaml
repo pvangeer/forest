@@ -13,78 +13,144 @@
         <system:String>2-1</system:String>
         <system:String>2-2</system:String>
     </x:Array>
-    
+
+    <SolidColorBrush Color="AliceBlue"  x:Key="BackgroundEditableColor" />
+
     <DataTemplate x:Key="GeneralInformationDataTemplate" DataType="viewModels:ProjectViewModel">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="140" MinHeight="120"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="1"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Margin="1">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500" MinWidth="250"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="1"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" MinWidth="250"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Orientation="Vertical">
-                    <StackPanel 
-                        Margin="2"
-                        CanHorizontallyScroll="False" 
-                        CanVerticallyScroll="False" 
-                        Orientation="Horizontal">
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.Row="0"
+                        Content="Projectinformatie" 
+                        FontWeight="Bold"
+                        HorizontalAlignment="Left"/>
+                    <Grid Grid.Row="1" Margin="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <Label 
+                            Grid.Column="0"
                             Content="Project" 
-                            Width="80" 
+                            Width="100"
                             HorizontalAlignment="Left"/>
                         <TextBox 
-                            Text="{Binding ProjectName}" 
-                            Width="400"
+                            Grid.Column="1"
+                            Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}" 
                             BorderThickness="0"
-                            Background="LightGray"/>
-                    </StackPanel>
-                    <StackPanel 
-                        Margin="2"
-                        CanHorizontallyScroll="False" 
-                        CanVerticallyScroll="False" 
-                        Orientation="Horizontal">
+                            Background="{StaticResource BackgroundEditableColor}"/>
+                    </Grid>
+                    <Grid Grid.Row="2" Margin="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <Label 
+                            Grid.Column="0"
                             Content="Omschrijving" 
-                            Width="80" 
+                            Width="100"
                             HorizontalAlignment="Left"/>
                         <TextBox 
-                            Text="{Binding ProjectDescription}" 
+                            Grid.Column="1"
+                            Text="{Binding ProjectDescription, UpdateSourceTrigger=PropertyChanged}" 
                             VerticalScrollBarVisibility="Auto" 
                             AcceptsReturn="True" 
                             TextWrapping="Wrap" 
-                            Background="LightGray"
-                            BorderThickness="0"
-                            Width="400" 
-                            Height="60"/>
-                    </StackPanel>
-                    <StackPanel 
-                        Margin="2"
-                        CanHorizontallyScroll="False" 
-                        CanVerticallyScroll="False" 
-                        Orientation="Horizontal">
+                            Background="{StaticResource BackgroundEditableColor}"
+                            BorderThickness="0"/>
+                    </Grid>
+                    <Grid Grid.Row="3" Margin="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <Label 
+                            Grid.Column="0"
                             Content="Traject" 
-                            Width="80" 
+                            Width="100"
                             HorizontalAlignment="Left"/>
                         <ComboBox
+                            Grid.Column="1"
                             Style="{StaticResource ComboBoxFlatStyle}"
                             ItemsSource="{StaticResource AvailableAssessmentSections}"
-                            SelectedItem="{Binding AssessmentSection}"
-                            Background="LightGray"
+                            SelectedItem="{Binding AssessmentSection, UpdateSourceTrigger=PropertyChanged}"
+                            Background="{StaticResource BackgroundEditableColor}"
                             UseLayoutRounding="False"
-                            BorderThickness="0"/>
-                    </StackPanel>
-                </StackPanel>
-                <Grid Grid.Column="1" Background="LightGray"></Grid>
-                <Grid Grid.Column="1">
+                            BorderThickness="0"
+                            HorizontalAlignment="Left"
+                            Width="40"/>
+                    </Grid>
+                </Grid>
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="10"></GridSplitter>
+                <Grid Grid.Column="2">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Content="Projectleider"
+                            FontWeight="Bold"/>
+                        <Grid Grid.Row="1" Margin="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Naam" Grid.Column="0"/>
+                            <TextBox 
+                                Grid.Column="1"
+                                Text="{Binding ProjectLeaderName, UpdateSourceTrigger=PropertyChanged}"
+                                Background="{StaticResource BackgroundEditableColor}"
+                                BorderThickness="0"/>
+                        </Grid>
+                        <Grid Grid.Row="2" Margin="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Telefoon" Grid.Column="0"/>
+                            <TextBox 
+                                Grid.Column="1"
+                                Text="{Binding ProjectLeaderTelephone, UpdateSourceTrigger=PropertyChanged}"
+                                Background="{StaticResource BackgroundEditableColor}"
+                                BorderThickness="0"/>
+                        </Grid>
+                        <Grid Grid.Row="3" Margin="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Email" Grid.Column="0"/>
+                            <TextBox 
+                                Grid.Column="1"
+                                Text="{Binding ProjectLeaderEmail, UpdateSourceTrigger=PropertyChanged}"
+                                Background="{StaticResource BackgroundEditableColor}"
+                                BorderThickness="0"/>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="1" Background="LightGray"></Grid>
+            <GridSplitter Grid.Row="1" VerticalAlignment="Stretch" Height="10" HorizontalAlignment="Stretch"></GridSplitter>
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -92,11 +158,12 @@
                 </Grid.RowDefinitions>
                 <Label 
                     Grid.Row="0"
+                    FontWeight="Bold"
                     Content="Algemene Gegevens"/>
                 <xctk:RichTextBox 
-                    Margin="5"
-                    BorderThickness="0"
-                    Background="LightGray"
+                    Margin="4"
+                    BorderThickness="1"
+                    Background="{StaticResource BackgroundEditableColor}"
                     Grid.Row="1" 
                     Text="{Binding ProjectInformation, UpdateSourceTrigger=PropertyChanged}"
                     ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -105,7 +172,6 @@
                     </xctk:RichTextBoxFormatBarManager.FormatBar>
                 </xctk:RichTextBox>
             </Grid>
-            
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

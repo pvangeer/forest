@@ -112,16 +112,54 @@ namespace StoryTree.Gui.ViewModels
                     return null;
                 }
 
-                if (expertViewModels == null)
-                {
-                    expertViewModels = new ObservableCollection<ExpertViewModel>(Project?.Experts.Select(e => new ExpertViewModel(e)));
-                }
-
-                return expertViewModels;
+                return expertViewModels ?? 
+                       (expertViewModels = new ObservableCollection<ExpertViewModel>(Project?.Experts.Select(e => new ExpertViewModel(e))));
             }
         }
 
         public object SelectedObject { get; set; }
+
+        public string ProjectLeaderName
+        {
+            get => Project.ProjectLeader.Name;
+            set
+            {
+                if (Project == null)
+                {
+                    return;
+                }
+                Project.ProjectLeader.Name = value;
+                Project.ProjectLeader.OnPropertyChanged(nameof(Project.ProjectLeader.Name));
+            }
+        }
+
+        public string ProjectLeaderEmail
+        {
+            get => Project.ProjectLeader.Email;
+            set
+            {
+                if (Project == null)
+                {
+                    return;
+                }
+                Project.ProjectLeader.Email = value;
+                Project.ProjectLeader.OnPropertyChanged(nameof(Project.ProjectLeader.Email));
+            }
+        }
+
+        public string ProjectLeaderTelephone
+        {
+            get => Project.ProjectLeader.Telephone;
+            set
+            {
+                if (Project == null)
+                {
+                    return;
+                }
+                Project.ProjectLeader.Telephone = value;
+                Project.ProjectLeader.OnPropertyChanged(nameof(Project.ProjectLeader.Telephone));
+            }
+        }
 
         public void AddNewEventTree()
         {
