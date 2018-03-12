@@ -20,25 +20,44 @@ namespace StoryTree.Gui.ViewModels
         public double WaterLevel
         {
             get => HydraulicCondition.WaterLevel;
-            set => HydraulicCondition.WaterLevel = value;
+            set
+            {
+                HydraulicCondition.WaterLevel = value;
+                OnPropertyChanged();
+            }
         }
 
         public Probability Probability
         {
             get => HydraulicCondition.Probability;
-            set => HydraulicCondition.Probability = value;
+            set
+            {
+                HydraulicCondition.Probability = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(ProbabilityDouble));
+            }
         }
+
+        public double ProbabilityDouble => HydraulicCondition.Probability;
 
         public double WavePeriod
         {
             get => HydraulicCondition.WavePeriod;
-            set => HydraulicCondition.WavePeriod = value;
+            set
+            {
+                HydraulicCondition.WavePeriod = value;
+                OnPropertyChanged();
+            }
         }
 
         public double WaveHeight
         {
             get => HydraulicCondition.WaveHeight;
-            set => HydraulicCondition.WaveHeight = value;
+            set
+            {
+                HydraulicCondition.WaveHeight = value;
+                OnPropertyChanged();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -96,6 +96,7 @@
     <Compile Include="Command\AddTreeEventCommand.cs" />
     <Compile Include="Command\EventTreeCommand.cs" />
     <Compile Include="Converters\StringToProbabilityConverter.cs" />
+    <Compile Include="Converters\HydraulicConditionsToViewModelConverter.cs" />
     <Compile Include="ViewModels\EventTreeViewModel.cs" />
     <Compile Include="ViewModels\ExpertViewModel.cs" />
     <Compile Include="ViewModels\HydraulicConditionViewModel.cs" />
