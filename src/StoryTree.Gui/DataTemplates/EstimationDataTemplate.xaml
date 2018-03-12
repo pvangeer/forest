@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
                     xmlns:gui="clr-namespace:StoryTree.Gui"
-                    xmlns:converters="clr-namespace:StoryTree.Gui.Converters">
+                    xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
+                    xmlns:dataTemplates="clr-namespace:StoryTree.Gui.DataTemplates">
     <converters:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
 
     <DataTemplate x:Key="ChoiceNodeTemplate" DataType="viewModels:TreeEventViewModel">
@@ -150,7 +151,7 @@
     <DataTemplate x:Key="EstimationDataTemplate" DataType="viewModels:ProjectViewModel">
         <DataTemplate.Resources>
             <converters:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
-            <gui:ContentTemplateSelector x:Key="ContentTemplateSelector" />
+            <dataTemplates:ContentTemplateSelector x:Key="ContentTemplateSelector" />
         </DataTemplate.Resources>
 
         <Grid ShowGridLines="False">

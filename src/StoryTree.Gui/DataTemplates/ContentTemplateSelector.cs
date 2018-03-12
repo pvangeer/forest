@@ -2,7 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using StoryTree.Gui.ViewModels;
 
-namespace StoryTree.Gui
+namespace StoryTree.Gui.DataTemplates
 {
     public class ContentTemplateSelector : DataTemplateSelector
     {
