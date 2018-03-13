@@ -33,8 +33,8 @@ namespace StoryTree.Gui.ViewModels
                 case nameof(EventTree.Name):
                     OnPropertyChanged(nameof(Name));
                     break;
-                case nameof(EventTree.Description):
-                    OnPropertyChanged(nameof(Description));
+                case nameof(EventTree.Summary):
+                    OnPropertyChanged(nameof(Summary));
                     break;
             }
         }
@@ -84,10 +84,16 @@ namespace StoryTree.Gui.ViewModels
             }
         }
 
-        public string Description
+        public string Summary
         {
-            get => EventTree.Description;
-            set => EventTree.Description = value;
+            get => EventTree.Summary;
+            set => EventTree.Summary = value;
+        }
+
+        public string Details
+        {
+            get => EventTree.Details;
+            set => EventTree.Details = value;
         }
 
         public bool IsViewModelFor(EventTree eventTree)

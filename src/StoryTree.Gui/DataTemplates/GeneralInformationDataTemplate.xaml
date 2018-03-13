@@ -52,8 +52,7 @@
                         <TextBox 
                             Grid.Column="1"
                             Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}" 
-                            BorderThickness="0"
-                            Background="{StaticResource BackgroundEditableColor}"/>
+                            Style="{StaticResource TextBoxStyle}"/>
                     </Grid>
                     <Grid Grid.Row="2" Margin="2">
                         <Grid.ColumnDefinitions>
@@ -71,8 +70,7 @@
                             VerticalScrollBarVisibility="Auto" 
                             AcceptsReturn="True" 
                             TextWrapping="Wrap" 
-                            Background="{StaticResource BackgroundEditableColor}"
-                            BorderThickness="0"/>
+                            Style="{StaticResource TextBoxStyle}"/>
                     </Grid>
                     <Grid Grid.Row="3" Margin="2">
                         <Grid.ColumnDefinitions>
@@ -118,8 +116,7 @@
                             <TextBox 
                                 Grid.Column="1"
                                 Text="{Binding ProjectLeaderName, UpdateSourceTrigger=PropertyChanged}"
-                                Background="{StaticResource BackgroundEditableColor}"
-                                BorderThickness="0"/>
+                                Style="{StaticResource TextBoxStyle}"/>
                         </Grid>
                         <Grid Grid.Row="2" Margin="2">
                             <Grid.ColumnDefinitions>
@@ -130,8 +127,7 @@
                             <TextBox 
                                 Grid.Column="1"
                                 Text="{Binding ProjectLeaderTelephone, UpdateSourceTrigger=PropertyChanged}"
-                                Background="{StaticResource BackgroundEditableColor}"
-                                BorderThickness="0"/>
+                                Style="{StaticResource TextBoxStyle}"/>
                         </Grid>
                         <Grid Grid.Row="3" Margin="2">
                             <Grid.ColumnDefinitions>
@@ -142,8 +138,7 @@
                             <TextBox 
                                 Grid.Column="1"
                                 Text="{Binding ProjectLeaderEmail, UpdateSourceTrigger=PropertyChanged}"
-                                Background="{StaticResource BackgroundEditableColor}"
-                                BorderThickness="0"/>
+                                Style="{StaticResource TextBoxStyle}"/>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -159,12 +154,9 @@
                     FontWeight="Bold"
                     Content="Algemene Gegevens"/>
                 <xctk:RichTextBox 
-                    Margin="4"
-                    BorderThickness="0"
-                    Background="{StaticResource BackgroundEditableColor}"
+                    Style="{StaticResource RichtTextBoxStyle}"
                     Grid.Row="1" 
-                    Text="{Binding ProjectInformation, UpdateSourceTrigger=PropertyChanged}"
-                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    Text="{Binding ProjectInformation, UpdateSourceTrigger=PropertyChanged}">
                     <xctk:RichTextBoxFormatBarManager.FormatBar>
                         <xctk:RichTextBoxFormatBar/>
                     </xctk:RichTextBoxFormatBarManager.FormatBar>

@@ -9,7 +9,9 @@ namespace StoryTree.Data
     {
         public string Name { get; set; }
 
-        public string Description { get; set; }
+        public string Summary { get; set; }
+
+        public string Details { get; set; }
 
         public TreeEvent MainTreeEvent { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;

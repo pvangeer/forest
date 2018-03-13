@@ -214,12 +214,16 @@
                 <ContentPresenter.Resources>
                     <DataTemplate x:Key="EventTreePropertiesTemplate" DataType="{x:Type viewModels:EventTreeViewModel}">
                         <Grid Background="Azure">
-                            <TextBox Text="{Binding Name, Mode=TwoWay}" Background="Aquamarine"></TextBox>
+                            <TextBox 
+                                Text="{Binding Name, Mode=TwoWay}" 
+                                Style="{StaticResource TextBoxStyle}"/>
                         </Grid>
                     </DataTemplate>
                     <DataTemplate x:Key="TreeEventPropertiesTemplate" DataType="{x:Type viewModels:TreeEventViewModel}">
                         <StackPanel>
-                            <TextBox Text="{Binding Name, Mode=TwoWay}" Background="BlanchedAlmond"></TextBox>
+                            <TextBox 
+                                Text="{Binding Name, Mode=TwoWay}" 
+                                Style="{StaticResource TextBoxStyle}"/>
                             <TextBlock Text="TreeEvent"></TextBlock>
                         </StackPanel>
                     </DataTemplate>

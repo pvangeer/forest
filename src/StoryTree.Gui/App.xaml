@@ -5,5 +5,18 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <SolidColorBrush Color="AliceBlue"  x:Key="BackgroundEditableColor" />
+        
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource BackgroundEditableColor}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="1"></Setter>
+        </Style>
+
+        <Style x:Key="RichtTextBoxStyle" TargetType="RichTextBox">
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="Background" Value="{StaticResource BackgroundEditableColor}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="4"/>
+        </Style>
     </Application.Resources>
 </Application>
