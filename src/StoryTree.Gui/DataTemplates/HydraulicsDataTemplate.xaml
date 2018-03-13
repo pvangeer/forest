@@ -11,7 +11,7 @@
         <Setter Property="Margin" Value="5,5,5,5" />
     </Style>
 
-    <gui:HydraulicConditionsToViewModelConverter x:Key="HydraulicsListToPlotModelConverter" />
+    <converters:HydraulicConditionsToViewModelConverter x:Key="HydraulicsListToPlotModelConverter" />
     <DataTemplate x:Key="HydraulicsDataTemplate" DataType="viewModels:ProjectViewModel">
         <Grid>
             <Grid.ColumnDefinitions>

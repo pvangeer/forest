@@ -178,7 +178,7 @@ namespace StoryTree.Gui.ViewModels
 
         public void AddNewEventTree()
         {
-            Project.EventTrees.Add(new EventTree {Description = "Nieuwe gebeurtenis"});
+            Project.EventTrees.Add(new EventTree {Name = "Nieuwe gebeurtenis"});
         }
 
         public void RemoveSelectedEventTree()

@@ -50,7 +50,7 @@ namespace StoryTree.Gui
             });
         }
 
-        private static EventTree CreateEventTree(string treeDescription, int numberTreeEvents)
+        private static EventTree CreateEventTree(string treeName, int numberTreeEvents)
         {
             var mainTreeEvent = new TreeEvent
             {
@@ -59,7 +59,7 @@ namespace StoryTree.Gui
 
             var tree = new EventTree
             {
-                Description = treeDescription,
+                Name = treeName,
                 MainTreeEvent = mainTreeEvent
             };
 

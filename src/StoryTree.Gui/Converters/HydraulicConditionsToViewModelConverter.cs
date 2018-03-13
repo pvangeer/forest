@@ -4,13 +4,12 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Media;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using StoryTree.Gui.ViewModels;
 
-namespace StoryTree.Gui
+namespace StoryTree.Gui.Converters
 {
     public class HydraulicConditionsToViewModelConverter : IValueConverter
     {

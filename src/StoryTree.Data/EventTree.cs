@@ -7,6 +7,8 @@ namespace StoryTree.Data
 {
     public class EventTree : INotifyPropertyChanged
     {
+        public string Name { get; set; }
+
         public string Description { get; set; }
 
         public TreeEvent MainTreeEvent { get; set; }

@@ -19,12 +19,14 @@
                 <ResourceDictionary Source="/DataTemplates/ExpertsDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/EstimationDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/HydraulicsDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/EventTreesDataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:TabItemToTemplateConverter x:Key="TabItemToTemplateConverter" 
                                                    GeneralDataTemplate="{StaticResource GeneralInformationDataTemplate}"
                                                    ExpertsTemplate ="{StaticResource ExpertsDataTemplate}"
                                                    EstimationTemplate="{StaticResource EstimationDataTemplate}"
-                                                   HydraulicsTemplate="{StaticResource HydraulicsDataTemplate}"/>
+                                                   HydraulicsTemplate="{StaticResource HydraulicsDataTemplate}"
+                                                   EventsTemplate="{StaticResource EventTreesDataTemplate}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
@@ -119,7 +121,6 @@
                 fluent:KeyTip.Keys="S" 
                 Group="{Binding Source={x:Reference GeneralInformationGroup}}"/>
 
-            <!--View-->
             <fluent:RibbonTabItem 
                 Name="ExpertsTabItem" 
                 Header="Experts" 
@@ -134,7 +135,12 @@
             <fluent:RibbonTabItem
                 Name="EventsTabItem"
                 Header="Gebeurtenissen"
-                Group="{Binding Source={x:Reference EventTreesGroup}}"/>
+                Group="{Binding Source={x:Reference EventTreesGroup}}">
+                <fluent:RibbonGroupBox Header="Gebeurtenissen">
+                    <fluent:Button Header="Gebeurtenis toevoegen" Size="Large" Command="{Binding AddEventTreeCommand}"></fluent:Button>
+                    <fluent:Button Header="Gebeurtenis verwijderen" Size="Large" Command="{Binding RemoveEventTreeCommand}"></fluent:Button>
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
 
             <fluent:RibbonTabItem
                 Name="TreeEventsTabItem"
@@ -145,10 +151,6 @@
                 Name="EstimationTabItem" 
                 Header="Overgangskansen"
                 Group="{Binding Source={x:Reference EstimationGroup}}">
-                <fluent:RibbonGroupBox Header="Faalpaden">
-                    <fluent:Button Header="Faalpad toevoegen" Size="Large" Command="{Binding AddEventTreeCommand}"></fluent:Button>
-                    <fluent:Button Header="Faalpad verwijderen" Size="Large" Command="{Binding RemoveEventTreeCommand}"></fluent:Button>
-                </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:Button Header="Gebeurtenis toevoegen" Size="Large" Command="{Binding AddTreeEventCommand}"></fluent:Button>
                     <fluent:Button Header="Gebeurtenis verwijderen" Size="Large" Command="{Binding RemoveTreeEventCommand}"></fluent:Button>

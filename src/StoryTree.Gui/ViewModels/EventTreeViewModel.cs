@@ -14,7 +14,7 @@ namespace StoryTree.Gui.ViewModels
 
         private EventTree EventTree { get; }
 
-        public EventTreeViewModel() { }
+        public EventTreeViewModel():this(new EventTree()) { }
 
         public EventTreeViewModel([NotNull]EventTree eventTree)
         {
@@ -30,24 +30,22 @@ namespace StoryTree.Gui.ViewModels
                     mainTreeEventViewModel = null;
                     OnPropertyChanged(nameof(MainTreeEventViewModel));
                     break;
-                case nameof(EventTree.Description):
+                case nameof(EventTree.Name):
                     OnPropertyChanged(nameof(Name));
+                    break;
+                case nameof(EventTree.Description):
+                    OnPropertyChanged(nameof(Description));
                     break;
             }
         }
 
         public string Name
         {
-            get => EventTree?.Description;
+            get => EventTree.Name;
             set
             {
-                if (EventTree == null)
-                {
-                    return;
-                }
-
-                EventTree.Description = value;
-                EventTree.OnPropertyChanged(nameof(EventTree.Description));
+                EventTree.Name= value;
+                EventTree.OnPropertyChanged(nameof(EventTree.Name));
             }
         }
 
@@ -55,11 +53,6 @@ namespace StoryTree.Gui.ViewModels
         {
             get
             {
-                if (EventTree == null)
-                {
-                    return null;
-                }
-
                 if (mainTreeEventViewModel == null && EventTree.MainTreeEvent == null)
                 {
                     return null;
@@ -89,6 +82,12 @@ namespace StoryTree.Gui.ViewModels
                 selected = value;
                 OnPropertyChanged(nameof(Selected));
             }
+        }
+
+        public string Description
+        {
+            get => EventTree.Description;
+            set => EventTree.Description = value;
         }
 
         public bool IsViewModelFor(EventTree eventTree)

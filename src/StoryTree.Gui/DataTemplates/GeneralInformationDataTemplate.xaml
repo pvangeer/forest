@@ -14,8 +14,6 @@
         <system:String>2-2</system:String>
     </x:Array>
 
-    <SolidColorBrush Color="AliceBlue"  x:Key="BackgroundEditableColor" />
-
     <DataTemplate x:Key="GeneralInformationDataTemplate" DataType="viewModels:ProjectViewModel">
         <Grid>
             <Grid.RowDefinitions>

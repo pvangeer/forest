@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:StoryTree.Gui"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush Color="AliceBlue"  x:Key="BackgroundEditableColor" />
     </Application.Resources>
 </Application>
