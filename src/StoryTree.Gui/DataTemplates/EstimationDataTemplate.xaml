@@ -73,9 +73,16 @@
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Label Grid.Column="0" FontWeight="Bold" Content="Specificatie"/>
+                                            <Label 
+                                                Width="100"
+                                                Grid.Column="0" 
+                                                FontWeight="Bold" 
+                                                Content="Specificatie"/>
                                             <ComboBox 
                                                 Grid.Column="1" 
+                                                Margin="1"
+                                                Width="200"
+                                                HorizontalAlignment="Left"
                                                 Style="{StaticResource ComboBoxFlatStyle}"
                                                 SelectedIndex="{Binding ProbabilityEstimationTypeIndex, UpdateSourceTrigger=PropertyChanged}"
                                                 ItemsSource="{Binding EstimationSpecificationOptions}">
@@ -91,9 +98,14 @@
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="Auto"/>
-                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="*"/>
                                                         </Grid.ColumnDefinitions>
-                                                        <Label Grid.Column="0" Content="Kans" FontWeight="Bold"/>
+                                                        <Label 
+                                                            Width="100"
+                                                            HorizontalAlignment="Left" 
+                                                            Grid.Column="0" 
+                                                            Content="Kans" 
+                                                            FontWeight="Bold"/>
                                                         <TextBox 
                                                             Style="{StaticResource TextBoxStyle}"
                                                             HorizontalAlignment="Left"

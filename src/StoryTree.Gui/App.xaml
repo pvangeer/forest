@@ -6,27 +6,30 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="DataTemplates/ComboBoxFlatStyle.xaml"></ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
-            <SolidColorBrush Color="AliceBlue"  x:Key="BackgroundEditableColor" />
+            <Color x:Key="BackgroundEditableColor">AliceBlue</Color>
+            <SolidColorBrush Color="{StaticResource BackgroundEditableColor}" x:Key="BackgroundEditableColorBrush" />
+
+            <xctk:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
+            <converters:ProbabilityToStringConverter x:Key="ProbabilityToStringConverter" />
+
+            <BitmapImage UriSource="Resources/EventTree.png" x:Key="EventTreeImage"/>
 
             <Style x:Key="TextBoxStyle" TargetType="TextBox">
-                <Setter Property="Background" Value="{StaticResource BackgroundEditableColor}"/>
+                <Setter Property="Background" Value="{StaticResource BackgroundEditableColorBrush}"/>
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="Margin" Value="1"></Setter>
             </Style>
 
             <Style x:Key="RichtTextBoxStyle" TargetType="RichTextBox">
                 <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-                <Setter Property="Background" Value="{StaticResource BackgroundEditableColor}"/>
+                <Setter Property="Background" Value="{StaticResource BackgroundEditableColorBrush}"/>
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="Margin" Value="4"/>
             </Style>
 
-            <BitmapImage UriSource="Resources/EventTree.png" x:Key="EventTreeImage"/>
-            <xctk:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
-            <converters:ProbabilityToStringConverter x:Key="ProbabilityToStringConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DataTemplates/ComboBoxFlatStyle.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

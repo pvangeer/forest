@@ -84,11 +84,11 @@
                             Style="{StaticResource ComboBoxFlatStyle}"
                             ItemsSource="{StaticResource AvailableAssessmentSections}"
                             SelectedItem="{Binding AssessmentSection, UpdateSourceTrigger=PropertyChanged}"
-                            Background="{StaticResource BackgroundEditableColor}"
+                            Background="{StaticResource BackgroundEditableColorBrush}"
                             UseLayoutRounding="False"
                             BorderThickness="0"
                             HorizontalAlignment="Left"
-                            Width="40"/>
+                            Width="60"/>
                     </Grid>
                 </Grid>
                 <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="10"></GridSplitter>
