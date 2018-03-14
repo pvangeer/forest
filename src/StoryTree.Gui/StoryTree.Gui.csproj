@@ -48,6 +48,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -97,7 +98,9 @@
     <Compile Include="Command\EventTreeCommand.cs" />
     <Compile Include="Converters\StringToProbabilityConverter.cs" />
     <Compile Include="Converters\HydraulicConditionsToViewModelConverter.cs" />
-    <Compile Include="EventTreeViewModelToGalleryItemConverter.cs" />
+    <Compile Include="Sandbox\TestBackground.xaml.cs">
+      <DependentUpon>TestBackground.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\EventTreeViewModel.cs" />
     <Compile Include="ViewModels\ExpertViewModel.cs" />
     <Compile Include="ViewModels\HydraulicConditionViewModel.cs" />
@@ -146,6 +149,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Sandbox\TestBackground.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -180,6 +187,14 @@
       <Name>StoryTree.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\EventTree.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\EventTree-small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\trees.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

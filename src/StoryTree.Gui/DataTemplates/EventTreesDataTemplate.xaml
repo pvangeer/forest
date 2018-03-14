@@ -3,6 +3,10 @@
                     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:converters="clr-namespace:StoryTree.Gui.Converters">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ComboBoxFlatStyle.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
     <DataTemplate x:Key="EventTreesDataTemplate" DataType="viewModels:ProjectViewModel">
         <DataTemplate.Resources>
             <converters:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
@@ -23,7 +27,7 @@
                 BorderThickness="0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="{Binding Selected, Converter={StaticResource SelectedPropertyToBrushConverter}}" BorderThickness="1" Margin="0,1,0,1">
+                        <Border BorderBrush="{Binding IsSelected, Converter={StaticResource SelectedPropertyToBrushConverter}}" BorderThickness="1" Margin="0,1,0,1">
                             <Grid>
                                 <TextBlock Text="{Binding Name}" Padding="5" Margin="0,0,0,0" Background="Gainsboro"/>
                             </Grid>
@@ -52,26 +56,51 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Content="Titel" FontWeight="Bold"/>
-                    <TextBox 
-                        Grid.Row="0" 
-                        Grid.Column="1" 
-                        Text="{Binding SelectedEventTree.Name, UpdateSourceTrigger=PropertyChanged}"
-                        Style="{StaticResource TextBoxStyle}"/>
-                    <Label Grid.Row="1" Grid.Column="0" Content="Samenvatting" FontWeight="Bold"/>
-                    <TextBox 
-                        Grid.Row="1" 
-                        Grid.Column="1" 
-                        Text="{Binding SelectedEventTree.Summary, UpdateSourceTrigger=PropertyChanged}"
-                        Style="{StaticResource TextBoxStyle}"/>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label 
+                            Grid.Row="0" 
+                            Grid.Column="0" 
+                            Content="Titel" 
+                            FontWeight="Bold"/>
+                        <TextBox 
+                            Grid.Row="0" 
+                            Grid.Column="1" 
+                            Text="{Binding SelectedEventTree.Name, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource TextBoxStyle}"/>
+                        <Label 
+                            Grid.Row="1" 
+                            Grid.Column="0" 
+                            Content="Samenvatting" 
+                            FontWeight="Bold"/>
+                        <TextBox 
+                            Grid.Row="1" 
+                            Grid.Column="1" 
+                            Text="{Binding SelectedEventTree.Summary, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource TextBoxStyle}"/>
+                        <Label 
+                            Grid.Row="2" 
+                            Grid.Column="0" 
+                            FontWeight="Bold" 
+                            Content="Kleur"/>
+                        <xctk:ColorPicker 
+                            Grid.Row="2" 
+                            Grid.Column="1" 
+                            SelectedColor="{Binding SelectedEventTree.Color, UpdateSourceTrigger=PropertyChanged}"
+                            Width="40" HorizontalAlignment="Left"/>
+                    </Grid>
                 </Grid>
                 <Label Grid.Row="1" Grid.Column="0" Content="Details" FontWeight="Bold"/>
                 <xctk:RichTextBox 

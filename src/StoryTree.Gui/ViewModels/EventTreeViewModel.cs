@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Media;
 using StoryTree.Data;
 using StoryTree.Data.Properties;
 using StoryTree.Data.Services;
@@ -10,7 +11,7 @@ namespace StoryTree.Gui.ViewModels
     {
         private TreeEventViewModel selectedTreeEvent;
         private TreeEventViewModel mainTreeEventViewModel;
-        private bool selected;
+        private bool isSelected;
 
         private EventTree EventTree { get; }
 
@@ -36,6 +37,9 @@ namespace StoryTree.Gui.ViewModels
                 case nameof(EventTree.Summary):
                     OnPropertyChanged(nameof(Summary));
                     break;
+                case nameof(EventTree.Color):
+                    OnPropertyChanged(nameof(Color));
+                    break;
             }
         }
 
@@ -46,6 +50,53 @@ namespace StoryTree.Gui.ViewModels
             {
                 EventTree.Name= value;
                 EventTree.OnPropertyChanged(nameof(EventTree.Name));
+            }
+        }
+
+        public string Summary
+        {
+            get => EventTree.Summary;
+            set
+            {
+                EventTree.Summary = value;
+                EventTree.OnPropertyChanged(nameof(EventTree.Summary));
+            }
+        }
+
+        public string Details
+        {
+            get => EventTree.Details;
+            set => EventTree.Details = value;
+        }
+
+        public Color Color
+        {
+            get => EventTree.Color;
+            set
+            {
+                EventTree.Color = value;
+                EventTree.OnPropertyChanged(nameof(EventTree.Color));
+            }
+        }
+
+        public TreeEventViewModel SelectedTreeEvent
+        {
+            get => selectedTreeEvent;
+            set
+            {
+                selectedTreeEvent = value;
+                MainTreeEventViewModel?.FireSelectedStateChangeRecursive();
+                OnPropertyChanged(nameof(SelectedTreeEvent));
+            }
+        }
+
+        public bool IsSelected
+        {
+            get => isSelected;
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
             }
         }
 
@@ -61,39 +112,6 @@ namespace StoryTree.Gui.ViewModels
                 return mainTreeEventViewModel ??
                        (mainTreeEventViewModel = new TreeEventViewModel(EventTree.MainTreeEvent, this));
             }
-        }
-
-        public TreeEventViewModel SelectedTreeEvent
-        {
-            get => selectedTreeEvent;
-            set
-            {
-                selectedTreeEvent = value;
-                MainTreeEventViewModel?.FireSelectedStateChangeRecursive();
-                OnPropertyChanged(nameof(SelectedTreeEvent));
-            }
-        }
-
-        public bool Selected
-        {
-            get => selected;
-            set
-            {
-                selected = value;
-                OnPropertyChanged(nameof(Selected));
-            }
-        }
-
-        public string Summary
-        {
-            get => EventTree.Summary;
-            set => EventTree.Summary = value;
-        }
-
-        public string Details
-        {
-            get => EventTree.Details;
-            set => EventTree.Details = value;
         }
 
         public bool IsViewModelFor(EventTree eventTree)

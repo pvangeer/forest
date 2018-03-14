@@ -1,7 +1,6 @@
 ﻿<Application x:Class="StoryTree.Gui.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:StoryTree.Gui"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <SolidColorBrush Color="AliceBlue"  x:Key="BackgroundEditableColor" />
@@ -18,5 +17,7 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Margin" Value="4"/>
         </Style>
+        
+        <BitmapImage UriSource="Resources/EventTree.png" x:Key="EventTreeImage"/>
     </Application.Resources>
 </Application>
