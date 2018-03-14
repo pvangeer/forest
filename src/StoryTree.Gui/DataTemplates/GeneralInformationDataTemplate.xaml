@@ -154,9 +154,9 @@
                     FontWeight="Bold"
                     Content="Algemene Gegevens"/>
                 <xctk:RichTextBox 
-                    Style="{StaticResource RichtTextBoxStyle}"
-                    Grid.Row="1" 
-                    Text="{Binding ProjectInformation, UpdateSourceTrigger=PropertyChanged}">
+                        Style="{StaticResource RichtTextBoxStyle}"
+                        Grid.Row="1" 
+                        Text="{Binding ProjectInformation, UpdateSourceTrigger=PropertyChanged}">
                     <xctk:RichTextBoxFormatBarManager.FormatBar>
                         <xctk:RichTextBoxFormatBar/>
                     </xctk:RichTextBoxFormatBarManager.FormatBar>

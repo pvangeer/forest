@@ -97,6 +97,7 @@
     <Compile Include="Command\EventTreeCommand.cs" />
     <Compile Include="Converters\StringToProbabilityConverter.cs" />
     <Compile Include="Converters\HydraulicConditionsToViewModelConverter.cs" />
+    <Compile Include="EventTreeViewModelToGalleryItemConverter.cs" />
     <Compile Include="ViewModels\EventTreeViewModel.cs" />
     <Compile Include="ViewModels\ExpertViewModel.cs" />
     <Compile Include="ViewModels\HydraulicConditionViewModel.cs" />
@@ -126,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataTemplates\HydraulicsDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\TreeEventsDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

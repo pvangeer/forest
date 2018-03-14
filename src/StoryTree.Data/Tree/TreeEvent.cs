@@ -17,7 +17,9 @@ namespace StoryTree.Data.Tree
 
         public TreeEvent PassingEvent { get; set; }
 
-        public string Description { get; set; }
+        public string Summary { get; set; }
+
+        public string Details { get; set; }
 
         public IProbabilitySpecification ProbabilityInformation { get; set; }
 

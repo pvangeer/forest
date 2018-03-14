@@ -54,8 +54,8 @@ namespace StoryTree.Gui.ViewModels
                 case nameof(Name):
                     OnPropertyChanged(nameof(Name));
                     break;
-                case nameof(Description):
-                    OnPropertyChanged(nameof(Description));
+                case nameof(Summary):
+                    OnPropertyChanged(nameof(Summary));
                     break;
             }
         }
@@ -72,13 +72,23 @@ namespace StoryTree.Gui.ViewModels
             }
         }
 
-        public string Description
+        public string Summary
         {
-            get => TreeEvent.Description;
+            get => TreeEvent.Summary;
             set
             {
-                TreeEvent.Description = value;
-                TreeEvent.OnPropertyChanged(nameof(TreeEvent.Description));
+                TreeEvent.Summary = value;
+                TreeEvent.OnPropertyChanged(nameof(TreeEvent.Summary));
+            }
+        }
+
+        public string Details
+        {
+            get => TreeEvent.Details;
+            set
+            {
+                TreeEvent.Details = value;
+                TreeEvent.OnPropertyChanged(nameof(TreeEvent.Details));
             }
         }
 

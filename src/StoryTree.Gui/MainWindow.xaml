@@ -6,6 +6,7 @@
         xmlns:modelViews="clr-namespace:StoryTree.Gui.ViewModels"
                      xmlns:fluent="urn:fluent-ribbon"
                      xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
+                     xmlns:gui="clr-namespace:StoryTree.Gui"
                      mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="900" x:Name="MainRibbonWindow">
     <Window.DataContext>
@@ -20,13 +21,25 @@
                 <ResourceDictionary Source="/DataTemplates/EstimationDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/HydraulicsDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/EventTreesDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/TreeEventsDataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:TabItemToTemplateConverter x:Key="TabItemToTemplateConverter" 
                                                    GeneralDataTemplate="{StaticResource GeneralInformationDataTemplate}"
                                                    ExpertsTemplate ="{StaticResource ExpertsDataTemplate}"
                                                    EstimationTemplate="{StaticResource EstimationDataTemplate}"
                                                    HydraulicsTemplate="{StaticResource HydraulicsDataTemplate}"
-                                                   EventsTemplate="{StaticResource EventTreesDataTemplate}"/>
+                                                   EventsTemplate="{StaticResource EventTreesDataTemplate}"
+                                                   TreeEventsTemplate="{StaticResource TreeEventsTemplate}"/>
+            <DataTemplate x:Key="GalleryItemTemplate" DataType="modelViews:EventTreeViewModel">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Row="0" Fill="AntiqueWhite" Width="50" Height="30"/>
+                    <TextBlock Grid.Row="1" Text="{Binding Name}" TextAlignment="Center"/>
+                </Grid>
+            </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
@@ -145,16 +158,24 @@
             <fluent:RibbonTabItem
                 Name="TreeEventsTabItem"
                 Header="Faalpaden"
-                Group="{Binding Source={x:Reference EventTreesGroup}}"/>
+                Group="{Binding Source={x:Reference EventTreesGroup}}">
+                <fluent:RibbonGroupBox Header="Gebeurtenissen">
+                    <fluent:InRibbonGallery 
+                        ItemsSource="{Binding EventTrees}" 
+                        SelectedItem="{Binding SelectedEventTree}"
+                        ItemTemplate="{StaticResource GalleryItemTemplate}"/>
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Knopen">
+                    <fluent:Button Header="Knoop toevoegen" Size="Large" Command="{Binding AddTreeEventCommand}"></fluent:Button>
+                    <fluent:Button Header="Knoop verwijderen" Size="Large" Command="{Binding RemoveTreeEventCommand}"></fluent:Button>
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
 
             <fluent:RibbonTabItem 
                 Name="EstimationTabItem" 
                 Header="Overgangskansen"
                 Group="{Binding Source={x:Reference EstimationGroup}}">
-                <fluent:RibbonGroupBox Header="Gebeurtenissen">
-                    <fluent:Button Header="Gebeurtenis toevoegen" Size="Large" Command="{Binding AddTreeEventCommand}"></fluent:Button>
-                    <fluent:Button Header="Gebeurtenis verwijderen" Size="Large" Command="{Binding RemoveTreeEventCommand}"></fluent:Button>
-                </fluent:RibbonGroupBox>
+                
             </fluent:RibbonTabItem>
 
             <fluent:RibbonTabItem
