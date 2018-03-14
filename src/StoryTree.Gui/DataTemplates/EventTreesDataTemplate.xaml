@@ -22,14 +22,22 @@
                 Grid.Column="0" 
                 ItemsSource="{Binding EventTrees}" 
                 SelectedIndex="0"
-                SelectedItem="{Binding SelectedEventTree}"
+                SelectedItem="{Binding SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
                 HorizontalContentAlignment="Stretch"
                 BorderThickness="0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="{Binding IsSelected, Converter={StaticResource SelectedPropertyToBrushConverter}}" BorderThickness="1" Margin="0,1,0,1">
+                        <Border BorderBrush="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource SelectedPropertyToBrushConverter}}" 
+                                BorderThickness="1" 
+                                Background="{Binding Color, Converter={StaticResource ColorToSolidColorBrushConverter}}"
+                                Margin="0,1,0,1">
                             <Grid>
-                                <TextBlock Text="{Binding Name}" Padding="5" Margin="0,0,0,0" Background="Gainsboro"/>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Content="{Binding Name}" Padding="5" Margin="0,0,0,0" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                <TextBlock Grid.Row="1" Text="{Binding Summary}" Padding="5" Margin="0,0,0,0" HorizontalAlignment="Left"/>
                             </Grid>
                         </Border>
                     </DataTemplate>
@@ -47,7 +55,6 @@
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
-            <!--<ListView Name="EventTreesListView" Grid.Column="0" SelectedItem="{Binding SelectedEventTree}" ItemsSource="{Binding EventTrees}"/>-->
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="10"/>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
