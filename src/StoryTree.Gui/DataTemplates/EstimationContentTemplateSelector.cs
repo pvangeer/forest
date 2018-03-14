@@ -12,13 +12,13 @@ namespace StoryTree.Gui.DataTemplates
         {
             if (container is ContentPresenter contentPresenter)
             {
-                if (!(contentPresenter.Content is TreeEventViewModel treeEventViewModel))
+                if (!(contentPresenter.Content is ProbabilitySpecificationViewModelBase probabilitySpecification))
                 {
                     // TODO: Return default template
                     return null;
                 }
 
-                switch (treeEventViewModel.TreeEvent.ProbabilityInformation.Type)
+                switch (probabilitySpecification.Type)
                 {
                     case ProbabilitySpecificationType.Classes:
                         return contentPresenter.Resources["ClassEstimationTemplate"] as DataTemplate;

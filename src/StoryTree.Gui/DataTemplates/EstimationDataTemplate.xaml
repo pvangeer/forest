@@ -81,15 +81,29 @@
                                                 ItemsSource="{Binding EstimationSpecificationOptions}">
                                             </ComboBox>
                                         </Grid>
-                                        <ContentPresenter Grid.Row="1" Content="{Binding }" ContentTemplateSelector="{StaticResource ContentTemplateSelector}">
+                                        <ContentPresenter Grid.Row="1" Content="{Binding EstimationSpecification}" ContentTemplateSelector="{StaticResource ContentTemplateSelector}">
                                             <ContentPresenter.Resources>
-                                                <DataTemplate x:Key="ClassEstimationTemplate" DataType="{x:Type viewModels:TreeEventViewModel}">
+                                                <DataTemplate x:Key="ClassEstimationTemplate" DataType="{x:Type viewModels:ClassesProbabilitySpecificationViewModel}">
                                                     <Grid Background="Azure">
                                                     </Grid>
                                                 </DataTemplate>
-                                                <DataTemplate x:Key="FixedValueEstimationTemplate" DataType="{x:Type viewModels:TreeEventViewModel}">
-                                                    <StackPanel>
-                                                    </StackPanel>
+                                                <DataTemplate x:Key="FixedValueEstimationTemplate" DataType="{x:Type viewModels:FixedProbabilitySpecificationViewModel}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Label Grid.Column="0" Content="Kans" FontWeight="Bold"/>
+                                                        <TextBox 
+                                                            Style="{StaticResource TextBoxStyle}"
+                                                            HorizontalAlignment="Left"
+                                                            VerticalAlignment="Top"
+                                                            TextAlignment="Left"
+                                                            Width="100"
+                                                            Height="25"
+                                                            Grid.Column="1" 
+                                                            Text="{Binding FixedProbability, Converter={StaticResource ProbabilityToStringConverter}}"/>
+                                                    </Grid>
                                                 </DataTemplate>
                                             </ContentPresenter.Resources>
                                         </ContentPresenter>

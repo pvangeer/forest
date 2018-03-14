@@ -96,11 +96,15 @@
     <Compile Include="Converters\TabItemToTemplateConverter.cs" />
     <Compile Include="Command\AddTreeEventCommand.cs" />
     <Compile Include="Command\EventTreeCommand.cs" />
-    <Compile Include="Converters\StringToProbabilityConverter.cs" />
+    <Compile Include="Converters\ProbabilityToStringConverter.cs" />
     <Compile Include="Converters\HydraulicConditionsToViewModelConverter.cs" />
+    <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
+    <Compile Include="ViewModels\EstimationSpecificationViewModelFactory.cs" />
     <Compile Include="ViewModels\EventTreeViewModel.cs" />
     <Compile Include="ViewModels\ExpertViewModel.cs" />
+    <Compile Include="ViewModels\FixedProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\HydraulicConditionViewModel.cs" />
+    <Compile Include="ViewModels\ProbabilitySpecificationViewModelBase.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="Command\RemoveEventTreeCommand.cs" />
     <Compile Include="Command\RemoveTreeEventCommand.cs" />

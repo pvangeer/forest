@@ -5,7 +5,7 @@ using StoryTree.Data.Estimations.Classes;
 
 namespace StoryTree.Gui.Converters
 {
-    public class StringToProbabilityConverter : IValueConverter
+    public class ProbabilityToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -14,7 +14,7 @@ namespace StoryTree.Gui.Converters
                 return value;
             }
 
-            return probability.Value.ToString(CultureInfo.CurrentUICulture);
+            return probability.Value.ToString("E2", CultureInfo.CurrentUICulture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

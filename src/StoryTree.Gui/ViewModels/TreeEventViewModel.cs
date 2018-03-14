@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using StoryTree.Data.Estimations;
-using StoryTree.Data.Estimations.Classes;
 using StoryTree.Data.Properties;
 using StoryTree.Data.Services;
 using StoryTree.Data.Tree;
@@ -21,6 +20,8 @@ namespace StoryTree.Gui.ViewModels
         public static readonly Dictionary<ProbabilitySpecificationType, string> ProbabilitySpecificationTypes =
             Enum.GetValues(typeof(ProbabilitySpecificationType)).Cast<ProbabilitySpecificationType>()
                 .ToDictionary(t => t, t => t.ToString());
+
+        private ProbabilitySpecificationViewModelBase probabilityEstimationViewModel;
 
 
         public TreeEventViewModel([NotNull]TreeEvent treeEvent, [NotNull]EventTreeViewModel parentEventTreeViewModel)
@@ -69,7 +70,9 @@ namespace StoryTree.Gui.ViewModels
                     OnPropertyChanged(nameof(Summary));
                     break;
                 case nameof(TreeEvent.ProbabilityInformation):
+                    probabilityEstimationViewModel = null;
                     OnPropertyChanged(nameof(ProbabilityEstimationTypeIndex));
+                    OnPropertyChanged(nameof(EstimationSpecification));
                     break;
             }
         }
@@ -158,6 +161,9 @@ namespace StoryTree.Gui.ViewModels
         }
 
         public IEnumerable<string> EstimationSpecificationOptions => ProbabilitySpecificationTypes.Values;
+
+        public ProbabilitySpecificationViewModelBase EstimationSpecification => probabilityEstimationViewModel ?? (probabilityEstimationViewModel =
+                                                                                    EstimationSpecificationViewModelFactory.CreateViewModel(TreeEvent.ProbabilityInformation));
 
         public event PropertyChangedEventHandler PropertyChanged;
 
