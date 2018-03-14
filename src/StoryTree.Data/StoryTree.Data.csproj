@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Estimations\FixedValueProbabilitySpecification.cs" />
     <Compile Include="EventTree.cs" />
     <Compile Include="Expert.cs" />
     <Compile Include="Hydraulics\HydraulicCondition.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="Services\EventTreeManipulationService.cs" />
+    <Compile Include="Services\TreeEventManipulations.cs" />
     <Compile Include="Services\TreeEventType.cs" />
     <Compile Include="Estimations\Classes\ClassesProbabilitySpecification.cs" />
     <Compile Include="Tree\ExpertClassEstimation.cs" />
@@ -56,7 +58,7 @@
     <Compile Include="Estimations\IProbabilitySpecification.cs" />
     <Compile Include="Estimations\Classes\Probability.cs" />
     <Compile Include="Estimations\Classes\ProbabilityClass.cs" />
-    <Compile Include="Estimations\Classes\ProbabilitySpecificationType.cs" />
+    <Compile Include="Estimations\ProbabilitySpecificationType.cs" />
     <Compile Include="Tree\TreeEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

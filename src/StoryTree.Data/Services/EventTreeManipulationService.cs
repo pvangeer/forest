@@ -1,4 +1,5 @@
 ﻿using System;
+using StoryTree.Data.Estimations;
 using StoryTree.Data.Tree;
 
 namespace StoryTree.Data.Services
@@ -36,7 +37,12 @@ namespace StoryTree.Data.Services
 
         public static TreeEvent AddTreeEvent(EventTree eventTree, TreeEvent selectedTreeEventToAddTo, TreeEventType type)
         {
-            var newTreeEvent = new TreeEvent { Name = "Nieuwe gebeurtenis" };
+            var newTreeEvent = new TreeEvent
+            {
+                Name = "Nieuwe gebeurtenis",
+                ProbabilityInformation = new FixedValueProbabilitySpecification()
+            };
+
             if (eventTree.MainTreeEvent == null)
             {
                 eventTree.MainTreeEvent = newTreeEvent;

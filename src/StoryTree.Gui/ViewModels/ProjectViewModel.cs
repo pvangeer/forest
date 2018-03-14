@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -5,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using StoryTree.Data;
+using StoryTree.Data.Estimations;
 using StoryTree.Data.Properties;
 using StoryTree.Gui.Command;
 
@@ -14,12 +17,8 @@ namespace StoryTree.Gui.ViewModels
     {
         private readonly AddTreeEventCommand addTreeEventCommand;
         private readonly RemoveTreeEventCommand removeTreeEventCommand;
-        
-        public ProjectViewModel()
-        {
-            addTreeEventCommand = new AddTreeEventCommand(this);
-            removeTreeEventCommand = new RemoveTreeEventCommand(this);
-        }
+
+        public ProjectViewModel() : this(new Project()) { }
 
         public ProjectViewModel([NotNull]Project project)
         {
@@ -106,18 +105,7 @@ namespace StoryTree.Gui.ViewModels
 
         public TreeEventViewModel SelectedTreeEvent => SelectedEventTree?.SelectedTreeEvent;
 
-        public ObservableCollection<ExpertViewModel> Experts
-        {
-            get
-            {
-                if (Project == null)
-                {
-                    return null;
-                }
-
-                return expertViewModels;
-            }
-        }
+        public ObservableCollection<ExpertViewModel> Experts => expertViewModels;
 
         public object SelectedObject { get; set; }
 
@@ -126,10 +114,6 @@ namespace StoryTree.Gui.ViewModels
             get => Project.ProjectLeader.Name;
             set
             {
-                if (Project == null)
-                {
-                    return;
-                }
                 Project.ProjectLeader.Name = value;
                 Project.ProjectLeader.OnPropertyChanged(nameof(Project.ProjectLeader.Name));
             }
@@ -140,10 +124,6 @@ namespace StoryTree.Gui.ViewModels
             get => Project.ProjectLeader.Email;
             set
             {
-                if (Project == null)
-                {
-                    return;
-                }
                 Project.ProjectLeader.Email = value;
                 Project.ProjectLeader.OnPropertyChanged(nameof(Project.ProjectLeader.Email));
             }
@@ -154,27 +134,13 @@ namespace StoryTree.Gui.ViewModels
             get => Project.ProjectLeader.Telephone;
             set
             {
-                if (Project == null)
-                {
-                    return;
-                }
                 Project.ProjectLeader.Telephone = value;
                 Project.ProjectLeader.OnPropertyChanged(nameof(Project.ProjectLeader.Telephone));
             }
         }
 
-        public ObservableCollection<HydraulicConditionViewModel> HydraulicConditionsList
-        {
-            get
-            {
-                if (Project == null)
-                {
-                    return null;
-                }
+        public ObservableCollection<HydraulicConditionViewModel> HydraulicConditionsList => hydraulicsViewModels;
 
-                return hydraulicsViewModels;
-            }
-        }
 
         public void AddNewEventTree()
         {

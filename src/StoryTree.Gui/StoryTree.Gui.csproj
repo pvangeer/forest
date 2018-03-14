@@ -90,7 +90,7 @@
     </ApplicationDefinition>
     <Compile Include="Command\AddEventTreeCommand.cs" />
     <Compile Include="Command\ProjectViewModelCommand.cs" />
-    <Compile Include="DataTemplates\ContentTemplateSelector.cs" />
+    <Compile Include="DataTemplates\EstimationContentTemplateSelector.cs" />
     <Compile Include="Converters\SelectedItemToMainTreeEventViewModelConverter.cs" />
     <Compile Include="Converters\SelectedPropertyToColorConverter.cs" />
     <Compile Include="Converters\TabItemToTemplateConverter.cs" />

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using StoryTree.Data;
@@ -114,6 +116,8 @@ namespace StoryTree.Gui.ViewModels
             }
         }
 
+        public IEnumerable<TreeEventViewModel> AllTreeEvents => GetAllEventsRecursive(MainTreeEventViewModel);
+
         public bool IsViewModelFor(EventTree eventTree)
         {
             return Equals(EventTree, eventTree);
@@ -131,12 +135,31 @@ namespace StoryTree.Gui.ViewModels
         {
             EventTreeManipulationService.AddTreeEvent(EventTree,treeEventViewModel?.TreeEvent,treeEventType);
             SelectedTreeEvent = treeEventViewModel == null ? MainTreeEventViewModel : treeEventType == TreeEventType.Failing ? treeEventViewModel.FailingEvent : treeEventViewModel.PassingEvent;
+            OnPropertyChanged(nameof(AllTreeEvents));
         }
 
         public void RemoveTreeEvent(TreeEventViewModel treeEventViewModel, TreeEventType eventType)
         {
             var parent = EventTreeManipulationService.RemoveTreeEvent(EventTree, treeEventViewModel.TreeEvent);
             SelectedTreeEvent = parent == null ? MainTreeEventViewModel : FindLastEventViewModel(MainTreeEventViewModel, eventType);
+            OnPropertyChanged(nameof(AllTreeEvents));
+        }
+
+        private static IEnumerable<TreeEventViewModel> GetAllEventsRecursive(TreeEventViewModel treeEventViewModel)
+        {
+            var list = new[]{treeEventViewModel};
+
+            if (treeEventViewModel.FailingEvent != null)
+            {
+                list = list.Concat(GetAllEventsRecursive(treeEventViewModel.FailingEvent)).ToArray();
+            }
+
+            if (treeEventViewModel.PassingEvent != null)
+            {
+                list = list.Concat(GetAllEventsRecursive(treeEventViewModel.PassingEvent)).ToArray();
+            }
+
+            return list;
         }
 
         private static TreeEventViewModel FindLastEventViewModel(TreeEventViewModel mainTreeEventViewModel, TreeEventType type)

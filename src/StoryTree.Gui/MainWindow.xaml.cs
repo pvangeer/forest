@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using StoryTree.Data;
+using StoryTree.Data.Estimations;
+using StoryTree.Data.Estimations.Classes;
 using StoryTree.Data.Tree;
 using StoryTree.Gui.ViewModels;
 
@@ -54,7 +56,8 @@ namespace StoryTree.Gui
         {
             var mainTreeEvent = new TreeEvent
             {
-                Name = "First element"
+                Name = "First element",
+                ProbabilityInformation = new FixedValueProbabilitySpecification()
             };
 
             var tree = new EventTree
@@ -68,7 +71,8 @@ namespace StoryTree.Gui
             {
                 var falseEvent = new TreeEvent
                 {
-                    Name = string.Format("Event no. {0}",i+1)
+                    Name = string.Format("Event no. {0}",i+1),
+                    ProbabilityInformation = new FixedValueProbabilitySpecification()
                 };
                 currentTreeEvent.FailingEvent = falseEvent;
                 currentTreeEvent = falseEvent;

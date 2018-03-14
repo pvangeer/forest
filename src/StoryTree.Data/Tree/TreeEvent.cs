@@ -7,10 +7,6 @@ namespace StoryTree.Data.Tree
 {
     public class TreeEvent : INotifyPropertyChanged
     {
-        public TreeEvent()
-        {
-        }
-        
         public string Name { get; set; }
 
         public TreeEvent FailingEvent { get; set; }

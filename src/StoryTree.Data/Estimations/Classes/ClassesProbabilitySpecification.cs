@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -9,31 +8,25 @@ namespace StoryTree.Data.Estimations.Classes
 {
     public class ClassesProbabilitySpecification : IProbabilitySpecification
     {
+        public ClassesProbabilitySpecification()
+        {
+            Estimations = new ObservableCollection<ExpertClassEstimation>();
+        }
+
         public ProbabilitySpecificationType Type => ProbabilitySpecificationType.Classes;
 
-        public Dictionary<double,Probability> Probabilities
+        public Probability GetProbability(double waterLevel)
         {
-            get
-            {
-                var allEstimations = Estimations.SelectMany(e => e.Estimations).ToArray();
-                var allWaterlevels = allEstimations.Select(e => e.WaterLevel).Distinct().ToArray();
+            // TODO: Add interpolation?
 
-                var dict = new Dictionary<double,Probability>();
-
-                foreach (var waterlevel in allWaterlevels)
-                {
-                    dict[waterlevel] = (Probability) allEstimations
-                        .Where(e => Math.Abs(e.WaterLevel - waterlevel) < 1e-8)
-                        .Select(e => ClassToProbabilityDouble(e.AverageEstimation))
-                        .Average();
-                }
-
-                return dict;
-            }
+            var allEstimations = Estimations.SelectMany(e => e.Estimations).ToArray();
+            return (Probability) allEstimations
+                .Where(e => Math.Abs(e.WaterLevel - waterLevel) < 1e-8)
+                .Select(e => ClassToProbabilityDouble(e.AverageEstimation))
+                .Average();
         }
 
         private double ClassToProbabilityDouble(ProbabilityClass probabilityClass)
-
         {
             switch (probabilityClass)
             {

@@ -1,7 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using StoryTree.Data.Estimations;
+using StoryTree.Data.Estimations.Classes;
 using StoryTree.Data.Properties;
+using StoryTree.Data.Services;
 using StoryTree.Data.Tree;
 using StoryTree.Gui.Command;
 
@@ -11,6 +17,11 @@ namespace StoryTree.Gui.ViewModels
     {
         private TreeEventViewModel failingEventViewModel;
         private TreeEventViewModel passingEventViewModel;
+
+        public static readonly Dictionary<ProbabilitySpecificationType, string> ProbabilitySpecificationTypes =
+            Enum.GetValues(typeof(ProbabilitySpecificationType)).Cast<ProbabilitySpecificationType>()
+                .ToDictionary(t => t, t => t.ToString());
+
 
         public TreeEventViewModel([NotNull]TreeEvent treeEvent, [NotNull]EventTreeViewModel parentEventTreeViewModel)
         {
@@ -25,7 +36,7 @@ namespace StoryTree.Gui.ViewModels
         {
             switch (e.PropertyName)
             {
-                case nameof(PassingEvent):
+                case nameof(TreeEvent.PassingEvent):
                     passingEventViewModel = null;
                     if (PassingEvent == null)
                     {
@@ -38,7 +49,7 @@ namespace StoryTree.Gui.ViewModels
                     OnPropertyChanged(nameof(HasFalseEventOnly));
                     OnPropertyChanged(nameof(HasTwoEvents));
                     break;
-                case nameof(FailingEvent):
+                case nameof(TreeEvent.FailingEvent):
                     failingEventViewModel = null;
                     if (FailingEvent == null)
                     {
@@ -51,11 +62,14 @@ namespace StoryTree.Gui.ViewModels
                     OnPropertyChanged(nameof(HasFalseEventOnly));
                     OnPropertyChanged(nameof(HasTwoEvents));
                     break;
-                case nameof(Name):
+                case nameof(TreeEvent.Name):
                     OnPropertyChanged(nameof(Name));
                     break;
-                case nameof(Summary):
+                case nameof(TreeEvent.Summary):
                     OnPropertyChanged(nameof(Summary));
+                    break;
+                case nameof(TreeEvent.ProbabilityInformation):
+                    OnPropertyChanged(nameof(ProbabilityEstimationTypeIndex));
                     break;
             }
         }
@@ -128,7 +142,22 @@ namespace StoryTree.Gui.ViewModels
 
         public ICommand TreeEventClickedCommand => new TreeEventClickedCommand(this);
 
-        public bool Selected => TreeEvent != null && Equals(TreeEvent,ParentEventTreeViewModel?.SelectedTreeEvent?.TreeEvent);
+        public bool IsSelected => TreeEvent != null && Equals(TreeEvent,ParentEventTreeViewModel?.SelectedTreeEvent?.TreeEvent);
+
+        public int ProbabilityEstimationTypeIndex
+        {
+            get => ProbabilitySpecificationTypes.Keys.ToList().IndexOf(TreeEvent.ProbabilityInformation.Type);
+            set
+            {
+                var selectedType = ProbabilitySpecificationTypes.ElementAt(value).Key;
+                if (TreeEvent.ProbabilityInformation.Type != selectedType)
+                {
+                    TreeEventManipulations.ChangeProbabilityEstimationType(TreeEvent, selectedType);
+                }
+            }
+        }
+
+        public IEnumerable<string> EstimationSpecificationOptions => ProbabilitySpecificationTypes.Values;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -140,7 +169,7 @@ namespace StoryTree.Gui.ViewModels
 
         public void FireSelectedStateChangeRecursive()
         {
-            OnPropertyChanged(nameof(Selected));
+            OnPropertyChanged(nameof(IsSelected));
             FailingEvent?.FireSelectedStateChangeRecursive();
             PassingEvent?.FireSelectedStateChangeRecursive();
         }

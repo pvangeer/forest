@@ -32,7 +32,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ChoiceNodeTemplate" DataType="viewModels:TreeEventViewModel">
-        <Border Background="DarkGray" BorderBrush="{Binding Selected, Converter={StaticResource SelectedPropertyToBrushConverter}}" BorderThickness="1">
+        <Border Background="DarkGray" BorderBrush="{Binding IsSelected, Converter={StaticResource SelectedPropertyToBrushConverter}}" BorderThickness="1">
             <Border.InputBindings>
                 <MouseBinding MouseAction="LeftClick" Command="{Binding TreeEventClickedCommand}"></MouseBinding>
             </Border.InputBindings>

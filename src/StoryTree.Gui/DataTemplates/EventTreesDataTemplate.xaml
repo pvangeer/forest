@@ -36,8 +36,19 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Content="{Binding Name}" Padding="5" Margin="0,0,0,0" FontWeight="Bold" HorizontalAlignment="Left"/>
-                                <TextBlock Grid.Row="1" Text="{Binding Summary}" Padding="5" Margin="0,0,0,0" HorizontalAlignment="Left"/>
+                                <Label 
+                                    Grid.Row="0" 
+                                    Content="{Binding Name}" 
+                                    Padding="5" 
+                                    Margin="0,0,0,0" 
+                                    FontWeight="Bold" 
+                                    HorizontalAlignment="Left"/>
+                                <TextBlock 
+                                    Grid.Row="1" 
+                                    Text="{Binding Summary}" 
+                                    Padding="5" 
+                                    Margin="0,0,0,0" 
+                                    HorizontalAlignment="Left"/>
                             </Grid>
                         </Border>
                     </DataTemplate>
