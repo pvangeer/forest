@@ -118,6 +118,8 @@ namespace StoryTree.Gui.ViewModels
 
         public IEnumerable<TreeEventViewModel> AllTreeEvents => GetAllEventsRecursive(MainTreeEventViewModel);
 
+        public EstimationSpecificationViewModelFactory EstimationSpecificationViewModelFactory { get; set; }
+
         public bool IsViewModelFor(EventTree eventTree)
         {
             return Equals(EventTree, eventTree);

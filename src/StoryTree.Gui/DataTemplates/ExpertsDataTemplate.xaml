@@ -12,10 +12,7 @@
             <DataGrid 
                 ItemsSource="{Binding Experts}" 
                 AutoGenerateColumns="False"
-                RowBackground="AliceBlue"
-                GridLinesVisibility="Vertical"
-                VerticalGridLinesBrush="LightGray"
-                AlternatingRowBackground="LightSteelBlue">
+                Style="{StaticResource DataGridStyle}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Naam" Binding="{Binding Name}" ElementStyle="{StaticResource ColumnElementStyle}"/>
                     <DataGridTextColumn Header="Organisatie" Binding="{Binding Organisation}" ElementStyle="{StaticResource ColumnElementStyle}"/>

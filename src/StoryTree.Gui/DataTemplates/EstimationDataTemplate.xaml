@@ -7,125 +7,152 @@
 
     <converters:SelectedItemToMainTreeEventViewModelConverter x:Key="SelectedItemToMainTreeEventViewModelConverter" />
 
+    <DataTemplate x:Key="ListViewItemTreeEventViewModelDataTemplate" DataType="viewModels:TreeEventViewModel">
+        <Border BorderBrush="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource SelectedPropertyToBrushConverter}}" 
+                BorderThickness="1" 
+                Background="Gainsboro"
+                Margin="0,1,0,1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label 
+                    Grid.Row="0" 
+                    Content="{Binding Name}" 
+                    Padding="5" 
+                    Margin="0,0,0,0" 
+                    FontWeight="Bold" 
+                    HorizontalAlignment="Left"/>
+                <TextBlock 
+                    Grid.Row="1" 
+                    Text="{Binding Summary}" 
+                    Padding="5" 
+                    Margin="0,0,0,0" 
+                    HorizontalAlignment="Left"/>
+            </Grid>
+        </Border>
+    </DataTemplate>
+
     <DataTemplate x:Key="EstimationDataTemplate" DataType="viewModels:ProjectViewModel">
         <DataTemplate.Resources>
-            <dataTemplates:EstimationContentTemplateSelector x:Key="ContentTemplateSelector" />
-        </DataTemplate.Resources>
-        <ContentPresenter Content="{Binding SelectedEventTree}">
-            <ContentPresenter.ContentTemplate>
-                <DataTemplate DataType="viewModels:EventTreeViewModel">
-                    <Grid ShowGridLines="False">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" MinWidth="100"></ColumnDefinition>
-                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                            <ColumnDefinition Width="*" MinWidth="150"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <ListView 
-                            x:Name="ListView" 
-                            Grid.Column="0" 
-                            ItemsSource="{Binding AllTreeEvents}"
-                            SelectedItem="{Binding SelectedTreeEvent, UpdateSourceTrigger=PropertyChanged}"
-                            HorizontalContentAlignment="Stretch"
-                            BorderThickness="0">
-                            <ListView.ItemTemplate>
-                                <DataTemplate DataType="viewModels:TreeEventViewModel">
-                                    <Border 
-                                        BorderBrush="{Binding IsSelected, Converter={StaticResource SelectedPropertyToBrushConverter}}" 
-                                        BorderThickness="1" 
-                                        Margin="0,1,0,1">
+            <DataTemplate x:Key="EstimationPerEventTreeDataTemplate" DataType="viewModels:EventTreeViewModel">
+                <DataTemplate.Resources>
+                    <DataTemplate DataType="viewModels:TreeEventViewModel" x:Key="TreeEventEstimationSpecificationDataTempalte">
+                        <DataTemplate.Resources>
+                            <dataTemplates:EstimationContentTemplateSelector x:Key="ContentTemplateSelector" />
+                        </DataTemplate.Resources>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label 
+                                    Width="100"
+                                    Grid.Column="0" 
+                                    FontWeight="Bold" 
+                                    Content="Specificatie"/>
+                                <ComboBox 
+                                    Grid.Column="1" 
+                                    Margin="1"
+                                    Width="200"
+                                    HorizontalAlignment="Left"
+                                    Style="{StaticResource ComboBoxFlatStyle}"
+                                    SelectedIndex="{Binding ProbabilityEstimationTypeIndex, UpdateSourceTrigger=PropertyChanged}"
+                                    ItemsSource="{Binding EstimationSpecificationOptions}">
+                                </ComboBox>
+                            </Grid>
+
+                            <ContentPresenter 
+                                Grid.Row="1" 
+                                Content="{Binding EstimationSpecification}" 
+                                ContentTemplateSelector="{StaticResource ContentTemplateSelector}">
+                                <ContentPresenter.Resources>
+                                    <DataTemplate x:Key="ClassEstimationTemplate" DataType="{x:Type viewModels:ClassesProbabilitySpecificationViewModel}">
+                                        <TabControl TabStripPlacement="Top">
+                                            <TabItem Header="Gemiddelde">
+                                                <DataGrid ItemsSource="{Binding MeanEstimationsList}" Style="{StaticResource DataGridStyle}"/>
+                                            </TabItem>
+                                            <TabItem Header="Ondergrens">
+                                                <DataGrid ItemsSource="{Binding MinEstimationsList}" Style="{StaticResource DataGridStyle}"/>
+                                            </TabItem>
+                                            <TabItem Header="Bovengrens">
+                                                <DataGrid ItemsSource="{Binding MaxEstimationsList}" Style="{StaticResource DataGridStyle}"/>
+                                            </TabItem>
+                                        </TabControl>
+                                    </DataTemplate>
+                                    <DataTemplate x:Key="FixedValueEstimationTemplate" DataType="{x:Type viewModels:FixedProbabilitySpecificationViewModel}">
                                         <Grid>
-                                            <TextBlock 
-                                                Text="{Binding Name}" 
-                                                Padding="5" 
-                                                Margin="0,0,0,0" 
-                                                Background="Gainsboro">
-                                            </TextBlock>
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="{x:Type ListViewItem}">
-                                    <Setter Property="Background" Value="Transparent" />
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                                <ContentPresenter />
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                        </ListView>
-                        <GridSplitter Grid.Column="1" Width="10"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   />
-                        <ContentPresenter 
-                            Grid.Column="2" 
-                            Content="{Binding SelectedTreeEvent}">
-                            <ContentPresenter.ContentTemplate>
-                                <DataTemplate DataType="viewModels:TreeEventViewModel">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <Label 
                                                 Width="100"
+                                                HorizontalAlignment="Left" 
                                                 Grid.Column="0" 
-                                                FontWeight="Bold" 
-                                                Content="Specificatie"/>
-                                            <ComboBox 
-                                                Grid.Column="1" 
-                                                Margin="1"
-                                                Width="200"
+                                                Content="Kans" 
+                                                FontWeight="Bold"/>
+                                            <TextBox 
+                                                Style="{StaticResource TextBoxStyle}"
                                                 HorizontalAlignment="Left"
-                                                Style="{StaticResource ComboBoxFlatStyle}"
-                                                SelectedIndex="{Binding ProbabilityEstimationTypeIndex, UpdateSourceTrigger=PropertyChanged}"
-                                                ItemsSource="{Binding EstimationSpecificationOptions}">
-                                            </ComboBox>
+                                                VerticalAlignment="Top"
+                                                TextAlignment="Left"
+                                                Width="100"
+                                                Height="25"
+                                                Grid.Column="1" 
+                                                Text="{Binding FixedProbability, Converter={StaticResource ProbabilityToStringConverter}}"/>
                                         </Grid>
-                                        <ContentPresenter Grid.Row="1" Content="{Binding EstimationSpecification}" ContentTemplateSelector="{StaticResource ContentTemplateSelector}">
-                                            <ContentPresenter.Resources>
-                                                <DataTemplate x:Key="ClassEstimationTemplate" DataType="{x:Type viewModels:ClassesProbabilitySpecificationViewModel}">
-                                                    <Grid Background="Azure">
-                                                    </Grid>
-                                                </DataTemplate>
-                                                <DataTemplate x:Key="FixedValueEstimationTemplate" DataType="{x:Type viewModels:FixedProbabilitySpecificationViewModel}">
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="Auto"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <Label 
-                                                            Width="100"
-                                                            HorizontalAlignment="Left" 
-                                                            Grid.Column="0" 
-                                                            Content="Kans" 
-                                                            FontWeight="Bold"/>
-                                                        <TextBox 
-                                                            Style="{StaticResource TextBoxStyle}"
-                                                            HorizontalAlignment="Left"
-                                                            VerticalAlignment="Top"
-                                                            TextAlignment="Left"
-                                                            Width="100"
-                                                            Height="25"
-                                                            Grid.Column="1" 
-                                                            Text="{Binding FixedProbability, Converter={StaticResource ProbabilityToStringConverter}}"/>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ContentPresenter.Resources>
-                                        </ContentPresenter>
-                                    </Grid>
-                                </DataTemplate>
-                            </ContentPresenter.ContentTemplate>
-                        </ContentPresenter>
-                    </Grid>
-                </DataTemplate>
-            </ContentPresenter.ContentTemplate>
-        </ContentPresenter>
+                                    </DataTemplate>
+                                </ContentPresenter.Resources>
+                            </ContentPresenter>
+                        </Grid>
+                    </DataTemplate>
+                </DataTemplate.Resources>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="100"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" MinWidth="150"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView 
+                        x:Name="ListView" 
+                        Grid.Column="0" 
+                        ItemsSource="{Binding AllTreeEvents}"
+                        SelectedItem="{Binding SelectedTreeEvent, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalContentAlignment="Stretch"
+                        BorderThickness="0"
+                        ItemTemplate="{StaticResource ListViewItemTreeEventViewModelDataTemplate}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                    <GridSplitter Grid.Column="1" Width="10"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   />
+                    <ContentPresenter 
+                        Grid.Column="2" 
+                        Content="{Binding SelectedTreeEvent}"
+                        ContentTemplate="{StaticResource TreeEventEstimationSpecificationDataTempalte}">
+                    </ContentPresenter>
+                </Grid>
+            </DataTemplate>
+        </DataTemplate.Resources>
+        <ContentPresenter 
+            Content="{Binding SelectedEventTree}" 
+            ContentTemplate="{StaticResource EstimationPerEventTreeDataTemplate}"/>
     </DataTemplate>
 </ResourceDictionary>

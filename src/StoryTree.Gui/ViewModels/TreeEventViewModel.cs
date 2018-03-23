@@ -17,12 +17,26 @@ namespace StoryTree.Gui.ViewModels
         private TreeEventViewModel failingEventViewModel;
         private TreeEventViewModel passingEventViewModel;
 
-        public static readonly Dictionary<ProbabilitySpecificationType, string> ProbabilitySpecificationTypes =
+        private static readonly Dictionary<ProbabilitySpecificationType, string> ProbabilitySpecificationTypes =
             Enum.GetValues(typeof(ProbabilitySpecificationType)).Cast<ProbabilitySpecificationType>()
-                .ToDictionary(t => t, t => t.ToString());
+                .ToDictionary(t => t, GetDisplayName);
+
+        private static string GetDisplayName(ProbabilitySpecificationType t)
+        {
+            switch (t)
+            {
+                case ProbabilitySpecificationType.Classes:
+                    return "Klassen";
+                case ProbabilitySpecificationType.FixedValue:
+                    return "Vaste kans";
+                case ProbabilitySpecificationType.FixedFreqeuncy:
+                    return "Vaste freqeuentielijn";
+                default:
+                    throw new InvalidEnumArgumentException();
+            }
+        }
 
         private ProbabilitySpecificationViewModelBase probabilityEstimationViewModel;
-
 
         public TreeEventViewModel([NotNull]TreeEvent treeEvent, [NotNull]EventTreeViewModel parentEventTreeViewModel)
         {
@@ -162,8 +176,9 @@ namespace StoryTree.Gui.ViewModels
 
         public IEnumerable<string> EstimationSpecificationOptions => ProbabilitySpecificationTypes.Values;
 
-        public ProbabilitySpecificationViewModelBase EstimationSpecification => probabilityEstimationViewModel ?? (probabilityEstimationViewModel =
-                                                                                    EstimationSpecificationViewModelFactory.CreateViewModel(TreeEvent.ProbabilityInformation));
+        public ProbabilitySpecificationViewModelBase EstimationSpecification =>
+            probabilityEstimationViewModel ?? (probabilityEstimationViewModel =
+                ParentEventTreeViewModel.EstimationSpecificationViewModelFactory.CreateViewModel(TreeEvent.ProbabilityInformation));
 
         public event PropertyChangedEventHandler PropertyChanged;
 

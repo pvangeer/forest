@@ -21,7 +21,6 @@
                 x:Name="EventTreesListView" 
                 Grid.Column="0" 
                 ItemsSource="{Binding EventTrees}" 
-                SelectedIndex="0"
                 SelectedItem="{Binding SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
                 HorizontalContentAlignment="Stretch"
                 BorderThickness="0">

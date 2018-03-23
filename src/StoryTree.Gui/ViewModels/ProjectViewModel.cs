@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -7,7 +5,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using StoryTree.Data;
-using StoryTree.Data.Estimations;
 using StoryTree.Data.Properties;
 using StoryTree.Gui.Command;
 
@@ -26,7 +23,10 @@ namespace StoryTree.Gui.ViewModels
 
             var eventTreeViewModels = new ObservableCollection<EventTreeViewModel>(project.EventTrees.Select(te =>
             {
-                var eventTreeViewModel = new EventTreeViewModel(te);
+                var eventTreeViewModel = new EventTreeViewModel(te)
+                {
+                    EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(project)
+                };
                 eventTreeViewModel.PropertyChanged += EventTreeViewModelPropertyChanged;
                 return eventTreeViewModel;
             }));
@@ -169,7 +169,10 @@ namespace StoryTree.Gui.ViewModels
             {
                 foreach (var eventTree in e.NewItems.OfType<EventTree>())
                 {
-                    var eventTreeViewModel = new EventTreeViewModel(eventTree);
+                    var eventTreeViewModel = new EventTreeViewModel(eventTree)
+                    {
+                        EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(Project)
+                    };
                     eventTreeViewModel.PropertyChanged += EventTreeViewModelPropertyChanged;
                     EventTrees.Add(eventTreeViewModel);
                 }
@@ -185,6 +188,7 @@ namespace StoryTree.Gui.ViewModels
                 {
                     Project.HydraulicConditions.Add(item.HydraulicCondition);
                 }
+                Project.OnPropertyChanged(nameof(Project.WaterLevels));
             }
 
             if (e.Action == NotifyCollectionChangedAction.Remove)
@@ -193,6 +197,7 @@ namespace StoryTree.Gui.ViewModels
                 {
                     Project.HydraulicConditions.Remove(item.HydraulicCondition);
                 }
+                Project.OnPropertyChanged(nameof(Project.WaterLevels));
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using StoryTree.Data.Estimations.Classes;
 
 namespace StoryTree.Data.Tree
 {
@@ -6,11 +7,16 @@ namespace StoryTree.Data.Tree
     {
         public ExpertClassEstimation()
         {
-            Estimations = new ObservableCollection<ExpertClassEstimationPerWaterLevel>();
         }
 
         public Expert Expert { get; set; }
 
-        public ObservableCollection<ExpertClassEstimationPerWaterLevel> Estimations { get; }
+        public double WaterLevel { get; set; }
+
+        public ProbabilityClass MinEstimation { get; set; }
+
+        public ProbabilityClass AverageEstimation { get; set; }
+
+        public ProbabilityClass MaxEstimation { get; set; }
     }
 }

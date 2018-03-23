@@ -1,18 +1,27 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using StoryTree.Data;
 using StoryTree.Data.Estimations;
 using StoryTree.Data.Estimations.Classes;
 
 namespace StoryTree.Gui.ViewModels
 {
-    public static class EstimationSpecificationViewModelFactory
+    public class EstimationSpecificationViewModelFactory
     {
-        public static ProbabilitySpecificationViewModelBase CreateViewModel(IProbabilitySpecification probabilitySpecification)
+        public EstimationSpecificationViewModelFactory(Project project)
+        {
+            Project = project;
+        }
+
+        public Project Project { get; }
+
+        public ProbabilitySpecificationViewModelBase CreateViewModel(IProbabilitySpecification probabilitySpecification)
         {
             switch (probabilitySpecification.Type)
             {
                 case ProbabilitySpecificationType.Classes:
-                    return new ClassesProbabilitySpecificationViewModel((ClassesProbabilitySpecification) probabilitySpecification);
+                    return new ClassesProbabilitySpecificationViewModel((ClassesProbabilitySpecification) probabilitySpecification, Project);
                 case ProbabilitySpecificationType.FixedValue:
                     return new FixedProbabilitySpecificationViewModel((FixedValueProbabilitySpecification) probabilitySpecification);
                 case ProbabilitySpecificationType.FixedFreqeuncy:

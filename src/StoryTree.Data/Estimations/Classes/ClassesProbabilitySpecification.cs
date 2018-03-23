@@ -19,8 +19,7 @@ namespace StoryTree.Data.Estimations.Classes
         {
             // TODO: Add interpolation?
 
-            var allEstimations = Estimations.SelectMany(e => e.Estimations).ToArray();
-            return (Probability) allEstimations
+            return (Probability) Estimations
                 .Where(e => Math.Abs(e.WaterLevel - waterLevel) < 1e-8)
                 .Select(e => ClassToProbabilityDouble(e.AverageEstimation))
                 .Average();

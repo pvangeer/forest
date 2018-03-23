@@ -1,5 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using StoryTree.Data.Hydraulics;
 using StoryTree.Data.Properties;
@@ -26,12 +29,15 @@ namespace StoryTree.Data
 
         public string ProjectInformation { get; set; }
 
+        public Person ProjectLeader { get; }
+
         public ObservableCollection<EventTree> EventTrees { get; }
 
         public ObservableCollection<Expert> Experts { get; }
-        public Person ProjectLeader { get; }
 
         public ObservableCollection<HydraulicCondition> HydraulicConditions { get; }
+
+        public IEnumerable<double> WaterLevels => HydraulicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w);
 
         public event PropertyChangedEventHandler PropertyChanged;
 
