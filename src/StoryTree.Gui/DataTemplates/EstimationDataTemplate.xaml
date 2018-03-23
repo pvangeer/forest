@@ -75,9 +75,9 @@
                                 ContentTemplateSelector="{StaticResource ContentTemplateSelector}">
                                 <ContentPresenter.Resources>
                                     <DataTemplate x:Key="ClassEstimationTemplate" DataType="{x:Type viewModels:ClassesProbabilitySpecificationViewModel}">
-                                        <TabControl TabStripPlacement="Top">
+                                        <TabControl TabStripPlacement="Top" Style="{StaticResource TabControlFlatStyle}">
                                             <TabItem Header="Gemiddelde">
-                                                <DataGrid ItemsSource="{Binding MeanEstimationsList}" Style="{StaticResource DataGridStyle}"/>
+                                                <DataGrid ItemsSource="{Binding MeanEstimationsList}" Style="{StaticResource DataGridStyle}" CellStyle="{StaticResource ColumnElementStyle}"/>
                                             </TabItem>
                                             <TabItem Header="Ondergrens">
                                                 <DataGrid ItemsSource="{Binding MinEstimationsList}" Style="{StaticResource DataGridStyle}"/>

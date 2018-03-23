@@ -6,10 +6,6 @@
                     xmlns:gui="clr-namespace:StoryTree.Gui">
 
     <converters:ProbabilityToStringConverter x:Key="DoubleToProbabilityConverter" />
-    
-    <Style x:Key="ColumnElementStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="5,5,5,5" />
-    </Style>
 
     <converters:HydraulicConditionsToViewModelConverter x:Key="HydraulicsListToPlotModelConverter" />
     <DataTemplate x:Key="HydraulicsDataTemplate" DataType="viewModels:ProjectViewModel">
@@ -22,10 +18,7 @@
             <DataGrid Grid.Column="0"
                       ItemsSource="{Binding HydraulicConditionsList}"
                       AutoGenerateColumns="False"
-                      RowBackground="AliceBlue"
-                      GridLinesVisibility="Vertical"
-                      VerticalGridLinesBrush="LightGray"
-                      AlternatingRowBackground="LightSteelBlue">
+                      Style="{StaticResource DataGridStyle}">
                 <DataGrid.Columns>
                     <DataGridTextColumn 
                         Header="Waterstand" 

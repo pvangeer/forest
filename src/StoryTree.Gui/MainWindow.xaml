@@ -132,7 +132,7 @@
 
             <fluent:RibbonTabItem 
                 Name="ExpertsTabItem" 
-                Header="Project" 
+                Header="Experts" 
                 fluent:KeyTip.Keys="V"  
                 Group="{Binding Source={x:Reference GeneralInformationGroup}}"/>
 

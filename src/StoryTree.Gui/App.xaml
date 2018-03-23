@@ -3,10 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="BackgroundEditableColor">AliceBlue</Color>
+            <Color x:Key="BackgroundColor">White</Color>
+            <Color x:Key="SelectedElementBorderColor">Red</Color>
+
+            <SolidColorBrush Color="{StaticResource SelectedElementBorderColor}" x:Key="SelectedElementBorderColorBrush" />
+            <SolidColorBrush Color="{StaticResource BackgroundColor}" x:Key="BackgroundColorBrush" />
             <SolidColorBrush Color="{StaticResource BackgroundEditableColor}" x:Key="BackgroundEditableColorBrush" />
 
             <xctk:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
@@ -27,7 +33,12 @@
                 <Setter Property="Margin" Value="4"/>
             </Style>
 
+            <Style x:Key="ColumnElementStyle" TargetType="TextBlock">
+                <Setter Property="Margin" Value="5,5,5,5" />
+            </Style>
+
             <Style x:Key="DataGridStyle" TargetType="DataGrid">
+                <Setter Property="Background" Value="{StaticResource BackgroundColorBrush}"/>
                 <Setter Property="RowBackground" Value="AliceBlue"/>
                 <Setter Property="GridLinesVisibility" Value="Vertical"/>
                 <Setter Property="VerticalGridLinesBrush" Value="LightGray"/>
@@ -35,7 +46,8 @@
             </Style>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="DataTemplates/ComboBoxFlatStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="DataTemplates/ComboBoxFlatStyle.xaml"/>
+                <ResourceDictionary Source="DataTemplates/TabControlFlatStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

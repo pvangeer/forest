@@ -51,7 +51,7 @@ namespace StoryTree.Gui.ViewModels
             var dataTable = new DataTable();
             var waterLevelColumn = new DataColumn("Waterstand")
             {
-                DataType = typeof(double)
+                DataType = typeof(double),
             };
             dataTable.Columns.Add(waterLevelColumn);
             dataTable.Columns.AddRange(Project.Experts.Select(e => new DataColumn(e.Name) {DataType = typeof(int)}).ToArray());
