@@ -7,12 +7,10 @@
     xmlns:modelViews="clr-namespace:StoryTree.Gui.ViewModels"
     xmlns:fluent="urn:fluent-ribbon"
     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
-    mc:Ignorable="d"
     Title="Gebeurtenissenboom" 
     Height="600" 
     Width="900" 
-    x:Name="MainRibbonWindow"
-    AllowsTransparency="True">
+    x:Name="MainRibbonWindow">
     <Window.DataContext>
         <modelViews:ProjectViewModel></modelViews:ProjectViewModel>
     </Window.DataContext>
