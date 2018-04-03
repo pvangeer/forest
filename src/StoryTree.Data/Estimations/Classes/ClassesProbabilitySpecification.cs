@@ -15,12 +15,20 @@ namespace StoryTree.Data.Estimations.Classes
 
         public ProbabilitySpecificationType Type => ProbabilitySpecificationType.Classes;
 
-        public Probability GetProbability(double waterLevel)
+        public Probability GetProbability()
         {
-            // TODO: Add interpolation?
+            throw new NotImplementedException();
+        }
 
-            return (Probability) Estimations
-                .Where(e => Math.Abs(e.WaterLevel - waterLevel) < 1e-8)
+        public Probability GetProbabilityForWaterLevel(double waterLevel)
+        {
+            var relevantEstimations = Estimations.Where(e => Math.Abs(e.WaterLevel - waterLevel) < 1e-8).ToArray();
+            if (relevantEstimations.Length == 0)
+            {
+                return Probability.NaN;
+            }
+
+            return (Probability) relevantEstimations
                 .Select(e => ClassToProbabilityDouble(e.AverageEstimation))
                 .Average();
         }

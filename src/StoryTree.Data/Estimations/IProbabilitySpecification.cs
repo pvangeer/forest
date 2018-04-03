@@ -7,6 +7,8 @@ namespace StoryTree.Data.Estimations
     {
         ProbabilitySpecificationType Type { get; }
 
-        Probability GetProbability(double waterlevel);
+        Probability GetProbability();
+
+        Probability GetProbabilityForWaterLevel(double waterlevel);
     }
 }

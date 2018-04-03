@@ -46,6 +46,7 @@ namespace StoryTree.Gui.ViewModels
             set
             {
                 HydraulicCondition.WavePeriod = value;
+                HydraulicCondition.OnPropertyChanged(nameof(HydraulicCondition.WavePeriod));
                 OnPropertyChanged();
             }
         }
@@ -57,6 +58,7 @@ namespace StoryTree.Gui.ViewModels
             {
                 HydraulicCondition.WaveHeight = value;
                 OnPropertyChanged();
+                HydraulicCondition.OnPropertyChanged(nameof(HydraulicCondition.WaveHeight));
             }
         }
 
