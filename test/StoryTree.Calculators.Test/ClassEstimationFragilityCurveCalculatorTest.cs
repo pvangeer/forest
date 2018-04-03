@@ -17,7 +17,7 @@ namespace StoryTree.Calculators.Test
         }
 
         [Test]
-        public void CalculateFragilityCurveTest()
+        public void CalculateCombinedProbabilityFragilityCurveTest()
         {
             var hydraulicConditions = new[]
             {
@@ -43,7 +43,7 @@ namespace StoryTree.Calculators.Test
             };
 
             var interpolatedValues =
-                ClassEstimationFragilityCurveCalculator.CalculateFragilityCurve(hydraulicConditions, fragilityCurves);
+                ClassEstimationFragilityCurveCalculator.CalculateCombinedProbabilityFragilityCurve(hydraulicConditions, fragilityCurves);
 
             Assert.AreEqual(6,interpolatedValues.Count);
             Assert.AreEqual(2.33E-05, interpolatedValues[0].Probability, 1e-4);
