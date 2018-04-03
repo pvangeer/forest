@@ -151,7 +151,7 @@
                 </Grid>
             </DataTemplate>
         </DataTemplate.Resources>
-        <ContentPresenter 
+        <ContentPresenter
             Content="{Binding SelectedEventTree}" 
             ContentTemplate="{StaticResource EstimationPerEventTreeDataTemplate}"/>
     </DataTemplate>

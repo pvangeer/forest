@@ -25,6 +25,7 @@
                 <ResourceDictionary Source="/DataTemplates/EventTreesDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/TreeEventsDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/EventTreeGalleryItemDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/ResultsDataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <converters:TabItemToTemplateConverter x:Key="TabItemToTemplateConverter" 
@@ -33,7 +34,8 @@
                                                    EstimationTemplate="{StaticResource EstimationDataTemplate}"
                                                    HydraulicsTemplate="{StaticResource HydraulicsDataTemplate}"
                                                    EventsTemplate="{StaticResource EventTreesDataTemplate}"
-                                                   TreeEventsTemplate="{StaticResource TreeEventsTemplate}"/>
+                                                   TreeEventsTemplate="{StaticResource TreeEventsTemplate}"
+                                                   ResultsTemplate="{StaticResource ResultsDataTemplate}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>

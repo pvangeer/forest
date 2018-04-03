@@ -1,8 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:StoryTree.Gui.DataTemplates"
                     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
-                    xmlns:gui="clr-namespace:StoryTree.Gui"
                     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <converters:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
