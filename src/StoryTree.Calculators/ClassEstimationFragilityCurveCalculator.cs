@@ -13,11 +13,16 @@ namespace StoryTree.Calculators
         public static Probability CalculateProbability(HydraulicCondition[] conditions,
             FragilityCurve[] treeEventCurves)
         {
-            var partialProbabilityCurve = CalculateFragilityCurve(conditions, treeEventCurves);
+            var partialProbabilityCurve = CalculateCombinedProbabilityFragilityCurve(conditions, treeEventCurves);
             return (Probability) partialProbabilityCurve.Sum(p => p.Probability);
         }
 
-        public static FragilityCurve CalculateFragilityCurve(HydraulicCondition[] conditions, FragilityCurve[] treeEventCurves)
+        public static Probability CalculateProbability(FragilityCurve partialProbabilityCurve)
+        {
+            return (Probability)partialProbabilityCurve.Sum(p => p.Probability);
+        }
+
+        public static FragilityCurve CalculateCombinedProbabilityFragilityCurve(HydraulicCondition[] conditions, FragilityCurve[] treeEventCurves)
         {
             if (!CheckProbabilitiesAreEqual(conditions, treeEventCurves))
             {
@@ -43,6 +48,22 @@ namespace StoryTree.Calculators
             return curve;
         }
 
+        public static FragilityCurve CalculateCombinedFragilityCurve(HydraulicCondition[] conditions, FragilityCurve[] treeEventCurves)
+        {
+            if (!CheckProbabilitiesAreEqual(treeEventCurves))
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            var curve = new FragilityCurve(new TreeEvent());
+            foreach (var condition in conditions)
+            {
+                curve.Add(new FragilityCurveElement(condition.WaterLevel, CalculateConditionalProbability(condition.WaterLevel, treeEventCurves)));
+            }
+
+            return curve;
+        }
+
         private static Probability CalculateConditionalProbability(double waterLevel, FragilityCurve[] treeEventCurves)
         {
             var probability = (Probability)1.0;
@@ -58,6 +79,12 @@ namespace StoryTree.Calculators
             }
 
             return probability;
+        }
+
+        private static bool CheckProbabilitiesAreEqual(FragilityCurve[] treeEventCurves)
+        {
+            //
+            return true;
         }
 
         private static bool CheckProbabilitiesAreEqual(IEnumerable<HydraulicCondition> hydraulicConditions, IEnumerable<FragilityCurve> treeEventCurves)
