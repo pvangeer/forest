@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -31,6 +32,17 @@ namespace StoryTree.Data.Estimations.Classes
             return (Probability) relevantEstimations
                 .Select(e => ClassToProbabilityDouble(e.AverageEstimation))
                 .Average();
+        }
+
+        public FragilityCurve GetFragilityCurve(IEnumerable<double> waterLevels)
+        {
+            var curve = new FragilityCurve();
+            foreach (var waterLevel in waterLevels)
+            {
+                curve.Add(new FragilityCurveElement(waterLevel,GetProbabilityForWaterLevel(waterLevel)));
+            }
+
+            return curve;
         }
 
         private double ClassToProbabilityDouble(ProbabilityClass probabilityClass)

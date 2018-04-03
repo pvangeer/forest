@@ -10,5 +10,7 @@ namespace StoryTree.Data.Estimations
         Probability GetProbability();
 
         Probability GetProbabilityForWaterLevel(double waterlevel);
+
+        FragilityCurve GetFragilityCurve(IEnumerable<double> waterLevels);
     }
 }

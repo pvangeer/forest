@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using StoryTree.Calculators;
+using StoryTree.Data;
 using StoryTree.Data.Estimations;
 using StoryTree.Data.Properties;
 using StoryTree.Data.Services;
@@ -179,6 +181,10 @@ namespace StoryTree.Gui.ViewModels
         public ProbabilitySpecificationViewModelBase EstimationSpecification =>
             probabilityEstimationViewModel ?? (probabilityEstimationViewModel =
                 ParentEventTreeViewModel.EstimationSpecificationViewModelFactory.CreateViewModel(TreeEvent.ProbabilityInformation));
+
+        public TreeEvent[] CriticalPath => TreeEvent == null ? null :
+            ParentEventTreeViewModel.MainTreeEventViewModel == null ? null :
+            CriticalPathCalculator.GetCriticalPath(ParentEventTreeViewModel.MainTreeEventViewModel.TreeEvent, TreeEvent).ToArray();
 
         public event PropertyChangedEventHandler PropertyChanged;
 

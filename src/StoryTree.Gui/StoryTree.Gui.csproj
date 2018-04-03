@@ -90,6 +90,8 @@
     </ApplicationDefinition>
     <Compile Include="Command\AddEventTreeCommand.cs" />
     <Compile Include="Command\ProjectViewModelCommand.cs" />
+    <Compile Include="CriticalPathToPlotModelConverter.cs" />
+    <Compile Include="CriticalPathToProbabilityTextConverter.cs" />
     <Compile Include="DataTemplates\EstimationContentTemplateSelector.cs" />
     <Compile Include="Converters\SelectedItemToMainTreeEventViewModelConverter.cs" />
     <Compile Include="Converters\SelectedPropertyToColorConverter.cs" />
@@ -126,6 +128,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DataTemplates\EventTreeTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataTemplates\ExpertsDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +143,10 @@
     <Page Include="DataTemplates\HydraulicsDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\ResultsDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="DataTemplates\TabControlFlatStyle.xaml">
       <SubType>Designer</SubType>
@@ -187,6 +197,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StoryTree.Calculators\StoryTree.Calculators.csproj">
+      <Project>{A7090218-547D-412B-A4F5-F80C8B4890F3}</Project>
+      <Name>StoryTree.Calculators</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StoryTree.Data\StoryTree.Data.csproj">
       <Project>{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}</Project>
       <Name>StoryTree.Data</Name>

@@ -5,6 +5,11 @@ namespace StoryTree.Data
 {
     public class FragilityCurve : ObservableCollection<FragilityCurveElement>
     {
+        public FragilityCurve()
+        {
+
+        }
+
         public FragilityCurve(TreeEvent treeEvent)
         {
             TreeEvent = treeEvent;
