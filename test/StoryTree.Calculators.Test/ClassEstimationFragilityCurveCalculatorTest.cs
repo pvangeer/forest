@@ -70,7 +70,7 @@ namespace StoryTree.Calculators.Test
 
             var fragilityCurves = new[]
             {
-                new FragilityCurve(new TreeEvent {Name = "Test"})
+                new FragilityCurve
                 {
                     new FragilityCurveElement(2.3, (Probability)0.001),
                     new FragilityCurveElement(2.6, (Probability)0.001),
