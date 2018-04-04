@@ -5,7 +5,7 @@ using StoryTree.Data.Hydraulics;
 using StoryTree.Data.Tree;
 using StoryTree.Gui.ViewModels;
 
-namespace StoryTree.Gui
+namespace StoryTree.Gui.Converters
 {
     public class CriticalPathConverter
     {

@@ -16,71 +16,8 @@ namespace StoryTree.Gui
         public MainWindow()
         {
             InitializeComponent();
-            CreateTestViewModel();
+            DataContext = new ProjectViewModel(TestDataGenerator.GenerateAsphalProject());
         }
-
-        #region TestCode
-        private void CreateTestViewModel()
-        {
-            DataContext = new ProjectViewModel(new Project
-            {
-                EventTrees =
-                {
-                    CreateEventTree("First event tree", 3),
-                    CreateEventTree("Second event tree", 2),
-                    CreateEventTree("3", 4)
-                },
-                Experts =
-                {
-                    new Expert
-                    {
-                        Name = "Klaas",
-                        Email = "email@domein.nl",
-                        Expertise = "Alles",
-                        Organisation = "Eigen bedrijf",
-                        Telephone = "088-3358339"
-                    },
-                    new Expert
-                    {
-                        Name = "Piet",
-                        Email = "piet@email.nl",
-                        Expertise = "Niets",
-                        Organisation = "Ander bedrijf",
-                        Telephone = "088-3358339"
-                    },
-                }
-            });
-        }
-
-        private static EventTree CreateEventTree(string treeName, int numberTreeEvents)
-        {
-            var mainTreeEvent = new TreeEvent
-            {
-                Name = "First element",
-                ProbabilityInformation = new FixedValueProbabilitySpecification()
-            };
-
-            var tree = new EventTree
-            {
-                Name = treeName,
-                MainTreeEvent = mainTreeEvent
-            };
-
-            var currentTreeEvent = mainTreeEvent;
-            for (int i = 0; i < numberTreeEvents - 1; i++)
-            {
-                var falseEvent = new TreeEvent
-                {
-                    Name = string.Format("Event no. {0}",i+1),
-                    ProbabilityInformation = new FixedValueProbabilitySpecification()
-                };
-                currentTreeEvent.FailingEvent = falseEvent;
-                currentTreeEvent = falseEvent;
-            }
-
-            return tree;
-        }
-        #endregion
 
         private void OnFileNewClicked(object sender, RoutedEventArgs e)
         {

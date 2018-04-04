@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Data;
 using StoryTree.Calculators;
 
-namespace StoryTree.Gui
+namespace StoryTree.Gui.Converters
 {
     public class CriticalPathToProbabilityTextConverter : CriticalPathConverter, IMultiValueConverter
     {

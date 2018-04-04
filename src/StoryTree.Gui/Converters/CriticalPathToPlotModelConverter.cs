@@ -6,10 +6,9 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using StoryTree.Calculators;
-using StoryTree.Data;
 using StoryTree.Gui.ViewModels;
 
-namespace StoryTree.Gui
+namespace StoryTree.Gui.Converters
 {
     public class CriticalPathToPlotModelConverter : CriticalPathConverter, IMultiValueConverter
     {

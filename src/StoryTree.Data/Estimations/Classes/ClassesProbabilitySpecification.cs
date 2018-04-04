@@ -63,6 +63,8 @@ namespace StoryTree.Data.Estimations.Classes
                     return 0.01;
                 case ProbabilityClass.Seven:
                     return 0.001;
+                case ProbabilityClass.None:
+                    return double.NaN;
                 default:
                     throw new InvalidEnumArgumentException();
             }

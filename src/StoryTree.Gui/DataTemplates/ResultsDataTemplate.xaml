@@ -2,11 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
                     xmlns:gui="clr-namespace:StoryTree.Gui"
-                    xmlns:oxy="http://oxyplot.org/wpf">
+                    xmlns:oxy="http://oxyplot.org/wpf"
+                    xmlns:converters="clr-namespace:StoryTree.Gui.Converters">
 
-    <gui:CriticalPathToProbabilityTextConverter x:Key="CriticalPathToProbabilityTextConverter" />
+    <converters:CriticalPathToProbabilityTextConverter x:Key="CriticalPathToProbabilityTextConverter" />
 
-    <gui:CriticalPathToPlotModelConverter x:Key="CriticalPathToPlotModelConverter" />
+    <converters:CriticalPathToPlotModelConverter x:Key="CriticalPathToPlotModelConverter" />
 
     <DataTemplate x:Key="TreeEventViewModelTemplate" DataType="viewModels:TreeEventViewModel">
     <Grid>
