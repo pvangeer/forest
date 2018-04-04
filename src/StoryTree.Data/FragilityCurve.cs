@@ -3,18 +3,6 @@ using StoryTree.Data.Tree;
 
 namespace StoryTree.Data
 {
-    public class FragilityCurve : ObservableCollection<FragilityCurveElement>
-    {
-        public FragilityCurve()
-        {
-
-        }
-
-        public FragilityCurve(TreeEvent treeEvent)
-        {
-            TreeEvent = treeEvent;
-        }
-
-        public TreeEvent TreeEvent { get; }
-    }
+    // TODO: Does this need extra properties? If not, remove this class
+    public class FragilityCurve : ObservableCollection<FragilityCurveElement> { }
 }

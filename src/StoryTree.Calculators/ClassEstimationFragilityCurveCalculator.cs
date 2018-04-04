@@ -4,17 +4,14 @@ using System.Linq;
 using StoryTree.Data;
 using StoryTree.Data.Estimations.Classes;
 using StoryTree.Data.Hydraulics;
-using StoryTree.Data.Tree;
 
 namespace StoryTree.Calculators
 {
     public static class ClassEstimationFragilityCurveCalculator
     {
-        public static Probability CalculateProbability(HydraulicCondition[] conditions,
-            FragilityCurve[] treeEventCurves)
+        public static Probability CalculateProbability(HydraulicCondition[] conditions, FragilityCurve[] treeEventCurves)
         {
-            var partialProbabilityCurve = CalculateCombinedProbabilityFragilityCurve(conditions, treeEventCurves);
-            return (Probability) partialProbabilityCurve.Sum(p => p.Probability);
+            return CalculateProbability(CalculateCombinedProbabilityFragilityCurve(conditions, treeEventCurves));
         }
 
         public static Probability CalculateProbability(FragilityCurve partialProbabilityCurve)
@@ -29,7 +26,7 @@ namespace StoryTree.Calculators
                 throw new ArgumentOutOfRangeException();
             }
 
-            var curve = new FragilityCurve(new TreeEvent());
+            var curve = new FragilityCurve();
             for (int i = 0; i < conditions.Length-1; i++)
             {
                 double waterLevelProbability = conditions[i].Probability;
@@ -55,7 +52,7 @@ namespace StoryTree.Calculators
                 throw new ArgumentOutOfRangeException();
             }
 
-            var curve = new FragilityCurve(new TreeEvent());
+            var curve = new FragilityCurve();
             foreach (var condition in conditions)
             {
                 curve.Add(new FragilityCurveElement(condition.WaterLevel, CalculateConditionalProbability(condition.WaterLevel, treeEventCurves)));
