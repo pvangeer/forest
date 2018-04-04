@@ -16,23 +16,7 @@ namespace StoryTree.Data.Estimations.Classes
 
         public ProbabilitySpecificationType Type => ProbabilitySpecificationType.Classes;
 
-        public Probability GetProbability()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Probability GetProbabilityForWaterLevel(double waterLevel)
-        {
-            var relevantEstimations = Estimations.Where(e => Math.Abs(e.WaterLevel - waterLevel) < 1e-8).ToArray();
-            if (relevantEstimations.Length == 0)
-            {
-                return Probability.NaN;
-            }
-
-            return (Probability) relevantEstimations
-                .Select(e => ClassToProbabilityDouble(e.AverageEstimation))
-                .Average();
-        }
+        public ObservableCollection<ExpertClassEstimation> Estimations { get; }
 
         public FragilityCurve GetFragilityCurve(IEnumerable<double> waterLevels)
         {
@@ -43,6 +27,19 @@ namespace StoryTree.Data.Estimations.Classes
             }
 
             return curve;
+        }
+
+        private Probability GetProbabilityForWaterLevel(double waterLevel)
+        {
+            var relevantEstimations = Estimations.Where(e => Math.Abs(e.WaterLevel - waterLevel) < 1e-8).ToArray();
+            if (relevantEstimations.Length == 0)
+            {
+                return Probability.NaN;
+            }
+
+            return (Probability) relevantEstimations
+                .Select(e => ClassToProbabilityDouble(e.AverageEstimation))
+                .Average();
         }
 
         private double ClassToProbabilityDouble(ProbabilityClass probabilityClass)
@@ -69,7 +66,5 @@ namespace StoryTree.Data.Estimations.Classes
                     throw new InvalidEnumArgumentException();
             }
         }
-
-        public ObservableCollection<ExpertClassEstimation> Estimations { get; }
     }
 }

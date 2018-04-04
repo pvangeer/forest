@@ -7,10 +7,6 @@ namespace StoryTree.Data.Estimations
     {
         ProbabilitySpecificationType Type { get; }
 
-        Probability GetProbability();
-
-        Probability GetProbabilityForWaterLevel(double waterlevel);
-
         FragilityCurve GetFragilityCurve(IEnumerable<double> waterLevels);
     }
 }

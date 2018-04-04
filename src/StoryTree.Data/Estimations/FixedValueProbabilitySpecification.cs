@@ -13,16 +13,6 @@ namespace StoryTree.Data.Estimations
 
         public ProbabilitySpecificationType Type => ProbabilitySpecificationType.FixedValue;
 
-        public Probability GetProbability()
-        {
-            return FixedValueProbability;
-        }
-
-        public Probability GetProbabilityForWaterLevel(double waterlevel)
-        {
-            return FixedValueProbability;
-        }
-
         public FragilityCurve GetFragilityCurve(IEnumerable<double> waterLevels)
         {
             var curve = new FragilityCurve();
