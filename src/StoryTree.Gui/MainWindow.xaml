@@ -182,7 +182,14 @@
             <fluent:RibbonTabItem
                 Name="ResultsTabItem"
                 Header="Resultaten"
-                Group="{Binding Source={x:Reference ResultsGroup}}"/>
+                Group="{Binding Source={x:Reference ResultsGroup}}">
+                <fluent:RibbonGroupBox Header="Gebeurtenissen">
+                    <fluent:InRibbonGallery 
+                        ItemsSource="{Binding EventTrees}" 
+                        SelectedItem="{Binding SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
+                        ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
         </fluent:Ribbon>
 
         <ContentPresenter 

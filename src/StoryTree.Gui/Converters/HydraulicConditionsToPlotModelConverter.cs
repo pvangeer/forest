@@ -11,7 +11,7 @@ using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui.Converters
 {
-    public class HydraulicConditionsToViewModelConverter : IValueConverter
+    public class HydraulicConditionsToPlotModelConverter : IValueConverter
     {
         private NotifyCollectionChangedEventHandler conditionCollectionChangedHandler;
         private PropertyChangedEventHandler hydraulicConditionPropertyChangedHandler;

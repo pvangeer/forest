@@ -90,6 +90,7 @@
     </ApplicationDefinition>
     <Compile Include="Command\AddEventTreeCommand.cs" />
     <Compile Include="Command\ProjectViewModelCommand.cs" />
+    <Compile Include="CriticalPathConverter.cs" />
     <Compile Include="CriticalPathToPlotModelConverter.cs" />
     <Compile Include="CriticalPathToProbabilityTextConverter.cs" />
     <Compile Include="DataTemplates\EstimationContentTemplateSelector.cs" />
@@ -99,12 +100,14 @@
     <Compile Include="Command\AddTreeEventCommand.cs" />
     <Compile Include="Command\EventTreeCommand.cs" />
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
-    <Compile Include="Converters\HydraulicConditionsToViewModelConverter.cs" />
+    <Compile Include="Converters\HydraulicConditionsToPlotModelConverter.cs" />
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\EstimationSpecificationViewModelFactory.cs" />
     <Compile Include="ViewModels\EventTreeViewModel.cs" />
     <Compile Include="ViewModels\ExpertViewModel.cs" />
     <Compile Include="ViewModels\FixedProbabilitySpecificationViewModel.cs" />
+    <Compile Include="ViewModels\FragilityCurveElementViewModel.cs" />
+    <Compile Include="ViewModels\FragilityCurveViewModel.cs" />
     <Compile Include="ViewModels\HydraulicConditionViewModel.cs" />
     <Compile Include="ViewModels\ProbabilitySpecificationViewModelBase.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />

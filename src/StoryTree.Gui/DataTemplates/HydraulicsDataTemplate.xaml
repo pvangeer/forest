@@ -7,7 +7,7 @@
 
     <converters:ProbabilityToStringConverter x:Key="DoubleToProbabilityConverter" />
 
-    <converters:HydraulicConditionsToViewModelConverter x:Key="HydraulicsListToPlotModelConverter" />
+    <converters:HydraulicConditionsToPlotModelConverter x:Key="HydraulicsListToPlotModelConverter" />
     <DataTemplate x:Key="HydraulicsDataTemplate" DataType="viewModels:ProjectViewModel">
         <Grid>
             <Grid.ColumnDefinitions>
