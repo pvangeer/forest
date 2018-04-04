@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Data;
 using StoryTree.Calculators;
 
@@ -14,9 +15,10 @@ namespace StoryTree.Gui
                 return values;
             }
 
-            var probability = ClassEstimationFragilityCurveCalculator.CalculateProbability(hydraulics, curves);
-
-            return string.Format("1/{0}", (int) (1.0 / probability));
+            return !hydraulics.Any() || !curves.Any()
+                ? "NaN"
+                : string.Format("1/{0}",
+                    (int) (1.0 / ClassEstimationFragilityCurveCalculator.CalculateProbability(hydraulics, curves)));
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
