@@ -29,7 +29,7 @@ namespace StoryTree.Data
 
         public string ProjectInformation { get; set; }
 
-        public Person ProjectLeader { get; }
+        public Person ProjectLeader { get; set; }
 
         public ObservableCollection<EventTree> EventTrees { get; }
 
