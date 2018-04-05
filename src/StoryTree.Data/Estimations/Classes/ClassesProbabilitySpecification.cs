@@ -29,17 +29,44 @@ namespace StoryTree.Data.Estimations.Classes
             return curve;
         }
 
-        private Probability GetProbabilityForWaterLevel(double waterLevel)
+        public FragilityCurve GetUpperFragilityCurve(IEnumerable<double> waterLevels)
         {
+            var curve = new FragilityCurve();
+            foreach (var waterLevel in waterLevels)
+            {
+                curve.Add(new FragilityCurveElement(waterLevel, GetProbabilityForWaterLevel(waterLevel, e=> e.MaxEstimation)));
+            }
+
+            return curve;
+        }
+
+        public FragilityCurve GetLowerFragilityCurve(IEnumerable<double> waterLevels)
+        {
+            var curve = new FragilityCurve();
+            foreach (var waterLevel in waterLevels)
+            {
+                curve.Add(new FragilityCurveElement(waterLevel, GetProbabilityForWaterLevel(waterLevel, e => e.MinEstimation)));
+            }
+
+            return curve; 
+        }
+
+        private Probability GetProbabilityForWaterLevel(double waterLevel, Func<ExpertClassEstimation,ProbabilityClass> getProbabilityClassFunc = null)
+        {
+            if (getProbabilityClassFunc == null)
+            {
+                getProbabilityClassFunc = (e) => e.AverageEstimation;
+            }
+
             var relevantEstimations = Estimations.Where(e => Math.Abs(e.WaterLevel - waterLevel) < 1e-8).ToArray();
             if (relevantEstimations.Length == 0)
             {
                 return Probability.NaN;
             }
 
-            return (Probability) relevantEstimations
-                .Select(e => ClassToProbabilityDouble(e.AverageEstimation))
-                .Average();
+            var allRelevantEstimations = relevantEstimations.Select(e => ClassToProbabilityDouble(getProbabilityClassFunc(e))).ToArray();
+            var validEstimation = allRelevantEstimations.Where(e => !double.IsNaN(e)).ToArray();
+            return validEstimation.Any() ? (Probability) validEstimation.Average() : Probability.NaN;
         }
 
         private double ClassToProbabilityDouble(ProbabilityClass probabilityClass)

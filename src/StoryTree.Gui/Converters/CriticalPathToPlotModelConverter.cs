@@ -1,11 +1,19 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using StoryTree.Calculators;
+using StoryTree.Data;
+using StoryTree.Data.Estimations.Classes;
+using StoryTree.Data.Tree;
 using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui.Converters
@@ -29,12 +37,35 @@ namespace StoryTree.Gui.Converters
                 Position = AxisPosition.Left
             });
 
+            var orderedWaterLevels = hydraulics.Select(h => h.WaterLevel).Distinct().ToArray();
+            var lowerCurves = criticalPath.Select(p => GetLowerFragilityCurve(p, orderedWaterLevels)).ToArray();
+            var lowerCurve = ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics, lowerCurves);
+
+            var upperCurves = criticalPath.Select(p => GetUpperFragilityCurves(p, orderedWaterLevels)).ToArray();
+            var upperCurve = ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics, upperCurves);
+
+            var polygonDatas = new List<PolygonData>();
+            for (int i = 0; i < orderedWaterLevels.Length; i++)
+            {
+                polygonDatas.Add(new PolygonData(lowerCurve[i].Probability, lowerCurve[i].WaterLevel, upperCurve[i].Probability, upperCurve[i].WaterLevel));
+            }
+
+            plotModel.Series.Add(new AreaSeries
+            {
+                ItemsSource = polygonDatas,
+                DataFieldX = nameof(PolygonData.X1),
+                DataFieldY = nameof(PolygonData.Y1),
+                DataFieldX2 = nameof(PolygonData.X2),
+                DataFieldY2 = nameof(PolygonData.Y2),
+                Color = OxyColors.AliceBlue
+            });
+
             for (int i = 0; i < curves.Length; i++)
             {
-                FragilityCurveViewModel curve = new FragilityCurveViewModel(
+                var curve = new FragilityCurveViewModel(
                     ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics,
                         curves.Take(i+1).ToArray()));
-                
+
                 plotModel.Series.Add(new LineSeries
                 {
                     ItemsSource = curve.CurveElements,
@@ -45,12 +76,53 @@ namespace StoryTree.Gui.Converters
                     Title = criticalPath[i].Name
                 });
             }
+
             return plotModel;
+        }
+
+        private static FragilityCurve GetUpperFragilityCurves(TreeEvent treeEvent, IEnumerable<double> orderedWaterLevels)
+        {
+            if (treeEvent.ProbabilityInformation is ClassesProbabilitySpecification classesSpecification)
+            {
+                return classesSpecification.GetUpperFragilityCurve(orderedWaterLevels);
+            }
+
+            return treeEvent.ProbabilityInformation.GetFragilityCurve(orderedWaterLevels);
+        }
+
+        private static FragilityCurve GetLowerFragilityCurve(TreeEvent treeEvent, IEnumerable<double> orderedWaterLevels)
+        {
+            if (treeEvent.ProbabilityInformation is ClassesProbabilitySpecification classesSpecification)
+            {
+                return classesSpecification.GetLowerFragilityCurve(orderedWaterLevels);
+            }
+
+            return treeEvent.ProbabilityInformation.GetFragilityCurve(orderedWaterLevels);
+            
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
+    }
+
+    public class PolygonData
+    {
+        public PolygonData(double x1, double y1, double x2, double y2)
+        {
+            X1 = x1;
+            X2 = x2;
+            Y1 = y1;
+            Y2 = y2;
+        }
+
+        public double X1 { get; }
+
+        public double X2 { get; }
+
+        public double Y1 { get; }
+
+        public double Y2 { get; }
     }
 }

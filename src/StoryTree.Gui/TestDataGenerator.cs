@@ -161,9 +161,9 @@ namespace StoryTree.Gui
                                     new ExpertClassEstimation{Expert = dirk, WaterLevel = 2.3, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
                                     new ExpertClassEstimation{Expert = dirk, WaterLevel = 2.6, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
                                     new ExpertClassEstimation{Expert = dirk, WaterLevel = 2.9, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                    new ExpertClassEstimation{Expert = dirk, WaterLevel = 3.2, AverageEstimation = ProbabilityClass.Six, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                    new ExpertClassEstimation{Expert = dirk, WaterLevel = 3.5, AverageEstimation = ProbabilityClass.Five, MinEstimation = ProbabilityClass.Six, MaxEstimation = ProbabilityClass.Five},
-                                    new ExpertClassEstimation{Expert = dirk, WaterLevel = 3.8, AverageEstimation = ProbabilityClass.Five, MinEstimation = ProbabilityClass.Six, MaxEstimation = ProbabilityClass.Five},
+                                    new ExpertClassEstimation{Expert = dirk, WaterLevel = 3.2, AverageEstimation = ProbabilityClass.Six, MinEstimation = ProbabilityClass.Six, MaxEstimation = ProbabilityClass.Seven},
+                                    new ExpertClassEstimation{Expert = dirk, WaterLevel = 3.5, AverageEstimation = ProbabilityClass.Five, MinEstimation = ProbabilityClass.Four, MaxEstimation = ProbabilityClass.Five},
+                                    new ExpertClassEstimation{Expert = dirk, WaterLevel = 3.8, AverageEstimation = ProbabilityClass.Five, MinEstimation = ProbabilityClass.Four, MaxEstimation = ProbabilityClass.Five},
                                 }
                             },
                             FailingEvent = new TreeEvent
