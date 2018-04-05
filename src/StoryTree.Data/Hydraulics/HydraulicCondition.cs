@@ -1,6 +1,4 @@
-﻿using StoryTree.Data.Estimations.Classes;
-
-namespace StoryTree.Data.Hydraulics
+﻿namespace StoryTree.Data.Hydraulics
 {
     public class HydraulicCondition : FragilityCurveElement
     {

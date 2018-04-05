@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using StoryTree.Data.Estimations;
 
 namespace StoryTree.Data.Tree
@@ -11,7 +13,13 @@ namespace StoryTree.Data.Tree
             switch (treeEvent.ProbabilitySpecificationType)
             {
                 case ProbabilitySpecificationType.Classes:
-                    return treeEvent.ClassesProbabilitySpecification.GetFragilityCurve(waterLevels);
+                    var classCurve = new FragilityCurve();
+                    foreach (var waterLevel in waterLevels)
+                    {
+                        classCurve.Add(new FragilityCurveElement(waterLevel, GetClassesBasedProbabilityForWaterLevel(treeEvent,waterLevel)));
+                    }
+
+                    return classCurve;
                 case ProbabilitySpecificationType.FixedFreqeuncy:
                     // TODO: Interpolate if necessary
                     return treeEvent.FixedFragilityCurve;
@@ -32,7 +40,7 @@ namespace StoryTree.Data.Tree
         {
             if (treeEvent.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
             {
-                return treeEvent.ClassesProbabilitySpecification.GetUpperFragilityCurve(orderedWaterLevels);
+                return treeEvent.GetClassBasedUpperFragilityCurve(orderedWaterLevels);
             }
 
             return treeEvent.GetFragilityCurve(orderedWaterLevels);
@@ -42,10 +50,75 @@ namespace StoryTree.Data.Tree
         {
             if (treeEvent.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
             {
-                return treeEvent.ClassesProbabilitySpecification.GetLowerFragilityCurve(orderedWaterLevels);
+                return treeEvent.GetClassBasedLowerFragilityCurve(orderedWaterLevels);
             }
 
             return treeEvent.GetFragilityCurve(orderedWaterLevels);
+        }
+
+        public static FragilityCurve GetClassBasedUpperFragilityCurve(this TreeEvent treeEvent, IEnumerable<double> waterLevels)
+        {
+            var curve = new FragilityCurve();
+            foreach (var waterLevel in waterLevels)
+            {
+                curve.Add(new FragilityCurveElement(waterLevel, GetClassesBasedProbabilityForWaterLevel(treeEvent,waterLevel, e => e.MaxEstimation)));
+            }
+
+            return curve;
+        }
+
+        public static FragilityCurve GetClassBasedLowerFragilityCurve(this TreeEvent treeEvent, IEnumerable<double> waterLevels)
+        {
+            var curve = new FragilityCurve();
+            foreach (var waterLevel in waterLevels)
+            {
+                curve.Add(new FragilityCurveElement(waterLevel, GetClassesBasedProbabilityForWaterLevel(treeEvent, waterLevel, e => e.MinEstimation)));
+            }
+
+            return curve;
+        }
+
+        public static Probability GetClassesBasedProbabilityForWaterLevel(this TreeEvent treeEvent, double waterLevel, Func<ExpertClassEstimation, ProbabilityClass> getProbabilityClassFunc = null)
+        {
+            if (getProbabilityClassFunc == null)
+            {
+                getProbabilityClassFunc = (e) => e.AverageEstimation;
+            }
+
+            var relevantEstimations = treeEvent.ClassesProbabilitySpecification.Where(e => Math.Abs(e.WaterLevel - waterLevel) < 1e-8).ToArray();
+            if (relevantEstimations.Length == 0)
+            {
+                return Probability.NaN;
+            }
+
+            var allRelevantEstimations = relevantEstimations.Select(e => ClassToProbabilityDouble(getProbabilityClassFunc(e))).ToArray();
+            var validEstimation = allRelevantEstimations.Where(e => !double.IsNaN(e)).ToArray();
+            return validEstimation.Any() ? (Probability)validEstimation.Average() : Probability.NaN;
+        }
+
+        private static double ClassToProbabilityDouble(ProbabilityClass probabilityClass)
+        {
+            switch (probabilityClass)
+            {
+                case ProbabilityClass.One:
+                    return 0.999;
+                case ProbabilityClass.Two:
+                    return 0.99;
+                case ProbabilityClass.Three:
+                    return 0.9;
+                case ProbabilityClass.Four:
+                    return 0.5;
+                case ProbabilityClass.Five:
+                    return 0.1;
+                case ProbabilityClass.Six:
+                    return 0.01;
+                case ProbabilityClass.Seven:
+                    return 0.001;
+                case ProbabilityClass.None:
+                    return double.NaN;
+                default:
+                    throw new InvalidEnumArgumentException();
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using StoryTree.Data.Estimations.Classes;
 
 namespace StoryTree.Data.Estimations
 {

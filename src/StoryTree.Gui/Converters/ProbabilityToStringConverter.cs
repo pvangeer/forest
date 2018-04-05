@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using StoryTree.Data.Estimations.Classes;
+using StoryTree.Data;
 
 namespace StoryTree.Gui.Converters
 {

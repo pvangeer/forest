@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using StoryTree.Data;
-using StoryTree.Data.Estimations.Classes;
+using StoryTree.Data.Estimations;
 using StoryTree.Data.Tree;
 
 namespace StoryTree.Gui.ViewModels
@@ -16,7 +17,7 @@ namespace StoryTree.Gui.ViewModels
 
         public Project Project { get; }
 
-        public ClassesProbabilitySpecification ClassesProbabilitySpecification => TreeEvent?.ClassesProbabilitySpecification;
+        public ObservableCollection<ExpertClassEstimation> ClassesProbabilitySpecification => TreeEvent?.ClassesProbabilitySpecification;
 
         public DataTable MeanEstimationsList => CreateEstimationDataTable(
             estimation => (int) estimation.AverageEstimation,
@@ -47,7 +48,7 @@ namespace StoryTree.Gui.ViewModels
                 for (var i = 0; i < Project.Experts.Count; i++)
                 {
                     var expert = Project.Experts[i];
-                    var specification = ClassesProbabilitySpecification.Estimations
+                    var specification = ClassesProbabilitySpecification
                         .FirstOrDefault(e => Math.Abs(e.WaterLevel - waterLevel) < 1e-8 && e.Expert == expert);
                     if (specification == null)
                     {
@@ -59,7 +60,7 @@ namespace StoryTree.Gui.ViewModels
                             WaterLevel = waterLevel,
                             Expert = expert
                         };
-                        ClassesProbabilitySpecification.Estimations.Add(specification);
+                        ClassesProbabilitySpecification.Add(specification);
                     }
 
                     dataTable.Rows[iRow][i + 1] = getValueFunc(specification);
@@ -107,7 +108,7 @@ namespace StoryTree.Gui.ViewModels
                 }
                 
                 var probabilityClass = (ProbabilityClass)specifiedIntegerValue;
-                var specification = ClassesProbabilitySpecification.Estimations
+                var specification = ClassesProbabilitySpecification
                     .FirstOrDefault(sp =>
                         sp.Expert == Project.Experts.ElementAt(i) && Math.Abs(sp.WaterLevel - waterLevel) < 1e-8);
                 setValueAction(specification, probabilityClass);

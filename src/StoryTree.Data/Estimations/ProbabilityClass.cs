@@ -1,4 +1,4 @@
-﻿namespace StoryTree.Data.Estimations.Classes
+﻿namespace StoryTree.Data.Estimations
 {
     public enum ProbabilityClass
     {

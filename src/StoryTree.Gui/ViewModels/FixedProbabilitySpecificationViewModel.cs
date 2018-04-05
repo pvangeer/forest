@@ -1,4 +1,4 @@
-﻿using StoryTree.Data.Estimations.Classes;
+﻿using StoryTree.Data;
 using StoryTree.Data.Tree;
 
 namespace StoryTree.Gui.ViewModels

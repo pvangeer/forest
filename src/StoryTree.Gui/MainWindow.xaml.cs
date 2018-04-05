@@ -2,7 +2,6 @@
 using System.Windows.Input;
 using StoryTree.Data;
 using StoryTree.Data.Estimations;
-using StoryTree.Data.Estimations.Classes;
 using StoryTree.Data.Tree;
 using StoryTree.Gui.ViewModels;
 

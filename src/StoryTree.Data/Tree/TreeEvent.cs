@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StoryTree.Data.Estimations;
-using StoryTree.Data.Estimations.Classes;
 using StoryTree.Data.Properties;
 
 namespace StoryTree.Data.Tree
@@ -12,7 +12,7 @@ namespace StoryTree.Data.Tree
         {
             ProbabilitySpecificationType = ProbabilitySpecificationType.FixedValue;
             FixedProbability = (Probability)1;
-
+            ClassesProbabilitySpecification = new ObservableCollection<ExpertClassEstimation>();
         }
 
         public string Name { get; set; }
@@ -25,7 +25,7 @@ namespace StoryTree.Data.Tree
 
         public string Details { get; set; }
 
-        public ClassesProbabilitySpecification ClassesProbabilitySpecification { get; set; }
+        public ObservableCollection<ExpertClassEstimation> ClassesProbabilitySpecification { get; }
 
         public Probability FixedProbability { get; set; }
 

@@ -54,11 +54,10 @@
     <Compile Include="Services\EventTreeManipulationService.cs" />
     <Compile Include="Services\TreeEventManipulations.cs" />
     <Compile Include="Services\TreeEventType.cs" />
-    <Compile Include="Estimations\Classes\ClassesProbabilitySpecification.cs" />
     <Compile Include="Tree\ExpertClassEstimation.cs" />
     <Compile Include="Estimations\IProbabilitySpecification.cs" />
-    <Compile Include="Estimations\Classes\Probability.cs" />
-    <Compile Include="Estimations\Classes\ProbabilityClass.cs" />
+    <Compile Include="Probability.cs" />
+    <Compile Include="Estimations\ProbabilityClass.cs" />
     <Compile Include="Estimations\ProbabilitySpecificationType.cs" />
     <Compile Include="Tree\TreeEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
