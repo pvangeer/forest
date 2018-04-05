@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using StoryTree.Data;
 using StoryTree.Data.Hydraulics;
+using StoryTree.Data.Tree;
 using StoryTree.Storage.DbContext;
 
 namespace StoryTree.Storage.Read
@@ -14,7 +15,12 @@ namespace StoryTree.Storage.Read
             CreateDictionary<HydraulicConditionElementEntity, HydraulicCondition>();
         private readonly Dictionary<FragilityCurveElementEntity, FragilityCurveElement> fragilityCurveElements =
             CreateDictionary<FragilityCurveElementEntity, FragilityCurveElement>();
+        private readonly Dictionary<EventTreeEntity, EventTree> eventTrees = CreateDictionary<EventTreeEntity, EventTree>();
+        private readonly Dictionary<TreeEventEntity, TreeEvent> treeEvents = CreateDictionary<TreeEventEntity, TreeEvent>();
+        private readonly Dictionary<ExpertClassEstimationEntity, ExpertClassEstimation> expertClassEstimations =
+            CreateDictionary<ExpertClassEstimationEntity, ExpertClassEstimation>();
 
+        
         internal void Collect(PersonEntity entity, Person model)
         {
             Collect(persons,entity,model);
@@ -30,6 +36,18 @@ namespace StoryTree.Storage.Read
         internal void Collect(FragilityCurveElementEntity entity, FragilityCurveElement model)
         {
             Collect(fragilityCurveElements, entity, model);
+        }
+        internal void Collect(EventTreeEntity entity, EventTree model)
+        {
+            Collect(eventTrees, entity, model);
+        }
+        internal void Collect(TreeEventEntity entity, TreeEvent model)
+        {
+            Collect(treeEvents, entity, model);
+        }
+        internal void Collect(ExpertClassEstimationEntity entity, ExpertClassEstimation model)
+        {
+            Collect(expertClassEstimations, entity, model);
         }
 
         internal bool Contains(PersonEntity entity)
@@ -48,6 +66,18 @@ namespace StoryTree.Storage.Read
         {
             return Contains(fragilityCurveElements, entity);
         }
+        internal bool Contains(EventTreeEntity entity)
+        {
+            return Contains(eventTrees, entity);
+        }
+        internal bool Contains(TreeEventEntity entity)
+        {
+            return Contains(treeEvents, entity);
+        }
+        internal bool Contains(ExpertClassEstimationEntity entity)
+        {
+            return Contains(expertClassEstimations, entity);
+        }
 
         internal Person Get(PersonEntity entity)
         {
@@ -65,7 +95,18 @@ namespace StoryTree.Storage.Read
         {
             return Get(fragilityCurveElements, entity);
         }
-
+        internal EventTree Get(EventTreeEntity entity)
+        {
+            return Get(eventTrees, entity);
+        }
+        internal TreeEvent Get(TreeEventEntity entity)
+        {
+            return Get(treeEvents, entity);
+        }
+        internal ExpertClassEstimation Get(ExpertClassEstimationEntity entity)
+        {
+            return Get(expertClassEstimations, entity);
+        }
         #region helpers
 
         private TModel Get<TEntity, TModel>(Dictionary<TEntity, TModel> collection, TEntity entity)

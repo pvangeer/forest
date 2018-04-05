@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StoryTree.Data;
 using StoryTree.Storage.DbContext;
 
@@ -12,8 +9,18 @@ namespace StoryTree.Storage.Read
     {
         internal static Project Read(this ProjectEntity entity, ReadConversionCollector collector)
         {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            if (collector == null)
+            {
+                throw new ArgumentNullException(nameof(collector));
+            }
+
             var experts = entity.ExpertEntities.Select(e => e.Read(collector));
             var hydraulicConditions = entity.HydraulicConditionElementEntities.Select(e => e.Read(collector));
+            var eventTrees = entity.EventTreeEntities.Select(e => e.Read(collector));
 
             var project = new Project
             {
@@ -34,10 +41,12 @@ namespace StoryTree.Storage.Read
                 project.HydraulicConditions.Add(hydraulicCondition);
             }
 
-            // TODO: EventTrees
+            foreach (var eventTree in eventTrees)
+            {
+                project.EventTrees.Add(eventTree);
+            }
 
             return project;
-
         }
     }
 }

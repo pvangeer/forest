@@ -4,7 +4,7 @@ using System.Linq;
 using StoryTree.Data;
 using StoryTree.Storage.DbContext;
 
-namespace StoryTree.Storage
+namespace StoryTree.Storage.Create
 {
     public class PersistenceRegistry
     {

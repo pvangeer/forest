@@ -93,12 +93,16 @@
       <DependentUpon>DatabaseSchema.tt</DependentUpon>
     </Compile>
     <Compile Include="Create\PersistenceRegistry.cs" />
+    <Compile Include="Read\EventTreeEntitiesReadExtensions.cs" />
+    <Compile Include="Read\ExpertClassEstimationEntityReadExtensions.cs" />
     <Compile Include="Read\ExpertEntitiesReadExtentions.cs" />
     <Compile Include="Read\FragilityCurveElementEntityReadExtensions.cs" />
     <Compile Include="Read\HydraulicConditionEntityReadExtensions.cs" />
     <Compile Include="Read\PersonEntityReadExtensions.cs" />
     <Compile Include="Read\ReadConversionCollector.cs" />
     <Compile Include="Read\ProjectEntityReadExtensions.cs" />
+    <Compile Include="Read\TreeEventEntityReadExtensions.cs" />
+    <Compile Include="Read\TreeEventFragilityCurveElementEntityReadExtensions.cs" />
     <Compile Include="ReferenceEqualityComparer.cs" />
     <Compile Include="SqliteConnectionStringBuilder.cs" />
     <Compile Include="FileReaderErrorMessageBuilder.cs" />
@@ -123,7 +127,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="StorageHelper.cs" />
     <Compile Include="StoreProject.cs" />
   </ItemGroup>
   <ItemGroup>

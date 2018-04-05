@@ -1,8 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using StoryTree.Data;
-using StoryTree.Data.Estimations;
-using StoryTree.Data.Tree;
 using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui
