@@ -61,7 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackupFileWriter.cs" />
+    <Compile Include="Create\ExpertCreateExtensions.cs" />
+    <Compile Include="Create\PersonCreateExtensions.cs" />
     <Compile Include="Create\ProjectCreateExtensions.cs" />
+    <Compile Include="Create\StringExtensions.cs" />
     <Compile Include="DbContext\DatabaseSchema.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -127,7 +130,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="StoreProject.cs" />
+    <Compile Include="StorageSqLite.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -10,6 +10,7 @@ namespace StoryTree.Storage.Create
     {
         private readonly Dictionary<ProjectEntity, Project> projects = CreateDictionary<ProjectEntity, Project>();
         private readonly Dictionary<ExpertEntity, Expert> experts = CreateDictionary<ExpertEntity, Expert>();
+        private readonly Dictionary<PersonEntity, Person> persons = CreateDictionary<PersonEntity, Person>();
 
         #region Register Methods
 
@@ -22,6 +23,12 @@ namespace StoryTree.Storage.Create
         {
             Register(experts, entity, model);
         }
+        internal void Register(PersonEntity entity, Person model)
+        {
+            Register(persons, entity, model);
+        }
+
+
         #endregion
 
         #region Contains Methods
@@ -35,6 +42,10 @@ namespace StoryTree.Storage.Create
         {
             return ContainsValue(experts, model);
         }
+        internal bool Contains(Person model)
+        {
+            return ContainsValue(persons, model);
+        }
         #endregion
 
         #region Get Methods
@@ -47,6 +58,10 @@ namespace StoryTree.Storage.Create
         public ExpertEntity Get(Expert model)
         {
             return Get(experts, model);
+        }
+        public PersonEntity Get(Person model)
+        {
+            return Get(persons, model);
         }
         #endregion
 
