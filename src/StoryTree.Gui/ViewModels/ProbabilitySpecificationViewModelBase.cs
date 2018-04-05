@@ -1,16 +1,17 @@
 ﻿using StoryTree.Data.Estimations;
+using StoryTree.Data.Tree;
 
 namespace StoryTree.Gui.ViewModels
 {
     public class ProbabilitySpecificationViewModelBase
     {
-        public ProbabilitySpecificationViewModelBase(IProbabilitySpecification specification)
+        public ProbabilitySpecificationViewModelBase(TreeEvent treeEvent)
         {
-            Specification = specification;
+            TreeEvent = treeEvent;
         }
 
-        public IProbabilitySpecification Specification { get; }
+        public TreeEvent TreeEvent { get; }
 
-        public ProbabilitySpecificationType Type => Specification.Type;
+        public ProbabilitySpecificationType Type => TreeEvent.ProbabilitySpecificationType;
     }
 }

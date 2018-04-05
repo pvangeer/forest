@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Data;
 using System.Linq;
 using StoryTree.Data;
@@ -12,27 +9,14 @@ namespace StoryTree.Gui.ViewModels
 {
     public class ClassesProbabilitySpecificationViewModel : ProbabilitySpecificationViewModelBase
     {
-        public ClassesProbabilitySpecificationViewModel(ClassesProbabilitySpecification probabilitySpecification, Project project) :
-            base(probabilitySpecification)
+        public ClassesProbabilitySpecificationViewModel(TreeEvent treeEvent, Project project) : base(treeEvent)
         {
-            ClassesProbabilitySpecification = probabilitySpecification;
             Project = project;
-            project.Experts.CollectionChanged += ExpertsCollectionChanged;
-        }
-
-        private void WaterLevelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            //TODO: Is this necessary? => Manipulate estimation lists
-        }
-
-        private void ExpertsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            //TODO: Is this necessary? => Manipulate estimation lists
         }
 
         public Project Project { get; }
 
-        public ClassesProbabilitySpecification ClassesProbabilitySpecification { get; }
+        public ClassesProbabilitySpecification ClassesProbabilitySpecification => TreeEvent?.ClassesProbabilitySpecification;
 
         public DataTable MeanEstimationsList => CreateEstimationDataTable(
             estimation => (int) estimation.AverageEstimation,

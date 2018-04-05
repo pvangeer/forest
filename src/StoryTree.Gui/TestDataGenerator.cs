@@ -45,8 +45,7 @@ namespace StoryTree.Gui
         {
             var mainTreeEvent = new TreeEvent
             {
-                Name = "First element",
-                ProbabilityInformation = new FixedValueProbabilitySpecification()
+                Name = "First element"
             };
 
             var tree = new EventTree
@@ -60,8 +59,7 @@ namespace StoryTree.Gui
             {
                 var falseEvent = new TreeEvent
                 {
-                    Name = string.Format("Event no. {0}", i + 1),
-                    ProbabilityInformation = new FixedValueProbabilitySpecification()
+                    Name = string.Format("Event no. {0}", i + 1)
                 };
                 currentTreeEvent.FailingEvent = falseEvent;
                 currentTreeEvent = falseEvent;
@@ -130,7 +128,8 @@ namespace StoryTree.Gui
                         MainTreeEvent = new TreeEvent
                         {
                             Name = "Knoop 1",
-                            ProbabilityInformation = new ClassesProbabilitySpecification
+                            ProbabilitySpecificationType = ProbabilitySpecificationType.Classes,
+                            ClassesProbabilitySpecification = new ClassesProbabilitySpecification
                             {
                                 Estimations =
                                 {
@@ -169,7 +168,8 @@ namespace StoryTree.Gui
                             FailingEvent = new TreeEvent
                             {
                                 Name = "Knoop 2",
-                                ProbabilityInformation = new ClassesProbabilitySpecification
+                                ProbabilitySpecificationType = ProbabilitySpecificationType.Classes,
+                                ClassesProbabilitySpecification = new ClassesProbabilitySpecification
                                 {
                                     Estimations =
                                     {

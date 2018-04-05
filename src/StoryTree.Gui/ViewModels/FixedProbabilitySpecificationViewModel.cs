@@ -1,18 +1,16 @@
-﻿using StoryTree.Data.Estimations;
-using StoryTree.Data.Estimations.Classes;
+﻿using StoryTree.Data.Estimations.Classes;
+using StoryTree.Data.Tree;
 
 namespace StoryTree.Gui.ViewModels
 {
     public class FixedProbabilitySpecificationViewModel : ProbabilitySpecificationViewModelBase
     {
-        public FixedProbabilitySpecificationViewModel(FixedValueProbabilitySpecification probabilitySpecification) : base(probabilitySpecification) { }
-
-        public FixedValueProbabilitySpecification FixedValueProbabilitySpecification => (FixedValueProbabilitySpecification)Specification;
+        public FixedProbabilitySpecificationViewModel(TreeEvent treeEvent) : base(treeEvent) { }
 
         public Probability FixedProbability
         {
-            get => FixedValueProbabilitySpecification.FixedValueProbability;
-            set => FixedValueProbabilitySpecification.FixedValueProbability = value;
+            get => TreeEvent.FixedProbability;
+            set => TreeEvent.FixedProbability = value;
         }
     }
 }

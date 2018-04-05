@@ -30,7 +30,7 @@ namespace StoryTree.Gui.Converters
             var orderedWaterLevels = hydraulicConditionViewModels.Select(h => h.WaterLevel).Distinct();
 
             hydraulicConditions = hydraulicConditionViewModels.Select(vm => vm.HydraulicCondition).OrderBy(c => c.WaterLevel).ToArray();
-            curves = criticalPath.Select(p => p.ProbabilityInformation.GetFragilityCurve(orderedWaterLevels)).ToArray();
+            curves = criticalPath.Select(p => p.GetFragilityCurve(orderedWaterLevels)).ToArray();
             treeEvents = criticalPath;
             return false;
         }

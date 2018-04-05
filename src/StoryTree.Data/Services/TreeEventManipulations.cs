@@ -9,25 +9,13 @@ namespace StoryTree.Data.Services
     {
         public static void ChangeProbabilityEstimationType(TreeEvent treeEvent, ProbabilitySpecificationType type)
         {
-            if (treeEvent.ProbabilityInformation == null || treeEvent.ProbabilityInformation.Type == type)
+            if (treeEvent.ProbabilitySpecificationType == type)
             {
                 return;
             }
 
-            switch (type)
-            {
-                case ProbabilitySpecificationType.Classes:
-                    treeEvent.ProbabilityInformation = new ClassesProbabilitySpecification();
-                    break;
-                case ProbabilitySpecificationType.FixedValue:
-                    treeEvent.ProbabilityInformation = new FixedValueProbabilitySpecification();
-                    break;
-                default:
-                    throw new InvalidEnumArgumentException();
-            }
-
-            treeEvent.OnPropertyChanged(nameof(TreeEvent.ProbabilityInformation));
-
+            treeEvent.ProbabilitySpecificationType = type;
+            treeEvent.OnPropertyChanged(nameof(TreeEvent.ProbabilitySpecificationType));
         }
     }
 }

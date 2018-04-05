@@ -85,7 +85,7 @@ namespace StoryTree.Gui.ViewModels
                 case nameof(TreeEvent.Summary):
                     OnPropertyChanged(nameof(Summary));
                     break;
-                case nameof(TreeEvent.ProbabilityInformation):
+                case nameof(TreeEvent.ProbabilitySpecificationType):
                     probabilityEstimationViewModel = null;
                     OnPropertyChanged(nameof(ProbabilityEstimationTypeIndex));
                     OnPropertyChanged(nameof(EstimationSpecification));
@@ -165,11 +165,11 @@ namespace StoryTree.Gui.ViewModels
 
         public int ProbabilityEstimationTypeIndex
         {
-            get => ProbabilitySpecificationTypes.Keys.ToList().IndexOf(TreeEvent.ProbabilityInformation.Type);
+            get => ProbabilitySpecificationTypes.Keys.ToList().IndexOf(TreeEvent.ProbabilitySpecificationType);
             set
             {
                 var selectedType = ProbabilitySpecificationTypes.ElementAt(value).Key;
-                if (TreeEvent.ProbabilityInformation.Type != selectedType)
+                if (TreeEvent.ProbabilitySpecificationType != selectedType)
                 {
                     TreeEventManipulations.ChangeProbabilityEstimationType(TreeEvent, selectedType);
                 }
@@ -180,7 +180,7 @@ namespace StoryTree.Gui.ViewModels
 
         public ProbabilitySpecificationViewModelBase EstimationSpecification =>
             probabilityEstimationViewModel ?? (probabilityEstimationViewModel =
-                ParentEventTreeViewModel.EstimationSpecificationViewModelFactory.CreateViewModel(TreeEvent.ProbabilityInformation));
+                ParentEventTreeViewModel.EstimationSpecificationViewModelFactory.CreateViewModel(TreeEvent));
 
         public TreeEvent[] CriticalPath => TreeEvent == null ? null :
             ParentEventTreeViewModel.MainTreeEventViewModel == null ? null :

@@ -1,18 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using StoryTree.Calculators;
-using StoryTree.Data;
-using StoryTree.Data.Estimations.Classes;
 using StoryTree.Data.Tree;
 using StoryTree.Gui.ViewModels;
 
@@ -38,10 +32,10 @@ namespace StoryTree.Gui.Converters
             });
 
             var orderedWaterLevels = hydraulics.Select(h => h.WaterLevel).Distinct().ToArray();
-            var lowerCurves = criticalPath.Select(p => GetLowerFragilityCurve(p, orderedWaterLevels)).ToArray();
+            var lowerCurves = criticalPath.Select(p => p.GetLowerFragilityCurve(orderedWaterLevels)).ToArray();
             var lowerCurve = ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics, lowerCurves);
 
-            var upperCurves = criticalPath.Select(p => GetUpperFragilityCurves(p, orderedWaterLevels)).ToArray();
+            var upperCurves = criticalPath.Select(p => p.GetUpperFragilityCurves(orderedWaterLevels)).ToArray();
             var upperCurve = ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics, upperCurves);
 
             var polygonDatas = new List<PolygonData>();
@@ -78,27 +72,6 @@ namespace StoryTree.Gui.Converters
             }
 
             return plotModel;
-        }
-
-        private static FragilityCurve GetUpperFragilityCurves(TreeEvent treeEvent, IEnumerable<double> orderedWaterLevels)
-        {
-            if (treeEvent.ProbabilityInformation is ClassesProbabilitySpecification classesSpecification)
-            {
-                return classesSpecification.GetUpperFragilityCurve(orderedWaterLevels);
-            }
-
-            return treeEvent.ProbabilityInformation.GetFragilityCurve(orderedWaterLevels);
-        }
-
-        private static FragilityCurve GetLowerFragilityCurve(TreeEvent treeEvent, IEnumerable<double> orderedWaterLevels)
-        {
-            if (treeEvent.ProbabilityInformation is ClassesProbabilitySpecification classesSpecification)
-            {
-                return classesSpecification.GetLowerFragilityCurve(orderedWaterLevels);
-            }
-
-            return treeEvent.ProbabilityInformation.GetFragilityCurve(orderedWaterLevels);
-            
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

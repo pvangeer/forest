@@ -39,8 +39,7 @@ namespace StoryTree.Data.Services
         {
             var newTreeEvent = new TreeEvent
             {
-                Name = "Nieuwe gebeurtenis",
-                ProbabilityInformation = new FixedValueProbabilitySpecification()
+                Name = "Nieuwe gebeurtenis"
             };
 
             if (eventTree.MainTreeEvent == null)

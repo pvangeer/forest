@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using StoryTree.Data;
 using StoryTree.Data.Estimations;
-using StoryTree.Data.Estimations.Classes;
+using StoryTree.Data.Tree;
 
 namespace StoryTree.Gui.ViewModels
 {
@@ -16,14 +15,14 @@ namespace StoryTree.Gui.ViewModels
 
         public Project Project { get; }
 
-        public ProbabilitySpecificationViewModelBase CreateViewModel(IProbabilitySpecification probabilitySpecification)
+        public ProbabilitySpecificationViewModelBase CreateViewModel(TreeEvent treeEvent)
         {
-            switch (probabilitySpecification.Type)
+            switch (treeEvent.ProbabilitySpecificationType)
             {
                 case ProbabilitySpecificationType.Classes:
-                    return new ClassesProbabilitySpecificationViewModel((ClassesProbabilitySpecification) probabilitySpecification, Project);
+                    return new ClassesProbabilitySpecificationViewModel(treeEvent, Project);
                 case ProbabilitySpecificationType.FixedValue:
-                    return new FixedProbabilitySpecificationViewModel((FixedValueProbabilitySpecification) probabilitySpecification);
+                    return new FixedProbabilitySpecificationViewModel(treeEvent);
                 case ProbabilitySpecificationType.FixedFreqeuncy:
                     throw new NotImplementedException();
                 default:
