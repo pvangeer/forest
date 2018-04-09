@@ -2,16 +2,16 @@
 using System.Data.SQLite;
 using System.IO;
 using NUnit.Framework;
-using StoryTree.Storage.Test.Properties;
+using StoryTree.Storage.Preparation.Test.Properties;
 
-namespace StoryTree.Storage.Test
+namespace StoryTree.Storage.Preparation.Test
 {
     [TestFixture]
-    public class DatabaseEntitiesCreationTests
+    public class SqLiteExampleDatabaseGeneratorTest
     {
         [Test]
         [Explicit("Creates a new Ringtoets.rtd file in the root of the Application.Ringtoets.Storage")]
-        public void CreateEntities()
+        public void CreateSampleDatabase()
         {
             // Setup
             string storageFile = GetPathToStorageFile();

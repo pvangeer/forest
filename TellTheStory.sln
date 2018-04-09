@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTree.Storage", "src\St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTree.Storage.Test", "test\StoryTree.Storage.Test\StoryTree.Storage.Test.csproj", "{4D5DF694-026F-4E49-926C-45A453573191}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTree.Storage.Preparation.Test", "test\StoryTree.Storage.Preparation.Test\StoryTree.Storage.Preparation.Test.csproj", "{88B89E7D-7E8F-4AC2-9EF2-F8CD5DC14BBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{4D5DF694-026F-4E49-926C-45A453573191}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D5DF694-026F-4E49-926C-45A453573191}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D5DF694-026F-4E49-926C-45A453573191}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88B89E7D-7E8F-4AC2-9EF2-F8CD5DC14BBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B89E7D-7E8F-4AC2-9EF2-F8CD5DC14BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88B89E7D-7E8F-4AC2-9EF2-F8CD5DC14BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88B89E7D-7E8F-4AC2-9EF2-F8CD5DC14BBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{9B8172A0-8896-4B96-A03D-6FF4043220DE} = {92A2A41A-A057-41B7-9549-A1E2EC8A94A4}
 		{A5C2B4E5-1758-4B14-800E-E3F2AA64EA64} = {93BD55D2-78AD-41AC-9584-315A803C25F8}
 		{4D5DF694-026F-4E49-926C-45A453573191} = {92A2A41A-A057-41B7-9549-A1E2EC8A94A4}
+		{88B89E7D-7E8F-4AC2-9EF2-F8CD5DC14BBB} = {92A2A41A-A057-41B7-9549-A1E2EC8A94A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0977DE7D-5323-406A-99E2-717CCC3723D2}
