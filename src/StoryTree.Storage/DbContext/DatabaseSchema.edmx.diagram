@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6638e58aa6c94019a0155304dbd341b1" Name="Diagram1">
-        <EntityTypeShape EntityType="mainModel.EventTreeEntity" Width="1.5" PointX="5.25" PointY="11.875" />
-        <EntityTypeShape EntityType="mainModel.ExpertClassEstimationEntity" Width="1.5" PointX="10.75" PointY="8" />
-        <EntityTypeShape EntityType="mainModel.ExpertEntity" Width="1.5" PointX="5.25" PointY="7.375" />
-        <EntityTypeShape EntityType="mainModel.FragilityCurveElementEntity" Width="1.5" PointX="6" PointY="4.125" />
-        <EntityTypeShape EntityType="mainModel.HydraulicConditionElementEntity" Width="1.5" PointX="8.25" PointY="8" />
+        <EntityTypeShape EntityType="mainModel.EventTreeEntity" Width="1.5" PointX="5.25" PointY="8.75" />
+        <EntityTypeShape EntityType="mainModel.ExpertClassEstimationEntity" Width="1.5" PointX="9.75" PointY="5.5" />
+        <EntityTypeShape EntityType="mainModel.ExpertEntity" Width="1.5" PointX="5.25" PointY="5.375" />
+        <EntityTypeShape EntityType="mainModel.FragilityCurveElementEntity" Width="1.5" PointX="7.5" PointY="5.125" />
+        <EntityTypeShape EntityType="mainModel.HydraulicConditionElementEntity" Width="1.5" PointX="5.25" PointY="13" />
         <EntityTypeShape EntityType="mainModel.PersonEntity" Width="1.5" PointX="0.75" PointY="5.75" />
         <EntityTypeShape EntityType="mainModel.ProjectEntity" Width="1.5" PointX="3" PointY="8.625" />
-        <EntityTypeShape EntityType="mainModel.TreeEventEntity" Width="1.5" PointX="7.5" PointY="11.125" />
-        <EntityTypeShape EntityType="mainModel.TreeEventFragilityCurveElementEntity" Width="1.5" PointX="9.75" PointY="12.25" />
+        <EntityTypeShape EntityType="mainModel.TreeEventEntity" Width="1.5" PointX="7.5" PointY="8" />
+        <EntityTypeShape EntityType="mainModel.TreeEventFragilityCurveElementEntity" Width="1.5" PointX="9.75" PointY="9.125" />
         <AssociationConnector Association="mainModel.FK_EventTreeEntity_0_0" />
         <AssociationConnector Association="mainModel.FK_TreeEventEntity_2_0" />
         <AssociationConnector Association="mainModel.FK_ExpertClassEstimationEntity_0_0" />

@@ -19,10 +19,10 @@ namespace StoryTree.Storage.Create
                 Description = project.Description.DeepClone(),
                 AssessmentSection = project.AssessmentSection.DeepClone(),
                 ProjectInformation = project.ProjectInformation.DeepClone(),
-                PersonEntity = project.ProjectLeader.Create(registry),
+                //PersonEntity = project.ProjectLeader.Create(registry),
             };
 
-            AddEntitiesForExperts(project, entity, registry);
+            /*AddEntitiesForExperts(project, entity, registry);*/
             /*AddEntitiesForHydraulicConditions(project, entity, registry);
             AddEntitiesForEventTrees(project, entity, registry);*/
 
