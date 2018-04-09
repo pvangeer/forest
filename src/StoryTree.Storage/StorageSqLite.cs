@@ -5,7 +5,6 @@ using System.Linq;
 using StoryTree.Data;
 using StoryTree.Storage.Create;
 using StoryTree.Storage.DbContext;
-using StoryTree.Storage.Properties;
 using StoryTree.Storage.Read;
 
 namespace StoryTree.Storage
@@ -185,7 +184,7 @@ namespace StoryTree.Storage
         {
             string connectionString = SqLiteEntityConnectionStringBuilder.BuildSqLiteEntityConnectionString(databaseFilePath);
 
-            using (var dbContext = new mainEntities())
+            using (var dbContext = new mainEntities(connectionString))
             {
                 try
                 {
