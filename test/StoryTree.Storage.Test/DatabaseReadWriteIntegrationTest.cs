@@ -18,7 +18,7 @@ namespace StoryTree.Storage.Test
 
             var storeProject = new StorageSqLite();
             storeProject.StageProject(project);
-            storeProject.SaveProjectAs(@"D:\Test\First project.sqlite");
+            storeProject.SaveProjectAs(@"D:\Test\FirstProject.sqlite");
 
             var project2c = storeProject.LoadProject(@"D:\Test\First project.sqlite");
         }

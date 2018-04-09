@@ -96,6 +96,7 @@
       <DependentUpon>DatabaseSchema.tt</DependentUpon>
     </Compile>
     <Compile Include="Create\PersistenceRegistry.cs" />
+    <Compile Include="DbContext\PartialMainEntities.cs" />
     <Compile Include="Read\EventTreeEntitiesReadExtensions.cs" />
     <Compile Include="Read\ExpertClassEstimationEntityReadExtensions.cs" />
     <Compile Include="Read\ExpertEntitiesReadExtentions.cs" />

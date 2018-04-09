@@ -44,7 +44,7 @@ namespace StoryTree.Storage
             }
             return new EntityConnectionStringBuilder
             {
-                Metadata = string.Format(@"res://*/{0}.csdl|res://*/{0}.ssdl|res://*/{0}.msl", "DbContext.RingtoetsEntities"),
+                Metadata = string.Format(@"res://*/{0}.csdl|res://*/{0}.ssdl|res://*/{0}.msl", "DbContext.mainEntities"),
                 Provider = @"System.Data.SQLite.EF6",
                 ProviderConnectionString = SqLiteConnectionStringBuilder.BuildSqLiteConnectionString(GetDataSourceLocation(filePath), false)
             }.ConnectionString;
