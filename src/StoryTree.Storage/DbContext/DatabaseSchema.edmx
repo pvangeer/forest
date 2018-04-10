@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="mainModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=C:\src\tellthestory\design\sampledatabase.sqlite" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="mainModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=C:\src\tellthestory\design\TellTheStoryDatabaseSchemaSample.sqlite;Base Schema Name=TellTheStoryEntities" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="EventTreeEntity">
           <Key>
             <PropertyRef Name="EventTreeId" />
           </Key>
-          <Property Name="EventTreeId" Type="integer" Nullable="false" />
+          <Property Name="EventTreeId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Summary" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Details" Type="nvarchar" MaxLength="2147483647" />
@@ -21,7 +21,7 @@
           <Key>
             <PropertyRef Name="ExpertClassEstimationId" />
           </Key>
-          <Property Name="ExpertClassEstimationId" Type="integer" Nullable="false" />
+          <Property Name="ExpertClassEstimationId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TreeEventId" Type="integer" Nullable="false" />
           <Property Name="ExpertId" Type="integer" Nullable="false" />
           <Property Name="WaterLevel" Type="decimal" Precision="53" Scale="0" Nullable="false" />
@@ -33,7 +33,7 @@
           <Key>
             <PropertyRef Name="ExpertId" />
           </Key>
-          <Property Name="ExpertId" Type="integer" Nullable="false" />
+          <Property Name="ExpertId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PersonId" Type="integer" Nullable="false" />
           <Property Name="Expertise" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Organisation" Type="nvarchar" MaxLength="2147483647" />
@@ -43,7 +43,7 @@
           <Key>
             <PropertyRef Name="FragilityCurveElementId" />
           </Key>
-          <Property Name="FragilityCurveElementId" Type="integer" Nullable="false" />
+          <Property Name="FragilityCurveElementId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WaterLevel" Type="decimal" Precision="53" Scale="0" Nullable="false" />
           <Property Name="Probability" Type="decimal" Precision="53" Scale="0" Nullable="false" />
         </EntityType>
@@ -51,7 +51,7 @@
           <Key>
             <PropertyRef Name="HydraulicConditionElementId" />
           </Key>
-          <Property Name="HydraulicConditionElementId" Type="integer" Nullable="false" />
+          <Property Name="HydraulicConditionElementId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FragilityCurveElementId" Type="integer" Nullable="false" />
           <Property Name="ProjectId" Type="integer" Nullable="false" />
           <Property Name="WavePeriod" Type="decimal" Precision="53" Scale="0" />
@@ -61,7 +61,7 @@
           <Key>
             <PropertyRef Name="PersonId" />
           </Key>
-          <Property Name="PersonId" Type="integer" Nullable="false" />
+          <Property Name="PersonId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Email" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Telephone" Type="nvarchar" MaxLength="2147483647" />
@@ -75,13 +75,13 @@
           <Property Name="AssessmentSection" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="ProjectInformation" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="ProjectLeaderId" Type="integer" />
-          <Property Name="ProjectId" Type="integer" Nullable="false" />
+          <Property Name="ProjectId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="TreeEventEntity">
           <Key>
             <PropertyRef Name="TreeEventId" />
           </Key>
-          <Property Name="TreeEventId" Type="integer" Nullable="false" />
+          <Property Name="TreeEventId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="FailingEventId" Type="integer" />
           <Property Name="PassingEventId" Type="integer" />
@@ -96,7 +96,7 @@
           <Key>
             <PropertyRef Name="TreeEventFragilicyCurveElementId" />
           </Key>
-          <Property Name="TreeEventFragilicyCurveElementId" Type="integer" Nullable="false" />
+          <Property Name="TreeEventFragilicyCurveElementId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FragilityCurveElementId" Type="integer" Nullable="false" />
           <Property Name="TreeEventId" Type="integer" />
         </EntityType>
@@ -390,7 +390,7 @@
           <Key>
             <PropertyRef Name="EventTreeId" />
           </Key>
-          <Property Name="EventTreeId" Type="Int64" Nullable="false" />
+          <Property Name="EventTreeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Summary" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
@@ -404,7 +404,7 @@
           <Key>
             <PropertyRef Name="ExpertClassEstimationId" />
           </Key>
-          <Property Name="ExpertClassEstimationId" Type="Int64" Nullable="false" />
+          <Property Name="ExpertClassEstimationId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TreeEventId" Type="Int64" Nullable="false" />
           <Property Name="ExpertId" Type="Int64" Nullable="false" />
           <Property Name="WaterLevel" Type="Decimal" Nullable="false" Precision="53" Scale="0" />
@@ -418,7 +418,7 @@
           <Key>
             <PropertyRef Name="ExpertId" />
           </Key>
-          <Property Name="ExpertId" Type="Int64" Nullable="false" />
+          <Property Name="ExpertId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PersonId" Type="Int64" Nullable="false" />
           <Property Name="Expertise" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Organisation" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
@@ -431,7 +431,7 @@
           <Key>
             <PropertyRef Name="FragilityCurveElementId" />
           </Key>
-          <Property Name="FragilityCurveElementId" Type="Int64" Nullable="false" />
+          <Property Name="FragilityCurveElementId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WaterLevel" Type="Decimal" Nullable="false" Precision="53" Scale="0" />
           <Property Name="Probability" Type="Decimal" Nullable="false" Precision="53" Scale="0" />
           <NavigationProperty Name="HydraulicConditionElementEntities" Relationship="mainModel.FK_HydraulicConditionElementEntity_1_0" FromRole="FragilityCurveElementEntity" ToRole="HydraulicConditionElementEntity" />
@@ -441,7 +441,7 @@
           <Key>
             <PropertyRef Name="HydraulicConditionElementId" />
           </Key>
-          <Property Name="HydraulicConditionElementId" Type="Int64" Nullable="false" />
+          <Property Name="HydraulicConditionElementId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FragilityCurveElementId" Type="Int64" Nullable="false" />
           <Property Name="ProjectId" Type="Int64" Nullable="false" />
           <Property Name="WavePeriod" Type="Decimal" Precision="53" Scale="0" />
@@ -453,7 +453,7 @@
           <Key>
             <PropertyRef Name="PersonId" />
           </Key>
-          <Property Name="PersonId" Type="Int64" Nullable="false" />
+          <Property Name="PersonId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Telephone" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
@@ -469,7 +469,7 @@
           <Property Name="AssessmentSection" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="ProjectInformation" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="ProjectLeaderId" Type="Int64" />
-          <Property Name="ProjectId" Type="Int64" Nullable="false" />
+          <Property Name="ProjectId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="EventTreeEntities" Relationship="mainModel.FK_EventTreeEntity_0_0" FromRole="ProjectEntity" ToRole="EventTreeEntity" />
           <NavigationProperty Name="ExpertEntities" Relationship="mainModel.FK_ExpertEntity_0_0" FromRole="ProjectEntity" ToRole="ExpertEntity" />
           <NavigationProperty Name="HydraulicConditionElementEntities" Relationship="mainModel.FK_HydraulicConditionElementEntity_0_0" FromRole="ProjectEntity" ToRole="HydraulicConditionElementEntity" />
@@ -479,7 +479,7 @@
           <Key>
             <PropertyRef Name="TreeEventId" />
           </Key>
-          <Property Name="TreeEventId" Type="Int64" Nullable="false" />
+          <Property Name="TreeEventId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="FailingEventId" Type="Int64" />
           <Property Name="PassingEventId" Type="Int64" />
@@ -501,7 +501,7 @@
           <Key>
             <PropertyRef Name="TreeEventFragilicyCurveElementId" />
           </Key>
-          <Property Name="TreeEventFragilicyCurveElementId" Type="Int64" Nullable="false" />
+          <Property Name="TreeEventFragilicyCurveElementId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FragilityCurveElementId" Type="Int64" Nullable="false" />
           <Property Name="TreeEventId" Type="Int64" />
           <NavigationProperty Name="FragilityCurveElementEntity" Relationship="mainModel.FK_TreeEventFragilityCurveElementEntity_1_0" FromRole="TreeEventFragilityCurveElementEntity" ToRole="FragilityCurveElementEntity" />

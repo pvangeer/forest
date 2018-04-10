@@ -22,7 +22,7 @@ namespace StoryTree.Storage.Preparation.Test
             }
 
             // Call
-            CreateDatabaseFile(storageFile, Resources.Database_design);
+            CreateDatabaseFile(storageFile, Resources.TellTheStoryDatabaseSchema);
 
             // Assert
             Assert.IsTrue(File.Exists(storageFile));
@@ -30,7 +30,7 @@ namespace StoryTree.Storage.Preparation.Test
 
         private static string GetPathToStorageFile()
         {
-            return @"C:\src\tellthestory\design\sampledatabase.sqlite";
+            return @"C:\src\tellthestory\design\TellTheStoryDatabaseSchemaSample.sqlite";
         }
 
         public static void CreateDatabaseFile(string databaseFilePath, string databaseSchemaQuery)

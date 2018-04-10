@@ -157,7 +157,7 @@
       <DependentUpon>DatabaseSchema.edmx</DependentUpon>
       <LastGenOutput>DatabaseSchema.cs</LastGenOutput>
     </Content>
-    <None Include="Resources\Database design.sql" />
+    <None Include="Resources\TellTheStoryDatabaseSchema.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

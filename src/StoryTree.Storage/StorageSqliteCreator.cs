@@ -22,9 +22,10 @@
 using System;
 using System.Data.SQLite;
 using System.IO;
+using StoryTree.Storage.DbContext;
 using StoryTree.Storage.Properties;
 
-namespace StoryTree.Storage.DbContext
+namespace StoryTree.Storage
 {
     /// <summary>
     /// This class interacts with an empty or new SQLite database file.
@@ -61,7 +62,7 @@ namespace StoryTree.Storage.DbContext
                     dbContext.Open();
                     using (SQLiteCommand command = dbContext.CreateCommand())
                     {
-                        command.CommandText = Resources.Database_design;
+                        command.CommandText = Resources.TellTheStoryDatabaseSchema;
                         command.ExecuteNonQuery();
                     }
                 }
