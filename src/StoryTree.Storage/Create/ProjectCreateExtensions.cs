@@ -19,25 +19,31 @@ namespace StoryTree.Storage.Create
                 Description = project.Description.DeepClone(),
                 AssessmentSection = project.AssessmentSection.DeepClone(),
                 ProjectInformation = project.ProjectInformation.DeepClone(),
-                PersonEntity = project.ProjectLeader.Create(registry),
+                PersonEntity = project.ProjectLeader.Create(registry)
             };
 
             AddEntitiesForExperts(project, entity, registry);
-            //AddEntitiesForHydraulicConditions(project, entity, registry);
-            /*AddEntitiesForEventTrees(project, entity, registry);*/
+            AddEntitiesForHydraulicConditions(project, entity, registry);
+            AddEntitiesForEventTrees(project, entity, registry);
 
             return entity;
-
-            // TODO: Implement
         }
 
-        /*private static void AddEntitiesForHydraulicConditions(Project project, ProjectEntity entity, PersistenceRegistry registry)
+        private static void AddEntitiesForEventTrees(Project project, ProjectEntity entity, PersistenceRegistry registry)
+        {
+            foreach (var eventTree in project.EventTrees)
+            {
+                entity.EventTreeEntities.Add(eventTree.Create(registry));
+            }
+        }
+
+        private static void AddEntitiesForHydraulicConditions(Project project, ProjectEntity entity, PersistenceRegistry registry)
         {
             foreach (var condition in project.HydraulicConditions)
             {
                 entity.HydraulicConditionElementEntities.Add(condition.Create(registry));
             }
-        }*/
+        }
 
         private static void AddEntitiesForExperts(Project project, ProjectEntity entity, PersistenceRegistry registry)
         {

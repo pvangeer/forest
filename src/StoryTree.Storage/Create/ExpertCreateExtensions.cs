@@ -29,7 +29,7 @@ namespace StoryTree.Storage.Create
                 Organisation = model.Organisation.DeepClone()
             };
 
-            registry.Register(entity, model);
+            registry.Register(model, entity);
 
             return entity;
         }

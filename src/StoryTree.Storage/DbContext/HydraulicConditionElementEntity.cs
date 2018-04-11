@@ -17,8 +17,8 @@ namespace StoryTree.Storage.DbContext
         public long HydraulicConditionElementId { get; set; }
         public long FragilityCurveElementId { get; set; }
         public long ProjectId { get; set; }
-        public Nullable<decimal> WavePeriod { get; set; }
-        public Nullable<decimal> WaveHeight { get; set; }
+        public Nullable<double> WavePeriod { get; set; }
+        public Nullable<double> WaveHeight { get; set; }
     
         public virtual FragilityCurveElementEntity FragilityCurveElementEntity { get; set; }
         public virtual ProjectEntity ProjectEntity { get; set; }

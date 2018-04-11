@@ -25,7 +25,7 @@ using System.IO;
 using System.Linq;
 using System.Security;
 
-namespace StoryTree.Storage.DbContext
+namespace StoryTree.Storage
 {
     /// <summary>
     /// Class with reusable file and folder related utility methods.

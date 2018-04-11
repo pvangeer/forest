@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoryTree.Data;
+using StoryTree.Storage.Create;
 using StoryTree.Storage.DbContext;
 
 namespace StoryTree.Storage.Read
@@ -31,8 +32,8 @@ namespace StoryTree.Storage.Read
                 Name = entity.Name,
                 Details = entity.Details,
                 Summary = entity.Summary,
-                MainTreeEvent = entity.TreeEventEntities.Single().Read(collector)
-                //Color = entity.Color TODO: Change the type of this column to long and convert to hexadecimal representation
+                MainTreeEvent = entity.TreeEventEntity.Read(collector),
+                Color = entity.Color.ToColor()
             };
 
             collector.Collect(entity,eventTree);

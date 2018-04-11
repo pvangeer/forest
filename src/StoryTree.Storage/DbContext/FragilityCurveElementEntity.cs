@@ -22,8 +22,8 @@ namespace StoryTree.Storage.DbContext
         }
     
         public long FragilityCurveElementId { get; set; }
-        public decimal WaterLevel { get; set; }
-        public decimal Probability { get; set; }
+        public Nullable<double> WaterLevel { get; set; }
+        public Nullable<double> Probability { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HydraulicConditionElementEntity> HydraulicConditionElementEntities { get; set; }

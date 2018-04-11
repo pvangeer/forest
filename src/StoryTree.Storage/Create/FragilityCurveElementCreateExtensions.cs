@@ -4,9 +4,9 @@ using StoryTree.Storage.DbContext;
 
 namespace StoryTree.Storage.Create
 {
-    internal static class PersonCreateExtensions
+    internal static class FragilityCurveElementCreateExtensions
     {
-        internal static PersonEntity Create(this Person model, PersistenceRegistry registry)
+        internal static FragilityCurveElementEntity Create(this FragilityCurveElement model, PersistenceRegistry registry)
         {
             if (registry == null)
             {
@@ -18,11 +18,10 @@ namespace StoryTree.Storage.Create
                 return registry.Get(model);
             }
 
-            var entity = new PersonEntity
+            var entity = new FragilityCurveElementEntity
             {
-                Name = model.Name.DeepClone(),
-                Email = model.Email.DeepClone(),
-                Telephone = model.Telephone.DeepClone()
+                Probability = model.Probability,
+                WaterLevel = model.WaterLevel
             };
 
             registry.Register(model, entity);

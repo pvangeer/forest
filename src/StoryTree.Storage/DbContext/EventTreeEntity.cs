@@ -14,22 +14,15 @@ namespace StoryTree.Storage.DbContext
     
     public partial class EventTreeEntity
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EventTreeEntity()
-        {
-            this.TreeEventEntities = new HashSet<TreeEventEntity>();
-        }
-    
         public long EventTreeId { get; set; }
         public string Name { get; set; }
         public string Summary { get; set; }
         public string Details { get; set; }
-        public string Color { get; set; }
+        public Nullable<long> Color { get; set; }
         public Nullable<long> MainTreeEventId { get; set; }
         public long ProjectId { get; set; }
     
+        public virtual TreeEventEntity TreeEventEntity { get; set; }
         public virtual ProjectEntity ProjectEntity { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TreeEventEntity> TreeEventEntities { get; set; }
     }
 }

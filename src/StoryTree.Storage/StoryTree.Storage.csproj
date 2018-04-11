@@ -38,6 +38,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -61,10 +62,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackupFileWriter.cs" />
+    <Compile Include="ColorConversionExtensions.cs" />
+    <Compile Include="Create\EventTreeCreateExtensions.cs" />
     <Compile Include="Create\ExpertCreateExtensions.cs" />
+    <Compile Include="Create\FragilityCurveElementCreateExtensions.cs" />
+    <Compile Include="Create\HydraulicConditionCreateExtensions.cs" />
     <Compile Include="Create\PersonCreateExtensions.cs" />
     <Compile Include="Create\ProjectCreateExtensions.cs" />
-    <Compile Include="Create\StringExtensions.cs" />
+    <Compile Include="Create\TreeEventCreateExtensions.cs" />
+    <Compile Include="StringExtensions.cs" />
     <Compile Include="Create\PersistenceRegistry.cs" />
     <Compile Include="DbContext\EventTreeEntity.cs">
       <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
@@ -109,6 +115,7 @@
     <Compile Include="DbContext\TreeEventFragilityCurveElementEntity.cs">
       <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DoubleConversionExtensions.cs" />
     <Compile Include="Read\EventTreeEntitiesReadExtensions.cs" />
     <Compile Include="Read\ExpertClassEstimationEntityReadExtensions.cs" />
     <Compile Include="Read\ExpertEntitiesReadExtentions.cs" />

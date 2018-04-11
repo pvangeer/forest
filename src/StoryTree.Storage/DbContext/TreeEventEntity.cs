@@ -17,6 +17,7 @@ namespace StoryTree.Storage.DbContext
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TreeEventEntity()
         {
+            this.EventTreeEntities = new HashSet<EventTreeEntity>();
             this.ExpertClassEstimationEntities = new HashSet<ExpertClassEstimationEntity>();
             this.TreeEventEntity1 = new HashSet<TreeEventEntity>();
             this.TreeEventEntity11 = new HashSet<TreeEventEntity>();
@@ -29,12 +30,11 @@ namespace StoryTree.Storage.DbContext
         public Nullable<long> PassingEventId { get; set; }
         public string Details { get; set; }
         public string Summary { get; set; }
-        public Nullable<decimal> FixedProbability { get; set; }
+        public Nullable<double> FixedProbability { get; set; }
         public long ProbabilitySpecificationTypeId { get; set; }
-        public Nullable<long> FixedFragilityCurveId { get; set; }
-        public Nullable<long> EventTreeId { get; set; }
     
-        public virtual EventTreeEntity EventTreeEntity { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EventTreeEntity> EventTreeEntities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExpertClassEstimationEntity> ExpertClassEstimationEntities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

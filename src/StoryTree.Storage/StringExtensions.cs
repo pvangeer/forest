@@ -21,7 +21,7 @@
 
 using System.Globalization;
 
-namespace StoryTree.Storage.Create
+namespace StoryTree.Storage
 {
     /// <summary>
     /// This class defines extension methods for <see cref="string"/> objects.

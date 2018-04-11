@@ -1,12 +1,13 @@
 ﻿using System;
 using StoryTree.Data;
+using StoryTree.Data.Hydraulics;
 using StoryTree.Storage.DbContext;
 
 namespace StoryTree.Storage.Create
 {
-    internal static class PersonCreateExtensions
+    internal static class HydraulicConditionCreateExtensions
     {
-        internal static PersonEntity Create(this Person model, PersistenceRegistry registry)
+        internal static HydraulicConditionElementEntity Create(this HydraulicCondition model, PersistenceRegistry registry)
         {
             if (registry == null)
             {
@@ -18,11 +19,11 @@ namespace StoryTree.Storage.Create
                 return registry.Get(model);
             }
 
-            var entity = new PersonEntity
+            var entity = new HydraulicConditionElementEntity
             {
-                Name = model.Name.DeepClone(),
-                Email = model.Email.DeepClone(),
-                Telephone = model.Telephone.DeepClone()
+                FragilityCurveElementEntity = ((FragilityCurveElement)model).Create(registry),
+                WaveHeight = model.WaveHeight.ToNaNAsNull(),
+                WavePeriod = model.WavePeriod.ToNaNAsNull()
             };
 
             registry.Register(model, entity);

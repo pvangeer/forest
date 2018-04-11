@@ -31,8 +31,8 @@ namespace StoryTree.Storage.Read
             {
                 Name = entity.Name,
                 Details = entity.Details,
-                FailingEvent = entity.TreeEventEntity2.Read(collector),
-                PassingEvent = entity.TreeEventEntity3.Read(collector),
+                //FailingEvent = entity.TreeEventEntity2.Read(collector),
+                //PassingEvent = entity.TreeEventEntity3.Read(collector),
                 FixedProbability = entity.FixedProbability == null
                     ? Probability.NaN
                     : (Probability) (double) entity.FixedProbability,

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TellTheStoryEntities.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=C:\src\tellthestory\design\TellTheStoryDatabaseSchemaSample.sqlite;Default Type Name=TellTheStoryEntities" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TellTheStoryEntities.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=C:\src\tellthestory\design\TellTheStoryDatabaseSchemaSample.sqlite;Default Type Name=TellTheStoryEntities" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="EventTreeEntity">
           <Key>
             <PropertyRef Name="EventTreeId" />
@@ -13,7 +13,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Summary" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Details" Type="nvarchar" MaxLength="2147483647" />
-          <Property Name="Color" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Color" Type="integer" />
           <Property Name="MainTreeEventId" Type="integer" />
           <Property Name="ProjectId" Type="integer" Nullable="false" />
         </EntityType>
@@ -24,7 +24,7 @@
           <Property Name="ExpertClassEstimationId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TreeEventId" Type="integer" Nullable="false" />
           <Property Name="ExpertId" Type="integer" Nullable="false" />
-          <Property Name="WaterLevel" Type="decimal" Precision="53" Scale="0" Nullable="false" />
+          <Property Name="WaterLevel" Type="real" />
           <Property Name="MinEstimationId" Type="integer" Nullable="false" />
           <Property Name="MaxEstimationId" Type="integer" Nullable="false" />
           <Property Name="AverageEstimationId" Type="integer" Nullable="false" />
@@ -44,8 +44,8 @@
             <PropertyRef Name="FragilityCurveElementId" />
           </Key>
           <Property Name="FragilityCurveElementId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="WaterLevel" Type="decimal" Precision="53" Scale="0" Nullable="false" />
-          <Property Name="Probability" Type="decimal" Precision="53" Scale="0" Nullable="false" />
+          <Property Name="WaterLevel" Type="real" />
+          <Property Name="Probability" Type="real" />
         </EntityType>
         <EntityType Name="HydraulicConditionElementEntity">
           <Key>
@@ -54,8 +54,8 @@
           <Property Name="HydraulicConditionElementId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FragilityCurveElementId" Type="integer" Nullable="false" />
           <Property Name="ProjectId" Type="integer" Nullable="false" />
-          <Property Name="WavePeriod" Type="decimal" Precision="53" Scale="0" />
-          <Property Name="WaveHeight" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="WavePeriod" Type="real" />
+          <Property Name="WaveHeight" Type="real" />
         </EntityType>
         <EntityType Name="PersonEntity">
           <Key>
@@ -87,10 +87,8 @@
           <Property Name="PassingEventId" Type="integer" />
           <Property Name="Details" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Summary" Type="nvarchar" MaxLength="2147483647" />
-          <Property Name="FixedProbability" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="FixedProbability" Type="real" />
           <Property Name="ProbabilitySpecificationTypeId" Type="integer" Nullable="false" />
-          <Property Name="FixedFragilityCurveId" Type="integer" />
-          <Property Name="EventTreeId" Type="integer" />
         </EntityType>
         <EntityType Name="TreeEventFragilityCurveElementEntity">
           <Key>
@@ -101,6 +99,18 @@
           <Property Name="TreeEventId" Type="integer" />
         </EntityType>
         <Association Name="FK_EventTreeEntity_0_0">
+          <End Role="TreeEventEntity" Type="Self.TreeEventEntity" Multiplicity="0..1" />
+          <End Role="EventTreeEntity" Type="Self.EventTreeEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TreeEventEntity">
+              <PropertyRef Name="TreeEventId" />
+            </Principal>
+            <Dependent Role="EventTreeEntity">
+              <PropertyRef Name="MainTreeEventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventTreeEntity_1_0">
           <End Role="ProjectEntity" Type="Self.ProjectEntity" Multiplicity="1" />
           <End Role="EventTreeEntity" Type="Self.EventTreeEntity" Multiplicity="*" />
           <ReferentialConstraint>
@@ -217,18 +227,6 @@
             </Principal>
             <Dependent Role="TreeEventEntity1">
               <PropertyRef Name="FailingEventId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TreeEventEntity_2_0">
-          <End Role="EventTreeEntity" Type="Self.EventTreeEntity" Multiplicity="0..1" />
-          <End Role="TreeEventEntity" Type="Self.TreeEventEntity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EventTreeEntity">
-              <PropertyRef Name="EventTreeId" />
-            </Principal>
-            <Dependent Role="TreeEventEntity">
-              <PropertyRef Name="EventTreeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -267,6 +265,10 @@
           <EntitySet Name="TreeEventEntity" EntityType="Self.TreeEventEntity" store:Type="Tables" />
           <EntitySet Name="TreeEventFragilityCurveElementEntity" EntityType="Self.TreeEventFragilityCurveElementEntity" store:Type="Tables" />
           <AssociationSet Name="FK_EventTreeEntity_0_0" Association="Self.FK_EventTreeEntity_0_0">
+            <End Role="TreeEventEntity" EntitySet="TreeEventEntity" />
+            <End Role="EventTreeEntity" EntitySet="EventTreeEntity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventTreeEntity_1_0" Association="Self.FK_EventTreeEntity_1_0">
             <End Role="ProjectEntity" EntitySet="ProjectEntity" />
             <End Role="EventTreeEntity" EntitySet="EventTreeEntity" />
           </AssociationSet>
@@ -306,10 +308,6 @@
             <End Role="TreeEventEntity" EntitySet="TreeEventEntity" />
             <End Role="TreeEventEntity1" EntitySet="TreeEventEntity" />
           </AssociationSet>
-          <AssociationSet Name="FK_TreeEventEntity_2_0" Association="Self.FK_TreeEventEntity_2_0">
-            <End Role="EventTreeEntity" EntitySet="EventTreeEntity" />
-            <End Role="TreeEventEntity" EntitySet="TreeEventEntity" />
-          </AssociationSet>
           <AssociationSet Name="FK_TreeEventFragilityCurveElementEntity_0_0" Association="Self.FK_TreeEventFragilityCurveElementEntity_0_0">
             <End Role="TreeEventEntity" EntitySet="TreeEventEntity" />
             <End Role="TreeEventFragilityCurveElementEntity" EntitySet="TreeEventFragilityCurveElementEntity" />
@@ -319,11 +317,73 @@
             <End Role="TreeEventFragilityCurveElementEntity" EntitySet="TreeEventFragilityCurveElementEntity" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TellTheStoryEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EventTreeEntities" EntityType="TellTheStoryEntities.EventTreeEntity" />
+          <EntitySet Name="ExpertClassEstimationEntities" EntityType="TellTheStoryEntities.ExpertClassEstimationEntity" />
+          <EntitySet Name="ExpertEntities" EntityType="TellTheStoryEntities.ExpertEntity" />
+          <EntitySet Name="FragilityCurveElementEntities" EntityType="TellTheStoryEntities.FragilityCurveElementEntity" />
+          <EntitySet Name="HydraulicConditionElementEntities" EntityType="TellTheStoryEntities.HydraulicConditionElementEntity" />
+          <EntitySet Name="PersonEntities" EntityType="TellTheStoryEntities.PersonEntity" />
+          <EntitySet Name="ProjectEntities" EntityType="TellTheStoryEntities.ProjectEntity" />
+          <EntitySet Name="TreeEventEntities" EntityType="TellTheStoryEntities.TreeEventEntity" />
+          <EntitySet Name="TreeEventFragilityCurveElementEntities" EntityType="TellTheStoryEntities.TreeEventFragilityCurveElementEntity" />
+          <AssociationSet Name="FK_EventTreeEntity_0_0" Association="TellTheStoryEntities.FK_EventTreeEntity_0_0">
+            <End Role="TreeEventEntity" EntitySet="TreeEventEntities" />
+            <End Role="EventTreeEntity" EntitySet="EventTreeEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventTreeEntity_1_0" Association="TellTheStoryEntities.FK_EventTreeEntity_1_0">
+            <End Role="ProjectEntity" EntitySet="ProjectEntities" />
+            <End Role="EventTreeEntity" EntitySet="EventTreeEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpertClassEstimationEntity_0_0" Association="TellTheStoryEntities.FK_ExpertClassEstimationEntity_0_0">
+            <End Role="TreeEventEntity" EntitySet="TreeEventEntities" />
+            <End Role="ExpertClassEstimationEntity" EntitySet="ExpertClassEstimationEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpertClassEstimationEntity_1_0" Association="TellTheStoryEntities.FK_ExpertClassEstimationEntity_1_0">
+            <End Role="ExpertEntity" EntitySet="ExpertEntities" />
+            <End Role="ExpertClassEstimationEntity" EntitySet="ExpertClassEstimationEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpertEntity_0_0" Association="TellTheStoryEntities.FK_ExpertEntity_0_0">
+            <End Role="ProjectEntity" EntitySet="ProjectEntities" />
+            <End Role="ExpertEntity" EntitySet="ExpertEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpertEntity_1_0" Association="TellTheStoryEntities.FK_ExpertEntity_1_0">
+            <End Role="PersonEntity" EntitySet="PersonEntities" />
+            <End Role="ExpertEntity" EntitySet="ExpertEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HydraulicConditionElementEntity_1_0" Association="TellTheStoryEntities.FK_HydraulicConditionElementEntity_1_0">
+            <End Role="FragilityCurveElementEntity" EntitySet="FragilityCurveElementEntities" />
+            <End Role="HydraulicConditionElementEntity" EntitySet="HydraulicConditionElementEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreeEventFragilityCurveElementEntity_1_0" Association="TellTheStoryEntities.FK_TreeEventFragilityCurveElementEntity_1_0">
+            <End Role="FragilityCurveElementEntity" EntitySet="FragilityCurveElementEntities" />
+            <End Role="TreeEventFragilityCurveElementEntity" EntitySet="TreeEventFragilityCurveElementEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HydraulicConditionElementEntity_0_0" Association="TellTheStoryEntities.FK_HydraulicConditionElementEntity_0_0">
+            <End Role="ProjectEntity" EntitySet="ProjectEntities" />
+            <End Role="HydraulicConditionElementEntity" EntitySet="HydraulicConditionElementEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectEntity_0_0" Association="TellTheStoryEntities.FK_ProjectEntity_0_0">
+            <End Role="PersonEntity" EntitySet="PersonEntities" />
+            <End Role="ProjectEntity" EntitySet="ProjectEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreeEventEntity_0_0" Association="TellTheStoryEntities.FK_TreeEventEntity_0_0">
+            <End Role="TreeEventEntity" EntitySet="TreeEventEntities" />
+            <End Role="TreeEventEntity1" EntitySet="TreeEventEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreeEventEntity_1_0" Association="TellTheStoryEntities.FK_TreeEventEntity_1_0">
+            <End Role="TreeEventEntity" EntitySet="TreeEventEntities" />
+            <End Role="TreeEventEntity1" EntitySet="TreeEventEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TreeEventFragilityCurveElementEntity_0_0" Association="TellTheStoryEntities.FK_TreeEventFragilityCurveElementEntity_0_0">
+            <End Role="TreeEventEntity" EntitySet="TreeEventEntities" />
+            <End Role="TreeEventFragilityCurveElementEntity" EntitySet="TreeEventFragilityCurveElementEntities" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="EventTreeEntity">
           <Key>
             <PropertyRef Name="EventTreeId" />
@@ -332,11 +392,11 @@
           <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Summary" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="Color" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="Int64" />
           <Property Name="MainTreeEventId" Type="Int64" />
           <Property Name="ProjectId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="ProjectEntity" Relationship="Self.FK_EventTreeEntity_0_0" FromRole="EventTreeEntity" ToRole="ProjectEntity" />
-          <NavigationProperty Name="TreeEventEntities" Relationship="Self.FK_TreeEventEntity_2_0" FromRole="EventTreeEntity" ToRole="TreeEventEntity" />
+          <NavigationProperty Name="TreeEventEntity" Relationship="TellTheStoryEntities.FK_EventTreeEntity_0_0" FromRole="EventTreeEntity" ToRole="TreeEventEntity" />
+          <NavigationProperty Name="ProjectEntity" Relationship="TellTheStoryEntities.FK_EventTreeEntity_1_0" FromRole="EventTreeEntity" ToRole="ProjectEntity" />
         </EntityType>
         <EntityType Name="ExpertClassEstimationEntity">
           <Key>
@@ -345,12 +405,12 @@
           <Property Name="ExpertClassEstimationId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TreeEventId" Type="Int64" Nullable="false" />
           <Property Name="ExpertId" Type="Int64" Nullable="false" />
-          <Property Name="WaterLevel" Type="Decimal" Precision="53" Scale="0" Nullable="false" />
+          <Property Name="WaterLevel" Type="Double" />
           <Property Name="MinEstimationId" Type="Int64" Nullable="false" />
           <Property Name="MaxEstimationId" Type="Int64" Nullable="false" />
           <Property Name="AverageEstimationId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="TreeEventEntity" Relationship="Self.FK_ExpertClassEstimationEntity_0_0" FromRole="ExpertClassEstimationEntity" ToRole="TreeEventEntity" />
-          <NavigationProperty Name="ExpertEntity" Relationship="Self.FK_ExpertClassEstimationEntity_1_0" FromRole="ExpertClassEstimationEntity" ToRole="ExpertEntity" />
+          <NavigationProperty Name="TreeEventEntity" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_0_0" FromRole="ExpertClassEstimationEntity" ToRole="TreeEventEntity" />
+          <NavigationProperty Name="ExpertEntity" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_1_0" FromRole="ExpertClassEstimationEntity" ToRole="ExpertEntity" />
         </EntityType>
         <EntityType Name="ExpertEntity">
           <Key>
@@ -361,19 +421,19 @@
           <Property Name="Expertise" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Organisation" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="ProjectId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="ExpertClassEstimationEntities" Relationship="Self.FK_ExpertClassEstimationEntity_1_0" FromRole="ExpertEntity" ToRole="ExpertClassEstimationEntity" />
-          <NavigationProperty Name="ProjectEntity" Relationship="Self.FK_ExpertEntity_0_0" FromRole="ExpertEntity" ToRole="ProjectEntity" />
-          <NavigationProperty Name="PersonEntity" Relationship="Self.FK_ExpertEntity_1_0" FromRole="ExpertEntity" ToRole="PersonEntity" />
+          <NavigationProperty Name="ExpertClassEstimationEntities" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_1_0" FromRole="ExpertEntity" ToRole="ExpertClassEstimationEntity" />
+          <NavigationProperty Name="ProjectEntity" Relationship="TellTheStoryEntities.FK_ExpertEntity_0_0" FromRole="ExpertEntity" ToRole="ProjectEntity" />
+          <NavigationProperty Name="PersonEntity" Relationship="TellTheStoryEntities.FK_ExpertEntity_1_0" FromRole="ExpertEntity" ToRole="PersonEntity" />
         </EntityType>
         <EntityType Name="FragilityCurveElementEntity">
           <Key>
             <PropertyRef Name="FragilityCurveElementId" />
           </Key>
           <Property Name="FragilityCurveElementId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WaterLevel" Type="Decimal" Precision="53" Scale="0" Nullable="false" />
-          <Property Name="Probability" Type="Decimal" Precision="53" Scale="0" Nullable="false" />
-          <NavigationProperty Name="HydraulicConditionElementEntities" Relationship="Self.FK_HydraulicConditionElementEntity_1_0" FromRole="FragilityCurveElementEntity" ToRole="HydraulicConditionElementEntity" />
-          <NavigationProperty Name="TreeEventFragilityCurveElementEntities" Relationship="Self.FK_TreeEventFragilityCurveElementEntity_1_0" FromRole="FragilityCurveElementEntity" ToRole="TreeEventFragilityCurveElementEntity" />
+          <Property Name="WaterLevel" Type="Double" />
+          <Property Name="Probability" Type="Double" />
+          <NavigationProperty Name="HydraulicConditionElementEntities" Relationship="TellTheStoryEntities.FK_HydraulicConditionElementEntity_1_0" FromRole="FragilityCurveElementEntity" ToRole="HydraulicConditionElementEntity" />
+          <NavigationProperty Name="TreeEventFragilityCurveElementEntities" Relationship="TellTheStoryEntities.FK_TreeEventFragilityCurveElementEntity_1_0" FromRole="FragilityCurveElementEntity" ToRole="TreeEventFragilityCurveElementEntity" />
         </EntityType>
         <EntityType Name="HydraulicConditionElementEntity">
           <Key>
@@ -382,10 +442,10 @@
           <Property Name="HydraulicConditionElementId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FragilityCurveElementId" Type="Int64" Nullable="false" />
           <Property Name="ProjectId" Type="Int64" Nullable="false" />
-          <Property Name="WavePeriod" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="WaveHeight" Type="Decimal" Precision="53" Scale="0" />
-          <NavigationProperty Name="FragilityCurveElementEntity" Relationship="Self.FK_HydraulicConditionElementEntity_1_0" FromRole="HydraulicConditionElementEntity" ToRole="FragilityCurveElementEntity" />
-          <NavigationProperty Name="ProjectEntity" Relationship="Self.FK_HydraulicConditionElementEntity_0_0" FromRole="HydraulicConditionElementEntity" ToRole="ProjectEntity" />
+          <Property Name="WavePeriod" Type="Double" />
+          <Property Name="WaveHeight" Type="Double" />
+          <NavigationProperty Name="FragilityCurveElementEntity" Relationship="TellTheStoryEntities.FK_HydraulicConditionElementEntity_1_0" FromRole="HydraulicConditionElementEntity" ToRole="FragilityCurveElementEntity" />
+          <NavigationProperty Name="ProjectEntity" Relationship="TellTheStoryEntities.FK_HydraulicConditionElementEntity_0_0" FromRole="HydraulicConditionElementEntity" ToRole="ProjectEntity" />
         </EntityType>
         <EntityType Name="PersonEntity">
           <Key>
@@ -395,8 +455,8 @@
           <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Telephone" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ExpertEntities" Relationship="Self.FK_ExpertEntity_1_0" FromRole="PersonEntity" ToRole="ExpertEntity" />
-          <NavigationProperty Name="ProjectEntities" Relationship="Self.FK_ProjectEntity_0_0" FromRole="PersonEntity" ToRole="ProjectEntity" />
+          <NavigationProperty Name="ExpertEntities" Relationship="TellTheStoryEntities.FK_ExpertEntity_1_0" FromRole="PersonEntity" ToRole="ExpertEntity" />
+          <NavigationProperty Name="ProjectEntities" Relationship="TellTheStoryEntities.FK_ProjectEntity_0_0" FromRole="PersonEntity" ToRole="ProjectEntity" />
         </EntityType>
         <EntityType Name="ProjectEntity">
           <Key>
@@ -408,10 +468,10 @@
           <Property Name="ProjectInformation" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="ProjectLeaderId" Type="Int64" />
           <Property Name="ProjectId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="EventTreeEntities" Relationship="Self.FK_EventTreeEntity_0_0" FromRole="ProjectEntity" ToRole="EventTreeEntity" />
-          <NavigationProperty Name="ExpertEntities" Relationship="Self.FK_ExpertEntity_0_0" FromRole="ProjectEntity" ToRole="ExpertEntity" />
-          <NavigationProperty Name="HydraulicConditionElementEntities" Relationship="Self.FK_HydraulicConditionElementEntity_0_0" FromRole="ProjectEntity" ToRole="HydraulicConditionElementEntity" />
-          <NavigationProperty Name="PersonEntity" Relationship="Self.FK_ProjectEntity_0_0" FromRole="ProjectEntity" ToRole="PersonEntity" />
+          <NavigationProperty Name="EventTreeEntities" Relationship="TellTheStoryEntities.FK_EventTreeEntity_1_0" FromRole="ProjectEntity" ToRole="EventTreeEntity" />
+          <NavigationProperty Name="ExpertEntities" Relationship="TellTheStoryEntities.FK_ExpertEntity_0_0" FromRole="ProjectEntity" ToRole="ExpertEntity" />
+          <NavigationProperty Name="HydraulicConditionElementEntities" Relationship="TellTheStoryEntities.FK_HydraulicConditionElementEntity_0_0" FromRole="ProjectEntity" ToRole="HydraulicConditionElementEntity" />
+          <NavigationProperty Name="PersonEntity" Relationship="TellTheStoryEntities.FK_ProjectEntity_0_0" FromRole="ProjectEntity" ToRole="PersonEntity" />
         </EntityType>
         <EntityType Name="TreeEventEntity">
           <Key>
@@ -423,17 +483,15 @@
           <Property Name="PassingEventId" Type="Int64" />
           <Property Name="Details" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Summary" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="FixedProbability" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="FixedProbability" Type="Double" />
           <Property Name="ProbabilitySpecificationTypeId" Type="Int64" Nullable="false" />
-          <Property Name="FixedFragilityCurveId" Type="Int64" />
-          <Property Name="EventTreeId" Type="Int64" />
-          <NavigationProperty Name="EventTreeEntity" Relationship="Self.FK_TreeEventEntity_2_0" FromRole="TreeEventEntity" ToRole="EventTreeEntity" />
-          <NavigationProperty Name="ExpertClassEstimationEntities" Relationship="Self.FK_ExpertClassEstimationEntity_0_0" FromRole="TreeEventEntity" ToRole="ExpertClassEstimationEntity" />
-          <NavigationProperty Name="TreeEventEntity1" Relationship="Self.FK_TreeEventEntity_0_0" FromRole="TreeEventEntity" ToRole="TreeEventEntity1" />
-          <NavigationProperty Name="TreeEventEntity2" Relationship="Self.FK_TreeEventEntity_0_0" FromRole="TreeEventEntity1" ToRole="TreeEventEntity" />
-          <NavigationProperty Name="TreeEventEntity11" Relationship="Self.FK_TreeEventEntity_1_0" FromRole="TreeEventEntity" ToRole="TreeEventEntity1" />
-          <NavigationProperty Name="TreeEventEntity3" Relationship="Self.FK_TreeEventEntity_1_0" FromRole="TreeEventEntity1" ToRole="TreeEventEntity" />
-          <NavigationProperty Name="TreeEventFragilityCurveElementEntities" Relationship="Self.FK_TreeEventFragilityCurveElementEntity_0_0" FromRole="TreeEventEntity" ToRole="TreeEventFragilityCurveElementEntity" />
+          <NavigationProperty Name="EventTreeEntities" Relationship="TellTheStoryEntities.FK_EventTreeEntity_0_0" FromRole="TreeEventEntity" ToRole="EventTreeEntity" />
+          <NavigationProperty Name="ExpertClassEstimationEntities" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_0_0" FromRole="TreeEventEntity" ToRole="ExpertClassEstimationEntity" />
+          <NavigationProperty Name="TreeEventEntity1" Relationship="TellTheStoryEntities.FK_TreeEventEntity_0_0" FromRole="TreeEventEntity" ToRole="TreeEventEntity1" />
+          <NavigationProperty Name="TreeEventEntity2" Relationship="TellTheStoryEntities.FK_TreeEventEntity_0_0" FromRole="TreeEventEntity1" ToRole="TreeEventEntity" />
+          <NavigationProperty Name="TreeEventEntity11" Relationship="TellTheStoryEntities.FK_TreeEventEntity_1_0" FromRole="TreeEventEntity" ToRole="TreeEventEntity1" />
+          <NavigationProperty Name="TreeEventEntity3" Relationship="TellTheStoryEntities.FK_TreeEventEntity_1_0" FromRole="TreeEventEntity1" ToRole="TreeEventEntity" />
+          <NavigationProperty Name="TreeEventFragilityCurveElementEntities" Relationship="TellTheStoryEntities.FK_TreeEventFragilityCurveElementEntity_0_0" FromRole="TreeEventEntity" ToRole="TreeEventFragilityCurveElementEntity" />
         </EntityType>
         <EntityType Name="TreeEventFragilityCurveElementEntity">
           <Key>
@@ -442,12 +500,24 @@
           <Property Name="TreeEventFragilicyCurveElementId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FragilityCurveElementId" Type="Int64" Nullable="false" />
           <Property Name="TreeEventId" Type="Int64" />
-          <NavigationProperty Name="FragilityCurveElementEntity" Relationship="Self.FK_TreeEventFragilityCurveElementEntity_1_0" FromRole="TreeEventFragilityCurveElementEntity" ToRole="FragilityCurveElementEntity" />
-          <NavigationProperty Name="TreeEventEntity" Relationship="Self.FK_TreeEventFragilityCurveElementEntity_0_0" FromRole="TreeEventFragilityCurveElementEntity" ToRole="TreeEventEntity" />
+          <NavigationProperty Name="FragilityCurveElementEntity" Relationship="TellTheStoryEntities.FK_TreeEventFragilityCurveElementEntity_1_0" FromRole="TreeEventFragilityCurveElementEntity" ToRole="FragilityCurveElementEntity" />
+          <NavigationProperty Name="TreeEventEntity" Relationship="TellTheStoryEntities.FK_TreeEventFragilityCurveElementEntity_0_0" FromRole="TreeEventFragilityCurveElementEntity" ToRole="TreeEventEntity" />
         </EntityType>
         <Association Name="FK_EventTreeEntity_0_0">
-          <End Role="ProjectEntity" Type="Self.ProjectEntity" Multiplicity="1" />
-          <End Role="EventTreeEntity" Type="Self.EventTreeEntity" Multiplicity="*" />
+          <End Type="TellTheStoryEntities.TreeEventEntity" Role="TreeEventEntity" Multiplicity="0..1" />
+          <End Type="TellTheStoryEntities.EventTreeEntity" Role="EventTreeEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TreeEventEntity">
+              <PropertyRef Name="TreeEventId" />
+            </Principal>
+            <Dependent Role="EventTreeEntity">
+              <PropertyRef Name="MainTreeEventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventTreeEntity_1_0">
+          <End Type="TellTheStoryEntities.ProjectEntity" Role="ProjectEntity" Multiplicity="1" />
+          <End Type="TellTheStoryEntities.EventTreeEntity" Role="EventTreeEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProjectEntity">
               <PropertyRef Name="ProjectId" />
@@ -457,21 +527,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TreeEventEntity_2_0">
-          <End Role="EventTreeEntity" Type="Self.EventTreeEntity" Multiplicity="0..1" />
-          <End Role="TreeEventEntity" Type="Self.TreeEventEntity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EventTreeEntity">
-              <PropertyRef Name="EventTreeId" />
-            </Principal>
-            <Dependent Role="TreeEventEntity">
-              <PropertyRef Name="EventTreeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ExpertClassEstimationEntity_0_0">
-          <End Role="TreeEventEntity" Type="Self.TreeEventEntity" Multiplicity="1" />
-          <End Role="ExpertClassEstimationEntity" Type="Self.ExpertClassEstimationEntity" Multiplicity="*" />
+          <End Type="TellTheStoryEntities.TreeEventEntity" Role="TreeEventEntity" Multiplicity="1" />
+          <End Type="TellTheStoryEntities.ExpertClassEstimationEntity" Role="ExpertClassEstimationEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TreeEventEntity">
               <PropertyRef Name="TreeEventId" />
@@ -482,8 +540,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExpertClassEstimationEntity_1_0">
-          <End Role="ExpertEntity" Type="Self.ExpertEntity" Multiplicity="1" />
-          <End Role="ExpertClassEstimationEntity" Type="Self.ExpertClassEstimationEntity" Multiplicity="*" />
+          <End Type="TellTheStoryEntities.ExpertEntity" Role="ExpertEntity" Multiplicity="1" />
+          <End Type="TellTheStoryEntities.ExpertClassEstimationEntity" Role="ExpertClassEstimationEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ExpertEntity">
               <PropertyRef Name="ExpertId" />
@@ -494,8 +552,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExpertEntity_0_0">
-          <End Role="ProjectEntity" Type="Self.ProjectEntity" Multiplicity="1" />
-          <End Role="ExpertEntity" Type="Self.ExpertEntity" Multiplicity="*" />
+          <End Type="TellTheStoryEntities.ProjectEntity" Role="ProjectEntity" Multiplicity="1" />
+          <End Type="TellTheStoryEntities.ExpertEntity" Role="ExpertEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProjectEntity">
               <PropertyRef Name="ProjectId" />
@@ -506,8 +564,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExpertEntity_1_0">
-          <End Role="PersonEntity" Type="Self.PersonEntity" Multiplicity="1" />
-          <End Role="ExpertEntity" Type="Self.ExpertEntity" Multiplicity="*" />
+          <End Type="TellTheStoryEntities.PersonEntity" Role="PersonEntity" Multiplicity="1" />
+          <End Type="TellTheStoryEntities.ExpertEntity" Role="ExpertEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonEntity">
               <PropertyRef Name="PersonId" />
@@ -518,8 +576,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HydraulicConditionElementEntity_1_0">
-          <End Role="FragilityCurveElementEntity" Type="Self.FragilityCurveElementEntity" Multiplicity="1" />
-          <End Role="HydraulicConditionElementEntity" Type="Self.HydraulicConditionElementEntity" Multiplicity="*" />
+          <End Type="TellTheStoryEntities.FragilityCurveElementEntity" Role="FragilityCurveElementEntity" Multiplicity="1" />
+          <End Type="TellTheStoryEntities.HydraulicConditionElementEntity" Role="HydraulicConditionElementEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FragilityCurveElementEntity">
               <PropertyRef Name="FragilityCurveElementId" />
@@ -530,8 +588,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TreeEventFragilityCurveElementEntity_1_0">
-          <End Role="FragilityCurveElementEntity" Type="Self.FragilityCurveElementEntity" Multiplicity="1" />
-          <End Role="TreeEventFragilityCurveElementEntity" Type="Self.TreeEventFragilityCurveElementEntity" Multiplicity="*" />
+          <End Type="TellTheStoryEntities.FragilityCurveElementEntity" Role="FragilityCurveElementEntity" Multiplicity="1" />
+          <End Type="TellTheStoryEntities.TreeEventFragilityCurveElementEntity" Role="TreeEventFragilityCurveElementEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FragilityCurveElementEntity">
               <PropertyRef Name="FragilityCurveElementId" />
@@ -542,8 +600,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HydraulicConditionElementEntity_0_0">
-          <End Role="ProjectEntity" Type="Self.ProjectEntity" Multiplicity="1" />
-          <End Role="HydraulicConditionElementEntity" Type="Self.HydraulicConditionElementEntity" Multiplicity="*" />
+          <End Type="TellTheStoryEntities.ProjectEntity" Role="ProjectEntity" Multiplicity="1" />
+          <End Type="TellTheStoryEntities.HydraulicConditionElementEntity" Role="HydraulicConditionElementEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProjectEntity">
               <PropertyRef Name="ProjectId" />
@@ -554,8 +612,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProjectEntity_0_0">
-          <End Role="PersonEntity" Type="Self.PersonEntity" Multiplicity="0..1" />
-          <End Role="ProjectEntity" Type="Self.ProjectEntity" Multiplicity="*" />
+          <End Type="TellTheStoryEntities.PersonEntity" Role="PersonEntity" Multiplicity="0..1" />
+          <End Type="TellTheStoryEntities.ProjectEntity" Role="ProjectEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PersonEntity">
               <PropertyRef Name="PersonId" />
@@ -566,8 +624,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TreeEventEntity_0_0">
-          <End Role="TreeEventEntity" Type="Self.TreeEventEntity" Multiplicity="0..1" />
-          <End Role="TreeEventEntity1" Type="Self.TreeEventEntity" Multiplicity="*" />
+          <End Type="TellTheStoryEntities.TreeEventEntity" Role="TreeEventEntity" Multiplicity="0..1" />
+          <End Type="TellTheStoryEntities.TreeEventEntity" Role="TreeEventEntity1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TreeEventEntity">
               <PropertyRef Name="TreeEventId" />
@@ -578,8 +636,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TreeEventEntity_1_0">
-          <End Role="TreeEventEntity" Type="Self.TreeEventEntity" Multiplicity="0..1" />
-          <End Role="TreeEventEntity1" Type="Self.TreeEventEntity" Multiplicity="*" />
+          <End Type="TellTheStoryEntities.TreeEventEntity" Role="TreeEventEntity" Multiplicity="0..1" />
+          <End Type="TellTheStoryEntities.TreeEventEntity" Role="TreeEventEntity1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TreeEventEntity">
               <PropertyRef Name="TreeEventId" />
@@ -590,8 +648,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TreeEventFragilityCurveElementEntity_0_0">
-          <End Role="TreeEventEntity" Type="Self.TreeEventEntity" Multiplicity="0..1" />
-          <End Role="TreeEventFragilityCurveElementEntity" Type="Self.TreeEventFragilityCurveElementEntity" Multiplicity="*" />
+          <End Type="TellTheStoryEntities.TreeEventEntity" Role="TreeEventEntity" Multiplicity="0..1" />
+          <End Type="TellTheStoryEntities.TreeEventFragilityCurveElementEntity" Role="TreeEventFragilityCurveElementEntity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TreeEventEntity">
               <PropertyRef Name="TreeEventId" />
@@ -601,70 +659,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="EventTreeEntities" EntityType="Self.EventTreeEntity" />
-          <EntitySet Name="ExpertClassEstimationEntities" EntityType="Self.ExpertClassEstimationEntity" />
-          <EntitySet Name="ExpertEntities" EntityType="Self.ExpertEntity" />
-          <EntitySet Name="FragilityCurveElementEntities" EntityType="Self.FragilityCurveElementEntity" />
-          <EntitySet Name="HydraulicConditionElementEntities" EntityType="Self.HydraulicConditionElementEntity" />
-          <EntitySet Name="PersonEntities" EntityType="Self.PersonEntity" />
-          <EntitySet Name="ProjectEntities" EntityType="Self.ProjectEntity" />
-          <EntitySet Name="TreeEventEntities" EntityType="Self.TreeEventEntity" />
-          <EntitySet Name="TreeEventFragilityCurveElementEntities" EntityType="Self.TreeEventFragilityCurveElementEntity" />
-          <AssociationSet Name="FK_EventTreeEntity_0_0" Association="Self.FK_EventTreeEntity_0_0">
-            <End Role="ProjectEntity" EntitySet="ProjectEntities" />
-            <End Role="EventTreeEntity" EntitySet="EventTreeEntities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TreeEventEntity_2_0" Association="Self.FK_TreeEventEntity_2_0">
-            <End Role="EventTreeEntity" EntitySet="EventTreeEntities" />
-            <End Role="TreeEventEntity" EntitySet="TreeEventEntities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExpertClassEstimationEntity_0_0" Association="Self.FK_ExpertClassEstimationEntity_0_0">
-            <End Role="TreeEventEntity" EntitySet="TreeEventEntities" />
-            <End Role="ExpertClassEstimationEntity" EntitySet="ExpertClassEstimationEntities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExpertClassEstimationEntity_1_0" Association="Self.FK_ExpertClassEstimationEntity_1_0">
-            <End Role="ExpertEntity" EntitySet="ExpertEntities" />
-            <End Role="ExpertClassEstimationEntity" EntitySet="ExpertClassEstimationEntities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExpertEntity_0_0" Association="Self.FK_ExpertEntity_0_0">
-            <End Role="ProjectEntity" EntitySet="ProjectEntities" />
-            <End Role="ExpertEntity" EntitySet="ExpertEntities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExpertEntity_1_0" Association="Self.FK_ExpertEntity_1_0">
-            <End Role="PersonEntity" EntitySet="PersonEntities" />
-            <End Role="ExpertEntity" EntitySet="ExpertEntities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HydraulicConditionElementEntity_1_0" Association="Self.FK_HydraulicConditionElementEntity_1_0">
-            <End Role="FragilityCurveElementEntity" EntitySet="FragilityCurveElementEntities" />
-            <End Role="HydraulicConditionElementEntity" EntitySet="HydraulicConditionElementEntities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TreeEventFragilityCurveElementEntity_1_0" Association="Self.FK_TreeEventFragilityCurveElementEntity_1_0">
-            <End Role="FragilityCurveElementEntity" EntitySet="FragilityCurveElementEntities" />
-            <End Role="TreeEventFragilityCurveElementEntity" EntitySet="TreeEventFragilityCurveElementEntities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HydraulicConditionElementEntity_0_0" Association="Self.FK_HydraulicConditionElementEntity_0_0">
-            <End Role="ProjectEntity" EntitySet="ProjectEntities" />
-            <End Role="HydraulicConditionElementEntity" EntitySet="HydraulicConditionElementEntities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProjectEntity_0_0" Association="Self.FK_ProjectEntity_0_0">
-            <End Role="PersonEntity" EntitySet="PersonEntities" />
-            <End Role="ProjectEntity" EntitySet="ProjectEntities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TreeEventEntity_0_0" Association="Self.FK_TreeEventEntity_0_0">
-            <End Role="TreeEventEntity" EntitySet="TreeEventEntities" />
-            <End Role="TreeEventEntity1" EntitySet="TreeEventEntities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TreeEventEntity_1_0" Association="Self.FK_TreeEventEntity_1_0">
-            <End Role="TreeEventEntity" EntitySet="TreeEventEntities" />
-            <End Role="TreeEventEntity1" EntitySet="TreeEventEntities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TreeEventFragilityCurveElementEntity_0_0" Association="Self.FK_TreeEventFragilityCurveElementEntity_0_0">
-            <End Role="TreeEventEntity" EntitySet="TreeEventEntities" />
-            <End Role="TreeEventFragilityCurveElementEntity" EntitySet="TreeEventFragilityCurveElementEntities" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -673,104 +668,102 @@
           <EntitySetMapping Name="EventTreeEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.EventTreeEntity">
               <MappingFragment StoreEntitySet="EventTreeEntity">
-                <ScalarProperty Name="EventTreeId" ColumnName="EventTreeId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Summary" ColumnName="Summary" />
-                <ScalarProperty Name="Details" ColumnName="Details" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="MainTreeEventId" ColumnName="MainTreeEventId" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="MainTreeEventId" ColumnName="MainTreeEventId" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EventTreeId" ColumnName="EventTreeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ExpertClassEstimationEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.ExpertClassEstimationEntity">
               <MappingFragment StoreEntitySet="ExpertClassEstimationEntity">
-                <ScalarProperty Name="ExpertClassEstimationId" ColumnName="ExpertClassEstimationId" />
-                <ScalarProperty Name="TreeEventId" ColumnName="TreeEventId" />
-                <ScalarProperty Name="ExpertId" ColumnName="ExpertId" />
-                <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
-                <ScalarProperty Name="MinEstimationId" ColumnName="MinEstimationId" />
-                <ScalarProperty Name="MaxEstimationId" ColumnName="MaxEstimationId" />
                 <ScalarProperty Name="AverageEstimationId" ColumnName="AverageEstimationId" />
+                <ScalarProperty Name="MaxEstimationId" ColumnName="MaxEstimationId" />
+                <ScalarProperty Name="MinEstimationId" ColumnName="MinEstimationId" />
+                <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
+                <ScalarProperty Name="ExpertId" ColumnName="ExpertId" />
+                <ScalarProperty Name="TreeEventId" ColumnName="TreeEventId" />
+                <ScalarProperty Name="ExpertClassEstimationId" ColumnName="ExpertClassEstimationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ExpertEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.ExpertEntity">
               <MappingFragment StoreEntitySet="ExpertEntity">
-                <ScalarProperty Name="ExpertId" ColumnName="ExpertId" />
-                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-                <ScalarProperty Name="Expertise" ColumnName="Expertise" />
-                <ScalarProperty Name="Organisation" ColumnName="Organisation" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Organisation" ColumnName="Organisation" />
+                <ScalarProperty Name="Expertise" ColumnName="Expertise" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="ExpertId" ColumnName="ExpertId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FragilityCurveElementEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.FragilityCurveElementEntity">
               <MappingFragment StoreEntitySet="FragilityCurveElementEntity">
-                <ScalarProperty Name="FragilityCurveElementId" ColumnName="FragilityCurveElementId" />
-                <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
                 <ScalarProperty Name="Probability" ColumnName="Probability" />
+                <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
+                <ScalarProperty Name="FragilityCurveElementId" ColumnName="FragilityCurveElementId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HydraulicConditionElementEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.HydraulicConditionElementEntity">
               <MappingFragment StoreEntitySet="HydraulicConditionElementEntity">
-                <ScalarProperty Name="HydraulicConditionElementId" ColumnName="HydraulicConditionElementId" />
-                <ScalarProperty Name="FragilityCurveElementId" ColumnName="FragilityCurveElementId" />
-                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-                <ScalarProperty Name="WavePeriod" ColumnName="WavePeriod" />
                 <ScalarProperty Name="WaveHeight" ColumnName="WaveHeight" />
+                <ScalarProperty Name="WavePeriod" ColumnName="WavePeriod" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="FragilityCurveElementId" ColumnName="FragilityCurveElementId" />
+                <ScalarProperty Name="HydraulicConditionElementId" ColumnName="HydraulicConditionElementId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PersonEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.PersonEntity">
               <MappingFragment StoreEntitySet="PersonEntity">
-                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProjectEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.ProjectEntity">
               <MappingFragment StoreEntitySet="ProjectEntity">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="AssessmentSection" ColumnName="AssessmentSection" />
-                <ScalarProperty Name="ProjectInformation" ColumnName="ProjectInformation" />
-                <ScalarProperty Name="ProjectLeaderId" ColumnName="ProjectLeaderId" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ProjectLeaderId" ColumnName="ProjectLeaderId" />
+                <ScalarProperty Name="ProjectInformation" ColumnName="ProjectInformation" />
+                <ScalarProperty Name="AssessmentSection" ColumnName="AssessmentSection" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TreeEventEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.TreeEventEntity">
               <MappingFragment StoreEntitySet="TreeEventEntity">
-                <ScalarProperty Name="TreeEventId" ColumnName="TreeEventId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="FailingEventId" ColumnName="FailingEventId" />
-                <ScalarProperty Name="PassingEventId" ColumnName="PassingEventId" />
-                <ScalarProperty Name="Details" ColumnName="Details" />
-                <ScalarProperty Name="Summary" ColumnName="Summary" />
-                <ScalarProperty Name="FixedProbability" ColumnName="FixedProbability" />
                 <ScalarProperty Name="ProbabilitySpecificationTypeId" ColumnName="ProbabilitySpecificationTypeId" />
-                <ScalarProperty Name="FixedFragilityCurveId" ColumnName="FixedFragilityCurveId" />
-                <ScalarProperty Name="EventTreeId" ColumnName="EventTreeId" />
+                <ScalarProperty Name="FixedProbability" ColumnName="FixedProbability" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="PassingEventId" ColumnName="PassingEventId" />
+                <ScalarProperty Name="FailingEventId" ColumnName="FailingEventId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TreeEventId" ColumnName="TreeEventId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TreeEventFragilityCurveElementEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.TreeEventFragilityCurveElementEntity">
               <MappingFragment StoreEntitySet="TreeEventFragilityCurveElementEntity">
-                <ScalarProperty Name="TreeEventFragilicyCurveElementId" ColumnName="TreeEventFragilicyCurveElementId" />
-                <ScalarProperty Name="FragilityCurveElementId" ColumnName="FragilityCurveElementId" />
                 <ScalarProperty Name="TreeEventId" ColumnName="TreeEventId" />
+                <ScalarProperty Name="FragilityCurveElementId" ColumnName="FragilityCurveElementId" />
+                <ScalarProperty Name="TreeEventFragilicyCurveElementId" ColumnName="TreeEventFragilicyCurveElementId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
