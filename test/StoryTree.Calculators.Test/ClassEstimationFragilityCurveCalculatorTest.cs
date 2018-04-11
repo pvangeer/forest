@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using StoryTree.Data;
 using StoryTree.Data.Hydraulics;
-using StoryTree.Data.Tree;
 
 namespace StoryTree.Calculators.Test
 {

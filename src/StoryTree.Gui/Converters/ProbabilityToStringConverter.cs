@@ -24,7 +24,7 @@ namespace StoryTree.Gui.Converters
                 return value;
             }
 
-            if (!Double.TryParse(str, out var probabilityValue))
+            if (!double.TryParse(str, out var probabilityValue))
             {
                 return value;
             }

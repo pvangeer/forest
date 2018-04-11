@@ -21,8 +21,6 @@
 
 using System;
 using System.IO;
-using StoryTree.Storage.DbContext;
-using StoryTree.Storage.Properties;
 
 namespace StoryTree.Storage
 {

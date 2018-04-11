@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using StoryTree.Calculators;
-using StoryTree.Data;
 using StoryTree.Data.Estimations;
 using StoryTree.Data.Properties;
 using StoryTree.Data.Services;

@@ -72,8 +72,8 @@
       </Grid.ColumnDefinitions>
       <Grid Grid.Column="0">
         <Grid.RowDefinitions>
-          <RowDefinition Height="15"></RowDefinition>
-          <RowDefinition Height="*"></RowDefinition>
+          <RowDefinition Height="15" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="{Binding SelectedEventTree.Name}" TextAlignment="Center" FontWeight="Bold"/>
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
@@ -81,8 +81,7 @@
           <ContentPresenter
               Margin="10"
               Content="{Binding SelectedEventTree.MainTreeEventViewModel}"
-              ContentTemplate="{DynamicResource TemplateSwitch}">
-          </ContentPresenter>
+              ContentTemplate="{DynamicResource TemplateSwitch}" />
         </ScrollViewer>
       </Grid>
       <GridSplitter Grid.Column="1" Width="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>

@@ -22,7 +22,7 @@
                             <Setter Property="ContentTemplate" Value="{DynamicResource EndEventTemplate}" />
                         </DataTrigger>
                     </Style.Triggers>
-                    <Setter Property="Content" Value="{Binding }"></Setter>
+                    <Setter Property="Content" Value="{Binding }" />
                 </Style>
             </ContentControl.Style>
         </ContentControl>
@@ -31,20 +31,20 @@
     <DataTemplate x:Key="ChoiceNodeTemplate" DataType="viewModels:TreeEventViewModel">
         <Border Background="DarkGray" BorderBrush="{Binding IsSelected, Converter={StaticResource SelectedPropertyToBrushConverter}}" BorderThickness="1">
             <Border.InputBindings>
-                <MouseBinding MouseAction="LeftClick" Command="{Binding TreeEventClickedCommand}"></MouseBinding>
+                <MouseBinding MouseAction="LeftClick" Command="{Binding TreeEventClickedCommand}" />
             </Border.InputBindings>
             <Grid Width="120">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="{Binding Name}" Padding="1,2,1,3" FontWeight="Bold" FontSize="14"></TextBlock>
-                <TextBlock Grid.Row="1" Text="{Binding Summary}" Padding="1,2,1,3" FontSize="10"></TextBlock>
+                <TextBlock Grid.Row="0" Text="{Binding Name}" Padding="1,2,1,3" FontWeight="Bold" FontSize="14" />
+                <TextBlock Grid.Row="1" Text="{Binding Summary}" Padding="1,2,1,3" FontSize="10" />
                 <Grid.Style>
                     <Style>
                         <Style.Triggers>
                             <Trigger Property="Grid.IsMouseOver" Value="True">
-                                <Setter Property="Grid.Background" Value="DarkSeaGreen"></Setter>
+                                <Setter Property="Grid.Background" Value="DarkSeaGreen" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -64,41 +64,41 @@
     <DataTemplate x:Key="EndEventTemplate" DataType="viewModels:TreeEventViewModel">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="30"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
-                <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
-                <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
+                <RowDefinition Height="Auto" MinHeight="30" />
+                <RowDefinition Height="Auto" MinHeight="30" />
+                <RowDefinition Height="Auto" MinHeight="30" />
             </Grid.RowDefinitions>
-            <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
-            <ContentPresenter Grid.Row="0" Grid.Column="2" ContentTemplate="{DynamicResource FalseEndPointTemplate}" Content="{Binding}"></ContentPresenter>
-            <ContentPresenter Grid.Row="2" Grid.Column="2" ContentTemplate="{DynamicResource TrueEndPointTemplate}" Content="{Binding}"></ContentPresenter>
+            <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}" />
+            <ContentPresenter Grid.Row="0" Grid.Column="2" ContentTemplate="{DynamicResource FalseEndPointTemplate}" Content="{Binding}" />
+            <ContentPresenter Grid.Row="2" Grid.Column="2" ContentTemplate="{DynamicResource TrueEndPointTemplate}" Content="{Binding}" />
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="FalseEventOnlyTemplate" DataType="viewModels:TreeEventViewModel">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="30"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
-                <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
-                <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
+                <RowDefinition Height="Auto" MinHeight="30" />
+                <RowDefinition Height="Auto" MinHeight="30" />
+                <RowDefinition Height="Auto" MinHeight="30" />
             </Grid.RowDefinitions>
-            <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
+            <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}" />
             <ContentControl Grid.Row="0" Grid.Column="2" DataContext="{Binding FailingEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
             <Grid Grid.Row="2" Grid.Column="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <ContentPresenter Grid.Column="0" ContentTemplate="{DynamicResource TrueEndPointTemplate}" Content="{Binding}"></ContentPresenter>
+                <ContentPresenter Grid.Column="0" ContentTemplate="{DynamicResource TrueEndPointTemplate}" Content="{Binding}" />
             </Grid>
         </Grid>
     </DataTemplate>
@@ -106,22 +106,22 @@
     <DataTemplate x:Key="TrueEventOnlyTemplate" DataType="viewModels:TreeEventViewModel">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="30"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
-                <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
-                <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
+                <RowDefinition Height="Auto" MinHeight="30" />
+                <RowDefinition Height="Auto" MinHeight="30" />
+                <RowDefinition Height="Auto" MinHeight="30" />
             </Grid.RowDefinitions>
-            <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
+            <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}" />
             <Grid Grid.Row="0" Grid.Column="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <ContentPresenter Grid.Column="0" ContentTemplate="{DynamicResource FalseEndPointTemplate}" Content="{Binding}"></ContentPresenter>
+                <ContentPresenter Grid.Column="0" ContentTemplate="{DynamicResource FalseEndPointTemplate}" Content="{Binding}" />
             </Grid>
             <ContentControl Grid.Row="2" Grid.Column="2" DataContext="{Binding PassingEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
         </Grid>
@@ -130,16 +130,16 @@
     <DataTemplate x:Key="TwoEventsTemplate" DataType="viewModels:TreeEventViewModel">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="30"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
-                <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
-                <RowDefinition Height="Auto" MinHeight="30"></RowDefinition>
+                <RowDefinition Height="Auto" MinHeight="30" />
+                <RowDefinition Height="Auto" MinHeight="30" />
+                <RowDefinition Height="Auto" MinHeight="30" />
             </Grid.RowDefinitions>
-            <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}"></ContentPresenter>
+            <ContentPresenter Grid.Row="1" Grid.Column="0" ContentTemplate="{DynamicResource ChoiceNodeTemplate}" Content="{Binding}" />
             <ContentControl Grid.Row="0" Grid.Column="2" DataContext="{Binding FailingEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
             <ContentControl Grid.Row="2" Grid.Column="2" DataContext="{Binding PassingEvent}" Content="{Binding }" ContentTemplate="{DynamicResource TemplateSwitch}"/>
         </Grid>

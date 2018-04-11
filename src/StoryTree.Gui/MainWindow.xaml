@@ -12,7 +12,7 @@
     Width="900" 
     x:Name="MainRibbonWindow">
     <Window.DataContext>
-        <modelViews:ProjectViewModel></modelViews:ProjectViewModel>
+        <modelViews:ProjectViewModel />
     </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
@@ -146,8 +146,8 @@
                 Header="Gebeurtenissen"
                 Group="{Binding Source={x:Reference EventTreesGroup}}">
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
-                    <fluent:Button Header="Gebeurtenis toevoegen" Size="Large" Command="{Binding AddEventTreeCommand}"></fluent:Button>
-                    <fluent:Button Header="Gebeurtenis verwijderen" Size="Large" Command="{Binding RemoveEventTreeCommand}"></fluent:Button>
+                    <fluent:Button Header="Gebeurtenis toevoegen" Size="Large" Command="{Binding AddEventTreeCommand}" />
+                    <fluent:Button Header="Gebeurtenis verwijderen" Size="Large" Command="{Binding RemoveEventTreeCommand}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 
@@ -162,8 +162,8 @@
                         ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Knopen">
-                    <fluent:Button Header="Knoop toevoegen" Size="Large" Command="{Binding AddTreeEventCommand}"></fluent:Button>
-                    <fluent:Button Header="Knoop verwijderen" Size="Large" Command="{Binding RemoveTreeEventCommand}"></fluent:Button>
+                    <fluent:Button Header="Knoop toevoegen" Size="Large" Command="{Binding AddTreeEventCommand}" />
+                    <fluent:Button Header="Knoop verwijderen" Size="Large" Command="{Binding RemoveTreeEventCommand}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 

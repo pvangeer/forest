@@ -91,7 +91,7 @@
                             Width="60"/>
                     </Grid>
                 </Grid>
-                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="10"></GridSplitter>
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="10" />
                 <Grid Grid.Column="2">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -140,7 +140,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <GridSplitter Grid.Row="1" VerticalAlignment="Stretch" Height="10" HorizontalAlignment="Stretch"></GridSplitter>
+            <GridSplitter Grid.Row="1" VerticalAlignment="Stretch" Height="10" HorizontalAlignment="Stretch" />
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>

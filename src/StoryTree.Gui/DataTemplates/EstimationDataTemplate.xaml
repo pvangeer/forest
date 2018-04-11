@@ -65,8 +65,7 @@
                                     HorizontalAlignment="Left"
                                     Style="{StaticResource ComboBoxFlatStyle}"
                                     SelectedIndex="{Binding ProbabilityEstimationTypeIndex, UpdateSourceTrigger=PropertyChanged}"
-                                    ItemsSource="{Binding EstimationSpecificationOptions}">
-                                </ComboBox>
+                                    ItemsSource="{Binding EstimationSpecificationOptions}" />
                             </Grid>
 
                             <ContentPresenter 
@@ -146,8 +145,7 @@
                     <ContentPresenter 
                         Grid.Column="2" 
                         Content="{Binding SelectedTreeEvent}"
-                        ContentTemplate="{StaticResource TreeEventEstimationSpecificationDataTempalte}">
-                    </ContentPresenter>
+                        ContentTemplate="{StaticResource TreeEventEstimationSpecificationDataTempalte}" />
                 </Grid>
             </DataTemplate>
         </DataTemplate.Resources>

@@ -26,7 +26,7 @@ namespace StoryTree.Data
 {
     public struct Probability : IEquatable<Probability>, IEquatable<double>, IFormattable, IComparable, IComparable<Probability>, IComparable<double>
     {
-        private static double ToStringPrecision = 1e-100;
+        private static readonly double ToStringPrecision = 1e-100;
 
         /// <summary>
         /// Represents a value that is not a number (NaN). This field is constant.

@@ -21,7 +21,6 @@
 
 using System;
 using System.Data.Entity.Core.EntityClient;
-using StoryTree.Storage.DbContext;
 
 namespace StoryTree.Storage
 {
