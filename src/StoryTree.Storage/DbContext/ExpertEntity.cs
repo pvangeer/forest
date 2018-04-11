@@ -25,6 +25,7 @@ namespace StoryTree.Storage.DbContext
         public string Expertise { get; set; }
         public string Organisation { get; set; }
         public long ProjectId { get; set; }
+        public long Order { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExpertClassEstimationEntity> ExpertClassEstimationEntities { get; set; }

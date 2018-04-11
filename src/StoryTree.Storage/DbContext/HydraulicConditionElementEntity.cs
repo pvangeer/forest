@@ -19,6 +19,7 @@ namespace StoryTree.Storage.DbContext
         public long ProjectId { get; set; }
         public Nullable<double> WavePeriod { get; set; }
         public Nullable<double> WaveHeight { get; set; }
+        public long Order { get; set; }
     
         public virtual FragilityCurveElementEntity FragilityCurveElementEntity { get; set; }
         public virtual ProjectEntity ProjectEntity { get; set; }

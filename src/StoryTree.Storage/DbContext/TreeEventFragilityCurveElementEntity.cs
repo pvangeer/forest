@@ -16,6 +16,7 @@ namespace StoryTree.Storage.DbContext
     {
         public long TreeEventFragilicyCurveElementId { get; set; }
         public long FragilityCurveElementId { get; set; }
+        public long Order { get; set; }
         public Nullable<long> TreeEventId { get; set; }
     
         public virtual FragilityCurveElementEntity FragilityCurveElementEntity { get; set; }

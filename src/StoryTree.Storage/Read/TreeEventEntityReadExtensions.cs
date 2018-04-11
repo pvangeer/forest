@@ -26,20 +26,28 @@ namespace StoryTree.Storage.Read
                 return collector.Get(entity);
             }
 
-            var fixedFragilityCurve = ReadFragilityCurve(entity.TreeEventFragilityCurveElementEntities, collector);
             var treeEvent = new TreeEvent
             {
                 Name = entity.Name,
                 Details = entity.Details,
-                //FailingEvent = entity.TreeEventEntity2.Read(collector),
-                //PassingEvent = entity.TreeEventEntity3.Read(collector),
                 FixedProbability = entity.FixedProbability == null
                     ? Probability.NaN
                     : (Probability) (double) entity.FixedProbability,
-                FixedFragilityCurve = fixedFragilityCurve,
                 ProbabilitySpecificationType = (ProbabilitySpecificationType) entity.ProbabilitySpecificationTypeId,
                 Summary = entity.Summary
             };
+
+            ReadFragilityCurve(treeEvent, entity.TreeEventFragilityCurveElementEntities, collector);
+
+            if (entity.TreeEventEntity3 != null)
+            {
+                treeEvent.FailingEvent = entity.TreeEventEntity3.Read(collector);
+            }
+
+            if (entity.TreeEventEntity2 != null)
+            {
+                treeEvent.PassingEvent = entity.TreeEventEntity2.Read(collector);
+            }
 
             ReadExpertClassSpecifications(entity, collector, treeEvent);
             collector.Collect(entity,treeEvent);
@@ -48,22 +56,19 @@ namespace StoryTree.Storage.Read
 
         private static void ReadExpertClassSpecifications(TreeEventEntity entity, ReadConversionCollector collector, TreeEvent treeEvent)
         {
-            var specifications = entity.ExpertClassEstimationEntities.Select(e => e.Read(collector));
+            var specifications = entity.ExpertClassEstimationEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
             foreach (var specification in specifications)
             {
                 treeEvent.ClassesProbabilitySpecification.Add(specification);
             }
         }
 
-        private static FragilityCurve ReadFragilityCurve(ICollection<TreeEventFragilityCurveElementEntity> entities, ReadConversionCollector collector)
+        private static void ReadFragilityCurve(TreeEvent treeEvent, IEnumerable<TreeEventFragilityCurveElementEntity> entities, ReadConversionCollector collector)
         {
-            var curve = new FragilityCurve();
-            foreach (var treeEventFragilityCurveElementEntity in entities)
+            foreach (var treeEventFragilityCurveElementEntity in entities.OrderBy(e => e.Order))
             {
-                curve.Add(treeEventFragilityCurveElementEntity.Read(collector));
+                treeEvent.FixedFragilityCurve.Add(treeEventFragilityCurveElementEntity.Read(collector));
             }
-
-            return curve;
         }
     }
 }

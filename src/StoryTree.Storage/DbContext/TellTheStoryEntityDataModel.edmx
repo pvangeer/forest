@@ -16,6 +16,7 @@
           <Property Name="Color" Type="integer" />
           <Property Name="MainTreeEventId" Type="integer" />
           <Property Name="ProjectId" Type="integer" Nullable="false" />
+          <Property Name="Order" Type="integer" Nullable="false" />
         </EntityType>
         <EntityType Name="ExpertClassEstimationEntity">
           <Key>
@@ -28,6 +29,7 @@
           <Property Name="MinEstimationId" Type="integer" Nullable="false" />
           <Property Name="MaxEstimationId" Type="integer" Nullable="false" />
           <Property Name="AverageEstimationId" Type="integer" Nullable="false" />
+          <Property Name="Order" Type="integer" Nullable="false" />
         </EntityType>
         <EntityType Name="ExpertEntity">
           <Key>
@@ -38,6 +40,7 @@
           <Property Name="Expertise" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Organisation" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="ProjectId" Type="integer" Nullable="false" />
+          <Property Name="Order" Type="integer" Nullable="false" />
         </EntityType>
         <EntityType Name="FragilityCurveElementEntity">
           <Key>
@@ -56,6 +59,7 @@
           <Property Name="ProjectId" Type="integer" Nullable="false" />
           <Property Name="WavePeriod" Type="real" />
           <Property Name="WaveHeight" Type="real" />
+          <Property Name="Order" Type="integer" Nullable="false" />
         </EntityType>
         <EntityType Name="PersonEntity">
           <Key>
@@ -96,6 +100,7 @@
           </Key>
           <Property Name="TreeEventFragilicyCurveElementId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FragilityCurveElementId" Type="integer" Nullable="false" />
+          <Property Name="Order" Type="integer" Nullable="false" />
           <Property Name="TreeEventId" Type="integer" />
         </EntityType>
         <Association Name="FK_EventTreeEntity_0_0">
@@ -395,6 +400,7 @@
           <Property Name="Color" Type="Int64" />
           <Property Name="MainTreeEventId" Type="Int64" />
           <Property Name="ProjectId" Type="Int64" Nullable="false" />
+          <Property Name="Order" Type="Int64" Nullable="false" />
           <NavigationProperty Name="TreeEventEntity" Relationship="TellTheStoryEntities.FK_EventTreeEntity_0_0" FromRole="EventTreeEntity" ToRole="TreeEventEntity" />
           <NavigationProperty Name="ProjectEntity" Relationship="TellTheStoryEntities.FK_EventTreeEntity_1_0" FromRole="EventTreeEntity" ToRole="ProjectEntity" />
         </EntityType>
@@ -409,6 +415,7 @@
           <Property Name="MinEstimationId" Type="Int64" Nullable="false" />
           <Property Name="MaxEstimationId" Type="Int64" Nullable="false" />
           <Property Name="AverageEstimationId" Type="Int64" Nullable="false" />
+          <Property Name="Order" Type="Int64" Nullable="false" />
           <NavigationProperty Name="TreeEventEntity" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_0_0" FromRole="ExpertClassEstimationEntity" ToRole="TreeEventEntity" />
           <NavigationProperty Name="ExpertEntity" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_1_0" FromRole="ExpertClassEstimationEntity" ToRole="ExpertEntity" />
         </EntityType>
@@ -421,6 +428,7 @@
           <Property Name="Expertise" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Organisation" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="ProjectId" Type="Int64" Nullable="false" />
+          <Property Name="Order" Type="Int64" Nullable="false" />
           <NavigationProperty Name="ExpertClassEstimationEntities" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_1_0" FromRole="ExpertEntity" ToRole="ExpertClassEstimationEntity" />
           <NavigationProperty Name="ProjectEntity" Relationship="TellTheStoryEntities.FK_ExpertEntity_0_0" FromRole="ExpertEntity" ToRole="ProjectEntity" />
           <NavigationProperty Name="PersonEntity" Relationship="TellTheStoryEntities.FK_ExpertEntity_1_0" FromRole="ExpertEntity" ToRole="PersonEntity" />
@@ -444,6 +452,7 @@
           <Property Name="ProjectId" Type="Int64" Nullable="false" />
           <Property Name="WavePeriod" Type="Double" />
           <Property Name="WaveHeight" Type="Double" />
+          <Property Name="Order" Type="Int64" Nullable="false" />
           <NavigationProperty Name="FragilityCurveElementEntity" Relationship="TellTheStoryEntities.FK_HydraulicConditionElementEntity_1_0" FromRole="HydraulicConditionElementEntity" ToRole="FragilityCurveElementEntity" />
           <NavigationProperty Name="ProjectEntity" Relationship="TellTheStoryEntities.FK_HydraulicConditionElementEntity_0_0" FromRole="HydraulicConditionElementEntity" ToRole="ProjectEntity" />
         </EntityType>
@@ -499,6 +508,7 @@
           </Key>
           <Property Name="TreeEventFragilicyCurveElementId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FragilityCurveElementId" Type="Int64" Nullable="false" />
+          <Property Name="Order" Type="Int64" Nullable="false" />
           <Property Name="TreeEventId" Type="Int64" />
           <NavigationProperty Name="FragilityCurveElementEntity" Relationship="TellTheStoryEntities.FK_TreeEventFragilityCurveElementEntity_1_0" FromRole="TreeEventFragilityCurveElementEntity" ToRole="FragilityCurveElementEntity" />
           <NavigationProperty Name="TreeEventEntity" Relationship="TellTheStoryEntities.FK_TreeEventFragilityCurveElementEntity_0_0" FromRole="TreeEventFragilityCurveElementEntity" ToRole="TreeEventEntity" />
@@ -668,6 +678,7 @@
           <EntitySetMapping Name="EventTreeEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.EventTreeEntity">
               <MappingFragment StoreEntitySet="EventTreeEntity">
+                <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="MainTreeEventId" ColumnName="MainTreeEventId" />
                 <ScalarProperty Name="Color" ColumnName="Color" />
@@ -681,6 +692,7 @@
           <EntitySetMapping Name="ExpertClassEstimationEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.ExpertClassEstimationEntity">
               <MappingFragment StoreEntitySet="ExpertClassEstimationEntity">
+                <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="AverageEstimationId" ColumnName="AverageEstimationId" />
                 <ScalarProperty Name="MaxEstimationId" ColumnName="MaxEstimationId" />
                 <ScalarProperty Name="MinEstimationId" ColumnName="MinEstimationId" />
@@ -694,6 +706,7 @@
           <EntitySetMapping Name="ExpertEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.ExpertEntity">
               <MappingFragment StoreEntitySet="ExpertEntity">
+                <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="Organisation" ColumnName="Organisation" />
                 <ScalarProperty Name="Expertise" ColumnName="Expertise" />
@@ -714,6 +727,7 @@
           <EntitySetMapping Name="HydraulicConditionElementEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.HydraulicConditionElementEntity">
               <MappingFragment StoreEntitySet="HydraulicConditionElementEntity">
+                <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="WaveHeight" ColumnName="WaveHeight" />
                 <ScalarProperty Name="WavePeriod" ColumnName="WavePeriod" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
@@ -762,6 +776,7 @@
             <EntityTypeMapping TypeName="TellTheStoryEntities.TreeEventFragilityCurveElementEntity">
               <MappingFragment StoreEntitySet="TreeEventFragilityCurveElementEntity">
                 <ScalarProperty Name="TreeEventId" ColumnName="TreeEventId" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="FragilityCurveElementId" ColumnName="FragilityCurveElementId" />
                 <ScalarProperty Name="TreeEventFragilicyCurveElementId" ColumnName="TreeEventFragilicyCurveElementId" />
               </MappingFragment>

@@ -13,6 +13,7 @@ namespace StoryTree.Data.Tree
             ProbabilitySpecificationType = ProbabilitySpecificationType.FixedValue;
             FixedProbability = (Probability)1;
             ClassesProbabilitySpecification = new ObservableCollection<ExpertClassEstimation>();
+            FixedFragilityCurve = new FragilityCurve();
         }
 
         public string Name { get; set; }
@@ -29,7 +30,7 @@ namespace StoryTree.Data.Tree
 
         public Probability FixedProbability { get; set; }
 
-        public FragilityCurve FixedFragilityCurve { get; set; }
+        public FragilityCurve FixedFragilityCurve { get; }
 
         public ProbabilitySpecificationType ProbabilitySpecificationType { get; set; }
 

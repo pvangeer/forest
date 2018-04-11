@@ -64,6 +64,7 @@
     <Compile Include="BackupFileWriter.cs" />
     <Compile Include="ColorConversionExtensions.cs" />
     <Compile Include="Create\EventTreeCreateExtensions.cs" />
+    <Compile Include="Create\ExpertClassEstimationCreateExtensions.cs" />
     <Compile Include="Create\ExpertCreateExtensions.cs" />
     <Compile Include="Create\FragilityCurveElementCreateExtensions.cs" />
     <Compile Include="Create\HydraulicConditionCreateExtensions.cs" />

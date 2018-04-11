@@ -21,6 +21,7 @@ namespace StoryTree.Storage.DbContext
         public long MinEstimationId { get; set; }
         public long MaxEstimationId { get; set; }
         public long AverageEstimationId { get; set; }
+        public long Order { get; set; }
     
         public virtual TreeEventEntity TreeEventEntity { get; set; }
         public virtual ExpertEntity ExpertEntity { get; set; }

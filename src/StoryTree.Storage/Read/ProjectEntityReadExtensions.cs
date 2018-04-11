@@ -18,9 +18,9 @@ namespace StoryTree.Storage.Read
                 throw new ArgumentNullException(nameof(collector));
             }
 
-            var experts = entity.ExpertEntities.Select(e => e.Read(collector));
-            var hydraulicConditions = entity.HydraulicConditionElementEntities.Select(e => e.Read(collector));
-            var eventTrees = entity.EventTreeEntities.Select(e => e.Read(collector));
+            var experts = entity.ExpertEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
+            var hydraulicConditions = entity.HydraulicConditionElementEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
+            var eventTrees = entity.EventTreeEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
 
             var project = new Project
             {

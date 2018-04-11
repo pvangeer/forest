@@ -31,25 +31,31 @@ namespace StoryTree.Storage.Create
 
         private static void AddEntitiesForEventTrees(Project project, ProjectEntity entity, PersistenceRegistry registry)
         {
-            foreach (var eventTree in project.EventTrees)
+            for (var index = 0; index < project.EventTrees.Count; index++)
             {
-                entity.EventTreeEntities.Add(eventTree.Create(registry));
+                var eventTreeEntity = project.EventTrees[index].Create(registry);
+                eventTreeEntity.Order = index;
+                entity.EventTreeEntities.Add(eventTreeEntity);
             }
         }
 
         private static void AddEntitiesForHydraulicConditions(Project project, ProjectEntity entity, PersistenceRegistry registry)
         {
-            foreach (var condition in project.HydraulicConditions)
+            for (var index = 0; index < project.HydraulicConditions.Count; index++)
             {
-                entity.HydraulicConditionElementEntities.Add(condition.Create(registry));
+                var hydraulicConditionElementEntity = project.HydraulicConditions[index].Create(registry);
+                hydraulicConditionElementEntity.Order = index;
+                entity.HydraulicConditionElementEntities.Add(hydraulicConditionElementEntity);
             }
         }
 
         private static void AddEntitiesForExperts(Project project, ProjectEntity entity, PersistenceRegistry registry)
         {
-            foreach (var expert in project.Experts)
+            for (var index = 0; index < project.Experts.Count; index++)
             {
-                entity.ExpertEntities.Add(expert.Create(registry));
+                var expertEntity = project.Experts[index].Create(registry);
+                expertEntity.Order = index;
+                entity.ExpertEntities.Add(expertEntity);
             }
         }
     }
