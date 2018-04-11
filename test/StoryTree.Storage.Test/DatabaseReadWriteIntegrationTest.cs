@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +15,27 @@ namespace StoryTree.Storage.Test
         [Test]
         public void WriteAndReadProject()
         {
+            var testProjectName = @"D:\Test\FirstProject.sqlite";
+
+            if (File.Exists(testProjectName))
+            {
+                try
+                {
+                    File.Delete(testProjectName);
+                }
+                catch (Exception e)
+                {
+                    Assert.Fail("Unable to remove previous version of target file.");
+                }
+            }
+
             var project = TestDataGenerator.GenerateAsphalProject();
 
             var storeProject = new StorageSqLite();
             storeProject.StageProject(project);
-            storeProject.SaveProjectAs(@"D:\Test\FirstProject.sqlite");
+            storeProject.SaveProjectAs(testProjectName);
 
-            var project2c = storeProject.LoadProject(@"D:\Test\First project.sqlite");
+            var project2c = storeProject.LoadProject(testProjectName);
         }
     }
 }
