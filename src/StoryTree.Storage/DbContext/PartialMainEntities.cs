@@ -23,9 +23,9 @@ using System.Data.Entity;
 
 namespace StoryTree.Storage.DbContext
 {
-    public partial class mainEntities
+    public partial class Entities
     {
-        public mainEntities(string connString) : base(connString)
+        public Entities(string connString) : base(connString)
         {
             Configuration.LazyLoadingEnabled = false;
         }

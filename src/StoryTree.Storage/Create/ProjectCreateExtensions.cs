@@ -22,14 +22,22 @@ namespace StoryTree.Storage.Create
                 PersonEntity = project.ProjectLeader.Create(registry),
             };
 
-            /*AddEntitiesForExperts(project, entity, registry);*/
-            /*AddEntitiesForHydraulicConditions(project, entity, registry);
-            AddEntitiesForEventTrees(project, entity, registry);*/
+            AddEntitiesForExperts(project, entity, registry);
+            //AddEntitiesForHydraulicConditions(project, entity, registry);
+            /*AddEntitiesForEventTrees(project, entity, registry);*/
 
             return entity;
 
             // TODO: Implement
         }
+
+        /*private static void AddEntitiesForHydraulicConditions(Project project, ProjectEntity entity, PersistenceRegistry registry)
+        {
+            foreach (var condition in project.HydraulicConditions)
+            {
+                entity.HydraulicConditionElementEntities.Add(condition.Create(registry));
+            }
+        }*/
 
         private static void AddEntitiesForExperts(Project project, ProjectEntity entity, PersistenceRegistry registry)
         {

@@ -42,9 +42,10 @@ namespace StoryTree.Storage
             {
                 throw new ArgumentNullException(nameof(filePath), @"Cannot create a connection string without the path to the file to connect to.");
             }
+
             return new EntityConnectionStringBuilder
             {
-                Metadata = string.Format(@"res://*/{0}.csdl|res://*/{0}.ssdl|res://*/{0}.msl", "DbContext.mainEntities"),
+                Metadata = string.Format(@"res://*/{0}.csdl|res://*/{0}.ssdl|res://*/{0}.msl", "DbContext.TellTheStoryEntityDataModel"),
                 Provider = @"System.Data.SQLite.EF6",
                 ProviderConnectionString = SqLiteConnectionStringBuilder.BuildSqLiteConnectionString(GetDataSourceLocation(filePath), false)
             }.ConnectionString;

@@ -67,7 +67,7 @@ namespace StoryTree.Storage
             try
             {
                 Project project;
-                using (var dbContext = new mainEntities(connectionString))
+                using (var dbContext = new Entities(connectionString))
                 {
                     dbContext.LoadTablesIntoContext();
 
@@ -100,7 +100,7 @@ namespace StoryTree.Storage
         private void SaveProjectInDatabase(string databaseFilePath)
         {
             string connectionString = GetConnectionToNewFile(databaseFilePath);
-            using (var dbContext = new mainEntities(connectionString))
+            using (var dbContext = new Entities(connectionString))
             {
                 try
                 {
@@ -184,7 +184,7 @@ namespace StoryTree.Storage
         {
             string connectionString = SqLiteEntityConnectionStringBuilder.BuildSqLiteEntityConnectionString(databaseFilePath);
 
-            using (var dbContext = new mainEntities(connectionString))
+            using (var dbContext = new Entities(connectionString))
             {
                 try
                 {

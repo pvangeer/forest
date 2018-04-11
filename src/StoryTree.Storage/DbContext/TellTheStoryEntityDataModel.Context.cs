@@ -13,10 +13,10 @@ namespace StoryTree.Storage.DbContext
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class mainEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public mainEntities()
-            : base("name=mainEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
