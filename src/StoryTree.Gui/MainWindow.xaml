@@ -2,8 +2,6 @@
     x:Class="StoryTree.Gui.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:modelViews="clr-namespace:StoryTree.Gui.ViewModels"
     xmlns:fluent="urn:fluent-ribbon"
     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
@@ -58,28 +56,24 @@
 
                     <fluent:BackstageTabControl>
                         <fluent:Button Header="Nieuw bestand"
-                                       IsEnabled="False"
                                        x:Name="ButtonMenuFileNewProject"
                                        Icon="/Core.Common.Gui;component\Resources\DocumentHS.png"
                                        fluent:KeyTip.Keys="N"
                                        Click="OnFileNewClicked" x:FieldModifier="private" />
 
                         <fluent:Button Header="Opslaan" 
-                                       IsEnabled="False"
                                        x:Name="ButtonMenuFileSaveProject"
                                        Icon="/Core.Common.Gui;component\Resources\saveHS.png"
                                        fluent:KeyTip.Keys="S"
                                        Click="OnFileSaveClicked" x:FieldModifier="private" />
 
                         <fluent:Button Header="Opslaan Als"
-                                       IsEnabled="False"
                                        x:Name="ButtonMenuFileSaveProjectAs"
                                        Icon="/Core.Common.Gui;component\Resources\SaveAsHH.png"
                                        fluent:KeyTip.Keys="A" 
                                        Click="OnFileSaveAsClicked" x:FieldModifier="private" />
 
                         <fluent:Button Header="Openen"
-                                       IsEnabled="False"
                                        x:Name="ButtonMenuFileOpenProject"
                                        Icon="/Core.Common.Gui;component\Resources\openfolderHS.png"
                                        fluent:KeyTip.Keys="O"

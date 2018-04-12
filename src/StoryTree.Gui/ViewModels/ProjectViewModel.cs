@@ -44,7 +44,7 @@ namespace StoryTree.Gui.ViewModels
             project.EventTrees.CollectionChanged += EventTreesCollectionChanged;
         }
 
-        private Project Project { get; }
+        public Project Project { get; }
 
         public ObservableCollection<EventTreeViewModel> EventTrees { get; }
 
