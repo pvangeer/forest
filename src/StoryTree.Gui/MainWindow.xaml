@@ -60,6 +60,7 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            <gui:EventTreesToCountConverter x:Key="EventTreesToCountConverter" />
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
@@ -228,9 +229,17 @@
             <fluent:StatusBar.Resources>
                 <gui:BusyIconTemplateSelector x:Key="BusyIconTemplateSelector" />
             </fluent:StatusBar.Resources>
+            <fluent:StatusBarItem HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/StoryTree.Gui;component/Resources/EventTree.png" Height="24"/>
+                    <TextBlock Text="{Binding EventTrees, Converter={StaticResource EventTreesToCountConverter}}"
+                               Margin="4,0,4,0"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+                
+            </fluent:StatusBarItem>
             <fluent:StatusBarItem 
                 Name="BusyStatusBarItem"
-                Title="Item placed on the right side"
                 HorizontalAlignment="Right"
                 Content="{Binding BusyIndicator}" 
                 Margin="1,1,5,1"

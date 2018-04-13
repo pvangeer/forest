@@ -149,11 +149,13 @@ namespace StoryTree.Gui.ViewModels
         public void AddNewEventTree()
         {
             Project.EventTrees.Add(new EventTree {Name = "Nieuwe gebeurtenis"});
+            OnPropertyChanged(nameof(EventTrees));
         }
 
         public void RemoveSelectedEventTree()
         {
             EventTrees.Remove(SelectedEventTree);
+            OnPropertyChanged(nameof(EventTrees));
         }
 
         private void EventTreesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

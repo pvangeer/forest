@@ -119,6 +119,7 @@
     <Compile Include="Command\EventTreeCommand.cs" />
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
     <Compile Include="Converters\HydraulicConditionsToPlotModelConverter.cs" />
+    <Compile Include="EventTreesToCountConverter.cs" />
     <Compile Include="StorageState.cs" />
     <Compile Include="TestDataGenerator.cs" />
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
