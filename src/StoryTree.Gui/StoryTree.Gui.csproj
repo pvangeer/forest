@@ -105,6 +105,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BusyIconTemplateSelector.cs" />
     <Compile Include="Command\AddEventTreeCommand.cs" />
     <Compile Include="Command\ProjectViewModelCommand.cs" />
     <Compile Include="Converters\CriticalPathConverter.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Command\EventTreeCommand.cs" />
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
     <Compile Include="Converters\HydraulicConditionsToPlotModelConverter.cs" />
+    <Compile Include="StorageState.cs" />
     <Compile Include="TestDataGenerator.cs" />
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\EstimationSpecificationViewModelFactory.cs" />
@@ -239,6 +241,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\trees.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\busy-white.png" />
+    <Resource Include="Resources\busy.png" />
+    <Resource Include="Resources\idle-white.png" />
+    <Resource Include="Resources\idle.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" />

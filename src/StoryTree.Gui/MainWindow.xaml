@@ -5,6 +5,7 @@
     xmlns:modelViews="clr-namespace:StoryTree.Gui.ViewModels"
     xmlns:fluent="urn:fluent-ribbon"
     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
+    xmlns:gui="clr-namespace:StoryTree.Gui"
     Title="Gebeurtenissenboom" 
     Height="600" 
     Width="900" 
@@ -34,6 +35,31 @@
                                                    EventsTemplate="{StaticResource EventTreesDataTemplate}"
                                                    TreeEventsTemplate="{StaticResource TreeEventsTemplate}"
                                                    ResultsTemplate="{StaticResource ResultsDataTemplate}"/>
+
+            <Style x:Key="Spinner" TargetType="Image">
+                <Setter Property="Height" Value="24" />
+                <Setter Property="Image.RenderTransform">
+                    <Setter.Value>
+                        <RotateTransform CenterX="12" CenterY="12" />
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="RenderTransform.Angle"
+                                        From="0"
+                                        To="360"
+                                        Duration="0:0:1"
+                                        RepeatBehavior="Forever" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
@@ -44,6 +70,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <fluent:Ribbon 
@@ -196,6 +223,31 @@
                 Converter={StaticResource TabItemToTemplateConverter}, 
                 ConverterParameter={RelativeSource Self}
             }"/>
+        
+        <fluent:StatusBar Grid.Row="2">
+            <fluent:StatusBar.Resources>
+                <gui:BusyIconTemplateSelector x:Key="BusyIconTemplateSelector" />
+            </fluent:StatusBar.Resources>
+            <fluent:StatusBarItem 
+                Name="BusyStatusBarItem"
+                Title="Item placed on the right side"
+                HorizontalAlignment="Right"
+                Content="{Binding BusyIndicator}" 
+                Margin="1,1,5,1"
+                ContentTemplateSelector="{DynamicResource BusyIconTemplateSelector}">
+                <StatusBarItem.Resources>
+                    <DataTemplate x:Key="BusyIconTemplate" DataType="gui:StorageState">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="Bezig" Margin="4,0,4,0" VerticalAlignment="Center"/>
+                            <Image Source="/StoryTree.Gui;component/Resources/busy-white.png" Style="{StaticResource Spinner}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                    <DataTemplate x:Key="IdleIconTemplate" DataType="gui:StorageState">
+                        <Image Source="/StoryTree.Gui;component/Resources/idle-white.png"/>
+                    </DataTemplate>
+                </StatusBarItem.Resources>
+            </fluent:StatusBarItem>
+        </fluent:StatusBar>
     </Grid>
 </fluent:RibbonWindow>
 

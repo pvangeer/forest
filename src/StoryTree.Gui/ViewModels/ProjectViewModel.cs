@@ -19,6 +19,8 @@ namespace StoryTree.Gui.ViewModels
 
         public ProjectViewModel([NotNull]Project project)
         {
+            BusyIndicator = StorageState.Idle;
+
             Project = project;
 
             var eventTreeViewModels = new ObservableCollection<EventTreeViewModel>(project.EventTrees.Select(te =>
@@ -141,6 +143,8 @@ namespace StoryTree.Gui.ViewModels
 
         public ObservableCollection<HydraulicConditionViewModel> HydraulicConditionsList => hydraulicsViewModels;
 
+        public StorageState BusyIndicator { get; set; }
+
 
         public void AddNewEventTree()
         {
@@ -248,7 +252,7 @@ namespace StoryTree.Gui.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
