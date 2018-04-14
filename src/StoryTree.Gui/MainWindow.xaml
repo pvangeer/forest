@@ -61,6 +61,7 @@
                 </Style.Triggers>
             </Style>
             <gui:EventTreesToCountConverter x:Key="EventTreesToCountConverter" />
+            <gui:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
@@ -75,6 +76,7 @@
         </Grid.RowDefinitions>
 
         <fluent:Ribbon 
+            IsEnabled="{Binding BusyIndicator, Converter={StaticResource BusyIndicatorToEnabledConverter}}"
             Focusable="True" 
             x:Name="Ribbon" 
             x:FieldModifier="protected">
@@ -215,6 +217,7 @@
         </fluent:Ribbon>
 
         <ContentPresenter 
+            IsEnabled="{Binding BusyIndicator, Converter={StaticResource BusyIndicatorToEnabledConverter}}"
             Name="HostControl" 
             Grid.Row="1" 
             Content="{Binding }" 

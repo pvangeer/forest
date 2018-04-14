@@ -106,6 +106,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BusyIconTemplateSelector.cs" />
+    <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />
     <Compile Include="Command\AddEventTreeCommand.cs" />
     <Compile Include="Command\ProjectViewModelCommand.cs" />
     <Compile Include="Converters\CriticalPathConverter.cs" />
@@ -119,7 +120,7 @@
     <Compile Include="Command\EventTreeCommand.cs" />
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
     <Compile Include="Converters\HydraulicConditionsToPlotModelConverter.cs" />
-    <Compile Include="EventTreesToCountConverter.cs" />
+    <Compile Include="Converters\EventTreesToCountConverter.cs" />
     <Compile Include="StorageState.cs" />
     <Compile Include="TestDataGenerator.cs" />
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />

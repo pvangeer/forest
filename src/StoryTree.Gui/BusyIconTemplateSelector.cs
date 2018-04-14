@@ -13,7 +13,7 @@ namespace StoryTree.Gui
                 !(item is StorageState busy))
             {
                 return base.SelectTemplate(item, container);
-            }
+            }   
 
             return busy == StorageState.Busy
                 ? statusBarItem.Resources["BusyIconTemplate"] as DataTemplate
