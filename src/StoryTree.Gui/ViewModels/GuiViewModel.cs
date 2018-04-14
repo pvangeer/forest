@@ -1,6 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Input;
 using StoryTree.Data.Annotations;
+using StoryTree.Gui.Command;
 
 namespace StoryTree.Gui.ViewModels
 {
@@ -12,6 +16,7 @@ namespace StoryTree.Gui.ViewModels
 
         public GuiViewModel(StoryTreeGui gui)
         {
+            GuiProjectSercices = new GuiProjectServices(this);
             Gui = gui;
             if (Gui != null)
             {
@@ -19,6 +24,8 @@ namespace StoryTree.Gui.ViewModels
                 projectViewModel = new ProjectViewModel(Gui.Project);
             }
         }
+
+        public GuiProjectServices GuiProjectSercices { get; }
 
         public StoryTreeGui Gui { get; }
 
@@ -36,6 +43,24 @@ namespace StoryTree.Gui.ViewModels
             set => Gui.ProjectFilePath = value;
         }
 
+        public Window Win32Window
+        {
+            get => GuiProjectSercices.Win32Window;
+            set => GuiProjectSercices.Win32Window = value;
+        }
+
+
+        public ICommand FileNewCommand => new FileNewCommnd(this);
+
+        public ICommand SaveProjectCommand => new SaveProjectCommand(this);
+
+        public ICommand SaveProjectAsCommand => new SaveProjectAsCommand(this);
+
+        public ICommand OpenProjectCommand => new OpenProjectCommand(this);
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler OnInvalidateVisual;
+
         private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -50,10 +75,13 @@ namespace StoryTree.Gui.ViewModels
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public void InvokeInvalidateVisual()
+        {
+            OnInvalidateVisual?.Invoke(this, null);
+        }
 
         [NotifyPropertyChangedInvocator]
-        public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StoryTree.Data;
 using StoryTree.Data.Annotations;
+using StoryTree.Gui.Messaging;
 using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui
@@ -24,6 +25,7 @@ namespace StoryTree.Gui
         public string ProjectFilePath { get; set; }
 
         public ObservableCollection<StoryTreeMessage> Messages { get; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:fluent="urn:fluent-ribbon"
     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
-    xmlns:gui="clr-namespace:StoryTree.Gui"
     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
     xmlns:dataTemplates="clr-namespace:StoryTree.Gui.DataTemplates"
     Title="Gebeurtenissenboom" 
@@ -83,32 +82,27 @@
             x:FieldModifier="protected">
             <!--Backstage-->
             <fluent:Ribbon.Menu>
-                <fluent:Backstage Background="#008fc5" x:Name="Menu" x:FieldModifier="private">
-
+                <fluent:Backstage Background="#008fc5">
                     <fluent:BackstageTabControl>
                         <fluent:Button Header="Nieuw bestand"
-                                       x:Name="ButtonMenuFileNewProject"
                                        Icon="/Core.Common.Gui;component\Resources\DocumentHS.png"
                                        fluent:KeyTip.Keys="N"
-                                       Click="OnFileNewClicked" x:FieldModifier="private" />
+                                       Command="{Binding FileNewCommand}"/>
 
-                        <fluent:Button Header="Opslaan" 
-                                       x:Name="ButtonMenuFileSaveProject"
+                        <fluent:Button Header="Opslaan"
                                        Icon="/Core.Common.Gui;component\Resources\saveHS.png"
                                        fluent:KeyTip.Keys="S"
-                                       Click="OnFileSaveClicked" x:FieldModifier="private" />
+                                       Command="{Binding SaveProjectCommand}"/>
 
                         <fluent:Button Header="Opslaan Als"
-                                       x:Name="ButtonMenuFileSaveProjectAs"
                                        Icon="/Core.Common.Gui;component\Resources\SaveAsHH.png"
                                        fluent:KeyTip.Keys="A" 
-                                       Click="OnFileSaveAsClicked" x:FieldModifier="private" />
+                                       Command="{Binding SaveProjectAsCommand}"/>
 
                         <fluent:Button Header="Openen"
-                                       x:Name="ButtonMenuFileOpenProject"
                                        Icon="/Core.Common.Gui;component\Resources\openfolderHS.png"
                                        fluent:KeyTip.Keys="O"
-                                       Click="OnFileOpenClicked" x:FieldModifier="private" />
+                                       Command ="{Binding OpenProjectCommand}"/>
 
                         <fluent:SeparatorTabItem />
 
@@ -240,10 +234,9 @@
                                Margin="4,0,4,0"
                                VerticalAlignment="Center"/>
                 </StackPanel>
-                
             </fluent:StatusBarItem>
-            <fluent:StatusBarItem 
-                Name="BusyStatusBarItem"
+
+            <fluent:StatusBarItem
                 HorizontalAlignment="Right"
                 Content="{Binding BusyIndicator}" 
                 Margin="1,1,5,1"
