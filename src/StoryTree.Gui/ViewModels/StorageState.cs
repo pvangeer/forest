@@ -1,4 +1,4 @@
-namespace StoryTree.Gui
+namespace StoryTree.Gui.ViewModels
 {
     public enum StorageState
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace StoryTree.Gui
+namespace StoryTree.Gui.Converters
 {
     public class EventTreesToCountConverter : IValueConverter
     {

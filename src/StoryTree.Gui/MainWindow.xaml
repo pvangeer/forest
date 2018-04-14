@@ -2,16 +2,17 @@
     x:Class="StoryTree.Gui.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:modelViews="clr-namespace:StoryTree.Gui.ViewModels"
     xmlns:fluent="urn:fluent-ribbon"
     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
     xmlns:gui="clr-namespace:StoryTree.Gui"
+    xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
+    xmlns:dataTemplates="clr-namespace:StoryTree.Gui.DataTemplates"
     Title="Gebeurtenissenboom" 
     Height="600" 
     Width="900" 
     x:Name="MainRibbonWindow">
     <Window.DataContext>
-        <modelViews:ProjectViewModel />
+        <viewModels:GuiViewModel />
     </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
@@ -60,8 +61,8 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
-            <gui:EventTreesToCountConverter x:Key="EventTreesToCountConverter" />
-            <gui:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
+            <converters:EventTreesToCountConverter x:Key="EventTreesToCountConverter" />
+            <converters:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
@@ -170,8 +171,8 @@
                 Header="Gebeurtenissen"
                 Group="{Binding Source={x:Reference EventTreesGroup}}">
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
-                    <fluent:Button Header="Gebeurtenis toevoegen" Size="Large" Command="{Binding AddEventTreeCommand}" />
-                    <fluent:Button Header="Gebeurtenis verwijderen" Size="Large" Command="{Binding RemoveEventTreeCommand}" />
+                    <fluent:Button Header="Gebeurtenis toevoegen" Size="Large" Command="{Binding ProjectViewModel.AddEventTreeCommand}" />
+                    <fluent:Button Header="Gebeurtenis verwijderen" Size="Large" Command="{Binding ProjectViewModel.RemoveEventTreeCommand}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 
@@ -181,13 +182,13 @@
                 Group="{Binding Source={x:Reference EventTreesGroup}}">
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:InRibbonGallery 
-                        ItemsSource="{Binding EventTrees}" 
-                        SelectedItem="{Binding SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding ProjectViewModel.EventTrees}" 
+                        SelectedItem="{Binding ProjectViewModel.SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
                         ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Knopen">
-                    <fluent:Button Header="Knoop toevoegen" Size="Large" Command="{Binding AddTreeEventCommand}" />
-                    <fluent:Button Header="Knoop verwijderen" Size="Large" Command="{Binding RemoveTreeEventCommand}" />
+                    <fluent:Button Header="Knoop toevoegen" Size="Large" Command="{Binding ProjectViewModel.AddTreeEventCommand}" />
+                    <fluent:Button Header="Knoop verwijderen" Size="Large" Command="{Binding ProjectViewModel.RemoveTreeEventCommand}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 
@@ -197,8 +198,8 @@
                 Group="{Binding Source={x:Reference EstimationGroup}}">
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:InRibbonGallery 
-                        ItemsSource="{Binding EventTrees}" 
-                        SelectedItem="{Binding SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding ProjectViewModel.EventTrees}" 
+                        SelectedItem="{Binding ProjectViewModel.SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
                         ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
@@ -209,8 +210,8 @@
                 Group="{Binding Source={x:Reference ResultsGroup}}">
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:InRibbonGallery 
-                        ItemsSource="{Binding EventTrees}" 
-                        SelectedItem="{Binding SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding ProjectViewModel.EventTrees}" 
+                        SelectedItem="{Binding ProjectViewModel.SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
                         ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
@@ -220,7 +221,7 @@
             IsEnabled="{Binding BusyIndicator, Converter={StaticResource BusyIndicatorToEnabledConverter}}"
             Name="HostControl" 
             Grid.Row="1" 
-            Content="{Binding }" 
+            Content="{Binding ProjectViewModel}" 
             ContentTemplate="{
                 Binding ElementName=Ribbon, 
                 Path=SelectedTabItem, 
@@ -230,12 +231,12 @@
         
         <fluent:StatusBar Grid.Row="2">
             <fluent:StatusBar.Resources>
-                <gui:BusyIconTemplateSelector x:Key="BusyIconTemplateSelector" />
+                <dataTemplates:BusyIconTemplateSelector x:Key="BusyIconTemplateSelector" />
             </fluent:StatusBar.Resources>
             <fluent:StatusBarItem HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/StoryTree.Gui;component/Resources/EventTree.png" Height="24"/>
-                    <TextBlock Text="{Binding EventTrees, Converter={StaticResource EventTreesToCountConverter}}"
+                    <TextBlock Text="{Binding ProjectViewModel.EventTrees, Converter={StaticResource EventTreesToCountConverter}}"
                                Margin="4,0,4,0"
                                VerticalAlignment="Center"/>
                 </StackPanel>
@@ -248,13 +249,13 @@
                 Margin="1,1,5,1"
                 ContentTemplateSelector="{DynamicResource BusyIconTemplateSelector}">
                 <StatusBarItem.Resources>
-                    <DataTemplate x:Key="BusyIconTemplate" DataType="gui:StorageState">
+                    <DataTemplate x:Key="BusyIconTemplate" DataType="viewModels:StorageState">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock Text="Bezig" Margin="4,0,4,0" VerticalAlignment="Center"/>
                             <Image Source="/StoryTree.Gui;component/Resources/busy-white.png" Style="{StaticResource Spinner}"/>
                         </StackPanel>
                     </DataTemplate>
-                    <DataTemplate x:Key="IdleIconTemplate" DataType="gui:StorageState">
+                    <DataTemplate x:Key="IdleIconTemplate" DataType="viewModels:StorageState">
                         <Image Source="/StoryTree.Gui;component/Resources/idle-white.png"/>
                     </DataTemplate>
                 </StatusBarItem.Resources>

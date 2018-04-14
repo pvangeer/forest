@@ -1,8 +1,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using Fluent;
+using StoryTree.Gui.ViewModels;
 
-namespace StoryTree.Gui
+namespace StoryTree.Gui.DataTemplates
 {
     public class BusyIconTemplateSelector : DataTemplateSelector
     {

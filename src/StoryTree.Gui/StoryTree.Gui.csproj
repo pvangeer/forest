@@ -105,7 +105,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BusyIconTemplateSelector.cs" />
+    <Compile Include="DataTemplates\BusyIconTemplateSelector.cs" />
     <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />
     <Compile Include="Command\AddEventTreeCommand.cs" />
     <Compile Include="Command\ProjectViewModelCommand.cs" />
@@ -121,7 +121,10 @@
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
     <Compile Include="Converters\HydraulicConditionsToPlotModelConverter.cs" />
     <Compile Include="Converters\EventTreesToCountConverter.cs" />
-    <Compile Include="StorageState.cs" />
+    <Compile Include="Messaging\MessageSeverity.cs" />
+    <Compile Include="Messaging\MessageType.cs" />
+    <Compile Include="StoryTreeGui.cs" />
+    <Compile Include="Messaging\StoryTreeMessage.cs" />
     <Compile Include="TestDataGenerator.cs" />
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\EstimationSpecificationViewModelFactory.cs" />
@@ -130,12 +133,14 @@
     <Compile Include="ViewModels\FixedProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\FragilityCurveElementViewModel.cs" />
     <Compile Include="ViewModels\FragilityCurveViewModel.cs" />
+    <Compile Include="ViewModels\GuiViewModel.cs" />
     <Compile Include="ViewModels\HydraulicConditionViewModel.cs" />
     <Compile Include="ViewModels\ProbabilitySpecificationViewModelBase.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="Command\RemoveEventTreeCommand.cs" />
     <Compile Include="Command\RemoveTreeEventCommand.cs" />
     <Compile Include="Command\TreeEventClickedCommand.cs" />
+    <Compile Include="ViewModels\StorageState.cs" />
     <Compile Include="ViewModels\TreeEventViewModel.cs" />
     <Page Include="DataTemplates\ComboBoxFlatStyle.xaml">
       <SubType>Designer</SubType>

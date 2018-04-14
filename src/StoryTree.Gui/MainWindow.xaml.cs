@@ -1,7 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
@@ -16,27 +14,28 @@ namespace StoryTree.Gui
     /// </summary>
     public partial class MainWindow
     {
-        private StorageSqLite storageSqLite;
-
-        public string ProjectFilePath { get; set; }
+        private readonly StorageSqLite storageSqLite;
 
         public MainWindow()
         {
+            DataContext = new GuiViewModel(new StoryTreeGui());
             InitializeComponent();
-            DataContext = new ProjectViewModel(TestDataGenerator.GenerateAsphalProject());
             storageSqLite = new StorageSqLite();
         }
 
+        public GuiViewModel ViewModel => (GuiViewModel) DataContext;
+
         private void OnFileNewClicked(object sender, RoutedEventArgs e)
         {
-            ProjectFilePath = "";
-            DataContext = new ProjectViewModel(new Project());
+            ViewModel.ProjectFilePath = "";
             storageSqLite.UnstageProject();
+            ViewModel.Gui.Project = new Project();
+            ViewModel.Gui.OnPropertyChanged(nameof(StoryTreeGui.Project));
         }
 
         private void OnFileSaveClicked(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(ProjectFilePath))
+            if (string.IsNullOrWhiteSpace(ViewModel.ProjectFilePath))
             {
                 OnFileSaveAsClicked(sender,e);
             }
@@ -50,13 +49,13 @@ namespace StoryTree.Gui
         {
             var worker = new BackgroundWorker();
             worker.DoWork += StageAndeStoreProjectAsync;
-            worker.RunWorkerCompleted += StageAndStoreProjectAsyncFinished;
+            worker.RunWorkerCompleted += BackgroundWorkerAsyncFinished;
             worker.WorkerSupportsCancellation = false;
 
-            worker.RunWorkerAsync(new BackgroundWorkerArguments(storageSqLite, ((ProjectViewModel)DataContext).Project, ProjectFilePath));
+            worker.RunWorkerAsync(new BackgroundWorkerArguments(storageSqLite, ViewModel));
         }
 
-        private void StageAndStoreProjectAsyncFinished(object sender, RunWorkerCompletedEventArgs e)
+        private void BackgroundWorkerAsyncFinished(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Result is Exception)
             {
@@ -77,7 +76,7 @@ namespace StoryTree.Gui
             {
                 if (!arguments.StorageSqLite.HasStagedProject)
                 {
-                    arguments.StorageSqLite.StageProject(arguments.Project);
+                    arguments.StorageSqLite.StageProject(arguments.Gui.Project);
                 }
 
                 arguments.StorageSqLite.SaveProjectAs(arguments.ProjectFilePath);
@@ -94,14 +93,14 @@ namespace StoryTree.Gui
             var dialog = new SaveFileDialog
             {
                 CheckPathExists = true,
-                FileName = ProjectFilePath,
+                FileName = ViewModel.ProjectFilePath,
                 OverwritePrompt = true,
                 Filter = "StoryTree bestand (*.sqlite)|*.sqlite"
             };
 
             if ((bool)dialog.ShowDialog(this))
             {
-                ProjectFilePath = dialog.FileName;
+                ViewModel.ProjectFilePath = dialog.FileName;
                 StageProjectAndStore();
                 return;
             }
@@ -111,31 +110,55 @@ namespace StoryTree.Gui
 
         private void ChangeState(StorageState state)
         {
-            if (DataContext == null)
+            if (ViewModel == null)
             {
                 return;
             }
 
-            var projectViewModel = (ProjectViewModel) DataContext;
-            projectViewModel.BusyIndicator = state;
-            projectViewModel.OnPropertyChanged(nameof(projectViewModel.BusyIndicator));
+            ViewModel.BusyIndicator = state;
+            ViewModel.OnPropertyChanged(nameof(ProjectViewModel.BusyIndicator));
             BusyStatusBarItem.InvalidateVisual();
         }
 
         private void OnFileOpenClicked(object sender, RoutedEventArgs e)
         {
+            ChangeState(StorageState.Busy);
             storageSqLite.UnstageProject();
             var dialog = new OpenFileDialog
             {
                 CheckFileExists = true,
                 Filter = "StoryTree bestand (*.sqlite)|*.sqlite",
-                FileName = ProjectFilePath,
+                FileName = ViewModel.ProjectFilePath,
             };
 
             if ((bool) dialog.ShowDialog(this))
             {
-                DataContext = new ProjectViewModel(storageSqLite.LoadProject(dialog.FileName));
-                ProjectFilePath = dialog.FileName;
+                var worker = new BackgroundWorker();
+                worker.DoWork += OpenProjectAsync;
+                worker.RunWorkerCompleted += BackgroundWorkerAsyncFinished;
+                worker.WorkerSupportsCancellation = false;
+
+                ViewModel.ProjectFilePath = dialog.FileName;
+                worker.RunWorkerAsync(new BackgroundWorkerArguments(storageSqLite, ViewModel));
+            }
+            ChangeState(StorageState.Idle);
+        }
+
+        private void OpenProjectAsync(object sender, DoWorkEventArgs e)
+        {
+            if (!(e.Argument is BackgroundWorkerArguments arguments))
+            {
+                return;
+            }
+
+            try
+            {
+                arguments.Gui.Project = storageSqLite.LoadProject(arguments.ProjectFilePath);
+                arguments.Gui.OnPropertyChanged(nameof(StoryTreeGui.Project));
+            }
+            catch (Exception exception)
+            {
+                e.Result = exception;
             }
         }
 
@@ -147,17 +170,17 @@ namespace StoryTree.Gui
 
     internal class BackgroundWorkerArguments
     {
-        public BackgroundWorkerArguments(StorageSqLite storageSqLite, Project project, string projectFilePath)
+        public BackgroundWorkerArguments(StorageSqLite storageSqLite, GuiViewModel guiViewModel)
         {
             StorageSqLite = storageSqLite;
-            Project = project;
-            ProjectFilePath = projectFilePath;
+            Gui = guiViewModel.Gui;
+            ProjectFilePath = guiViewModel.ProjectFilePath;
         }
 
         public string ProjectFilePath { get; }
 
         public StorageSqLite StorageSqLite { get; }
 
-        public Project Project { get; }
+        public StoryTreeGui Gui { get; }
     }
 }
