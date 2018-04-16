@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using Microsoft.Win32;
 using StoryTree.Data;
+using StoryTree.Gui.Messaging;
 using StoryTree.Gui.ViewModels;
 using StoryTree.Storage;
 
@@ -41,6 +42,12 @@ namespace StoryTree.Gui
 
             if ((bool)dialog.ShowDialog(Win32Window))
             {
+                guiViewModel.Messages.Add(new StoryTreeMessage
+                {
+                    Severity = MessageSeverity.Information,
+                    Message = $"Bezig met openen van proejct uit bestand '{dialog.FileName}'"
+                });
+
                 ChangeState(StorageState.Busy);
 
                 var worker = new BackgroundWorker();
@@ -50,6 +57,12 @@ namespace StoryTree.Gui
 
                 guiViewModel.ProjectFilePath = dialog.FileName;
                 worker.RunWorkerAsync(new BackgroundWorkerArguments(storageSqLite, guiViewModel));
+
+                guiViewModel.Messages.Add(new StoryTreeMessage
+                {
+                    Severity = MessageSeverity.Error,
+                    Message = "Test met een hele lange test. Hopelijk gaat hij over meerdere regels worden verdeeld. Misschien moeten we er nog een titel aan toevoegen???"
+                });
             }
         }
 

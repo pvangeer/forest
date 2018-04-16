@@ -6,6 +6,7 @@
     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
     xmlns:dataTemplates="clr-namespace:StoryTree.Gui.DataTemplates"
+    xmlns:gui="clr-namespace:StoryTree.Gui"
     Title="Gebeurtenissenboom" 
     Height="600" 
     Width="900" 
@@ -25,6 +26,7 @@
                 <ResourceDictionary Source="/DataTemplates/TreeEventsDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/EventTreeGalleryItemDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/ResultsDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/MessageDataTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <converters:TabItemToTemplateConverter x:Key="TabItemToTemplateConverter" 
@@ -62,6 +64,7 @@
             </Style>
             <converters:EventTreesToCountConverter x:Key="EventTreesToCountConverter" />
             <converters:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
+            <gui:ShouldShowLastErrorConverter x:Key="ShouldShowLastErrorConverter" />
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
@@ -236,7 +239,24 @@
                 </StackPanel>
             </fluent:StatusBarItem>
 
+<!--            <fluent:StatusBarItem
+                HorizontalAlignment="Right">
+                <StackPanel>
+                    <Image x:Name="ErrorIcon" Source="/StoryTree.Gui;component/Resources/dialog-error-2400px.png" Height="24"/>
+                    <Popup IsOpen="{Binding LastErrorMessage, Converter={StaticResource ShouldShowLastErrorConverter}}"
+                           PlacementTarget="{Binding ElementName=ErrorIcon}"
+                           AllowsTransparency="True"
+                           Placement="Top"
+                           PopupAnimation="Slide">
+                        <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource PopupErrorMessageTemplate}"/>
+                    </Popup>
+                </StackPanel>
+            </fluent:StatusBarItem>
+            
+            <Separator HorizontalAlignment="Right"/>-->
+
             <fluent:StatusBarItem
+                x:Name="StatusBarItem"
                 HorizontalAlignment="Right"
                 Content="{Binding BusyIndicator}" 
                 Margin="1,1,5,1"
@@ -253,6 +273,14 @@
                     </DataTemplate>
                 </StatusBarItem.Resources>
             </fluent:StatusBarItem>
+            <Popup IsOpen="{Binding LastErrorMessage, Converter={StaticResource ShouldShowLastErrorConverter}}"
+                   PlacementTarget="{Binding ElementName=StatusBarItem}"
+                   HorizontalOffset="-285"
+                   AllowsTransparency="True"
+                   Placement="Top"
+                   PopupAnimation="Slide">
+                <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource PopupErrorMessageTemplate}"/>
+            </Popup>
         </fluent:StatusBar>
     </Grid>
 </fluent:RibbonWindow>

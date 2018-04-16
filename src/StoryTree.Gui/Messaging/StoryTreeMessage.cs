@@ -5,6 +5,6 @@ namespace StoryTree.Gui.Messaging
     {
         public MessageSeverity Severity { get; set; }
 
-        public MessageType Message { get; set; }
+        public string Message { get; set; }
     }
 }

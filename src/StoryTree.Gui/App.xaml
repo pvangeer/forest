@@ -48,6 +48,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DataTemplates/ComboBoxFlatStyle.xaml"/>
                 <ResourceDictionary Source="DataTemplates/TabControlFlatStyle.xaml"/>
+                <ResourceDictionary Source="DataTemplates/ButtonFlatStyleTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
