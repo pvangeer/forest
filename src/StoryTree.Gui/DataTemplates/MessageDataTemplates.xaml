@@ -9,7 +9,24 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="SeverityImage" Grid.Column="0" Height="48" VerticalAlignment="Center"/>
+            <Grid Grid.Column="0" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image 
+                    x:Name="SeverityImage" 
+                    Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"/>
+                <Label
+                    Grid.Row="1"
+                    Content="{Binding Time}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    ContentStringFormat="HH:mm:ss"/>
+            </Grid>
+
             <StackPanel Grid.Column="1" Orientation="Vertical" Width="300">
                 <TextBlock TextWrapping="Wrap"
                            Margin="4"
@@ -21,13 +38,13 @@
         </Grid>
         <DataTemplate.Triggers>
             <DataTrigger Binding="{Binding Severity}" Value="Information">
-                <Setter TargetName="SeverityImage" Property="Source" Value="/StoryTree.Gui;component/Resources/info-icon-2400px.png"/>
+                <Setter TargetName="SeverityImage" Property="Source" Value="/StoryTree.Gui;component/Resources/information-icon 32x32.png"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding Severity}" Value="Warning">
-                <Setter TargetName="SeverityImage" Property="Source" Value="/StoryTree.Gui;component/Resources/rodentia-icons_dialog-warning-2400px.png"/>
+                <Setter TargetName="SeverityImage" Property="Source" Value="/StoryTree.Gui;component/Resources/alert-icon 32x32.png"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding Severity}" Value="Error">
-                <Setter TargetName="SeverityImage" Property="Source" Value="/StoryTree.Gui;component/Resources/dialog-error-2400px.png"/>
+                <Setter TargetName="SeverityImage" Property="Source" Value="/StoryTree.Gui;component/Resources/close-icon 32x32.png"/>
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>

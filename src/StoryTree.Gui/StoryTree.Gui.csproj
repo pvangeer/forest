@@ -126,6 +126,7 @@
     <Compile Include="Converters\HydraulicConditionsToPlotModelConverter.cs" />
     <Compile Include="Converters\EventTreesToCountConverter.cs" />
     <Compile Include="GuiProjectServices.cs" />
+    <Compile Include="MessageListToLabelConverter.cs" />
     <Compile Include="ShouldShowLastErrorConverter.cs" />
     <Compile Include="StoryTreeGui.cs" />
     <Compile Include="TestDataGenerator.cs" />
@@ -149,7 +150,7 @@
     <Compile Include="Command\SaveProjectCommand.cs" />
     <Compile Include="Command\RemoveLastMessageCommand.cs" />
     <Compile Include="ViewModels\StorageState.cs" />
-    <Compile Include="Command\ToggleShowMessagesCommand.cs" />
+    <Compile Include="Command\ShowMessageListCommand.cs" />
     <Compile Include="ViewModels\TreeEventViewModel.cs" />
     <Page Include="DataTemplates\ButtonFlatStyleTemplate.xaml">
       <SubType>Designer</SubType>
@@ -277,9 +278,22 @@
     <Resource Include="Resources\idle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\dialog-error-2400px.png" />
-    <Resource Include="Resources\info-icon-2400px.png" />
-    <Resource Include="Resources\rodentia-icons_dialog-warning-2400px.png" />
+    <Resource Include="Resources\alert-icon 32x32.png" />
+    <Resource Include="Resources\alert-icon 48x48.png" />
+    <Resource Include="Resources\alert-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\close-icon 32x32.png" />
+    <Resource Include="Resources\close-icon 48x48.png" />
+    <Resource Include="Resources\close-icon.png" />
+    <Resource Include="Resources\Custom-Icon-Design-Mono-General-1-Alert.ico" />
+    <Resource Include="Resources\Custom-Icon-Design-Mono-General-1-Close.ico" />
+    <Resource Include="Resources\Custom-Icon-Design-Mono-General-1-Information.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\information-icon 32x32.png" />
+    <Resource Include="Resources\information-icon 48x48.png" />
+    <Resource Include="Resources\information-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" />

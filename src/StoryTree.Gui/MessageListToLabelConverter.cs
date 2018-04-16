@@ -1,20 +1,25 @@
 using System;
+using System.Collections;
 using System.Globalization;
 using System.Windows.Data;
-using StoryTree.Messaging;
 
 namespace StoryTree.Gui
 {
-    public class ShouldShowLastErrorConverter : IValueConverter
+    public class MessageListToLabelConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is LogMessage message && message.HasPriority;
+            if (!(value is ICollection collection))
+            {
+                return value;
+            }
+
+            return $"{collection.Count} Berichten";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value;
+            throw new NotImplementedException();
         }
     }
 }

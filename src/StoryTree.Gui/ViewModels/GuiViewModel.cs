@@ -40,6 +40,7 @@ namespace StoryTree.Gui.ViewModels
                     LastErrorMessage = newItem;
                     OnPropertyChanged(nameof(LastErrorMessage));
                 }
+                OnPropertyChanged(nameof(Messages));
             }
         }
 
@@ -84,7 +85,7 @@ namespace StoryTree.Gui.ViewModels
 
         public ICommand RemoveLastMessageCommand => new RemoveLastMessageCommand(this);
 
-        public ICommand ToggleShowMessagesCommand => new ToggleShowMessagesCommand(this);
+        public ICommand ShowMessageListCommand => new ShowMessageListCommand(this);
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler OnInvalidateVisual;

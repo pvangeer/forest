@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Windows.Input;
+using StoryTree.Gui.ViewModels;
 
-namespace StoryTree.Gui.ViewModels
+namespace StoryTree.Gui.Command
 {
-    public class ToggleShowMessagesCommand : ICommand
+    public class ShowMessageListCommand : ICommand
     {
-        public ToggleShowMessagesCommand(GuiViewModel guiViewModel)
+        public ShowMessageListCommand(GuiViewModel guiViewModel)
         {
             ViewModel = guiViewModel;
         }
@@ -19,7 +20,7 @@ namespace StoryTree.Gui.ViewModels
 
         public void Execute(object parameter)
         {
-            ViewModel.ShowMessages = ViewModel.Messages.Count != 0 && !ViewModel.ShowMessages;
+            ViewModel.ShowMessages = ViewModel.Messages.Count != 0;
             ViewModel.OnPropertyChanged(nameof(GuiViewModel.ShowMessages));
         }
 

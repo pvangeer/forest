@@ -65,6 +65,7 @@
             <converters:EventTreesToCountConverter x:Key="EventTreesToCountConverter" />
             <converters:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
             <gui:ShouldShowLastErrorConverter x:Key="ShouldShowLastErrorConverter" />
+            <gui:MessageListToLabelConverter x:Key="MessageListToLabelConverter" />
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
@@ -243,13 +244,18 @@
                 HorizontalAlignment="Right">
                 <StackPanel>
                     <Label Name="ErrorIcon" VerticalAlignment="Center">
-                        <Hyperlink Command="{Binding ToggleShowMessagesCommand}" Foreground="AliceBlue">Berichten</Hyperlink>
+                        <Hyperlink 
+                            Command="{Binding ToggleShowMessagesCommand}" 
+                            Foreground="AliceBlue">
+                            <TextBlock Text="{Binding Messages, Converter={StaticResource MessageListToLabelConverter}}"/>
+                        </Hyperlink>
                     </Label>
                     <Popup IsOpen="{Binding ShowMessages}"
                            PlacementTarget="{Binding ElementName=ErrorIcon}"
                            AllowsTransparency="True"
-                           HorizontalOffset="-285"
+                           HorizontalOffset="-250"
                            Placement="Top"
+                           StaysOpen="False"
                            PopupAnimation="Slide">
                         <ListView 
                             ItemsSource="{Binding Messages}"
@@ -298,7 +304,7 @@
             </fluent:StatusBarItem>
             <Popup IsOpen="{Binding LastErrorMessage, Converter={StaticResource ShouldShowLastErrorConverter}}"
                    PlacementTarget="{Binding ElementName=StatusBarItem}"
-                   HorizontalOffset="-285"
+                   HorizontalOffset="-290"
                    AllowsTransparency="True"
                    Placement="Top"
                    PopupAnimation="Slide">
