@@ -127,8 +127,8 @@
     <Compile Include="Converters\HydraulicConditionsToPlotModelConverter.cs" />
     <Compile Include="Converters\EventTreesToCountConverter.cs" />
     <Compile Include="GuiProjectServices.cs" />
-    <Compile Include="MessageListToLabelConverter.cs" />
-    <Compile Include="ShouldShowLastErrorConverter.cs" />
+    <Compile Include="Converters\MessageListToLabelConverter.cs" />
+    <Compile Include="Converters\ShouldShowLastErrorConverter.cs" />
     <Compile Include="StoryTreeGui.cs" />
     <Compile Include="TestDataGenerator.cs" />
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />

@@ -10,7 +10,13 @@ namespace StoryTree.Gui
     {
         public MainWindow()
         {
-            var guiViewModel = new GuiViewModel(new StoryTreeGui())
+            InitializeComponent();
+
+            var storyTreeGui = new StoryTreeGui
+            {
+                Project = TestDataGenerator.GenerateAsphalProject()
+            };
+            var guiViewModel = new GuiViewModel(storyTreeGui)
             {
                 Win32Window = this
             };
@@ -20,8 +26,6 @@ namespace StoryTree.Gui
                 InvalidateVisual();
             };
             DataContext = guiViewModel;
-
-            InitializeComponent();
         }
 
         private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
