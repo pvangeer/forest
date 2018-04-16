@@ -3,8 +3,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StoryTree.Data;
 using StoryTree.Data.Annotations;
-using StoryTree.Gui.Messaging;
 using StoryTree.Gui.ViewModels;
+using StoryTree.Messaging;
 
 namespace StoryTree.Gui
 {
@@ -13,7 +13,7 @@ namespace StoryTree.Gui
         public StoryTreeGui()
         {
             BusyIndicator = StorageState.Idle;
-            Messages = new ObservableCollection<StoryTreeMessage>();
+            Messages = new ObservableCollection<LogMessage>();
             Project = new Project();
             ProjectFilePath = "";
         }
@@ -24,7 +24,7 @@ namespace StoryTree.Gui
 
         public string ProjectFilePath { get; set; }
 
-        public ObservableCollection<StoryTreeMessage> Messages { get; }
+        public ObservableCollection<LogMessage> Messages { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

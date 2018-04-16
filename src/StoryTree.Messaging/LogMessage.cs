@@ -1,8 +1,10 @@
 ﻿
-namespace StoryTree.Gui.Messaging
+namespace StoryTree.Messaging
 {
-    public class StoryTreeMessage
+    public class LogMessage
     {
+        public bool HasPriority { get; set; }
+
         public MessageSeverity Severity { get; set; }
 
         public string Message { get; set; }

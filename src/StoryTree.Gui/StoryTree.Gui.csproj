@@ -122,10 +122,8 @@
     <Compile Include="Converters\HydraulicConditionsToPlotModelConverter.cs" />
     <Compile Include="Converters\EventTreesToCountConverter.cs" />
     <Compile Include="GuiProjectServices.cs" />
-    <Compile Include="Messaging\MessageSeverity.cs" />
     <Compile Include="ShouldShowLastErrorConverter.cs" />
     <Compile Include="StoryTreeGui.cs" />
-    <Compile Include="Messaging\StoryTreeMessage.cs" />
     <Compile Include="TestDataGenerator.cs" />
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\EstimationSpecificationViewModelFactory.cs" />
@@ -247,6 +245,10 @@
     <ProjectReference Include="..\StoryTree.Data\StoryTree.Data.csproj">
       <Project>{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}</Project>
       <Name>StoryTree.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StoryTree.Messaging\StoryTree.Messaging.csproj">
+      <Project>{7F6BB180-3B8C-4761-8BB6-E7562FB37895}</Project>
+      <Name>StoryTree.Messaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\StoryTree.Storage\StoryTree.Storage.csproj">
       <Project>{A5C2B4E5-1758-4B14-800E-E3F2AA64EA64}</Project>

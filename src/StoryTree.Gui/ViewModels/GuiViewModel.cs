@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using StoryTree.Data.Annotations;
 using StoryTree.Gui.Command;
-using StoryTree.Gui.Messaging;
+using StoryTree.Messaging;
 
 namespace StoryTree.Gui.ViewModels
 {
@@ -34,7 +34,7 @@ namespace StoryTree.Gui.ViewModels
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
-                var newItem = e.NewItems.OfType<StoryTreeMessage>().First();
+                var newItem = e.NewItems.OfType<LogMessage>().First();
                 if (newItem.Severity == MessageSeverity.Error)
                 {
                     LastErrorMessage = newItem;
@@ -43,7 +43,7 @@ namespace StoryTree.Gui.ViewModels
             }
         }
 
-        public StoryTreeMessage LastErrorMessage { get; set; }
+        public LogMessage LastErrorMessage { get; set; }
 
         public GuiProjectServices GuiProjectSercices { get; }
 
@@ -57,7 +57,7 @@ namespace StoryTree.Gui.ViewModels
 
         public ProjectViewModel ProjectViewModel => projectViewModel;
 
-        public ObservableCollection<StoryTreeMessage> Messages => Gui.Messages;
+        public ObservableCollection<LogMessage> Messages => Gui.Messages;
 
         public string ProjectFilePath
         {

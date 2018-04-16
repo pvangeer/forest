@@ -1,4 +1,4 @@
-﻿namespace StoryTree.Gui.Messaging
+﻿namespace StoryTree.Messaging
 {
     public enum MessageSeverity
     {
