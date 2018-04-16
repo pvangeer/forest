@@ -245,7 +245,7 @@
                 <StackPanel>
                     <Label Name="ErrorIcon" VerticalAlignment="Center">
                         <Hyperlink 
-                            Command="{Binding ToggleShowMessagesCommand}" 
+                            Command="{Binding ShowMessageListCommand}" 
                             Foreground="AliceBlue">
                             <TextBlock Text="{Binding Messages, Converter={StaticResource MessageListToLabelConverter}}"/>
                         </Hyperlink>

@@ -9,7 +9,7 @@ using StoryTree.Storage;
 
 namespace StoryTree.Gui
 {
-    public class GuiProjectServices
+    public partial class GuiProjectServices
     {
         private readonly StoryTreeLog log = new StoryTreeLog(typeof(GuiProjectServices));
         private readonly GuiViewModel guiViewModel;
@@ -43,32 +43,27 @@ namespace StoryTree.Gui
 
             if ((bool)dialog.ShowDialog(Win32Window))
             {
-                log.Info($"Bezig met openen van proejct uit bestand '{dialog.FileName}'");
-
                 ChangeState(StorageState.Busy);
 
                 var worker = new BackgroundWorker();
                 worker.DoWork += OpenProjectAsync;
-                worker.RunWorkerCompleted += BackgroundWorkerAsyncFinished;
+                worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o, e,
+                    () => log.Info($"Klaar met openen van project uit bestand '{guiViewModel.ProjectFilePath}'."));
                 worker.WorkerSupportsCancellation = false;
 
                 guiViewModel.ProjectFilePath = dialog.FileName;
                 worker.RunWorkerAsync(new BackgroundWorkerArguments(storageSqLite, guiViewModel));
-
-                log.Error("Test met een hele lange test. Hopelijk gaat hij over meerdere regels worden verdeeld. Misschien moeten we er nog een titel aan toevoegen???");
             }
         }
 
         public void SaveProject()
         {
-            log.Info("Saving project");
             if (string.IsNullOrWhiteSpace(guiViewModel.ProjectFilePath))
             {
                 SaveProjectAs();
             }
 
             StageProjectAndStore();
-            log.Info($"Project saved to {guiViewModel.ProjectFilePath}",true);
         }
 
         public void SaveProjectAs()
@@ -93,17 +88,22 @@ namespace StoryTree.Gui
             ChangeState(StorageState.Busy);
             var worker = new BackgroundWorker();
             worker.DoWork += StageAndeStoreProjectAsync;
-            worker.RunWorkerCompleted += BackgroundWorkerAsyncFinished;
+            worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o, e,
+                () => log.Info($"Project is opgeslagen in bestand '{guiViewModel.ProjectFilePath}'."));
             worker.WorkerSupportsCancellation = false;
 
             worker.RunWorkerAsync(new BackgroundWorkerArguments(storageSqLite, guiViewModel));
         }
 
-        private void BackgroundWorkerAsyncFinished(object sender, RunWorkerCompletedEventArgs e)
+        private void BackgroundWorkerAsyncFinished(object sender, RunWorkerCompletedEventArgs e, Action workFinishedAction)
         {
-            if (e.Result is Exception)
+            if (e.Result is Exception exception)
             {
-                // Handle exception
+                log.Error(exception.Message);
+            }
+            else
+            {
+                workFinishedAction();
             }
 
             ChangeState(StorageState.Idle);
@@ -154,22 +154,6 @@ namespace StoryTree.Gui
             guiViewModel.BusyIndicator = state;
             guiViewModel.OnPropertyChanged(nameof(GuiViewModel.BusyIndicator));
             guiViewModel.InvokeInvalidateVisual();
-        }
-
-        private class BackgroundWorkerArguments
-        {
-            public BackgroundWorkerArguments(StorageSqLite storageSqLite, GuiViewModel guiViewModel)
-            {
-                StorageSqLite = storageSqLite;
-                Gui = guiViewModel.Gui;
-                ProjectFilePath = guiViewModel.ProjectFilePath;
-            }
-
-            public string ProjectFilePath { get; }
-
-            public StorageSqLite StorageSqLite { get; }
-
-            public StoryTreeGui Gui { get; }
         }
     }
 }

@@ -49,7 +49,7 @@ namespace StoryTree.Storage
         public string Build(string errorMessage)
         {
             return string.Format(CultureInfo.CurrentCulture,
-                                 "Er is een fout opgetreden bij het lezen van bestad \"{0}\" op locatie {1}: {2} - {3}",
+                                 "Er is een fout opgetreden bij het lezen van bestand \"{0}\" op locatie {1}: {2} - {3}",
                                  filePath,
                                  location ?? string.Empty,
                                  subject ?? string.Empty,

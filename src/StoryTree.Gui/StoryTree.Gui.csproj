@@ -109,6 +109,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BackgroundWorkerArguments.cs" />
     <Compile Include="DataTemplates\BusyIconTemplateSelector.cs" />
     <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />
     <Compile Include="Command\AddEventTreeCommand.cs" />
