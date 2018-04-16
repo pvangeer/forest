@@ -1,4 +1,5 @@
-﻿using log4net.Appender;
+﻿using System;
+using log4net.Appender;
 using log4net.Core;
 
 namespace StoryTree.Messaging
@@ -6,6 +7,13 @@ namespace StoryTree.Messaging
     public class LogMessageAppender : AppenderSkeleton
     {
         public IMessageCollection MessageCollection { get; set; }
+
+        public LogMessageAppender()
+        {
+            Instance = this;
+        }
+
+        public static LogMessageAppender Instance { get; set; }
 
         protected override void Append(LoggingEvent loggingEvent)
         {
@@ -20,7 +28,7 @@ namespace StoryTree.Messaging
                 };
             }
 
-            MessageCollection.Messages.Add(message);
+            MessageCollection.Messages.Insert(0,message);
 
             /*if (message.HasPriority)
             {

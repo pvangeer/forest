@@ -35,13 +35,15 @@ namespace StoryTree.Gui.ViewModels
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 var newItem = e.NewItems.OfType<LogMessage>().First();
-                if (newItem.Severity == MessageSeverity.Error)
+                if (newItem.HasPriority)
                 {
                     LastErrorMessage = newItem;
                     OnPropertyChanged(nameof(LastErrorMessage));
                 }
             }
         }
+
+        public bool ShowMessages { get; set; }
 
         public LogMessage LastErrorMessage { get; set; }
 
@@ -82,6 +84,8 @@ namespace StoryTree.Gui.ViewModels
 
         public ICommand RemoveLastMessageCommand => new RemoveLastMessageCommand(this);
 
+        public ICommand ToggleShowMessagesCommand => new ToggleShowMessagesCommand(this);
+
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler OnInvalidateVisual;
 
@@ -109,27 +113,5 @@ namespace StoryTree.Gui.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-    }
-
-    public class RemoveLastMessageCommand : ICommand
-    {
-        public RemoveLastMessageCommand(GuiViewModel guiViewModel)
-        {
-            ViewModel = guiViewModel;
-        }
-
-        public GuiViewModel ViewModel { get; }
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object parameter)
-        {
-            ViewModel.LastErrorMessage = null;
-            ViewModel.OnPropertyChanged(nameof(GuiViewModel.LastErrorMessage));
-        }
-
-        public event EventHandler CanExecuteChanged;
     }
 }

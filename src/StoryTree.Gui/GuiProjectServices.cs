@@ -11,6 +11,7 @@ namespace StoryTree.Gui
 {
     public class GuiProjectServices
     {
+        private readonly StoryTreeLog log = new StoryTreeLog(typeof(GuiProjectServices));
         private readonly GuiViewModel guiViewModel;
         private readonly StorageSqLite storageSqLite;
 
@@ -42,11 +43,7 @@ namespace StoryTree.Gui
 
             if ((bool)dialog.ShowDialog(Win32Window))
             {
-                guiViewModel.Messages.Add(new LogMessage
-                {
-                    Severity = MessageSeverity.Information,
-                    Message = $"Bezig met openen van proejct uit bestand '{dialog.FileName}'"
-                });
+                log.Info($"Bezig met openen van proejct uit bestand '{dialog.FileName}'");
 
                 ChangeState(StorageState.Busy);
 
@@ -58,22 +55,20 @@ namespace StoryTree.Gui
                 guiViewModel.ProjectFilePath = dialog.FileName;
                 worker.RunWorkerAsync(new BackgroundWorkerArguments(storageSqLite, guiViewModel));
 
-                guiViewModel.Messages.Add(new LogMessage
-                {
-                    Severity = MessageSeverity.Error,
-                    Message = "Test met een hele lange test. Hopelijk gaat hij over meerdere regels worden verdeeld. Misschien moeten we er nog een titel aan toevoegen???"
-                });
+                log.Error("Test met een hele lange test. Hopelijk gaat hij over meerdere regels worden verdeeld. Misschien moeten we er nog een titel aan toevoegen???");
             }
         }
 
         public void SaveProject()
         {
+            log.Info("Saving project");
             if (string.IsNullOrWhiteSpace(guiViewModel.ProjectFilePath))
             {
                 SaveProjectAs();
             }
 
             StageProjectAndStore();
+            log.Info($"Project saved to {guiViewModel.ProjectFilePath}",true);
         }
 
         public void SaveProjectAs()

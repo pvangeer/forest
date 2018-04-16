@@ -9,7 +9,7 @@ namespace StoryTree.Gui
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is LogMessage message && message.Severity == MessageSeverity.Error;
+            return value is LogMessage message && message.HasPriority;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

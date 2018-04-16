@@ -48,6 +48,10 @@
     <Reference Include="Fluent, Version=6.1.0.233, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Fluent.Ribbon.6.1.0.233\lib\net45\Fluent.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
     </Reference>
@@ -143,7 +147,9 @@
     <Compile Include="Command\TreeEventClickedCommand.cs" />
     <Compile Include="Command\SaveProjectAsCommand.cs" />
     <Compile Include="Command\SaveProjectCommand.cs" />
+    <Compile Include="Command\RemoveLastMessageCommand.cs" />
     <Compile Include="ViewModels\StorageState.cs" />
+    <Compile Include="Command\ToggleShowMessagesCommand.cs" />
     <Compile Include="ViewModels\TreeEventViewModel.cs" />
     <Page Include="DataTemplates\ButtonFlatStyleTemplate.xaml">
       <SubType>Designer</SubType>
