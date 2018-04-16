@@ -8,7 +8,7 @@ using StoryTree.Messaging;
 
 namespace StoryTree.Gui
 {
-    public class StoryTreeGui : INotifyPropertyChanged
+    public class StoryTreeGui : IMessageCollection
     {
         public StoryTreeGui()
         {
