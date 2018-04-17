@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
-using StoryTree.Data.Annotations;
+using StoryTree.Data.Properties;
 using StoryTree.Data.Tree;
 
 namespace StoryTree.Data

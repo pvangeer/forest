@@ -110,6 +110,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BackgroundWorkerArguments.cs" />
+    <Compile Include="Command\RemoveAllMessagesCommand.cs" />
     <Compile Include="DataTemplates\BusyIconTemplateSelector.cs" />
     <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />
     <Compile Include="Command\AddEventTreeCommand.cs" />
@@ -128,7 +129,7 @@
     <Compile Include="Converters\EventTreesToCountConverter.cs" />
     <Compile Include="GuiProjectServices.cs" />
     <Compile Include="Converters\MessageListToLabelConverter.cs" />
-    <Compile Include="Converters\ShouldShowLastErrorConverter.cs" />
+    <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
     <Compile Include="StoryTreeGui.cs" />
     <Compile Include="TestDataGenerator.cs" />
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="ViewModels\GuiViewModel.cs" />
     <Compile Include="ViewModels\HydraulicConditionViewModel.cs" />
     <Compile Include="Command\OpenProjectCommand.cs" />
+    <Compile Include="ViewModels\MessageListViewModel.cs" />
     <Compile Include="ViewModels\ProbabilitySpecificationViewModelBase.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="Command\RemoveEventTreeCommand.cs" />
@@ -149,7 +151,7 @@
     <Compile Include="Command\TreeEventClickedCommand.cs" />
     <Compile Include="Command\SaveProjectAsCommand.cs" />
     <Compile Include="Command\SaveProjectCommand.cs" />
-    <Compile Include="Command\RemoveLastMessageCommand.cs" />
+    <Compile Include="Command\RemovePriorityMessageCommand.cs" />
     <Compile Include="ViewModels\StorageState.cs" />
     <Compile Include="Command\ShowMessageListCommand.cs" />
     <Compile Include="ViewModels\TreeEventViewModel.cs" />

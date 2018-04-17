@@ -6,7 +6,7 @@ using log4net;
 using log4net.Appender;
 using log4net.Repository.Hierarchy;
 using StoryTree.Data;
-using StoryTree.Data.Annotations;
+using StoryTree.Data.Properties;
 using StoryTree.Gui.ViewModels;
 using StoryTree.Messaging;
 
@@ -18,7 +18,7 @@ namespace StoryTree.Gui
         {
             ConfigureMessaging();
             BusyIndicator = StorageState.Idle;
-            Messages = new ObservableCollection<LogMessage>();
+            Messages = new MessageList();
             Project = new Project();
             ProjectFilePath = "";
 
@@ -31,7 +31,7 @@ namespace StoryTree.Gui
 
         public string ProjectFilePath { get; set; }
 
-        public ObservableCollection<LogMessage> Messages { get; }
+        public MessageList Messages { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

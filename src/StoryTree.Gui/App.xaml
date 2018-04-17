@@ -45,6 +45,8 @@
                 <Setter Property="AlternatingRowBackground" Value="LightSteelBlue"/>
             </Style>
 
+            <Style BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="Button"/>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DataTemplates/ComboBoxFlatStyle.xaml"/>
                 <ResourceDictionary Source="DataTemplates/TabControlFlatStyle.xaml"/>

@@ -5,8 +5,10 @@ namespace StoryTree.Messaging
 {
     public interface IMessageCollection : INotifyPropertyChanged
     {
-        ObservableCollection<LogMessage> Messages { get; }
+        MessageList Messages { get; }
 
         void OnPropertyChanged(string propertyName = null);
     }
+
+    public class MessageList : ObservableCollection<LogMessage> { }
 }

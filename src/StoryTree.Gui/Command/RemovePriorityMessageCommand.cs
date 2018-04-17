@@ -4,14 +4,14 @@ using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui.Command
 {
-    public class ShowMessageListCommand : ICommand
+    public class RemovePriorityMessageCommand : ICommand
     {
-        public ShowMessageListCommand(GuiViewModel guiViewModel)
+        public RemovePriorityMessageCommand(GuiViewModel guiViewModel)
         {
             ViewModel = guiViewModel;
         }
 
-        public GuiViewModel ViewModel { get; }
+        private GuiViewModel ViewModel { get; }
 
         public bool CanExecute(object parameter)
         {
@@ -20,8 +20,8 @@ namespace StoryTree.Gui.Command
 
         public void Execute(object parameter)
         {
-            ViewModel.ShowMessages = ViewModel.MessagesViewModel.MessageList.Count != 0;
-            ViewModel.OnPropertyChanged(nameof(GuiViewModel.ShowMessages));
+            ViewModel.PriorityMessage = null;
+            ViewModel.OnPropertyChanged(nameof(GuiViewModel.PriorityMessage));
         }
 
         public event EventHandler CanExecuteChanged;

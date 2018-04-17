@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using StoryTree.Data.Annotations;
+using StoryTree.Data.Properties;
 using StoryTree.Gui.Command;
 using StoryTree.Messaging;
 
@@ -15,6 +14,7 @@ namespace StoryTree.Gui.ViewModels
     public class GuiViewModel : INotifyPropertyChanged
     {
         private ProjectViewModel projectViewModel;
+        private MessageListViewModel messageListViewModel;
 
         public GuiViewModel() : this(new StoryTreeGui()) { }
 
@@ -37,16 +37,45 @@ namespace StoryTree.Gui.ViewModels
                 var newItem = e.NewItems.OfType<LogMessage>().First();
                 if (newItem.HasPriority)
                 {
-                    LastErrorMessage = newItem;
-                    OnPropertyChanged(nameof(LastErrorMessage));
+                    PriorityMessage = newItem;
+                    OnPropertyChanged(nameof(PriorityMessage));
                 }
-                OnPropertyChanged(nameof(Messages));
+                OnPropertyChanged(nameof(MessagesViewModel));
+            }
+
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                var items = e.OldItems.OfType<LogMessage>();
+                foreach (var logMessage in items)
+                {
+                    if (PriorityMessage == logMessage)
+                    {
+                        PriorityMessage = null;
+                        OnPropertyChanged(nameof(PriorityMessage));
+                    }
+                }
+
+                if (!MessagesViewModel.MessageList.Any())
+                {
+                    ShowMessages = false;
+                    OnPropertyChanged(nameof(ShowMessages));
+                }
+                OnPropertyChanged(nameof(MessagesViewModel));
+            }
+
+            if (e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                PriorityMessage = null;
+                OnPropertyChanged(nameof(PriorityMessage));
+                OnPropertyChanged(nameof(MessagesViewModel));
+                ShowMessages = false;
+                OnPropertyChanged(nameof(ShowMessages));
             }
         }
 
         public bool ShowMessages { get; set; }
 
-        public LogMessage LastErrorMessage { get; set; }
+        public LogMessage PriorityMessage { get; set; }
 
         public GuiProjectServices GuiProjectSercices { get; }
 
@@ -60,7 +89,8 @@ namespace StoryTree.Gui.ViewModels
 
         public ProjectViewModel ProjectViewModel => projectViewModel;
 
-        public ObservableCollection<LogMessage> Messages => Gui.Messages;
+        public MessageListViewModel MessagesViewModel =>
+            messageListViewModel ?? (messageListViewModel = new MessageListViewModel(Gui.Messages));
 
         public string ProjectFilePath
         {
@@ -83,7 +113,7 @@ namespace StoryTree.Gui.ViewModels
 
         public ICommand OpenProjectCommand => new OpenProjectCommand(this);
 
-        public ICommand RemoveLastMessageCommand => new RemoveLastMessageCommand(this);
+        public ICommand RemoveLastMessageCommand => new RemovePriorityMessageCommand(this);
 
         public ICommand ShowMessageListCommand => new ShowMessageListCommand(this);
 
@@ -100,6 +130,10 @@ namespace StoryTree.Gui.ViewModels
                 case nameof(StoryTreeGui.Project):
                     projectViewModel = new ProjectViewModel(Gui.Project);
                     OnPropertyChanged(nameof(ProjectViewModel));
+                    break;
+                case nameof(StoryTreeGui.Messages):
+                    messageListViewModel = null;
+                    OnPropertyChanged(nameof(MessagesViewModel));
                     break;
             }
         }

@@ -3,9 +3,9 @@ using System.Globalization;
 using System.Windows.Data;
 using StoryTree.Messaging;
 
-namespace StoryTree.Gui
+namespace StoryTree.Gui.Converters
 {
-    public class ShouldShowLastErrorConverter : IValueConverter
+    public class ShouldShowPriorityMessageToBoolConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
