@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StoryTree.Data;
+using StoryTree.Data.Properties;
 
 namespace StoryTree.Gui.ViewModels
 {
@@ -50,7 +51,7 @@ namespace StoryTree.Gui.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [Data.Annotations.NotifyPropertyChangedInvocator]
+        [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

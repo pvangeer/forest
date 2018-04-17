@@ -2,9 +2,9 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using StoryTree.Data.Properties;
 using StoryTree.Gui.Command;
 using StoryTree.Messaging;
-using StoryTree.Messaging.Properties;
 
 namespace StoryTree.Gui.ViewModels
 {

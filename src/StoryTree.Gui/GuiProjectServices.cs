@@ -61,6 +61,7 @@ namespace StoryTree.Gui
             if (string.IsNullOrWhiteSpace(guiViewModel.ProjectFilePath))
             {
                 SaveProjectAs();
+                return;
             }
 
             StageProjectAndStore();
