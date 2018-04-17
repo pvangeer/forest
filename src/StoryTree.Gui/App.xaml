@@ -48,9 +48,9 @@
             <Style BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="Button"/>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="DataTemplates/ComboBoxFlatStyle.xaml"/>
-                <ResourceDictionary Source="DataTemplates/TabControlFlatStyle.xaml"/>
-                <ResourceDictionary Source="DataTemplates/ButtonFlatStyleTemplate.xaml"/>
+                <ResourceDictionary Source="DataTemplates/General/ComboBoxFlatStyle.xaml"/>
+                <ResourceDictionary Source="DataTemplates/General/TabControlFlatStyle.xaml"/>
+                <ResourceDictionary Source="DataTemplates/General/ButtonFlatStyleTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

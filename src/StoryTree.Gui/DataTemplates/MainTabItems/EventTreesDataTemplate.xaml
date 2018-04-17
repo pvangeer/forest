@@ -3,9 +3,6 @@
                     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:converters="clr-namespace:StoryTree.Gui.Converters">
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="ComboBoxFlatStyle.xaml"/>
-    </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="EventTreesDataTemplate" DataType="viewModels:ProjectViewModel">
         <DataTemplate.Resources>

@@ -18,14 +18,14 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/GeneralInformationDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/ExpertsDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/EstimationDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/HydraulicsDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/EventTreesDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/TreeEventsDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/MainTabItems/GeneralInformationDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/MainTabItems/ExpertsDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/MainTabItems/EstimationDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/MainTabItems/HydraulicsDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/MainTabItems/EventTreesDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/MainTabItems/TreeEventsDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/EventTreeGalleryItemDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/ResultsDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/MainTabItems/ResultsDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/MessageDataTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 

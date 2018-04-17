@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using StoryTree.Data.Estimations;
 using StoryTree.Gui.ViewModels;
 
-namespace StoryTree.Gui.DataTemplates
+namespace StoryTree.Gui.DataTemplates.MainTabItems
 {
     public class EstimationContentTemplateSelector : DataTemplateSelector
     {
