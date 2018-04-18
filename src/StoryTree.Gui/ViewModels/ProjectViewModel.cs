@@ -156,9 +156,19 @@ namespace StoryTree.Gui.ViewModels
 
         public void RemoveSelectedEventTree()
         {
+            var currentIndex = EventTrees.IndexOf(selectedEventTree);
+
             EventTrees.Remove(SelectedEventTree);
             OnPropertyChanged(nameof(EventTrees));
-            SelectedEventTree = EventTrees.LastOrDefault();
+
+            if (currentIndex == -1 || currentIndex == EventTrees.Count)
+            {
+                SelectedEventTree = EventTrees.LastOrDefault();
+            }
+            else
+            {
+                SelectedEventTree = EventTrees.ElementAt(currentIndex);
+            }
         }
 
         private void EventTreesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
