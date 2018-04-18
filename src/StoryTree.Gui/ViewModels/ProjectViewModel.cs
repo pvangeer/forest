@@ -44,6 +44,12 @@ namespace StoryTree.Gui.ViewModels
             hydraulicsViewModels.CollectionChanged += HydraulicsViewModelsCollectionChanged;
 
             project.EventTrees.CollectionChanged += EventTreesCollectionChanged;
+
+            SelectedEventTree = EventTrees.FirstOrDefault();
+            foreach (var eventTreeViewModel in EventTrees)
+            {
+                eventTreeViewModel.SelectedTreeEvent = eventTreeViewModel.MainTreeEventViewModel;
+            }
         }
 
         public Project Project { get; }
