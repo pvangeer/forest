@@ -169,8 +169,16 @@
                 Header="Gebeurtenissen"
                 Group="{Binding Source={x:Reference EventTreesGroup}}">
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
-                    <fluent:Button Header="Gebeurtenis toevoegen" Size="Large" Command="{Binding ProjectViewModel.AddEventTreeCommand}" />
-                    <fluent:Button Header="Gebeurtenis verwijderen" Size="Large" Command="{Binding ProjectViewModel.RemoveEventTreeCommand}" />
+                    <fluent:Button 
+                        Header="Gebeurtenis toevoegen" 
+                        LargeIcon="/StoryTree.Gui;component\Resources\add-eventtree.png"
+                        Size="Large" 
+                        Command="{Binding ProjectViewModel.AddEventTreeCommand}" />
+                    <fluent:Button 
+                        Header="Gebeurtenis verwijderen" 
+                        LargeIcon="/StoryTree.Gui;component\Resources\remove-eventtree.png"
+                        Size="Large" 
+                        Command="{Binding ProjectViewModel.RemoveEventTreeCommand}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 

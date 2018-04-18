@@ -17,6 +17,7 @@ namespace StoryTree.Data
         public Color Color { get; set; }
 
         public TreeEvent MainTreeEvent { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
