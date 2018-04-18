@@ -155,6 +155,10 @@
     <Compile Include="ViewModels\StorageState.cs" />
     <Compile Include="Command\ShowMessageListCommand.cs" />
     <Compile Include="ViewModels\TreeEventViewModel.cs" />
+    <Page Include="DataTemplates\General\AssessmentSections.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataTemplates\General\ButtonFlatStyleTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

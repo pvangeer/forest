@@ -4,13 +4,6 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
 
-    <x:Array x:Key="AvailableAssessmentSections" Type="{x:Type system:String}">
-        <system:String>1-1</system:String>
-        <system:String>1-2</system:String>
-        <system:String>2-1</system:String>
-        <system:String>2-2</system:String>
-    </x:Array>
-
     <DataTemplate x:Key="GeneralInformationDataTemplate" DataType="viewModels:ProjectViewModel">
         <Grid>
             <Grid.RowDefinitions>
