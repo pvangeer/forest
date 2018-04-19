@@ -26,6 +26,8 @@ namespace StoryTree.Data.Tree
 
         public string Details { get; set; }
 
+        public string Information { get; set; }
+
         public ObservableCollection<ExpertClassEstimation> ClassesProbabilitySpecification { get; }
 
         public Probability FixedProbability { get; set; }
@@ -33,7 +35,7 @@ namespace StoryTree.Data.Tree
         public FragilityCurve FixedFragilityCurve { get; }
 
         public ProbabilitySpecificationType ProbabilitySpecificationType { get; set; }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

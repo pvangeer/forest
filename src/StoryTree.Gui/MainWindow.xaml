@@ -24,8 +24,9 @@
                 <ResourceDictionary Source="/DataTemplates/MainTabItems/HydraulicsDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/MainTabItems/EventTreesDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/MainTabItems/TreeEventsDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/EventTreeGalleryItemDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/MainTabItems/ResultsDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/MainTabItems/TreeEventInformationDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/EventTreeGalleryItemDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/MessageDataTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
@@ -36,7 +37,8 @@
                                                    HydraulicsTemplate="{StaticResource HydraulicsDataTemplate}"
                                                    EventsTemplate="{StaticResource EventTreesDataTemplate}"
                                                    TreeEventsTemplate="{StaticResource TreeEventsTemplate}"
-                                                   ResultsTemplate="{StaticResource ResultsDataTemplate}"/>
+                                                   ResultsTemplate="{StaticResource ResultsDataTemplate}"
+                                                   TreeEventsInformationTemplate="{StaticResource TreeEventInformationDataTemplate}"/>
 
             <Style x:Key="Spinner" TargetType="Image">
                 <Setter Property="Height" Value="24" />
@@ -184,7 +186,7 @@
 
             <fluent:RibbonTabItem
                 Name="TreeEventsTabItem"
-                Header="Faalpaden"
+                Header="Knopen"
                 Group="{Binding Source={x:Reference EventTreesGroup}}">
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:InRibbonGallery 
@@ -203,6 +205,18 @@
                         LargeIcon="/StoryTree.Gui;component\Resources\remove-tree-event.png"
                         Size="Large" 
                         Command="{Binding ProjectViewModel.RemoveTreeEventCommand}" />
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+
+            <fluent:RibbonTabItem
+                Name="TreeEventInformationTabItem"
+                Header="Knoopinformatie"
+                Group="{Binding Source={x:Reference EventTreesGroup}}">
+                <fluent:RibbonGroupBox Header="Gebeurtenissen">
+                    <fluent:InRibbonGallery 
+                        ItemsSource="{Binding ProjectViewModel.EventTreesToEstimate}" 
+                        SelectedItem="{Binding ProjectViewModel.SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
+                        ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 

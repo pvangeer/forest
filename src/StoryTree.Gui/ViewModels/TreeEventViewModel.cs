@@ -89,6 +89,9 @@ namespace StoryTree.Gui.ViewModels
                     OnPropertyChanged(nameof(ProbabilityEstimationTypeIndex));
                     OnPropertyChanged(nameof(EstimationSpecification));
                     break;
+                case nameof(TreeEvent.Information):
+                    OnPropertyChanged(nameof(Information));
+                    break;
             }
         }
 
@@ -184,6 +187,16 @@ namespace StoryTree.Gui.ViewModels
         public TreeEvent[] CriticalPath => TreeEvent == null ? null :
             ParentEventTreeViewModel.MainTreeEventViewModel == null ? null :
             CriticalPathCalculator.GetCriticalPath(ParentEventTreeViewModel.MainTreeEventViewModel.TreeEvent, TreeEvent).ToArray();
+
+        public string Information
+        {
+            get => TreeEvent.Information;
+            set
+            {
+                TreeEvent.Information = value;
+                TreeEvent.OnPropertyChanged(nameof(TreeEvent.Information));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

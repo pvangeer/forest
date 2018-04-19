@@ -31,6 +31,8 @@ namespace StoryTree.Gui.Converters
                     return EstimationTemplate;
                 case nameof(MainWindow.ResultsTabItem):
                     return ResultsTemplate;
+                case nameof(MainWindow.TreeEventInformationTabItem):
+                    return TreeEventsInformationTemplate;
                 default:
                     return null;
             }
@@ -51,8 +53,10 @@ namespace StoryTree.Gui.Converters
 
         public DataTemplate TreeEventsTemplate { get; set; }
 
-        public DataTemplate EstimationTemplate { get; set; }
+        public DataTemplate TreeEventsInformationTemplate { get; set; }
 
+        public DataTemplate EstimationTemplate { get; set; }
+        
         public DataTemplate ResultsTemplate { get; set; }
     }
 }
