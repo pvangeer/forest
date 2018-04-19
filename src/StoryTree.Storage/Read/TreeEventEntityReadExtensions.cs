@@ -34,7 +34,8 @@ namespace StoryTree.Storage.Read
                     ? Probability.NaN
                     : (Probability) (double) entity.FixedProbability,
                 ProbabilitySpecificationType = (ProbabilitySpecificationType) entity.ProbabilitySpecificationTypeId,
-                Summary = entity.Summary
+                Summary = entity.Summary,
+                Information = entity.Information
             };
 
             ReadFragilityCurve(treeEvent, entity.TreeEventFragilityCurveElementEntities, collector);

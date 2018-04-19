@@ -94,6 +94,8 @@
           <Property Name="Summary" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="FixedProbability" Type="real" />
           <Property Name="ProbabilitySpecificationTypeId" Type="integer" Nullable="false" />
+          <Property Name="Information" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Discussion" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
         <EntityType Name="TreeEventFragilityCurveElementEntity">
           <Key>
@@ -496,6 +498,8 @@
           <Property Name="Summary" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="FixedProbability" Type="Double" />
           <Property Name="ProbabilitySpecificationTypeId" Type="Int64" Nullable="false" />
+          <Property Name="Information" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Discussion" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EventTreeEntities" Relationship="TellTheStoryEntities.FK_EventTreeEntity_0_0" FromRole="TreeEventEntity" ToRole="EventTreeEntity" />
           <NavigationProperty Name="ExpertClassEstimationEntities" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_0_0" FromRole="TreeEventEntity" ToRole="ExpertClassEstimationEntity" />
           <NavigationProperty Name="TreeEventEntity1" Relationship="TellTheStoryEntities.FK_TreeEventEntity_0_0" FromRole="TreeEventEntity" ToRole="TreeEventEntity1" />
@@ -764,6 +768,8 @@
           <EntitySetMapping Name="TreeEventEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.TreeEventEntity">
               <MappingFragment StoreEntitySet="TreeEventEntity">
+                <ScalarProperty Name="Discussion" ColumnName="Discussion" />
+                <ScalarProperty Name="Information" ColumnName="Information" />
                 <ScalarProperty Name="ProbabilitySpecificationTypeId" ColumnName="ProbabilitySpecificationTypeId" />
                 <ScalarProperty Name="FixedProbability" ColumnName="FixedProbability" />
                 <ScalarProperty Name="Summary" ColumnName="Summary" />

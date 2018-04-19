@@ -24,7 +24,8 @@ namespace StoryTree.Storage.Create
                 Details = model.Details.DeepClone(),
                 Summary = model.Summary.DeepClone(),
                 FixedProbability = ((double)model.FixedProbability).ToNaNAsNull(),
-                ProbabilitySpecificationTypeId = (int)model.ProbabilitySpecificationType
+                ProbabilitySpecificationTypeId = (int)model.ProbabilitySpecificationType,
+                Information = model.Information.DeepClone()
             };
 
             AddExpertClassEstimations(entity, model, registry);

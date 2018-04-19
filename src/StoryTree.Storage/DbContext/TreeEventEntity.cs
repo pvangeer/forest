@@ -32,6 +32,8 @@ namespace StoryTree.Storage.DbContext
         public string Summary { get; set; }
         public Nullable<double> FixedProbability { get; set; }
         public long ProbabilitySpecificationTypeId { get; set; }
+        public string Information { get; set; }
+        public string Discussion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventTreeEntity> EventTreeEntities { get; set; }
