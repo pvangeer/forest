@@ -79,6 +79,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -112,8 +113,19 @@
                         <xctk:ColorPicker 
                             Grid.Row="2" 
                             Grid.Column="1" 
+                            Margin="0,2,0,2"
                             SelectedColor="{Binding SelectedEventTree.Color, UpdateSourceTrigger=PropertyChanged}"
                             Width="40" HorizontalAlignment="Left"/>
+                        <Label 
+                            Grid.Row="3" 
+                            Grid.Column="0" 
+                            FontWeight="Bold" 
+                            Content="Uitwerken"/>
+                        <CheckBox 
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            IsChecked="{Binding SelectedEventTree.NeedsSpecification, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                 </Grid>
                 <Label Grid.Row="1" Grid.Column="0" Content="Details" FontWeight="Bold"/>

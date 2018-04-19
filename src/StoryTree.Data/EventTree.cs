@@ -18,6 +18,8 @@ namespace StoryTree.Data
 
         public TreeEvent MainTreeEvent { get; set; }
 
+        public bool NeedsSpecification { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

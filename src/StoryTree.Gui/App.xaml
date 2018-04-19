@@ -50,7 +50,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DataTemplates/General/ComboBoxFlatStyle.xaml"/>
                 <ResourceDictionary Source="DataTemplates/General/TabControlFlatStyle.xaml"/>
-                <ResourceDictionary Source="DataTemplates/General/ButtonFlatStyleTemplate.xaml"/>
                 <ResourceDictionary Source="DataTemplates/General/AssessmentSections.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

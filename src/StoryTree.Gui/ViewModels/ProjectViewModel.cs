@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -53,6 +54,8 @@ namespace StoryTree.Gui.ViewModels
         }
 
         public Project Project { get; }
+
+        public IEnumerable<EventTreeViewModel> EventTreesToEstimate => EventTrees.Where(e => e.NeedsSpecification);
 
         public ObservableCollection<EventTreeViewModel> EventTrees { get; }
 
@@ -157,6 +160,7 @@ namespace StoryTree.Gui.ViewModels
             var eventTree = new EventTree {Name = "Nieuwe gebeurtenis"};
             Project.EventTrees.Add(eventTree);
             OnPropertyChanged(nameof(EventTrees));
+            OnPropertyChanged(nameof(EventTreesToEstimate));
             SelectedEventTree = EventTrees.FirstOrDefault(et => et.IsViewModelFor(eventTree));
         }
 
@@ -166,6 +170,7 @@ namespace StoryTree.Gui.ViewModels
 
             EventTrees.Remove(SelectedEventTree);
             OnPropertyChanged(nameof(EventTrees));
+            OnPropertyChanged(nameof(EventTreesToEstimate));
 
             if (currentIndex == -1 || currentIndex == EventTrees.Count)
             {
@@ -266,6 +271,9 @@ namespace StoryTree.Gui.ViewModels
                     OnPropertyChanged(nameof(SelectedObject));
                     addTreeEventCommand.FireCanExecuteChanged();
                     removeTreeEventCommand.FireCanExecuteChanged();
+                    break;
+                case nameof(EventTreeViewModel.NeedsSpecification):
+                    OnPropertyChanged(nameof(EventTreesToEstimate));
                     break;
             }
         }
