@@ -195,6 +195,7 @@ namespace StoryTree.Gui
                             }
                         },
                         Color = Colors.CornflowerBlue,
+                        NeedsSpecification = true
                     }
                 },
                 Experts =

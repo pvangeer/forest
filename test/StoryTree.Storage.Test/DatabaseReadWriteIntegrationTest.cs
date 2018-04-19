@@ -69,6 +69,7 @@ namespace StoryTree.Storage.Test
                 Assert.AreEqual(tree1.Summary, tree2.Summary);
                 Assert.AreEqual(tree1.Details, tree2.Details);
                 Assert.AreEqual(tree1.Color, tree2.Color);
+                Assert.AreEqual(tree1.NeedsSpecification, tree2.NeedsSpecification);
                 AssertEqualTreeEvents(tree1.MainTreeEvent, tree2.MainTreeEvent);
             }
         }

@@ -24,7 +24,8 @@ namespace StoryTree.Storage.Create
                 Details = model.Details.DeepClone(),
                 Summary = model.Summary.DeepClone(),
                 Color = model.Color.ToInt64(),
-                TreeEventEntity = model.MainTreeEvent.Create(registry)
+                TreeEventEntity = model.MainTreeEvent.Create(registry),
+                NeedsSpecification = model.NeedsSpecification ? 1 : 0
             };
 
             registry.Register(model, entity);

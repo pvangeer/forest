@@ -17,6 +17,7 @@
           <Property Name="MainTreeEventId" Type="integer" />
           <Property Name="ProjectId" Type="integer" Nullable="false" />
           <Property Name="Order" Type="integer" Nullable="false" />
+          <Property Name="NeedsSpecification" Type="integer" Nullable="false" />
         </EntityType>
         <EntityType Name="ExpertClassEstimationEntity">
           <Key>
@@ -401,6 +402,7 @@
           <Property Name="MainTreeEventId" Type="Int64" />
           <Property Name="ProjectId" Type="Int64" Nullable="false" />
           <Property Name="Order" Type="Int64" Nullable="false" />
+          <Property Name="NeedsSpecification" Type="Int64" Nullable="false" />
           <NavigationProperty Name="TreeEventEntity" Relationship="TellTheStoryEntities.FK_EventTreeEntity_0_0" FromRole="EventTreeEntity" ToRole="TreeEventEntity" />
           <NavigationProperty Name="ProjectEntity" Relationship="TellTheStoryEntities.FK_EventTreeEntity_1_0" FromRole="EventTreeEntity" ToRole="ProjectEntity" />
         </EntityType>
@@ -678,6 +680,7 @@
           <EntitySetMapping Name="EventTreeEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.EventTreeEntity">
               <MappingFragment StoreEntitySet="EventTreeEntity">
+                <ScalarProperty Name="NeedsSpecification" ColumnName="NeedsSpecification" />
                 <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="MainTreeEventId" ColumnName="MainTreeEventId" />

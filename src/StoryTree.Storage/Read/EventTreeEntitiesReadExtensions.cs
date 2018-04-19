@@ -28,7 +28,8 @@ namespace StoryTree.Storage.Read
                 Details = entity.Details,
                 Summary = entity.Summary,
                 MainTreeEvent = entity.TreeEventEntity.Read(collector),
-                Color = entity.Color.ToColor()
+                Color = entity.Color.ToColor(),
+                NeedsSpecification = entity.NeedsSpecification == 1
             };
 
             collector.Collect(entity,eventTree);
