@@ -193,8 +193,16 @@
                         ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Knopen">
-                    <fluent:Button Header="Knoop toevoegen" Size="Large" Command="{Binding ProjectViewModel.AddTreeEventCommand}" />
-                    <fluent:Button Header="Knoop verwijderen" Size="Large" Command="{Binding ProjectViewModel.RemoveTreeEventCommand}" />
+                    <fluent:Button 
+                        Header="Toevoegen" 
+                        LargeIcon="/StoryTree.Gui;component\Resources\add-tree-event.png"
+                        Size="Large" 
+                        Command="{Binding ProjectViewModel.AddTreeEventCommand}" />
+                    <fluent:Button 
+                        Header="Verwijderen" 
+                        LargeIcon="/StoryTree.Gui;component\Resources\remove-tree-event.png"
+                        Size="Large" 
+                        Command="{Binding ProjectViewModel.RemoveTreeEventCommand}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 

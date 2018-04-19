@@ -73,6 +73,16 @@ namespace StoryTree.Gui.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add_tree_event {
+            get {
+                object obj = ResourceManager.GetObject("add_tree_event", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EventTree {
             get {
                 object obj = ResourceManager.GetObject("EventTree", resourceCulture);
@@ -96,6 +106,16 @@ namespace StoryTree.Gui.Properties {
         internal static System.Drawing.Bitmap remove_eventtree {
             get {
                 object obj = ResourceManager.GetObject("remove_eventtree", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap remove_tree_event {
+            get {
+                object obj = ResourceManager.GetObject("remove_tree_event", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
