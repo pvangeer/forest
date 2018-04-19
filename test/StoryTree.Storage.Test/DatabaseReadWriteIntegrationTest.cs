@@ -87,6 +87,7 @@ namespace StoryTree.Storage.Test
             Assert.AreEqual(treeEvent1.FixedProbability, treeEvent2.FixedProbability);
             Assert.AreEqual(treeEvent1.Summary, treeEvent2.Summary);
             Assert.AreEqual(treeEvent1.Information, treeEvent2.Information);
+            Assert.AreEqual(treeEvent1.Discussion, treeEvent2.Discussion);
 
             AssertEqualTreeEvents(treeEvent1.PassingEvent, treeEvent2.PassingEvent);
             AssertEqualTreeEvents(treeEvent1.FailingEvent, treeEvent2.FailingEvent);

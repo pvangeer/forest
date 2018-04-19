@@ -92,6 +92,9 @@ namespace StoryTree.Gui.ViewModels
                 case nameof(TreeEvent.Information):
                     OnPropertyChanged(nameof(Information));
                     break;
+                case nameof(TreeEvent.Discussion):
+                    OnPropertyChanged(nameof(Discussion));
+                    break;
             }
         }
 
@@ -195,6 +198,16 @@ namespace StoryTree.Gui.ViewModels
             {
                 TreeEvent.Information = value;
                 TreeEvent.OnPropertyChanged(nameof(TreeEvent.Information));
+            }
+        }
+
+        public string Discussion
+        {
+            get => TreeEvent.Discussion;
+            set
+            {
+                TreeEvent.Discussion = value;
+                TreeEvent.OnPropertyChanged(nameof(TreeEvent.Discussion));
             }
         }
 

@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
                     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
-                    xmlns:mainTabItems="clr-namespace:StoryTree.Gui.DataTemplates.MainTabItems">
+                    xmlns:mainTabItems="clr-namespace:StoryTree.Gui.DataTemplates.MainTabItems"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="TreeEventsListViewItemDataTemplate.xaml"/>
@@ -16,83 +17,57 @@
                 <DataTemplate.Resources>
                     <DataTemplate DataType="viewModels:TreeEventViewModel" x:Key="TreeEventEstimationSpecificationDataTempalte">
                         <DataTemplate.Resources>
-                            <mainTabItems:EstimationContentTemplateSelector x:Key="ContentTemplateSelector" />
+                            <mainTabItems:EstimationContentTemplateSelector x:Key="EstimationContentTemplateSelector" />
                         </DataTemplate.Resources>
 
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label 
-                                    Width="100"
-                                    Grid.Column="0" 
-                                    FontWeight="Bold" 
-                                    Content="Specificatie"/>
-                                <ComboBox 
-                                    Grid.Column="1" 
-                                    Margin="1"
-                                    Width="200"
-                                    HorizontalAlignment="Left"
-                                    Style="{StaticResource ComboBoxFlatStyle}"
-                                    SelectedIndex="{Binding ProbabilityEstimationTypeIndex, UpdateSourceTrigger=PropertyChanged}"
-                                    ItemsSource="{Binding EstimationSpecificationOptions}" />
-                            </Grid>
+                        <ScrollViewer>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label 
+                                        Width="100"
+                                        Grid.Column="0" 
+                                        FontWeight="Bold" 
+                                        Content="Specificatie"/>
+                                    <ComboBox 
+                                        Grid.Column="1" 
+                                        Margin="1"
+                                        Width="200"
+                                        HorizontalAlignment="Left"
+                                        Style="{StaticResource ComboBoxFlatStyle}"
+                                        SelectedIndex="{Binding ProbabilityEstimationTypeIndex, UpdateSourceTrigger=PropertyChanged}"
+                                        ItemsSource="{Binding EstimationSpecificationOptions}" />
+                                </Grid>
 
-                            <ContentPresenter 
-                                Grid.Row="1" 
-                                Content="{Binding EstimationSpecification}" 
-                                ContentTemplateSelector="{StaticResource ContentTemplateSelector}">
-                                <ContentPresenter.Resources>
-                                    <DataTemplate x:Key="ClassEstimationTemplate" DataType="{x:Type viewModels:ClassesProbabilitySpecificationViewModel}">
-                                        <TabControl TabStripPlacement="Top" Style="{StaticResource TabControlFlatStyle}">
-                                            <TabItem Header="Gemiddelde">
-                                                <DataGrid ItemsSource="{Binding MeanEstimationsList}" Style="{StaticResource DataGridStyle}"/>
-                                            </TabItem>
-                                            <TabItem Header="Ondergrens">
-                                                <DataGrid ItemsSource="{Binding MinEstimationsList}" Style="{StaticResource DataGridStyle}"/>
-                                            </TabItem>
-                                            <TabItem Header="Bovengrens">
-                                                <DataGrid ItemsSource="{Binding MaxEstimationsList}" Style="{StaticResource DataGridStyle}"/>
-                                            </TabItem>
-                                        </TabControl>
-                                    </DataTemplate>
-                                    <DataTemplate x:Key="FixedValueEstimationTemplate" DataType="{x:Type viewModels:FixedProbabilitySpecificationViewModel}">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Label 
-                                                Width="100"
-                                                HorizontalAlignment="Left" 
-                                                Grid.Column="0" 
-                                                Content="Kans" 
-                                                FontWeight="Bold"/>
-                                            <TextBox 
-                                                Style="{StaticResource TextBoxStyle}"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Top"
-                                                TextAlignment="Left"
-                                                Width="100"
-                                                Height="25"
-                                                Grid.Column="1" 
-                                                Text="{Binding FixedProbability, Converter={StaticResource ProbabilityToStringConverter}}"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ContentPresenter.Resources>
-                            </ContentPresenter>
-                        </Grid>
+                                <ContentPresenter 
+                                    Grid.Row="1" 
+                                    Content="{Binding EstimationSpecification}" 
+                                    ContentTemplateSelector="{StaticResource EstimationContentTemplateSelector}">
+                                    <ContentPresenter.Resources>
+                                        <ResourceDictionary>
+                                            <ResourceDictionary.MergedDictionaries>
+                                                <ResourceDictionary Source="Estimation/FixedValueEstimationTemplate.xaml"/>
+                                                <ResourceDictionary Source="Estimation/ClassEstimationTemplate.xaml"/>
+                                            </ResourceDictionary.MergedDictionaries>
+                                        </ResourceDictionary>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                            </Grid>
+                        </ScrollViewer>
                     </DataTemplate>
                 </DataTemplate.Resources>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" MinWidth="100"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" MinWidth="150"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*" MinWidth="150"/>
                     </Grid.ColumnDefinitions>
@@ -117,11 +92,31 @@
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
-                    <GridSplitter Grid.Column="1" Width="10"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   />
+                    <GridSplitter Grid.Column="1" Width="10"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                     <ContentPresenter 
                         Grid.Column="2" 
                         Content="{Binding SelectedTreeEvent}"
                         ContentTemplate="{StaticResource TreeEventEstimationSpecificationDataTempalte}" />
+                    <GridSplitter Grid.Column="3" Width="10"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <Grid Grid.Column="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label 
+                            Grid.Row="0"
+                            FontWeight="Bold"
+                            Content="Discussie"
+                            HorizontalContentAlignment="Left"/>
+                        <xctk:RichTextBox 
+                            Style="{StaticResource RichtTextBoxStyle}"
+                            Grid.Row="1" 
+                            Text="{Binding SelectedTreeEvent.Discussion}">
+                            <xctk:RichTextBoxFormatBarManager.FormatBar>
+                                <xctk:RichTextBoxFormatBar/>
+                            </xctk:RichTextBoxFormatBarManager.FormatBar>
+                        </xctk:RichTextBox>
+                    </Grid>
                 </Grid>
             </DataTemplate>
         </DataTemplate.Resources>

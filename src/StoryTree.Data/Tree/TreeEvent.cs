@@ -28,6 +28,8 @@ namespace StoryTree.Data.Tree
 
         public string Information { get; set; }
 
+        public string Discussion { get; set; }
+
         public ObservableCollection<ExpertClassEstimation> ClassesProbabilitySpecification { get; }
 
         public Probability FixedProbability { get; set; }

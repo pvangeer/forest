@@ -35,7 +35,8 @@ namespace StoryTree.Storage.Read
                     : (Probability) (double) entity.FixedProbability,
                 ProbabilitySpecificationType = (ProbabilitySpecificationType) entity.ProbabilitySpecificationTypeId,
                 Summary = entity.Summary,
-                Information = entity.Information
+                Information = entity.Information,
+                Discussion = entity.Discussion
             };
 
             ReadFragilityCurve(treeEvent, entity.TreeEventFragilityCurveElementEntities, collector);
