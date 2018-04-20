@@ -81,6 +81,8 @@
           <Property Name="ProjectInformation" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="ProjectLeaderId" Type="integer" />
           <Property Name="ProjectId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="EndDate" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
         </EntityType>
         <EntityType Name="TreeEventEntity">
           <Key>
@@ -481,6 +483,8 @@
           <Property Name="ProjectInformation" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="ProjectLeaderId" Type="Int64" />
           <Property Name="ProjectId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="EndDate" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EventTreeEntities" Relationship="TellTheStoryEntities.FK_EventTreeEntity_1_0" FromRole="ProjectEntity" ToRole="EventTreeEntity" />
           <NavigationProperty Name="ExpertEntities" Relationship="TellTheStoryEntities.FK_ExpertEntity_0_0" FromRole="ProjectEntity" ToRole="ExpertEntity" />
           <NavigationProperty Name="HydraulicConditionElementEntities" Relationship="TellTheStoryEntities.FK_HydraulicConditionElementEntity_0_0" FromRole="ProjectEntity" ToRole="HydraulicConditionElementEntity" />
@@ -756,6 +760,8 @@
           <EntitySetMapping Name="ProjectEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.ProjectEntity">
               <MappingFragment StoreEntitySet="ProjectEntity">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="ProjectLeaderId" ColumnName="ProjectLeaderId" />
                 <ScalarProperty Name="ProjectInformation" ColumnName="ProjectInformation" />

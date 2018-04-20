@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -154,6 +155,25 @@ namespace StoryTree.Gui.ViewModels
 
         public StorageState BusyIndicator { get; set; }
 
+        public DateTime StartDate
+        {
+            get => Project.StarteDate;
+            set
+            {
+                Project.StarteDate = value;
+                Project.OnPropertyChanged(nameof(Project.StarteDate));
+            }
+        }
+
+        public DateTime EndDate
+        {
+            get => Project.EndDate;
+            set
+            {
+                Project.EndDate = value;
+                Project.OnPropertyChanged(nameof(Project.EndDate));
+            }
+        }
 
         public void AddNewEventTree()
         {

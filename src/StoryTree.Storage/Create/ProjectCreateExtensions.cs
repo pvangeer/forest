@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using StoryTree.Data;
 using StoryTree.Storage.DbContext;
 
@@ -19,7 +20,9 @@ namespace StoryTree.Storage.Create
                 Description = project.Description.DeepClone(),
                 AssessmentSection = project.AssessmentSection.DeepClone(),
                 ProjectInformation = project.ProjectInformation.DeepClone(),
-                PersonEntity = project.ProjectLeader.Create(registry)
+                PersonEntity = project.ProjectLeader.Create(registry),
+                StartDate = project.StarteDate.ToString(CultureInfo.InvariantCulture.DateTimeFormat),
+                EndDate = project.EndDate.ToString(CultureInfo.InvariantCulture.DateTimeFormat)
             };
 
             AddEntitiesForExperts(project, entity, registry);

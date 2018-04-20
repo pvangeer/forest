@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace StoryTree.Data
             EventTrees = new ObservableCollection<EventTree>();
             Experts = new ObservableCollection<Expert>();
             HydraulicConditions = new ObservableCollection<HydraulicCondition>();
+            StarteDate = DateTime.Now.Date;
+            EndDate = StarteDate.AddDays(4*7);
         }
 
         public string Name { get; set; }
@@ -38,6 +41,10 @@ namespace StoryTree.Data
 
         public IEnumerable<double> WaterLevels => HydraulicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w);
 
+        public DateTime StarteDate { get; set; }
+
+        public DateTime EndDate { get; set; }
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

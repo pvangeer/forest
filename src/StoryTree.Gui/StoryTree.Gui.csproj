@@ -133,6 +133,7 @@
     <Compile Include="GuiProjectServices.cs" />
     <Compile Include="Converters\MessageListToLabelConverter.cs" />
     <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
+    <Compile Include="SelectTodayCommand.cs" />
     <Compile Include="StoryTreeGui.cs" />
     <Compile Include="TestDataGenerator.cs" />
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
