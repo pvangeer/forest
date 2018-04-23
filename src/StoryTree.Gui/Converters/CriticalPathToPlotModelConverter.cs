@@ -16,7 +16,7 @@ namespace StoryTree.Gui.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (ExtractInput(values, out var hydraulics, out var curves, out var criticalPath))
+            if (ExtractInput(values, out var hydraulics, out var pathElements, out var criticalPath))
             {
                 return values;
             }
@@ -32,10 +32,10 @@ namespace StoryTree.Gui.Converters
             });
 
             var orderedWaterLevels = hydraulics.Select(h => h.WaterLevel).Distinct().ToArray();
-            var lowerCurves = criticalPath.Select(p => p.GetLowerFragilityCurve(orderedWaterLevels)).ToArray();
-            var lowerCurve = ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics, lowerCurves);
+            var lowerElements = pathElements.Select(p => new CriticalPathElement(p.Element, p.Element.GetLowerFragilityCurve(orderedWaterLevels), p.ElementFails)).ToArray();
+            var lowerCurve = ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics, lowerElements);
 
-            var upperCurves = criticalPath.Select(p => p.GetUpperFragilityCurves(orderedWaterLevels)).ToArray();
+            var upperCurves = pathElements.Select(p => new CriticalPathElement(p.Element, p.Element.GetUpperFragilityCurves(orderedWaterLevels), p.ElementFails)).ToArray();
             var upperCurve = ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics, upperCurves);
 
             var polygonDatas = new List<PolygonData>();
@@ -54,11 +54,10 @@ namespace StoryTree.Gui.Converters
                 Color = OxyColors.AliceBlue
             });
 
-            for (int i = 0; i < curves.Length; i++)
+            for (int i = 0; i < pathElements.Length; i++)
             {
                 var curve = new FragilityCurveViewModel(
-                    ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics,
-                        curves.Take(i+1).ToArray()));
+                    ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics,pathElements.Take(i+1).ToArray()));
 
                 plotModel.Series.Add(new LineSeries
                 {

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using StoryTree.Data;
 using StoryTree.Data.Hydraulics;
+using StoryTree.Gui.Converters;
 
 namespace StoryTree.Calculators
 {
     public static class ClassEstimationFragilityCurveCalculator
     {
-        public static Probability CalculateProbability(HydraulicCondition[] conditions, FragilityCurve[] treeEventCurves)
+        public static Probability CalculateProbability(HydraulicCondition[] conditions, CriticalPathElement[] treeEventCurves)
         {
             return CalculateProbability(CalculateCombinedProbabilityFragilityCurve(conditions, treeEventCurves));
         }
@@ -18,7 +19,7 @@ namespace StoryTree.Calculators
             return (Probability)partialProbabilityCurve.Sum(p => p.Probability);
         }
 
-        public static FragilityCurve CalculateCombinedProbabilityFragilityCurve(HydraulicCondition[] conditions, FragilityCurve[] treeEventCurves)
+        public static FragilityCurve CalculateCombinedProbabilityFragilityCurve(HydraulicCondition[] conditions, CriticalPathElement[] treeEventCurves)
         {
             if (!CheckProbabilitiesAreEqual(conditions, treeEventCurves))
             {
@@ -44,9 +45,9 @@ namespace StoryTree.Calculators
             return curve;
         }
 
-        public static FragilityCurve CalculateCombinedFragilityCurve(HydraulicCondition[] conditions, FragilityCurve[] treeEventCurves)
+        public static FragilityCurve CalculateCombinedFragilityCurve(HydraulicCondition[] conditions, CriticalPathElement[] criticalPathElements)
         {
-            if (!CheckProbabilitiesAreEqual(treeEventCurves))
+            if (!CheckProbabilitiesAreEqual(criticalPathElements))
             {
                 throw new ArgumentOutOfRangeException();
             }
@@ -54,36 +55,39 @@ namespace StoryTree.Calculators
             var curve = new FragilityCurve();
             foreach (var condition in conditions)
             {
-                curve.Add(new FragilityCurveElement(condition.WaterLevel, CalculateConditionalProbability(condition.WaterLevel, treeEventCurves)));
+                curve.Add(new FragilityCurveElement(condition.WaterLevel, CalculateConditionalProbability(condition.WaterLevel, criticalPathElements)));
             }
 
             return curve;
         }
 
-        private static Probability CalculateConditionalProbability(double waterLevel, FragilityCurve[] treeEventCurves)
+        private static Probability CalculateConditionalProbability(double waterLevel, CriticalPathElement[] criticalPathElements)
         {
             var probability = (Probability)1.0;
-            foreach (var fragilityCurve in treeEventCurves)
+            foreach (var criticalPathElement in criticalPathElements)
             {
-                var fragilityCurveElement = fragilityCurve.FirstOrDefault(e => Math.Abs(e.WaterLevel - waterLevel) < 1e-8);
+                var fragilityCurveElement = criticalPathElement.FragilityCurve.FirstOrDefault(e => Math.Abs(e.WaterLevel - waterLevel) < 1e-8);
                 if (fragilityCurveElement == null)
                 {
                     throw new ArgumentException();
                 }
-                var estimatedProbabilityForTreeEvent = fragilityCurveElement.Probability;
+
+                var estimatedProbabilityForTreeEvent = criticalPathElement.ElementFails
+                    ? fragilityCurveElement.Probability
+                    : 1 - fragilityCurveElement.Probability;
                 probability = probability * estimatedProbabilityForTreeEvent;
             }
 
             return probability;
         }
 
-        private static bool CheckProbabilitiesAreEqual(FragilityCurve[] treeEventCurves)
+        private static bool CheckProbabilitiesAreEqual(CriticalPathElement[] treeEventCurves)
         {
             //
             return true;
         }
 
-        private static bool CheckProbabilitiesAreEqual(IEnumerable<HydraulicCondition> hydraulicConditions, IEnumerable<FragilityCurve> treeEventCurves)
+        private static bool CheckProbabilitiesAreEqual(IEnumerable<HydraulicCondition> hydraulicConditions, IEnumerable<CriticalPathElement> treeEventCurves)
         {
             //
             return true;

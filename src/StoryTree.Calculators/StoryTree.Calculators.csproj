@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="ClassEstimationFragilityCurveCalculator.cs" />
     <Compile Include="CriticalPathCalculator.cs" />
+    <Compile Include="CriticalPathElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

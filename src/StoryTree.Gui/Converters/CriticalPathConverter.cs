@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using StoryTree.Data;
@@ -9,10 +10,10 @@ namespace StoryTree.Gui.Converters
 {
     public class CriticalPathConverter
     {
-        protected static bool ExtractInput(object[] values, out HydraulicCondition[] hydraulicConditions, out FragilityCurve[] curves, out TreeEvent[] treeEvents)
+        protected static bool ExtractInput(object[] values, out HydraulicCondition[] hydraulicConditions, out CriticalPathElement[] elements, out TreeEvent[] treeEvents)
         {
             hydraulicConditions = null;
-            curves = new FragilityCurve[] { };
+            elements = new CriticalPathElement[] { };
             treeEvents = new TreeEvent[] { };
 
             if (values.Length != 2)
@@ -30,7 +31,19 @@ namespace StoryTree.Gui.Converters
             var orderedWaterLevels = hydraulicConditionViewModels.Select(h => h.WaterLevel).Distinct();
 
             hydraulicConditions = hydraulicConditionViewModels.Select(vm => vm.HydraulicCondition).OrderBy(c => c.WaterLevel).ToArray();
-            curves = criticalPath.Select(p => p.GetFragilityCurve(orderedWaterLevels)).ToArray();
+            var allElements = new List<CriticalPathElement>();
+            for (int i = 0; i < criticalPath.Length; i++)
+            {
+                var failElement = true;
+                if (i < criticalPath.Length - 1)
+                {
+                    failElement = criticalPath[i].FailingEvent != null && criticalPath[i].FailingEvent == criticalPath[i + 1];
+                }
+
+                allElements.Add(new CriticalPathElement(criticalPath[i],criticalPath[i].GetFragilityCurve(orderedWaterLevels), failElement));
+            }
+
+            elements = allElements.ToArray();
             treeEvents = criticalPath;
             return false;
         }
