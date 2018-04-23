@@ -16,7 +16,12 @@ namespace StoryTree.Gui.Command
 
         public override void Execute(object parameter)
         {
-            ProjectViewModel?.SelectedEventTree.AddTreeEvent(ProjectViewModel?.SelectedTreeEvent, TreeEventType.Failing);
+            var treeEventType = TreeEventType.Failing;
+            if (parameter is TreeEventType treeEventTypeCasted)
+            {
+                treeEventType = treeEventTypeCasted;
+            }
+            ProjectViewModel?.SelectedEventTree.AddTreeEvent(ProjectViewModel?.SelectedTreeEvent, treeEventType);
         }
     }
 }

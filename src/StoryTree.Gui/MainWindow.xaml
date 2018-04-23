@@ -7,6 +7,7 @@
     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
     xmlns:dataTemplates="clr-namespace:StoryTree.Gui.DataTemplates"
     xmlns:gui="clr-namespace:StoryTree.Gui"
+    xmlns:services="clr-namespace:StoryTree.Data.Services;assembly=StoryTree.Data"
     Title="Gebeurtenissenboom" 
     Height="600" 
     Width="900" 
@@ -196,10 +197,17 @@
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Knopen">
                     <fluent:Button 
-                        Header="Toevoegen" 
+                        Header="Toevoegen (falen)" 
                         LargeIcon="/StoryTree.Gui;component\Resources\add-tree-event.png"
                         Size="Large" 
-                        Command="{Binding ProjectViewModel.AddTreeEventCommand}" />
+                        Command="{Binding ProjectViewModel.AddTreeEventCommand}" 
+                        CommandParameter="{x:Static services:TreeEventType.Failing}"/>
+                    <fluent:Button 
+                        Header="Toevoegen (niet falen)"
+                        LargeIcon="/StoryTree.Gui;component\Resources\add-tree-event.png"
+                        Size="Large" 
+                        Command="{Binding ProjectViewModel.AddTreeEventCommand}" 
+                        CommandParameter="{x:Static services:TreeEventType.Passing}"/>
                     <fluent:Button 
                         Header="Verwijderen" 
                         LargeIcon="/StoryTree.Gui;component\Resources\remove-tree-event.png"
