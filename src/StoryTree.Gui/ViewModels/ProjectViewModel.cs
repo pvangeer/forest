@@ -246,7 +246,6 @@ namespace StoryTree.Gui.ViewModels
                 {
                     Project.HydraulicConditions.Add(item.HydraulicCondition);
                 }
-                Project.OnPropertyChanged(nameof(Project.WaterLevels));
             }
 
             if (e.Action == NotifyCollectionChangedAction.Remove)
@@ -255,7 +254,6 @@ namespace StoryTree.Gui.ViewModels
                 {
                     Project.HydraulicConditions.Remove(item.HydraulicCondition);
                 }
-                Project.OnPropertyChanged(nameof(Project.WaterLevels));
             }
         }
 

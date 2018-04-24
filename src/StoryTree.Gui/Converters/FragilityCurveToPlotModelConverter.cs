@@ -11,14 +11,14 @@ using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui.Converters
 {
-    public class HydraulicConditionsToPlotModelConverter : IValueConverter
+    public class FragilityCurveToPlotModelConverter : IValueConverter
     {
         private NotifyCollectionChangedEventHandler conditionCollectionChangedHandler;
         private PropertyChangedEventHandler hydraulicConditionPropertyChangedHandler;
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is ObservableCollection<HydraulicConditionViewModel> conditions))
+            if (!(value is ObservableCollection<FragilityCurveElementViewModel> conditions))
             {
                 return null;
             }
@@ -39,8 +39,8 @@ namespace StoryTree.Gui.Converters
                 Color = OxyColors.CornflowerBlue,
                 MarkerSize = 0,
                 StrokeThickness = 2,
-                DataFieldX = nameof(HydraulicConditionViewModel.ProbabilityDouble),
-                DataFieldY = nameof(HydraulicConditionViewModel.WaterLevel)
+                DataFieldX = nameof(FragilityCurveElementViewModel.ProbabilityDouble),
+                DataFieldY = nameof(FragilityCurveElementViewModel.WaterLevel)
             });
 
             conditionCollectionChangedHandler = (o,e) => ConditionsCollectionChanged(conditions, plotModel);
@@ -60,7 +60,7 @@ namespace StoryTree.Gui.Converters
             plotModel.InvalidatePlot(true);
         }
 
-        private void ConditionsCollectionChanged(ObservableCollection<HydraulicConditionViewModel> conditions, PlotModel plotModel)
+        private void ConditionsCollectionChanged(ObservableCollection<FragilityCurveElementViewModel> conditions, PlotModel plotModel)
         {
             foreach (var hydraulicConditionViewModel in conditions)
             {

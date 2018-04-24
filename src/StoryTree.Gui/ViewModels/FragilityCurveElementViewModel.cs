@@ -16,7 +16,26 @@ namespace StoryTree.Gui.ViewModels
 
         public double ProbabilityDouble => FragilityCurveElement.Probability;
 
-        public double WaterLevel => FragilityCurveElement.WaterLevel;
+        public double WaterLevel
+        {
+            get => FragilityCurveElement.WaterLevel;
+            set
+            {
+                FragilityCurveElement.WaterLevel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Probability Probability
+        {
+            get => FragilityCurveElement.Probability;
+            set
+            {
+                FragilityCurveElement.Probability = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(ProbabilityDouble));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

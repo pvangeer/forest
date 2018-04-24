@@ -24,7 +24,7 @@ namespace StoryTree.Gui.ViewModels
                 case ProbabilitySpecificationType.FixedValue:
                     return new FixedProbabilitySpecificationViewModel(treeEvent);
                 case ProbabilitySpecificationType.FixedFreqeuncy:
-                    throw new NotImplementedException();
+                    return new FixedFragilityCurveSpecificationViewModel(treeEvent, Project);
                 default:
                     throw new InvalidEnumArgumentException();
             }

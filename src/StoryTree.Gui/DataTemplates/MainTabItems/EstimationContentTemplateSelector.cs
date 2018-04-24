@@ -28,7 +28,7 @@ namespace StoryTree.Gui.DataTemplates.MainTabItems
                 case ProbabilitySpecificationType.FixedValue:
                     return contentPresenter.Resources["FixedValueEstimationTemplate"] as DataTemplate;
                 case ProbabilitySpecificationType.FixedFreqeuncy:
-                    throw new NotImplementedException();
+                    return contentPresenter.Resources["FixedFragilityCurveEstimationTemplate"] as DataTemplate; 
                 default:
                     throw new NotImplementedException();
             }

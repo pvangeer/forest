@@ -149,7 +149,7 @@
     <Compile Include="Command\AddTreeEventCommand.cs" />
     <Compile Include="Command\EventTreeCommand.cs" />
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
-    <Compile Include="Converters\HydraulicConditionsToPlotModelConverter.cs" />
+    <Compile Include="Converters\FragilityCurveToPlotModelConverter.cs" />
     <Compile Include="Converters\EventTreesToCountConverter.cs" />
     <Compile Include="DataTemplates\MainTabItems\EventTree\EventTreeGraphLayout.cs" />
     <Compile Include="GuiProjectServices.cs" />
@@ -165,6 +165,7 @@
     <Compile Include="ViewModels\EventTreeViewModel.cs" />
     <Compile Include="ViewModels\ExpertViewModel.cs" />
     <Compile Include="Command\FileNewCommnd.cs" />
+    <Compile Include="ViewModels\FixedFragilityCurveSpecificationViewModel.cs" />
     <Compile Include="ViewModels\FixedProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\FragilityCurveElementViewModel.cs" />
     <Compile Include="ViewModels\FragilityCurveViewModel.cs" />
@@ -200,6 +201,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataTemplates\MainTabItems\Estimation\ClassEstimationTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\Estimation\FixedFragilityCurveEstimationTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

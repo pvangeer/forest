@@ -56,6 +56,7 @@
                                             <ResourceDictionary.MergedDictionaries>
                                                 <ResourceDictionary Source="Estimation/FixedValueEstimationTemplate.xaml"/>
                                                 <ResourceDictionary Source="Estimation/ClassEstimationTemplate.xaml"/>
+                                                <ResourceDictionary Source="Estimation/FixedFragilityCurveEstimationTemplate.xaml"/>
                                             </ResourceDictionary.MergedDictionaries>
                                         </ResourceDictionary>
                                     </ContentPresenter.Resources>

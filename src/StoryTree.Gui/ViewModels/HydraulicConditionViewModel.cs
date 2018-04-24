@@ -1,44 +1,17 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using StoryTree.Data;
-using StoryTree.Data.Hydraulics;
-using StoryTree.Data.Properties;
+﻿using StoryTree.Data.Hydraulics;
 
 namespace StoryTree.Gui.ViewModels
 {
-    public class HydraulicConditionViewModel : INotifyPropertyChanged
+    public class HydraulicConditionViewModel : FragilityCurveElementViewModel
     {
         public HydraulicConditionViewModel():this(new HydraulicCondition()) { }
 
-        public HydraulicConditionViewModel(HydraulicCondition condition)
+        public HydraulicConditionViewModel(HydraulicCondition condition) : base(condition)
         {
             HydraulicCondition = condition;
         }
 
         public HydraulicCondition HydraulicCondition { get; }
-
-        public double WaterLevel
-        {
-            get => HydraulicCondition.WaterLevel;
-            set
-            {
-                HydraulicCondition.WaterLevel = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public Probability Probability
-        {
-            get => HydraulicCondition.Probability;
-            set
-            {
-                HydraulicCondition.Probability = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(ProbabilityDouble));
-            }
-        }
-
-        public double ProbabilityDouble => HydraulicCondition.Probability;
 
         public double WavePeriod
         {
@@ -60,14 +33,6 @@ namespace StoryTree.Gui.ViewModels
                 OnPropertyChanged();
                 HydraulicCondition.OnPropertyChanged(nameof(HydraulicCondition.WaveHeight));
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
