@@ -17,85 +17,16 @@ namespace StoryTree.Gui.ViewModels
     {
         private TreeEventViewModel failingEventViewModel;
         private TreeEventViewModel passingEventViewModel;
-
+        private ProbabilitySpecificationViewModelBase probabilityEstimationViewModel;
         private static readonly Dictionary<ProbabilitySpecificationType, string> ProbabilitySpecificationTypes =
             Enum.GetValues(typeof(ProbabilitySpecificationType)).Cast<ProbabilitySpecificationType>()
-                .ToDictionary(t => t, GetDisplayName);
-
-        private static string GetDisplayName(ProbabilitySpecificationType t)
-        {
-            switch (t)
-            {
-                case ProbabilitySpecificationType.Classes:
-                    return "Klassen";
-                case ProbabilitySpecificationType.FixedValue:
-                    return "Vaste kans";
-                case ProbabilitySpecificationType.FixedFreqeuncy:
-                    return "Vaste freqeuentielijn";
-                default:
-                    throw new InvalidEnumArgumentException();
-            }
-        }
-
-        private ProbabilitySpecificationViewModelBase probabilityEstimationViewModel;
+                .ToDictionary(t => t, GetEstimationSpecificationTypeDisplayName);
 
         public TreeEventViewModel([NotNull]TreeEvent treeEvent, [NotNull]EventTreeViewModel parentEventTreeViewModel)
         {
             TreeEvent = treeEvent;
             ParentEventTreeViewModel = parentEventTreeViewModel;
             treeEvent.PropertyChanged += TreeEventPropertyChanged;
-        }
-
-        private EventTreeViewModel ParentEventTreeViewModel { get; }
-
-        private void TreeEventPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(TreeEvent.PassingEvent):
-                    passingEventViewModel = null;
-                    if (PassingEvent == null)
-                    {
-                        // TODO: Shouldn't this be done by the command?
-                        Select();
-                    }
-                    OnPropertyChanged(nameof(PassingEvent));
-                    OnPropertyChanged(nameof(IsEndPointEvent));
-                    OnPropertyChanged(nameof(HasTrueEventOnly));
-                    OnPropertyChanged(nameof(HasFalseEventOnly));
-                    OnPropertyChanged(nameof(HasTwoEvents));
-                    break;
-                case nameof(TreeEvent.FailingEvent):
-                    failingEventViewModel = null;
-                    if (FailingEvent == null)
-                    {
-                        // TODO: Shouldn't this be done by the command?
-                        Select();
-                    }
-                    OnPropertyChanged(nameof(FailingEvent));
-                    OnPropertyChanged(nameof(IsEndPointEvent));
-                    OnPropertyChanged(nameof(HasTrueEventOnly));
-                    OnPropertyChanged(nameof(HasFalseEventOnly));
-                    OnPropertyChanged(nameof(HasTwoEvents));
-                    break;
-                case nameof(TreeEvent.Name):
-                    OnPropertyChanged(nameof(Name));
-                    break;
-                case nameof(TreeEvent.Summary):
-                    OnPropertyChanged(nameof(Summary));
-                    break;
-                case nameof(TreeEvent.ProbabilitySpecificationType):
-                    probabilityEstimationViewModel = null;
-                    OnPropertyChanged(nameof(ProbabilityEstimationTypeIndex));
-                    OnPropertyChanged(nameof(EstimationSpecification));
-                    break;
-                case nameof(TreeEvent.Information):
-                    OnPropertyChanged(nameof(Information));
-                    break;
-                case nameof(TreeEvent.Discussion):
-                    OnPropertyChanged(nameof(Discussion));
-                    break;
-            }
         }
 
         public TreeEvent TreeEvent { get; }
@@ -138,7 +69,9 @@ namespace StoryTree.Gui.ViewModels
                 {
                     return null;
                 }
-                return passingEventViewModel ?? new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel);
+
+                return passingEventViewModel ?? (passingEventViewModel =
+                           new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel));
             }
         }
 
@@ -166,7 +99,7 @@ namespace StoryTree.Gui.ViewModels
 
         public ICommand TreeEventClickedCommand => new TreeEventClickedCommand(this);
 
-        public bool IsSelected => TreeEvent != null && Equals(TreeEvent,ParentEventTreeViewModel?.SelectedTreeEvent?.TreeEvent);
+        public bool IsSelected => TreeEvent != null && ReferenceEquals(TreeEvent,ParentEventTreeViewModel?.SelectedTreeEvent?.TreeEvent);
 
         public int ProbabilityEstimationTypeIndex
         {
@@ -229,6 +162,73 @@ namespace StoryTree.Gui.ViewModels
         public void Select()
         {
             ParentEventTreeViewModel.SelectedTreeEvent = this;
+        }
+
+        private static string GetEstimationSpecificationTypeDisplayName(ProbabilitySpecificationType t)
+        {
+            switch (t)
+            {
+                case ProbabilitySpecificationType.Classes:
+                    return "Klassen";
+                case ProbabilitySpecificationType.FixedValue:
+                    return "Vaste kans";
+                case ProbabilitySpecificationType.FixedFreqeuncy:
+                    return "Vaste freqeuentielijn";
+                default:
+                    throw new InvalidEnumArgumentException();
+            }
+        }
+
+        private EventTreeViewModel ParentEventTreeViewModel { get; }
+
+        private void TreeEventPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(TreeEvent.PassingEvent):
+                    passingEventViewModel = null;
+                    if (PassingEvent == null)
+                    {
+                        // TODO: Shouldn't this be done by the command?
+                        Select();
+                    }
+                    OnPropertyChanged(nameof(PassingEvent));
+                    OnPropertyChanged(nameof(IsEndPointEvent));
+                    OnPropertyChanged(nameof(HasTrueEventOnly));
+                    OnPropertyChanged(nameof(HasFalseEventOnly));
+                    OnPropertyChanged(nameof(HasTwoEvents));
+                    break;
+                case nameof(TreeEvent.FailingEvent):
+                    failingEventViewModel = null;
+                    if (FailingEvent == null)
+                    {
+                        // TODO: Shouldn't this be done by the command?
+                        Select();
+                    }
+                    OnPropertyChanged(nameof(FailingEvent));
+                    OnPropertyChanged(nameof(IsEndPointEvent));
+                    OnPropertyChanged(nameof(HasTrueEventOnly));
+                    OnPropertyChanged(nameof(HasFalseEventOnly));
+                    OnPropertyChanged(nameof(HasTwoEvents));
+                    break;
+                case nameof(TreeEvent.Name):
+                    OnPropertyChanged(nameof(Name));
+                    break;
+                case nameof(TreeEvent.Summary):
+                    OnPropertyChanged(nameof(Summary));
+                    break;
+                case nameof(TreeEvent.ProbabilitySpecificationType):
+                    probabilityEstimationViewModel = null;
+                    OnPropertyChanged(nameof(ProbabilityEstimationTypeIndex));
+                    OnPropertyChanged(nameof(EstimationSpecification));
+                    break;
+                case nameof(TreeEvent.Information):
+                    OnPropertyChanged(nameof(Information));
+                    break;
+                case nameof(TreeEvent.Discussion):
+                    OnPropertyChanged(nameof(Discussion));
+                    break;
+            }
         }
     }
 }

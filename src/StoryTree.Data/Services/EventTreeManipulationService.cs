@@ -14,7 +14,9 @@ namespace StoryTree.Data.Services
                 return null;
             }
 
-            var parent = FindTreeEvent(eventTree.MainTreeEvent, treeEvent => treeEvent.FailingEvent == selectedTreeEventToRemove || treeEvent.PassingEvent == selectedTreeEventToRemove);
+            var parent = FindTreeEvent(eventTree.MainTreeEvent,
+                treeEvent => treeEvent.FailingEvent == selectedTreeEventToRemove ||
+                             treeEvent.PassingEvent == selectedTreeEventToRemove);
             if (parent == null)
             {
                 throw new ArgumentNullException();
@@ -65,7 +67,30 @@ namespace StoryTree.Data.Services
 
         private static TreeEvent FindTreeEvent(TreeEvent treeEvent, Func<TreeEvent, bool> findAction)
         {
-            return findAction(treeEvent) ? treeEvent : FindTreeEvent(treeEvent.FailingEvent, findAction);
+            if (findAction(treeEvent))
+            {
+                return treeEvent;
+            }
+
+            if (treeEvent.FailingEvent != null)
+            {
+                var possibleEvent = FindTreeEvent(treeEvent.FailingEvent, findAction);
+                if (possibleEvent != null)
+                {
+                    return possibleEvent;
+                }
+            }
+
+            if (treeEvent.PassingEvent != null)
+            {
+                var possibleEvent = FindTreeEvent(treeEvent.PassingEvent, findAction);
+                if (possibleEvent != null)
+                {
+                    return possibleEvent;
+                }
+            }
+
+            return null;
         }
     }
 }

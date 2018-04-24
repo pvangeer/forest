@@ -2,42 +2,44 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
                     xmlns:oxy="http://oxyplot.org/wpf"
-                    xmlns:converters="clr-namespace:StoryTree.Gui.Converters">
+                    xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
+                    xmlns:controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
+                    xmlns:eventTree="clr-namespace:StoryTree.Gui.DataTemplates.MainTabItems.EventTree">
 
     <converters:CriticalPathToProbabilityTextConverter x:Key="CriticalPathToProbabilityTextConverter" />
 
     <converters:CriticalPathToPlotModelConverter x:Key="CriticalPathToPlotModelConverter" />
 
     <DataTemplate x:Key="TreeEventViewModelTemplate" DataType="viewModels:TreeEventViewModel">
-    <Grid>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="Auto"/>
-        <RowDefinition Height="*"/>
-      </Grid.RowDefinitions>
-      <Grid Grid.Row="0">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto"/>
-          <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Content="Kans"/>
-        <TextBlock Grid.Column="1">
-            <TextBlock.Style>
-            <Style TargetType="TextBlock">
-                <Setter Property="Text">
-                    <Setter.Value>
-                        <MultiBinding Converter="{StaticResource CriticalPathToProbabilityTextConverter}">
-                            <Binding Path="CriticalPath"/>
-                            <Binding 
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Kans"/>
+                <TextBlock Grid.Column="1">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Text">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource CriticalPathToProbabilityTextConverter}">
+                                        <Binding Path="CriticalPath"/>
+                                        <Binding 
                                 Path="DataContext.HydraulicConditionsList" 
                                 RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter, AncestorLevel=2}"/>
-                        </MultiBinding>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            </TextBlock.Style>
-            </TextBlock>
-      </Grid>
-      <Grid Grid.Row="1" Margin="10">
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="1" Margin="10">
                 <oxy:PlotView>
                     <oxy:PlotView.Style>
                         <Style TargetType="oxy:PlotView">
@@ -54,38 +56,33 @@
                         </Style>
                     </oxy:PlotView.Style>
                 </oxy:PlotView>
-      </Grid>
-    </Grid>
-  </DataTemplate>
+            </Grid>
+        </Grid>
+    </DataTemplate>
 
-  <DataTemplate x:Key="ResultsDataTemplate" DataType="viewModels:ProjectViewModel">
-    <DataTemplate.Resources>
-      <ResourceDictionary Source="EventTreeTemplates.xaml"/>
-    </DataTemplate.Resources>
-
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto" MinWidth="200"/>
-        <ColumnDefinition Width="Auto"/>
-        <ColumnDefinition Width="*" MinWidth="400"/>
-      </Grid.ColumnDefinitions>
-      <Grid Grid.Column="0">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="15" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="{Binding SelectedEventTree.Name}" TextAlignment="Center" FontWeight="Bold"/>
-        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-          <!--TODO: Replace template switch by TemplateSelector and use ContentPresenter-->
-          <ContentPresenter
-              Margin="10"
-              Content="{Binding SelectedEventTree.MainTreeEventViewModel}"
-              ContentTemplate="{DynamicResource TemplateSwitch}" />
-        </ScrollViewer>
-      </Grid>
-      <GridSplitter Grid.Column="1" Width="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-      <ContentPresenter Grid.Column="2" Content="{Binding SelectedTreeEvent}" ContentTemplate="{StaticResource TreeEventViewModelTemplate}"/>
-    </Grid>
-  </DataTemplate>
+    <DataTemplate x:Key="ResultsDataTemplate" DataType="viewModels:ProjectViewModel">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="200"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" MinWidth="400"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Binding SelectedEventTree.Name}" TextAlignment="Center" FontWeight="Bold"/>
+                <controls:ZoomControl Grid.Row="1">
+                    <controls:ZoomControl.Resources>
+                        <ResourceDictionary Source="EventTree/PointedTreeGraphTemplate.xaml"/>
+                    </controls:ZoomControl.Resources>
+                    <eventTree:EventTreeGraphLayout Graph="{Binding SelectedEventTree.Graph}"/>
+                </controls:ZoomControl>
+            </Grid>
+            <GridSplitter Grid.Column="1" Width="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <ContentPresenter Grid.Column="2" Content="{Binding SelectedTreeEvent}" ContentTemplate="{StaticResource TreeEventViewModelTemplate}"/>
+        </Grid>
+    </DataTemplate>
 
 </ResourceDictionary>

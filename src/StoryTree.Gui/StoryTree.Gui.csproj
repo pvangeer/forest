@@ -51,6 +51,12 @@
     <Reference Include="Fluent, Version=6.1.0.233, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Fluent.Ribbon.6.1.0.233\lib\net45\Fluent.dll</HintPath>
     </Reference>
+    <Reference Include="GraphSharp, Version=1.0.2.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphSharp.Controls, Version=1.1.0.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
@@ -60,6 +66,18 @@
     </Reference>
     <Reference Include="OxyPlot.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\OxyPlot.Wpf.1.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Data, Version=3.6.61114.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Graphviz, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Serialization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -88,6 +106,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFExtensions, Version=1.0.3437.34043, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WPFExtensions.1.0.0\lib\WPFExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
@@ -114,6 +135,7 @@
     </ApplicationDefinition>
     <Compile Include="BackgroundWorkerArguments.cs" />
     <Compile Include="Command\RemoveAllMessagesCommand.cs" />
+    <Compile Include="Converters\EventTypeToColorConverter.cs" />
     <Compile Include="DataTemplates\BusyIconTemplateSelector.cs" />
     <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />
     <Compile Include="Command\AddEventTreeCommand.cs" />
@@ -130,14 +152,17 @@
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
     <Compile Include="Converters\HydraulicConditionsToPlotModelConverter.cs" />
     <Compile Include="Converters\EventTreesToCountConverter.cs" />
+    <Compile Include="DataTemplates\MainTabItems\EventTree\EventTreeGraphLayout.cs" />
     <Compile Include="GuiProjectServices.cs" />
     <Compile Include="Converters\MessageListToLabelConverter.cs" />
     <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
     <Compile Include="SelectTodayCommand.cs" />
     <Compile Include="StoryTreeGui.cs" />
     <Compile Include="TestDataGenerator.cs" />
+    <Compile Include="TreeEventConnector.cs" />
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\EstimationSpecificationViewModelFactory.cs" />
+    <Compile Include="ViewModels\EventTreeGraph.cs" />
     <Compile Include="ViewModels\EventTreeViewModel.cs" />
     <Compile Include="ViewModels\ExpertViewModel.cs" />
     <Compile Include="Command\FileNewCommnd.cs" />
@@ -226,6 +251,18 @@
     <Page Include="DataTemplates\MainTabItems\TreeEventsDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\EventTree\EdgeControlTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\EventTree\PointedTreeGraphTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\EventTree\VertexControlTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

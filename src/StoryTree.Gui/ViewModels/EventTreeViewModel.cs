@@ -9,20 +9,74 @@ using StoryTree.Data.Services;
 
 namespace StoryTree.Gui.ViewModels
 {
-    public class EventTreeViewModel : INotifyPropertyChanged
+    public partial class EventTreeViewModel : INotifyPropertyChanged
     {
         private TreeEventViewModel selectedTreeEvent;
         private TreeEventViewModel mainTreeEventViewModel;
         private bool isSelected;
+        private EventTreeGraph graph;
 
         private EventTree EventTree { get; }
 
-        public EventTreeViewModel():this(new EventTree()) { }
+        public EventTreeViewModel()
+        {
+            var project = TestDataGenerator.GenerateAsphalProject();
+            EventTree = project.EventTrees.First();
+            EventTree.PropertyChanged += EventTreePropertyChanged;
+        }
 
         public EventTreeViewModel([NotNull]EventTree eventTree)
         {
             EventTree = eventTree;
             eventTree.PropertyChanged += EventTreePropertyChanged;
+        }
+
+        public EventTreeGraph Graph => CreateGraph();
+
+        private EventTreeGraph CreateGraph()
+        {
+            graph = new EventTreeGraph();
+
+            DrawNode(MainTreeEventViewModel);
+
+            return graph;
+        }
+
+        private void DrawNode(TreeEventViewModel treeEventViewModel, GraphVertex parent = null)
+        {
+            if (treeEventViewModel == null)
+            {
+                return;
+            }
+
+            var vertex = new GraphVertex(treeEventViewModel);
+            graph.AddVertex(vertex);
+            if (parent != null)
+            {
+                graph.AddEdge(new TreeEventConnector(parent, vertex));
+            }
+
+            if (treeEventViewModel.FailingEvent != null)
+            {
+                DrawNode(treeEventViewModel.FailingEvent, vertex);
+            }
+            else
+            {
+                var lastVertex = new GraphVertex(false);
+                graph.AddVertex(lastVertex);
+                graph.AddEdge(new TreeEventConnector(vertex, lastVertex));
+            }
+
+            if (treeEventViewModel.PassingEvent != null)
+            {
+                DrawNode(treeEventViewModel.PassingEvent, vertex);
+            }
+            else
+            {
+                var lastVertex = new GraphVertex(true);
+                graph.AddVertex(lastVertex);
+                graph.AddEdge(new TreeEventConnector(vertex, lastVertex));
+            }
         }
 
         private void EventTreePropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -32,6 +86,7 @@ namespace StoryTree.Gui.ViewModels
                 case nameof(EventTree.MainTreeEvent):
                     mainTreeEventViewModel = null;
                     OnPropertyChanged(nameof(MainTreeEventViewModel));
+                    OnPropertyChanged(nameof(Graph));
                     break;
                 case nameof(EventTree.Name):
                     OnPropertyChanged(nameof(Name));
@@ -151,6 +206,7 @@ namespace StoryTree.Gui.ViewModels
             EventTreeManipulationService.AddTreeEvent(EventTree,treeEventViewModel?.TreeEvent,treeEventType);
             SelectedTreeEvent = treeEventViewModel == null ? MainTreeEventViewModel : treeEventType == TreeEventType.Failing ? treeEventViewModel.FailingEvent : treeEventViewModel.PassingEvent;
             OnPropertyChanged(nameof(AllTreeEvents));
+            OnPropertyChanged(nameof(Graph));
         }
 
         public void RemoveTreeEvent(TreeEventViewModel treeEventViewModel, TreeEventType eventType)
@@ -158,11 +214,17 @@ namespace StoryTree.Gui.ViewModels
             var parent = EventTreeManipulationService.RemoveTreeEvent(EventTree, treeEventViewModel.TreeEvent);
             SelectedTreeEvent = parent == null ? MainTreeEventViewModel : FindLastEventViewModel(MainTreeEventViewModel, eventType);
             OnPropertyChanged(nameof(AllTreeEvents));
+            OnPropertyChanged(nameof(Graph));
         }
 
         private static IEnumerable<TreeEventViewModel> GetAllEventsRecursive(TreeEventViewModel treeEventViewModel)
         {
             var list = new[]{treeEventViewModel};
+
+            if (treeEventViewModel == null)
+            {
+                return list;
+            }
 
             if (treeEventViewModel.FailingEvent != null)
             {
