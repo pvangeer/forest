@@ -18,7 +18,7 @@
                 x:Name="EventTreesListView" 
                 Grid.Column="0" 
                 ItemsSource="{Binding EventTrees}" 
-                SelectedItem="{Binding SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedEventTreeUnFiltered, UpdateSourceTrigger=PropertyChanged}"
                 HorizontalContentAlignment="Stretch"
                 BorderThickness="0">
                 <ListView.ItemTemplate>
@@ -93,7 +93,7 @@
                         <TextBox 
                             Grid.Row="0" 
                             Grid.Column="1" 
-                            Text="{Binding SelectedEventTree.Name, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding SelectedEventTreeUnFiltered.Name, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource TextBoxStyle}"/>
                         <Label 
                             Grid.Row="1" 
@@ -103,7 +103,7 @@
                         <TextBox 
                             Grid.Row="1" 
                             Grid.Column="1" 
-                            Text="{Binding SelectedEventTree.Summary, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding SelectedEventTreeUnFiltered.Summary, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource TextBoxStyle}"/>
                         <Label 
                             Grid.Row="2" 
@@ -114,7 +114,7 @@
                             Grid.Row="2" 
                             Grid.Column="1" 
                             Margin="0,2,0,2"
-                            SelectedColor="{Binding SelectedEventTree.Color, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedColor="{Binding SelectedEventTreeUnFiltered.Color, UpdateSourceTrigger=PropertyChanged}"
                             Width="40" HorizontalAlignment="Left"/>
                         <Label 
                             Grid.Row="3" 
@@ -125,14 +125,14 @@
                             Grid.Row="3"
                             Grid.Column="1"
                             VerticalAlignment="Center"
-                            IsChecked="{Binding SelectedEventTree.NeedsSpecification, UpdateSourceTrigger=PropertyChanged}"/>
+                            IsChecked="{Binding SelectedEventTreeUnFiltered.NeedsSpecification, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                 </Grid>
                 <Label Grid.Row="1" Grid.Column="0" Content="Details" FontWeight="Bold"/>
                 <xctk:RichTextBox 
                     Style="{StaticResource RichtTextBoxStyle}"
                     Grid.Row="2" 
-                    Text="{Binding SelectedEventTree.Details}">
+                    Text="{Binding SelectedEventTreeUnFiltered.Details}">
                     <xctk:RichTextBoxFormatBarManager.FormatBar>
                         <xctk:RichTextBoxFormatBar/>
                     </xctk:RichTextBoxFormatBarManager.FormatBar>

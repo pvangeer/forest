@@ -60,6 +60,6 @@
                 </Grid>
             </DataTemplate>
         </DataTemplate.Resources>
-        <ContentPresenter Content="{Binding SelectedEventTree}" ContentTemplate="{StaticResource TreeEventsInformationTemplate}"/>
+        <ContentPresenter Content="{Binding SelectedEventTreeFiltered}" ContentTemplate="{StaticResource TreeEventsInformationTemplate}"/>
     </DataTemplate>
 </ResourceDictionary>

@@ -72,12 +72,21 @@
                     <RowDefinition Height="15" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="{Binding SelectedEventTree.Name}" TextAlignment="Center" FontWeight="Bold"/>
-                <controls:ZoomControl Grid.Row="1">
+                <TextBlock Grid.Row="0" Text="{Binding SelectedEventTreeFiltered.Name}" TextAlignment="Center" FontWeight="Bold"/>
+                <controls:ZoomControl 
+                    Grid.Row="1"
+                    AnimationLength="0"
+                    Mode="Original"
+                    Zoom="1">
                     <controls:ZoomControl.Resources>
-                        <ResourceDictionary Source="EventTree/PointedTreeGraphTemplate.xaml"/>
+                        <ResourceDictionary>
+                            <ResourceDictionary.MergedDictionaries>
+                                <ResourceDictionary Source="EventTree/EdgeControlTemplate.xaml"/>
+                                <ResourceDictionary Source="EventTree/VertexControlTemplate.xaml"/>
+                            </ResourceDictionary.MergedDictionaries>
+                        </ResourceDictionary>
                     </controls:ZoomControl.Resources>
-                    <eventTree:EventTreeGraphLayout Graph="{Binding SelectedEventTree.Graph}"/>
+                    <eventTree:EventTreeGraphLayout Graph="{Binding SelectedEventTreeFiltered.Graph}"/>
                 </controls:ZoomControl>
             </Grid>
             <GridSplitter Grid.Column="1" Width="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>

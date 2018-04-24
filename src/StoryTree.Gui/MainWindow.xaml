@@ -192,7 +192,7 @@
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:InRibbonGallery 
                         ItemsSource="{Binding ProjectViewModel.EventTreesToEstimate}" 
-                        SelectedItem="{Binding ProjectViewModel.SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding ProjectViewModel.SelectedEventTreeFiltered, UpdateSourceTrigger=PropertyChanged}"
                         ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Knopen">
@@ -223,7 +223,7 @@
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:InRibbonGallery 
                         ItemsSource="{Binding ProjectViewModel.EventTreesToEstimate}" 
-                        SelectedItem="{Binding ProjectViewModel.SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding ProjectViewModel.SelectedEventTreeFiltered, UpdateSourceTrigger=PropertyChanged}"
                         ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
@@ -235,7 +235,7 @@
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:InRibbonGallery 
                         ItemsSource="{Binding ProjectViewModel.EventTreesToEstimate}" 
-                        SelectedItem="{Binding ProjectViewModel.SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding ProjectViewModel.SelectedEventTreeFiltered, UpdateSourceTrigger=PropertyChanged}"
                         ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
@@ -247,7 +247,7 @@
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:InRibbonGallery 
                         ItemsSource="{Binding ProjectViewModel.EventTreesToEstimate}" 
-                        SelectedItem="{Binding ProjectViewModel.SelectedEventTree, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding ProjectViewModel.SelectedEventTreeFiltered, UpdateSourceTrigger=PropertyChanged}"
                         ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
@@ -266,9 +266,6 @@
             }"/>
         
         <fluent:StatusBar Grid.Row="2">
-            <fluent:StatusBar.Resources>
-                <dataTemplates:BusyIconTemplateSelector x:Key="BusyIconTemplateSelector" />
-            </fluent:StatusBar.Resources>
             <fluent:StatusBarItem HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/StoryTree.Gui;component/Resources/EventTree.png" Height="24"/>
@@ -306,8 +303,7 @@
                 x:Name="StatusBarItem"
                 HorizontalAlignment="Right"
                 Content="{Binding BusyIndicator}" 
-                Margin="1,1,5,1"
-                ContentTemplateSelector="{DynamicResource BusyIconTemplateSelector}">
+                Margin="1,1,5,1">
                 <StatusBarItem.Resources>
                     <DataTemplate x:Key="BusyIconTemplate" DataType="viewModels:StorageState">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -319,6 +315,19 @@
                         <Image Source="/StoryTree.Gui;component/Resources/idle-white.png"/>
                     </DataTemplate>
                 </StatusBarItem.Resources>
+                <StatusBarItem.ContentTemplate>
+                    <DataTemplate>
+                        <ContentPresenter 
+                            Name="busyIconPresenter"
+                            Content="{Binding }"
+                            ContentTemplate="{StaticResource IdleIconTemplate}"/>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding }" Value="{x:Static viewModels:StorageState.Busy}">
+                                <Setter TargetName="busyIconPresenter" Property="ContentTemplate" Value="{StaticResource BusyIconTemplate}"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </StatusBarItem.ContentTemplate>
             </fluent:StatusBarItem>
             <Popup IsOpen="{Binding PriorityMessage, Converter={StaticResource ShouldShowPriorityMessageToBoolConverter}}"
                    PlacementTarget="{Binding ElementName=StatusBarItem}"
