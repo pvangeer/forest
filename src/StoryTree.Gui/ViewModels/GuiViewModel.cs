@@ -15,6 +15,7 @@ namespace StoryTree.Gui.ViewModels
     {
         private ProjectViewModel projectViewModel;
         private MessageListViewModel messageListViewModel;
+        private StoryTreeProcess selectedProcess;
 
         public GuiViewModel() : this(new StoryTreeGui()) { }
 
@@ -116,6 +117,18 @@ namespace StoryTree.Gui.ViewModels
         public ICommand RemoveLastMessageCommand => new RemovePriorityMessageCommand(this);
 
         public ICommand ShowMessageListCommand => new ShowMessageListCommand(this);
+
+        public StoryTreeProcess SelectedProcess
+        {
+            get => selectedProcess;
+            set
+            {
+                selectedProcess = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand ChangeProcesStepCommand => new ChangeProcessStepCommand(this);
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler OnInvalidateVisual;

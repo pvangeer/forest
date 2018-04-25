@@ -5,12 +5,10 @@
     xmlns:fluent="urn:fluent-ribbon"
     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
-    xmlns:dataTemplates="clr-namespace:StoryTree.Gui.DataTemplates"
-    xmlns:gui="clr-namespace:StoryTree.Gui"
     xmlns:services="clr-namespace:StoryTree.Data.Services;assembly=StoryTree.Data"
     Title="Gebeurtenissenboom" 
-    Height="600" 
-    Width="900" 
+    Height="800" 
+    Width="1200" 
     x:Name="MainRibbonWindow">
     <Window.DataContext>
         <viewModels:GuiViewModel />
@@ -19,27 +17,10 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/MainTabItems/GeneralInformationDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/MainTabItems/ExpertsDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/MainTabItems/EstimationDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/MainTabItems/HydraulicsDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/MainTabItems/EventTreesDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/MainTabItems/TreeEventsDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/MainTabItems/ResultsDataTemplate.xaml"/>
-                <ResourceDictionary Source="/DataTemplates/MainTabItems/TreeEventInformationDataTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplates/ContentPresenterDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/EventTreeGalleryItemDataTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplates/MessageDataTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            <converters:TabItemToTemplateConverter x:Key="TabItemToTemplateConverter" 
-                                                   GeneralDataTemplate="{StaticResource GeneralInformationDataTemplate}"
-                                                   ExpertsTemplate ="{StaticResource ExpertsDataTemplate}"
-                                                   EstimationTemplate="{StaticResource EstimationDataTemplate}"
-                                                   HydraulicsTemplate="{StaticResource HydraulicsDataTemplate}"
-                                                   EventsTemplate="{StaticResource EventTreesDataTemplate}"
-                                                   TreeEventsTemplate="{StaticResource TreeEventsTemplate}"
-                                                   ResultsTemplate="{StaticResource ResultsDataTemplate}"
-                                                   TreeEventsInformationTemplate="{StaticResource TreeEventInformationDataTemplate}"/>
 
             <Style x:Key="Spinner" TargetType="Image">
                 <Setter Property="Height" Value="24" />
@@ -84,9 +65,7 @@
 
         <fluent:Ribbon 
             IsEnabled="{Binding BusyIndicator, Converter={StaticResource BusyIndicatorToEnabledConverter}}"
-            Focusable="True" 
-            x:Name="Ribbon" 
-            x:FieldModifier="protected">
+            Focusable="True">
             <!--Backstage-->
             <fluent:Ribbon.Menu>
                 <fluent:Backstage Background="#008fc5">
@@ -123,132 +102,189 @@
             </fluent:Ribbon.Menu>
 
             <fluent:Ribbon.ContextualGroups>
-                <fluent:RibbonContextualTabGroup 
-                    Name="GeneralInformationGroup" 
-                    Header="Algemeen" 
-                    Visibility="Visible" 
+                <fluent:RibbonContextualTabGroup
+                    Name="EventTreeFunctionsGroup" 
+                    Header="Gebeurtenissen"
                     Background="CornflowerBlue" 
-                    BorderBrush="DodgerBlue"/>
-                <fluent:RibbonContextualTabGroup 
-                    Name="EventTreesGroup" 
-                    Header="Gebeurtenissen" 
-                    Visibility="Visible" 
-                    Background="DarkSeaGreen" 
-                    BorderBrush="ForestGreen"/>
-                <fluent:RibbonContextualTabGroup 
-                    Name="EstimationGroup" 
-                    Header="Overgangskansen" 
-                    Visibility="Visible" 
-                    Background="Pink" 
-                    BorderBrush="HotPink"/>
-                <fluent:RibbonContextualTabGroup 
-                    Name="ResultsGroup" 
-                    Header="Resultaten" 
-                    Visibility="Visible" 
-                    Background="BlueViolet" 
-                    BorderBrush="Purple"/>
+                    BorderBrush="DodgerBlue">
+                    <fluent:RibbonContextualTabGroup.Style>
+                        <Style TargetType="fluent:RibbonContextualTabGroup">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.GeneralInformation}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.Experts}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.Hydraulics}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </fluent:RibbonContextualTabGroup.Style>
+                </fluent:RibbonContextualTabGroup>
             </fluent:Ribbon.ContextualGroups>
 
-            <!-- Start -->
             <fluent:RibbonTabItem 
-                Name="GeneralDataTabItem" 
-                Header="Projectgegevens" 
-                fluent:KeyTip.Keys="S" 
-                Group="{Binding Source={x:Reference GeneralInformationGroup}}"/>
-
-            <fluent:RibbonTabItem 
-                Name="ExpertsTabItem" 
-                Header="Experts" 
-                fluent:KeyTip.Keys="V"  
-                Group="{Binding Source={x:Reference GeneralInformationGroup}}"/>
-
-            <fluent:RibbonTabItem
-                Name="HydraulicsTabItem"
-                Header="Hydraulische gegevens"
-                Group="{Binding Source={x:Reference GeneralInformationGroup}}"/>
-
-            <fluent:RibbonTabItem
-                Name="EventsTabItem"
-                Header="Gebeurtenissen"
-                Group="{Binding Source={x:Reference EventTreesGroup}}">
+                Header="Proces"
+                fluent:KeyTip.Keys="P">
+                <fluent:RibbonGroupBox Header="Algemeen">
+                    <fluent:Button
+                        Header="Projectgegevens"
+                        LargeIcon="/StoryTree.Gui;component\Resources\project-information.png"
+                        Size="Large" 
+                        Command="{Binding ChangeProcesStepCommand}"
+                        CommandParameter="{x:Static viewModels:StoryTreeProcess.GeneralInformation}"/>
+                    <fluent:Button
+                        Header="Experts"
+                        LargeIcon="/StoryTree.Gui;component\Resources\experts.png"
+                        Size="Large" 
+                        Command="{Binding ChangeProcesStepCommand}"
+                        CommandParameter="{x:Static viewModels:StoryTreeProcess.Experts}"/>
+                    <fluent:Button
+                        Header="Hydraulische gegevens"
+                        LargeIcon="/StoryTree.Gui;component\Resources\hydraulics.png"
+                        Size="Large" 
+                        Command="{Binding ChangeProcesStepCommand}"
+                        CommandParameter="{x:Static viewModels:StoryTreeProcess.Hydraulics}"/>
+                </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
-                    <fluent:Button 
-                        Header="Gebeurtenis toevoegen" 
+                    <fluent:Button
+                        Header="Gebeurtenissen definieren"
                         LargeIcon="/StoryTree.Gui;component\Resources\add-eventtree.png"
                         Size="Large" 
-                        Command="{Binding ProjectViewModel.AddEventTreeCommand}" />
-                    <fluent:Button 
-                        Header="Gebeurtenis verwijderen" 
-                        LargeIcon="/StoryTree.Gui;component\Resources\remove-eventtree.png"
+                        Command="{Binding ChangeProcesStepCommand}"
+                        CommandParameter="{x:Static viewModels:StoryTreeProcess.EventTreeDefinition}"/>
+                    <fluent:Button
+                        Header="Knopen definieren"
+                        LargeIcon="/StoryTree.Gui;component\Resources\add-tree-event.png"
                         Size="Large" 
-                        Command="{Binding ProjectViewModel.RemoveEventTreeCommand}" />
+                        Command="{Binding ChangeProcesStepCommand}"
+                        CommandParameter="{x:Static viewModels:StoryTreeProcess.TreeEventsDefinition}"/>
+                    <fluent:Button
+                        Header="Knoopinformatie"
+                        LargeIcon="/StoryTree.Gui;component\Resources\tree-event-info.png"
+                        Size="Large" 
+                        Command="{Binding ChangeProcesStepCommand}"
+                        CommandParameter="{x:Static viewModels:StoryTreeProcess.TreeEventsInformation}"/>
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Overgangskansen">
+                    <fluent:Button
+                        Header="Overgangskansen"
+                        LargeIcon="/StoryTree.Gui;component\Resources\estimation.png"
+                        Size="Large" 
+                        Command="{Binding ChangeProcesStepCommand}"
+                        CommandParameter="{x:Static viewModels:StoryTreeProcess.Estimation}"/>
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Resultaten">
+                    <fluent:Button
+                        Header="Resultaten"
+                        LargeIcon="/StoryTree.Gui;component\Resources\results.png"
+                        Size="Large" 
+                        Command="{Binding ChangeProcesStepCommand}"
+                        CommandParameter="{x:Static viewModels:StoryTreeProcess.Results}"/>
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 
             <fluent:RibbonTabItem
-                Name="TreeEventsTabItem"
-                Header="Knopen"
-                Group="{Binding Source={x:Reference EventTreesGroup}}">
-                <fluent:RibbonGroupBox Header="Gebeurtenissen">
+                Name="EventTreesTabItem"
+                Header="Gebeurtenissen"
+                Group="{Binding Source={x:Reference EventTreeFunctionsGroup}}"
+                fluent:KeyTip.Keys="G">
+                <fluent:RibbonGroupBox 
+                    Header="Gebeurtenissen">
+                    <fluent:Button 
+                        Header="Gebeurtenis toevoegen" 
+                        LargeIcon="/StoryTree.Gui;component\Resources\add-eventtree.png"
+                        Size="Large" 
+                        Command="{Binding ProjectViewModel.AddEventTreeCommand}">
+                        <fluent:Button.Style>
+                            <Style TargetType="fluent:Button">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.EventTreeDefinition}">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </fluent:Button.Style>
+                    </fluent:Button>
+                    <fluent:Button 
+                        Header="Gebeurtenis verwijderen" 
+                        LargeIcon="/StoryTree.Gui;component\Resources\remove-eventtree.png"
+                        Size="Large" 
+                        Command="{Binding ProjectViewModel.RemoveEventTreeCommand}">
+                        <fluent:Button.Style>
+                            <Style TargetType="fluent:Button">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.EventTreeDefinition}">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </fluent:Button.Style>
+                    </fluent:Button>
+                    <fluent:InRibbonGallery 
+                        ItemsSource="{Binding ProjectViewModel.EventTrees}" 
+                        SelectedItem="{Binding ProjectViewModel.SelectedEventTreeFiltered, UpdateSourceTrigger=PropertyChanged}"
+                        ItemTemplate="{DynamicResource GalleryItemTemplate}">
+                        <fluent:InRibbonGallery.Style>
+                            <Style TargetType="fluent:InRibbonGallery">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.EventTreeDefinition}">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </fluent:InRibbonGallery.Style>
+                    </fluent:InRibbonGallery>
                     <fluent:InRibbonGallery 
                         ItemsSource="{Binding ProjectViewModel.EventTreesToEstimate}" 
                         SelectedItem="{Binding ProjectViewModel.SelectedEventTreeFiltered, UpdateSourceTrigger=PropertyChanged}"
-                        ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
+                        ItemTemplate="{DynamicResource GalleryItemTemplate}">
+                        <fluent:InRibbonGallery.Style>
+                            <Style TargetType="fluent:InRibbonGallery">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.EventTreeDefinition}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </fluent:InRibbonGallery.Style>
+                    </fluent:InRibbonGallery>
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Knopen">
                     <fluent:Button 
-                        Header="Toevoegen (falen)" 
+                        Header="Toevoegen (falen)"
                         LargeIcon="/StoryTree.Gui;component\Resources\add-tree-event.png"
-                        Size="Large" 
+                        Size="Large"
                         Command="{Binding ProjectViewModel.AddTreeEventCommand}" 
                         CommandParameter="{x:Static services:TreeEventType.Failing}"/>
                     <fluent:Button 
                         Header="Toevoegen (niet falen)"
                         LargeIcon="/StoryTree.Gui;component\Resources\add-tree-event.png"
-                        Size="Large" 
+                        Size="Large"
                         Command="{Binding ProjectViewModel.AddTreeEventCommand}" 
                         CommandParameter="{x:Static services:TreeEventType.Passing}"/>
                     <fluent:Button 
-                        Header="Verwijderen" 
+                        Header="Verwijderen"
                         LargeIcon="/StoryTree.Gui;component\Resources\remove-tree-event.png"
-                        Size="Large" 
+                        Size="Large"
                         Command="{Binding ProjectViewModel.RemoveTreeEventCommand}" />
-                </fluent:RibbonGroupBox>
-            </fluent:RibbonTabItem>
-
-            <fluent:RibbonTabItem
-                Name="TreeEventInformationTabItem"
-                Header="Knoopinformatie"
-                Group="{Binding Source={x:Reference EventTreesGroup}}">
-                <fluent:RibbonGroupBox Header="Gebeurtenissen">
-                    <fluent:InRibbonGallery 
-                        ItemsSource="{Binding ProjectViewModel.EventTreesToEstimate}" 
-                        SelectedItem="{Binding ProjectViewModel.SelectedEventTreeFiltered, UpdateSourceTrigger=PropertyChanged}"
-                        ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
-                </fluent:RibbonGroupBox>
-            </fluent:RibbonTabItem>
-
-            <fluent:RibbonTabItem 
-                Name="EstimationTabItem" 
-                Header="Overgangskansen"
-                Group="{Binding Source={x:Reference EstimationGroup}}">
-                <fluent:RibbonGroupBox Header="Gebeurtenissen">
-                    <fluent:InRibbonGallery 
-                        ItemsSource="{Binding ProjectViewModel.EventTreesToEstimate}" 
-                        SelectedItem="{Binding ProjectViewModel.SelectedEventTreeFiltered, UpdateSourceTrigger=PropertyChanged}"
-                        ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
-                </fluent:RibbonGroupBox>
-            </fluent:RibbonTabItem>
-
-            <fluent:RibbonTabItem
-                Name="ResultsTabItem"
-                Header="Resultaten"
-                Group="{Binding Source={x:Reference ResultsGroup}}">
-                <fluent:RibbonGroupBox Header="Gebeurtenissen">
-                    <fluent:InRibbonGallery 
-                        ItemsSource="{Binding ProjectViewModel.EventTreesToEstimate}" 
-                        SelectedItem="{Binding ProjectViewModel.SelectedEventTreeFiltered, UpdateSourceTrigger=PropertyChanged}"
-                        ItemTemplate="{DynamicResource GalleryItemTemplate}"/>
+                    <fluent:RibbonGroupBox.Style>
+                        <Style TargetType="fluent:RibbonGroupBox">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.TreeEventsDefinition}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </fluent:RibbonGroupBox.Style>
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
         </fluent:Ribbon>
@@ -257,14 +293,9 @@
             IsEnabled="{Binding BusyIndicator, Converter={StaticResource BusyIndicatorToEnabledConverter}}"
             Name="HostControl" 
             Grid.Row="1" 
-            Content="{Binding ProjectViewModel}" 
-            ContentTemplate="{
-                Binding ElementName=Ribbon, 
-                Path=SelectedTabItem, 
-                Converter={StaticResource TabItemToTemplateConverter}, 
-                ConverterParameter={RelativeSource Self}
-            }"/>
-        
+            Content="{Binding }"
+            ContentTemplate="{StaticResource ContentPresenterDataTemplate}"/>
+
         <fluent:StatusBar Grid.Row="2">
             <fluent:StatusBarItem HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
