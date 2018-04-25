@@ -289,10 +289,40 @@
             </fluent:RibbonTabItem>
         </fluent:Ribbon>
 
+        <Grid Grid.Row="1" ZIndex="2">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding BusyIndicator}" Value="{x:Static viewModels:StorageState.Busy}">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.Background>
+                <SolidColorBrush Color="White" Opacity="0.6"/>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image 
+                Grid.Row="1"
+                Grid.Column="1"
+                Source="/StoryTree.Gui;component/Resources/busy-white.png" 
+                Style="{StaticResource Spinner}"/>
+        </Grid>
         <ContentPresenter 
+            Grid.Row="1" 
             IsEnabled="{Binding BusyIndicator, Converter={StaticResource BusyIndicatorToEnabledConverter}}"
             Name="HostControl" 
-            Grid.Row="1" 
             Content="{Binding }"
             ContentTemplate="{StaticResource ContentPresenterDataTemplate}"/>
 
