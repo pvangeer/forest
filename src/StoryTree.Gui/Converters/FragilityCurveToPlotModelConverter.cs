@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Data;
 using OxyPlot;
 using OxyPlot.Axes;
@@ -11,18 +12,36 @@ using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui.Converters
 {
+    public class HydraulicsListToPlotModelConverter : FragilityCurveToPlotModelConverter
+    {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!(value is ObservableCollection<HydraulicConditionViewModel> conditions))
+            {
+                return null;
+            }
+
+            return CreatePlotModel(conditions);
+        }
+    }
+
     public class FragilityCurveToPlotModelConverter : IValueConverter
     {
         private NotifyCollectionChangedEventHandler conditionCollectionChangedHandler;
         private PropertyChangedEventHandler hydraulicConditionPropertyChangedHandler;
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is ObservableCollection<FragilityCurveElementViewModel> conditions))
             {
                 return null;
             }
 
+            return CreatePlotModel(conditions);
+        }
+
+        protected PlotModel CreatePlotModel<T>(ObservableCollection<T> fragilityCurveElementViewModels) where T : FragilityCurveElementViewModel
+        {
             var plotModel = new PlotModel();
             plotModel.Axes.Add(new LogarithmicAxis
             {
@@ -35,7 +54,7 @@ namespace StoryTree.Gui.Converters
 
             plotModel.Series.Add(new LineSeries
             {
-                ItemsSource = conditions,
+                ItemsSource = fragilityCurveElementViewModels,
                 Color = OxyColors.CornflowerBlue,
                 MarkerSize = 0,
                 StrokeThickness = 2,
@@ -43,11 +62,12 @@ namespace StoryTree.Gui.Converters
                 DataFieldY = nameof(FragilityCurveElementViewModel.WaterLevel)
             });
 
-            conditionCollectionChangedHandler = (o,e) => ConditionsCollectionChanged(conditions, plotModel);
+            conditionCollectionChangedHandler =
+                (o, e) => ConditionsCollectionChanged(fragilityCurveElementViewModels, plotModel);
             hydraulicConditionPropertyChangedHandler = (o, e) => HydraulicConditionPropertyChanged(plotModel);
 
-            conditions.CollectionChanged += conditionCollectionChangedHandler;
-            foreach (var condition in conditions)
+            fragilityCurveElementViewModels.CollectionChanged += conditionCollectionChangedHandler;
+            foreach (var condition in fragilityCurveElementViewModels)
             {
                 condition.PropertyChanged += hydraulicConditionPropertyChangedHandler;
             }
@@ -60,7 +80,7 @@ namespace StoryTree.Gui.Converters
             plotModel.InvalidatePlot(true);
         }
 
-        private void ConditionsCollectionChanged(ObservableCollection<FragilityCurveElementViewModel> conditions, PlotModel plotModel)
+        private void ConditionsCollectionChanged<T>(ObservableCollection<T> conditions, PlotModel plotModel) where T : FragilityCurveElementViewModel
         {
             foreach (var hydraulicConditionViewModel in conditions)
             {

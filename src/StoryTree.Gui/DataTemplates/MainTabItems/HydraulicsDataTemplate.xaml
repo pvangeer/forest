@@ -4,7 +4,7 @@
                     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
                     xmlns:oxy="http://oxyplot.org/wpf">
 
-    <converters:FragilityCurveToPlotModelConverter x:Key="HydraulicsListToPlotModelConverter" />
+    <converters:HydraulicsListToPlotModelConverter x:Key="HydraulicsListToPlotModelConverter" />
     <DataTemplate x:Key="HydraulicsDataTemplate" DataType="viewModels:ProjectViewModel">
         <Grid>
             <Grid.ColumnDefinitions>
