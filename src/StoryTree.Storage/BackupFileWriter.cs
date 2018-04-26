@@ -167,8 +167,8 @@ namespace StoryTree.Storage
                 if (e is ArgumentException || e is IOException || e is UnauthorizedAccessException || e is NotSupportedException)
                 {
                     string message = string.Format(
-                        "Het is niet gelukt om een tijdelijk bestand te creeren: {0}",
-                        targetFilePath);
+                        "Het is niet gelukt om het oude projectbestand weg te schrijven in een tijdelijk bestand met de naam: {0}",
+                        temporaryFilePath);
                     throw new IOException(message, e);
                 }
                 throw;

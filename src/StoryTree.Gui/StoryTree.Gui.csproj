@@ -133,7 +133,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BackgroundWorkerArguments.cs" />
     <Compile Include="Command\RemoveAllMessagesCommand.cs" />
     <Compile Include="Converters\EventTypeToColorConverter.cs" />
     <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />

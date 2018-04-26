@@ -9,12 +9,12 @@ using StoryTree.Storage;
 
 namespace StoryTree.Gui
 {
-    public partial class GuiProjectServices
+    public class GuiProjectServices
     {
         private readonly StoryTreeLog log = new StoryTreeLog(typeof(GuiProjectServices));
         private readonly GuiViewModel guiViewModel;
         private readonly StorageSqLite storageSqLite;
-
+        
         public GuiProjectServices(GuiViewModel guiViewModel)
         {
             this.guiViewModel = guiViewModel;
@@ -25,8 +25,11 @@ namespace StoryTree.Gui
 
         public void NewProject()
         {
-            HandleUnsavedChanges(guiViewModel.Gui);
+            HandleUnsavedChanges(guiViewModel.Gui, CreateNewProject);
+        }
 
+        private void CreateNewProject()
+        {
             storageSqLite.UnstageProject();
             guiViewModel.ProjectFilePath = "";
 
@@ -37,6 +40,12 @@ namespace StoryTree.Gui
         public void OpenProject()
         {
             storageSqLite.UnstageProject();
+
+            HandleUnsavedChanges(guiViewModel.Gui, OpenNewProjectCore);
+        }
+
+        private void OpenNewProjectCore()
+        {
             var dialog = new OpenFileDialog
             {
                 CheckFileExists = true,
@@ -44,33 +53,36 @@ namespace StoryTree.Gui
                 FileName = guiViewModel.ProjectFilePath,
             };
 
-            if ((bool)dialog.ShowDialog(Win32Window))
+            if ((bool) dialog.ShowDialog(Win32Window))
             {
                 ChangeState(StorageState.Busy);
 
                 var worker = new BackgroundWorker();
                 worker.DoWork += OpenProjectAsync;
                 worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o, e,
-                    () => log.Info($"Klaar met openen van project uit bestand '{guiViewModel.ProjectFilePath}'."));
+                    () =>
+                    {
+                        guiViewModel.ProjectFilePath = dialog.FileName;
+                        log.Info($"Klaar met openen van project uit bestand '{guiViewModel.ProjectFilePath}'.");
+                    });
                 worker.WorkerSupportsCancellation = false;
 
-                guiViewModel.ProjectFilePath = dialog.FileName;
-                worker.RunWorkerAsync(new BackgroundWorkerArguments(storageSqLite, guiViewModel));
+                worker.RunWorkerAsync(dialog.FileName);
             }
         }
 
-        public void SaveProject()
+        public void SaveProject(Action followingAction = null)
         {
             if (string.IsNullOrWhiteSpace(guiViewModel.ProjectFilePath))
             {
-                SaveProjectAs();
+                SaveProjectAs(followingAction);
                 return;
             }
 
-            StageProjectAndStore();
+            StageProjectAndStore(followingAction);
         }
 
-        public void SaveProjectAs()
+        public void SaveProjectAs(Action followingAction = null)
         {
             var dialog = new SaveFileDialog
             {
@@ -83,20 +95,36 @@ namespace StoryTree.Gui
             if ((bool)dialog.ShowDialog(Win32Window))
             {
                 guiViewModel.ProjectFilePath = dialog.FileName;
-                StageProjectAndStore();
+                StageProjectAndStore(followingAction);
             }
         }
 
-        private void StageProjectAndStore()
+        private void StageProjectAndStore(Action followingAction = null)
         {
             ChangeState(StorageState.Busy);
             var worker = new BackgroundWorker();
-            worker.DoWork += StageAndeStoreProjectAsync;
+            worker.DoWork += StageAndStoreProjectAsync;
             worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o, e,
-                () => log.Info($"Project is opgeslagen in bestand '{guiViewModel.ProjectFilePath}'."));
+                () =>
+                {
+                    log.Info($"Project is opgeslagen in bestand '{guiViewModel.ProjectFilePath}'.");
+                    followingAction?.Invoke();
+                });
             worker.WorkerSupportsCancellation = false;
 
-            worker.RunWorkerAsync(new BackgroundWorkerArguments(storageSqLite, guiViewModel));
+            worker.RunWorkerAsync();
+        }
+
+        private void StageAndStoreProjectAsync(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                StageAndStoreProjectCore();
+            }
+            catch (Exception exception)
+            {
+                e.Result = exception;
+            }
         }
 
         private void BackgroundWorkerAsyncFinished(object sender, RunWorkerCompletedEventArgs e, Action workFinishedAction)
@@ -115,16 +143,11 @@ namespace StoryTree.Gui
 
         private void OpenProjectAsync(object sender, DoWorkEventArgs e)
         {
-            if (!(e.Argument is BackgroundWorkerArguments arguments))
-            {
-                return;
-            }
-
+            var fileName = e.Argument as string;
             try
             {
-                HandleUnsavedChanges(arguments.Gui);
-                arguments.Gui.Project = arguments.StorageSqLite.LoadProject(arguments.ProjectFilePath);
-                arguments.Gui.OnPropertyChanged(nameof(StoryTreeGui.Project));
+                guiViewModel.Gui.Project = storageSqLite.LoadProject(fileName);
+                guiViewModel.Gui.OnPropertyChanged(nameof(StoryTreeGui.Project));
             }
             catch (Exception exception)
             {
@@ -133,43 +156,34 @@ namespace StoryTree.Gui
         }
 
         // TODO: Also use this method when exiting the gui 
-        private void HandleUnsavedChanges(StoryTreeGui gui)
+        private void HandleUnsavedChanges(StoryTreeGui gui, Action followingAction)
         {
-            if (gui.ProjectFilePath != null)
+            storageSqLite.StageProject(gui.Project);
+            if (storageSqLite.HasStagedProjectChanges(gui.ProjectFilePath))
             {
-                storageSqLite.StageProject(gui.Project);
-                if (storageSqLite.HasStagedProjectChanges(gui.ProjectFilePath))
+                if (gui.ShouldSaveOpenChanges != null && gui.ShouldSaveOpenChanges())
                 {
-                    if (gui.ShouldSaveOpenChanges != null && gui.ShouldSaveOpenChanges())
-                    {
-                        SaveProject();
-                    }
+                    SaveProject(followingAction);
                 }
-
-                storageSqLite.UnstageProject();
+                else
+                {
+                    followingAction();
+                }
+            }
+            else
+            {
+                followingAction();
             }
         }
 
-        private static void StageAndeStoreProjectAsync(object sender, DoWorkEventArgs e)
+        private void StageAndStoreProjectCore()
         {
-            if (!(e.Argument is BackgroundWorkerArguments arguments))
+            if (!storageSqLite.HasStagedProject)
             {
-                return;
+                storageSqLite.StageProject(guiViewModel.Gui.Project);
             }
 
-            try
-            {
-                if (!arguments.StorageSqLite.HasStagedProject)
-                {
-                    arguments.StorageSqLite.StageProject(arguments.Gui.Project);
-                }
-
-                arguments.StorageSqLite.SaveProjectAs(arguments.ProjectFilePath);
-            }
-            catch (Exception exception)
-            {
-                e.Result = exception;
-            }
+            storageSqLite.SaveProjectAs(guiViewModel.ProjectFilePath);
         }
 
         private void ChangeState(StorageState state)
