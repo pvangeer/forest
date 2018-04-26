@@ -33,7 +33,7 @@ namespace StoryTree.Storage.Read
                 FixedProbability = entity.FixedProbability == null
                     ? Probability.NaN
                     : (Probability) (double) entity.FixedProbability,
-                ProbabilitySpecificationType = (ProbabilitySpecificationType) entity.ProbabilitySpecificationTypeId,
+                ProbabilitySpecificationType = (ProbabilitySpecificationType) entity.ProbabilitySpecificationType,
                 Summary = entity.Summary,
                 Information = entity.Information,
                 Discussion = entity.Discussion

@@ -19,8 +19,8 @@ namespace StoryTree.Data
             EventTrees = new ObservableCollection<EventTree>();
             Experts = new ObservableCollection<Expert>();
             HydraulicConditions = new ObservableCollection<HydraulicCondition>();
-            StarteDate = DateTime.Now.Date;
-            EndDate = StarteDate.AddDays(4*7);
+            StartDate = DateTime.Now.Date;
+            EndDate = StartDate.AddDays(4*7);
         }
 
         public string Name { get; set; }
@@ -41,7 +41,7 @@ namespace StoryTree.Data
 
         public IEnumerable<double> WaterLevels => HydraulicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w);
 
-        public DateTime StarteDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
         

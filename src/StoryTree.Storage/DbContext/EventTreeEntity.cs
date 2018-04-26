@@ -22,7 +22,7 @@ namespace StoryTree.Storage.DbContext
         public Nullable<long> MainTreeEventId { get; set; }
         public long ProjectId { get; set; }
         public long Order { get; set; }
-        public long NeedsSpecification { get; set; }
+        public byte NeedsSpecification { get; set; }
     
         public virtual TreeEventEntity TreeEventEntity { get; set; }
         public virtual ProjectEntity ProjectEntity { get; set; }

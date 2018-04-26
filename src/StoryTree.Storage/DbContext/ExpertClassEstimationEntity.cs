@@ -18,9 +18,9 @@ namespace StoryTree.Storage.DbContext
         public long TreeEventId { get; set; }
         public long ExpertId { get; set; }
         public Nullable<double> WaterLevel { get; set; }
-        public long MinEstimationId { get; set; }
-        public long MaxEstimationId { get; set; }
-        public long AverageEstimationId { get; set; }
+        public byte MinEstimation { get; set; }
+        public byte MaxEstimation { get; set; }
+        public byte AverageEstimation { get; set; }
         public long Order { get; set; }
     
         public virtual TreeEventEntity TreeEventEntity { get; set; }

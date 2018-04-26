@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -51,5 +52,7 @@ namespace StoryTree.Gui
                 rootLogger.Repository.Configured = true;
             }
         }
+
+        public Func<bool> ShouldSaveOpenChanges { get; set; }
     }
 }

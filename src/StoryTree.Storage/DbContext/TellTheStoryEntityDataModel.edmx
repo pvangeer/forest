@@ -17,7 +17,7 @@
           <Property Name="MainTreeEventId" Type="integer" />
           <Property Name="ProjectId" Type="integer" Nullable="false" />
           <Property Name="Order" Type="integer" Nullable="false" />
-          <Property Name="NeedsSpecification" Type="integer" Nullable="false" />
+          <Property Name="NeedsSpecification" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="ExpertClassEstimationEntity">
           <Key>
@@ -27,9 +27,9 @@
           <Property Name="TreeEventId" Type="integer" Nullable="false" />
           <Property Name="ExpertId" Type="integer" Nullable="false" />
           <Property Name="WaterLevel" Type="real" />
-          <Property Name="MinEstimationId" Type="integer" Nullable="false" />
-          <Property Name="MaxEstimationId" Type="integer" Nullable="false" />
-          <Property Name="AverageEstimationId" Type="integer" Nullable="false" />
+          <Property Name="MinEstimation" Type="tinyint" Nullable="false" />
+          <Property Name="MaxEstimation" Type="tinyint" Nullable="false" />
+          <Property Name="AverageEstimation" Type="tinyint" Nullable="false" />
           <Property Name="Order" Type="integer" Nullable="false" />
         </EntityType>
         <EntityType Name="ExpertEntity">
@@ -81,8 +81,8 @@
           <Property Name="ProjectInformation" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="ProjectLeaderId" Type="integer" />
           <Property Name="ProjectId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StartDate" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
-          <Property Name="EndDate" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="StartDate" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="EndDate" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
         <EntityType Name="TreeEventEntity">
           <Key>
@@ -95,7 +95,7 @@
           <Property Name="Details" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Summary" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="FixedProbability" Type="real" />
-          <Property Name="ProbabilitySpecificationTypeId" Type="integer" Nullable="false" />
+          <Property Name="ProbabilitySpecificationType" Type="tinyint" Nullable="false" />
           <Property Name="Information" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Discussion" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
@@ -107,6 +107,15 @@
           <Property Name="FragilityCurveElementId" Type="integer" Nullable="false" />
           <Property Name="Order" Type="integer" Nullable="false" />
           <Property Name="TreeEventId" Type="integer" />
+        </EntityType>
+        <EntityType Name="VersionEntity">
+          <Key>
+            <PropertyRef Name="VersionId" />
+          </Key>
+          <Property Name="VersionId" Type="integer" Nullable="false" />
+          <Property Name="Version" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="TimeStamp" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="FingerPrint" Type="blob" />
         </EntityType>
         <Association Name="FK_EventTreeEntity_0_0">
           <End Role="TreeEventEntity" Type="Self.TreeEventEntity" Multiplicity="0..1" />
@@ -274,6 +283,7 @@
           <EntitySet Name="ProjectEntity" EntityType="Self.ProjectEntity" store:Type="Tables" />
           <EntitySet Name="TreeEventEntity" EntityType="Self.TreeEventEntity" store:Type="Tables" />
           <EntitySet Name="TreeEventFragilityCurveElementEntity" EntityType="Self.TreeEventFragilityCurveElementEntity" store:Type="Tables" />
+          <EntitySet Name="VersionEntity" EntityType="Self.VersionEntity" store:Type="Tables" />
           <AssociationSet Name="FK_EventTreeEntity_0_0" Association="Self.FK_EventTreeEntity_0_0">
             <End Role="TreeEventEntity" EntitySet="TreeEventEntity" />
             <End Role="EventTreeEntity" EntitySet="EventTreeEntity" />
@@ -341,6 +351,7 @@
           <EntitySet Name="ProjectEntities" EntityType="TellTheStoryEntities.ProjectEntity" />
           <EntitySet Name="TreeEventEntities" EntityType="TellTheStoryEntities.TreeEventEntity" />
           <EntitySet Name="TreeEventFragilityCurveElementEntities" EntityType="TellTheStoryEntities.TreeEventFragilityCurveElementEntity" />
+          <EntitySet Name="VersionEntities" EntityType="TellTheStoryEntities.VersionEntity" />
           <AssociationSet Name="FK_EventTreeEntity_0_0" Association="TellTheStoryEntities.FK_EventTreeEntity_0_0">
             <End Role="TreeEventEntity" EntitySet="TreeEventEntities" />
             <End Role="EventTreeEntity" EntitySet="EventTreeEntities" />
@@ -406,7 +417,7 @@
           <Property Name="MainTreeEventId" Type="Int64" />
           <Property Name="ProjectId" Type="Int64" Nullable="false" />
           <Property Name="Order" Type="Int64" Nullable="false" />
-          <Property Name="NeedsSpecification" Type="Int64" Nullable="false" />
+          <Property Name="NeedsSpecification" Type="Byte" Nullable="false" />
           <NavigationProperty Name="TreeEventEntity" Relationship="TellTheStoryEntities.FK_EventTreeEntity_0_0" FromRole="EventTreeEntity" ToRole="TreeEventEntity" />
           <NavigationProperty Name="ProjectEntity" Relationship="TellTheStoryEntities.FK_EventTreeEntity_1_0" FromRole="EventTreeEntity" ToRole="ProjectEntity" />
         </EntityType>
@@ -418,9 +429,9 @@
           <Property Name="TreeEventId" Type="Int64" Nullable="false" />
           <Property Name="ExpertId" Type="Int64" Nullable="false" />
           <Property Name="WaterLevel" Type="Double" />
-          <Property Name="MinEstimationId" Type="Int64" Nullable="false" />
-          <Property Name="MaxEstimationId" Type="Int64" Nullable="false" />
-          <Property Name="AverageEstimationId" Type="Int64" Nullable="false" />
+          <Property Name="MinEstimation" Type="Byte" Nullable="false" />
+          <Property Name="MaxEstimation" Type="Byte" Nullable="false" />
+          <Property Name="AverageEstimation" Type="Byte" Nullable="false" />
           <Property Name="Order" Type="Int64" Nullable="false" />
           <NavigationProperty Name="TreeEventEntity" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_0_0" FromRole="ExpertClassEstimationEntity" ToRole="TreeEventEntity" />
           <NavigationProperty Name="ExpertEntity" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_1_0" FromRole="ExpertClassEstimationEntity" ToRole="ExpertEntity" />
@@ -483,8 +494,8 @@
           <Property Name="ProjectInformation" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="ProjectLeaderId" Type="Int64" />
           <Property Name="ProjectId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StartDate" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="EndDate" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="EndDate" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EventTreeEntities" Relationship="TellTheStoryEntities.FK_EventTreeEntity_1_0" FromRole="ProjectEntity" ToRole="EventTreeEntity" />
           <NavigationProperty Name="ExpertEntities" Relationship="TellTheStoryEntities.FK_ExpertEntity_0_0" FromRole="ProjectEntity" ToRole="ExpertEntity" />
           <NavigationProperty Name="HydraulicConditionElementEntities" Relationship="TellTheStoryEntities.FK_HydraulicConditionElementEntity_0_0" FromRole="ProjectEntity" ToRole="HydraulicConditionElementEntity" />
@@ -501,7 +512,7 @@
           <Property Name="Details" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Summary" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="FixedProbability" Type="Double" />
-          <Property Name="ProbabilitySpecificationTypeId" Type="Int64" Nullable="false" />
+          <Property Name="ProbabilitySpecificationType" Type="Byte" Nullable="false" />
           <Property Name="Information" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Discussion" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EventTreeEntities" Relationship="TellTheStoryEntities.FK_EventTreeEntity_0_0" FromRole="TreeEventEntity" ToRole="EventTreeEntity" />
@@ -522,6 +533,15 @@
           <Property Name="TreeEventId" Type="Int64" />
           <NavigationProperty Name="FragilityCurveElementEntity" Relationship="TellTheStoryEntities.FK_TreeEventFragilityCurveElementEntity_1_0" FromRole="TreeEventFragilityCurveElementEntity" ToRole="FragilityCurveElementEntity" />
           <NavigationProperty Name="TreeEventEntity" Relationship="TellTheStoryEntities.FK_TreeEventFragilityCurveElementEntity_0_0" FromRole="TreeEventFragilityCurveElementEntity" ToRole="TreeEventEntity" />
+        </EntityType>
+        <EntityType Name="VersionEntity">
+          <Key>
+            <PropertyRef Name="VersionId" />
+          </Key>
+          <Property Name="VersionId" Type="Int64" Nullable="false" />
+          <Property Name="Version" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="FingerPrint" Type="Binary" MaxLength="2147483647" FixedLength="false" />
         </EntityType>
         <Association Name="FK_EventTreeEntity_0_0">
           <End Type="TellTheStoryEntities.TreeEventEntity" Role="TreeEventEntity" Multiplicity="0..1" />
@@ -704,9 +724,9 @@
             <EntityTypeMapping TypeName="TellTheStoryEntities.ExpertClassEstimationEntity">
               <MappingFragment StoreEntitySet="ExpertClassEstimationEntity">
                 <ScalarProperty Name="Order" ColumnName="Order" />
-                <ScalarProperty Name="AverageEstimationId" ColumnName="AverageEstimationId" />
-                <ScalarProperty Name="MaxEstimationId" ColumnName="MaxEstimationId" />
-                <ScalarProperty Name="MinEstimationId" ColumnName="MinEstimationId" />
+                <ScalarProperty Name="AverageEstimation" ColumnName="AverageEstimation" />
+                <ScalarProperty Name="MaxEstimation" ColumnName="MaxEstimation" />
+                <ScalarProperty Name="MinEstimation" ColumnName="MinEstimation" />
                 <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
                 <ScalarProperty Name="ExpertId" ColumnName="ExpertId" />
                 <ScalarProperty Name="TreeEventId" ColumnName="TreeEventId" />
@@ -776,7 +796,7 @@
               <MappingFragment StoreEntitySet="TreeEventEntity">
                 <ScalarProperty Name="Discussion" ColumnName="Discussion" />
                 <ScalarProperty Name="Information" ColumnName="Information" />
-                <ScalarProperty Name="ProbabilitySpecificationTypeId" ColumnName="ProbabilitySpecificationTypeId" />
+                <ScalarProperty Name="ProbabilitySpecificationType" ColumnName="ProbabilitySpecificationType" />
                 <ScalarProperty Name="FixedProbability" ColumnName="FixedProbability" />
                 <ScalarProperty Name="Summary" ColumnName="Summary" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
@@ -794,6 +814,16 @@
                 <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="FragilityCurveElementId" ColumnName="FragilityCurveElementId" />
                 <ScalarProperty Name="TreeEventFragilicyCurveElementId" ColumnName="TreeEventFragilicyCurveElementId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VersionEntities">
+            <EntityTypeMapping TypeName="TellTheStoryEntities.VersionEntity">
+              <MappingFragment StoreEntitySet="VersionEntity">
+                <ScalarProperty Name="FingerPrint" ColumnName="FingerPrint" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="VersionId" ColumnName="VersionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

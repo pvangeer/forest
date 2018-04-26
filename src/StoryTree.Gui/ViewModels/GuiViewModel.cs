@@ -28,7 +28,21 @@ namespace StoryTree.Gui.ViewModels
                 Gui.PropertyChanged += GuiPropertyChanged;
                 Gui.Messages.CollectionChanged += GuiMessagesCollectionChanged;
                 projectViewModel = new ProjectViewModel(Gui.Project);
+                Gui.ShouldSaveOpenChanges = ShouldSaveOpenChanges;
             }
+        }
+
+        private bool ShouldSaveOpenChanges()
+        {
+            string messageBoxText = "U heeft aanpassingen aan uw project nog niet opgeslagen. Wilt u dat alsnog doen?";
+            string caption = "Aanpassingen opslaan";
+
+            MessageBoxButton messageBoxType = MessageBoxButton.YesNo;
+            MessageBoxImage messageBoxImage = MessageBoxImage.Question;
+
+            MessageBoxResult messageBoxResult = MessageBox.Show(messageBoxText, caption, messageBoxType, messageBoxImage);
+
+            return messageBoxResult == MessageBoxResult.Yes;
         }
 
         private void GuiMessagesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

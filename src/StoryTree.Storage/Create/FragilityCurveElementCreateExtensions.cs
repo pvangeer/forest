@@ -20,8 +20,8 @@ namespace StoryTree.Storage.Create
 
             var entity = new FragilityCurveElementEntity
             {
-                Probability = model.Probability,
-                WaterLevel = model.WaterLevel
+                Probability = ((double)model.Probability).ToNaNAsNull(),
+                WaterLevel = model.WaterLevel.ToNaNAsNull()
             };
 
             registry.Register(model, entity);

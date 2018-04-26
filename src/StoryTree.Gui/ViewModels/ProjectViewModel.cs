@@ -165,11 +165,11 @@ namespace StoryTree.Gui.ViewModels
 
         public DateTime StartDate
         {
-            get => Project.StarteDate;
+            get => Project.StartDate;
             set
             {
-                Project.StarteDate = value;
-                Project.OnPropertyChanged(nameof(Project.StarteDate));
+                Project.StartDate = value;
+                Project.OnPropertyChanged(nameof(Project.StartDate));
             }
         }
 

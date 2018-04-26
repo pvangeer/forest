@@ -25,8 +25,11 @@ namespace StoryTree.Gui
 
         public void NewProject()
         {
-            guiViewModel.ProjectFilePath = "";
+            HandleUnsavedChanges(guiViewModel.Gui);
+
             storageSqLite.UnstageProject();
+            guiViewModel.ProjectFilePath = "";
+
             guiViewModel.Gui.Project = new Project();
             guiViewModel.Gui.OnPropertyChanged(nameof(StoryTreeGui.Project));
         }
@@ -110,7 +113,7 @@ namespace StoryTree.Gui
             ChangeState(StorageState.Idle);
         }
 
-        private static void OpenProjectAsync(object sender, DoWorkEventArgs e)
+        private void OpenProjectAsync(object sender, DoWorkEventArgs e)
         {
             if (!(e.Argument is BackgroundWorkerArguments arguments))
             {
@@ -119,12 +122,31 @@ namespace StoryTree.Gui
 
             try
             {
+                HandleUnsavedChanges(arguments.Gui);
                 arguments.Gui.Project = arguments.StorageSqLite.LoadProject(arguments.ProjectFilePath);
                 arguments.Gui.OnPropertyChanged(nameof(StoryTreeGui.Project));
             }
             catch (Exception exception)
             {
                 e.Result = exception;
+            }
+        }
+
+        // TODO: Also use this method when exiting the gui 
+        private void HandleUnsavedChanges(StoryTreeGui gui)
+        {
+            if (gui.ProjectFilePath != null)
+            {
+                storageSqLite.StageProject(gui.Project);
+                if (storageSqLite.HasStagedProjectChanges(gui.ProjectFilePath))
+                {
+                    if (gui.ShouldSaveOpenChanges != null && gui.ShouldSaveOpenChanges())
+                    {
+                        SaveProject();
+                    }
+                }
+
+                storageSqLite.UnstageProject();
             }
         }
 

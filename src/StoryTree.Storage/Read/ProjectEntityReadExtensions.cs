@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Linq;
 using StoryTree.Data;
 using StoryTree.Storage.DbContext;
-using StoryTree.Storage.Properties;
 
 namespace StoryTree.Storage.Read
 {
@@ -31,7 +30,7 @@ namespace StoryTree.Storage.Read
                 Description = entity.Description,
                 ProjectInformation = entity.ProjectInformation,
                 ProjectLeader = entity.PersonEntity.Read(collector),
-                StarteDate = DateTime.Parse(entity.StartDate, CultureInfo.InvariantCulture.DateTimeFormat),
+                StartDate = DateTime.Parse(entity.StartDate, CultureInfo.InvariantCulture.DateTimeFormat),
                 EndDate = DateTime.Parse(entity.EndDate,CultureInfo.InvariantCulture.DateTimeFormat)
             };
 

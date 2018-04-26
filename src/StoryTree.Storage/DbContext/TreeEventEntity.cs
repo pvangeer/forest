@@ -31,7 +31,7 @@ namespace StoryTree.Storage.DbContext
         public string Details { get; set; }
         public string Summary { get; set; }
         public Nullable<double> FixedProbability { get; set; }
-        public long ProbabilitySpecificationTypeId { get; set; }
+        public byte ProbabilitySpecificationType { get; set; }
         public string Information { get; set; }
         public string Discussion { get; set; }
     

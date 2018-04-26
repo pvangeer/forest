@@ -34,5 +34,6 @@ namespace StoryTree.Storage.DbContext
         public virtual DbSet<ProjectEntity> ProjectEntities { get; set; }
         public virtual DbSet<TreeEventEntity> TreeEventEntities { get; set; }
         public virtual DbSet<TreeEventFragilityCurveElementEntity> TreeEventFragilityCurveElementEntities { get; set; }
+        public virtual DbSet<VersionEntity> VersionEntities { get; set; }
     }
 }

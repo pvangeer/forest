@@ -23,7 +23,7 @@ namespace StoryTree.Storage.Read
             }
 
             var element =
-                new FragilityCurveElement((double) entity.WaterLevel, (Probability) (double) entity.Probability);
+                new FragilityCurveElement(entity.WaterLevel.ToNullAsNaN(), (Probability) entity.Probability.ToNullAsNaN());
 
             collector.Collect(entity,element);
 

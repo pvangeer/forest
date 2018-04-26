@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
+using Application.Ringtoets.Storage;
 using StoryTree.Data;
+using StoryTree.Data.Properties;
 using StoryTree.Storage.Create;
 using StoryTree.Storage.DbContext;
 using StoryTree.Storage.Read;
@@ -69,6 +73,8 @@ namespace StoryTree.Storage
                 Project project;
                 using (var dbContext = new Entities(connectionString))
                 {
+                    ValidateDatabaseVersion(dbContext, databaseFilePath);
+
                     dbContext.LoadTablesIntoContext();
 
                     ProjectEntity projectEntity;
@@ -84,7 +90,6 @@ namespace StoryTree.Storage
                     project = projectEntity.Read(new ReadConversionCollector());
                 }
 
-                project.Name = Path.GetFileNameWithoutExtension(databaseFilePath);
                 return project;
             }
             catch (DataException exception)
@@ -97,6 +102,37 @@ namespace StoryTree.Storage
             }
         }
 
+        public bool HasStagedProjectChanges(string filePath)
+        {
+            if (!HasStagedProject)
+            {
+                throw new InvalidOperationException("Call 'StageProject(IProject)' first before calling this method.");
+            }
+            if (string.IsNullOrWhiteSpace(filePath))
+            {
+                return true;
+            }
+
+            string connectionString = GetConnectionToExistingFile(filePath);
+            try
+            {
+                byte[] originalHash;
+                using (var dbContext = new Entities(connectionString))
+                    originalHash = dbContext.VersionEntities.Select(v => v.FingerPrint).First();
+
+                byte[] hash = FingerprintHelper.Get(stagedProject.Entity);
+                return !FingerprintHelper.AreEqual(originalHash, hash);
+            }
+            catch (Exception e)
+            {
+                if (e.InnerException is QuotaExceededException)
+                {
+                    throw new StorageException("Opgeslagen project bevat teveel objecten om een vingerafdruk van te maken", e);
+                }
+                throw new StorageException(e.Message, e);
+            }
+        }
+
         private void SaveProjectInDatabase(string databaseFilePath)
         {
             string connectionString = GetConnectionToNewFile(databaseFilePath);
@@ -104,6 +140,12 @@ namespace StoryTree.Storage
             {
                 try
                 {
+                    dbContext.VersionEntities.Add(new VersionEntity
+                    {
+                        Version = StoryTreeVersionHelper.GetCurrentDatabaseVersion(),
+                        TimeStamp = DateTime.Now.ToString(CultureInfo.InvariantCulture.DateTimeFormat),
+                        FingerPrint = FingerprintHelper.Get(stagedProject.Entity)
+                    });
                     dbContext.ProjectEntities.Add(stagedProject.Entity);
                     dbContext.SaveChanges();
                 }
@@ -119,7 +161,34 @@ namespace StoryTree.Storage
                     }
                     throw;
                 }
-                stagedProject.Model.Name = Path.GetFileNameWithoutExtension(databaseFilePath);
+            }
+        }
+
+        private static void ValidateDatabaseVersion(Entities storyTreeEntities, string databaseFilePath)
+        {
+            try
+            {
+                string databaseVersion = storyTreeEntities.VersionEntities.Select(v => v.Version).Single();
+                if (!StoryTreeVersionHelper.IsValidVersion(databaseVersion))
+                {
+                    string m = string.Format("Database versie ('{0}') is ongeldig",
+                        databaseVersion);
+                    string message = new FileReaderErrorMessageBuilder(databaseFilePath).Build(m);
+                    throw new FormatException(message);
+                }
+
+                if (StoryTreeVersionHelper.IsNewerThanCurrent(databaseVersion))
+                {
+                    string m = string.Format("Database versie ('{0}') is nieuwer dan de huidige versie ('{1}')",
+                        databaseVersion, StoryTreeVersionHelper.GetCurrentDatabaseVersion());
+                    string message = new FileReaderErrorMessageBuilder(databaseFilePath).Build(m);
+                    throw new FormatException(message);
+                }
+            }
+            catch (InvalidOperationException e)
+            {
+                string message = new FileReaderErrorMessageBuilder(databaseFilePath).Build("Er mag maximaal 1 rij aanwezig zijn in de VersionEntity tabel van het opslagformaat.");
+                throw new FormatException(message);
             }
         }
 
@@ -189,6 +258,7 @@ namespace StoryTree.Storage
                 try
                 {
                     dbContext.Database.Initialize(true);
+                    dbContext.LoadVersionTableIntoContext();
                 }
                 catch (Exception exception)
                 {

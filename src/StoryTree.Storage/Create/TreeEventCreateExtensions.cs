@@ -24,7 +24,7 @@ namespace StoryTree.Storage.Create
                 Details = model.Details.DeepClone(),
                 Summary = model.Summary.DeepClone(),
                 FixedProbability = ((double)model.FixedProbability).ToNaNAsNull(),
-                ProbabilitySpecificationTypeId = (int)model.ProbabilitySpecificationType,
+                ProbabilitySpecificationType = Convert.ToByte(model.ProbabilitySpecificationType),
                 Information = model.Information.DeepClone(),
                 Discussion = model.Discussion.DeepClone()
             };

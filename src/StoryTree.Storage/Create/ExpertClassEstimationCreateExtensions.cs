@@ -1,4 +1,5 @@
-﻿using StoryTree.Data.Tree;
+﻿using System;
+using StoryTree.Data.Tree;
 using StoryTree.Storage.DbContext;
 
 namespace StoryTree.Storage.Create
@@ -11,9 +12,9 @@ namespace StoryTree.Storage.Create
             {
                 ExpertEntity = model.Expert.Create(registry),
                 WaterLevel = model.WaterLevel.ToNaNAsNull(),
-                AverageEstimationId = (int)model.AverageEstimation,
-                MaxEstimationId = (int)model.MaxEstimation,
-                MinEstimationId = (int)model.MinEstimation,
+                AverageEstimation = Convert.ToByte(model.AverageEstimation),
+                MaxEstimation = Convert.ToByte(model.MaxEstimation),
+                MinEstimation = Convert.ToByte(model.MinEstimation),
             };
 
             return entity;

@@ -51,7 +51,7 @@ namespace StoryTree.Storage.Test
             Assert.AreEqual(project.Description, project2C.Description);
             Assert.AreEqual(project.AssessmentSection, project2C.AssessmentSection);
             Assert.AreEqual(project.ProjectInformation, project2C.ProjectInformation);
-            Assert.AreEqual(project.StarteDate, project2C.StarteDate);
+            Assert.AreEqual(project.StartDate, project2C.StartDate);
             Assert.AreEqual(project.EndDate, project2C.EndDate);
 
             AssertEqualProjectLeader(project.ProjectLeader, project2C.ProjectLeader);

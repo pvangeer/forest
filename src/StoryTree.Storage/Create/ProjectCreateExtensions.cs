@@ -21,7 +21,7 @@ namespace StoryTree.Storage.Create
                 AssessmentSection = project.AssessmentSection.DeepClone(),
                 ProjectInformation = project.ProjectInformation.DeepClone(),
                 PersonEntity = project.ProjectLeader.Create(registry),
-                StartDate = project.StarteDate.ToString(CultureInfo.InvariantCulture.DateTimeFormat),
+                StartDate = project.StartDate.ToString(CultureInfo.InvariantCulture.DateTimeFormat),
                 EndDate = project.EndDate.ToString(CultureInfo.InvariantCulture.DateTimeFormat)
             };
 

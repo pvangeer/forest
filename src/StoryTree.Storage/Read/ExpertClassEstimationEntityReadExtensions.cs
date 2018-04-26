@@ -28,9 +28,9 @@ namespace StoryTree.Storage.Read
             {
                 Expert = entity.ExpertEntity.Read(collector),
                 WaterLevel = (double)entity.WaterLevel,
-                AverageEstimation = (ProbabilityClass)entity.AverageEstimationId,
-                MinEstimation = (ProbabilityClass)entity.MinEstimationId,
-                MaxEstimation = (ProbabilityClass)entity.MaxEstimationId
+                AverageEstimation = (ProbabilityClass)entity.AverageEstimation,
+                MinEstimation = (ProbabilityClass)entity.MinEstimation,
+                MaxEstimation = (ProbabilityClass)entity.MaxEstimation
             };
 
             collector.Collect(entity,estimation);

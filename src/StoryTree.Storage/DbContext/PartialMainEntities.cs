@@ -30,6 +30,11 @@ namespace StoryTree.Storage.DbContext
             Configuration.LazyLoadingEnabled = false;
         }
 
+        public void LoadVersionTableIntoContext()
+        {
+            VersionEntities.Load();
+        }
+
         /// <summary>
         /// Loads all tables into the context.
         /// </summary>
