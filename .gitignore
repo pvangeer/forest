@@ -1,5 +1,6 @@
 # Visual studio
 *.suo
+*.ldb
 *.user
 *.userosscache
 *.sln.docstates
