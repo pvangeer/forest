@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9B8172A0-8896-4B96-A03D-6FF4043220DE}</ProjectGuid>
+    <ProjectGuid>{42800156-F7F8-41C8-90F4-95B89CCADA1F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StoryTree.Calculators.Test</RootNamespace>
-    <AssemblyName>StoryTree.Calculators.Test</AssemblyName>
+    <RootNamespace>StoryTree.Gui.Test</RootNamespace>
+    <AssemblyName>StoryTree.Gui.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -37,12 +37,19 @@
     <Reference Include="nunit.framework, Version=3.10.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassEstimationFragilityCurveCalculatorTest.cs" />
-    <Compile Include="CriticalPathCalculatorTest.cs" />
+    <Compile Include="DataTemplateTestBaseFixture.cs" />
+    <Compile Include="DataTemplateTestBaseFixtureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -52,13 +59,9 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\StoryTree.Calculators\StoryTree.Calculators.csproj">
-      <Project>{A7090218-547D-412B-A4F5-F80C8B4890F3}</Project>
-      <Name>StoryTree.Calculators</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\StoryTree.Data\StoryTree.Data.csproj">
-      <Project>{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}</Project>
-      <Name>StoryTree.Data</Name>
+    <ProjectReference Include="..\..\src\StoryTree.Gui\StoryTree.Gui.csproj">
+      <Project>{349cd8fe-3af9-4ea5-9ea0-5318fb20e123}</Project>
+      <Name>StoryTree.Gui</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

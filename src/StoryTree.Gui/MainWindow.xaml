@@ -6,6 +6,7 @@
     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
     xmlns:services="clr-namespace:StoryTree.Data.Services;assembly=StoryTree.Data"
+    xmlns:gui="clr-namespace:StoryTree.Gui"
     Title="Gebeurtenissenboom" 
     Height="800" 
     Width="1200" 
@@ -24,7 +25,7 @@
 
             <Style x:Key="Spinner" TargetType="Image">
                 <Setter Property="Height" Value="24" />
-                <Setter Property="Image.RenderTransform">
+                <Setter Property="RenderTransform">
                     <Setter.Value>
                         <RotateTransform CenterX="12" CenterY="12" />
                     </Setter.Value>
@@ -50,6 +51,7 @@
             <converters:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
             <converters:ShouldShowPriorityMessageToBoolConverter x:Key="ShouldShowPriorityMessageToBoolConverter" />
             <converters:MessageListToLabelConverter x:Key="MessageListToLabelConverter" />
+            <converters:SelectedProcessToCheckedConverter x:Key="SelectedProcessToBoolConverter" />
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
@@ -130,58 +132,66 @@
                 Header="Proces"
                 fluent:KeyTip.Keys="P">
                 <fluent:RibbonGroupBox Header="Algemeen">
-                    <fluent:Button
+                    <fluent:ToggleButton
                         Header="Projectgegevens"
                         LargeIcon="/StoryTree.Gui;component\Resources\project-information.png"
                         Size="Large" 
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.GeneralInformation}}"
                         Command="{Binding ChangeProcesStepCommand}"
                         CommandParameter="{x:Static viewModels:StoryTreeProcess.GeneralInformation}"/>
-                    <fluent:Button
+                    <fluent:ToggleButton
                         Header="Experts"
                         LargeIcon="/StoryTree.Gui;component\Resources\experts.png"
                         Size="Large" 
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Experts}}"
                         Command="{Binding ChangeProcesStepCommand}"
                         CommandParameter="{x:Static viewModels:StoryTreeProcess.Experts}"/>
-                    <fluent:Button
+                    <fluent:ToggleButton
                         Header="Hydraulische gegevens"
                         LargeIcon="/StoryTree.Gui;component\Resources\hydraulics.png"
                         Size="Large" 
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Hydraulics}}"
                         Command="{Binding ChangeProcesStepCommand}"
                         CommandParameter="{x:Static viewModels:StoryTreeProcess.Hydraulics}"/>
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
-                    <fluent:Button
+                    <fluent:ToggleButton
                         Header="Gebeurtenissen definieren"
                         LargeIcon="/StoryTree.Gui;component\Resources\add-eventtree.png"
                         Size="Large" 
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.EventTreeDefinition}}"
                         Command="{Binding ChangeProcesStepCommand}"
                         CommandParameter="{x:Static viewModels:StoryTreeProcess.EventTreeDefinition}"/>
-                    <fluent:Button
+                    <fluent:ToggleButton
                         Header="Knopen definieren"
                         LargeIcon="/StoryTree.Gui;component\Resources\add-tree-event.png"
                         Size="Large" 
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.TreeEventsDefinition}}"
                         Command="{Binding ChangeProcesStepCommand}"
                         CommandParameter="{x:Static viewModels:StoryTreeProcess.TreeEventsDefinition}"/>
-                    <fluent:Button
+                    <fluent:ToggleButton
                         Header="Knoopinformatie"
                         LargeIcon="/StoryTree.Gui;component\Resources\tree-event-info.png"
                         Size="Large" 
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.TreeEventsInformation}}"
                         Command="{Binding ChangeProcesStepCommand}"
                         CommandParameter="{x:Static viewModels:StoryTreeProcess.TreeEventsInformation}"/>
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Overgangskansen">
-                    <fluent:Button
+                    <fluent:ToggleButton
                         Header="Overgangskansen"
                         LargeIcon="/StoryTree.Gui;component\Resources\estimation.png"
                         Size="Large" 
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Estimation}}"
                         Command="{Binding ChangeProcesStepCommand}"
                         CommandParameter="{x:Static viewModels:StoryTreeProcess.Estimation}"/>
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Resultaten">
-                    <fluent:Button
+                    <fluent:ToggleButton
                         Header="Resultaten"
                         LargeIcon="/StoryTree.Gui;component\Resources\results.png"
                         Size="Large" 
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Results}}"
                         Command="{Binding ChangeProcesStepCommand}"
                         CommandParameter="{x:Static viewModels:StoryTreeProcess.Results}"/>
                 </fluent:RibbonGroupBox>

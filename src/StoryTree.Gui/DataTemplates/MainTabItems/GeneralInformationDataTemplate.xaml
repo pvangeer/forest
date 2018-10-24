@@ -2,9 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:gui="clr-namespace:StoryTree.Gui">
+                    xmlns:gui="clr-namespace:StoryTree.Gui"
+                    xmlns:command="clr-namespace:StoryTree.Gui.Command">
 
-    <gui:SelectTodayCommand x:Key="SelectTodayCommand" />
+    <command:SelectTodayCommand x:Key="SelectTodayCommand" />
     <DataTemplate x:Key="GeneralInformationDataTemplate" DataType="viewModels:ProjectViewModel">
         <Grid>
             <Grid.RowDefinitions>

@@ -1,7 +1,7 @@
 using StoryTree.Data;
 using StoryTree.Data.Tree;
 
-namespace StoryTree.Gui.Converters
+namespace StoryTree.Calculators
 {
     public class CriticalPathElement
     {

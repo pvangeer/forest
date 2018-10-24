@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using StoryTree.Data;
 using StoryTree.Data.Hydraulics;
-using StoryTree.Gui.Converters;
 
 namespace StoryTree.Calculators
 {

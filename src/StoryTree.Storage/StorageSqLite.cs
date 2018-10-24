@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
-using Application.Ringtoets.Storage;
 using StoryTree.Data;
 using StoryTree.Data.Properties;
 using StoryTree.Storage.Create;

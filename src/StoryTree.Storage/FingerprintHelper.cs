@@ -27,9 +27,8 @@ using System.Security.Cryptography;
 using System.ServiceModel;
 using System.Xml;
 using StoryTree.Storage.DbContext;
-using StoryTree.Storage.Properties;
 
-namespace Application.Ringtoets.Storage
+namespace StoryTree.Storage
 {
     /// <summary>
     /// This class is capable of generating a hashcode for serializable object instance

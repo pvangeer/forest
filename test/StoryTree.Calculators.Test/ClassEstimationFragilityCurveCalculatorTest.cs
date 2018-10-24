@@ -3,7 +3,6 @@ using NUnit.Framework;
 using StoryTree.Data;
 using StoryTree.Data.Hydraulics;
 using StoryTree.Data.Tree;
-using StoryTree.Gui.Converters;
 
 namespace StoryTree.Calculators.Test
 {
