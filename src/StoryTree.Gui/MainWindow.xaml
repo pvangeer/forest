@@ -6,11 +6,11 @@
     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
     xmlns:services="clr-namespace:StoryTree.Data.Services;assembly=StoryTree.Data"
-    xmlns:gui="clr-namespace:StoryTree.Gui"
     Title="Gebeurtenissenboom" 
     Height="800" 
-    Width="1200" 
-    x:Name="MainRibbonWindow">
+    Width="1200"
+    BorderThickness="1"
+    BorderBrush="MediumBlue">
     <Window.DataContext>
         <viewModels:GuiViewModel />
     </Window.DataContext>
@@ -70,7 +70,7 @@
             Focusable="True">
             <!--Backstage-->
             <fluent:Ribbon.Menu>
-                <fluent:Backstage Background="#008fc5">
+                <fluent:Backstage Background="{StaticResource ApplicationBorderColorBrush}">
                     <fluent:BackstageTabControl>
                         <fluent:Button Header="Nieuw bestand"
                                        Icon="/Core.Common.Gui;component\Resources\DocumentHS.png"
@@ -336,7 +336,9 @@
             Content="{Binding }"
             ContentTemplate="{StaticResource ContentPresenterDataTemplate}"/>
 
-        <fluent:StatusBar Grid.Row="2">
+        <fluent:StatusBar 
+            Grid.Row="2"
+            Background="{StaticResource ApplicationBorderColorBrush}">
             <fluent:StatusBarItem HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/StoryTree.Gui;component/Resources/EventTree.png" Height="24"/>

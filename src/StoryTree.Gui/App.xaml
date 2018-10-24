@@ -9,11 +9,13 @@
             <Color x:Key="BackgroundEditableColor">AliceBlue</Color>
             <Color x:Key="BackgroundColor">White</Color>
             <Color x:Key="SelectedElementBorderColor">Red</Color>
+            <Color x:Key="ApplicationBorderColor">RoyalBlue</Color>
 
             <SolidColorBrush Color="{StaticResource SelectedElementBorderColor}" x:Key="SelectedElementBorderColorBrush" />
             <SolidColorBrush Color="{StaticResource BackgroundColor}" x:Key="BackgroundColorBrush" />
             <SolidColorBrush Color="{StaticResource BackgroundEditableColor}" x:Key="BackgroundEditableColorBrush" />
-
+            <SolidColorBrush Color="{StaticResource ApplicationBorderColor}" x:Key="ApplicationBorderColorBrush" />
+            
             <xctk:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
             <converters:ProbabilityToStringConverter x:Key="ProbabilityToStringConverter" />
 
