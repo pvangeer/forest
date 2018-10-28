@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
+             xmlns:export="clr-namespace:StoryTree.Gui.Export"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -34,6 +35,26 @@
                 <Setter Property="Margin" Value="4"/>
             </Style>
 
+            <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="MinWidth" Value="15"/>
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="TextElement.Foreground" Value="Black"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Background" Value="Transparent" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="RoyalBlue" Opacity="0.5"/>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
             <Style x:Key="ColumnElementStyle" TargetType="TextBlock">
                 <Setter Property="Margin" Value="5,5,5,5" />
             </Style>
@@ -47,6 +68,8 @@
             </Style>
 
             <Style BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="Button"/>
+
+            <export:ExportElicitationFormsCommand x:Key="ExportElicitationFormsCommand"/>
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DataTemplates/General/ComboBoxFlatStyle.xaml"/>

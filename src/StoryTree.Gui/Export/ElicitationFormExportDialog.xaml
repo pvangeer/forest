@@ -1,0 +1,162 @@
+﻿<Window x:Class="StoryTree.Gui.Export.ElicitationFormExportDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:gui="clr-namespace:StoryTree.Gui"
+        xmlns:export="clr-namespace:StoryTree.Gui.Export"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        BorderBrush="{StaticResource ApplicationBorderColorBrush}"
+        BorderThickness="1"
+        WindowStyle="None"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner" Height="460" Width="650">
+    <Window.DataContext>
+        <export:ExpertElicitationFormsViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical"
+                        Grid.Row="0">
+                <TextBlock Text="Selecteer experts:" FontWeight="Bold" Margin="2,2,2,5"/>
+                <DataGrid 
+                    ItemsSource="{Binding Experts}" 
+                    AutoGenerateColumns="False"
+                    Margin="0,0,2,0"
+                    Style="{StaticResource DataGridStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Exporteren">
+                            <DataGridTemplateColumn.CellTemplate >
+                                <DataTemplate DataType="export:ExpertExportViewModel">
+                                    <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Style="{StaticResource CheckBoxStyle}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Naam" Binding="{Binding Name}" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="10" />
+            <StackPanel Grid.Column="2" Orientation="Vertical">
+                <TextBlock Text="Selecteer gebeurtenissen:" FontWeight="Bold" Margin="2,2,2,5"/>
+                <DataGrid 
+                    ItemsSource="{Binding EventTrees}"
+                    AutoGenerateColumns="False"
+                    Margin="2,0,0,0"
+                    Style="{StaticResource DataGridStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Exporteren">
+                            <DataGridTemplateColumn.CellTemplate >
+                                <DataTemplate DataType="export:EventTreeExportViewModel">
+                                    <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Style="{StaticResource CheckBoxStyle}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Naam" Binding="{Binding Name}" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+
+        <Border Grid.Row="1"
+                BorderThickness="1"
+                BorderBrush="{StaticResource ApplicationBorderColorBrush}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Uitvoerbestand(en)" FontWeight="Bold" Margin="20,5,0,5"/>
+                <Grid Margin="20,5,20,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock 
+                        Grid.Row="0"
+                        Grid.Column="0" 
+                        Text="Bestandslocatie:" 
+                        HorizontalAlignment="Left"
+                        Margin="0,5,5,5"
+                        Padding="0,3,5,3"/>
+                    <TextBlock 
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Height="20"
+                        Background="{StaticResource ComboBoxDisabledBackgroundBrush}"
+                        Padding="5,3,5,3"
+                        Margin="5"
+                        ToolTip="{Binding ExportLocation}"
+                        Text="{Binding ExportLocation}"/>
+                    <Button 
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Content="Selecteren..." 
+                        Margin="5"
+                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
+                        VerticalAlignment="Center">
+                        <i:Interaction.Behaviors>
+                            <gui:FolderDialogBehavior FolderName="{Binding ExportLocation, Mode=TwoWay}"/>
+                        </i:Interaction.Behaviors>
+                    </Button>
+                    <TextBlock 
+                        Grid.Row="1"
+                        Grid.Column="0" 
+                        Text="Prefix:" 
+                        HorizontalAlignment="Left"
+                        Padding="0,3,5,3"
+                        Margin="0,5,5,5"/>
+                    <TextBlock 
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Height="20"
+                        Grid.ColumnSpan="2"
+                        Background="{StaticResource BackgroundEditableColorBrush}"
+                        Margin="5"
+                        Padding="5,3,5,3"
+                        Text="{Binding Prefix}"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border 
+            Grid.Row="2"
+            BorderBrush="{StaticResource ApplicationBorderColorBrush}"
+            Background="{StaticResource ApplicationBorderColorBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button 
+                    Grid.Column="2" 
+                    Content="Annuleren" 
+                    Margin="20,5,20,5"
+                    Foreground="White"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                    IsCancel="True"
+                    Click="ButtonBase_OnClick"/>
+                <Button 
+                    Grid.Column="1" 
+                    Content="Exporteren" 
+                    Margin="20,5"
+                    Foreground="White"
+                    IsDefault="True"
+                    Command="{Binding ExportElicitationFormsCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

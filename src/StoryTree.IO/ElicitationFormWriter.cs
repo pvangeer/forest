@@ -316,6 +316,11 @@ namespace StoryTree.IO
 
         private static void AddImage(string imageFileName, WorksheetPart worksheetPart)
         {
+            if (string.IsNullOrWhiteSpace(imageFileName) || !File.Exists(imageFileName))
+            {
+                return;
+            }
+
             DrawingsPart drawingsPart = worksheetPart.AddNewPart<DrawingsPart>();
             ImagePart imagePart = drawingsPart.AddImagePart(ImagePartType.Png, worksheetPart.GetIdOfPart(drawingsPart));
             using (FileStream fileStream = new FileStream(imageFileName, FileMode.Open))

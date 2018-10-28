@@ -61,7 +61,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Command="{Binding RemoveLastMessageCommand}">Bericht negeren</Button>
+                    <Button Grid.Column="1" Command="{Binding RemoveLastMessageCommand}">Bericht sluiten</Button>
                     <!---Style="{StaticResource MetroButton}"!-->
                 </Grid>
                 <ContentPresenter 
