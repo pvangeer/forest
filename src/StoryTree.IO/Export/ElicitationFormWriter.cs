@@ -18,15 +18,13 @@ namespace StoryTree.IO
 {
     public class ExpertFormWriter
     {
-        private int rowNumber = 1;
+        private readonly char[] columnHeaders = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
         private string expertElicitationCodeCellRange = "$C$12:$C$18";
 
         public void WriteForm(string fileName, string eventName, string eventImageFileName, string expertName, DateTime date, double[] waterLevels, double[] frequencies, string[] eventNodes)
         {
             using (var spreadsheetDocument = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook))
             {
-                rowNumber = 1;
-
                 WorkbookPart workbookPart = spreadsheetDocument.AddWorkbookPart();
 
                 // Add stylesheet
@@ -62,8 +60,7 @@ namespace StoryTree.IO
 
                 // Write header
                 sheetData.Append(new Row());
-                rowNumber++;
-                AddRow(sheetData, StyleSheetLibrary.TitleStyleIndex,
+                AddRow(sheetData, StyleSheetLibrary.TitleStyleIndex,2,
                     ConstructCell("DOT Formulier", CellValues.String, StyleSheetLibrary.TitleStyleIndex),
                     EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                     EmptyCell(StyleSheetLibrary.TitleStyleIndex),
@@ -73,12 +70,12 @@ namespace StoryTree.IO
                     EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                     EmptyCell(StyleSheetLibrary.TitleStyleIndex));
                 mergeCells.Append(new MergeCell{ Reference = new StringValue("C2:I2") });
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,3,
                     ConstructCell("DOT = Deskundigen Oordeel Toets op Maat", CellValues.String, StyleSheetLibrary.DefaultStyleIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex);
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,4);
 
                 // Write eventname
-                AddRow(sheetData,0,
+                AddRow(sheetData,0,5,
                     ConstructCell(string.Format("Gebeurtenis 3: {0}", eventName), CellValues.String, StyleSheetLibrary.TitleStyleIndex),
                     EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                     EmptyCell(StyleSheetLibrary.TitleStyleIndex),
@@ -88,74 +85,74 @@ namespace StoryTree.IO
                     EmptyCell(StyleSheetLibrary.TitleStyleIndex), 
                     EmptyCell(StyleSheetLibrary.DefaultStyleIndex));
                 mergeCells.Append(new MergeCell { Reference = new StringValue("C5:I5") });
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex);
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,6);
 
                 // Write expert information
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,7,
                     ConstructCell("Expert:", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                     ConstructCell(expertName, CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
 
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,8,
                     ConstructCell("Datum:", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                     new Cell
                     {
                         CellValue = new CellValue(date.ToOADate().ToString(CultureInfo.InvariantCulture)),
                         StyleIndex = StyleSheetLibrary.DateTimeBodyStyle
                     });
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex);
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex);
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,9);
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,10);
 
                 // Write list of codes
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,11,
                     ConstructCell("Code", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                     ConstructCell("Faalkans", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                     ConstructCell("", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                     ConstructCell("Omschrijving", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                     ConstructCell("", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,12,
                     ConstructCell(1, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell(0.999, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell("999/1000", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell("Virtually certain", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,13,
                     ConstructCell(2, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                     ConstructCell(0.99, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                     ConstructCell("99/100", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                     ConstructCell("Very Likely", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                     ConstructCell("", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,14,
                     ConstructCell(3, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell(0.9, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell("9/10", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell("Likely", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,15,
                     ConstructCell(StyleSheetLibrary.TableHeaderStyleIndex, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                     ConstructCell(0.5, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                     ConstructCell("5/10", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                     ConstructCell("Neutral", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                     ConstructCell("", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,16,
                     ConstructCell(5, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell(0.1, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell("1/10", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell("Unlikely", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,17,
                     ConstructCell(6, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                     ConstructCell(0.01, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                     ConstructCell("1/100", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                     ConstructCell("Very Unlikely", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                     ConstructCell("", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,18,
                     ConstructCell(7, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell(0.001, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell("1/1000", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell("Virtually Impossible", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                     ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
-                AddRow(sheetData,0);
-                AddRow(sheetData,0);
+                AddRow(sheetData,0,19);
+                AddRow(sheetData,0,20);
 
                 //append a MergeCell to the mergeCells for each set of merged cells
                 mergeCells.Append(new MergeCell {Reference = new StringValue("F11:G11")});
@@ -172,14 +169,15 @@ namespace StoryTree.IO
                 // Include image
                 AddImage(eventImageFileName, worksheetPart);
 
+                uint rowNumber = 21;
                 // Write table parts
                 foreach (var eventNode in eventNodes)
                 {
-                    AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex);
+                    AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,rowNumber++);
                     // TODO: merge all cells above table
-                    AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                    AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++,
                         ConstructCell(eventNode, CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex));
-                    AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                    AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++,
                         ConstructCell("Waterstand", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                         ConstructCell("Frequentie", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                         ConstructCell("Onder", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
@@ -194,7 +192,7 @@ namespace StoryTree.IO
                         var frequency = frequencies[index];
                         var waterLevel = waterLevels[index];
 
-                        AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,
+                        AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++,
                             ConstructCell(waterLevel, CellValues.Number, styleIndex),
                             ConstructCell(frequency, CellValues.Number, styleIndex),
                             ConstructCell(double.NaN, CellValues.Number, styleIndex),
@@ -240,7 +238,7 @@ namespace StoryTree.IO
                     }
                 }
 
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex);
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++);
 
                 var row = new Row(EmptyCell(StyleSheetLibrary.DefaultStyleIndex),
                     EmptyCell(StyleSheetLibrary.TopBorderStyleIndex), 
@@ -253,7 +251,6 @@ namespace StoryTree.IO
                     EmptyCell(StyleSheetLibrary.TopBorderStyleIndex), 
                     EmptyCell(StyleSheetLibrary.TopBorderStyleIndex));
                 sheetData.Append(row);
-                rowNumber++;
 
                 var sheet = sheet1;
 
@@ -276,15 +273,24 @@ namespace StoryTree.IO
             return new Cell {StyleIndex = styleSheetIndex};
         }
 
-        private void AddRow(SheetData sheetData, uint styleIndex, params Cell[] cells)
+        private void AddRow(SheetData sheetData, uint styleIndex, uint rowNumber, params Cell[] cells)
         {
             while (cells.Length < 8)
             {
                 cells = cells.Concat(new[] {EmptyCell(StyleSheetLibrary.DefaultStyleIndex) }).ToArray();
             }
-            
-            var row = new Row();
-            row.Append(new[]{EmptyCell(StyleSheetLibrary.RightBorderStyleIndex), EmptyCell(styleIndex)}.Concat(cells).Concat(new []{EmptyCell(StyleSheetLibrary.LeftBorderStyleIndex) }));
+
+            var cellsToWrite = new[] {EmptyCell(StyleSheetLibrary.RightBorderStyleIndex), EmptyCell(styleIndex)}
+                .Concat(cells)
+                .Concat(new[] {EmptyCell(StyleSheetLibrary.LeftBorderStyleIndex)})
+                .ToArray();
+
+            for (int i = 0; i < cellsToWrite.Length; i++)
+            {
+                cellsToWrite[i].CellReference = columnHeaders[i] + rowNumber.ToString(CultureInfo.InvariantCulture);
+            }
+            var row = new Row { RowIndex = rowNumber };
+            row.Append(cellsToWrite);
             sheetData.Append(row);
             rowNumber++;
         }
