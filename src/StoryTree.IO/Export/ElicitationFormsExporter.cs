@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using DocumentFormat.OpenXml.Office2013.Word;
 using StoryTree.Data;
+using StoryTree.Data.Hydraulics;
 using StoryTree.Data.Tree;
+using StoryTree.IO.Import;
 using StoryTree.Messaging;
 
 namespace StoryTree.IO.Export
@@ -10,7 +14,7 @@ namespace StoryTree.IO.Export
     public class ElicitationFormsExporter
     {
         private readonly StoryTreeLog log = new StoryTreeLog(typeof(ElicitationFormsExporter));
-        private readonly ExpertFormWriter writer = new ExpertFormWriter();
+        private readonly ElicitationFormWriter writer = new ElicitationFormWriter();
 
         public Project Project { get; }
 
@@ -66,18 +70,58 @@ namespace StoryTree.IO.Export
             foreach (var expert in expertsToExport)
             {
                 var fileName = Path.Combine(fileLocation,prefix + expert.Name + ".xlsx");
-                // TODO: Loop all eventtrees
-                // TODO: Pass complete tree event and also write already entered estimations to the file
 
-                var eventTreeToExport = eventTreesToExport.First();
-                var allEventNodes = eventTreeToExport.MainTreeEvent.GetAllEventsRecursive().Select(te => te.Name).ToArray();
-
-                writer.WriteForm(fileName, eventTreeToExport.Name, null, expert.Name, DateTime.Now,
-                    hydraulicConditions.Select(hc => hc.WaterLevel).ToArray(),
-                    hydraulicConditions.Select(hc => (double) hc.Probability).ToArray(), allEventNodes);
+                writer.WriteForm(fileName, EventTreesToDotForms(eventTreesToExport, expert.Name, hydraulicConditions));
                 log.Info($"Bestand '{fileName}' geëxporteerd voor expert '{expert.Name}'");
             }
             log.Info($"{expertsToExport.Length} DOT formulieren geëxporteerd naar locatie '{fileLocation}'",true);
+        }
+
+        private DotForm[] EventTreesToDotForms(EventTree[] eventTreeToExport, string expertName,
+            HydraulicCondition[] hydraulicConditions)
+        {
+            var forms = new List<DotForm>();
+
+            foreach (var eventTree in eventTreeToExport)
+            {
+                forms.Add(EventTreeToDotForm(eventTree, expertName, hydraulicConditions));
+            }
+
+            return forms.ToArray();
+        }
+
+        private DotForm EventTreeToDotForm(EventTree eventTree, string expertName, HydraulicCondition[] hydraulicConditions)
+        {
+            var nodes = new List<DotNode>();
+            foreach (var treeEvent in eventTree.MainTreeEvent.GetAllEventsRecursive())
+            {
+                nodes.Add(new DotNode
+                {
+                    NodeName = treeEvent.Name,
+                    Estimates = treeEvent.ClassesProbabilitySpecification.Where(e => e.Expert.Name == expertName).Select(s => new DotEstimate
+                    {
+                        WaterLevel = s.WaterLevel,
+                        Frequency = hydraulicConditions.FirstOrDefault(hc => Math.Abs(hc.WaterLevel - s.WaterLevel) < 1e-6).Probability,
+                        BestEstimate = (int)s.AverageEstimation,
+                        LowerEstimate = (int)s.MinEstimation,
+                        UpperEstimate = (int)s.MaxEstimation,
+                    }).ToArray()
+                });
+            }
+
+            return new DotForm
+            {
+                EventTreeName = eventTree.Name,
+                ExpertName = expertName,
+                EventImageFileName = EventTreeToImageStream(eventTree),
+                Date = DateTime.Today,
+                Nodes = nodes.ToArray()
+            };
+        }
+
+        private string EventTreeToImageStream(EventTree eventTree)
+        {
+            return "";
         }
     }
 }

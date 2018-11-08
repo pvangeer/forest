@@ -10,7 +10,7 @@
         ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner" Height="460" Width="650">
     <Window.DataContext>
-        <export:ExportExpertElicitationFormsViewModel/>
+        <export:ExportElicitationFormsViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -36,7 +36,7 @@
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Exporteren">
                             <DataGridTemplateColumn.CellTemplate >
-                                <DataTemplate DataType="export:ExpertExportViewModel">
+                                <DataTemplate DataType="export:ElicitationFormsExportViewModel">
                                     <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Style="{StaticResource CheckBoxStyle}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

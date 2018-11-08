@@ -7,6 +7,7 @@ using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.Drawing.Spreadsheet;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
+using StoryTree.IO.Import;
 using BlipFill = DocumentFormat.OpenXml.Drawing.Spreadsheet.BlipFill;
 using NonVisualDrawingProperties = DocumentFormat.OpenXml.Drawing.Spreadsheet.NonVisualDrawingProperties;
 using NonVisualPictureDrawingProperties = DocumentFormat.OpenXml.Drawing.Spreadsheet.NonVisualPictureDrawingProperties;
@@ -14,259 +15,264 @@ using NonVisualPictureProperties = DocumentFormat.OpenXml.Drawing.Spreadsheet.No
 using Position = DocumentFormat.OpenXml.Drawing.Spreadsheet.Position;
 using ShapeProperties = DocumentFormat.OpenXml.Drawing.Spreadsheet.ShapeProperties;
 
-namespace StoryTree.IO
+namespace StoryTree.IO.Export
 {
-    public class ExpertFormWriter
+    public class ElicitationFormWriter
     {
         private readonly char[] columnHeaders = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-        private string expertElicitationCodeCellRange = "$C$12:$C$18";
+        private string elicitationCodeCellRange = "$C$12:$C$18";
 
-        public void WriteForm(string fileName, string eventName, string eventImageFileName, string expertName, DateTime date, double[] waterLevels, double[] frequencies, string[] eventNodes)
+        //public void WriteForm(string fileName, string eventName, string eventImageFileName, string expertName, DateTime date, double[] waterLevels, double[] frequencies, string[] eventNodes)
+        public void WriteForm(string fileName, DotForm[] forms)
         {
             using (var spreadsheetDocument = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook))
             {
                 WorkbookPart workbookPart = spreadsheetDocument.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+                workbookPart.Workbook.Append(new FileVersion { ApplicationName = "Microsoft Office Excel" });
 
-                // Add stylesheet
-                WorkbookStylesPart workbookStylesPart = workbookPart.AddNewPart<WorkbookStylesPart>();
-                workbookStylesPart.Stylesheet = StyleSheetLibrary.StyleSheet;
-                workbookStylesPart.Stylesheet.Save(workbookStylesPart);
-                
-                //Add data to first sheet
-                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
-                Worksheet worksheet = new Worksheet();
-                worksheetPart.Worksheet = worksheet;
-                Columns columns = new Columns();
-                columns.Append(new Column { Min = 1, Max = 2, Width = 4, CustomWidth = true });
-                columns.Append(new Column { Min = 3, Max = 7, Width = 12, CustomWidth = true });
-                columns.Append(new Column { Min = 8, Max = 8, Width = 40, CustomWidth = true });
-                columns.Append(new Column { Min = 9, Max = 9, Width = 20, CustomWidth = true });
-                columns.Append(new Column { Min = 10, Max = 11, Width = 4, CustomWidth = true });
-                worksheetPart.Worksheet.Append(columns);
-                
-                MergeCells mergeCells = new MergeCells();
-                var sheetData = new SheetData();
-                var dataValidations = new DataValidations();
-                worksheet.Append(sheetData);
-                worksheet.Append(dataValidations);
-                Sheets sheets = new Sheets();
-
-                Sheet sheet1 = new Sheet
+                Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
+                foreach (var dotForm in forms)
                 {
-                    Name = "Formulier",
-                    SheetId = 1,
-                    Id = workbookPart.GetIdOfPart(worksheetPart)
-                };
-
-                // Write header
-                sheetData.Append(new Row());
-                AddRow(sheetData, StyleSheetLibrary.TitleStyleIndex,2,
-                    ConstructCell("DOT Formulier", CellValues.String, StyleSheetLibrary.TitleStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TitleStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TitleStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TitleStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TitleStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TitleStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TitleStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TitleStyleIndex));
-                mergeCells.Append(new MergeCell{ Reference = new StringValue("C2:I2") });
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,3,
-                    ConstructCell("DOT = Deskundigen Oordeel Toets op Maat", CellValues.String));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,4);
-
-                // Write eventname
-                AddRow(sheetData,0,5,
-                    ConstructCell("Gebeurtenis:", CellValues.String, StyleSheetLibrary.TitleStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TitleStyleIndex),
-                    ConstructCell(eventName, CellValues.String, StyleSheetLibrary.TitleStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TitleStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TitleStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TitleStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TitleStyleIndex), 
-                    EmptyCell(StyleSheetLibrary.DefaultStyleIndex));
-                mergeCells.Append(new MergeCell { Reference = new StringValue("C5:D5") });
-                mergeCells.Append(new MergeCell { Reference = new StringValue("E5:I5") });
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,6);
-
-                // Write expert information
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,7,
-                    ConstructCell("Expert:", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
-                    ConstructCell(expertName, CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
-
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,8,
-                    ConstructCell("Datum:", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
-                    new Cell
-                    {
-                        CellValue = new CellValue(date.ToOADate().ToString(CultureInfo.InvariantCulture)),
-                        StyleIndex = StyleSheetLibrary.DateTimeBodyStyle
-                    });
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,9);
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,10);
-
-                // Write list of codes
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,11,
-                    ConstructCell("Code", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
-                    ConstructCell("Faalkans", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
-                    ConstructCell("", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
-                    ConstructCell("Omschrijving", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
-                    ConstructCell("", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,12,
-                    ConstructCell(1, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell(0.999, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell("999/1000", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell("Virtually certain", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,13,
-                    ConstructCell(2, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
-                    ConstructCell(0.99, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
-                    ConstructCell("99/100", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
-                    ConstructCell("Very Likely", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
-                    ConstructCell("", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,14,
-                    ConstructCell(3, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell(0.9, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell("9/10", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell("Likely", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,15,
-                    ConstructCell(StyleSheetLibrary.TableHeaderStyleIndex, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
-                    ConstructCell(0.5, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
-                    ConstructCell("5/10", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
-                    ConstructCell("Neutral", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
-                    ConstructCell("", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,16,
-                    ConstructCell(5, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell(0.1, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell("1/10", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell("Unlikely", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,17,
-                    ConstructCell(6, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
-                    ConstructCell(0.01, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
-                    ConstructCell("1/100", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
-                    ConstructCell("Very Unlikely", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
-                    ConstructCell("", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,18,
-                    ConstructCell(7, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell(0.001, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell("1/1000", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell("Virtually Impossible", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
-                    ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
-                AddRow(sheetData,0,19);
-                AddRow(sheetData,0,20);
-
-                //append a MergeCell to the mergeCells for each set of merged cells
-                mergeCells.Append(new MergeCell {Reference = new StringValue("F11:G11")});
-                mergeCells.Append(new MergeCell {Reference = new StringValue("F12:G12")});
-                mergeCells.Append(new MergeCell {Reference = new StringValue("F13:G13")});
-                mergeCells.Append(new MergeCell {Reference = new StringValue("F14:G14")});
-                mergeCells.Append(new MergeCell {Reference = new StringValue("F15:G15")});
-                mergeCells.Append(new MergeCell {Reference = new StringValue("F16:G16")});
-                mergeCells.Append(new MergeCell {Reference = new StringValue("F17:G17")});
-                mergeCells.Append(new MergeCell { Reference = new StringValue("F18:G18") });
-
-                worksheetPart.Worksheet.InsertAfter(mergeCells, worksheetPart.Worksheet.Elements<SheetData>().First());
-
-                // Include image
-                AddImage(eventImageFileName, worksheetPart);
-
-                uint rowNumber = 21;
-                // Write table parts
-                foreach (var eventNode in eventNodes)
-                {
-                    AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,rowNumber++);
-                    // TODO: merge all cells above table
-                    AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++,
-                        ConstructCell(eventNode, CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex));
-                    AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++,
-                        ConstructCell("Waterstand", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
-                        ConstructCell("Frequentie", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
-                        ConstructCell("Onder", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
-                        ConstructCell("Gemiddeld", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
-                        ConstructCell("Boven", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
-                        ConstructCell("Weergave", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
-                        ConstructCell("Toelichting", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex));
-
-                    var styleIndex = StyleSheetLibrary.TableBodyStyleNormalIndex;
-                    for (var index = 0; index < frequencies.Length; index++)
-                    {
-                        var frequency = frequencies[index];
-                        var waterLevel = waterLevels[index];
-
-                        AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++,
-                            ConstructCell(waterLevel, CellValues.Number, styleIndex),
-                            ConstructCell(frequency, CellValues.Number, styleIndex),
-                            ConstructCell(double.NaN, CellValues.Number, styleIndex),
-                            ConstructCell(double.NaN, CellValues.Number, styleIndex),
-                            ConstructCell(double.NaN, CellValues.Number, styleIndex),
-                            ConstructCell(double.NaN, CellValues.Number, styleIndex),
-                            ConstructCell("", CellValues.String, styleIndex));
-                        
-                        dataValidations.Append(new DataValidation
-                        {
-                            AllowBlank = true,
-                            Type = DataValidationValues.List,
-                            Formula1 = new Formula1(expertElicitationCodeCellRange),
-                            SequenceOfReferences = new ListValue<StringValue>
-                            {
-                                InnerText = "E" + (rowNumber - 1)
-                            }
-                        });
-                        dataValidations.Append(new DataValidation
-                        {
-                            AllowBlank = true,
-                            Type = DataValidationValues.List,
-                            Formula1 = new Formula1(expertElicitationCodeCellRange),
-                            SequenceOfReferences = new ListValue<StringValue>
-                            {
-                                InnerText = "F" + (rowNumber - 1)
-                            }
-                        });
-                        dataValidations.Append(new DataValidation
-                        {
-                            AllowBlank = true,
-                            Type = DataValidationValues.List,
-                            Formula1 = new Formula1(expertElicitationCodeCellRange),
-                            SequenceOfReferences = new ListValue<StringValue>
-                            {
-                                InnerText = "G" + (rowNumber-1)
-                            }
-                        });
-
-                        styleIndex = styleIndex == StyleSheetLibrary.TableBodyStyleNormalIndex
-                            ? StyleSheetLibrary.TableAlternateBodyStyleIndex
-                            : StyleSheetLibrary.TableBodyStyleNormalIndex;
-                    }
+                    WriteWorksheet(workbookPart, sheets, dotForm);
                 }
 
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++);
-
-                var row = new Row(EmptyCell(StyleSheetLibrary.DefaultStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TopBorderStyleIndex), 
-                    EmptyCell(StyleSheetLibrary.TopBorderStyleIndex), 
-                    EmptyCell(StyleSheetLibrary.TopBorderStyleIndex), 
-                    EmptyCell(StyleSheetLibrary.TopBorderStyleIndex), 
-                    EmptyCell(StyleSheetLibrary.TopBorderStyleIndex), 
-                    EmptyCell(StyleSheetLibrary.TopBorderStyleIndex), 
-                    EmptyCell(StyleSheetLibrary.TopBorderStyleIndex), 
-                    EmptyCell(StyleSheetLibrary.TopBorderStyleIndex), 
-                    EmptyCell(StyleSheetLibrary.TopBorderStyleIndex));
-                sheetData.Append(row);
-
-                var sheet = sheet1;
-
-                sheets.Append(sheet);
-
-                Workbook workbook = new Workbook();
-                workbook.Append(new FileVersion { ApplicationName = "Microsoft Office Excel" });
-                workbook.Append(sheets);
-
                 // Save document
-                worksheetPart.Worksheet.Save();
-                workbookPart.Workbook = workbook;
                 workbookPart.Workbook.Save();
                 spreadsheetDocument.Close();
             }
+        }
+
+        private void WriteWorksheet(WorkbookPart workbookPart, Sheets sheets, DotForm form)
+        {
+            // Add stylesheet
+            WorkbookStylesPart workbookStylesPart = workbookPart.AddNewPart<WorkbookStylesPart>();
+            workbookStylesPart.Stylesheet = StyleSheetLibrary.StyleSheet;
+            workbookStylesPart.Stylesheet.Save(workbookStylesPart);
+
+            //Add data to first sheet
+            WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+            Worksheet worksheet = new Worksheet();
+            worksheetPart.Worksheet = worksheet;
+            Columns columns = new Columns();
+            columns.Append(new Column {Min = 1, Max = 2, Width = 4, CustomWidth = true});
+            columns.Append(new Column {Min = 3, Max = 7, Width = 12, CustomWidth = true});
+            columns.Append(new Column {Min = 8, Max = 8, Width = 40, CustomWidth = true});
+            columns.Append(new Column {Min = 9, Max = 9, Width = 20, CustomWidth = true});
+            columns.Append(new Column {Min = 10, Max = 11, Width = 4, CustomWidth = true});
+            worksheetPart.Worksheet.Append(columns);
+
+            MergeCells mergeCells = new MergeCells();
+            var sheetData = new SheetData();
+            var dataValidations = new DataValidations();
+            worksheet.Append(sheetData);
+            worksheet.Append(dataValidations);
+
+            Sheet sheet = new Sheet
+            {
+                Name = form.EventTreeName,
+                SheetId = 1,
+                Id = workbookPart.GetIdOfPart(worksheetPart)
+            };
+
+            // Write header
+            sheetData.Append(new Row());
+            AddRow(sheetData, StyleSheetLibrary.TitleStyleIndex, 2,
+                ConstructCell("DOT Formulier", CellValues.String, StyleSheetLibrary.TitleStyleIndex),
+                EmptyCell(StyleSheetLibrary.TitleStyleIndex),
+                EmptyCell(StyleSheetLibrary.TitleStyleIndex),
+                EmptyCell(StyleSheetLibrary.TitleStyleIndex),
+                EmptyCell(StyleSheetLibrary.TitleStyleIndex),
+                EmptyCell(StyleSheetLibrary.TitleStyleIndex),
+                EmptyCell(StyleSheetLibrary.TitleStyleIndex),
+                EmptyCell(StyleSheetLibrary.TitleStyleIndex));
+            mergeCells.Append(new MergeCell {Reference = new StringValue("C2:I2")});
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 3,
+                ConstructCell("DOT = Deskundigen Oordeel Toets op Maat", CellValues.String));
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 4);
+
+            // Write eventname
+            AddRow(sheetData, 0, 5,
+                ConstructCell("Gebeurtenis:", CellValues.String, StyleSheetLibrary.TitleStyleIndex),
+                EmptyCell(StyleSheetLibrary.TitleStyleIndex),
+                ConstructCell(form.EventTreeName, CellValues.String, StyleSheetLibrary.TitleStyleIndex),
+                EmptyCell(StyleSheetLibrary.TitleStyleIndex),
+                EmptyCell(StyleSheetLibrary.TitleStyleIndex),
+                EmptyCell(StyleSheetLibrary.TitleStyleIndex),
+                EmptyCell(StyleSheetLibrary.TitleStyleIndex),
+                EmptyCell(StyleSheetLibrary.DefaultStyleIndex));
+            mergeCells.Append(new MergeCell {Reference = new StringValue("C5:D5")});
+            mergeCells.Append(new MergeCell {Reference = new StringValue("E5:I5")});
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 6);
+
+            // Write expert information
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 7,
+                ConstructCell("Expert:", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
+                ConstructCell(form.ExpertName, CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
+
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 8,
+                ConstructCell("Datum:", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
+                new Cell
+                {
+                    CellValue = new CellValue(form.Date.ToOADate().ToString(CultureInfo.InvariantCulture)),
+                    StyleIndex = StyleSheetLibrary.DateTimeBodyStyle
+                });
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 9);
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 10);
+
+            // Write list of codes
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 11,
+                ConstructCell("Code", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
+                ConstructCell("Faalkans", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
+                ConstructCell("", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
+                ConstructCell("Omschrijving", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
+                ConstructCell("", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex));
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 12,
+                ConstructCell(1, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell(0.999, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell("999/1000", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell("Virtually certain", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 13,
+                ConstructCell(2, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
+                ConstructCell(0.99, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
+                ConstructCell("99/100", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
+                ConstructCell("Very Likely", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
+                ConstructCell("", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex));
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 14,
+                ConstructCell(3, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell(0.9, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell("9/10", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell("Likely", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 15,
+                ConstructCell(StyleSheetLibrary.TableHeaderStyleIndex, CellValues.Number,
+                    StyleSheetLibrary.TableAlternateBodyStyleIndex),
+                ConstructCell(0.5, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
+                ConstructCell("5/10", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
+                ConstructCell("Neutral", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
+                ConstructCell("", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex));
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 16,
+                ConstructCell(5, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell(0.1, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell("1/10", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell("Unlikely", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 17,
+                ConstructCell(6, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
+                ConstructCell(0.01, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
+                ConstructCell("1/100", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
+                ConstructCell("Very Unlikely", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
+                ConstructCell("", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex));
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 18,
+                ConstructCell(7, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell(0.001, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell("1/1000", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell("Virtually Impossible", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
+                ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
+            AddRow(sheetData, 0, 19);
+            AddRow(sheetData, 0, 20);
+
+            //append a MergeCell to the mergeCells for each set of merged cells
+            mergeCells.Append(new MergeCell {Reference = new StringValue("F11:G11")});
+            mergeCells.Append(new MergeCell {Reference = new StringValue("F12:G12")});
+            mergeCells.Append(new MergeCell {Reference = new StringValue("F13:G13")});
+            mergeCells.Append(new MergeCell {Reference = new StringValue("F14:G14")});
+            mergeCells.Append(new MergeCell {Reference = new StringValue("F15:G15")});
+            mergeCells.Append(new MergeCell {Reference = new StringValue("F16:G16")});
+            mergeCells.Append(new MergeCell {Reference = new StringValue("F17:G17")});
+            mergeCells.Append(new MergeCell {Reference = new StringValue("F18:G18")});
+
+            worksheetPart.Worksheet.InsertAfter(mergeCells, worksheetPart.Worksheet.Elements<SheetData>().First());
+
+            // Include image
+            AddImage(form.EventImageFileName, worksheetPart);
+
+            uint rowNumber = 21;
+            // Write table parts
+            foreach (DotNode node in form.Nodes)
+            {
+                var estimates = node.Estimates.OrderBy(n => n.WaterLevel).ToArray();
+
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++);
+                // TODO: merge all cells above table
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++,
+                    ConstructCell(node.NodeName, CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex));
+                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++,
+                    ConstructCell("Waterstand", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
+                    ConstructCell("Frequentie", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
+                    ConstructCell("Onder", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
+                    ConstructCell("Gemiddeld", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
+                    ConstructCell("Boven", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
+                    ConstructCell("Weergave", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
+                    ConstructCell("Toelichting", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex));
+
+                var styleIndex = StyleSheetLibrary.TableBodyStyleNormalIndex;
+                foreach (var estimate in estimates)
+                {
+                    AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++,
+                        ConstructCell(estimate.WaterLevel, CellValues.Number, styleIndex),
+                        ConstructCell(estimate.Frequency, CellValues.Number, styleIndex),
+                        ConstructCell(estimate.LowerEstimate == 0 ? double.NaN : estimate.LowerEstimate, CellValues.Number, styleIndex),
+                        ConstructCell(estimate.BestEstimate == 0 ? double.NaN : estimate.BestEstimate, CellValues.Number, styleIndex),
+                        ConstructCell(estimate.UpperEstimate == 0 ? double.NaN : estimate.UpperEstimate, CellValues.Number, styleIndex),
+                        ConstructCell(double.NaN, CellValues.Number, styleIndex),
+                        ConstructCell("", CellValues.String, styleIndex));
+
+                    dataValidations.Append(new DataValidation
+                    {
+                        AllowBlank = true,
+                        Type = DataValidationValues.List,
+                        Formula1 = new Formula1(elicitationCodeCellRange),
+                        SequenceOfReferences = new ListValue<StringValue>
+                        {
+                            InnerText = "E" + (rowNumber - 1)
+                        }
+                    });
+                    dataValidations.Append(new DataValidation
+                    {
+                        AllowBlank = true,
+                        Type = DataValidationValues.List,
+                        Formula1 = new Formula1(elicitationCodeCellRange),
+                        SequenceOfReferences = new ListValue<StringValue>
+                        {
+                            InnerText = "F" + (rowNumber - 1)
+                        }
+                    });
+                    dataValidations.Append(new DataValidation
+                    {
+                        AllowBlank = true,
+                        Type = DataValidationValues.List,
+                        Formula1 = new Formula1(elicitationCodeCellRange),
+                        SequenceOfReferences = new ListValue<StringValue>
+                        {
+                            InnerText = "G" + (rowNumber - 1)
+                        }
+                    });
+
+                    styleIndex = styleIndex == StyleSheetLibrary.TableBodyStyleNormalIndex
+                        ? StyleSheetLibrary.TableAlternateBodyStyleIndex
+                        : StyleSheetLibrary.TableBodyStyleNormalIndex;
+                }
+            }
+
+            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++);
+
+            var row = new Row(EmptyCell(StyleSheetLibrary.DefaultStyleIndex),
+                EmptyCell(StyleSheetLibrary.TopBorderStyleIndex),
+                EmptyCell(StyleSheetLibrary.TopBorderStyleIndex),
+                EmptyCell(StyleSheetLibrary.TopBorderStyleIndex),
+                EmptyCell(StyleSheetLibrary.TopBorderStyleIndex),
+                EmptyCell(StyleSheetLibrary.TopBorderStyleIndex),
+                EmptyCell(StyleSheetLibrary.TopBorderStyleIndex),
+                EmptyCell(StyleSheetLibrary.TopBorderStyleIndex),
+                EmptyCell(StyleSheetLibrary.TopBorderStyleIndex),
+                EmptyCell(StyleSheetLibrary.TopBorderStyleIndex));
+            sheetData.Append(row);
+
+            sheets.Append(sheet);
+
+            worksheetPart.Worksheet.Save();
         }
 
         private static Cell EmptyCell(uint styleSheetIndex)
