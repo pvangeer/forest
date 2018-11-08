@@ -6,11 +6,11 @@ namespace StoryTree.Gui.Export
 {
     public class SelectFileLocationCommand : ICommand
     {
-        private readonly ExpertElicitationFormsViewModel viewModel;
+        private readonly ExportExpertElicitationFormsViewModel viewModel;
 
-        public SelectFileLocationCommand(ExpertElicitationFormsViewModel expertElicitationFormsViewModel)
+        public SelectFileLocationCommand(ExportExpertElicitationFormsViewModel exportExpertElicitationFormsViewModel)
         {
-            viewModel = expertElicitationFormsViewModel;
+            viewModel = exportExpertElicitationFormsViewModel;
         }
 
         public bool CanExecute(object parameter)
@@ -22,7 +22,7 @@ namespace StoryTree.Gui.Export
         {
             var dlg = new CommonOpenFileDialog
             {
-                Title = "My Title",
+                Title = "Selecteer locatie",
                 IsFolderPicker = true,
                 InitialDirectory = viewModel.ExportLocation,
                 AddToMostRecentlyUsedList = false,

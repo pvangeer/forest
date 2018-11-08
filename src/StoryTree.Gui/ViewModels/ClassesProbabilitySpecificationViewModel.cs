@@ -31,6 +31,18 @@ namespace StoryTree.Gui.ViewModels
             estimation => (int)estimation.MinEstimation,
             (o, e) => { DataTableRowChanged(e, SetValueActionMinimum); });
 
+        protected override void OnTreeEventPropertyChanged(string propertyName)
+        {
+            switch (propertyName)
+            {
+                case nameof(TreeEvent.ClassesProbabilitySpecification):
+                    OnPropertyChanged(nameof(MeanEstimationsList));
+                    OnPropertyChanged(nameof(MaxEstimationsList));
+                    OnPropertyChanged(nameof(MinEstimationsList));
+                    break;
+            }
+        }
+
         private DataTable CreateEstimationDataTable(Func<ExpertClassEstimation, int> getValueFunc, DataRowChangeEventHandler rowChangeEventHandler)
         {
             var dataTable = new DataTable();

@@ -71,20 +71,21 @@ namespace StoryTree.IO
                     EmptyCell(StyleSheetLibrary.TitleStyleIndex));
                 mergeCells.Append(new MergeCell{ Reference = new StringValue("C2:I2") });
                 AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,3,
-                    ConstructCell("DOT = Deskundigen Oordeel Toets op Maat", CellValues.String, StyleSheetLibrary.DefaultStyleIndex));
+                    ConstructCell("DOT = Deskundigen Oordeel Toets op Maat", CellValues.String));
                 AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,4);
 
                 // Write eventname
                 AddRow(sheetData,0,5,
-                    ConstructCell(string.Format("Gebeurtenis 3: {0}", eventName), CellValues.String, StyleSheetLibrary.TitleStyleIndex),
+                    ConstructCell("Gebeurtenis:", CellValues.String, StyleSheetLibrary.TitleStyleIndex),
                     EmptyCell(StyleSheetLibrary.TitleStyleIndex),
-                    EmptyCell(StyleSheetLibrary.TitleStyleIndex),
+                    ConstructCell(eventName, CellValues.String, StyleSheetLibrary.TitleStyleIndex),
                     EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                     EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                     EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                     EmptyCell(StyleSheetLibrary.TitleStyleIndex), 
                     EmptyCell(StyleSheetLibrary.DefaultStyleIndex));
-                mergeCells.Append(new MergeCell { Reference = new StringValue("C5:I5") });
+                mergeCells.Append(new MergeCell { Reference = new StringValue("C5:D5") });
+                mergeCells.Append(new MergeCell { Reference = new StringValue("E5:I5") });
                 AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex,6);
 
                 // Write expert information

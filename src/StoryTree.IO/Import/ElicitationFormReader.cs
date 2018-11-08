@@ -40,54 +40,44 @@ namespace StoryTree.IO.Import
         {
             var nodes = new List<DotNode>();
             uint firstNodeRow = 22;
-            var maxRow = worksheet.Descendants<Row>().Max(r => r.RowIndex.Value);
+            var maxRow = worksheet.Descendants<Row>().Count();
 
             string nodeName = null;
             List<DotEstimate> estimates = new List<DotEstimate>();
 
-            for (uint iRow = firstNodeRow; iRow < maxRow+1; iRow++)
+            for (uint iRow = firstNodeRow; iRow < maxRow; iRow++)
             {
-
-                var row = GetRow(worksheet, iRow);
-                if (row == null)
-                {
-                    nodes.Add(new DotNode
-                    {
-                        NodeName = nodeName,
-                        Estimates = estimates.ToArray()
-                    });
-
-                    nodeName = null;
-                    estimates = new List<DotEstimate>();
-                    continue;
-                }
-
-                var Ccell = row.Descendants<Cell>().FirstOrDefault(c => c.CellReference == "C" + iRow.ToString(CultureInfo.InvariantCulture));
-                if (Ccell == null)
-                {
-                    nodes.Add(new DotNode
-                    {
-                        NodeName = nodeName,
-                        Estimates = estimates.ToArray()
-                    });
-
-                    nodeName = null;
-                    estimates = new List<DotEstimate>();
-                    continue;
-                }
-
-                if (Ccell.DataType != null && Ccell.DataType == CellValues.SharedString)
+                var cCell = GetCell(worksheet, "C" + iRow.ToString(CultureInfo.InvariantCulture));
+                if (cCell == null || string.IsNullOrWhiteSpace(cCell.InnerText))
                 {
                     if (string.IsNullOrWhiteSpace(nodeName))
                     {
-                        nodeName = CellValueAsStringFromCell(Ccell, workbookPart);
+                        continue;
+                    }
+
+                    nodes.Add(new DotNode
+                    {
+                        NodeName = nodeName,
+                        Estimates = estimates.ToArray()
+                    });
+
+                    nodeName = null;
+                    estimates = new List<DotEstimate>();
+                    continue;
+                }
+
+                if (cCell.DataType != null && (cCell.DataType == CellValues.SharedString || cCell.DataType == CellValues.String || cCell.DataType == CellValues.InlineString))
+                {
+                    if (string.IsNullOrWhiteSpace(nodeName))
+                    {
+                        nodeName = CellValueAsStringFromCell(cCell, workbookPart);
                     }
                     continue;
                 }
 
                 estimates.Add(new DotEstimate
                 {
-                    WaterLevel = GetCellValueAsDoubleFromCell(Ccell, workbookPart),
+                    WaterLevel = GetCellValueAsDoubleFromCell(cCell, workbookPart),
                     Frequency = GetCellValueAsDouble(worksheet, "D" + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
                     LowerEstimate = GetCellValueAsInt(worksheet, "E" + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
                     BestEstimate = GetCellValueAsInt(worksheet, "F" + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
@@ -96,9 +86,18 @@ namespace StoryTree.IO.Import
                 });
             }
 
+            if (!string.IsNullOrWhiteSpace(nodeName) && estimates.Any())
+            {
+                nodes.Add(new DotNode
+                {
+                    NodeName = nodeName,
+                    Estimates = estimates.ToArray()
+                });
+            }
+
             return new DotForm
             {
-                EventTreeName = GetCellValueAsString(worksheet, "C5", workbookPart),
+                EventTreeName = GetCellValueAsString(worksheet, "E5", workbookPart),
                 ExpertName = GetCellValueAsString(worksheet, "D7", workbookPart),
                 Date = GetCellValueAsDateTime(worksheet,"D8"),
                 Nodes = nodes.ToArray()

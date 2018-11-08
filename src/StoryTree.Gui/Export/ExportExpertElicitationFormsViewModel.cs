@@ -10,11 +10,11 @@ using StoryTree.Gui.Annotations;
 
 namespace StoryTree.Gui.Export
 {
-    public class ExpertElicitationFormsViewModel : INotifyPropertyChanged
+    public class ExportExpertElicitationFormsViewModel : INotifyPropertyChanged
     {
         private string exportLocation;
 
-        private static readonly ILog Log = LogManager.GetLogger(typeof(ExpertElicitationFormsViewModel));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ExportExpertElicitationFormsViewModel));
 
         public static Project TestProject = new Project
         {
@@ -31,9 +31,9 @@ namespace StoryTree.Gui.Export
             Name = "Testproject"
         };
 
-        public ExpertElicitationFormsViewModel() : this(TestProject) { }
+        public ExportExpertElicitationFormsViewModel() : this(TestProject) { }
 
-        public ExpertElicitationFormsViewModel(Project project)
+        public ExportExpertElicitationFormsViewModel(Project project)
         {
             Experts = new ObservableCollection<ExpertExportViewModel>(project.Experts.Select(e => new ExpertExportViewModel(e)));
             foreach (var expertExportViewModel in Experts)
@@ -82,8 +82,6 @@ namespace StoryTree.Gui.Export
         }
 
         public ObservableCollection<EventTreeExportViewModel> EventTrees { get; }
-
-        public ICommand SelectLocationCommand => new SelectFileLocationCommand(this);
 
         public ICommand ExportElicitationFormsCommand => new PerformExportElicitationFormsCommand(this);
 

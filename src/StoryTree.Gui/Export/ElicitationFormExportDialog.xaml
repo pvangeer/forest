@@ -10,7 +10,7 @@
         ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner" Height="460" Width="650">
     <Window.DataContext>
-        <export:ExpertElicitationFormsViewModel/>
+        <export:ExportExpertElicitationFormsViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>

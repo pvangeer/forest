@@ -4,6 +4,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
              xmlns:export="clr-namespace:StoryTree.Gui.Export"
+             xmlns:import="clr-namespace:StoryTree.Gui.Import"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -70,6 +71,7 @@
             <Style BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="Button"/>
 
             <export:ExportElicitationFormsCommand x:Key="ExportElicitationFormsCommand"/>
+            <import:ImportElicitationFormsCommand x:Key="ImportElicitationFormsCommand"/>
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="DataTemplates/General/ComboBoxFlatStyle.xaml"/>

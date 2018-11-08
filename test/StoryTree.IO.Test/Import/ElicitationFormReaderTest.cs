@@ -17,7 +17,7 @@ namespace StoryTree.IO.Test.Import
             Assert.AreEqual(1,forms.Count());
             var form = forms.First();
             Assert.AreEqual("Andre van Hoven",form.ExpertName);
-            Assert.AreEqual("Gebeurtenis 3: AGK - HHNK",form.EventTreeName);
+            Assert.AreEqual("AGK - HHNK",form.EventTreeName);
             Assert.AreEqual(2018,form.Date.Year);
             Assert.AreEqual(11,form.Date.Month);
             Assert.AreEqual(2,form.Date.Day);

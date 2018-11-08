@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using StoryTree.Data;
-using StoryTree.Data.Hydraulics;
+using StoryTree.Data.Tree;
 using StoryTree.Messaging;
 
-namespace StoryTree.IO
+namespace StoryTree.IO.Export
 {
     public class ElicitationFormsExporter
     {
         private readonly StoryTreeLog log = new StoryTreeLog(typeof(ElicitationFormsExporter));
-        private ExpertFormWriter writer = new ExpertFormWriter();
+        private readonly ExpertFormWriter writer = new ExpertFormWriter();
 
         public Project Project { get; }
 
@@ -67,9 +66,15 @@ namespace StoryTree.IO
             foreach (var expert in expertsToExport)
             {
                 var fileName = Path.Combine(fileLocation,prefix + expert.Name + ".xlsx");
-                writer.WriteForm(fileName, eventTreesToExport.First().Name, null, expert.Name, DateTime.Now,
+                // TODO: Loop all eventtrees
+                // TODO: Pass complete tree event and also write already entered estimations to the file
+
+                var eventTreeToExport = eventTreesToExport.First();
+                var allEventNodes = eventTreeToExport.MainTreeEvent.GetAllEventsRecursive().Select(te => te.Name).ToArray();
+
+                writer.WriteForm(fileName, eventTreeToExport.Name, null, expert.Name, DateTime.Now,
                     hydraulicConditions.Select(hc => hc.WaterLevel).ToArray(),
-                    hydraulicConditions.Select(hc => (double) hc.Probability).ToArray(), new[] {"test", "test2"});
+                    hydraulicConditions.Select(hc => (double) hc.Probability).ToArray(), allEventNodes);
                 log.Info($"Bestand '{fileName}' geëxporteerd voor expert '{expert.Name}'");
             }
             log.Info($"{expertsToExport.Length} DOT formulieren geëxporteerd naar locatie '{fileLocation}'",true);

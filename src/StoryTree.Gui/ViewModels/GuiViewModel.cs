@@ -8,8 +8,8 @@ using System.Windows.Input;
 using StoryTree.Data;
 using StoryTree.Data.Properties;
 using StoryTree.Gui.Command;
-using StoryTree.Gui.Export;
-using StoryTree.IO;
+using StoryTree.IO.Export;
+using StoryTree.IO.Import;
 using StoryTree.Messaging;
 
 namespace StoryTree.Gui.ViewModels
@@ -146,7 +146,7 @@ namespace StoryTree.Gui.ViewModels
         }
 
         public ICommand ChangeProcesStepCommand => new ChangeProcessStepCommand(this);
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler OnInvalidateVisual;
 
@@ -183,6 +183,15 @@ namespace StoryTree.Gui.ViewModels
         {
             var exporter = new ElicitationFormsExporter(ProjectViewModel.Project);
             exporter.Export(fileLocation, prefix, expertsToExport, eventTreesToExport);
+        }
+
+        public void OnImportElicitationForms(string[] fileLocations)
+        {
+            var importer = new ElicitationFormImporter(ProjectViewModel.Project);
+            foreach (var fileLocation in fileLocations)
+            {
+                importer.Import(fileLocation);
+            }
         }
     }
 }

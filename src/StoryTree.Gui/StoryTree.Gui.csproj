@@ -158,12 +158,13 @@
     <Compile Include="Converters\EventTreesToCountConverter.cs" />
     <Compile Include="DataTemplates\MainTabItems\EventTree\EventTreeGraphLayout.cs" />
     <Compile Include="Export\EventTreeExportViewModel.cs" />
-    <Compile Include="Export\ExpertElicitationFormsViewModel.cs" />
+    <Compile Include="Export\ExportExpertElicitationFormsViewModel.cs" />
     <Compile Include="Export\ElicitationFormExportDialog.xaml.cs">
       <DependentUpon>ElicitationFormExportDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Export\ExpertExportViewModel.cs" />
     <Compile Include="Export\ExportElicitationFormsCommand.cs" />
+    <Compile Include="Import\ImportElicitationFormsCommand.cs" />
     <Compile Include="Export\PerformExportElicitationFormsCommand.cs" />
     <Compile Include="Export\SelectFileLocationCommand.cs" />
     <Compile Include="Export\FolderDialogBehavior.cs" />
@@ -399,9 +400,7 @@
   <ItemGroup>
     <Resource Include="Resources\project-information.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Import\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
