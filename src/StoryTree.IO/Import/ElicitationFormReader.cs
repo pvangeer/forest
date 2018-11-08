@@ -11,6 +11,16 @@ namespace StoryTree.IO.Import
 {
     public static class ElicitationFormReader
     {
+        private const string EventTreeNameCellReference = "E5";
+        private const string ExpertNameCellReference = "D7";
+        private const string DateCellReference = "D8";
+        private const string FrequencyColumnReference = "D";
+        private const string LowerEstimateColumnReference = "E";
+        private const string BestEstimateColumnReference = "F";
+        private const string UpperEstimateColumnReference = "G";
+        private const string CommentColumnReference = "I";
+        private const string NodeNameColumnReference = "C";
+
         private static readonly StoryTreeLog Log = new StoryTreeLog(typeof(ElicitationFormReader));
 
         public static IEnumerable<DotForm> ReadElicitationForm(string fileName)
@@ -47,7 +57,7 @@ namespace StoryTree.IO.Import
 
             for (uint iRow = firstNodeRow; iRow < maxRow; iRow++)
             {
-                var cCell = GetCell(worksheet, "C" + iRow.ToString(CultureInfo.InvariantCulture));
+                var cCell = GetCell(worksheet, NodeNameColumnReference + iRow.ToString(CultureInfo.InvariantCulture));
                 if (cCell == null || string.IsNullOrWhiteSpace(cCell.InnerText))
                 {
                     if (string.IsNullOrWhiteSpace(nodeName))
@@ -78,11 +88,11 @@ namespace StoryTree.IO.Import
                 estimates.Add(new DotEstimate
                 {
                     WaterLevel = GetCellValueAsDoubleFromCell(cCell, workbookPart),
-                    Frequency = GetCellValueAsDouble(worksheet, "D" + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
-                    LowerEstimate = GetCellValueAsInt(worksheet, "E" + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
-                    BestEstimate = GetCellValueAsInt(worksheet, "F" + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
-                    UpperEstimate = GetCellValueAsInt(worksheet, "G" + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
-                    Comment = GetCellValueAsString(worksheet, "I" + iRow.ToString(CultureInfo.InvariantCulture), workbookPart)
+                    Frequency = GetCellValueAsDouble(worksheet, FrequencyColumnReference + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
+                    LowerEstimate = GetCellValueAsInt(worksheet, LowerEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
+                    BestEstimate = GetCellValueAsInt(worksheet, BestEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
+                    UpperEstimate = GetCellValueAsInt(worksheet, UpperEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
+                    Comment = GetCellValueAsString(worksheet, CommentColumnReference + iRow.ToString(CultureInfo.InvariantCulture), workbookPart)
                 });
             }
 
@@ -97,9 +107,9 @@ namespace StoryTree.IO.Import
 
             return new DotForm
             {
-                EventTreeName = GetCellValueAsString(worksheet, "E5", workbookPart),
-                ExpertName = GetCellValueAsString(worksheet, "D7", workbookPart),
-                Date = GetCellValueAsDateTime(worksheet,"D8"),
+                EventTreeName = GetCellValueAsString(worksheet, EventTreeNameCellReference, workbookPart),
+                ExpertName = GetCellValueAsString(worksheet, ExpertNameCellReference, workbookPart),
+                Date = GetCellValueAsDateTime(worksheet,DateCellReference),
                 Nodes = nodes.ToArray()
             };
         }
@@ -150,11 +160,6 @@ namespace StoryTree.IO.Import
             }
 
             return cellValueAsInt;
-        }
-
-        private static Row GetRow(Worksheet worksheet, uint rowNumber)
-        {
-            return worksheet.Descendants<Row>().FirstOrDefault(r => r.RowIndex == rowNumber);
         }
 
         private static Cell GetCell(Worksheet worksheet, string addressName)
@@ -229,20 +234,6 @@ namespace StoryTree.IO.Import
             }
 
             return DateTime.FromOADate(cellValueAsDouble);
-        }
-
-        private static Worksheet GetWorksheet(WorkbookPart wbPart, string sheetName)
-        {
-            Sheet theSheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault(s => s.Name == sheetName);
-
-            if (theSheet == null)
-            {
-                throw new ArgumentException("sheetName");
-            }
-
-            var wsPart = (WorksheetPart)wbPart.GetPartById(theSheet.Id);
-
-            return wsPart.Worksheet;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace StoryTree.Gui.Export
 
             var dialog = new ElicitationFormExportDialog
             {
-                DataContext = new ExportExpertElicitationFormsViewModel(guiViewModel.ProjectViewModel.Project)
+                DataContext = new ExportElicitationFormsViewModel(guiViewModel.ProjectViewModel.Project)
                 {
                     OnExport = guiViewModel.OnExportElicitationForms
                 },

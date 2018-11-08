@@ -6,11 +6,11 @@ namespace StoryTree.Gui.Export
 {
     public class SelectFileLocationCommand : ICommand
     {
-        private readonly ExportExpertElicitationFormsViewModel viewModel;
+        private readonly ExportElicitationFormsViewModel viewModel;
 
-        public SelectFileLocationCommand(ExportExpertElicitationFormsViewModel exportExpertElicitationFormsViewModel)
+        public SelectFileLocationCommand(ExportElicitationFormsViewModel exportElicitationFormsViewModel)
         {
-            viewModel = exportExpertElicitationFormsViewModel;
+            viewModel = exportElicitationFormsViewModel;
         }
 
         public bool CanExecute(object parameter)

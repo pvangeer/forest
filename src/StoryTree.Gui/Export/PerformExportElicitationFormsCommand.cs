@@ -7,12 +7,12 @@ namespace StoryTree.Gui.Export
 {
     public class PerformExportElicitationFormsCommand : ICommand
     {
-        private readonly ExportExpertElicitationFormsViewModel viewModel;
+        private readonly ExportElicitationFormsViewModel viewModel;
 
-        public PerformExportElicitationFormsCommand(ExportExpertElicitationFormsViewModel exportExpertElicitationFormsViewModel)
+        public PerformExportElicitationFormsCommand(ExportElicitationFormsViewModel exportElicitationFormsViewModel)
         {
-            this.viewModel = exportExpertElicitationFormsViewModel;
-            exportExpertElicitationFormsViewModel.CanExportChanged += CanExportChanged;
+            this.viewModel = exportElicitationFormsViewModel;
+            exportElicitationFormsViewModel.CanExportChanged += CanExportChanged;
         }
 
         public bool CanExecute(object parameter)

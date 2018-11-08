@@ -10,11 +10,11 @@ using StoryTree.Gui.Annotations;
 
 namespace StoryTree.Gui.Export
 {
-    public class ExportExpertElicitationFormsViewModel : INotifyPropertyChanged
+    public class ExportElicitationFormsViewModel : INotifyPropertyChanged
     {
         private string exportLocation;
 
-        private static readonly ILog Log = LogManager.GetLogger(typeof(ExportExpertElicitationFormsViewModel));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ExportElicitationFormsViewModel));
 
         public static Project TestProject = new Project
         {
@@ -31,11 +31,11 @@ namespace StoryTree.Gui.Export
             Name = "Testproject"
         };
 
-        public ExportExpertElicitationFormsViewModel() : this(TestProject) { }
+        public ExportElicitationFormsViewModel() : this(TestProject) { }
 
-        public ExportExpertElicitationFormsViewModel(Project project)
+        public ExportElicitationFormsViewModel(Project project)
         {
-            Experts = new ObservableCollection<ExpertExportViewModel>(project.Experts.Select(e => new ExpertExportViewModel(e)));
+            Experts = new ObservableCollection<ElicitationFormsExportViewModel>(project.Experts.Select(e => new ElicitationFormsExportViewModel(e)));
             foreach (var expertExportViewModel in Experts)
             {
                 expertExportViewModel.PropertyChanged += ViewModelPropertyChanged;
@@ -67,7 +67,7 @@ namespace StoryTree.Gui.Export
 
         public Action<string, string, Expert[], EventTree[]> OnExport { get; set; }
 
-        public ObservableCollection<ExpertExportViewModel> Experts { get; }
+        public ObservableCollection<ElicitationFormsExportViewModel> Experts { get; }
 
         public event EventHandler CanExportChanged;
 
@@ -97,7 +97,7 @@ namespace StoryTree.Gui.Export
 
         private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ExpertExportViewModel.IsChecked) ||
+            if (e.PropertyName == nameof(ElicitationFormsExportViewModel.IsChecked) ||
                 e.PropertyName == nameof(EventTreeExportViewModel.IsChecked))
             {
                 CanExportChanged?.Invoke(this, null);

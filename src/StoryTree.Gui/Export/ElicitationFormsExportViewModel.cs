@@ -5,12 +5,12 @@ using StoryTree.Gui.Annotations;
 
 namespace StoryTree.Gui.Export
 {
-    public class ExpertExportViewModel : INotifyPropertyChanged
+    public class ElicitationFormsExportViewModel : INotifyPropertyChanged
     {
         private Expert expert;
         private bool isChecked;
 
-        public ExpertExportViewModel(Expert expert)
+        public ElicitationFormsExportViewModel(Expert expert)
         {
             this.expert = expert;
             IsChecked = true;
