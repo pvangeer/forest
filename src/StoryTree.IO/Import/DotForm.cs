@@ -9,7 +9,7 @@ namespace StoryTree.IO.Import
 
         public string ExpertName { get; set; }
 
-        public FileStream EventImageFile { get; set; }
+        public Func<FileStream> GetFileStream { get; set; }
 
         public DateTime Date { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using StoryTree.Data.Properties;
 using StoryTree.IO.Import;
 using BlipFill = DocumentFormat.OpenXml.Drawing.Spreadsheet.BlipFill;
+using Color = System.Drawing.Color;
 using NonVisualDrawingProperties = DocumentFormat.OpenXml.Drawing.Spreadsheet.NonVisualDrawingProperties;
 using NonVisualPictureDrawingProperties = DocumentFormat.OpenXml.Drawing.Spreadsheet.NonVisualPictureDrawingProperties;
 using NonVisualPictureProperties = DocumentFormat.OpenXml.Drawing.Spreadsheet.NonVisualPictureProperties;
@@ -82,7 +84,7 @@ namespace StoryTree.IO.Export
             WriteEventHeader(form, sheetData, mergeCells);
             WriteExpertInformation(form, sheetData);
             WriteElicitationCodeInformation(sheetData, mergeCells);
-            AddImage(form.EventImageFile, worksheetPart);
+            AddImage(form.GetFileStream, worksheetPart);
             var rowNumber = WriteNodes(form, sheetData, dataValidations);
             WriteSheetBottom(sheetData, rowNumber);
 
@@ -404,35 +406,56 @@ namespace StoryTree.IO.Export
                 };
         }
 
-        private static void AddImage(FileStream fileStream, WorksheetPart worksheetPart)
+        private static void AddImage(Func<FileStream> fileStreamFunc, WorksheetPart worksheetPart)
         {
-            if (fileStream == null)
+            if (fileStreamFunc == null)
             {
                 return;
             }
 
-            DrawingsPart drawingsPart = worksheetPart.AddNewPart<DrawingsPart>();
-            ImagePart imagePart = drawingsPart.AddImagePart(ImagePartType.Png, worksheetPart.GetIdOfPart(drawingsPart));
-            imagePart.FeedData(fileStream);
-
-            NonVisualDrawingProperties nonVisualDrawingProperties = new NonVisualDrawingProperties
+            DrawingsPart drawingsPart;
+            ImagePart imagePart;
+            Extents extents;
+            using (var fileStream = fileStreamFunc())
             {
-                Id = 1025,
-                Name = "Picture 1",
-                Description = "eventtree"
-            };
-            PictureLocks pictureLocks =
-                new PictureLocks
+                if (fileStream == null)
                 {
-                    NoChangeAspect = true,
-                    NoChangeArrowheads = true
+                    return;
+                }
+
+                drawingsPart = worksheetPart.AddNewPart<DrawingsPart>();
+                imagePart = drawingsPart.AddImagePart(ImagePartType.Png, worksheetPart.GetIdOfPart(drawingsPart));
+                imagePart.FeedData(fileStream);
+
+                Image image = Image.FromStream(fileStream);
+                //http://en.wikipedia.org/wiki/English_Metric_Unit#DrawingML
+                //http://stackoverflow.com/questions/1341930/pixel-to-centimeter
+                //http://stackoverflow.com/questions/139655/how-to-convert-pixels-to-points-px-to-pt-in-net-c
+                extents = new Extents
+                {
+                    Cx = (long)image.Width * (long)((float)914400 / image.HorizontalResolution),
+                    Cy = (long)image.Height * (long)((float)914400 / image.VerticalResolution)
                 };
-            NonVisualPictureDrawingProperties nonVisualPictureDrawingProperties = new NonVisualPictureDrawingProperties { PictureLocks = pictureLocks };
+                image.Dispose();
+            }
+
             NonVisualPictureProperties pictureNonVisualPictureProperties =
                 new NonVisualPictureProperties
                 {
-                    NonVisualDrawingProperties = nonVisualDrawingProperties,
-                    NonVisualPictureDrawingProperties = nonVisualPictureDrawingProperties
+                    NonVisualDrawingProperties = new NonVisualDrawingProperties
+                    {
+                        Id = 1025,
+                        Name = "Picture 1",
+                        Description = "eventtree"
+                    },
+                    NonVisualPictureDrawingProperties = new NonVisualPictureDrawingProperties
+                    {
+                        PictureLocks = new PictureLocks
+                        {
+                            NoChangeAspect = true,
+                            NoChangeArrowheads = true
+                        }
+                    }
                 };
 
             Stretch stretch =
@@ -452,29 +475,19 @@ namespace StoryTree.IO.Export
             };
             blipFill.Append(stretch);
 
-            Offset offset = new Offset
-            {
-                X = 0,
-                Y = 0
-            };
-            Transform2D transform2D =
-                new Transform2D { Offset = offset };
-            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(fileStream);
-            //http://en.wikipedia.org/wiki/English_Metric_Unit#DrawingML
-            //http://stackoverflow.com/questions/1341930/pixel-to-centimeter
-            //http://stackoverflow.com/questions/139655/how-to-convert-pixels-to-points-px-to-pt-in-net-c
-            Extents extents = new Extents
-            {
-                Cx = (long) bitmap.Width * (long) ((float) 914400 / bitmap.HorizontalResolution),
-                Cy = (long) bitmap.Height * (long) ((float) 914400 / bitmap.VerticalResolution)
-            };
-            bitmap.Dispose();
-            transform2D.Extents = extents;
             ShapeProperties shapeProperties =
                 new ShapeProperties
                 {
                     BlackWhiteMode = BlackWhiteModeValues.Auto,
-                    Transform2D = transform2D
+                    Transform2D = new Transform2D
+                    {
+                        Offset = new Offset
+                        {
+                            X = 0,
+                            Y = 0
+                        },
+                        Extents = extents
+                    }
                 };
             PresetGeometry prstGeom =
                 new PresetGeometry
@@ -483,7 +496,28 @@ namespace StoryTree.IO.Export
                     AdjustValueList = new AdjustValueList()
                 };
             shapeProperties.Append(prstGeom);
-            shapeProperties.Append(new NoFill());
+            shapeProperties.Append(new SolidFill
+            {
+                RgbColorModelHex = new RgbColorModelHex
+                {
+                    Val = Color.White.ToSimpleHexValue()
+
+                }
+            });
+            DocumentFormat.OpenXml.Drawing.Outline outline = new DocumentFormat.OpenXml.Drawing.Outline
+            {
+                Width = 25400,
+            };
+
+            var solidFill1 = new SolidFill
+            {
+                RgbColorModelHex = new RgbColorModelHex
+                {
+                    Val = StyleSheetLibrary.BorderColor.ToSimpleHexValue()
+                }
+            };
+            outline.Append(solidFill1);
+            shapeProperties.Append(outline);
 
             DocumentFormat.OpenXml.Drawing.Spreadsheet.Picture picture =
                 new DocumentFormat.OpenXml.Drawing.Spreadsheet.Picture
@@ -493,43 +527,29 @@ namespace StoryTree.IO.Export
                     ShapeProperties = shapeProperties
                 };
 
-            Extent ext = new Extent
-            {
-                Cx = extents.Cx,
-                Cy = extents.Cy
-            };
             var iColumnId = 11;
             var iRowId = 1;
             var lColumnOffset = 0;
             var lRowOffset = 0;
-            OneCellAnchor ocanchor = new OneCellAnchor();
-            ocanchor.FromMarker = new DocumentFormat.OpenXml.Drawing.Spreadsheet.FromMarker
+            OneCellAnchor ocanchor = new OneCellAnchor
             {
-                ColumnId = new ColumnId {Text = iColumnId.ToString(CultureInfo.InvariantCulture)},
-                ColumnOffset = new ColumnOffset {Text = lColumnOffset.ToString(CultureInfo.InvariantCulture)},
-                RowId = new RowId {Text = iRowId.ToString(CultureInfo.InvariantCulture)},
-                RowOffset = new RowOffset {Text = lRowOffset.ToString(CultureInfo.InvariantCulture)}
+                FromMarker = new DocumentFormat.OpenXml.Drawing.Spreadsheet.FromMarker
+                {
+                    ColumnId = new ColumnId {Text = iColumnId.ToString(CultureInfo.InvariantCulture)},
+                    ColumnOffset = new ColumnOffset {Text = lColumnOffset.ToString(CultureInfo.InvariantCulture)},
+                    RowId = new RowId {Text = iRowId.ToString(CultureInfo.InvariantCulture)},
+                    RowOffset = new RowOffset {Text = lRowOffset.ToString(CultureInfo.InvariantCulture)}
+                },
+                Extent = new Extent {Cx = extents.Cx, Cy = extents.Cy}
             };
-            // Subtract 1 because picture goes to bottom right corner
-            // Subtracting 1 makes it more intuitive that (1,1) means top-left corner of (1,1)
-
-            ocanchor.Extent = ext;
 
             ocanchor.Append(picture);
             ocanchor.Append(new ClientData());
-            
 
-           /* AbsoluteAnchor anchor = new AbsoluteAnchor
-            {
-                Position = pos,
-                Extent = ext
-            };
-            anchor.Append(picture);
-            anchor.Append(new ClientData());*/
+
             WorksheetDrawing worksheetDrawing = new WorksheetDrawing();
-            //worksheetDrawing.Append(anchor);
             worksheetDrawing.Append(ocanchor);
-            Drawing drawing = new Drawing { Id = drawingsPart.GetIdOfPart(imagePart) };
+            Drawing drawing = new Drawing {Id = drawingsPart.GetIdOfPart(imagePart)};
 
             worksheetDrawing.Save(drawingsPart);
 

@@ -5,6 +5,10 @@ namespace StoryTree.IO
 {
     public static class StyleSheetLibrary
     {
+        public static readonly System.Drawing.Color RowColor = System.Drawing.Color.AliceBlue;
+        public static readonly System.Drawing.Color AlternatingRowColor = System.Drawing.Color.LightSteelBlue;
+        public static readonly System.Drawing.Color TitleColor = System.Drawing.Color.LightSteelBlue;
+        public static readonly System.Drawing.Color BorderColor = System.Drawing.Color.LightGray;
         public const uint DefaultStyleIndex = 0;
         public const uint TitleStyleIndex = 1;
         public const uint TableBodyStyleNormalIndex = 2;
@@ -28,9 +32,9 @@ namespace StoryTree.IO
                 Fills fills = new Fills(
                     new Fill { PatternFill = new PatternFill { PatternType = PatternValues.None } }, // required, reserved by Excel
                     new Fill { PatternFill = new PatternFill { PatternType = PatternValues.Gray125 } }, // required, reserved by Excel
-                    new Fill(new PatternFill(CreateForegroundColor(System.Drawing.Color.LightSteelBlue)) { PatternType = PatternValues.Solid }), // 2 - alternating row
-                    new Fill(new PatternFill(CreateForegroundColor(System.Drawing.Color.AliceBlue)) { PatternType = PatternValues.Solid }), // Index 3 - header row and main row
-                    new Fill(new PatternFill(CreateForegroundColor(System.Drawing.Color.LightSteelBlue)) { PatternType = PatternValues.Solid }) // Index 4 - Title
+                    new Fill(new PatternFill(CreateForegroundColor(AlternatingRowColor)) { PatternType = PatternValues.Solid }), // 2 - alternating row
+                    new Fill(new PatternFill(CreateForegroundColor(RowColor)) { PatternType = PatternValues.Solid }), // Index 3 - header row and main row
+                    new Fill(new PatternFill(CreateForegroundColor(TitleColor)) { PatternType = PatternValues.Solid }) // Index 4 - Title
                 );
 
                 Borders borders = new Borders(
@@ -41,14 +45,14 @@ namespace StoryTree.IO
                         new TopBorder(new Color { Auto = true }) { Style = BorderStyleValues.Thin },
                         new BottomBorder(new Color { Auto = true }) { Style = BorderStyleValues.Thin }),
                     new Border( // index 2 header border
-                        new LeftBorder(new Color { Rgb = new HexBinaryValue { Value = System.Drawing.Color.LightGray.ToHexValue() } }) { Style = BorderStyleValues.Thin },
-                        new RightBorder(new Color { Rgb = new HexBinaryValue { Value = System.Drawing.Color.LightGray.ToHexValue() } }) { Style = BorderStyleValues.Thin }),
+                        new LeftBorder(new Color { Rgb = new HexBinaryValue { Value = BorderColor.ToHexValue() } }) { Style = BorderStyleValues.Thin },
+                        new RightBorder(new Color { Rgb = new HexBinaryValue { Value = BorderColor.ToHexValue() } }) { Style = BorderStyleValues.Thin }),
                     new Border( // index 3 Rightborder
-                        new RightBorder(new Color { Rgb = new HexBinaryValue { Value = System.Drawing.Color.LightGray.ToHexValue() } }) { Style = BorderStyleValues.Thick }),
+                        new RightBorder(new Color { Rgb = new HexBinaryValue { Value = BorderColor.ToHexValue() } }) { Style = BorderStyleValues.Thick }),
                     new Border( // index 4 Leftborder
-                        new LeftBorder(new Color { Rgb = new HexBinaryValue { Value = System.Drawing.Color.LightGray.ToHexValue() } }) { Style = BorderStyleValues.Thick }),
+                        new LeftBorder(new Color { Rgb = new HexBinaryValue { Value = BorderColor.ToHexValue() } }) { Style = BorderStyleValues.Thick }),
                     new Border( // index 5 Topborder
-                        new TopBorder(new Color { Rgb = new HexBinaryValue { Value = System.Drawing.Color.LightGray.ToHexValue() } }) { Style = BorderStyleValues.Thick })
+                        new TopBorder(new Color { Rgb = new HexBinaryValue { Value = BorderColor.ToHexValue() } }) { Style = BorderStyleValues.Thick })
                 );
 
                 CellFormats cellFormats = new CellFormats(

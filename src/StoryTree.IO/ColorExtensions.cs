@@ -9,5 +9,10 @@ namespace StoryTree.IO
         {
             return color.A.ToString("X2") + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
         }
+
+        public static string ToSimpleHexValue(this Color color)
+        {
+            return color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+        }
     }
 }

@@ -23,22 +23,20 @@ namespace StoryTree.IO.Test
 
             var writer = new ElicitationFormWriter();
 
-            using (FileStream eventImageFileStream = new FileStream(eventImageFileName,FileMode.Open))
+            var form = new DotForm
             {
-                var form = new DotForm
+                Date = date,
+                GetFileStream = () => new FileStream(eventImageFileName, FileMode.Open),
+                EventTreeName = eventName,
+                ExpertName = expertName,
+                Nodes = new DotNode[]
                 {
-                    Date = date,
-                    EventImageFile = eventImageFileStream,
-                    EventTreeName = eventName,
-                    ExpertName = expertName,
-                    Nodes = new DotNode[]
-                    {
-                        CreateNode("Knoop 1", waterLevels, frequencies),
-                        CreateNode("Knoop 2", waterLevels, frequencies),
-                    }
-                };
-                writer.WriteForm(fileName, new[] { form });
-            }
+                    CreateNode("Knoop 1", waterLevels, frequencies),
+                    CreateNode("Knoop 2", waterLevels, frequencies),
+                }
+            };
+
+            writer.WriteForm(fileName, new[] { form });
         }
 
         private static DotNode CreateNode(string nodeName, double[] waterlevels, double[] frequencies)

@@ -113,7 +113,7 @@ namespace StoryTree.IO.Export
             {
                 EventTreeName = eventTree.Name,
                 ExpertName = expertName,
-                EventImageFile = EventTreeToImageStream(eventTree),
+                GetFileStream = () => EventTreeToImageStream(eventTree),
                 Date = DateTime.Today,
                 Nodes = nodes.ToArray()
             };
