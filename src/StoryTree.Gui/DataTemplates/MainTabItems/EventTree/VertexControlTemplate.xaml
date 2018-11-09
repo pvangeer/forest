@@ -17,13 +17,13 @@
             <Border.InputBindings>
                 <MouseBinding MouseAction="LeftClick" Command="{Binding TreeEventClickedCommand}" />
             </Border.InputBindings>
-            <Grid Width="120">
+            <Grid MinWidth="120" MaxWidth="320">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="{Binding Name}" Padding="1,2,1,3" FontWeight="Bold" FontSize="14" />
-                <TextBlock Grid.Row="1" Text="{Binding Summary}" Padding="1,2,1,3" FontSize="10" />
+                <TextBlock TextWrapping="Wrap" Grid.Row="0" Text="{Binding Name}" Padding="1,2,1,3" FontWeight="Bold" FontSize="14" />
+                <TextBlock TextWrapping="Wrap" Grid.Row="1" Text="{Binding Summary}" Padding="1,2,1,3" FontSize="10" />
                 <Grid.Style>
                     <Style>
                         <Style.Triggers>
