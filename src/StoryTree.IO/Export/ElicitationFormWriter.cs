@@ -7,6 +7,7 @@ using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.Drawing.Spreadsheet;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
+using StoryTree.Data.Properties;
 using StoryTree.IO.Import;
 using BlipFill = DocumentFormat.OpenXml.Drawing.Spreadsheet.BlipFill;
 using NonVisualDrawingProperties = DocumentFormat.OpenXml.Drawing.Spreadsheet.NonVisualDrawingProperties;
@@ -31,6 +32,11 @@ namespace StoryTree.IO.Export
                 workbookPart.Workbook = new Workbook();
                 workbookPart.Workbook.Append(new FileVersion { ApplicationName = "Microsoft Office Excel" });
 
+                // Add stylesheet
+                WorkbookStylesPart workbookStylesPart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                workbookStylesPart.Stylesheet = StyleSheetLibrary.StyleSheet;
+                workbookStylesPart.Stylesheet.Save(workbookStylesPart);
+
                 Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
                 foreach (var dotForm in forms)
                 {
@@ -45,11 +51,6 @@ namespace StoryTree.IO.Export
 
         private void WriteWorksheet(WorkbookPart workbookPart, Sheets sheets, DotForm form)
         {
-            // Add stylesheet
-            WorkbookStylesPart workbookStylesPart = workbookPart.AddNewPart<WorkbookStylesPart>();
-            workbookStylesPart.Stylesheet = StyleSheetLibrary.StyleSheet;
-            workbookStylesPart.Stylesheet.Save(workbookStylesPart);
-
             //Add data to first sheet
             WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
             Worksheet worksheet = new Worksheet();
@@ -60,18 +61,19 @@ namespace StoryTree.IO.Export
             columns.Append(new Column {Min = 8, Max = 8, Width = 40, CustomWidth = true});
             columns.Append(new Column {Min = 9, Max = 9, Width = 20, CustomWidth = true});
             columns.Append(new Column {Min = 10, Max = 11, Width = 4, CustomWidth = true});
-            worksheetPart.Worksheet.Append(columns);
 
-            MergeCells mergeCells = new MergeCells();
             var sheetData = new SheetData();
             var dataValidations = new DataValidations();
+
+            worksheet.Append(columns);
             worksheet.Append(sheetData);
+            var mergeCells = CreateOrGetMergeCells(worksheet);
             worksheet.Append(dataValidations);
 
             Sheet sheet = new Sheet
             {
                 Name = form.EventTreeName,
-                SheetId = 1,
+                SheetId = (uint)sheets.Count() + 1,
                 Id = workbookPart.GetIdOfPart(worksheetPart)
             };
 
@@ -183,8 +185,6 @@ namespace StoryTree.IO.Export
             mergeCells.Append(new MergeCell {Reference = new StringValue("F17:G17")});
             mergeCells.Append(new MergeCell {Reference = new StringValue("F18:G18")});
 
-            worksheetPart.Worksheet.InsertAfter(mergeCells, worksheetPart.Worksheet.Elements<SheetData>().First());
-
             // Include image
             AddImage(form.EventImageFileName, worksheetPart);
 
@@ -273,6 +273,59 @@ namespace StoryTree.IO.Export
             sheets.Append(sheet);
 
             worksheetPart.Worksheet.Save();
+        }
+
+        private static MergeCells CreateOrGetMergeCells([NotNull]Worksheet worksheet)
+        {
+            MergeCells mergeCells;
+            if (worksheet.Elements<MergeCells>().Any())
+            {
+                mergeCells = worksheet.Elements<MergeCells>().First();
+            }
+            else
+            {
+                mergeCells = new MergeCells();
+
+                // Insert a MergeCells object into the specified position.
+                if (worksheet.Elements<CustomSheetView>().Any())
+                {
+                    worksheet.InsertAfter(mergeCells, worksheet.Elements<CustomSheetView>().First());
+                }
+                else if (worksheet.Elements<DataConsolidate>().Any())
+                {
+                    worksheet.InsertAfter(mergeCells, worksheet.Elements<DataConsolidate>().First());
+                }
+                else if (worksheet.Elements<SortState>().Any())
+                {
+                    worksheet.InsertAfter(mergeCells, worksheet.Elements<SortState>().First());
+                }
+                else if (worksheet.Elements<AutoFilter>().Any())
+                {
+                    worksheet.InsertAfter(mergeCells, worksheet.Elements<AutoFilter>().First());
+                }
+                else if (worksheet.Elements<Scenarios>().Any())
+                {
+                    worksheet.InsertAfter(mergeCells, worksheet.Elements<Scenarios>().First());
+                }
+                else if (worksheet.Elements<ProtectedRanges>().Any())
+                {
+                    worksheet.InsertAfter(mergeCells, worksheet.Elements<ProtectedRanges>().First());
+                }
+                else if (worksheet.Elements<SheetProtection>().Any())
+                {
+                    worksheet.InsertAfter(mergeCells, worksheet.Elements<SheetProtection>().First());
+                }
+                else if (worksheet.Elements<SheetCalculationProperties>().Any())
+                {
+                    worksheet.InsertAfter(mergeCells, worksheet.Elements<SheetCalculationProperties>().First());
+                }
+                else
+                {
+                    worksheet.InsertAfter(mergeCells, worksheet.Elements<SheetData>().First());
+                }
+            }
+
+            return mergeCells;
         }
 
         private static Cell EmptyCell(uint styleSheetIndex)
