@@ -113,15 +113,15 @@ namespace StoryTree.IO.Export
             {
                 EventTreeName = eventTree.Name,
                 ExpertName = expertName,
-                EventImageFileName = EventTreeToImageStream(eventTree),
+                EventImageFile = EventTreeToImageStream(eventTree),
                 Date = DateTime.Today,
                 Nodes = nodes.ToArray()
             };
         }
 
-        private string EventTreeToImageStream(EventTree eventTree)
+        private FileStream EventTreeToImageStream(EventTree eventTree)
         {
-            return "";
+            return null;
         }
     }
 }

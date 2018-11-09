@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace StoryTree.IO.Import
 {
@@ -8,7 +9,7 @@ namespace StoryTree.IO.Import
 
         public string ExpertName { get; set; }
 
-        public string EventImageFileName { get; set; }
+        public FileStream EventImageFile { get; set; }
 
         public DateTime Date { get; set; }
 

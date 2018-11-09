@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using NUnit.Framework;
 using StoryTree.IO.Export;
 using StoryTree.IO.Import;
@@ -21,19 +22,23 @@ namespace StoryTree.IO.Test
             double[] frequencies = {0.0001, 0.001, 0.01, 0.1};
 
             var writer = new ElicitationFormWriter();
-            var form = new DotForm
+
+            using (FileStream eventImageFileStream = new FileStream(eventImageFileName,FileMode.Open))
             {
-                Date = date,
-                EventImageFileName = eventImageFileName,
-                EventTreeName = eventName,
-                ExpertName = expertName,
-                Nodes = new DotNode[]
+                var form = new DotForm
                 {
-                    CreateNode("Knoop 1", waterLevels, frequencies),
-                    CreateNode("Knoop 2", waterLevels, frequencies),
-                }
-            };
-            writer.WriteForm(fileName, new []{form});
+                    Date = date,
+                    EventImageFile = eventImageFileStream,
+                    EventTreeName = eventName,
+                    ExpertName = expertName,
+                    Nodes = new DotNode[]
+                    {
+                        CreateNode("Knoop 1", waterLevels, frequencies),
+                        CreateNode("Knoop 2", waterLevels, frequencies),
+                    }
+                };
+                writer.WriteForm(fileName, new[] { form });
+            }
         }
 
         private static DotNode CreateNode(string nodeName, double[] waterlevels, double[] frequencies)

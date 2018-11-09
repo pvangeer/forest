@@ -82,7 +82,7 @@ namespace StoryTree.IO.Export
             WriteEventHeader(form, sheetData, mergeCells);
             WriteExpertInformation(form, sheetData);
             WriteElicitationCodeInformation(sheetData, mergeCells);
-            AddImage(form.EventImageFileName, worksheetPart);
+            AddImage(form.EventImageFile, worksheetPart);
             var rowNumber = WriteNodes(form, sheetData, dataValidations);
             WriteSheetBottom(sheetData, rowNumber);
 
@@ -404,25 +404,22 @@ namespace StoryTree.IO.Export
                 };
         }
 
-        private static void AddImage(string imageFileName, WorksheetPart worksheetPart)
+        private static void AddImage(FileStream fileStream, WorksheetPart worksheetPart)
         {
-            if (string.IsNullOrWhiteSpace(imageFileName) || !File.Exists(imageFileName))
+            if (fileStream == null)
             {
                 return;
             }
 
             DrawingsPart drawingsPart = worksheetPart.AddNewPart<DrawingsPart>();
             ImagePart imagePart = drawingsPart.AddImagePart(ImagePartType.Png, worksheetPart.GetIdOfPart(drawingsPart));
-            using (FileStream fileStream = new FileStream(imageFileName, FileMode.Open))
-            {
-                imagePart.FeedData(fileStream);
-            }
+            imagePart.FeedData(fileStream);
 
             NonVisualDrawingProperties nonVisualDrawingProperties = new NonVisualDrawingProperties
             {
                 Id = 1025,
                 Name = "Picture 1",
-                Description = "polymathlogo"
+                Description = "eventtree"
             };
             PictureLocks pictureLocks =
                 new PictureLocks
@@ -462,7 +459,7 @@ namespace StoryTree.IO.Export
             };
             Transform2D transform2D =
                 new Transform2D { Offset = offset };
-            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(imageFileName);
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(fileStream);
             //http://en.wikipedia.org/wiki/English_Metric_Unit#DrawingML
             //http://stackoverflow.com/questions/1341930/pixel-to-centimeter
             //http://stackoverflow.com/questions/139655/how-to-convert-pixels-to-points-px-to-pt-in-net-c
@@ -496,28 +493,25 @@ namespace StoryTree.IO.Export
                     ShapeProperties = shapeProperties
                 };
 
-            Position pos = new Position
-            {
-                X = 7000000,
-                Y = 200000
-            };
             Extent ext = new Extent
             {
                 Cx = extents.Cx,
                 Cy = extents.Cy
             };
-            var iColumnId = 7;
-            var iRowId = 5;
+            var iColumnId = 11;
+            var iRowId = 1;
             var lColumnOffset = 0;
             var lRowOffset = 0;
             OneCellAnchor ocanchor = new OneCellAnchor();
-            ocanchor.FromMarker = new DocumentFormat.OpenXml.Drawing.Spreadsheet.FromMarker();
+            ocanchor.FromMarker = new DocumentFormat.OpenXml.Drawing.Spreadsheet.FromMarker
+            {
+                ColumnId = new ColumnId {Text = iColumnId.ToString(CultureInfo.InvariantCulture)},
+                ColumnOffset = new ColumnOffset {Text = lColumnOffset.ToString(CultureInfo.InvariantCulture)},
+                RowId = new RowId {Text = iRowId.ToString(CultureInfo.InvariantCulture)},
+                RowOffset = new RowOffset {Text = lRowOffset.ToString(CultureInfo.InvariantCulture)}
+            };
             // Subtract 1 because picture goes to bottom right corner
             // Subtracting 1 makes it more intuitive that (1,1) means top-left corner of (1,1)
-            ocanchor.FromMarker.ColumnId = new ColumnId() { Text = iColumnId.ToString(CultureInfo.InvariantCulture) };
-            ocanchor.FromMarker.ColumnOffset = new ColumnOffset() { Text = lColumnOffset.ToString(CultureInfo.InvariantCulture) };
-            ocanchor.FromMarker.RowId = new RowId() { Text = iRowId.ToString(CultureInfo.InvariantCulture) };
-            ocanchor.FromMarker.RowOffset = new RowOffset() { Text = lRowOffset.ToString(CultureInfo.InvariantCulture) };
 
             ocanchor.Extent = ext;
 
