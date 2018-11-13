@@ -15,6 +15,7 @@ namespace StoryTree.Storage.Create
                 AverageEstimation = Convert.ToByte(model.AverageEstimation),
                 MaxEstimation = Convert.ToByte(model.MaxEstimation),
                 MinEstimation = Convert.ToByte(model.MinEstimation),
+                // TODO: Add Comment to data model and map
             };
 
             return entity;

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\src\tellthestory\src\StoryTree.Storage\DbContext\TellTheStoryEntityDataModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\src\storytree\src\StoryTree.Storage\DbContext\TellTheStoryEntityDataModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

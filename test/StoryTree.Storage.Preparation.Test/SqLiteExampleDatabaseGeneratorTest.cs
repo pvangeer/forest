@@ -30,7 +30,7 @@ namespace StoryTree.Storage.Preparation.Test
 
         private static string GetPathToStorageFile()
         {
-            return @"C:\src\tellthestory\design\TellTheStoryDatabaseSchemaSample.sqlite";
+            return @"C:\src\storytree\design\TellTheStoryDatabaseSchemaSample.sqlite";
         }
 
         public static void CreateDatabaseFile(string databaseFilePath, string databaseSchemaQuery)

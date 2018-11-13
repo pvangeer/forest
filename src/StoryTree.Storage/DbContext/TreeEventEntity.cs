@@ -34,6 +34,7 @@ namespace StoryTree.Storage.DbContext
         public byte ProbabilitySpecificationType { get; set; }
         public string Information { get; set; }
         public string Discussion { get; set; }
+        public string PassPhrase { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventTreeEntity> EventTreeEntities { get; set; }

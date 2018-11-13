@@ -31,6 +31,7 @@ namespace StoryTree.Storage.Read
                 AverageEstimation = (ProbabilityClass)entity.AverageEstimation,
                 MinEstimation = (ProbabilityClass)entity.MinEstimation,
                 MaxEstimation = (ProbabilityClass)entity.MaxEstimation
+                // TODO: Add Comment
             };
 
             collector.Collect(entity,estimation);

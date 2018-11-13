@@ -67,14 +67,6 @@
     <Compile Include="Create\PersonCreateExtensions.cs" />
     <Compile Include="Create\ProjectCreateExtensions.cs" />
     <Compile Include="Create\TreeEventCreateExtensions.cs" />
-    <Compile Include="DbContext\VersionEntity.cs">
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FingerprintHelper.cs" />
-    <Compile Include="StoryTreeVersionComparer.cs" />
-    <Compile Include="StoryTreeVersionHelper.cs" />
-    <Compile Include="StringExtensions.cs" />
-    <Compile Include="Create\PersistenceRegistry.cs" />
     <Compile Include="DbContext\EventTreeEntity.cs">
       <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
     </Compile>
@@ -90,13 +82,27 @@
     <Compile Include="DbContext\HydraulicConditionElementEntity.cs">
       <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DbContext\PartialMainEntities.cs" />
     <Compile Include="DbContext\PersonEntity.cs">
       <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\ProjectEntity.cs">
       <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\TreeEventEntity.cs">
+      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\TreeEventFragilityCurveElementEntity.cs">
+      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\VersionEntity.cs">
+      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FingerprintHelper.cs" />
+    <Compile Include="StoryTreeVersionComparer.cs" />
+    <Compile Include="StoryTreeVersionHelper.cs" />
+    <Compile Include="StringExtensions.cs" />
+    <Compile Include="Create\PersistenceRegistry.cs" />
+    <Compile Include="DbContext\PartialMainEntities.cs" />
     <Compile Include="DbContext\TellTheStoryEntityDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -111,12 +117,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TellTheStoryEntityDataModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\TreeEventEntity.cs">
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\TreeEventFragilityCurveElementEntity.cs">
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DoubleConversionExtensions.cs" />
     <Compile Include="Read\EventTreeEntitiesReadExtensions.cs" />

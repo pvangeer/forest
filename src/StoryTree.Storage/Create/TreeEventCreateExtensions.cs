@@ -26,7 +26,8 @@ namespace StoryTree.Storage.Create
                 FixedProbability = ((double)model.FixedProbability).ToNaNAsNull(),
                 ProbabilitySpecificationType = Convert.ToByte(model.ProbabilitySpecificationType),
                 Information = model.Information.DeepClone(),
-                Discussion = model.Discussion.DeepClone()
+                Discussion = model.Discussion.DeepClone(),
+                // Add passphrase
             };
 
             AddExpertClassEstimations(entity, model, registry);

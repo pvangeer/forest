@@ -37,6 +37,7 @@ namespace StoryTree.Storage.Read
                 Summary = entity.Summary,
                 Information = entity.Information,
                 Discussion = entity.Discussion
+                // TODO: Add PassPhrase
             };
 
             ReadFragilityCurve(treeEvent, entity.TreeEventFragilityCurveElementEntities, collector);
