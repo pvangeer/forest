@@ -71,7 +71,19 @@ namespace StoryTree.Gui
             }
         }
 
-        public void SaveProject(Action followingAction = null)
+        public void SaveProject()
+        {
+            storageSqLite.UnstageProject();
+            SaveProject(null);
+        }
+
+        public void SaveProjectAs()
+        {
+            storageSqLite.UnstageProject();
+            SaveProjectAs(null);
+        }
+
+        private void SaveProject(Action followingAction)
         {
             if (string.IsNullOrWhiteSpace(guiViewModel.ProjectFilePath))
             {
@@ -82,7 +94,7 @@ namespace StoryTree.Gui
             StageProjectAndStore(followingAction);
         }
 
-        public void SaveProjectAs(Action followingAction = null)
+        private void SaveProjectAs(Action followingAction)
         {
             var dialog = new SaveFileDialog
             {
