@@ -109,11 +109,9 @@ namespace StoryTree.Gui.ViewModels
             set
             {
                 selectedEventTree = value;
-                SelectedObject = selectedEventTree;
                 OnPropertyChanged(nameof(SelectedEventTreeFiltered));
                 OnPropertyChanged(nameof(SelectedEventTreeUnFiltered));
                 OnPropertyChanged(nameof(SelectedTreeEvent));
-                OnPropertyChanged(nameof(SelectedObject));
                 foreach (var eventTreeViewModel in EventTrees)
                 {
                     eventTreeViewModel.IsSelected = Equals(selectedEventTree, eventTreeViewModel);
@@ -126,8 +124,6 @@ namespace StoryTree.Gui.ViewModels
         public TreeEventViewModel SelectedTreeEvent => SelectedEventTreeFiltered?.SelectedTreeEvent;
 
         public ObservableCollection<ExpertViewModel> Experts => expertViewModels;
-
-        public object SelectedObject { get; set; }
 
         public string ProjectLeaderName
         {
@@ -293,8 +289,6 @@ namespace StoryTree.Gui.ViewModels
                     break;
                 case nameof(EventTreeViewModel.SelectedTreeEvent):
                     OnPropertyChanged(nameof(SelectedTreeEvent));
-                    SelectedObject = SelectedTreeEvent;
-                    OnPropertyChanged(nameof(SelectedObject));
                     addTreeEventCommand.FireCanExecuteChanged();
                     removeTreeEventCommand.FireCanExecuteChanged();
                     break;
