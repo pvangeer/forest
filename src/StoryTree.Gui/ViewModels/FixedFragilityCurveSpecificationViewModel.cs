@@ -27,8 +27,9 @@ namespace StoryTree.Gui.ViewModels
         private ObservableCollection<FragilityCurveElementViewModel> FixedFragilityCurveViewModels()
         {
             var estimatedWaterLevels = fixedFragilityCurveViewModels.Select(vm => vm.WaterLevel).ToArray();
-            var missingWaterLevels = Project.WaterLevels.Except(estimatedWaterLevels).ToArray();
-            var waterLevelsToRemove = estimatedWaterLevels.Except(Project.WaterLevels).ToArray(); 
+            var currentWaterLevels = Project.HydraulicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w).ToArray();
+            var missingWaterLevels = currentWaterLevels.Except(estimatedWaterLevels).ToArray();
+            var waterLevelsToRemove = estimatedWaterLevels.Except(currentWaterLevels).ToArray(); 
             foreach (var waterLevel in waterLevelsToRemove)
             {
                 fixedFragilityCurveViewModels.Remove(fixedFragilityCurveViewModels.FirstOrDefault(vm => Math.Abs(vm.WaterLevel - waterLevel) < 1e-8));

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace StoryTree.Storage.Test
 
             var project = TestDataGenerator.GenerateAsphalProject();
             var mainTreeEvent = project.EventTrees.First().MainTreeEvent;
-            foreach (var waterLevel in project.WaterLevels)
+            foreach (var waterLevel in project.HydraulicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w))
             {
                 mainTreeEvent.FixedFragilityCurve.Add(new FragilityCurveElement(waterLevel,(Probability)0.5));
             }

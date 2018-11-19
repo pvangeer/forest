@@ -4,10 +4,6 @@ namespace StoryTree.Data.Tree
 {
     public class ExpertClassEstimation
     {
-        public ExpertClassEstimation()
-        {
-        }
-
         public Expert Expert { get; set; }
 
         public double WaterLevel { get; set; }

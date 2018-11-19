@@ -39,8 +39,6 @@ namespace StoryTree.Data
 
         public ObservableCollection<HydraulicCondition> HydraulicConditions { get; }
 
-        public IEnumerable<double> WaterLevels => HydraulicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w);
-
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }

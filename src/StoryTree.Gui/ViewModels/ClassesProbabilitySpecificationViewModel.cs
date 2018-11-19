@@ -53,9 +53,10 @@ namespace StoryTree.Gui.ViewModels
             dataTable.Columns.Add(waterLevelColumn);
             dataTable.Columns.AddRange(Project.Experts.Select(e => new DataColumn(e.Name) {DataType = typeof(int)}).ToArray());
 
-            for (int iRow = 0; iRow < Project.WaterLevels.Count(); iRow++)
+            var waterLevels = Project.HydraulicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w).ToArray();
+            for (int iRow = 0; iRow < waterLevels.Length; iRow++)
             {
-                var waterLevel = Project.WaterLevels.ElementAt(iRow);
+                var waterLevel = waterLevels[iRow];
                 dataTable.Rows.Add(waterLevel);
                 for (var i = 0; i < Project.Experts.Count; i++)
                 {
