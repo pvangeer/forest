@@ -18,7 +18,7 @@ namespace StoryTree.Storage.DbContext
         public string Name { get; set; }
         public string Summary { get; set; }
         public string Details { get; set; }
-        public Nullable<long> Color { get; set; }
+        public string Color { get; set; }
         public Nullable<long> MainTreeEventId { get; set; }
         public long ProjectId { get; set; }
         public long Order { get; set; }

@@ -23,7 +23,7 @@ namespace StoryTree.Storage.Create
                 Name = model.Name.DeepClone(),
                 Details = model.Details.DeepClone(),
                 Summary = model.Summary.DeepClone(),
-                Color = model.Color.ToInt64(),
+                Color = model.Color.ToHexString(),
                 TreeEventEntity = model.MainTreeEvent.Create(registry),
                 NeedsSpecification = Convert.ToByte(model.NeedsSpecification)
             };

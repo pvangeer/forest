@@ -29,32 +29,23 @@ namespace StoryTree.Storage
     /// </summary>
     internal static class ColorConversionExtensions
     {
-        /// <summary>
-        /// Convert <paramref name="value"/> to its 64-bit ARGB value.
-        /// </summary>
-        /// <param name="value">The value to convert.</param>
-        /// <returns>The 64-bit ARGB value, or null when the
-        /// color is empty.</returns>
-        public static long? ToInt64(this Color value)
+        public static string ToHexString(this Color value)
         {
-            // To integer
-            return (value.A << 24) | (value.R << 16) | (value.G << 8) | value.B;
+            return "#" + 
+                   value.A.ToString("X2") + 
+                   value.R.ToString("X2") + 
+                   value.G.ToString("X2") + 
+                   value.B.ToString("X2");
         }
 
-        /// <summary>
-        /// Converts a 32-bit ARGB value to <see cref="Color"/>.
-        /// </summary>
-        /// <param name="value">The 32-bit ARGB value to convert.</param>
-        /// <returns>The created <see cref="Color"/>.</returns>
-        public static Color ToColor(this long? value)
+        public static Color ToColor(this string value)
         {
-            // From integer
-            return value == null
-                ? Colors.Transparent
-                : Color.FromArgb((byte) (value >> 24),
-                    (byte) (value >> 16),
-                    (byte) (value >> 8),
-                    (byte) (value));
+            var color = ColorConverter.ConvertFromString(value);
+            if (color == null)
+            {
+                return Colors.Transparent;
+            }
+            return (Color)color;
         }
     }
 }

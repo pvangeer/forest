@@ -20,6 +20,7 @@
     <ProjectReference Include="..\StoryTree.Data\StoryTree.Data.csproj">
       <Project>{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}</Project>
       <Name>StoryTree.Data</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -98,10 +98,12 @@
     <ProjectReference Include="..\StoryTree.Data\StoryTree.Data.csproj">
       <Project>{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}</Project>
       <Name>StoryTree.Data</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\StoryTree.Messaging\StoryTree.Messaging.csproj">
       <Project>{7F6BB180-3B8C-4761-8BB6-E7562FB37895}</Project>
       <Name>StoryTree.Messaging</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
 </Project>
