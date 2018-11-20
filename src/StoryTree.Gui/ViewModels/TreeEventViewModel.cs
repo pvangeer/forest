@@ -22,8 +22,11 @@ namespace StoryTree.Gui.ViewModels
             Enum.GetValues(typeof(ProbabilitySpecificationType)).Cast<ProbabilitySpecificationType>()
                 .ToDictionary(t => t, GetEstimationSpecificationTypeDisplayName);
 
-        public TreeEventViewModel([NotNull]TreeEvent treeEvent, [NotNull]EventTreeViewModel parentEventTreeViewModel)
+        private readonly ProjectManipulationService projectManipulationService;
+
+        public TreeEventViewModel([NotNull]TreeEvent treeEvent, [NotNull]EventTreeViewModel parentEventTreeViewModel, [NotNull]ProjectManipulationService projectManipulationService)
         {
+            this.projectManipulationService = projectManipulationService;
             TreeEvent = treeEvent;
             ParentEventTreeViewModel = parentEventTreeViewModel;
             treeEvent.PropertyChanged += TreeEventPropertyChanged;
@@ -71,7 +74,7 @@ namespace StoryTree.Gui.ViewModels
                 }
 
                 return passingEventViewModel ?? (passingEventViewModel =
-                           new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel));
+                           new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel, projectManipulationService));
             }
         }
 
@@ -85,7 +88,7 @@ namespace StoryTree.Gui.ViewModels
                 }
 
                 return failingEventViewModel ?? (failingEventViewModel =
-                           new TreeEventViewModel(TreeEvent.FailingEvent, ParentEventTreeViewModel));
+                           new TreeEventViewModel(TreeEvent.FailingEvent, ParentEventTreeViewModel, projectManipulationService));
             }
         }
 

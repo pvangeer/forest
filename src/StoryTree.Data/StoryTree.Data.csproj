@@ -20,7 +20,7 @@
     <Compile Include="Person.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Services\EventTreeManipulationService.cs" />
+    <Compile Include="Services\ProjectManipulationService.cs" />
     <Compile Include="Services\TreeEventManipulations.cs" />
     <Compile Include="Services\TreeEventType.cs" />
     <Compile Include="Tree\ExpertClassEstimation.cs" />

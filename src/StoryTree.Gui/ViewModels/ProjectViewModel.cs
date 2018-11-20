@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using StoryTree.Data;
 using StoryTree.Data.Properties;
+using StoryTree.Data.Services;
 using StoryTree.Gui.Command;
 
 namespace StoryTree.Gui.ViewModels
@@ -24,10 +25,11 @@ namespace StoryTree.Gui.ViewModels
             BusyIndicator = StorageState.Idle;
 
             Project = project;
+            projectManipulationService = new ProjectManipulationService(project);
 
             var eventTreeViewModels = new ObservableCollection<EventTreeViewModel>(project.EventTrees.Select(te =>
             {
-                var eventTreeViewModel = new EventTreeViewModel(te)
+                var eventTreeViewModel = new EventTreeViewModel(te, projectManipulationService)
                 {
                     EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(project)
                 };
@@ -95,6 +97,7 @@ namespace StoryTree.Gui.ViewModels
         private EventTreeViewModel selectedEventTree;
         private readonly ObservableCollection<ExpertViewModel> expertViewModels;
         private readonly ObservableCollection<HydraulicConditionViewModel> hydraulicsViewModels;
+        private ProjectManipulationService projectManipulationService;
 
         public EventTreeViewModel SelectedEventTreeUnFiltered
         {
@@ -223,7 +226,7 @@ namespace StoryTree.Gui.ViewModels
             {
                 foreach (var eventTree in e.NewItems.OfType<EventTree>())
                 {
-                    var eventTreeViewModel = new EventTreeViewModel(eventTree)
+                    var eventTreeViewModel = new EventTreeViewModel(eventTree, projectManipulationService)
                     {
                         EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(Project)
                     };
@@ -240,7 +243,7 @@ namespace StoryTree.Gui.ViewModels
             {
                 foreach (var item in e.NewItems.OfType<HydraulicConditionViewModel>())
                 {
-                    Project.HydraulicConditions.Add(item.HydraulicCondition);
+                    projectManipulationService.AddHydraulicCondition(item.HydraulicCondition);
                 }
             }
 
@@ -248,7 +251,7 @@ namespace StoryTree.Gui.ViewModels
             {
                 foreach (var item in e.OldItems.OfType<HydraulicConditionViewModel>())
                 {
-                    Project.HydraulicConditions.Remove(item.HydraulicCondition);
+                    projectManipulationService.RemoveHydraulicCondition(item.HydraulicCondition);
                 }
             }
         }
@@ -259,7 +262,7 @@ namespace StoryTree.Gui.ViewModels
             {
                 foreach (var item in e.NewItems.OfType<ExpertViewModel>())
                 {
-                    Project.Experts.Add(item.Expert);
+                    projectManipulationService.AddExpert(item.Expert);
                 }
             }
 
@@ -267,7 +270,7 @@ namespace StoryTree.Gui.ViewModels
             {
                 foreach (var item in e.OldItems.OfType<ExpertViewModel>())
                 {
-                    Project.Experts.Remove(item.Expert);
+                    projectManipulationService.RemoveExpert(item.Expert);
                 }
             }
         }

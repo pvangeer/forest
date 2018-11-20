@@ -15,19 +15,22 @@ namespace StoryTree.Gui.ViewModels
         private TreeEventViewModel mainTreeEventViewModel;
         private bool isSelected;
         private EventTreeGraph graph;
+        private ProjectManipulationService projectManipulationService;
 
         private EventTree EventTree { get; }
 
         public EventTreeViewModel()
         {
             var project = TestDataGenerator.GenerateAsphalProject();
+            projectManipulationService = new ProjectManipulationService(project);
             EventTree = project.EventTrees.First();
             EventTree.PropertyChanged += EventTreePropertyChanged;
         }
 
-        public EventTreeViewModel([NotNull]EventTree eventTree)
+        public EventTreeViewModel([NotNull]EventTree eventTree, ProjectManipulationService projectManipulationService)
         {
             EventTree = eventTree;
+            this.projectManipulationService = projectManipulationService;
             eventTree.PropertyChanged += EventTreePropertyChanged;
         }
 
@@ -180,7 +183,7 @@ namespace StoryTree.Gui.ViewModels
                 }
 
                 return mainTreeEventViewModel ??
-                       (mainTreeEventViewModel = new TreeEventViewModel(EventTree.MainTreeEvent, this));
+                       (mainTreeEventViewModel = new TreeEventViewModel(EventTree.MainTreeEvent, this, projectManipulationService));
             }
         }
 
@@ -203,7 +206,7 @@ namespace StoryTree.Gui.ViewModels
 
         public void AddTreeEvent(TreeEventViewModel treeEventViewModel, TreeEventType treeEventType)
         {
-            EventTreeManipulationService.AddTreeEvent(EventTree,treeEventViewModel?.TreeEvent,treeEventType);
+            projectManipulationService.AddTreeEvent(EventTree,treeEventViewModel?.TreeEvent,treeEventType);
             SelectedTreeEvent = treeEventViewModel == null ? MainTreeEventViewModel : treeEventType == TreeEventType.Failing ? treeEventViewModel.FailingEvent : treeEventViewModel.PassingEvent;
             OnPropertyChanged(nameof(AllTreeEvents));
             OnPropertyChanged(nameof(Graph));
@@ -211,7 +214,7 @@ namespace StoryTree.Gui.ViewModels
 
         public void RemoveTreeEvent(TreeEventViewModel treeEventViewModel, TreeEventType eventType)
         {
-            var parent = EventTreeManipulationService.RemoveTreeEvent(EventTree, treeEventViewModel.TreeEvent);
+            var parent = projectManipulationService.RemoveTreeEvent(EventTree, treeEventViewModel.TreeEvent);
             SelectedTreeEvent = parent == null ? MainTreeEventViewModel : FindLastEventViewModel(MainTreeEventViewModel, eventType);
             OnPropertyChanged(nameof(AllTreeEvents));
             OnPropertyChanged(nameof(Graph));

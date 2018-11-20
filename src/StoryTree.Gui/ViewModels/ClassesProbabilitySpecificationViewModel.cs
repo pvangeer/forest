@@ -63,18 +63,6 @@ namespace StoryTree.Gui.ViewModels
                     var expert = Project.Experts[i];
                     var specification = ClassesProbabilitySpecification
                         .FirstOrDefault(e => e.HydraulicCondition == hydraulicCondition && e.Expert == expert);
-                    if (specification == null)
-                    {
-                        specification = new ExpertClassEstimation
-                        {
-                            AverageEstimation = ProbabilityClass.None,
-                            MinEstimation = ProbabilityClass.None,
-                            MaxEstimation = ProbabilityClass.None,
-                            HydraulicCondition = hydraulicCondition,
-                            Expert = expert
-                        };
-                        ClassesProbabilitySpecification.Add(specification);
-                    }
 
                     dataTable.Rows[iRow][i + 1] = getValueFunc(specification);
                 }
