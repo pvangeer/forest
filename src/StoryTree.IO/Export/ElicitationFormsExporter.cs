@@ -100,8 +100,8 @@ namespace StoryTree.IO.Export
                     NodeName = treeEvent.Name,
                     Estimates = treeEvent.ClassesProbabilitySpecification.Where(e => e.Expert.Name == expertName).Select(s => new DotEstimate
                     {
-                        WaterLevel = s.WaterLevel,
-                        Frequency = hydraulicConditions.FirstOrDefault(hc => Math.Abs(hc.WaterLevel - s.WaterLevel) < 1e-6).Probability,
+                        WaterLevel = s.HydraulicCondition.WaterLevel,
+                        Frequency = s.HydraulicCondition.Probability,
                         BestEstimate = (int)s.AverageEstimation,
                         LowerEstimate = (int)s.MinEstimation,
                         UpperEstimate = (int)s.MaxEstimation,

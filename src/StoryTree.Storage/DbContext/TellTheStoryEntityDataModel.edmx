@@ -26,12 +26,12 @@
           <Property Name="ExpertClassEstimationId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TreeEventId" Type="integer" Nullable="false" />
           <Property Name="ExpertId" Type="integer" Nullable="false" />
-          <Property Name="WaterLevel" Type="real" />
           <Property Name="MinEstimation" Type="tinyint" Nullable="false" />
           <Property Name="MaxEstimation" Type="tinyint" Nullable="false" />
           <Property Name="AverageEstimation" Type="tinyint" Nullable="false" />
           <Property Name="Order" Type="integer" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="HydraulicConditionElementId" Type="integer" Nullable="false" />
         </EntityType>
         <EntityType Name="ExpertEntity">
           <Key>
@@ -156,6 +156,18 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExpertClassEstimationEntity_1_0">
+          <End Role="HydraulicConditionElementEntity" Type="Self.HydraulicConditionElementEntity" Multiplicity="1" />
+          <End Role="ExpertClassEstimationEntity" Type="Self.ExpertClassEstimationEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HydraulicConditionElementEntity">
+              <PropertyRef Name="HydraulicConditionElementId" />
+            </Principal>
+            <Dependent Role="ExpertClassEstimationEntity">
+              <PropertyRef Name="HydraulicConditionElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExpertClassEstimationEntity_2_0">
           <End Role="ExpertEntity" Type="Self.ExpertEntity" Multiplicity="1" />
           <End Role="ExpertClassEstimationEntity" Type="Self.ExpertClassEstimationEntity" Multiplicity="*" />
           <ReferentialConstraint>
@@ -299,6 +311,10 @@
             <End Role="ExpertClassEstimationEntity" EntitySet="ExpertClassEstimationEntity" />
           </AssociationSet>
           <AssociationSet Name="FK_ExpertClassEstimationEntity_1_0" Association="Self.FK_ExpertClassEstimationEntity_1_0">
+            <End Role="HydraulicConditionElementEntity" EntitySet="HydraulicConditionElementEntity" />
+            <End Role="ExpertClassEstimationEntity" EntitySet="ExpertClassEstimationEntity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpertClassEstimationEntity_2_0" Association="Self.FK_ExpertClassEstimationEntity_2_0">
             <End Role="ExpertEntity" EntitySet="ExpertEntity" />
             <End Role="ExpertClassEstimationEntity" EntitySet="ExpertClassEstimationEntity" />
           </AssociationSet>
@@ -367,6 +383,10 @@
             <End Role="ExpertClassEstimationEntity" EntitySet="ExpertClassEstimationEntities" />
           </AssociationSet>
           <AssociationSet Name="FK_ExpertClassEstimationEntity_1_0" Association="TellTheStoryEntities.FK_ExpertClassEstimationEntity_1_0">
+            <End Role="HydraulicConditionElementEntity" EntitySet="HydraulicConditionElementEntities" />
+            <End Role="ExpertClassEstimationEntity" EntitySet="ExpertClassEstimationEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExpertClassEstimationEntity_2_0" Association="TellTheStoryEntities.FK_ExpertClassEstimationEntity_2_0">
             <End Role="ExpertEntity" EntitySet="ExpertEntities" />
             <End Role="ExpertClassEstimationEntity" EntitySet="ExpertClassEstimationEntities" />
           </AssociationSet>
@@ -430,14 +450,15 @@
           <Property Name="ExpertClassEstimationId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TreeEventId" Type="Int64" Nullable="false" />
           <Property Name="ExpertId" Type="Int64" Nullable="false" />
-          <Property Name="WaterLevel" Type="Double" />
           <Property Name="MinEstimation" Type="Byte" Nullable="false" />
           <Property Name="MaxEstimation" Type="Byte" Nullable="false" />
           <Property Name="AverageEstimation" Type="Byte" Nullable="false" />
           <Property Name="Order" Type="Int64" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="HydraulicConditionElementId" Type="Int64" Nullable="false" />
           <NavigationProperty Name="TreeEventEntity" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_0_0" FromRole="ExpertClassEstimationEntity" ToRole="TreeEventEntity" />
-          <NavigationProperty Name="ExpertEntity" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_1_0" FromRole="ExpertClassEstimationEntity" ToRole="ExpertEntity" />
+          <NavigationProperty Name="HydraulicConditionElementEntity" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_1_0" FromRole="ExpertClassEstimationEntity" ToRole="HydraulicConditionElementEntity" />
+          <NavigationProperty Name="ExpertEntity" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_2_0" FromRole="ExpertClassEstimationEntity" ToRole="ExpertEntity" />
         </EntityType>
         <EntityType Name="ExpertEntity">
           <Key>
@@ -449,7 +470,7 @@
           <Property Name="Organisation" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="ProjectId" Type="Int64" Nullable="false" />
           <Property Name="Order" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="ExpertClassEstimationEntities" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_1_0" FromRole="ExpertEntity" ToRole="ExpertClassEstimationEntity" />
+          <NavigationProperty Name="ExpertClassEstimationEntities" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_2_0" FromRole="ExpertEntity" ToRole="ExpertClassEstimationEntity" />
           <NavigationProperty Name="ProjectEntity" Relationship="TellTheStoryEntities.FK_ExpertEntity_0_0" FromRole="ExpertEntity" ToRole="ProjectEntity" />
           <NavigationProperty Name="PersonEntity" Relationship="TellTheStoryEntities.FK_ExpertEntity_1_0" FromRole="ExpertEntity" ToRole="PersonEntity" />
         </EntityType>
@@ -473,6 +494,7 @@
           <Property Name="WavePeriod" Type="Double" />
           <Property Name="WaveHeight" Type="Double" />
           <Property Name="Order" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="ExpertClassEstimationEntities" Relationship="TellTheStoryEntities.FK_ExpertClassEstimationEntity_1_0" FromRole="HydraulicConditionElementEntity" ToRole="ExpertClassEstimationEntity" />
           <NavigationProperty Name="FragilityCurveElementEntity" Relationship="TellTheStoryEntities.FK_HydraulicConditionElementEntity_1_0" FromRole="HydraulicConditionElementEntity" ToRole="FragilityCurveElementEntity" />
           <NavigationProperty Name="ProjectEntity" Relationship="TellTheStoryEntities.FK_HydraulicConditionElementEntity_0_0" FromRole="HydraulicConditionElementEntity" ToRole="ProjectEntity" />
         </EntityType>
@@ -584,6 +606,18 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExpertClassEstimationEntity_1_0">
+          <End Type="TellTheStoryEntities.HydraulicConditionElementEntity" Role="HydraulicConditionElementEntity" Multiplicity="1" />
+          <End Type="TellTheStoryEntities.ExpertClassEstimationEntity" Role="ExpertClassEstimationEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HydraulicConditionElementEntity">
+              <PropertyRef Name="HydraulicConditionElementId" />
+            </Principal>
+            <Dependent Role="ExpertClassEstimationEntity">
+              <PropertyRef Name="HydraulicConditionElementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExpertClassEstimationEntity_2_0">
           <End Type="TellTheStoryEntities.ExpertEntity" Role="ExpertEntity" Multiplicity="1" />
           <End Type="TellTheStoryEntities.ExpertClassEstimationEntity" Role="ExpertClassEstimationEntity" Multiplicity="*" />
           <ReferentialConstraint>
@@ -727,12 +761,12 @@
           <EntitySetMapping Name="ExpertClassEstimationEntities">
             <EntityTypeMapping TypeName="TellTheStoryEntities.ExpertClassEstimationEntity">
               <MappingFragment StoreEntitySet="ExpertClassEstimationEntity">
+                <ScalarProperty Name="HydraulicConditionElementId" ColumnName="HydraulicConditionElementId" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="AverageEstimation" ColumnName="AverageEstimation" />
                 <ScalarProperty Name="MaxEstimation" ColumnName="MaxEstimation" />
                 <ScalarProperty Name="MinEstimation" ColumnName="MinEstimation" />
-                <ScalarProperty Name="WaterLevel" ColumnName="WaterLevel" />
                 <ScalarProperty Name="ExpertId" ColumnName="ExpertId" />
                 <ScalarProperty Name="TreeEventId" ColumnName="TreeEventId" />
                 <ScalarProperty Name="ExpertClassEstimationId" ColumnName="ExpertClassEstimationId" />

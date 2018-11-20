@@ -100,7 +100,10 @@ namespace StoryTree.Storage.Test
             {
                 var spec1 = treeEvent1.ClassesProbabilitySpecification[i];
                 var spec2 = treeEvent2.ClassesProbabilitySpecification[i];
-                Assert.AreEqual(spec1.WaterLevel, spec2.WaterLevel);
+                Assert.AreEqual(spec1.HydraulicCondition.WaterLevel, spec2.HydraulicCondition.WaterLevel);
+                Assert.AreEqual(spec1.HydraulicCondition.Probability, spec2.HydraulicCondition.Probability);
+                Assert.AreEqual(spec1.HydraulicCondition.WaveHeight, spec2.HydraulicCondition.WaveHeight);
+                Assert.AreEqual(spec1.HydraulicCondition.WavePeriod, spec2.HydraulicCondition.WavePeriod);
                 AssertEqualExperts(spec1.Expert, spec2.Expert);
                 Assert.AreEqual(spec1.AverageEstimation, spec2.AverageEstimation);
                 Assert.AreEqual(spec1.MinEstimation, spec2.MinEstimation);

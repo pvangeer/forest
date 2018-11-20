@@ -17,14 +17,15 @@ namespace StoryTree.Storage.DbContext
         public long ExpertClassEstimationId { get; set; }
         public long TreeEventId { get; set; }
         public long ExpertId { get; set; }
-        public Nullable<double> WaterLevel { get; set; }
         public byte MinEstimation { get; set; }
         public byte MaxEstimation { get; set; }
         public byte AverageEstimation { get; set; }
         public long Order { get; set; }
         public string Comment { get; set; }
+        public long HydraulicConditionElementId { get; set; }
     
         public virtual TreeEventEntity TreeEventEntity { get; set; }
+        public virtual HydraulicConditionElementEntity HydraulicConditionElementEntity { get; set; }
         public virtual ExpertEntity ExpertEntity { get; set; }
     }
 }

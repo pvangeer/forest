@@ -14,6 +14,12 @@ namespace StoryTree.Storage.DbContext
     
     public partial class HydraulicConditionElementEntity
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HydraulicConditionElementEntity()
+        {
+            this.ExpertClassEstimationEntities = new HashSet<ExpertClassEstimationEntity>();
+        }
+    
         public long HydraulicConditionElementId { get; set; }
         public long FragilityCurveElementId { get; set; }
         public long ProjectId { get; set; }
@@ -21,6 +27,8 @@ namespace StoryTree.Storage.DbContext
         public Nullable<double> WaveHeight { get; set; }
         public long Order { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExpertClassEstimationEntity> ExpertClassEstimationEntities { get; set; }
         public virtual FragilityCurveElementEntity FragilityCurveElementEntity { get; set; }
         public virtual ProjectEntity ProjectEntity { get; set; }
     }

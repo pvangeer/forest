@@ -53,16 +53,16 @@ namespace StoryTree.Gui.ViewModels
             dataTable.Columns.Add(waterLevelColumn);
             dataTable.Columns.AddRange(Project.Experts.Select(e => new DataColumn(e.Name) {DataType = typeof(int)}).ToArray());
 
-            var waterLevels = Project.HydraulicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w).ToArray();
-            for (int iRow = 0; iRow < waterLevels.Length; iRow++)
+            var hydraulicConditions = Project.HydraulicConditions.Distinct().OrderBy(hc => hc.WaterLevel).ToArray();
+            for (int iRow = 0; iRow < hydraulicConditions.Length; iRow++)
             {
-                var waterLevel = waterLevels[iRow];
-                dataTable.Rows.Add(waterLevel);
+                var hydraulicCondition = hydraulicConditions[iRow];
+                dataTable.Rows.Add(hydraulicCondition.WaterLevel);
                 for (var i = 0; i < Project.Experts.Count; i++)
                 {
                     var expert = Project.Experts[i];
                     var specification = ClassesProbabilitySpecification
-                        .FirstOrDefault(e => Math.Abs(e.WaterLevel - waterLevel) < 1e-8 && e.Expert == expert);
+                        .FirstOrDefault(e => e.HydraulicCondition == hydraulicCondition && e.Expert == expert);
                     if (specification == null)
                     {
                         specification = new ExpertClassEstimation
@@ -70,7 +70,7 @@ namespace StoryTree.Gui.ViewModels
                             AverageEstimation = ProbabilityClass.None,
                             MinEstimation = ProbabilityClass.None,
                             MaxEstimation = ProbabilityClass.None,
-                            WaterLevel = waterLevel,
+                            HydraulicCondition = hydraulicCondition,
                             Expert = expert
                         };
                         ClassesProbabilitySpecification.Add(specification);
@@ -123,7 +123,7 @@ namespace StoryTree.Gui.ViewModels
                 var probabilityClass = (ProbabilityClass)specifiedIntegerValue;
                 var specification = ClassesProbabilitySpecification
                     .FirstOrDefault(sp =>
-                        sp.Expert == Project.Experts.ElementAt(i) && Math.Abs(sp.WaterLevel - waterLevel) < 1e-8);
+                        sp.Expert == Project.Experts.ElementAt(i) && Math.Abs(sp.HydraulicCondition.WaterLevel - waterLevel) < 1e-8);
                 setValueAction(specification, probabilityClass);
             }
         }

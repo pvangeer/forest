@@ -85,7 +85,7 @@ namespace StoryTree.Data.Tree
                 getProbabilityClassFunc = (e) => e.AverageEstimation;
             }
 
-            var relevantEstimations = treeEvent.ClassesProbabilitySpecification.Where(e => Math.Abs(e.WaterLevel - waterLevel) < 1e-8).ToArray();
+            var relevantEstimations = treeEvent.ClassesProbabilitySpecification.Where(e => Math.Abs(e.HydraulicCondition.WaterLevel - waterLevel) < 1e-8).ToArray();
             if (relevantEstimations.Length == 0)
             {
                 return Probability.NaN;

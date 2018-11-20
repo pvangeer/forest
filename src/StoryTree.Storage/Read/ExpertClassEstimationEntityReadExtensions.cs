@@ -27,7 +27,7 @@ namespace StoryTree.Storage.Read
             var estimation = new ExpertClassEstimation
             {
                 Expert = entity.ExpertEntity.Read(collector),
-                WaterLevel = (double)entity.WaterLevel,
+                HydraulicCondition = entity.HydraulicConditionElementEntity.Read(collector),
                 AverageEstimation = (ProbabilityClass)entity.AverageEstimation,
                 MinEstimation = (ProbabilityClass)entity.MinEstimation,
                 MaxEstimation = (ProbabilityClass)entity.MaxEstimation

@@ -11,7 +11,7 @@ namespace StoryTree.Storage.Create
             var entity = new ExpertClassEstimationEntity
             {
                 ExpertEntity = model.Expert.Create(registry),
-                WaterLevel = model.WaterLevel.ToNaNAsNull(),
+                HydraulicConditionElementEntity = model.HydraulicCondition.Create(registry),
                 AverageEstimation = Convert.ToByte(model.AverageEstimation),
                 MaxEstimation = Convert.ToByte(model.MaxEstimation),
                 MinEstimation = Convert.ToByte(model.MinEstimation),

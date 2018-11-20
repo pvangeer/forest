@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f8126fc61121480daa80392ee05b32fc" Name="Diagram1">
-        <EntityTypeShape EntityType="TellTheStoryEntities.EventTreeEntity" Width="1.5" PointX="6" PointY="4.75" />
-        <EntityTypeShape EntityType="TellTheStoryEntities.ExpertClassEstimationEntity" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="TellTheStoryEntities.ExpertEntity" Width="1.5" PointX="0.75" PointY="10.125" />
-        <EntityTypeShape EntityType="TellTheStoryEntities.FragilityCurveElementEntity" Width="1.5" PointX="0.75" PointY="1.375" />
-        <EntityTypeShape EntityType="TellTheStoryEntities.HydraulicConditionElementEntity" Width="1.5" PointX="3.75" PointY="9" />
-        <EntityTypeShape EntityType="TellTheStoryEntities.PersonEntity" Width="1.5" PointX="1.5" PointY="18.375" />
-        <EntityTypeShape EntityType="TellTheStoryEntities.ProjectEntity" Width="1.5" PointX="1.5" PointY="13.875" />
+        <EntityTypeShape EntityType="TellTheStoryEntities.EventTreeEntity" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="TellTheStoryEntities.ExpertClassEstimationEntity" Width="1.5" PointX="6" PointY="4.75" />
+        <EntityTypeShape EntityType="TellTheStoryEntities.ExpertEntity" Width="1.5" PointX="3.75" PointY="8.75" />
+        <EntityTypeShape EntityType="TellTheStoryEntities.FragilityCurveElementEntity" Width="1.5" PointX="1.5" PointY="17.625" />
+        <EntityTypeShape EntityType="TellTheStoryEntities.HydraulicConditionElementEntity" Width="1.5" PointX="3.75" PointY="17.25" />
+        <EntityTypeShape EntityType="TellTheStoryEntities.PersonEntity" Width="1.5" PointX="1.5" PointY="14" />
+        <EntityTypeShape EntityType="TellTheStoryEntities.ProjectEntity" Width="1.5" PointX="0.75" PointY="9.5" />
         <EntityTypeShape EntityType="TellTheStoryEntities.TreeEventEntity" Width="1.5" PointX="0.75" PointY="4.125" />
         <EntityTypeShape EntityType="TellTheStoryEntities.TreeEventFragilityCurveElementEntity" Width="1.5" PointX="3" PointY="5.25" />
         <EntityTypeShape EntityType="TellTheStoryEntities.VersionEntity" Width="1.5" PointX="5.75" PointY="0.75" />
@@ -19,6 +19,7 @@
         <AssociationConnector Association="TellTheStoryEntities.FK_EventTreeEntity_1_0" />
         <AssociationConnector Association="TellTheStoryEntities.FK_ExpertClassEstimationEntity_0_0" />
         <AssociationConnector Association="TellTheStoryEntities.FK_ExpertClassEstimationEntity_1_0" />
+        <AssociationConnector Association="TellTheStoryEntities.FK_ExpertClassEstimationEntity_2_0" />
         <AssociationConnector Association="TellTheStoryEntities.FK_ExpertEntity_0_0" />
         <AssociationConnector Association="TellTheStoryEntities.FK_ExpertEntity_1_0" />
         <AssociationConnector Association="TellTheStoryEntities.FK_HydraulicConditionElementEntity_1_0" />

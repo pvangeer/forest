@@ -1,4 +1,5 @@
 ﻿using StoryTree.Data.Estimations;
+using StoryTree.Data.Hydraulics;
 
 namespace StoryTree.Data.Tree
 {
@@ -6,7 +7,7 @@ namespace StoryTree.Data.Tree
     {
         public Expert Expert { get; set; }
 
-        public double WaterLevel { get; set; }
+        public HydraulicCondition HydraulicCondition { get; set; }
 
         public ProbabilityClass MinEstimation { get; set; }
 

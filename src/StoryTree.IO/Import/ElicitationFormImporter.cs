@@ -53,7 +53,7 @@ namespace StoryTree.IO.Import
                     foreach (var dotEstimate in dotFormNode.Estimates)
                     {
                         var specification = node.ClassesProbabilitySpecification.First(s =>
-                            s.Expert == expert && Math.Abs(s.WaterLevel - dotEstimate.WaterLevel) < 1e-6);
+                            s.Expert == expert && Math.Abs(s.HydraulicCondition.WaterLevel - dotEstimate.WaterLevel) < 1e-6);
                         specification.MinEstimation = (ProbabilityClass)dotEstimate.LowerEstimate;
                         specification.AverageEstimation = (ProbabilityClass)dotEstimate.BestEstimate;
                         specification.MaxEstimation = (ProbabilityClass)dotEstimate.UpperEstimate;
