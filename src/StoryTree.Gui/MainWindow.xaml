@@ -341,9 +341,7 @@
             Background="{StaticResource ApplicationBorderColorBrush}">
             <fluent:StatusBarItem HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Bestand:"
-                               VerticalAlignment="Center"
-                               Margin="4,0,2,0"/>
+                    <Image Source="/StoryTree.Gui;component/Resources/file.png" Height="24"/>
                     <TextBlock 
                     Text="{Binding ProjectFileName}" 
                     VerticalAlignment="Center"
