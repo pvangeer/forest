@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -113,7 +114,11 @@ namespace StoryTree.Gui.ViewModels
         public string ProjectFilePath
         {
             get => Gui.ProjectFilePath;
-            set => Gui.ProjectFilePath = value;
+            set
+            {
+                Gui.ProjectFilePath = value;
+                OnPropertyChanged(nameof(ProjectFileName));
+            }
         }
 
         public Window Win32Window
@@ -121,7 +126,6 @@ namespace StoryTree.Gui.ViewModels
             get => GuiProjectSercices.Win32Window;
             set => GuiProjectSercices.Win32Window = value;
         }
-
 
         public ICommand FileNewCommand => new FileNewCommnd(this);
 
@@ -146,7 +150,11 @@ namespace StoryTree.Gui.ViewModels
         }
 
         public ICommand ChangeProcesStepCommand => new ChangeProcessStepCommand(this);
-        
+
+        public string ProjectFileName => string.IsNullOrEmpty(ProjectFilePath)
+            ? "Nieuw bestand*"
+            : Path.GetFileNameWithoutExtension(ProjectFilePath);
+
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler OnInvalidateVisual;
 
@@ -164,6 +172,10 @@ namespace StoryTree.Gui.ViewModels
                 case nameof(StoryTreeGui.Messages):
                     messageListViewModel = null;
                     OnPropertyChanged(nameof(MessagesViewModel));
+                    break;
+                case nameof(StoryTreeGui.ProjectFilePath):
+                    OnPropertyChanged(nameof(ProjectFilePath));
+                    OnPropertyChanged(nameof(ProjectFileName));
                     break;
             }
         }
