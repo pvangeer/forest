@@ -17,7 +17,7 @@
             <SolidColorBrush Color="{StaticResource BackgroundColor}" x:Key="BackgroundColorBrush" />
             <SolidColorBrush Color="{StaticResource BackgroundEditableColor}" x:Key="BackgroundEditableColorBrush" />
             <SolidColorBrush Color="{StaticResource ApplicationBorderColor}" x:Key="ApplicationBorderColorBrush" />
-            
+
             <xctk:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
             <converters:ProbabilityToStringConverter x:Key="ProbabilityToStringConverter" />
 
