@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using StoryTree.Data;
 using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui
@@ -14,7 +15,7 @@ namespace StoryTree.Gui
 
             var storyTreeGui = new StoryTreeGui
             {
-                Project = TestDataGenerator.GenerateAsphalProject()
+                Project = new Project()
             };
             var guiViewModel = new GuiViewModel(storyTreeGui)
             {

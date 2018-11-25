@@ -181,7 +181,6 @@
     <Compile Include="Command\SelectTodayCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="StoryTreeGui.cs" />
-    <Compile Include="TestDataGenerator.cs" />
     <Compile Include="TreeEventConnector.cs" />
     <Compile Include="ViewModels\ChangeProcessStepCommand.cs" />
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />

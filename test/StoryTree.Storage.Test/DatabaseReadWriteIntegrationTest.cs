@@ -31,7 +31,7 @@ namespace StoryTree.Storage.Test
                 }
             }
 
-            var project = TestDataGenerator.GenerateAsphalProject();
+            var project = TestDataGenerator.GenerateAsphaltProject();
             var mainTreeEvent = project.EventTrees.First().MainTreeEvent;
             foreach (var waterLevel in project.HydraulicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w))
             {

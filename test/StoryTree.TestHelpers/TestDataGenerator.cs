@@ -67,7 +67,7 @@ namespace StoryTree.Gui
             return tree;
         }
 
-        public static Project GenerateAsphalProject()
+        public static Project GenerateAsphaltProject()
         {
             var andre = new Expert
             {

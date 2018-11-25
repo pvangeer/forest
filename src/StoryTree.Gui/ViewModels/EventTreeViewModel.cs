@@ -15,13 +15,13 @@ namespace StoryTree.Gui.ViewModels
         private TreeEventViewModel mainTreeEventViewModel;
         private bool isSelected;
         private EventTreeGraph graph;
-        private ProjectManipulationService projectManipulationService;
+        private readonly ProjectManipulationService projectManipulationService;
 
         private EventTree EventTree { get; }
 
         public EventTreeViewModel()
         {
-            var project = TestDataGenerator.GenerateAsphalProject();
+            var project = new Project();
             projectManipulationService = new ProjectManipulationService(project);
             EventTree = project.EventTrees.First();
             EventTree.PropertyChanged += EventTreePropertyChanged;

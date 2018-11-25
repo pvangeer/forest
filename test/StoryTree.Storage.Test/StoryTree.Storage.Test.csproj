@@ -92,6 +92,10 @@
       <Project>{A5C2B4E5-1758-4B14-800E-E3F2AA64EA64}</Project>
       <Name>StoryTree.Storage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StoryTree.TestHelpers\StoryTree.TestHelpers.csproj">
+      <Project>{24D09D6E-5221-4612-8A93-06F2EAA35401}</Project>
+      <Name>StoryTree.TestHelpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
