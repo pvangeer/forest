@@ -163,6 +163,7 @@
     <Compile Include="Converters\FragilityCurveToPlotModelConverter.cs" />
     <Compile Include="Converters\EventTreesToCountConverter.cs" />
     <Compile Include="DataTemplates\MainTabItems\EventTree\EventTreeGraphLayout.cs" />
+    <Compile Include="EnumerationExtension.cs" />
     <Compile Include="Export\EventTreeExportViewModel.cs" />
     <Compile Include="Export\ExportElicitationFormsViewModel.cs" />
     <Compile Include="Export\ElicitationFormExportDialog.xaml.cs">
@@ -187,6 +188,7 @@
     <Compile Include="ViewModels\EstimationSpecificationViewModelFactory.cs" />
     <Compile Include="ViewModels\EventTreeGraph.cs" />
     <Compile Include="ViewModels\EventTreeViewModel.cs" />
+    <Compile Include="ViewModels\ExpertClassEstimationViewmodel.cs" />
     <Compile Include="ViewModels\ExpertViewModel.cs" />
     <Compile Include="Command\FileNewCommnd.cs" />
     <Compile Include="ViewModels\FixedFragilityCurveSpecificationViewModel.cs" />

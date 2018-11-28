@@ -8,7 +8,7 @@ namespace StoryTree.Gui.ViewModels
 {
     public class ProbabilitySpecificationViewModelBase: INotifyPropertyChanged
     {
-        public ProbabilitySpecificationViewModelBase(TreeEvent treeEvent)
+        public ProbabilitySpecificationViewModelBase([NotNull]TreeEvent treeEvent)
         {
             TreeEvent = treeEvent;
             TreeEvent.PropertyChanged += TreeEventPropertyChanged;

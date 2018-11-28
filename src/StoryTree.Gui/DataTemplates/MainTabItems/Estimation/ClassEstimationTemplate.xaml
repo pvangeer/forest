@@ -1,25 +1,46 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels">
+                    xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
+                    xmlns:estimations="clr-namespace:StoryTree.Data.Estimations;assembly=StoryTree.Data"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib"
+                    xmlns:gui="clr-namespace:StoryTree.Gui">
 
     <DataTemplate x:Key="ClassEstimationTemplate" DataType="{x:Type viewModels:ClassesProbabilitySpecificationViewModel}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" HorizontalContentAlignment="Left" FontWeight="Bold" Content="Gemiddelde"/>
-            <DataGrid Grid.Row="1" ItemsSource="{Binding MeanEstimationsList}" Style="{StaticResource DataGridStyle}"/>
+        <DataGrid ItemsSource="{Binding ClassesProbabilitySpecification}" Style="{StaticResource DataGridStyle}" AutoGenerateColumns="False">
+            <DataGrid.Resources>
+                <ObjectDataProvider x:Key="ProbabilityClassData"
+                                    MethodName="GetValues" 
+                                    ObjectType="{x:Type System:Enum}">
+                    <ObjectDataProvider.MethodParameters>
+                        <x:Type TypeName="estimations:ProbabilityClass" />
+                    </ObjectDataProvider.MethodParameters>
+                </ObjectDataProvider>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Expert" Binding="{Binding Expert.Name}" IsReadOnly="True" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                <DataGridTextColumn Header="Waterstand" Binding="{Binding HydraulicCondition.WaterLevel}" IsReadOnly="True" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                <DataGridTextColumn Header="Frequentie" Binding="{Binding HydraulicCondition.Probability}" IsReadOnly="True"  ElementStyle="{StaticResource ColumnElementStyle}"/>
 
-            <Label Grid.Row="2" HorizontalContentAlignment="Left" FontWeight="Bold" Content="Ondergrens"/>
-            <DataGrid Grid.Row="3" ItemsSource="{Binding MinEstimationsList}" Style="{StaticResource DataGridStyle}"/>
-
-            <Label Grid.Row="4" HorizontalContentAlignment="Left" FontWeight="Bold" Content="Bovengrens"/>
-            <DataGrid Grid.Row="5" ItemsSource="{Binding MaxEstimationsList}" Style="{StaticResource DataGridStyle}"/>
-        </Grid>
+                <DataGridComboBoxColumn 
+                    Header="Ondergrens" 
+                    ItemsSource="{Binding Source={gui:Enumeration {x:Type estimations:ProbabilityClass}}}"
+                    DisplayMemberPath="Description"
+                    SelectedValuePath="Value"
+                    SelectedValueBinding="{Binding AverageEstimation}"/>
+                <DataGridComboBoxColumn 
+                    Header="Ondergrens" 
+                    ItemsSource="{Binding Source={gui:Enumeration {x:Type estimations:ProbabilityClass}}}"
+                    DisplayMemberPath="Description"
+                    SelectedValuePath="Value"
+                    SelectedValueBinding="{Binding MinEstimation}"/>
+                <DataGridComboBoxColumn 
+                    Header="Bovengrens" 
+                    ItemsSource="{Binding Source={gui:Enumeration {x:Type estimations:ProbabilityClass}}}"
+                    DisplayMemberPath="Description"
+                    SelectedValuePath="Value"
+                    SelectedValueBinding="{Binding MaxEstimation}"/>
+                <DataGridTextColumn Header="Commentaar" Binding="{Binding Comment}"  ElementStyle="{StaticResource ColumnElementStyle}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </DataTemplate>
 </ResourceDictionary>

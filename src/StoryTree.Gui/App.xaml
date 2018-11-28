@@ -70,6 +70,17 @@
 
             <Style BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="Button"/>
 
+            <Style x:Key="ErrorTextTemplate" TargetType="TextBox">
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="true">
+                        <Setter Property="Background" Value="Red"/>
+                        <Setter Property="ToolTip"
+                                Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                Path=(Validation.Errors)[0].ErrorContent}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
             <export:ExportElicitationFormsCommand x:Key="ExportElicitationFormsCommand"/>
             <import:ImportElicitationFormsCommand x:Key="ImportElicitationFormsCommand"/>
 
