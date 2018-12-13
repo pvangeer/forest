@@ -5,6 +5,8 @@
                     xmlns:System="clr-namespace:System;assembly=mscorlib"
                     xmlns:gui="clr-namespace:StoryTree.Gui">
 
+    <gui:EstimationToBackgroundConverter x:Key="EstimationToBackgroundConverter" />
+
     <DataTemplate x:Key="ClassEstimationTemplate" DataType="{x:Type viewModels:ClassesProbabilitySpecificationViewModel}">
         <DataGrid ItemsSource="{Binding ClassesProbabilitySpecification}" Style="{StaticResource DataGridStyle}" AutoGenerateColumns="False">
             <DataGrid.Resources>
@@ -20,25 +22,72 @@
                 <DataGridTextColumn Header="Expert" Binding="{Binding Expert.Name}" IsReadOnly="True" ElementStyle="{StaticResource ColumnElementStyle}"/>
                 <DataGridTextColumn Header="Waterstand" Binding="{Binding HydraulicCondition.WaterLevel}" IsReadOnly="True" ElementStyle="{StaticResource ColumnElementStyle}"/>
                 <DataGridTextColumn Header="Frequentie" Binding="{Binding HydraulicCondition.Probability}" IsReadOnly="True"  ElementStyle="{StaticResource ColumnElementStyle}"/>
-
-                <DataGridComboBoxColumn 
-                    Header="Ondergrens" 
-                    ItemsSource="{Binding Source={gui:Enumeration {x:Type estimations:ProbabilityClass}}}"
-                    DisplayMemberPath="Description"
-                    SelectedValuePath="Value"
-                    SelectedValueBinding="{Binding AverageEstimation}"/>
-                <DataGridComboBoxColumn 
-                    Header="Ondergrens" 
-                    ItemsSource="{Binding Source={gui:Enumeration {x:Type estimations:ProbabilityClass}}}"
-                    DisplayMemberPath="Description"
-                    SelectedValuePath="Value"
-                    SelectedValueBinding="{Binding MinEstimation}"/>
-                <DataGridComboBoxColumn 
-                    Header="Bovengrens" 
-                    ItemsSource="{Binding Source={gui:Enumeration {x:Type estimations:ProbabilityClass}}}"
-                    DisplayMemberPath="Description"
-                    SelectedValuePath="Value"
-                    SelectedValueBinding="{Binding MaxEstimation}"/>
+                <DataGridTemplateColumn Header="Gemiddelde">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="viewModels:ExpertClassEstimationViewModel">
+                            <Border
+                                Background="{Binding UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EstimationToBackgroundConverter}}">
+                                <ComboBox IsEditable="True" 
+                                      ItemsSource="{Binding Source={gui:Enumeration {x:Type estimations:ProbabilityClass}}}"
+                                      DisplayMemberPath="Description"
+                                      SelectedValuePath="Value"
+                                      Style="{StaticResource ComboBoxFlatTransparantStyle}">
+                                <ComboBox.SelectedValue>
+                                        <Binding Path="AverageEstimation" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <gui:StringToProbabilityClassValidationRule  ValidationStep="RawProposedValue"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </ComboBox.SelectedValue>
+                                </ComboBox>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Ondergrens">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="viewModels:ExpertClassEstimationViewModel">
+                            <Border
+                                Background="{Binding UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EstimationToBackgroundConverter}}">
+                                <ComboBox IsEditable="True" 
+                                      ItemsSource="{Binding Source={gui:Enumeration {x:Type estimations:ProbabilityClass}}}"
+                                      DisplayMemberPath="Description"
+                                      SelectedValuePath="Value"
+                                      Style="{StaticResource ComboBoxFlatTransparantStyle}">
+                                    <ComboBox.SelectedValue>
+                                        <Binding Path="MinEstimation" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <gui:StringToProbabilityClassValidationRule  ValidationStep="RawProposedValue"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </ComboBox.SelectedValue>
+                                </ComboBox>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Bovengrens">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="viewModels:ExpertClassEstimationViewModel">
+                            <Border
+                                Background="{Binding UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EstimationToBackgroundConverter}}">
+                                <ComboBox IsEditable="True" 
+                                      ItemsSource="{Binding Source={gui:Enumeration {x:Type estimations:ProbabilityClass}}}"
+                                      DisplayMemberPath="Description"
+                                      SelectedValuePath="Value"
+                                      Style="{StaticResource ComboBoxFlatTransparantStyle}">
+                                    <ComboBox.SelectedValue>
+                                        <Binding Path="MaxEstimation" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <gui:StringToProbabilityClassValidationRule  ValidationStep="RawProposedValue"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </ComboBox.SelectedValue>
+                                </ComboBox>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Commentaar" Binding="{Binding Comment}"  ElementStyle="{StaticResource ColumnElementStyle}"/>
             </DataGrid.Columns>
         </DataGrid>

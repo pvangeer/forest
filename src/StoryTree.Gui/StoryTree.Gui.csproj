@@ -164,6 +164,7 @@
     <Compile Include="Converters\EventTreesToCountConverter.cs" />
     <Compile Include="DataTemplates\MainTabItems\EventTree\EventTreeGraphLayout.cs" />
     <Compile Include="EnumerationExtension.cs" />
+    <Compile Include="EstimationToBackgroundConverter.cs" />
     <Compile Include="Export\EventTreeExportViewModel.cs" />
     <Compile Include="Export\ExportElicitationFormsViewModel.cs" />
     <Compile Include="Export\ElicitationFormExportDialog.xaml.cs">
@@ -182,13 +183,14 @@
     <Compile Include="Command\SelectTodayCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="StoryTreeGui.cs" />
+    <Compile Include="StringToProbabilityClassValidationRule.cs" />
     <Compile Include="TreeEventConnector.cs" />
     <Compile Include="ViewModels\ChangeProcessStepCommand.cs" />
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\EstimationSpecificationViewModelFactory.cs" />
     <Compile Include="ViewModels\EventTreeGraph.cs" />
     <Compile Include="ViewModels\EventTreeViewModel.cs" />
-    <Compile Include="ViewModels\ExpertClassEstimationViewmodel.cs" />
+    <Compile Include="ViewModels\ExpertClassEstimationViewModel.cs" />
     <Compile Include="ViewModels\ExpertViewModel.cs" />
     <Compile Include="Command\FileNewCommnd.cs" />
     <Compile Include="ViewModels\FixedFragilityCurveSpecificationViewModel.cs" />

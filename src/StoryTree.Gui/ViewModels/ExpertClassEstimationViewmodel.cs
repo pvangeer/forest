@@ -1,21 +1,22 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Globalization;
+using System.Runtime.CompilerServices;
 using StoryTree.Data;
 using StoryTree.Data.Estimations;
 using StoryTree.Data.Hydraulics;
 using StoryTree.Data.Tree;
+using StoryTree.Gui.Annotations;
 
 namespace StoryTree.Gui.ViewModels
 {
-    public class ExpertClassEstimationViewmodel : IDataErrorInfo
+    public class ExpertClassEstimationViewModel : INotifyPropertyChanged
     {
         private readonly ExpertClassEstimation estimation;
         private bool lastMinEstimationValid = true;
         private bool lastMaxEstimationValid = true;
         private bool lastAverageEstimationValid = true;
 
-        public ExpertClassEstimationViewmodel(ExpertClassEstimation estimation)
+        public ExpertClassEstimationViewModel(ExpertClassEstimation estimation)
         {
             this.estimation = estimation;
         }
@@ -27,67 +28,39 @@ namespace StoryTree.Gui.ViewModels
         public ProbabilityClass MinEstimation
         {
             get => estimation.MinEstimation;
-            set => estimation.MinEstimation = value;
+            set
+            {
+                estimation.MinEstimation = value;
+                OnPropertyChanged(nameof(MinEstimation));
+            }
         }
+
         public ProbabilityClass MaxEstimation
         {
             get => estimation.MaxEstimation;
-            set => estimation.MaxEstimation = value;
+            set
+            {
+                estimation.MaxEstimation = value;
+                OnPropertyChanged(nameof(MaxEstimation));
+            }
         }
+
         public ProbabilityClass AverageEstimation
         {
             get => estimation.AverageEstimation;
-            set => estimation.AverageEstimation = value;
+            set
+            {
+                estimation.AverageEstimation = value;
+                OnPropertyChanged(nameof(AverageEstimation));
+            }
         }
 
-        private bool TryParseToProbabilityClass(string value, out ProbabilityClass probabilityClass)
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (!(value is string stringValue))
-            {
-                probabilityClass = ProbabilityClass.None;
-                return false;
-            }
-
-            if (!(int.TryParse(stringValue, out int intValue)))
-            {
-                probabilityClass = ProbabilityClass.None;
-                return false;
-            }
-
-            if (!Enum.IsDefined(typeof(ProbabilityClass), intValue))
-            {
-                probabilityClass = ProbabilityClass.None;
-                return false;
-            }
-
-            probabilityClass = (ProbabilityClass)intValue;
-            return true;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public string this[string columnName]
-        {
-            get
-            {
-                switch (columnName)
-                {
-                    case nameof(MinEstimation):
-                        return lastMinEstimationValid
-                            ? string.Empty
-                            : "De gespecificeerde waarde kan niet worden vertaald naar een klasse";
-                    case nameof(MaxEstimation):
-                        return lastMaxEstimationValid
-                            ? string.Empty
-                            : "De gespecificeerde waarde kan niet worden vertaald naar een klasse";
-                    case nameof(AverageEstimation):
-                        return lastAverageEstimationValid
-                            ? string.Empty
-                            : "De gespecificeerde waarde kan niet worden vertaald naar een klasse";
-                    default:
-                        return string.Empty;
-                }
-            }
-        }
-
-        public string Error => null;
     }
 }
