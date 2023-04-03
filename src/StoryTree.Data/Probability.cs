@@ -227,7 +227,7 @@ namespace StoryTree.Data
                 return CompareTo((double)obj);
             }
 
-            throw new ArgumentException("Arg must be double or Probability");
+            throw new ArgumentException("Argument must be double or Probability");
         }
 
         public int CompareTo(Probability other)
