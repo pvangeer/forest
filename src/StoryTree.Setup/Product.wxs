@@ -1,33 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
-     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <!-- Static variables. -->
   <?include Variables.wxi ?>
 
-  <Product Id="*" Name="$(var.ApplicationFullName)" Language="1043" Version="$(var.ReleaseVersion)" Manufacturer="!(loc.Manufacturer)" UpgradeCode="a58f8212-c5f1-4ba9-b4b4-5633e7ab5ab5">
-    <!--Comment left empty on purpose to remove auto-generated text.-->
-    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Languages="1043" Manufacturer="!(loc.Manufacturer)" Comments=" "/>
+  <Package Name="$(var.ApplicationFullName)" Language="1043" Version="$(var.ReleaseVersion)" Manufacturer="!(loc.Manufacturer)" UpgradeCode="a58f8212-c5f1-4ba9-b4b4-5633e7ab5ab5" InstallerVersion="200"><!--Comment left empty on purpose to remove auto-generated text.-->
+    <SummaryInformation Manufacturer="!(loc.Manufacturer)" />
 
-    <Media Id="1" Cabinet="StoryTreeFull.cab" EmbedCab="yes"/>
+    <Media Id="1" Cabinet="StoryTreeFull.cab" EmbedCab="yes" />
     <Property Id="ARPPRODUCTICON" Value="StoryTree.ico" />
 
-    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" AllowSameVersionUpgrades="yes"/>
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" AllowSameVersionUpgrades="yes" />
 
     <!-- Specify default installer UI and which folder the user can configure during setup -->
-    <UIRef Id="WixUI_Deltares"/>
-    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR"/>
+    <UIRef Id="WixUI_Deltares" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
     <WixVariable Id="WixUIBannerBmp" Value="Banner_493x77.bmp" />
     <WixVariable Id="WixUIDialogBmp" Value="Start_493x312.bmp" />
 
     <!-- Requirement: .Net framework 4.6.1 installed on machine -->
     <PropertyRef Id="WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED" />
-    <Condition Message="!(loc.NetFramework461Required)">
-      <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED]]>
-    </Condition>
+    <Launch Condition="Installed OR WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED" Message="!(loc.NetFramework461Required)" />
     
     <!-- File System hierarchy -->
-    <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFilesFolder" Name="PFiles">
+    
+
+    <Feature Id="CompleteInstallation" Title="!(loc.ApplicationLongName)" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no" AllowAbsent="no">
+      <ComponentGroupRef Id="StoryTreeApplicationComponents" />
+      <ComponentRef Id="InstalledShortcut" />
+      <ComponentRef Id="ProgramMenuShortcut" />
+      <ComponentRef Id="DesktopShortcut" />
+      <ComponentRef Id="FileAssociation" />
+    </Feature>
+
+    <Icon Id="StoryTree.ico" SourceFile="StoryTree.ico" />
+  
+      <StandardDirectory Id="ProgramFilesFolder">
         <Directory Id="WTIDIR" Name="!(loc.ApplicationGroupShortName)">
           <Directory Id="INSTALLDIR" Name="$(var.ApplicationFullName)">
             <Directory Id="BINDIR" Name="bin">
@@ -41,12 +47,12 @@
             </Directory>
 
             <Component Id="FileAssociation" Guid="9EB4A417-2685-42DA-8167-6C726DC27349">
-              <File Source="StoryTree.ico" KeyPath="yes"></File>
+              <File Id="StoryTree.ico" Source="StoryTree.ico" KeyPath="yes"></File>
 
               <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\StoryTree.dot" Name="FriendlyTypeName" Value="!(loc.DotDescription)" Type="string" />
               <ProgId Id="StoryTree.dot" Description="!(loc.DotDescription)" Icon="StoryTree.ico">
                 <Extension Id="dot" ContentType="application/dot">
-                  <Verb Id="open" TargetFile="filF9E8BEF82108C69B28E9BE0EC5BD43E3" Command="Open" Argument="&quot;%1&quot;"/>
+                  <Verb Id="open" TargetFile="filF9E8BEF82108C69B28E9BE0EC5BD43E3" Command="Open" Argument="&quot;%1&quot;" />
                   <MIME ContentType="application/dot" Default="yes" />
                 </Extension>
               </ProgId>
@@ -54,17 +60,12 @@
             </Component>
 
             <Component Id="InstalledShortcut" Guid="441A8BC7-0B13-453D-9FBB-F03293282A3D">
-              <Shortcut Id="ApplicationInstallDirShortcut"
-                        Name="!(loc.ApplicationLongName)"
-                        Description="!(loc.StartApplicationDescription)"
-                        Target="[BINDIR]$(var.StoryTree.Gui.TargetFileName)"
-                        WorkingDirectory="INSTALLDIR"
-                        Icon="StoryTree.ico"/>
+              <Shortcut Id="ApplicationInstallDirShortcut" Name="!(loc.ApplicationLongName)" Description="!(loc.StartApplicationDescription)" Target="[BINDIR]$(var.StoryTree.Gui.TargetFileName)" WorkingDirectory="INSTALLDIR" Icon="StoryTree.ico" />
 
-              <RemoveFolder Id="RemoveBINDIR" Directory="BINDIR" On="uninstall"/>
+              <RemoveFolder Id="RemoveBINDIR" Directory="BINDIR" On="uninstall" />
               <RemoveFolder Id="RemoveINSTALLDIR" Directory="INSTALLDIR" On="uninstall" />
               <RemoveFolder Id="RemoveWTIDIR" Directory="WTIDIR" On="uninstall" />
-              <RegistryValue Root="HKCU" Key="Software\!(loc.Manufacturer)\!(loc.ApplicationShortName)" Name="StoryTreeAppShortcutInstalled" Type="integer" Value="1" KeyPath="yes"/>
+              <RegistryValue Root="HKCU" Key="Software\!(loc.Manufacturer)\!(loc.ApplicationShortName)" Name="StoryTreeAppShortcutInstalled" Type="integer" Value="1" KeyPath="yes" />
             </Component>
 
 
@@ -80,23 +81,18 @@
 
           </Directory>
         </Directory>
-      </Directory>
+      </StandardDirectory>
 
       <!-- Start menu folder -->
-      <Directory Id="ProgramMenuFolder" Name="Programs">
+      <StandardDirectory Id="ProgramMenuFolder">
         <Directory Id="ProgramMenuDot" Name="!(loc.ApplicationGroupShortName)">
           <Directory Id="ProgramMenuStoryTree" Name="!(loc.ApplicationLongName)">
 
             <Component Id="ProgramMenuShortcut" Guid="1BF4BE48-FB81-425D-85E4-C30F1BF51DA4">
-              <Shortcut Id="ApplicationStartMenuShortcut"
-                        Name="!(loc.ApplicationLongName)"
-                        Description="!(loc.StartApplicationDescription)"
-                        Target="[BINDIR]$(var.StoryTree.Gui.TargetFileName)"
-                        WorkingDirectory="INSTALLDIR"
-                        Icon="StoryTree.ico"/>
+              <Shortcut Id="ApplicationStartMenuShortcut" Name="!(loc.ApplicationLongName)" Description="!(loc.StartApplicationDescription)" Target="[BINDIR]$(var.StoryTree.Gui.TargetFileName)" WorkingDirectory="INSTALLDIR" Icon="StoryTree.ico" />
               <RemoveFolder Id="RemoveProgramMenuShortcut" Directory="ProgramMenuStoryTree" On="uninstall" />
               <RemoveFolder Id="RemoveProgramMenuDot" Directory="ProgramMenuDot" On="uninstall" />
-              <RegistryValue Root="HKCU" Key="Software\!(loc.Manufacturer)\!(loc.ApplicationShortName)" Name="StoryTreeProgMenuShortcutInstalled" Type="integer" Value="1" KeyPath="yes"/>
+              <RegistryValue Root="HKCU" Key="Software\!(loc.Manufacturer)\!(loc.ApplicationShortName)" Name="StoryTreeProgMenuShortcutInstalled" Type="integer" Value="1" KeyPath="yes" />
             </Component>
 
             <!--
@@ -112,32 +108,16 @@
 
           </Directory>
         </Directory>
-      </Directory>
+      </StandardDirectory>
 
       <!-- Desktop -->
-      <Directory Id="DesktopFolder" Name="Desktop">
+      <StandardDirectory Id="DesktopFolder">
 
         <Component Id="DesktopShortcut" Guid="A871DE12-BE7D-4A80-86F6-5BA23249A8BB">
-          <Shortcut Id="ApplicationDesktopShortcut"
-                    Name="!(loc.ApplicationLongName)"
-                    Description="!(loc.StartApplicationDescription)"
-                    Target="[BINDIR]$(var.StoryTree.Gui.TargetFileName)"
-                    WorkingDirectory="INSTALLDIR"
-                    Icon="StoryTree.ico"/>
+          <Shortcut Id="ApplicationDesktopShortcut" Name="!(loc.ApplicationLongName)" Description="!(loc.StartApplicationDescription)" Target="[BINDIR]$(var.StoryTree.Gui.TargetFileName)" WorkingDirectory="INSTALLDIR" Icon="StoryTree.ico" />
 
-          <RegistryValue Root="HKCU" Key="Software\!(loc.Manufacturer)\!(loc.ApplicationShortName)" Name="StoryTreeDesktopShortcutInstalled" Type="integer" Value="1" KeyPath="yes"/>
+          <RegistryValue Root="HKCU" Key="Software\!(loc.Manufacturer)\!(loc.ApplicationShortName)" Name="StoryTreeDesktopShortcutInstalled" Type="integer" Value="1" KeyPath="yes" />
         </Component>
-      </Directory>
-    </Directory>
-
-    <Feature Id="CompleteInstallation" Title="!(loc.ApplicationLongName)" Level="1" Absent="disallow" ConfigurableDirectory="INSTALLDIR" AllowAdvertise="no">
-      <ComponentGroupRef Id="StoryTreeApplicationComponents"/>
-      <ComponentRef Id="InstalledShortcut"/>
-      <ComponentRef Id="ProgramMenuShortcut"/>
-      <ComponentRef Id="DesktopShortcut"/>
-      <ComponentRef Id="FileAssociation"/>
-    </Feature>
-
-    <Icon Id="StoryTree.ico" SourceFile="StoryTree.ico"/>
-  </Product>
+      </StandardDirectory>
+    </Package>
 </Wix>

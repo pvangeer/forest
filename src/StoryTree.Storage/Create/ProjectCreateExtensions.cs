@@ -21,8 +21,6 @@ namespace StoryTree.Storage.Create
                 AssessmentSection = project.AssessmentSection.DeepClone(),
                 ProjectInformation = project.ProjectInformation.DeepClone(),
                 PersonEntity = project.ProjectLeader.Create(registry),
-                StartDate = project.StartDate.ToString(CultureInfo.InvariantCulture.DateTimeFormat),
-                EndDate = project.EndDate.ToString(CultureInfo.InvariantCulture.DateTimeFormat)
             };
 
             AddEntitiesForExperts(project, entity, registry);

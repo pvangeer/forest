@@ -162,26 +162,6 @@ namespace StoryTree.Gui.ViewModels
 
         public StorageState BusyIndicator { get; set; }
 
-        public DateTime StartDate
-        {
-            get => Project.StartDate;
-            set
-            {
-                Project.StartDate = value;
-                Project.OnPropertyChanged(nameof(Project.StartDate));
-            }
-        }
-
-        public DateTime EndDate
-        {
-            get => Project.EndDate;
-            set
-            {
-                Project.EndDate = value;
-                Project.OnPropertyChanged(nameof(Project.EndDate));
-            }
-        }
-
         public void AddNewEventTree()
         {
             var eventTree = new EventTree {Name = "Nieuwe gebeurtenis"};

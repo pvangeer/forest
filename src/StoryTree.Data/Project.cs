@@ -19,8 +19,6 @@ namespace StoryTree.Data
             EventTrees = new ObservableCollection<EventTree>();
             Experts = new ObservableCollection<Expert>();
             HydraulicConditions = new ObservableCollection<HydraulicCondition>();
-            StartDate = DateTime.Now.Date;
-            EndDate = StartDate.AddDays(4*7);
         }
 
         public string Name { get; set; }
@@ -39,10 +37,7 @@ namespace StoryTree.Data
 
         public ObservableCollection<HydraulicCondition> HydraulicConditions { get; }
 
-        public DateTime StartDate { get; set; }
-
-        public DateTime EndDate { get; set; }
-        
+       
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

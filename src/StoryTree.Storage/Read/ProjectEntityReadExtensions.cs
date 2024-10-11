@@ -30,8 +30,6 @@ namespace StoryTree.Storage.Read
                 Description = entity.Description,
                 ProjectInformation = entity.ProjectInformation,
                 ProjectLeader = entity.PersonEntity.Read(collector),
-                StartDate = DateTime.Parse(entity.StartDate, CultureInfo.InvariantCulture.DateTimeFormat),
-                EndDate = DateTime.Parse(entity.EndDate,CultureInfo.InvariantCulture.DateTimeFormat)
             };
 
             foreach (var expert in experts)
