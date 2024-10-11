@@ -32,7 +32,7 @@ namespace StoryTree.Storage.Test
             }
 
             var project = TestDataGenerator.GenerateAsphaltProject();
-            var mainTreeEvent = project.EventTrees.First().MainTreeEvent;
+            var mainTreeEvent = project.EventTree.MainTreeEvent;
             foreach (var waterLevel in project.HydraulicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w))
             {
                 mainTreeEvent.FixedFragilityCurve.Add(new FragilityCurveElement(waterLevel,(Probability)0.5));
@@ -56,23 +56,19 @@ namespace StoryTree.Storage.Test
             AssertEqualProjectLeader(project.ProjectLeader, project2C.ProjectLeader);
             AssertEqualExperts(project.Experts, project2C.Experts);
             AssertEqualHydraulicConditions(project.HydraulicConditions, project2C.HydraulicConditions);
-            AssertEqualEventTrees(project.EventTrees, project2C.EventTrees);
+            AssertEqualEventTree(project.EventTree, project2C.EventTree);
         }
 
-        private void AssertEqualEventTrees(ObservableCollection<EventTree> projectEventTrees, ObservableCollection<EventTree> project2CEventTrees)
+        private void AssertEqualEventTree(EventTree projectEventTree, EventTree project2CEventTrees)
         {
-            Assert.AreEqual(projectEventTrees.Count,project2CEventTrees.Count);
-            for (int i = 0; i < projectEventTrees.Count; i++)
-            {
-                var tree1 = projectEventTrees[i];
-                var tree2 = project2CEventTrees[i];
+                var tree1 = projectEventTree;
+                var tree2 = project2CEventTrees;
                 Assert.AreEqual(tree1.Name, tree2.Name);
                 Assert.AreEqual(tree1.Summary, tree2.Summary);
                 Assert.AreEqual(tree1.Details, tree2.Details);
                 Assert.AreEqual(tree1.Color, tree2.Color);
                 Assert.AreEqual(tree1.NeedsSpecification, tree2.NeedsSpecification);
                 AssertEqualTreeEvents(tree1.MainTreeEvent, tree2.MainTreeEvent);
-            }
         }
 
         private void AssertEqualTreeEvents(TreeEvent treeEvent1, TreeEvent treeEvent2)

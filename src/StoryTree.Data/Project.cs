@@ -11,12 +11,14 @@ namespace StoryTree.Data
 {
     public class Project : INotifyPropertyChanged
     {
+        private EventTree eventTree;
+
         public Project()
         {
             Name = "Nieuw project";
             AssessmentSection = "1-1";
             ProjectLeader = new Person();
-            EventTrees = new ObservableCollection<EventTree>(){new EventTree()};
+            EventTree = new EventTree();
             Experts = new ObservableCollection<Expert>();
             HydraulicConditions = new ObservableCollection<HydraulicCondition>();
         }
@@ -31,7 +33,18 @@ namespace StoryTree.Data
 
         public Person ProjectLeader { get; set; }
 
-        public ObservableCollection<EventTree> EventTrees { get; }
+        public EventTree EventTree
+        {
+            get => eventTree;
+            set
+            {
+                eventTree = value;
+                if (eventTree == null)
+                {
+                    throw new ArgumentNullException();
+                }
+            }
+        }
 
         public ObservableCollection<Expert> Experts { get; }
 

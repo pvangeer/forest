@@ -27,7 +27,7 @@ namespace StoryTree.Gui.ViewModels
             Project = project;
             projectManipulationService = new ProjectManipulationService(project);
 
-            var eventTreeViewModel = new EventTreeViewModel(Project.EventTrees.FirstOrDefault(), projectManipulationService)
+            var eventTreeViewModel = new EventTreeViewModel(Project.EventTree, projectManipulationService)
             {
                 EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(project)
             };

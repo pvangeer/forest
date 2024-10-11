@@ -23,7 +23,7 @@ namespace StoryTree.Gui.ViewModels
         {
             var project = new Project();
             projectManipulationService = new ProjectManipulationService(project);
-            EventTree = project.EventTrees.First();
+            EventTree = project.EventTree;
             EventTree.PropertyChanged += EventTreePropertyChanged;
         }
 

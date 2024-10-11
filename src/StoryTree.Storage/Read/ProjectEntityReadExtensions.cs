@@ -42,10 +42,7 @@ namespace StoryTree.Storage.Read
                 project.HydraulicConditions.Add(hydraulicCondition);
             }
 
-            foreach (var eventTree in eventTrees)
-            {
-                project.EventTrees.Add(eventTree);
-            }
+            project.EventTree = eventTrees.FirstOrDefault();
 
             return project;
         }

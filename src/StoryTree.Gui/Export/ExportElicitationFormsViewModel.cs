@@ -23,11 +23,7 @@ namespace StoryTree.Gui.Export
                 new Expert {Name = "Pietje"},
                 new Expert {Name = "Jantje"}
             },
-            EventTrees =
-            {
-                new EventTree {Name = "Gebeurtenis 1", NeedsSpecification = true},
-                new EventTree {Name = "Gebeurtenis 2", NeedsSpecification = false},
-            },
+            EventTree = { Name = "Gebeurtenis 1", NeedsSpecification = true },
             Name = "Testproject"
         };
 
@@ -40,11 +36,8 @@ namespace StoryTree.Gui.Export
             {
                 expertExportViewModel.PropertyChanged += ViewModelPropertyChanged;
             }
-            EventTrees = new ObservableCollection<EventTreeExportViewModel>(project.EventTrees.Select(eventTree => new EventTreeExportViewModel(eventTree)));
-            foreach (var eventTreeExportViewModel in EventTrees)
-            {
-                eventTreeExportViewModel.PropertyChanged += ViewModelPropertyChanged;
-            }
+            EventTree = new EventTreeExportViewModel(project.EventTree);
+            EventTree.PropertyChanged += ViewModelPropertyChanged; 
 
             Prefix = DateTime.Now.Date.ToString("yyyy-MM-dd") + " - " + project.Name + " - ";
         }
@@ -52,7 +45,7 @@ namespace StoryTree.Gui.Export
         public void OnExportHandler()
         {
             Expert[] expertsToExport = Experts.Where(e => e.IsChecked).Select(e => e.Expert).ToArray();
-            EventTree[] eventTreesToExport = EventTrees.Where(e => e.IsChecked).Select(e => e.EventTree).ToArray();
+            EventTree eventTreeToExport = EventTree.EventTreeViewModel;
             string location = ExportLocation;
             string prefix = Prefix;
 
@@ -62,10 +55,10 @@ namespace StoryTree.Gui.Export
                 return;
             }
 
-            OnExport(location, prefix, expertsToExport, eventTreesToExport);
+            OnExport(location, prefix, expertsToExport, eventTreeToExport);
         }
 
-        public Action<string, string, Expert[], EventTree[]> OnExport { get; set; }
+        public Action<string, string, Expert[], EventTree> OnExport { get; set; }
 
         public ObservableCollection<ElicitationFormsExportViewModel> Experts { get; }
 
@@ -81,7 +74,7 @@ namespace StoryTree.Gui.Export
             }
         }
 
-        public ObservableCollection<EventTreeExportViewModel> EventTrees { get; }
+        public EventTreeExportViewModel EventTree { get; }
 
         public ICommand ExportElicitationFormsCommand => new PerformExportElicitationFormsCommand(this);
 

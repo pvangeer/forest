@@ -12,11 +12,10 @@ namespace StoryTree.Gui
         {
             return new Project
             {
-                EventTrees =
+                EventTree =
                 {
-                    CreateEventTree("First event tree", 3),
-                    CreateEventTree("Second event tree", 2),
-                    CreateEventTree("3", 4)
+                    Name = "First event tree",
+                    MainTreeEvent = CreateEventTree("Second event tree", 2),
                 },
                 Experts =
                 {
@@ -40,17 +39,11 @@ namespace StoryTree.Gui
             };
         }
 
-        private static EventTree CreateEventTree(string treeName, int numberTreeEvents)
+        private static TreeEvent CreateEventTree(string treeName, int numberTreeEvents)
         {
             var mainTreeEvent = new TreeEvent
             {
                 Name = "First element"
-            };
-
-            var tree = new EventTree
-            {
-                Name = treeName,
-                MainTreeEvent = mainTreeEvent
             };
 
             var currentTreeEvent = mainTreeEvent;
@@ -64,7 +57,7 @@ namespace StoryTree.Gui
                 currentTreeEvent = falseEvent;
             }
 
-            return tree;
+            return mainTreeEvent;
         }
 
         public static Project GenerateAsphaltProject()
@@ -126,90 +119,311 @@ namespace StoryTree.Gui
                     Name = "Goaitske de Vries"
                 },
                 AssessmentSection = "12-3",
-                EventTrees =
+                EventTree =
                 {
-                    new EventTree
+                    Name = "AGK - HHNK",
+                    MainTreeEvent = new TreeEvent
                     {
-                        Name = "AGK - HHNK",
-                        MainTreeEvent = new TreeEvent
+                        Name = "Knoop 1",
+                        ProbabilitySpecificationType = ProbabilitySpecificationType.Classes,
+                        ClassesProbabilitySpecification =
                         {
-                            Name = "Knoop 1",
-                            ProbabilitySpecificationType = ProbabilitySpecificationType.Classes,
-                            ClassesProbabilitySpecification = 
+                            new ExpertClassEstimation
                             {
-                                new ExpertClassEstimation{Expert = andre, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = andre, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = andre, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = andre, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = andre, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Six, MinEstimation = ProbabilityClass.Six, MaxEstimation = ProbabilityClass.Six},
-                                new ExpertClassEstimation{Expert = andre, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Five, MinEstimation = ProbabilityClass.Five, MaxEstimation = ProbabilityClass.Six},
-                                new ExpertClassEstimation{Expert = erik, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = erik, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = erik, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = erik, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = erik, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = erik, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = roy, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = roy, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = roy, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = roy, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = roy, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = roy, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = andries, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = andries, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = andries, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = andries, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = andries, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = andries, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = dirk, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = dirk, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = dirk, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = dirk, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Six, MinEstimation = ProbabilityClass.Six, MaxEstimation = ProbabilityClass.Seven},
-                                new ExpertClassEstimation{Expert = dirk, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Five, MinEstimation = ProbabilityClass.Four, MaxEstimation = ProbabilityClass.Five},
-                                new ExpertClassEstimation{Expert = dirk, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Five, MinEstimation = ProbabilityClass.Four, MaxEstimation = ProbabilityClass.Five},
+                                Expert = andre, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
                             },
-                            FailingEvent = new TreeEvent
+                            new ExpertClassEstimation
                             {
-                                Name = "Knoop 2",
-                                ProbabilitySpecificationType = ProbabilitySpecificationType.Classes,
-                                ClassesProbabilitySpecification =
-                                {
-                                    new ExpertClassEstimation{Expert = andre, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Six, MinEstimation = ProbabilityClass.Four, MaxEstimation = ProbabilityClass.Seven},
-                                    new ExpertClassEstimation{Expert = andre, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Five, MinEstimation = ProbabilityClass.Three, MaxEstimation = ProbabilityClass.Six},
-                                    new ExpertClassEstimation{Expert = andre, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Four, MinEstimation = ProbabilityClass.Three, MaxEstimation = ProbabilityClass.Five},
-                                    new ExpertClassEstimation{Expert = andre, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Three, MinEstimation = ProbabilityClass.Two, MaxEstimation = ProbabilityClass.Four},
-                                    new ExpertClassEstimation{Expert = andre, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Three, MinEstimation = ProbabilityClass.Two, MaxEstimation = ProbabilityClass.Four},
-                                    new ExpertClassEstimation{Expert = andre, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Three, MinEstimation = ProbabilityClass.Two, MaxEstimation = ProbabilityClass.Four},
-                                    new ExpertClassEstimation{Expert = erik, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Six},
-                                    new ExpertClassEstimation{Expert = erik, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Five},
-                                    new ExpertClassEstimation{Expert = erik, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Four},
-                                    new ExpertClassEstimation{Expert = erik, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Three},
-                                    new ExpertClassEstimation{Expert = erik, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Two},
-                                    new ExpertClassEstimation{Expert = erik, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.One},
-                                    new ExpertClassEstimation{Expert = roy, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.None, MinEstimation = ProbabilityClass.None, MaxEstimation = ProbabilityClass.None},
-                                    new ExpertClassEstimation{Expert = roy, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.None, MinEstimation = ProbabilityClass.None, MaxEstimation = ProbabilityClass.None},
-                                    new ExpertClassEstimation{Expert = roy, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.None, MinEstimation = ProbabilityClass.None, MaxEstimation = ProbabilityClass.None},
-                                    new ExpertClassEstimation{Expert = roy, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.None, MinEstimation = ProbabilityClass.None, MaxEstimation = ProbabilityClass.None},
-                                    new ExpertClassEstimation{Expert = roy, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.None, MinEstimation = ProbabilityClass.None, MaxEstimation = ProbabilityClass.None},
-                                    new ExpertClassEstimation{Expert = roy, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.None, MinEstimation = ProbabilityClass.None, MaxEstimation = ProbabilityClass.None},
-                                    new ExpertClassEstimation{Expert = andries, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Seven, MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven},
-                                    new ExpertClassEstimation{Expert = andries, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Six, MinEstimation = ProbabilityClass.Six, MaxEstimation = ProbabilityClass.Seven},
-                                    new ExpertClassEstimation{Expert = andries, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Five, MinEstimation = ProbabilityClass.Five, MaxEstimation = ProbabilityClass.Six},
-                                    new ExpertClassEstimation{Expert = andries, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Four, MinEstimation = ProbabilityClass.Three, MaxEstimation = ProbabilityClass.Five},
-                                    new ExpertClassEstimation{Expert = andries, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Two, MinEstimation = ProbabilityClass.Two, MaxEstimation = ProbabilityClass.Three},
-                                    new ExpertClassEstimation{Expert = andries, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.One, MinEstimation = ProbabilityClass.One, MaxEstimation = ProbabilityClass.Two},
-                                    new ExpertClassEstimation{Expert = dirk, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Five, MinEstimation = ProbabilityClass.Five, MaxEstimation = ProbabilityClass.Five},
-                                    new ExpertClassEstimation{Expert = dirk, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Five, MinEstimation = ProbabilityClass.Four, MaxEstimation = ProbabilityClass.Five},
-                                    new ExpertClassEstimation{Expert = dirk, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Four, MinEstimation = ProbabilityClass.Four, MaxEstimation = ProbabilityClass.Five},
-                                    new ExpertClassEstimation{Expert = dirk, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Four, MinEstimation = ProbabilityClass.Three, MaxEstimation = ProbabilityClass.Five},
-                                    new ExpertClassEstimation{Expert = dirk, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Three, MinEstimation = ProbabilityClass.Three, MaxEstimation = ProbabilityClass.Four},
-                                    new ExpertClassEstimation{Expert = dirk, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Three, MinEstimation = ProbabilityClass.Two, MaxEstimation = ProbabilityClass.Four},
-                                }
-                            }
+                                Expert = andre, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = andre, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = andre, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = andre, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Six,
+                                MinEstimation = ProbabilityClass.Six, MaxEstimation = ProbabilityClass.Six
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = andre, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Five,
+                                MinEstimation = ProbabilityClass.Five, MaxEstimation = ProbabilityClass.Six
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = erik, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = erik, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = erik, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = erik, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = erik, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = erik, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = roy, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = roy, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = roy, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = roy, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = roy, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = roy, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = andries, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = andries, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = andries, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = andries, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = andries, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = andries, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = dirk, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = dirk, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = dirk, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Seven,
+                                MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = dirk, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Six,
+                                MinEstimation = ProbabilityClass.Six, MaxEstimation = ProbabilityClass.Seven
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = dirk, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Five,
+                                MinEstimation = ProbabilityClass.Four, MaxEstimation = ProbabilityClass.Five
+                            },
+                            new ExpertClassEstimation
+                            {
+                                Expert = dirk, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Five,
+                                MinEstimation = ProbabilityClass.Four, MaxEstimation = ProbabilityClass.Five
+                            },
                         },
-                        Color = Colors.CornflowerBlue,
-                        NeedsSpecification = true
-                    }
+                        FailingEvent = new TreeEvent
+                        {
+                            Name = "Knoop 2",
+                            ProbabilitySpecificationType = ProbabilitySpecificationType.Classes,
+                            ClassesProbabilitySpecification =
+                            {
+                                new ExpertClassEstimation
+                                {
+                                    Expert = andre, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Six,
+                                    MinEstimation = ProbabilityClass.Four, MaxEstimation = ProbabilityClass.Seven
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = andre, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Five,
+                                    MinEstimation = ProbabilityClass.Three, MaxEstimation = ProbabilityClass.Six
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = andre, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Four,
+                                    MinEstimation = ProbabilityClass.Three, MaxEstimation = ProbabilityClass.Five
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = andre, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Three,
+                                    MinEstimation = ProbabilityClass.Two, MaxEstimation = ProbabilityClass.Four
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = andre, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Three,
+                                    MinEstimation = ProbabilityClass.Two, MaxEstimation = ProbabilityClass.Four
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = andre, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Three,
+                                    MinEstimation = ProbabilityClass.Two, MaxEstimation = ProbabilityClass.Four
+                                },
+                                new ExpertClassEstimation
+                                    { Expert = erik, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Six },
+                                new ExpertClassEstimation
+                                    { Expert = erik, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Five },
+                                new ExpertClassEstimation
+                                    { Expert = erik, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Four },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = erik, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Three
+                                },
+                                new ExpertClassEstimation
+                                    { Expert = erik, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Two },
+                                new ExpertClassEstimation
+                                    { Expert = erik, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.One },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = roy, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.None,
+                                    MinEstimation = ProbabilityClass.None, MaxEstimation = ProbabilityClass.None
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = roy, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.None,
+                                    MinEstimation = ProbabilityClass.None, MaxEstimation = ProbabilityClass.None
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = roy, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.None,
+                                    MinEstimation = ProbabilityClass.None, MaxEstimation = ProbabilityClass.None
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = roy, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.None,
+                                    MinEstimation = ProbabilityClass.None, MaxEstimation = ProbabilityClass.None
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = roy, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.None,
+                                    MinEstimation = ProbabilityClass.None, MaxEstimation = ProbabilityClass.None
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = roy, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.None,
+                                    MinEstimation = ProbabilityClass.None, MaxEstimation = ProbabilityClass.None
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = andries, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Seven,
+                                    MinEstimation = ProbabilityClass.Seven, MaxEstimation = ProbabilityClass.Seven
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = andries, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Six,
+                                    MinEstimation = ProbabilityClass.Six, MaxEstimation = ProbabilityClass.Seven
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = andries, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Five,
+                                    MinEstimation = ProbabilityClass.Five, MaxEstimation = ProbabilityClass.Six
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = andries, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Four,
+                                    MinEstimation = ProbabilityClass.Three, MaxEstimation = ProbabilityClass.Five
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = andries, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Two,
+                                    MinEstimation = ProbabilityClass.Two, MaxEstimation = ProbabilityClass.Three
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = andries, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.One,
+                                    MinEstimation = ProbabilityClass.One, MaxEstimation = ProbabilityClass.Two
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = dirk, HydraulicCondition = hydraulicCondition23, AverageEstimation = ProbabilityClass.Five,
+                                    MinEstimation = ProbabilityClass.Five, MaxEstimation = ProbabilityClass.Five
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = dirk, HydraulicCondition = hydraulicCondition26, AverageEstimation = ProbabilityClass.Five,
+                                    MinEstimation = ProbabilityClass.Four, MaxEstimation = ProbabilityClass.Five
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = dirk, HydraulicCondition = hydraulicCondition29, AverageEstimation = ProbabilityClass.Four,
+                                    MinEstimation = ProbabilityClass.Four, MaxEstimation = ProbabilityClass.Five
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = dirk, HydraulicCondition = hydraulicCondition32, AverageEstimation = ProbabilityClass.Four,
+                                    MinEstimation = ProbabilityClass.Three, MaxEstimation = ProbabilityClass.Five
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = dirk, HydraulicCondition = hydraulicCondition35, AverageEstimation = ProbabilityClass.Three,
+                                    MinEstimation = ProbabilityClass.Three, MaxEstimation = ProbabilityClass.Four
+                                },
+                                new ExpertClassEstimation
+                                {
+                                    Expert = dirk, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Three,
+                                    MinEstimation = ProbabilityClass.Two, MaxEstimation = ProbabilityClass.Four
+                                },
+                            }
+                        }
+                    },
+                    Color = Colors.CornflowerBlue,
+                    NeedsSpecification = true
                 },
                 Experts =
                 {

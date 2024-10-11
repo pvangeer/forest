@@ -81,10 +81,10 @@
     <Compile Include="Import\DotForm.cs" />
     <Compile Include="Import\DotFormValidation\DotFormValidationResult.cs" />
     <Compile Include="Import\DotFormValidation\DotFormValidator.cs" />
+    <Compile Include="Import\DotFormValidation\EventTreesValidationResult.cs" />
     <Compile Include="Import\DotNode.cs" />
     <Compile Include="Import\ElicitationFormImporter.cs" />
     <Compile Include="Import\ElicitationFormReader.cs" />
-    <Compile Include="Import\DotFormValidation\EventTreesValidationResult.cs" />
     <Compile Include="Import\DotFormValidation\ExpertValidationResult.cs" />
     <Compile Include="Import\DotFormValidation\NodeValidationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

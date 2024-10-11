@@ -36,7 +36,7 @@ namespace StoryTree.IO.Test
                 }
             };
 
-            writer.WriteForm(fileName, new[] { form });
+            writer.WriteForm(fileName,  form );
         }
 
         private static DotNode CreateNode(string nodeName, double[] waterlevels, double[] frequencies)

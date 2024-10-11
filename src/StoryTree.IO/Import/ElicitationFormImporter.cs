@@ -44,12 +44,11 @@ namespace StoryTree.IO.Import
 
             foreach (var dotForm in formContent)
             {
-                var eventTree = Project.EventTrees.First(et => et.Name == dotForm.EventTreeName);
                 var expert = Project.Experts.First(ex => ex.Name == dotForm.ExpertName);
                 
                 foreach (var dotFormNode in dotForm.Nodes)
                 {
-                    var node = eventTree.MainTreeEvent.FindTreeEvent(n => n.Name == dotFormNode.NodeName);
+                    var node = Project.EventTree.MainTreeEvent.FindTreeEvent(n => n.Name == dotFormNode.NodeName);
                     foreach (var dotEstimate in dotFormNode.Estimates)
                     {
                         var specification = node.ClassesProbabilitySpecification.First(s =>
@@ -69,13 +68,6 @@ namespace StoryTree.IO.Import
             {
                 log.Error(
                     $"Fout bij het lezen van bestand {fileName}: De gespecificeerde gebeurtenis ({dotForm.EventTreeName}) kon niet in het project worden gevonden.");
-                return true;
-            }
-
-            if (validationResult.EventTreesValidation == EventTreesValidationResult.NoEventTrees)
-            {
-                log.Error(
-                    $"Het project bevat nog geen gebeurtenissen. Daardoor is het niet mogelijk om een elicitatieformulier in te lezen.");
                 return true;
             }
 

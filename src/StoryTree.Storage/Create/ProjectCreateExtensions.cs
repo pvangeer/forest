@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Reflection;
 using StoryTree.Data;
 using StoryTree.Storage.DbContext;
 
@@ -32,12 +33,8 @@ namespace StoryTree.Storage.Create
 
         private static void AddEntitiesForEventTrees(Project project, ProjectEntity entity, PersistenceRegistry registry)
         {
-            for (var index = 0; index < project.EventTrees.Count; index++)
-            {
-                var eventTreeEntity = project.EventTrees[index].Create(registry);
-                eventTreeEntity.Order = index;
-                entity.EventTreeEntities.Add(eventTreeEntity);
-            }
+            var eventTreeEntity = project.EventTree.Create(registry);
+            entity.EventTreeEntities.Add(eventTreeEntity);
         }
 
         private static void AddEntitiesForHydraulicConditions(Project project, ProjectEntity entity, PersistenceRegistry registry)

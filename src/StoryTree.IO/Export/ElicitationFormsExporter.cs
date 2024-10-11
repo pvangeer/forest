@@ -23,7 +23,7 @@ namespace StoryTree.IO.Export
             this.Project = project;
         }
 
-        public void Export(string fileLocation, string prefix, Expert[] expertsToExport, EventTree[] eventTreesToExport)
+        public void Export(string fileLocation, string prefix, Expert[] expertsToExport, EventTree eventTreeToExport)
         {
             if (string.IsNullOrWhiteSpace(fileLocation))
             {
@@ -48,17 +48,6 @@ namespace StoryTree.IO.Export
                 return;
             }
 
-            if (eventTreesToExport.Length == 0)
-            {
-                log.Error("Er moet minimaal 1 gebeurtenis zijn geselecteerd om te kunnen exporteren.");
-                return;
-            }
-            if (eventTreesToExport.Any(e => !Project.EventTrees.Contains(e)))
-            {
-                log.Error("Er is iets misgegaan bij het exporteren. Niet alle experts konden in het project worden gevonden.");
-                return;
-            }
-
             var hydraulicConditions = Project.HydraulicConditions.Distinct(new HydraulicConditionsWaterLevelComparer())
                 .OrderBy(hc => hc.WaterLevel)
                 .ToArray();
@@ -71,23 +60,10 @@ namespace StoryTree.IO.Export
             {
                 var fileName = Path.Combine(fileLocation,prefix + expert.Name + ".xlsx");
 
-                writer.WriteForm(fileName, EventTreesToDotForms(eventTreesToExport, expert.Name, hydraulicConditions));
+                writer.WriteForm(fileName, EventTreeToDotForm(eventTreeToExport, expert.Name, hydraulicConditions));
                 log.Info($"Bestand '{fileName}' geëxporteerd voor expert '{expert.Name}'");
             }
             log.Info($"{expertsToExport.Length} DOT formulieren geëxporteerd naar locatie '{fileLocation}'",true);
-        }
-
-        private DotForm[] EventTreesToDotForms(EventTree[] eventTreeToExport, string expertName,
-            HydraulicCondition[] hydraulicConditions)
-        {
-            var forms = new List<DotForm>();
-
-            foreach (var eventTree in eventTreeToExport)
-            {
-                forms.Add(EventTreeToDotForm(eventTree, expertName, hydraulicConditions));
-            }
-
-            return forms.ToArray();
         }
 
         private DotForm EventTreeToDotForm(EventTree eventTree, string expertName, HydraulicCondition[] hydraulicConditions)

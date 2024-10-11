@@ -15,10 +15,7 @@ namespace StoryTree.Data.Test
             var treeEvent = new TreeEvent();
             var project = new Project
             {
-                EventTrees = { new EventTree
-                {
-                    MainTreeEvent = treeEvent
-                }}
+                EventTree = { MainTreeEvent = treeEvent }
             };
             var projectManipulationService = new ProjectManipulationService(project);
             Assert.AreEqual(0,treeEvent.ClassesProbabilitySpecification.Count);
@@ -37,10 +34,7 @@ namespace StoryTree.Data.Test
             var treeEvent = new TreeEvent();
             var project = new Project
             {
-                EventTrees = { new EventTree
-                {
-                    MainTreeEvent = treeEvent
-                }},
+                EventTree = { MainTreeEvent = treeEvent },
                 HydraulicConditions =
                 {
                     new HydraulicCondition(1.0,(Probability)0.01,1,1),
@@ -87,13 +81,8 @@ namespace StoryTree.Data.Test
             };
             var project = new Project
             {
-                EventTrees =
-                {
-                    new EventTree
-                    {
-                        MainTreeEvent = treeEvent
-                    }
-                },
+                EventTree =
+                { MainTreeEvent = treeEvent },
                 Experts =
                 {
                     expertToRemove,
@@ -136,13 +125,8 @@ namespace StoryTree.Data.Test
             var otherExpert = new Expert();
             var project = new Project
             {
-                EventTrees =
-                {
-                    new EventTree
-                    {
-                        MainTreeEvent = treeEvent
-                    }
-                },
+                EventTree =
+                { MainTreeEvent = treeEvent },
                 Experts =
                 {
                     expertToRemove,
@@ -166,10 +150,7 @@ namespace StoryTree.Data.Test
             var treeEvent = new TreeEvent();
             var project = new Project
             {
-                EventTrees = { new EventTree
-                {
-                    MainTreeEvent = treeEvent
-                }}
+                EventTree = { MainTreeEvent = treeEvent }
             };
             var projectManipulationService = new ProjectManipulationService(project);
 
@@ -189,10 +170,7 @@ namespace StoryTree.Data.Test
             var treeEvent = new TreeEvent();
             var project = new Project
             {
-                EventTrees = { new EventTree
-                {
-                    MainTreeEvent = treeEvent
-                }},
+                EventTree = { MainTreeEvent = treeEvent },
                 Experts =
                 {
                     new Expert(),
@@ -239,13 +217,8 @@ namespace StoryTree.Data.Test
             };
             var project = new Project
             {
-                EventTrees =
-                {
-                    new EventTree
-                    {
-                        MainTreeEvent = treeEvent
-                    }
-                },
+                EventTree =
+                { MainTreeEvent = treeEvent },
                 Experts =
                 {
                     expert1,
@@ -288,13 +261,8 @@ namespace StoryTree.Data.Test
             var hydraulicCondition2 = new HydraulicCondition(2.0, (Probability)0.001, 1, 1);
             var project = new Project
             {
-                EventTrees =
-                {
-                    new EventTree
-                    {
-                        MainTreeEvent = treeEvent
-                    }
-                },
+                EventTree =
+                { MainTreeEvent = treeEvent },
                 HydraulicConditions =
                 {
                     hydraulicConditionToRemove,

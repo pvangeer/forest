@@ -7,13 +7,13 @@ namespace StoryTree.Gui.Export
 {
     public class EventTreeExportViewModel : INotifyPropertyChanged
     {
-        private EventTree eventTree;
+        private EventTree eventTreeViewModel;
         private bool isChecked;
 
-        public EventTreeExportViewModel(EventTree eventTree)
+        public EventTreeExportViewModel(EventTree eventTreeViewModel)
         {
-            this.eventTree = eventTree;
-            IsChecked = eventTree.NeedsSpecification;
+            this.eventTreeViewModel = eventTreeViewModel;
+            IsChecked = eventTreeViewModel.NeedsSpecification;
         }
 
         public bool IsChecked
@@ -26,9 +26,9 @@ namespace StoryTree.Gui.Export
             }
         }
 
-        public string Name => eventTree.Name;
+        public string Name => eventTreeViewModel.Name;
 
-        public EventTree EventTree => eventTree;
+        public EventTree EventTreeViewModel => eventTreeViewModel;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

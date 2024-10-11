@@ -18,8 +18,7 @@ namespace StoryTree.Gui.Export
         public bool CanExecute(object parameter)
         {
             return viewModel != null &&
-                   viewModel.Experts.Any(e => e.IsChecked) &&
-                   viewModel.EventTrees.Any(e => e.IsChecked);
+                   viewModel.Experts.Any(e => e.IsChecked);
         }
 
         public void Execute(object parameter)

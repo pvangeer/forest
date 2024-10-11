@@ -26,7 +26,7 @@ namespace StoryTree.IO.Export
         private string elicitationCodeCellRange = "$C$12:$C$18";
 
         //public void WriteForm(string fileName, string eventName, string eventImageFileName, string expertName, DateTime date, double[] waterLevels, double[] frequencies, string[] eventNodes)
-        public void WriteForm(string fileName, DotForm[] forms)
+        public void WriteForm(string fileName, DotForm dotForm)
         {
             using (var spreadsheetDocument = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook))
             {
@@ -40,10 +40,7 @@ namespace StoryTree.IO.Export
                 workbookStylesPart.Stylesheet.Save(workbookStylesPart);
 
                 Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
-                foreach (var dotForm in forms)
-                {
-                    WriteWorksheet(workbookPart, sheets, dotForm);
-                }
+                WriteWorksheet(workbookPart, sheets, dotForm);
 
                 // Save document
                 workbookPart.Workbook.Save();

@@ -13,7 +13,7 @@ namespace StoryTree.Gui.Import
 
         public bool CanExecute(object parameter)
         {
-            return parameter is GuiViewModel guiViewModel && guiViewModel.ProjectViewModel.Project.Experts.Count != 0 && guiViewModel.ProjectViewModel.Project.EventTrees.Count != 0;
+            return parameter is GuiViewModel guiViewModel && guiViewModel.ProjectViewModel.Project.Experts.Count != 0;
         }
 
         public void Execute(object parameter)

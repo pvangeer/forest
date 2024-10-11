@@ -14,6 +14,11 @@ namespace StoryTree.Storage.DbContext
     
     public partial class EventTreeEntity
     {
+        public EventTreeEntity()
+        {
+            Order = 0;
+        }
+
         public long EventTreeId { get; set; }
         public string Name { get; set; }
         public string Summary { get; set; }

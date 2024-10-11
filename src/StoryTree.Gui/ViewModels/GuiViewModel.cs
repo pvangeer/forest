@@ -192,10 +192,10 @@ namespace StoryTree.Gui.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void OnExportElicitationForms(string fileLocation, string prefix, Expert[] expertsToExport, EventTree[] eventTreesToExport)
+        public void OnExportElicitationForms(string fileLocation, string prefix, Expert[] expertsToExport, EventTree eventTreeToExport)
         {
             var exporter = new ElicitationFormsExporter(ProjectViewModel.Project);
-            exporter.Export(fileLocation, prefix, expertsToExport, eventTreesToExport);
+            exporter.Export(fileLocation, prefix, expertsToExport, eventTreeToExport);
         }
 
         public void OnImportElicitationForms(string[] fileLocations)

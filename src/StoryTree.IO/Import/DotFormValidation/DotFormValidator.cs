@@ -42,11 +42,9 @@ namespace StoryTree.IO.Import.DotFormValidation
                 return null;
             }
 
-            var eventTree = project.EventTrees.First(et => et.Name == form.EventTreeName);
-
             foreach (var formNode in form.Nodes)
             {
-                var estimatedTreeEvent = eventTree.MainTreeEvent.FindTreeEvent(treeEvent => treeEvent.Name == formNode.NodeName);
+                var estimatedTreeEvent = project.EventTree.MainTreeEvent.FindTreeEvent(treeEvent => treeEvent.Name == formNode.NodeName);
                 if (estimatedTreeEvent == null)
                 {
                     results[formNode] = NodeValidationResult.NodeNotFound;
@@ -104,12 +102,7 @@ namespace StoryTree.IO.Import.DotFormValidation
 
         private static EventTreesValidationResult ValidateEventTrees(DotForm form, Project project)
         {
-            if (project.EventTrees == null || !project.EventTrees.Any())
-            {
-                return EventTreesValidationResult.NoEventTrees;
-            }
-
-            if (project.EventTrees.Any(e => e.Name == form.EventTreeName))
+            if (project.EventTree.Name == form.EventTreeName)
             {
                 return EventTreesValidationResult.Valid;
             }
