@@ -146,10 +146,11 @@ namespace StoryTree.Gui.ViewModels
             {
                 selectedProcess = value;
                 OnPropertyChanged();
+                ProjectViewModel.OnProcessChanged();
             }
         }
 
-        public ICommand ChangeProcesStepCommand => new ChangeProcessStepCommand(this);
+        public ICommand ChangeProcessStepCommand => new ChangeProcessStepCommand(this);
 
         public string ProjectFileName => string.IsNullOrEmpty(ProjectFilePath)
             ? "Nieuw bestand*"

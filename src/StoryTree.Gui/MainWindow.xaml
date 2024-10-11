@@ -137,137 +137,35 @@
                         LargeIcon="/StoryTree.Gui;component\Resources\project-information.png"
                         Size="Large" 
                         IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.GeneralInformation}}"
-                        Command="{Binding ChangeProcesStepCommand}"
+                        Command="{Binding ChangeProcessStepCommand}"
                         CommandParameter="{x:Static viewModels:StoryTreeProcess.GeneralInformation}"/>
                     <fluent:ToggleButton
                         Header="Experts"
                         LargeIcon="/StoryTree.Gui;component\Resources\experts.png"
                         Size="Large" 
                         IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Experts}}"
-                        Command="{Binding ChangeProcesStepCommand}"
+                        Command="{Binding ChangeProcessStepCommand}"
                         CommandParameter="{x:Static viewModels:StoryTreeProcess.Experts}"/>
                     <fluent:ToggleButton
                         Header="Hydraulische gegevens"
                         LargeIcon="/StoryTree.Gui;component\Resources\hydraulics.png"
                         Size="Large" 
                         IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Hydraulics}}"
-                        Command="{Binding ChangeProcesStepCommand}"
+                        Command="{Binding ChangeProcessStepCommand}"
                         CommandParameter="{x:Static viewModels:StoryTreeProcess.Hydraulics}"/>
                 </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+            <fluent:RibbonTabItem 
+                Header="Faalpaden"
+                fluent:KeyTip.Keys="F">
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:ToggleButton
-                        Header="Gebeurtenissen definieren"
+                        Header="Faalpaden tonen"
                         LargeIcon="/StoryTree.Gui;component\Resources\add-eventtree.png"
-                        Size="Large" 
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.EventTreeDefinition}}"
-                        Command="{Binding ChangeProcesStepCommand}"
-                        CommandParameter="{x:Static viewModels:StoryTreeProcess.EventTreeDefinition}"/>
-                    <fluent:ToggleButton
-                        Header="Knopen definieren"
-                        LargeIcon="/StoryTree.Gui;component\Resources\add-tree-event.png"
                         Size="Large" 
                         IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.TreeEventsDefinition}}"
-                        Command="{Binding ChangeProcesStepCommand}"
+                        Command="{Binding ChangeProcessStepCommand}"
                         CommandParameter="{x:Static viewModels:StoryTreeProcess.TreeEventsDefinition}"/>
-                    <fluent:ToggleButton
-                        Header="Knoopinformatie"
-                        LargeIcon="/StoryTree.Gui;component\Resources\tree-event-info.png"
-                        Size="Large" 
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.TreeEventsInformation}}"
-                        Command="{Binding ChangeProcesStepCommand}"
-                        CommandParameter="{x:Static viewModels:StoryTreeProcess.TreeEventsInformation}"/>
-                </fluent:RibbonGroupBox>
-                <fluent:RibbonGroupBox Header="Overgangskansen">
-                    <fluent:ToggleButton
-                        Header="Overgangskansen"
-                        LargeIcon="/StoryTree.Gui;component\Resources\estimation.png"
-                        Size="Large" 
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Estimation}}"
-                        Command="{Binding ChangeProcesStepCommand}"
-                        CommandParameter="{x:Static viewModels:StoryTreeProcess.Estimation}"/>
-                </fluent:RibbonGroupBox>
-                <fluent:RibbonGroupBox Header="Resultaten">
-                    <fluent:ToggleButton
-                        Header="Resultaten"
-                        LargeIcon="/StoryTree.Gui;component\Resources\results.png"
-                        Size="Large" 
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Results}}"
-                        Command="{Binding ChangeProcesStepCommand}"
-                        CommandParameter="{x:Static viewModels:StoryTreeProcess.Results}"/>
-                </fluent:RibbonGroupBox>
-            </fluent:RibbonTabItem>
-
-            <fluent:RibbonTabItem
-                Name="EventTreesTabItem"
-                Header="Gebeurtenissen"
-                Group="{Binding Source={x:Reference EventTreeFunctionsGroup}}"
-                fluent:KeyTip.Keys="G">
-                <fluent:RibbonGroupBox 
-                    Header="Gebeurtenissen">
-                    <fluent:Button 
-                        Header="Gebeurtenis toevoegen" 
-                        LargeIcon="/StoryTree.Gui;component\Resources\add-eventtree.png"
-                        Size="Large" 
-                        Command="{Binding ProjectViewModel.AddEventTreeCommand}">
-                        <fluent:Button.Style>
-                            <Style TargetType="fluent:Button">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.EventTreeDefinition}">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </fluent:Button.Style>
-                    </fluent:Button>
-                    <fluent:Button 
-                        Header="Gebeurtenis verwijderen" 
-                        LargeIcon="/StoryTree.Gui;component\Resources\remove-eventtree.png"
-                        Size="Large" 
-                        Command="{Binding ProjectViewModel.RemoveEventTreeCommand}">
-                        <fluent:Button.Style>
-                            <Style TargetType="fluent:Button">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.EventTreeDefinition}">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </fluent:Button.Style>
-                    </fluent:Button>
-                    <fluent:InRibbonGallery 
-                        ItemsSource="{Binding ProjectViewModel.EventTrees}" 
-                        SelectedItem="{Binding ProjectViewModel.SelectedEventTreeFiltered, UpdateSourceTrigger=PropertyChanged}"
-                        ItemTemplate="{DynamicResource GalleryItemTemplate}">
-                        <fluent:InRibbonGallery.Style>
-                            <Style TargetType="fluent:InRibbonGallery">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.EventTreeDefinition}">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </fluent:InRibbonGallery.Style>
-                    </fluent:InRibbonGallery>
-                    <fluent:InRibbonGallery 
-                        ItemsSource="{Binding ProjectViewModel.EventTreesToEstimate}" 
-                        SelectedItem="{Binding ProjectViewModel.SelectedEventTreeFiltered, UpdateSourceTrigger=PropertyChanged}"
-                        ItemTemplate="{DynamicResource GalleryItemTemplate}">
-                        <fluent:InRibbonGallery.Style>
-                            <Style TargetType="fluent:InRibbonGallery">
-                                <Setter Property="Visibility" Value="Visible"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.EventTreeDefinition}">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </fluent:InRibbonGallery.Style>
-                    </fluent:InRibbonGallery>
-                </fluent:RibbonGroupBox>
-                <fluent:RibbonGroupBox Header="Knopen">
                     <fluent:Button 
                         Header="Toevoegen (falen)"
                         LargeIcon="/StoryTree.Gui;component\Resources\add-tree-event.png"
@@ -285,18 +183,35 @@
                         LargeIcon="/StoryTree.Gui;component\Resources\remove-tree-event.png"
                         Size="Large"
                         Command="{Binding ProjectViewModel.RemoveTreeEventCommand}" />
-                    <fluent:RibbonGroupBox.Style>
-                        <Style TargetType="fluent:RibbonGroupBox">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.TreeEventsDefinition}">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </fluent:RibbonGroupBox.Style>
+                    <fluent:ToggleButton
+                        Header="Knoopinformatie"
+                        LargeIcon="/StoryTree.Gui;component\Resources\tree-event-info.png"
+                        Size="Large" 
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.TreeEventsInformation}}"
+                        Command="{Binding ChangeProcessStepCommand}"
+                        CommandParameter="{x:Static viewModels:StoryTreeProcess.TreeEventsInformation}"/>
                 </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Overgangskansen">
+                    <fluent:ToggleButton
+                        Header="Overgangskansen"
+                        LargeIcon="/StoryTree.Gui;component\Resources\estimation.png"
+                        Size="Large" 
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Estimation}}"
+                        Command="{Binding ChangeProcessStepCommand}"
+                        CommandParameter="{x:Static viewModels:StoryTreeProcess.Estimation}"/>
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Resultaten">
+                    <fluent:ToggleButton
+                        Header="Resultaten"
+                        LargeIcon="/StoryTree.Gui;component\Resources\results.png"
+                        Size="Large" 
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Results}}"
+                        Command="{Binding ChangeProcessStepCommand}"
+                        CommandParameter="{x:Static viewModels:StoryTreeProcess.Results}"/>
+                </fluent:RibbonGroupBox>
+
             </fluent:RibbonTabItem>
+
         </fluent:Ribbon>
 
         <Grid Grid.Row="1" ZIndex="2">

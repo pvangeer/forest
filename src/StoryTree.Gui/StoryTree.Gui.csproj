@@ -149,7 +149,6 @@
     <Compile Include="Command\RemoveAllMessagesCommand.cs" />
     <Compile Include="Converters\EventTypeToColorConverter.cs" />
     <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />
-    <Compile Include="Command\AddEventTreeCommand.cs" />
     <Compile Include="Command\ProjectViewModelCommand.cs" />
     <Compile Include="Converters\CriticalPathConverter.cs" />
     <Compile Include="Converters\CriticalPathToPlotModelConverter.cs" />
@@ -203,7 +202,6 @@
     <Compile Include="ViewModels\MessageListViewModel.cs" />
     <Compile Include="ViewModels\ProbabilitySpecificationViewModelBase.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
-    <Compile Include="Command\RemoveEventTreeCommand.cs" />
     <Compile Include="Command\RemoveTreeEventCommand.cs" />
     <Compile Include="Command\TreeEventClickedCommand.cs" />
     <Compile Include="Command\SaveProjectAsCommand.cs" />
@@ -242,10 +240,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataTemplates\MainTabItems\Estimation\FixedValueEstimationTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\MainTabItems\EventTreesDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

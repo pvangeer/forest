@@ -5,7 +5,6 @@
         GeneralInformation,
         Experts,
         Hydraulics,
-        EventTreeDefinition,
         TreeEventsDefinition,
         TreeEventsInformation,
         Estimation,

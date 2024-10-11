@@ -11,7 +11,7 @@ namespace StoryTree.Gui.Command
 
         public override bool CanExecute(object parameter)
         {
-            return ProjectViewModel?.SelectedEventTreeFiltered != null;
+            return ProjectViewModel?.SelectedEventTree != null;
         }
 
         public override void Execute(object parameter)
@@ -21,7 +21,7 @@ namespace StoryTree.Gui.Command
             {
                 treeEventType = treeEventTypeCasted;
             }
-            ProjectViewModel?.SelectedEventTreeFiltered.AddTreeEvent(ProjectViewModel?.SelectedTreeEvent, treeEventType);
+            ProjectViewModel?.SelectedEventTree.AddTreeEvent(ProjectViewModel?.SelectedTreeEvent, treeEventType);
         }
     }
 }

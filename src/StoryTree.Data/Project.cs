@@ -16,7 +16,7 @@ namespace StoryTree.Data
             Name = "Nieuw project";
             AssessmentSection = "1-1";
             ProjectLeader = new Person();
-            EventTrees = new ObservableCollection<EventTree>();
+            EventTrees = new ObservableCollection<EventTree>(){new EventTree()};
             Experts = new ObservableCollection<Expert>();
             HydraulicConditions = new ObservableCollection<HydraulicCondition>();
         }

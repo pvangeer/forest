@@ -100,9 +100,6 @@ namespace StoryTree.Gui.ViewModels
                 case nameof(EventTree.Color):
                     OnPropertyChanged(nameof(Color));
                     break;
-                case nameof(EventTree.NeedsSpecification):
-                    OnPropertyChanged(nameof(NeedsSpecification));
-                    break;
             }
         }
 
@@ -139,16 +136,6 @@ namespace StoryTree.Gui.ViewModels
             {
                 EventTree.Color = value;
                 EventTree.OnPropertyChanged(nameof(EventTree.Color));
-            }
-        }
-
-        public bool NeedsSpecification
-        {
-            get => EventTree.NeedsSpecification;
-            set
-            {
-                EventTree.NeedsSpecification = value;
-                EventTree.OnPropertyChanged(nameof(EventTree.NeedsSpecification));
             }
         }
 

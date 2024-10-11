@@ -49,7 +49,7 @@ namespace StoryTree.Gui.ViewModels
 
             project.EventTrees.CollectionChanged += EventTreesCollectionChanged;
 
-            SelectedEventTreeFiltered = EventTrees.FirstOrDefault();
+            SelectedEventTree = EventTrees.FirstOrDefault();
             foreach (var eventTreeViewModel in EventTrees)
             {
                 eventTreeViewModel.SelectedTreeEvent = eventTreeViewModel.MainTreeEventViewModel;
@@ -57,8 +57,6 @@ namespace StoryTree.Gui.ViewModels
         }
 
         public Project Project { get; }
-
-        public IEnumerable<EventTreeViewModel> EventTreesToEstimate => EventTrees.Where(e => e.NeedsSpecification);
 
         public ObservableCollection<EventTreeViewModel> EventTrees { get; }
 
@@ -86,10 +84,6 @@ namespace StoryTree.Gui.ViewModels
             set => Project.ProjectInformation = value;
         }
 
-        public ICommand AddEventTreeCommand => new AddEventTreeCommand(this);
-
-        public ICommand RemoveEventTreeCommand => new RemoveEventTreeCommand(this);
-
         public ICommand RemoveTreeEventCommand => removeTreeEventCommand;
 
         public ICommand AddTreeEventCommand => addTreeEventCommand;
@@ -97,34 +91,21 @@ namespace StoryTree.Gui.ViewModels
         private EventTreeViewModel selectedEventTree;
         private readonly ObservableCollection<ExpertViewModel> expertViewModels;
         private readonly ObservableCollection<HydraulicConditionViewModel> hydraulicsViewModels;
-        private ProjectManipulationService projectManipulationService;
+        private readonly ProjectManipulationService projectManipulationService;
 
-        public EventTreeViewModel SelectedEventTreeUnFiltered
+        public EventTreeViewModel SelectedEventTree
         {
             get => selectedEventTree;
-            set => SelectedEventTreeFiltered = value;
-        }
-
-        public EventTreeViewModel SelectedEventTreeFiltered
-        {
-            get => selectedEventTree == null ? null :
-                selectedEventTree.NeedsSpecification ? selectedEventTree : null;
             set
             {
                 selectedEventTree = value;
-                OnPropertyChanged(nameof(SelectedEventTreeFiltered));
-                OnPropertyChanged(nameof(SelectedEventTreeUnFiltered));
                 OnPropertyChanged(nameof(SelectedTreeEvent));
-                foreach (var eventTreeViewModel in EventTrees)
-                {
-                    eventTreeViewModel.IsSelected = Equals(selectedEventTree, eventTreeViewModel);
-                }
                 addTreeEventCommand.FireCanExecuteChanged();
                 removeTreeEventCommand.FireCanExecuteChanged();
             }
         }
 
-        public TreeEventViewModel SelectedTreeEvent => SelectedEventTreeFiltered?.SelectedTreeEvent;
+        public TreeEventViewModel SelectedTreeEvent => SelectedEventTree?.SelectedTreeEvent;
 
         public ObservableCollection<ExpertViewModel> Experts => expertViewModels;
 
@@ -161,33 +142,6 @@ namespace StoryTree.Gui.ViewModels
         public ObservableCollection<HydraulicConditionViewModel> HydraulicConditionsList => hydraulicsViewModels;
 
         public StorageState BusyIndicator { get; set; }
-
-        public void AddNewEventTree()
-        {
-            var eventTree = new EventTree {Name = "Nieuwe gebeurtenis"};
-            Project.EventTrees.Add(eventTree);
-            OnPropertyChanged(nameof(EventTrees));
-            OnPropertyChanged(nameof(EventTreesToEstimate));
-            SelectedEventTreeFiltered = EventTrees.FirstOrDefault(et => et.IsViewModelFor(eventTree));
-        }
-
-        public void RemoveSelectedEventTree()
-        {
-            var currentIndex = EventTrees.IndexOf(selectedEventTree);
-
-            EventTrees.Remove(SelectedEventTreeFiltered);
-            OnPropertyChanged(nameof(EventTrees));
-            OnPropertyChanged(nameof(EventTreesToEstimate));
-
-            if (currentIndex == -1 || currentIndex == EventTrees.Count)
-            {
-                SelectedEventTreeFiltered = EventTrees.LastOrDefault();
-            }
-            else
-            {
-                SelectedEventTreeFiltered = EventTrees.ElementAt(currentIndex);
-            }
-        }
 
         private void EventTreesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -275,10 +229,6 @@ namespace StoryTree.Gui.ViewModels
                     addTreeEventCommand.FireCanExecuteChanged();
                     removeTreeEventCommand.FireCanExecuteChanged();
                     break;
-                case nameof(EventTreeViewModel.NeedsSpecification):
-                    OnPropertyChanged(nameof(EventTreesToEstimate));
-                    OnPropertyChanged(nameof(SelectedEventTreeUnFiltered));
-                    break;
             }
         }
 
@@ -288,6 +238,12 @@ namespace StoryTree.Gui.ViewModels
         public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void OnProcessChanged()
+        {
+            addTreeEventCommand.FireCanExecuteChanged();
+            removeTreeEventCommand.FireCanExecuteChanged();
         }
     }
 }
