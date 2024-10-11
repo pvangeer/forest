@@ -27,17 +27,13 @@ namespace StoryTree.Gui.ViewModels
             Project = project;
             projectManipulationService = new ProjectManipulationService(project);
 
-            var eventTreeViewModels = new ObservableCollection<EventTreeViewModel>(project.EventTrees.Select(te =>
+            var eventTreeViewModel = new EventTreeViewModel(Project.EventTrees.FirstOrDefault(), projectManipulationService)
             {
-                var eventTreeViewModel = new EventTreeViewModel(te, projectManipulationService)
-                {
-                    EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(project)
-                };
-                eventTreeViewModel.PropertyChanged += EventTreeViewModelPropertyChanged;
-                return eventTreeViewModel;
-            }));
+                EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(project)
+            };
+            eventTreeViewModel.PropertyChanged += EventTreeViewModelPropertyChanged;
+            EventTree = eventTreeViewModel;
 
-            EventTrees = eventTreeViewModels;
             addTreeEventCommand = new AddTreeEventCommand(this);
             removeTreeEventCommand = new RemoveTreeEventCommand(this);
 
@@ -46,19 +42,9 @@ namespace StoryTree.Gui.ViewModels
 
             hydraulicsViewModels = new ObservableCollection<HydraulicConditionViewModel>(Project.HydraulicConditions.Select(e => new HydraulicConditionViewModel(e)));
             hydraulicsViewModels.CollectionChanged += HydraulicsViewModelsCollectionChanged;
-
-            project.EventTrees.CollectionChanged += EventTreesCollectionChanged;
-
-            SelectedEventTree = EventTrees.FirstOrDefault();
-            foreach (var eventTreeViewModel in EventTrees)
-            {
-                eventTreeViewModel.SelectedTreeEvent = eventTreeViewModel.MainTreeEventViewModel;
-            }
         }
 
         public Project Project { get; }
-
-        public ObservableCollection<EventTreeViewModel> EventTrees { get; }
 
         public string ProjectName
         {
@@ -88,24 +74,13 @@ namespace StoryTree.Gui.ViewModels
 
         public ICommand AddTreeEventCommand => addTreeEventCommand;
 
-        private EventTreeViewModel selectedEventTree;
         private readonly ObservableCollection<ExpertViewModel> expertViewModels;
         private readonly ObservableCollection<HydraulicConditionViewModel> hydraulicsViewModels;
         private readonly ProjectManipulationService projectManipulationService;
 
-        public EventTreeViewModel SelectedEventTree
-        {
-            get => selectedEventTree;
-            set
-            {
-                selectedEventTree = value;
-                OnPropertyChanged(nameof(SelectedTreeEvent));
-                addTreeEventCommand.FireCanExecuteChanged();
-                removeTreeEventCommand.FireCanExecuteChanged();
-            }
-        }
+        public EventTreeViewModel EventTree { get; }
 
-        public TreeEventViewModel SelectedTreeEvent => SelectedEventTree?.SelectedTreeEvent;
+        public TreeEventViewModel SelectedTreeEvent => EventTree.SelectedTreeEvent;
 
         public ObservableCollection<ExpertViewModel> Experts => expertViewModels;
 
@@ -142,34 +117,6 @@ namespace StoryTree.Gui.ViewModels
         public ObservableCollection<HydraulicConditionViewModel> HydraulicConditionsList => hydraulicsViewModels;
 
         public StorageState BusyIndicator { get; set; }
-
-        private void EventTreesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == NotifyCollectionChangedAction.Remove)
-            {
-                foreach (var eventTree in e.OldItems.OfType<EventTree>())
-                {
-                    var eventTreeViewModel = EventTrees.First(et => et.IsViewModelFor(eventTree));
-                    eventTreeViewModel.PropertyChanged -= EventTreeViewModelPropertyChanged;
-                    EventTrees.Remove(eventTreeViewModel);
-                }
-                
-            }
-
-            if (e.Action == NotifyCollectionChangedAction.Add)
-            {
-                foreach (var eventTree in e.NewItems.OfType<EventTree>())
-                {
-                    var eventTreeViewModel = new EventTreeViewModel(eventTree, projectManipulationService)
-                    {
-                        EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(Project)
-                    };
-                    eventTreeViewModel.PropertyChanged += EventTreeViewModelPropertyChanged;
-                    EventTrees.Add(eventTreeViewModel);
-                }
-
-            }
-        }
 
         private void HydraulicsViewModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {

@@ -30,6 +30,7 @@ namespace StoryTree.Gui.ViewModels
         public EventTreeViewModel([NotNull]EventTree eventTree, ProjectManipulationService projectManipulationService)
         {
             EventTree = eventTree;
+            SelectedTreeEvent = MainTreeEventViewModel;
             this.projectManipulationService = projectManipulationService;
             eventTree.PropertyChanged += EventTreePropertyChanged;
         }

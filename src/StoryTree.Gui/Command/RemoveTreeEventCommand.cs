@@ -11,7 +11,7 @@ namespace StoryTree.Gui.Command
 
         public override void Execute(object parameter)
         {
-            ProjectViewModel.SelectedEventTree.RemoveTreeEvent(ProjectViewModel.SelectedTreeEvent, TreeEventType.Failing);
+            ProjectViewModel.EventTree.RemoveTreeEvent(ProjectViewModel.SelectedTreeEvent, TreeEventType.Failing);
         }
     }
 }

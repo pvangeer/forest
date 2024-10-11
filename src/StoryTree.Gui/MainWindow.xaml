@@ -263,14 +263,6 @@
                     Margin="2,0,10,0"/>
                 </StackPanel>
             </fluent:StatusBarItem>
-            <fluent:StatusBarItem HorizontalAlignment="Left">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="/StoryTree.Gui;component/Resources/EventTree.png" Height="24"/>
-                    <TextBlock Text="{Binding ProjectViewModel.EventTrees, Converter={StaticResource EventTreesToCountConverter}}"
-                               Margin="4,0,4,0"
-                               VerticalAlignment="Center"/>
-                </StackPanel>
-            </fluent:StatusBarItem>
 
             <fluent:StatusBarItem
                 HorizontalAlignment="Right">
