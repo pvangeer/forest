@@ -29,7 +29,6 @@ namespace StoryTree.Storage.Read
             var treeEvent = new TreeEvent
             {
                 Name = entity.Name,
-                Details = entity.Details,
                 FixedProbability = entity.FixedProbability == null
                     ? Probability.NaN
                     : (Probability) (double) entity.FixedProbability,

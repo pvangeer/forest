@@ -21,7 +21,6 @@ namespace StoryTree.Storage.Create
             var entity = new TreeEventEntity
             {
                 Name = model.Name.DeepClone(),
-                Details = model.Details.DeepClone(),
                 Summary = model.Summary.DeepClone(),
                 FixedProbability = ((double)model.FixedProbability).ToNaNAsNull(),
                 ProbabilitySpecificationType = Convert.ToByte(model.ProbabilitySpecificationType),

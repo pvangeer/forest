@@ -80,7 +80,6 @@ namespace StoryTree.Storage.Test
             }
             Assert.AreEqual(treeEvent1.Name, treeEvent2.Name);
             Assert.AreEqual(treeEvent1.ProbabilitySpecificationType, treeEvent2.ProbabilitySpecificationType);
-            Assert.AreEqual(treeEvent1.Details, treeEvent2.Details);
             Assert.AreEqual(treeEvent1.FixedProbability, treeEvent2.FixedProbability);
             Assert.AreEqual(treeEvent1.Summary, treeEvent2.Summary);
             Assert.AreEqual(treeEvent1.Information, treeEvent2.Information);
