@@ -20,11 +20,6 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
             <StackPanel Orientation="Vertical"
                         Grid.Row="0">
                 <TextBlock Text="Selecteer experts:" FontWeight="Bold" Margin="2,2,2,5"/>
@@ -43,26 +38,6 @@
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Naam" Binding="{Binding Name}" ElementStyle="{StaticResource ColumnElementStyle}"/>
                         <DataGridTextColumn Header="Email" Binding="{Binding Email}" ElementStyle="{StaticResource ColumnElementStyle}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </StackPanel>
-            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="10" />
-            <StackPanel Grid.Column="2" Orientation="Vertical">
-                <TextBlock Text="Selecteer gebeurtenissen:" FontWeight="Bold" Margin="2,2,2,5"/>
-                <DataGrid 
-                    ItemsSource="{Binding EventTree}"
-                    AutoGenerateColumns="False"
-                    Margin="2,0,0,0"
-                    Style="{StaticResource DataGridStyle}">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Exporteren">
-                            <DataGridTemplateColumn.CellTemplate >
-                                <DataTemplate DataType="export:EventTreeExportViewModel">
-                                    <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Style="{StaticResource CheckBoxStyle}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Naam" Binding="{Binding Name}" ElementStyle="{StaticResource ColumnElementStyle}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

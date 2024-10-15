@@ -20,12 +20,7 @@ namespace StoryTree.Storage.Create
 
             var entity = new EventTreeEntity
             {
-                Name = model.Name.DeepClone(),
-                Details = model.Details.DeepClone(),
-                Summary = model.Summary.DeepClone(),
-                Color = model.Color.ToHexString(),
                 TreeEventEntity = model.MainTreeEvent?.Create(registry),
-                NeedsSpecification = Convert.ToByte(model.NeedsSpecification)
             };
 
             registry.Register(model, entity);

@@ -24,12 +24,7 @@ namespace StoryTree.Storage.Read
 
             var eventTree = new EventTree
             {
-                Name = entity.Name,
-                Details = entity.Details,
-                Summary = entity.Summary,
                 MainTreeEvent = entity.TreeEventEntity?.Read(collector),
-                Color = entity.Color.ToColor(),
-                NeedsSpecification = entity.NeedsSpecification == 1
             };
 
             collector.Collect(entity,eventTree);

@@ -15,7 +15,6 @@ namespace StoryTree.IO.Test
         {
             var fileName = @"D:\Test\ThisIsATest.xlsx";
             var eventImageFileName = @"C:\src\storytree\src\StoryTree.IO\giraffe-png-images-8.png";
-            string eventName = "TestEvent";
             string expertName = "Test Expert";
             DateTime date = DateTime.Now;
             double[] waterLevels = {1.0, 2.0, 3.0, 4.0};
@@ -27,7 +26,6 @@ namespace StoryTree.IO.Test
             {
                 Date = date,
                 GetFileStream = () => new FileStream(eventImageFileName, FileMode.Open),
-                EventTreeName = eventName,
                 ExpertName = expertName,
                 Nodes = new DotNode[]
                 {

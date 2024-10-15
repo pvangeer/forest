@@ -5,7 +5,7 @@ namespace StoryTree.IO.Import
 {
     public class DotForm
     {
-        public string EventTreeName { get; set; }
+        //public string EventTreeName { get; set; }
 
         public string ExpertName { get; set; }
 

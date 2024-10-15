@@ -11,7 +11,6 @@ namespace StoryTree.IO.Import
 {
     public static class ElicitationFormReader
     {
-        private const string EventTreeNameCellReference = "E5";
         private const string ExpertNameCellReference = "D7";
         private const string DateCellReference = "D8";
         private const string FrequencyColumnReference = "D";
@@ -107,7 +106,6 @@ namespace StoryTree.IO.Import
 
             return new DotForm
             {
-                EventTreeName = GetCellValueAsString(worksheet, EventTreeNameCellReference, workbookPart),
                 ExpertName = GetCellValueAsString(worksheet, ExpertNameCellReference, workbookPart),
                 Date = GetCellValueAsDateTime(worksheet,DateCellReference),
                 Nodes = nodes.ToArray()

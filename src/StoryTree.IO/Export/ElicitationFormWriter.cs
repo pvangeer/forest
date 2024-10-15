@@ -71,7 +71,7 @@ namespace StoryTree.IO.Export
 
             Sheet sheet = new Sheet
             {
-                Name = form.EventTreeName,
+                Name = "Faalpad",
                 SheetId = (uint)sheets.Count() + 1,
                 Id = workbookPart.GetIdOfPart(worksheetPart),
             };
@@ -269,7 +269,7 @@ namespace StoryTree.IO.Export
             AddRow(sheetData, 0, 5,
                 ConstructCell("Gebeurtenis:", CellValues.String, StyleSheetLibrary.TitleStyleIndex),
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex),
-                ConstructCell(form.EventTreeName, CellValues.String, StyleSheetLibrary.TitleStyleIndex),
+                ConstructCell("Faalpad", CellValues.String, StyleSheetLibrary.TitleStyleIndex),
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex),

@@ -14,7 +14,6 @@ namespace StoryTree.Gui
             {
                 EventTree =
                 {
-                    Name = "First event tree",
                     MainTreeEvent = CreateEventTree("Second event tree", 2),
                 },
                 Experts =
@@ -121,7 +120,6 @@ namespace StoryTree.Gui
                 AssessmentSection = "12-3",
                 EventTree =
                 {
-                    Name = "AGK - HHNK",
                     MainTreeEvent = new TreeEvent
                     {
                         Name = "Knoop 1",
@@ -422,8 +420,6 @@ namespace StoryTree.Gui
                             }
                         }
                     },
-                    Color = Colors.CornflowerBlue,
-                    NeedsSpecification = true
                 },
                 Experts =
                 {

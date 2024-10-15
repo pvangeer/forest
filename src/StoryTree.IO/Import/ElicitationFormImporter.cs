@@ -64,13 +64,6 @@ namespace StoryTree.IO.Import
 
         private bool ValidationFailed(string fileName, DotFormValidationResult validationResult, DotForm dotForm)
         {
-            if (validationResult.EventTreesValidation == EventTreesValidationResult.EventTreeNotFound)
-            {
-                log.Error(
-                    $"Fout bij het lezen van bestand {fileName}: De gespecificeerde gebeurtenis ({dotForm.EventTreeName}) kon niet in het project worden gevonden.");
-                return true;
-            }
-
             if (validationResult.ExpertValidation == ExpertValidationResult.ExpertNotFound)
             {
                 log.Error(

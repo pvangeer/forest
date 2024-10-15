@@ -92,51 +92,6 @@ namespace StoryTree.Gui.ViewModels
                     OnPropertyChanged(nameof(MainTreeEventViewModel));
                     OnPropertyChanged(nameof(Graph));
                     break;
-                case nameof(EventTree.Name):
-                    OnPropertyChanged(nameof(Name));
-                    break;
-                case nameof(EventTree.Summary):
-                    OnPropertyChanged(nameof(Summary));
-                    break;
-                case nameof(EventTree.Color):
-                    OnPropertyChanged(nameof(Color));
-                    break;
-            }
-        }
-
-        public string Name
-        {
-            get => EventTree.Name;
-            set
-            {
-                EventTree.Name= value;
-                EventTree.OnPropertyChanged(nameof(EventTree.Name));
-            }
-        }
-
-        public string Summary
-        {
-            get => EventTree.Summary;
-            set
-            {
-                EventTree.Summary = value;
-                EventTree.OnPropertyChanged(nameof(EventTree.Summary));
-            }
-        }
-
-        public string Details
-        {
-            get => EventTree.Details;
-            set => EventTree.Details = value;
-        }
-
-        public Color Color
-        {
-            get => EventTree.Color;
-            set
-            {
-                EventTree.Color = value;
-                EventTree.OnPropertyChanged(nameof(EventTree.Color));
             }
         }
 

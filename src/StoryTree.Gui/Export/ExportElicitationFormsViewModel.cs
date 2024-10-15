@@ -23,7 +23,6 @@ namespace StoryTree.Gui.Export
                 new Expert {Name = "Pietje"},
                 new Expert {Name = "Jantje"}
             },
-            EventTree = { Name = "Gebeurtenis 1", NeedsSpecification = true },
             Name = "Testproject"
         };
 
@@ -45,7 +44,7 @@ namespace StoryTree.Gui.Export
         public void OnExportHandler()
         {
             Expert[] expertsToExport = Experts.Where(e => e.IsChecked).Select(e => e.Expert).ToArray();
-            EventTree eventTreeToExport = EventTree.EventTreeViewModel;
+            EventTree eventTreeToExport = EventTree.EventTree;
             string location = ExportLocation;
             string prefix = Prefix;
 
@@ -90,8 +89,7 @@ namespace StoryTree.Gui.Export
 
         private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ElicitationFormsExportViewModel.IsChecked) ||
-                e.PropertyName == nameof(EventTreeExportViewModel.IsChecked))
+            if (e.PropertyName == nameof(ElicitationFormsExportViewModel.IsChecked))
             {
                 CanExportChanged?.Invoke(this, null);
             }

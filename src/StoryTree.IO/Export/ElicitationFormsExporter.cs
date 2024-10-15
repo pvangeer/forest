@@ -87,7 +87,6 @@ namespace StoryTree.IO.Export
 
             return new DotForm
             {
-                EventTreeName = eventTree.Name,
                 ExpertName = expertName,
                 GetFileStream = () => EventTreeToImageStream(eventTree),
                 Date = DateTime.Today,

@@ -53,13 +53,13 @@
                         <TextBox 
                             Grid.Column="1"
                             Grid.Row="0"
-                            Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding SelectedTreeEvent.Name, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource TextBoxStyle}"/>
                         <Label Grid.Column="0" Grid.Row="1" Content="Omschrijving" FontWeight="Bold"/>
                         <TextBox 
                             Grid.Column="1"
                             Grid.Row="1"
-                            Text="{Binding Summary, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding SelectedTreeEvent.Summary, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource TextBoxStyle}"/>
                         <Label 
                             Grid.Row="2"

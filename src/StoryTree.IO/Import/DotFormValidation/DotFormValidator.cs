@@ -19,12 +19,10 @@ namespace StoryTree.IO.Import.DotFormValidation
 
             var validationResult = new DotFormValidationResult
             {
-                EventTreesValidation = ValidateEventTrees(form, project),
                 ExpertValidation = ValidateExperts(form, project),
             };
 
-            if (validationResult.EventTreesValidation == EventTreesValidationResult.Valid &&
-                validationResult.ExpertValidation == ExpertValidationResult.Valid)
+            if (validationResult.ExpertValidation == ExpertValidationResult.Valid)
             {
                 validationResult.NodesValidationResult = nodesValidationResult;
             }
@@ -98,16 +96,6 @@ namespace StoryTree.IO.Import.DotFormValidation
             }
 
             return ExpertValidationResult.ExpertNotFound;
-        }
-
-        private static EventTreesValidationResult ValidateEventTrees(DotForm form, Project project)
-        {
-            if (project.EventTree.Name == form.EventTreeName)
-            {
-                return EventTreesValidationResult.Valid;
-            }
-
-            return EventTreesValidationResult.EventTreeNotFound;
         }
     }
 }
