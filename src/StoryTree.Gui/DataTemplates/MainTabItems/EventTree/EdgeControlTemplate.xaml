@@ -4,25 +4,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:graphSharpControls="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls" 
     xmlns:graphSharpConverters="clr-namespace:GraphSharp.Converters;assembly=GraphSharp.Controls"
-    xmlns:converters="clr-namespace:StoryTree.Gui.Converters">
+    xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
+    xmlns:gui="clr-namespace:StoryTree.Gui">
 
     <graphSharpConverters:EdgeRouteToPathConverter x:Key="RouteToPathConverter" />
 
     <converters:EventTypeToColorConverter x:Key="EventTypeToColorConverter"/>
 
+    <gui:RouteToPathConverterManual x:Key="RouteToPathConverterManual" />
     <Style TargetType="{x:Type graphSharpControls:EdgeControl}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type graphSharpControls:EdgeControl}">
-                    <Path Stroke="{Binding PassingEvent, Converter={StaticResource EventTypeToColorConverter}}"
-                          StrokeThickness="2"
+                    <Path Stroke="DimGray"
+                          StrokeThickness="1"
                           MinWidth="1"
                           MinHeight="1"
                           x:Name="edgePath">
                         <Path.Data>
                             <PathGeometry>
                                 <PathGeometry.Figures>
-                                    <MultiBinding Converter="{StaticResource RouteToPathConverter}">
+                                    <MultiBinding Converter="{StaticResource RouteToPathConverterManual}">
                                         <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Source.(graphSharpControls:GraphCanvas.X)" />
                                         <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Source.(graphSharpControls:GraphCanvas.Y)" />
                                         <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Source.ActualWidth" />
@@ -40,10 +42,5 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="MinWidth" Value="1" />
-        <Setter Property="MinHeight" Value="1" />
-        <Setter Property="Background" Value="Red" />
-        <Setter Property="Foreground" Value="Silver" />
-        <Setter Property="Opacity" Value="0.5" />
     </Style>
 </ResourceDictionary>

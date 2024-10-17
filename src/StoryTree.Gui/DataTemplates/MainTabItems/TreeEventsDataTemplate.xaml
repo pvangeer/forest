@@ -12,23 +12,16 @@
     </DataTemplate>
 
     <DataTemplate x:Key="TreeEventsTemplate" DataType="viewModels:ProjectViewModel">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="15" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{Binding EventTree.Name}" TextAlignment="Center" FontWeight="Bold"/>
-            <controls:ZoomControl Grid.Row="1">
-                <controls:ZoomControl.Resources>
-                    <ResourceDictionary>
-                        <ResourceDictionary.MergedDictionaries>
-                            <ResourceDictionary Source="pack://application:,,,/StoryTree.Gui;component/DataTemplates/MainTabItems/EventTree/EdgeControlTemplate.xaml"/>
-                            <ResourceDictionary Source="pack://application:,,,/StoryTree.Gui;component/DataTemplates/MainTabItems/EventTree/VertexControlTemplate.xaml"/>
-                        </ResourceDictionary.MergedDictionaries>
-                    </ResourceDictionary>
-                </controls:ZoomControl.Resources>
-                <eventTree:EventTreeGraphLayout Graph="{Binding EventTree.Graph}"/>
-            </controls:ZoomControl>
-        </Grid>
+        <controls:ZoomControl ZoomDeltaMultiplier="5">
+            <controls:ZoomControl.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/StoryTree.Gui;component/DataTemplates/MainTabItems/EventTree/EdgeControlTemplate.xaml"/>
+                        <ResourceDictionary Source="pack://application:,,,/StoryTree.Gui;component/DataTemplates/MainTabItems/EventTree/VertexControlTemplate.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </controls:ZoomControl.Resources>
+            <eventTree:EventTreeGraphLayout Graph="{Binding EventTree.Graph}"/>
+        </controls:ZoomControl>
     </DataTemplate>
 </ResourceDictionary>
