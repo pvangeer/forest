@@ -165,7 +165,7 @@ namespace StoryTree.Gui.ViewModels
                     return "Klassen";
                 case ProbabilitySpecificationType.FixedValue:
                     return "Vaste kans";
-                case ProbabilitySpecificationType.FixedFreqeuncy:
+                case ProbabilitySpecificationType.FixedFrequency:
                     return "Vaste freqeuentielijn";
                 default:
                     throw new InvalidEnumArgumentException();

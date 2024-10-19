@@ -23,7 +23,7 @@ namespace StoryTree.Gui
                         Name = "Klaas",
                         Email = "email@domein.nl",
                         Expertise = "Alles",
-                        Organisation = "Eigen bedrijf",
+                        Organization = "Eigen bedrijf",
                         Telephone = "088-3358339"
                     },
                     new Expert
@@ -31,7 +31,7 @@ namespace StoryTree.Gui
                         Name = "Piet",
                         Email = "piet@email.nl",
                         Expertise = "Niets",
-                        Organisation = "Ander bedrijf",
+                        Organization = "Ander bedrijf",
                         Telephone = "088-3358339"
                     },
                 }
@@ -66,7 +66,7 @@ namespace StoryTree.Gui
                 Name = "Andre van Hoven",
                 Email = "Andre.vanHoven@deltares.nl",
                 Expertise = "Asfalt bekleding",
-                Organisation = "Deltares",
+                Organization = "Deltares",
                 Telephone = ""
             };
             var erik = new Expert
@@ -74,7 +74,7 @@ namespace StoryTree.Gui
                 Name = "Erik Vastenburg",
                 Email = "e.vastenburg@hhnk.nl",
                 Expertise = "Faalpaden, geotechniek",
-                Organisation = "HHNK",
+                Organization = "HHNK",
                 Telephone = ""
             };
             var roy = new Expert
@@ -82,7 +82,7 @@ namespace StoryTree.Gui
                 Name = "Roy Mom",
                 Email = "",
                 Expertise = "Bekledingen",
-                Organisation = "",
+                Organization = "",
                 Telephone = ""
             };
             var andries = new Expert
@@ -90,7 +90,7 @@ namespace StoryTree.Gui
                 Name = "Andries Nederpel",
                 Email = "a.nederpel@hhnk.nl",
                 Expertise = "",
-                Organisation = "HHNK",
+                Organization = "HHNK",
                 Telephone = ""
             };
             var dirk = new Expert
@@ -98,7 +98,7 @@ namespace StoryTree.Gui
                 Name = "Dirk",
                 Email = "",
                 Expertise = "Asfalt",
-                Organisation = "HKV",
+                Organization = "HKV",
                 Telephone = ""
             };
 

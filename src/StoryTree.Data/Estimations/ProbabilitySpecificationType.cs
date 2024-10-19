@@ -4,6 +4,6 @@
     {
         Classes = 1,
         FixedValue = 2,
-        FixedFreqeuncy = 3
+        FixedFrequency = 3
     }
 }

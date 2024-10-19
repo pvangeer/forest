@@ -20,7 +20,7 @@ namespace StoryTree.Data.Tree
                     }
 
                     return classCurve;
-                case ProbabilitySpecificationType.FixedFreqeuncy:
+                case ProbabilitySpecificationType.FixedFrequency:
                     // TODO: Interpolate if necessary
                     return treeEvent.FixedFragilityCurve;
                 case ProbabilitySpecificationType.FixedValue:

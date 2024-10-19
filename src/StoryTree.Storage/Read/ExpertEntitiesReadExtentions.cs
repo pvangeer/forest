@@ -29,7 +29,7 @@ namespace StoryTree.Storage.Read
                 Email = person.Email,
                 Telephone = person.Telephone,
                 Expertise = entity.Expertise,
-                Organisation = entity.Organisation
+                Organization = entity.Organisation
             };
 
             collector.Collect(entity,expert);

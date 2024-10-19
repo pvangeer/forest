@@ -22,7 +22,7 @@ namespace StoryTree.Storage.Create
             {
                 PersonEntity = ((Person) model).Create(registry),
                 Expertise = model.Expertise.DeepClone(),
-                Organisation = model.Organisation.DeepClone()
+                Organisation = model.Organization.DeepClone()
             };
 
             registry.Register(model, entity);

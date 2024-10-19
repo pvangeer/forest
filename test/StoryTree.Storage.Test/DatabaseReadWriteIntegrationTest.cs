@@ -138,7 +138,7 @@ namespace StoryTree.Storage.Test
             Assert.AreEqual(ex1.Name, ex2.Name);
             Assert.AreEqual(ex1.Telephone, ex2.Telephone);
             Assert.AreEqual(ex1.Email, ex2.Email);
-            Assert.AreEqual(ex1.Organisation, ex2.Organisation);
+            Assert.AreEqual(ex1.Organization, ex2.Organization);
             Assert.AreEqual(ex1.Expertise, ex2.Expertise);
         }
 

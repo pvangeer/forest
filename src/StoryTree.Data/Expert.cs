@@ -4,6 +4,6 @@
     {
         public string Expertise { get; set; }
 
-        public string Organisation { get; set; }
+        public string Organization { get; set; }
     }
 }

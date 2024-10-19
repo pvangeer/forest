@@ -26,6 +26,7 @@
       <HintPath>..\..\packages\System.Data.SQLite.Linq.1.0.108.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
@@ -116,6 +117,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="StorageSqLite.cs" />
+    <Compile Include="VersionInfo.cs" />
+    <Compile Include="XmlEntities\EventTreeXmlEntity.cs" />
+    <Compile Include="XmlEntities\ExpertClassEstimationXmlEntity.cs" />
+    <Compile Include="XmlEntities\ExpertXmlEntity.cs" />
+    <Compile Include="XmlEntities\FragilityCurveElementXmlEntity.cs" />
+    <Compile Include="XmlEntities\HydraulicConditionXmlEntity.cs" />
+    <Compile Include="XmlEntities\PersonXmlEntity.cs" />
+    <Compile Include="XmlEntities\ProbabilityXmlEntity.cs" />
+    <Compile Include="XmlEntities\ProjectXmlEntity.cs" />
+    <Compile Include="XmlEntities\TreeEventXmlEntity.cs" />
+    <Compile Include="XmlEntities\VersionXmlEntity.cs" />
+    <Compile Include="XmlEntities\XmlEntityBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -160,6 +173,7 @@
       <LastGenOutput>TellTheStoryEntityDataModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

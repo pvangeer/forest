@@ -14,7 +14,5 @@ namespace StoryTree.Data.Tree
         public ProbabilityClass AverageEstimation { get; set; }
 
         public ProbabilityClass MaxEstimation { get; set; }
-
-        public string Comment { get; set; }
     }
 }

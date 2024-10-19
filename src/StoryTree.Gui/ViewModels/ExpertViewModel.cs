@@ -39,8 +39,8 @@ namespace StoryTree.Gui.ViewModels
 
         public string Organisation
         {
-            get => Expert.Organisation;
-            set => Expert.Organisation = value;
+            get => Expert.Organization;
+            set => Expert.Organization = value;
         }
 
         public string Telephone
