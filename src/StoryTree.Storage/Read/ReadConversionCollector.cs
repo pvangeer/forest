@@ -10,42 +10,53 @@ namespace StoryTree.Storage.Read
 {
     internal class ReadConversionCollector
     {
-        private readonly Dictionary<PersonXmlEntity, Person> persons = CreateDictionary<PersonXmlEntity, Person>();
-        private readonly Dictionary<ExpertXmlEntity, Expert> experts = CreateDictionary<ExpertXmlEntity, Expert>();
-        private readonly Dictionary<HydraulicConditionXmlEntity, HydraulicCondition> hydraulicConditions = 
-            CreateDictionary<HydraulicConditionXmlEntity, HydraulicCondition>();
-        private readonly Dictionary<FragilityCurveElementXmlEntity, FragilityCurveElement> fragilityCurveElements =
-            CreateDictionary<FragilityCurveElementXmlEntity, FragilityCurveElement>();
         private readonly Dictionary<EventTreeXmlEntity, EventTree> eventTrees = CreateDictionary<EventTreeXmlEntity, EventTree>();
-        private readonly Dictionary<TreeEventXmlEntity, TreeEvent> treeEvents = CreateDictionary<TreeEventXmlEntity, TreeEvent>();
+
         private readonly Dictionary<ExpertClassEstimationXmlEntity, ExpertClassEstimation> expertClassEstimations =
             CreateDictionary<ExpertClassEstimationXmlEntity, ExpertClassEstimation>();
 
-        
+        private readonly Dictionary<ExpertXmlEntity, Expert> experts = CreateDictionary<ExpertXmlEntity, Expert>();
+
+        private readonly Dictionary<FragilityCurveElementXmlEntity, FragilityCurveElement> fragilityCurveElements =
+            CreateDictionary<FragilityCurveElementXmlEntity, FragilityCurveElement>();
+
+        private readonly Dictionary<HydraulicConditionXmlEntity, HydraulicCondition> hydraulicConditions =
+            CreateDictionary<HydraulicConditionXmlEntity, HydraulicCondition>();
+
+        private readonly Dictionary<PersonXmlEntity, Person> persons = CreateDictionary<PersonXmlEntity, Person>();
+        private readonly Dictionary<TreeEventXmlEntity, TreeEvent> treeEvents = CreateDictionary<TreeEventXmlEntity, TreeEvent>();
+
+
         internal void Collect(PersonXmlEntity entity, Person model)
         {
-            Collect(persons,entity,model);
+            Collect(persons, entity, model);
         }
+
         internal void Collect(ExpertXmlEntity entity, Expert model)
         {
             Collect(experts, entity, model);
         }
+
         internal void Collect(HydraulicConditionXmlEntity entity, HydraulicCondition model)
         {
             Collect(hydraulicConditions, entity, model);
         }
+
         internal void Collect(FragilityCurveElementXmlEntity entity, FragilityCurveElement model)
         {
             Collect(fragilityCurveElements, entity, model);
         }
+
         internal void Collect(EventTreeXmlEntity entity, EventTree model)
         {
             Collect(eventTrees, entity, model);
         }
+
         internal void Collect(TreeEventXmlEntity entity, TreeEvent model)
         {
             Collect(treeEvents, entity, model);
         }
+
         internal void Collect(ExpertClassEstimationXmlEntity entity, ExpertClassEstimation model)
         {
             Collect(expertClassEstimations, entity, model);
@@ -55,26 +66,32 @@ namespace StoryTree.Storage.Read
         {
             return Contains(persons, entity);
         }
+
         internal bool Contains(ExpertXmlEntity entity)
         {
             return Contains(experts, entity);
         }
+
         internal bool Contains(HydraulicConditionXmlEntity entity)
         {
             return Contains(hydraulicConditions, entity);
         }
+
         internal bool Contains(FragilityCurveElementXmlEntity entity)
         {
             return Contains(fragilityCurveElements, entity);
         }
+
         internal bool Contains(EventTreeXmlEntity entity)
         {
             return Contains(eventTrees, entity);
         }
+
         internal bool Contains(TreeEventXmlEntity entity)
         {
             return Contains(treeEvents, entity);
         }
+
         internal bool Contains(ExpertClassEstimationXmlEntity entity)
         {
             return Contains(expertClassEstimations, entity);
@@ -84,77 +101,36 @@ namespace StoryTree.Storage.Read
         {
             return Get(persons, entity);
         }
+
         internal Expert Get(ExpertXmlEntity entity)
         {
             return Get(experts, entity);
         }
+
         internal HydraulicCondition Get(HydraulicConditionXmlEntity entity)
         {
             return Get(hydraulicConditions, entity);
         }
+
         internal FragilityCurveElement Get(FragilityCurveElementXmlEntity entity)
         {
             return Get(fragilityCurveElements, entity);
         }
+
         internal EventTree Get(EventTreeXmlEntity entity)
         {
             return Get(eventTrees, entity);
         }
+
         internal TreeEvent Get(TreeEventXmlEntity entity)
         {
             return Get(treeEvents, entity);
         }
+
         internal ExpertClassEstimation Get(ExpertClassEstimationXmlEntity entity)
         {
             return Get(expertClassEstimations, entity);
         }
-        #region helpers
-
-        private TModel Get<TEntity, TModel>(Dictionary<TEntity, TModel> collection, TEntity entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException(nameof(entity));
-            }
-            try
-            {
-                return collection[entity];
-            }
-            catch (KeyNotFoundException e)
-            {
-                throw new InvalidOperationException(e.Message, e);
-            }
-        }
-
-        private bool Contains<TEntity, TModel>(Dictionary<TEntity, TModel> collection, TEntity entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException(nameof(entity));
-            }
-
-            return collection.ContainsKey(entity);
-        }
-
-        private void Collect<TEntity, TModel>(Dictionary<TEntity, TModel> collection, TEntity entity, TModel model)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException(nameof(entity));
-            }
-            if (model == null)
-            {
-                throw new ArgumentNullException(nameof(model));
-            }
-
-            collection[entity] = model;
-        }
-
-        private static Dictionary<TEntity, TModel> CreateDictionary<TEntity, TModel>()
-        {
-            return new Dictionary<TEntity, TModel>(new ReferenceEqualityComparer<TEntity>());
-        }
-        #endregion
 
         public Expert GetReferencedExpert(long id)
         {
@@ -171,5 +147,46 @@ namespace StoryTree.Storage.Read
                 ? throw new ReadReferencedObjectsFirstException(nameof(HydraulicCondition))
                 : Get(key);
         }
+
+        #region helpers
+
+        private TModel Get<TEntity, TModel>(Dictionary<TEntity, TModel> collection, TEntity entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+            try
+            {
+                return collection[entity];
+            }
+            catch (KeyNotFoundException e)
+            {
+                throw new InvalidOperationException(e.Message, e);
+            }
+        }
+
+        private bool Contains<TEntity, TModel>(Dictionary<TEntity, TModel> collection, TEntity entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            return collection.ContainsKey(entity);
+        }
+
+        private void Collect<TEntity, TModel>(Dictionary<TEntity, TModel> collection, TEntity entity, TModel model)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
+
+            collection[entity] = model;
+        }
+
+        private static Dictionary<TEntity, TModel> CreateDictionary<TEntity, TModel>()
+        {
+            return new Dictionary<TEntity, TModel>(new ReferenceEqualityComparer<TEntity>());
+        }
+
+        #endregion
     }
 }

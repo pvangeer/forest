@@ -11,18 +11,12 @@ namespace StoryTree.Storage.Read
             ReadConversionCollector collector)
         {
             if (entity == null)
-            {
                 throw new ArgumentNullException(nameof(entity));
-            }
             if (collector == null)
-            {
                 throw new ArgumentNullException(nameof(collector));
-            }
 
             if (collector.Contains(entity))
-            {
                 return collector.Get(entity);
-            }
 
             var estimation = new ExpertClassEstimation
             {
@@ -34,7 +28,7 @@ namespace StoryTree.Storage.Read
                 // TODO: Add Comment
             };
 
-            collector.Collect(entity,estimation);
+            collector.Collect(entity, estimation);
 
             return estimation;
         }

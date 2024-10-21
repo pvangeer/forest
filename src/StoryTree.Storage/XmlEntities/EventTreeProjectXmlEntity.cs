@@ -16,7 +16,7 @@ namespace StoryTree.Storage.XmlEntities
             HydraulicConditions = new Collection<HydraulicConditionXmlEntity>();
         }
 
-        [XmlAttribute(AttributeName = "name")] 
+        [XmlAttribute(AttributeName = "name")]
         public string Name { get; set; }
 
         [XmlAttribute(AttributeName = "description")]

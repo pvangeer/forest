@@ -14,6 +14,5 @@ namespace StoryTree.Storage.XmlEntities
 
         [XmlAttribute(AttributeName = "telephone")]
         public string Telephone { get; set; }
-
     }
 }

@@ -1,13 +1,12 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Globalization;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+using NUnit.Framework;
 using StoryTree.Data;
 using StoryTree.Storage.Create;
 using StoryTree.Storage.XmlEntities;
-using System;
-using System.Globalization;
-using System.IO;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace StoryTree.Storage.Test.Create
 {
@@ -24,7 +23,7 @@ namespace StoryTree.Storage.Test.Create
                 Telephone = "01455-4592"
             };
 
-            PersonXmlEntity xmlEntity = person.Create(new PersistenceRegistry());
+            var xmlEntity = person.Create(new PersistenceRegistry());
             Assert.IsNotNull(xmlEntity);
             var xmlSerializer = new XmlSerializer(typeof(PersonXmlEntity));
             var xmlText = "";
@@ -37,7 +36,7 @@ namespace StoryTree.Storage.Test.Create
             }
 
             Assert.IsNotEmpty(xmlText);
-            Assert.AreNotEqual(0,hash);
+            Assert.AreNotEqual(0, hash);
         }
 
         [Test]
@@ -52,7 +51,7 @@ namespace StoryTree.Storage.Test.Create
                     Created = DateTime.Now.ToString(CultureInfo.InvariantCulture),
                     FileVersion = "24.1",
                     LastAuthor = "Me",
-                    LastChanged = DateTime.Now.ToString(CultureInfo.InvariantCulture),
+                    LastChanged = DateTime.Now.ToString(CultureInfo.InvariantCulture)
                 }
             };
 

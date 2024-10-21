@@ -9,14 +9,10 @@ namespace StoryTree.Storage.Create
         internal static FragilityCurveElementXmlEntity Create(this FragilityCurveElement model, PersistenceRegistry registry)
         {
             if (registry == null)
-            {
                 throw new ArgumentNullException(nameof(registry));
-            }
 
             if (registry.Contains(model))
-            {
                 return registry.Get(model);
-            }
 
             var entity = new FragilityCurveElementXmlEntity
             {

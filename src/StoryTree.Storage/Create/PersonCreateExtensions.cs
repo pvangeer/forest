@@ -9,14 +9,10 @@ namespace StoryTree.Storage.Create
         internal static PersonXmlEntity Create(this Person model, PersistenceRegistry registry)
         {
             if (registry == null)
-            {
                 throw new ArgumentNullException(nameof(registry));
-            }
 
             if (registry.Contains(model))
-            {
                 return registry.Get(model);
-            }
 
             var entity = new PersonXmlEntity
             {

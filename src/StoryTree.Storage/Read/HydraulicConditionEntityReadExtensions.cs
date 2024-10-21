@@ -7,21 +7,15 @@ namespace StoryTree.Storage.Read
 {
     internal static class HydraulicConditionEntityReadExtensions
     {
-        internal static HydraulicCondition Read(this HydraulicConditionXmlEntity entity,ReadConversionCollector collector)
+        internal static HydraulicCondition Read(this HydraulicConditionXmlEntity entity, ReadConversionCollector collector)
         {
             if (entity == null)
-            {
                 throw new ArgumentNullException(nameof(entity));
-            }
             if (collector == null)
-            {
                 throw new ArgumentNullException(nameof(collector));
-            }
 
             if (collector.Contains(entity))
-            {
                 return collector.Get(entity);
-            }
 
             var condition = new HydraulicCondition
             {
@@ -31,7 +25,7 @@ namespace StoryTree.Storage.Read
                 WaveHeight = entity.WaveHeight
             };
 
-            collector.Collect(entity,condition);
+            collector.Collect(entity, condition);
             return condition;
         }
     }

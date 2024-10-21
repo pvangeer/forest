@@ -9,14 +9,10 @@ namespace StoryTree.Storage.Create
         internal static TreeEventXmlEntity Create(this TreeEvent model, PersistenceRegistry registry)
         {
             if (registry == null)
-            {
                 throw new ArgumentNullException(nameof(registry));
-            }
 
             if (registry.Contains(model))
-            {
                 return registry.Get(model);
-            }
 
             var entity = new TreeEventXmlEntity
             {
@@ -25,7 +21,7 @@ namespace StoryTree.Storage.Create
                 FixedProbability = model.FixedProbability,
                 ProbabilitySpecificationType = Convert.ToByte(model.ProbabilitySpecificationType),
                 Information = model.Information.DeepClone(),
-                Discussion = model.Discussion.DeepClone(),
+                Discussion = model.Discussion.DeepClone()
                 // Add passphrase
             };
 
@@ -33,15 +29,11 @@ namespace StoryTree.Storage.Create
             AddFragilityCurveElements(entity, model, registry);
 
             if (model.FailingEvent != null)
-            {
                 entity.FailingEvent = model.FailingEvent.Create(registry);
-            }
 
             if (model.PassingEvent != null)
-            {
                 entity.PassingEvent = model.PassingEvent.Create(registry);
-            }
-            
+
             registry.Register(model, entity);
 
             return entity;
@@ -50,13 +42,11 @@ namespace StoryTree.Storage.Create
         private static void AddFragilityCurveElements(TreeEventXmlEntity entity, TreeEvent model, PersistenceRegistry registry)
         {
             if (model.FixedFragilityCurve != null)
-            {
                 for (var index = 0; index < model.FixedFragilityCurve.Count; index++)
                 {
                     var fragilityCurveElement = model.FixedFragilityCurve[index];
                     entity.FixedFragilityCurveElements.Add(fragilityCurveElement.Create(registry));
                 }
-            }
         }
 
         private static void AddExpertClassEstimations(TreeEventXmlEntity entity, TreeEvent model, PersistenceRegistry registry)
