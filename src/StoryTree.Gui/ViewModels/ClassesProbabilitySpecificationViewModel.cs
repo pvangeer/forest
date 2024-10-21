@@ -9,7 +9,7 @@ namespace StoryTree.Gui.ViewModels
 {
     public class ClassesProbabilitySpecificationViewModel : ProbabilitySpecificationViewModelBase
     {
-        public ClassesProbabilitySpecificationViewModel([NotNull]TreeEvent treeEvent, Project project) : base(treeEvent)
+        public ClassesProbabilitySpecificationViewModel([NotNull]TreeEvent treeEvent, EventTreeProject eventTreeProject) : base(treeEvent)
         {
             ClassesProbabilitySpecification = new ObservableCollection<ExpertClassEstimationViewModel>(
                 TreeEvent.ClassesProbabilitySpecification.Select(e => new ExpertClassEstimationViewModel(e)));

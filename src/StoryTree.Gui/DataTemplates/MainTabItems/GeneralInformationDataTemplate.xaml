@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:gui="clr-namespace:StoryTree.Gui"
                     xmlns:command="clr-namespace:StoryTree.Gui.Command">
 
     <command:SelectTodayCommand x:Key="SelectTodayCommand" />
@@ -39,7 +38,7 @@
                         </Grid.ColumnDefinitions>
                         <Label 
                             Grid.Column="0"
-                            Content="Project" 
+                            Content="EventTreeProject" 
                             Width="100"
                             HorizontalAlignment="Left"/>
                         <TextBox 

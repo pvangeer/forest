@@ -1,12 +1,12 @@
 ﻿using System;
 using StoryTree.Data;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Create
 {
     internal static class EventTreeCreateExtensions
     {
-        internal static EventTreeEntity Create(this EventTree model, PersistenceRegistry registry)
+        internal static EventTreeXmlEntity Create(this EventTree model, PersistenceRegistry registry)
         {
             if (registry == null)
             {
@@ -18,9 +18,9 @@ namespace StoryTree.Storage.Create
                 return registry.Get(model);
             }
 
-            var entity = new EventTreeEntity
+            var entity = new EventTreeXmlEntity
             {
-                TreeEventEntity = model.MainTreeEvent?.Create(registry),
+                MainTreeEvent = model.MainTreeEvent?.Create(registry),
             };
 
             registry.Register(model, entity);

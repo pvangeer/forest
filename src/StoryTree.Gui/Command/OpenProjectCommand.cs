@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Windows.Input;
-using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui.Command
 {
     public class OpenProjectCommand : ICommand
     {
-        public OpenProjectCommand(GuiViewModel guiViewModel)
+        public OpenProjectCommand(GuiProjectServices guiProjectServices)
         {
-            ViewModel = guiViewModel;
+            this.guiProjectServices = guiProjectServices;
         }
 
-        private GuiViewModel ViewModel { get; }
+        private readonly GuiProjectServices guiProjectServices;
 
         public bool CanExecute(object parameter)
         {
@@ -20,7 +19,7 @@ namespace StoryTree.Gui.Command
 
         public void Execute(object parameter)
         {
-            ViewModel.GuiProjectSercices.OpenProject();
+            guiProjectServices.OpenProject();
         }
 
         public event EventHandler CanExecuteChanged;

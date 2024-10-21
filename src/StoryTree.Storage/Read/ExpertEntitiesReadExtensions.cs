@@ -1,12 +1,12 @@
 ﻿using System;
 using StoryTree.Data;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Read
 {
-    internal static class ExpertEntitiesReadExtentions
+    internal static class ExpertEntitiesReadExtensions
     {
-        internal static Expert Read(this ExpertEntity entity, ReadConversionCollector collector)
+        internal static Expert Read(this ExpertXmlEntity entity, ReadConversionCollector collector)
         {
             if (entity == null)
             {
@@ -22,14 +22,13 @@ namespace StoryTree.Storage.Read
                 return collector.Get(entity);
             }
 
-            var person = entity.PersonEntity.Read(collector);
             var expert = new Expert
             {
-                Name = person.Name,
-                Email = person.Email,
-                Telephone = person.Telephone,
+                Name = entity.Name,
+                Email = entity.Email,
+                Telephone = entity.Telephone,
                 Expertise = entity.Expertise,
-                Organization = entity.Organisation
+                Organization = entity.Organization
             };
 
             collector.Collect(entity,expert);

@@ -1,12 +1,12 @@
 ﻿using System;
 using StoryTree.Data;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Create
 {
     internal static class ExpertCreateExtensions
     {
-        internal static ExpertEntity Create(this Expert model, PersistenceRegistry registry)
+        internal static ExpertXmlEntity Create(this Expert model, PersistenceRegistry registry)
         {
             if (registry == null)
             {
@@ -18,11 +18,13 @@ namespace StoryTree.Storage.Create
                 return registry.Get(model);
             }
 
-            var entity = new ExpertEntity
+            var entity = new ExpertXmlEntity
             {
-                PersonEntity = ((Person) model).Create(registry),
+                Name = model.Name.DeepClone(),
+                Email = model.Email.DeepClone(),
+                Telephone = model.Telephone.DeepClone(),
                 Expertise = model.Expertise.DeepClone(),
-                Organisation = model.Organization.DeepClone()
+                Organization = model.Organization.DeepClone()
             };
 
             registry.Register(model, entity);

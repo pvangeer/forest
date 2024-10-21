@@ -18,18 +18,18 @@ namespace StoryTree.Gui.ViewModels
         private readonly AddTreeEventCommand addTreeEventCommand;
         private readonly RemoveTreeEventCommand removeTreeEventCommand;
 
-        public ProjectViewModel() : this(new Project()) { }
+        public ProjectViewModel() : this(new EventTreeProject()) { }
 
-        public ProjectViewModel([NotNull]Project project)
+        public ProjectViewModel([NotNull]EventTreeProject eventTreeProject)
         {
             BusyIndicator = StorageState.Idle;
 
-            Project = project;
-            projectManipulationService = new ProjectManipulationService(project);
+            EventTreeProject = eventTreeProject;
+            projectManipulationService = new ProjectManipulationService(eventTreeProject);
 
-            var eventTreeViewModel = new EventTreeViewModel(Project.EventTree, projectManipulationService)
+            var eventTreeViewModel = new EventTreeViewModel(EventTreeProject.EventTree, projectManipulationService)
             {
-                EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(project)
+                EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(eventTreeProject)
             };
             eventTreeViewModel.PropertyChanged += EventTreeViewModelPropertyChanged;
             EventTree = eventTreeViewModel;
@@ -37,37 +37,37 @@ namespace StoryTree.Gui.ViewModels
             addTreeEventCommand = new AddTreeEventCommand(this);
             removeTreeEventCommand = new RemoveTreeEventCommand(this);
 
-            expertViewModels = new ObservableCollection<ExpertViewModel>(Project.Experts.Select(e => new ExpertViewModel(e)));
+            expertViewModels = new ObservableCollection<ExpertViewModel>(EventTreeProject.Experts.Select(e => new ExpertViewModel(e)));
             expertViewModels.CollectionChanged += ExpertViewModelsCollectionChanged;
 
-            hydraulicsViewModels = new ObservableCollection<HydraulicConditionViewModel>(Project.HydraulicConditions.Select(e => new HydraulicConditionViewModel(e)));
+            hydraulicsViewModels = new ObservableCollection<HydraulicConditionViewModel>(EventTreeProject.HydraulicConditions.Select(e => new HydraulicConditionViewModel(e)));
             hydraulicsViewModels.CollectionChanged += HydraulicsViewModelsCollectionChanged;
         }
 
-        public Project Project { get; }
+        public EventTreeProject EventTreeProject { get; }
 
         public string ProjectName
         {
-            get => Project.Name;
-            set => Project.Name = value;
+            get => EventTreeProject.Name;
+            set => EventTreeProject.Name = value;
         }
 
         public string ProjectDescription
         {
-            get => Project.Description;
-            set => Project.Description = value;
+            get => EventTreeProject.Description;
+            set => EventTreeProject.Description = value;
         }
 
         public string AssessmentSection
         {
-            get => Project.AssessmentSection;
-            set => Project.AssessmentSection = value;
+            get => EventTreeProject.AssessmentSection;
+            set => EventTreeProject.AssessmentSection = value;
         }
 
         public string ProjectInformation
         {
-            get => Project.ProjectInformation;
-            set => Project.ProjectInformation = value;
+            get => EventTreeProject.ProjectInformation;
+            set => EventTreeProject.ProjectInformation = value;
         }
 
         public ICommand RemoveTreeEventCommand => removeTreeEventCommand;
@@ -86,31 +86,31 @@ namespace StoryTree.Gui.ViewModels
 
         public string ProjectLeaderName
         {
-            get => Project.ProjectLeader.Name;
+            get => EventTreeProject.ProjectLeader.Name;
             set
             {
-                Project.ProjectLeader.Name = value;
-                Project.ProjectLeader.OnPropertyChanged(nameof(Project.ProjectLeader.Name));
+                EventTreeProject.ProjectLeader.Name = value;
+                EventTreeProject.ProjectLeader.OnPropertyChanged(nameof(EventTreeProject.ProjectLeader.Name));
             }
         }
 
         public string ProjectLeaderEmail
         {
-            get => Project.ProjectLeader.Email;
+            get => EventTreeProject.ProjectLeader.Email;
             set
             {
-                Project.ProjectLeader.Email = value;
-                Project.ProjectLeader.OnPropertyChanged(nameof(Project.ProjectLeader.Email));
+                EventTreeProject.ProjectLeader.Email = value;
+                EventTreeProject.ProjectLeader.OnPropertyChanged(nameof(EventTreeProject.ProjectLeader.Email));
             }
         }
 
         public string ProjectLeaderTelephone
         {
-            get => Project.ProjectLeader.Telephone;
+            get => EventTreeProject.ProjectLeader.Telephone;
             set
             {
-                Project.ProjectLeader.Telephone = value;
-                Project.ProjectLeader.OnPropertyChanged(nameof(Project.ProjectLeader.Telephone));
+                EventTreeProject.ProjectLeader.Telephone = value;
+                EventTreeProject.ProjectLeader.OnPropertyChanged(nameof(EventTreeProject.ProjectLeader.Telephone));
             }
         }
 

@@ -1,12 +1,12 @@
 ﻿using System;
 using StoryTree.Data;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Read
 {
     internal static class EventTreeEntitiesReadExtensions
     {
-        internal static EventTree Read(this EventTreeEntity entity, ReadConversionCollector collector)
+        internal static EventTree Read(this EventTreeXmlEntity entity, ReadConversionCollector collector)
         {
             if (entity == null)
             {
@@ -24,7 +24,7 @@ namespace StoryTree.Storage.Read
 
             var eventTree = new EventTree
             {
-                MainTreeEvent = entity.TreeEventEntity?.Read(collector),
+                MainTreeEvent = entity.MainTreeEvent?.Read(collector),
             };
 
             collector.Collect(entity,eventTree);

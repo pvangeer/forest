@@ -12,11 +12,11 @@ namespace StoryTree.IO.Import
     {
         private readonly StoryTreeLog log = new StoryTreeLog(typeof(ElicitationFormImporter));
 
-        public Project Project { get; }
+        public EventTreeProject EventTreeProject { get; }
 
-        public ElicitationFormImporter(Project project)
+        public ElicitationFormImporter(EventTreeProject eventTreeProject)
         {
-            this.Project = project;
+            this.EventTreeProject = eventTreeProject;
         }
 
         public void Import(string fileName)
@@ -35,7 +35,7 @@ namespace StoryTree.IO.Import
 
             foreach (var dotForm in formContent)
             {
-                var validationResult = DotFormValidator.Validate(dotForm, Project);
+                var validationResult = DotFormValidator.Validate(dotForm, EventTreeProject);
                 if (ValidationFailed(fileName, validationResult, dotForm))
                 {
                     return;
@@ -44,11 +44,11 @@ namespace StoryTree.IO.Import
 
             foreach (var dotForm in formContent)
             {
-                var expert = Project.Experts.First(ex => ex.Name == dotForm.ExpertName);
+                var expert = EventTreeProject.Experts.First(ex => ex.Name == dotForm.ExpertName);
                 
                 foreach (var dotFormNode in dotForm.Nodes)
                 {
-                    var node = Project.EventTree.MainTreeEvent.FindTreeEvent(n => n.Name == dotFormNode.NodeName);
+                    var node = EventTreeProject.EventTree.MainTreeEvent.FindTreeEvent(n => n.Name == dotFormNode.NodeName);
                     foreach (var dotEstimate in dotFormNode.Estimates)
                     {
                         var specification = node.ClassesProbabilitySpecification.First(s =>
@@ -67,14 +67,14 @@ namespace StoryTree.IO.Import
             if (validationResult.ExpertValidation == ExpertValidationResult.ExpertNotFound)
             {
                 log.Error(
-                    $"Fout bij het lezen van bestand {fileName}: De gespecificeerde expert ({dotForm.ExpertName}) kon niet in het project worden gevonden.");
+                    $"Fout bij het lezen van bestand {fileName}: De gespecificeerde expert ({dotForm.ExpertName}) kon niet in het eventTreeProject worden gevonden.");
                 return true;
             }
 
             if (validationResult.ExpertValidation == ExpertValidationResult.NoExperts)
             {
                 log.Error(
-                    $"Het project bevat nog geen experts. Daardoor is het niet mogelijk om een elicitatieformulier in te lezen.");
+                    $"Het eventTreeProject bevat nog geen experts. Daardoor is het niet mogelijk om een elicitatieformulier in te lezen.");
                 return true;
             }
 
@@ -97,14 +97,14 @@ namespace StoryTree.IO.Import
                 if (nodeValidationResult.Value == NodeValidationResult.InvalidFrequencyForWaterLevel)
                 {
                     log.Error(
-                        $"Fout bij het lezen van bestand {fileName}: Een van de waterstanden voor knoop '{nodeValidationResult.Key.NodeName}' heeft een afwijkende frequentie ten opzichte van het project.");
+                        $"Fout bij het lezen van bestand {fileName}: Een van de waterstanden voor knoop '{nodeValidationResult.Key.NodeName}' heeft een afwijkende frequentie ten opzichte van het eventTreeProject.");
                     return true;
                 }
 
                 if (nodeValidationResult.Value == NodeValidationResult.WaterLevelNotFound)
                 {
                     log.Error(
-                        $"Fout bij het lezen van bestand {fileName}: Een van de waterstanden voor knoop '{nodeValidationResult.Key.NodeName}' kan niet in het project worden gevonden.");
+                        $"Fout bij het lezen van bestand {fileName}: Een van de waterstanden voor knoop '{nodeValidationResult.Key.NodeName}' kan niet in het eventTreeProject worden gevonden.");
                     return true;
                 }
             }

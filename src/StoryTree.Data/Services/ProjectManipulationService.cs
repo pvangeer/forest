@@ -9,20 +9,20 @@ namespace StoryTree.Data.Services
 {
     public class ProjectManipulationService
     {
-        private readonly Project project;
+        private readonly EventTreeProject eventTreeProject;
 
-        public ProjectManipulationService([NotNull] Project project)
+        public ProjectManipulationService([NotNull] EventTreeProject eventTreeProject)
         {
-            this.project = project;
+            this.eventTreeProject = eventTreeProject;
         }
 
         public void AddHydraulicCondition(HydraulicCondition hydraulicCondition)
         {
-            project.HydraulicConditions.Add(hydraulicCondition);
+            eventTreeProject.HydraulicConditions.Add(hydraulicCondition);
 
-            foreach (var treeEvent in project.EventTree.MainTreeEvent.GetAllEventsRecursive())
+            foreach (var treeEvent in eventTreeProject.EventTree.MainTreeEvent.GetAllEventsRecursive())
             {
-                foreach (var expert in project.Experts)
+                foreach (var expert in eventTreeProject.Experts)
                 {
                     treeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
                     {
@@ -38,11 +38,11 @@ namespace StoryTree.Data.Services
 
         public void RemoveHydraulicCondition(HydraulicCondition hydraulicCondition)
         {
-            project.HydraulicConditions.Remove(hydraulicCondition);
+            eventTreeProject.HydraulicConditions.Remove(hydraulicCondition);
 
-            foreach (var treeEvent in project.EventTree.MainTreeEvent.GetAllEventsRecursive())
+            foreach (var treeEvent in eventTreeProject.EventTree.MainTreeEvent.GetAllEventsRecursive())
             {
-                foreach (var expert in project.Experts)
+                foreach (var expert in eventTreeProject.Experts)
                 {
                     var estimatesToRemove = treeEvent.ClassesProbabilitySpecification.Where(e =>
                         e.Expert == expert && e.HydraulicCondition == hydraulicCondition).ToArray();
@@ -56,11 +56,11 @@ namespace StoryTree.Data.Services
 
         public void AddExpert(Expert expert)
         {
-            project.Experts.Add(expert);
+            eventTreeProject.Experts.Add(expert);
 
-            foreach (var treeEvent in project.EventTree.MainTreeEvent.GetAllEventsRecursive())
+            foreach (var treeEvent in eventTreeProject.EventTree.MainTreeEvent.GetAllEventsRecursive())
             {
-                foreach (var hydraulicCondition in project.HydraulicConditions)
+                foreach (var hydraulicCondition in eventTreeProject.HydraulicConditions)
                 {
                     treeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
                     {
@@ -76,11 +76,11 @@ namespace StoryTree.Data.Services
 
         public void RemoveExpert(Expert expert)
         {
-            project.Experts.Remove(expert);
+            eventTreeProject.Experts.Remove(expert);
 
-            foreach (var treeEvent in project.EventTree.MainTreeEvent.GetAllEventsRecursive())
+            foreach (var treeEvent in eventTreeProject.EventTree.MainTreeEvent.GetAllEventsRecursive())
             {
-                foreach (var hydraulicCondition in project.HydraulicConditions)
+                foreach (var hydraulicCondition in eventTreeProject.HydraulicConditions)
                 {
                     var estimatesToRemove = treeEvent.ClassesProbabilitySpecification.Where(e =>
                         e.Expert == expert && e.HydraulicCondition == hydraulicCondition).ToArray();
@@ -128,9 +128,9 @@ namespace StoryTree.Data.Services
             {
                 Name = "Nieuwe gebeurtenis"
             };
-            foreach (var expert in project.Experts)
+            foreach (var expert in eventTreeProject.Experts)
             {
-                foreach (var hydraulicCondition in project.HydraulicConditions)
+                foreach (var hydraulicCondition in eventTreeProject.HydraulicConditions)
                 {
                     newTreeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
                     {

@@ -13,12 +13,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventTree.cs" />
+    <Compile Include="EventTreeProjectFactory.cs" />
     <Compile Include="Expert.cs" />
     <Compile Include="FragilityCurve.cs" />
     <Compile Include="FragilityCurveElement.cs" />
     <Compile Include="Hydraulics\HydraulicCondition.cs" />
     <Compile Include="Person.cs" />
-    <Compile Include="Project.cs" />
+    <Compile Include="EventTreeProject.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\ProjectManipulationService.cs" />
     <Compile Include="Services\TreeEventManipulations.cs" />

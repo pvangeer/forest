@@ -6,6 +6,7 @@
     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
     xmlns:services="clr-namespace:StoryTree.Data.Services;assembly=StoryTree.Data"
+    Closing="MainWindowClosing"
     Title="Faalpad" 
     Height="800" 
     Width="1200"

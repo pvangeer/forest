@@ -1,12 +1,12 @@
 ﻿using System;
 using StoryTree.Data;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Read
 {
     internal static class PersonEntityReadExtensions
     {
-        internal static Person Read(this PersonEntity entity, ReadConversionCollector collector)
+        internal static Person Read(this PersonXmlEntity entity, ReadConversionCollector collector)
         {
             if (entity == null)
             {

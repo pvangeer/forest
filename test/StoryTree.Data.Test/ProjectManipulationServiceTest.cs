@@ -13,7 +13,7 @@ namespace StoryTree.Data.Test
         public void AddExpertDoesNotChangesClassEstimatesNoHydraulicConditions()
         {
             var treeEvent = new TreeEvent();
-            var project = new Project
+            var project = new EventTreeProject
             {
                 EventTree = { MainTreeEvent = treeEvent }
             };
@@ -32,7 +32,7 @@ namespace StoryTree.Data.Test
         public void AddExpertChangesClassEstimatesWithHydraulicConditions()
         {
             var treeEvent = new TreeEvent();
-            var project = new Project
+            var project = new EventTreeProject
             {
                 EventTree = { MainTreeEvent = treeEvent },
                 HydraulicConditions =
@@ -79,7 +79,7 @@ namespace StoryTree.Data.Test
                     new ExpertClassEstimation{Expert = otherExpert, HydraulicCondition = hydraulicCondition2}
                 }
             };
-            var project = new Project
+            var project = new EventTreeProject
             {
                 EventTree =
                 { MainTreeEvent = treeEvent },
@@ -123,7 +123,7 @@ namespace StoryTree.Data.Test
             var treeEvent = new TreeEvent();
             var expertToRemove = new Expert();
             var otherExpert = new Expert();
-            var project = new Project
+            var project = new EventTreeProject
             {
                 EventTree =
                 { MainTreeEvent = treeEvent },
@@ -148,7 +148,7 @@ namespace StoryTree.Data.Test
         public void AddHydraulicConditionDoesNotChangesClassEstimatesNoExperts()
         {
             var treeEvent = new TreeEvent();
-            var project = new Project
+            var project = new EventTreeProject
             {
                 EventTree = { MainTreeEvent = treeEvent }
             };
@@ -168,7 +168,7 @@ namespace StoryTree.Data.Test
         public void AddHydraulicConditionChangesClassEstimatesWithExperts()
         {
             var treeEvent = new TreeEvent();
-            var project = new Project
+            var project = new EventTreeProject
             {
                 EventTree = { MainTreeEvent = treeEvent },
                 Experts =
@@ -215,7 +215,7 @@ namespace StoryTree.Data.Test
                     new ExpertClassEstimation{Expert = expert2, HydraulicCondition = hydraulicCondition2}
                 }
             };
-            var project = new Project
+            var project = new EventTreeProject
             {
                 EventTree =
                 { MainTreeEvent = treeEvent },
@@ -259,7 +259,7 @@ namespace StoryTree.Data.Test
             var treeEvent = new TreeEvent();
             var hydraulicConditionToRemove = new HydraulicCondition(1.0, (Probability)0.01, 1, 1);
             var hydraulicCondition2 = new HydraulicCondition(2.0, (Probability)0.001, 1, 1);
-            var project = new Project
+            var project = new EventTreeProject
             {
                 EventTree =
                 { MainTreeEvent = treeEvent },

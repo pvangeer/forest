@@ -1,13 +1,13 @@
 ﻿using System;
 using StoryTree.Data.Estimations;
 using StoryTree.Data.Tree;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Read
 {
     internal static class ExpertClassEstimationEntityReadExtensions
     {
-        internal static ExpertClassEstimation Read(this ExpertClassEstimationEntity entity,
+        internal static ExpertClassEstimation Read(this ExpertClassEstimationXmlEntity entity,
             ReadConversionCollector collector)
         {
             if (entity == null)
@@ -26,8 +26,8 @@ namespace StoryTree.Storage.Read
 
             var estimation = new ExpertClassEstimation
             {
-                Expert = entity.ExpertEntity.Read(collector),
-                HydraulicCondition = entity.HydraulicConditionElementEntity.Read(collector),
+                Expert = collector.GetReferencedExpert(entity.ExpertId),
+                HydraulicCondition = collector.GetReferencedHydraulicCondition(entity.HydraulicConditionId),
                 AverageEstimation = (ProbabilityClass)entity.AverageEstimation,
                 MinEstimation = (ProbabilityClass)entity.MinEstimation,
                 MaxEstimation = (ProbabilityClass)entity.MaxEstimation

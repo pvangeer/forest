@@ -1,13 +1,13 @@
 ﻿using System;
 using StoryTree.Data;
 using StoryTree.Data.Hydraulics;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Read
 {
     internal static class HydraulicConditionEntityReadExtensions
     {
-        internal static HydraulicCondition Read(this HydraulicConditionElementEntity entity,ReadConversionCollector collector)
+        internal static HydraulicCondition Read(this HydraulicConditionXmlEntity entity,ReadConversionCollector collector)
         {
             if (entity == null)
             {
@@ -23,13 +23,12 @@ namespace StoryTree.Storage.Read
                 return collector.Get(entity);
             }
 
-            FragilityCurveElement curveElement = entity.FragilityCurveElementEntity.Read(collector);
             var condition = new HydraulicCondition
             {
-                Probability = curveElement.Probability,
-                WaterLevel = curveElement.WaterLevel,
-                WavePeriod = entity.WavePeriod == null ? double.NaN : (double)entity.WavePeriod,
-                WaveHeight = entity.WaveHeight == null ? double.NaN : (double)entity.WaveHeight
+                Probability = double.IsNaN(entity.Probability) ? Probability.NaN : (Probability)entity.Probability,
+                WaterLevel = entity.WaterLevel,
+                WavePeriod = entity.WavePeriod,
+                WaveHeight = entity.WaveHeight
             };
 
             collector.Collect(entity,condition);

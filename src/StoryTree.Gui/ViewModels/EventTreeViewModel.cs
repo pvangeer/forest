@@ -21,7 +21,7 @@ namespace StoryTree.Gui.ViewModels
 
         public EventTreeViewModel()
         {
-            var project = new Project();
+            var project = new EventTreeProject();
             projectManipulationService = new ProjectManipulationService(project);
             EventTree = project.EventTree;
             EventTree.PropertyChanged += EventTreePropertyChanged;

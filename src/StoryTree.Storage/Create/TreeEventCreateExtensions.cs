@@ -1,12 +1,12 @@
 ﻿using System;
 using StoryTree.Data.Tree;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Create
 {
     internal static class TreeEventCreateExtensions
     {
-        internal static TreeEventEntity Create(this TreeEvent model, PersistenceRegistry registry)
+        internal static TreeEventXmlEntity Create(this TreeEvent model, PersistenceRegistry registry)
         {
             if (registry == null)
             {
@@ -18,11 +18,11 @@ namespace StoryTree.Storage.Create
                 return registry.Get(model);
             }
 
-            var entity = new TreeEventEntity
+            var entity = new TreeEventXmlEntity
             {
                 Name = model.Name.DeepClone(),
                 Summary = model.Summary.DeepClone(),
-                FixedProbability = ((double)model.FixedProbability).ToNaNAsNull(),
+                FixedProbability = model.FixedProbability,
                 ProbabilitySpecificationType = Convert.ToByte(model.ProbabilitySpecificationType),
                 Information = model.Information.DeepClone(),
                 Discussion = model.Discussion.DeepClone(),
@@ -34,12 +34,12 @@ namespace StoryTree.Storage.Create
 
             if (model.FailingEvent != null)
             {
-                entity.TreeEventEntity3 = model.FailingEvent.Create(registry);
+                entity.FailingEvent = model.FailingEvent.Create(registry);
             }
 
             if (model.PassingEvent != null)
             {
-                entity.TreeEventEntity2 = model.PassingEvent.Create(registry);
+                entity.PassingEvent = model.PassingEvent.Create(registry);
             }
             
             registry.Register(model, entity);
@@ -47,32 +47,25 @@ namespace StoryTree.Storage.Create
             return entity;
         }
 
-        private static void AddFragilityCurveElements(TreeEventEntity entity, TreeEvent model, PersistenceRegistry registry)
+        private static void AddFragilityCurveElements(TreeEventXmlEntity entity, TreeEvent model, PersistenceRegistry registry)
         {
             if (model.FixedFragilityCurve != null)
             {
                 for (var index = 0; index < model.FixedFragilityCurve.Count; index++)
                 {
                     var fragilityCurveElement = model.FixedFragilityCurve[index];
-                    var curveElementEntity = new TreeEventFragilityCurveElementEntity
-                    {
-                        FragilityCurveElementEntity = fragilityCurveElement.Create(registry),
-                        TreeEventEntity = entity,
-                        Order = index
-                    };
-                    entity.TreeEventFragilityCurveElementEntities.Add(curveElementEntity);
+                    entity.FixedFragilityCurveElements.Add(fragilityCurveElement.Create(registry));
                 }
             }
         }
 
-        private static void AddExpertClassEstimations(TreeEventEntity entity, TreeEvent model, PersistenceRegistry registry)
+        private static void AddExpertClassEstimations(TreeEventXmlEntity entity, TreeEvent model, PersistenceRegistry registry)
         {
             for (var index = 0; index < model.ClassesProbabilitySpecification.Count; index++)
             {
                 var expertClassEstimationEntity = model.ClassesProbabilitySpecification[index].Create(registry);
-                expertClassEstimationEntity.TreeEventEntity = entity;
                 expertClassEstimationEntity.Order = index;
-                entity.ExpertClassEstimationEntities.Add(expertClassEstimationEntity);
+                entity.ClassesProbabilitySpecifications.Add(expertClassEstimationEntity);
             }
         }
     }

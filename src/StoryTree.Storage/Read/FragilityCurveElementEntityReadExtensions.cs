@@ -1,12 +1,12 @@
 ﻿using System;
 using StoryTree.Data;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Read
 {
     internal static class FragilityCurveElementEntityReadExtensions
     {
-        internal static FragilityCurveElement Read(this FragilityCurveElementEntity entity,ReadConversionCollector collector)
+        internal static FragilityCurveElement Read(this FragilityCurveElementXmlEntity entity,ReadConversionCollector collector)
         {
             if (entity == null)
             {
@@ -23,7 +23,7 @@ namespace StoryTree.Storage.Read
             }
 
             var element =
-                new FragilityCurveElement(entity.WaterLevel.ToNullAsNaN(), (Probability) entity.Probability.ToNullAsNaN());
+                new FragilityCurveElement(entity.WaterLevel, (Probability) entity.Probability);
 
             collector.Collect(entity,element);
 

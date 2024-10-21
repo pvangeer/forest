@@ -5,26 +5,13 @@
     <ProjectGuid>{A5C2B4E5-1758-4B14-800E-E3F2AA64EA64}</ProjectGuid>
     <RootNamespace>StoryTree.Storage</RootNamespace>
     <AssemblyName>StoryTree.Storage</AssemblyName>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Data.SQLite.Core.1.0.108.0\lib\net46\System.Data.SQLite.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.EF6, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Data.SQLite.EF6.1.0.108.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Data.SQLite.Linq.1.0.108.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Runtime.Serialization" />
@@ -42,81 +29,35 @@
     <Compile Include="Create\PersonCreateExtensions.cs" />
     <Compile Include="Create\ProjectCreateExtensions.cs" />
     <Compile Include="Create\TreeEventCreateExtensions.cs" />
-    <Compile Include="DbContext\EventTreeEntity.cs">
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\ExpertClassEstimationEntity.cs">
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\ExpertEntity.cs">
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\FragilityCurveElementEntity.cs">
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\HydraulicConditionElementEntity.cs">
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\PersonEntity.cs">
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\ProjectEntity.cs">
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\TreeEventEntity.cs">
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\TreeEventFragilityCurveElementEntity.cs">
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\VersionEntity.cs">
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="FingerprintHelper.cs" />
+    <Compile Include="Migration\FileMigrationScript.cs" />
+    <Compile Include="Migration\XmlMigrationException.cs" />
+    <Compile Include="Migration\XmlStorageMigrationService.cs" />
+    <Compile Include="Read\ReadReferencedObjectsFirstException.cs" />
+    <Compile Include="StorageXml.cs" />
     <Compile Include="StoryTreeVersionComparer.cs" />
     <Compile Include="StoryTreeVersionHelper.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Create\PersistenceRegistry.cs" />
-    <Compile Include="DbContext\PartialMainEntities.cs" />
-    <Compile Include="DbContext\TellTheStoryEntityDataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TellTheStoryEntityDataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\TellTheStoryEntityDataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TellTheStoryEntityDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\TellTheStoryEntityDataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TellTheStoryEntityDataModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="DoubleConversionExtensions.cs" />
     <Compile Include="Read\EventTreeEntitiesReadExtensions.cs" />
     <Compile Include="Read\ExpertClassEstimationEntityReadExtensions.cs" />
-    <Compile Include="Read\ExpertEntitiesReadExtentions.cs" />
+    <Compile Include="Read\ExpertEntitiesReadExtensions.cs" />
     <Compile Include="Read\FragilityCurveElementEntityReadExtensions.cs" />
     <Compile Include="Read\HydraulicConditionEntityReadExtensions.cs" />
     <Compile Include="Read\PersonEntityReadExtensions.cs" />
     <Compile Include="Read\ReadConversionCollector.cs" />
     <Compile Include="Read\ProjectEntityReadExtensions.cs" />
     <Compile Include="Read\TreeEventEntityReadExtensions.cs" />
-    <Compile Include="Read\TreeEventFragilityCurveElementEntityReadExtensions.cs" />
     <Compile Include="ReferenceEqualityComparer.cs" />
-    <Compile Include="SqliteConnectionStringBuilder.cs" />
     <Compile Include="FileReaderErrorMessageBuilder.cs" />
     <Compile Include="IOUtils.cs" />
-    <Compile Include="SqLiteEntityConnectionStringBuilder.cs" />
-    <Compile Include="StorageSqliteCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="StorageSqLite.cs" />
     <Compile Include="VersionInfo.cs" />
     <Compile Include="XmlEntities\EventTreeXmlEntity.cs" />
     <Compile Include="XmlEntities\ExpertClassEstimationXmlEntity.cs" />
@@ -124,7 +65,7 @@
     <Compile Include="XmlEntities\FragilityCurveElementXmlEntity.cs" />
     <Compile Include="XmlEntities\HydraulicConditionXmlEntity.cs" />
     <Compile Include="XmlEntities\PersonXmlEntity.cs" />
-    <Compile Include="XmlEntities\ProbabilityXmlEntity.cs" />
+    <Compile Include="XmlEntities\EventTreeProjectXmlEntity.cs" />
     <Compile Include="XmlEntities\ProjectXmlEntity.cs" />
     <Compile Include="XmlEntities\TreeEventXmlEntity.cs" />
     <Compile Include="XmlEntities\VersionXmlEntity.cs" />
@@ -132,16 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="DbContext\sampledatabase.db" />
-    <None Include="DbContext\sampledatabase.sqlite" />
-    <EntityDeploy Include="DbContext\TellTheStoryEntityDataModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TellTheStoryEntityDataModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="DbContext\TellTheStoryEntityDataModel.edmx.diagram">
-      <DependentUpon>TellTheStoryEntityDataModel.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TellTheStoryDatabaseSchema.sql" />
@@ -161,24 +92,5 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="DbContext\TellTheStoryEntityDataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TellTheStoryEntityDataModel.edmx</DependentUpon>
-      <LastGenOutput>TellTheStoryEntityDataModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DbContext\TellTheStoryEntityDataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TellTheStoryEntityDataModel.edmx</DependentUpon>
-      <LastGenOutput>TellTheStoryEntityDataModel.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
   <ItemGroup />
-  <Import Project="..\..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets'))" />
-  </Target>
 </Project>

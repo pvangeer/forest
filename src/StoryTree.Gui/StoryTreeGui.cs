@@ -10,6 +10,7 @@ using StoryTree.Data;
 using StoryTree.Data.Properties;
 using StoryTree.Gui.ViewModels;
 using StoryTree.Messaging;
+using StoryTree.Storage;
 
 namespace StoryTree.Gui
 {
@@ -20,15 +21,17 @@ namespace StoryTree.Gui
             ConfigureMessaging();
             BusyIndicator = StorageState.Idle;
             Messages = new MessageList();
-            Project = new Project();
+            EventTreeProject = new EventTreeProject();
             ProjectFilePath = "";
-
+            GuiProjectServices = new GuiProjectServices(this);
             LogMessageAppender.Instance.MessageCollection = this;
         }
 
+        public GuiProjectServices GuiProjectServices { get; }
+
         public StorageState BusyIndicator { get; set; }
 
-        public Project Project { get; set; }
+        public EventTreeProject EventTreeProject { get; set; }
 
         public string ProjectFilePath { get; set; }
 
@@ -53,6 +56,10 @@ namespace StoryTree.Gui
             }
         }
 
-        public Func<bool> ShouldSaveOpenChanges { get; set; }
+        public Func<ShouldProceedState> ShouldSaveOpenChanges { get; set; }
+
+        public VersionInfo VersionInfo { get; set; }
+
+        public Func<bool> ShouldMigrateProject { get; set; }
     }
 }

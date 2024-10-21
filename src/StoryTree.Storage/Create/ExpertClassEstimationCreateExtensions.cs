@@ -1,17 +1,17 @@
 ﻿using System;
 using StoryTree.Data.Tree;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Create
 {
     internal static class ExpertClassEstimationCreateExtensions
     {
-        internal static ExpertClassEstimationEntity Create(this ExpertClassEstimation model, PersistenceRegistry registry)
+        internal static ExpertClassEstimationXmlEntity Create(this ExpertClassEstimation model, PersistenceRegistry registry)
         {
-            var entity = new ExpertClassEstimationEntity
+            var entity = new ExpertClassEstimationXmlEntity
             {
-                ExpertEntity = model.Expert.Create(registry),
-                HydraulicConditionElementEntity = model.HydraulicCondition.Create(registry),
+                ExpertId = model.Expert.Create(registry).Id,
+                HydraulicConditionId = model.HydraulicCondition.Create(registry).Id,
                 AverageEstimation = Convert.ToByte(model.AverageEstimation),
                 MaxEstimation = Convert.ToByte(model.MaxEstimation),
                 MinEstimation = Convert.ToByte(model.MinEstimation),

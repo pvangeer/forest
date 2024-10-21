@@ -8,18 +8,18 @@ namespace StoryTree.IO.Import.DotFormValidation
 {
     public static class DotFormValidator
     {
-        public static DotFormValidationResult Validate(DotForm form, Project project)
+        public static DotFormValidationResult Validate(DotForm form, EventTreeProject eventTreeProject)
         {
-            if (project == null)
+            if (eventTreeProject == null)
             {
-                throw new ArgumentNullException(nameof(project));
+                throw new ArgumentNullException(nameof(eventTreeProject));
             }
 
-            var nodesValidationResult = ValidateNodes(form,project);
+            var nodesValidationResult = ValidateNodes(form,eventTreeProject);
 
             var validationResult = new DotFormValidationResult
             {
-                ExpertValidation = ValidateExperts(form, project),
+                ExpertValidation = ValidateExperts(form, eventTreeProject),
             };
 
             if (validationResult.ExpertValidation == ExpertValidationResult.Valid)
@@ -30,7 +30,7 @@ namespace StoryTree.IO.Import.DotFormValidation
             return validationResult;
         }
 
-        private static Dictionary<DotNode, NodeValidationResult> ValidateNodes(DotForm form, Project project)
+        private static Dictionary<DotNode, NodeValidationResult> ValidateNodes(DotForm form, EventTreeProject eventTreeProject)
         {
             var results = new Dictionary<DotNode, NodeValidationResult>();
 
@@ -42,7 +42,7 @@ namespace StoryTree.IO.Import.DotFormValidation
 
             foreach (var formNode in form.Nodes)
             {
-                var estimatedTreeEvent = project.EventTree.MainTreeEvent.FindTreeEvent(treeEvent => treeEvent.Name == formNode.NodeName);
+                var estimatedTreeEvent = eventTreeProject.EventTree.MainTreeEvent.FindTreeEvent(treeEvent => treeEvent.Name == formNode.NodeName);
                 if (estimatedTreeEvent == null)
                 {
                     results[formNode] = NodeValidationResult.NodeNotFound;
@@ -51,7 +51,7 @@ namespace StoryTree.IO.Import.DotFormValidation
                 foreach (var estimate in formNode.Estimates)
                 {
                     var condition =
-                        project.HydraulicConditions.FirstOrDefault(hc =>
+                        eventTreeProject.HydraulicConditions.FirstOrDefault(hc =>
                             Math.Abs(hc.WaterLevel - estimate.WaterLevel) < 1e-6);
 
                     if (condition == null)
@@ -83,14 +83,14 @@ namespace StoryTree.IO.Import.DotFormValidation
             return results;
         }
 
-        private static ExpertValidationResult ValidateExperts(DotForm form, Project project)
+        private static ExpertValidationResult ValidateExperts(DotForm form, EventTreeProject eventTreeProject)
         {
-            if (project.Experts == null || !project.Experts.Any())
+            if (eventTreeProject.Experts == null || !eventTreeProject.Experts.Any())
             {
                 return ExpertValidationResult.NoExperts;
             }
 
-            if (project.Experts.Any(e => e.Name == form.ExpertName))
+            if (eventTreeProject.Experts.Any(e => e.Name == form.ExpertName))
             {
                 return ExpertValidationResult.Valid;
             }

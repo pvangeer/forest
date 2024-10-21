@@ -8,9 +8,9 @@ namespace StoryTree.Gui
 {
     public static class TestDataGenerator
     {
-        public static Project CreateTestViewModel()
+        public static EventTreeProject CreateTestViewModel()
         {
-            return new Project
+            return new EventTreeProject
             {
                 EventTree =
                 {
@@ -59,7 +59,7 @@ namespace StoryTree.Gui
             return mainTreeEvent;
         }
 
-        public static Project GenerateAsphaltProject()
+        public static EventTreeProject GenerateAsphaltProject()
         {
             var andre = new Expert
             {
@@ -109,7 +109,7 @@ namespace StoryTree.Gui
             var hydraulicCondition35 = new HydraulicCondition(3.5, (Probability)3.33E-04,double.NaN,double.NaN);
             var hydraulicCondition38 = new HydraulicCondition(3.8, (Probability)1.00E-04,double.NaN,double.NaN);
 
-            return new Project
+            return new EventTreeProject
             {
                 Name = "AGK - HHNK",
                 ProjectLeader =

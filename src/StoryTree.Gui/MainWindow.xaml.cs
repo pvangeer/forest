@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.ComponentModel;
+using System.Windows.Input;
 using StoryTree.Data;
 using StoryTree.Gui.ViewModels;
 
@@ -15,7 +16,7 @@ namespace StoryTree.Gui
 
             var storyTreeGui = new StoryTreeGui
             {
-                Project = new Project()
+                EventTreeProject = new EventTreeProject()
             };
             var guiViewModel = new GuiViewModel(storyTreeGui)
             {
@@ -32,6 +33,12 @@ namespace StoryTree.Gui
         private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void MainWindowClosing(object sender, CancelEventArgs e)
+        {
+            if (DataContext is GuiViewModel viewModel)
+                e.Cancel = !viewModel.ForcedClosingMainWindow();
         }
     }
 

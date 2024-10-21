@@ -1,12 +1,12 @@
 ﻿using System;
 using StoryTree.Data;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Create
 {
     internal static class FragilityCurveElementCreateExtensions
     {
-        internal static FragilityCurveElementEntity Create(this FragilityCurveElement model, PersistenceRegistry registry)
+        internal static FragilityCurveElementXmlEntity Create(this FragilityCurveElement model, PersistenceRegistry registry)
         {
             if (registry == null)
             {
@@ -18,10 +18,10 @@ namespace StoryTree.Storage.Create
                 return registry.Get(model);
             }
 
-            var entity = new FragilityCurveElementEntity
+            var entity = new FragilityCurveElementXmlEntity
             {
-                Probability = ((double)model.Probability).ToNaNAsNull(),
-                WaterLevel = model.WaterLevel.ToNaNAsNull()
+                Probability = model.Probability,
+                WaterLevel = model.WaterLevel
             };
 
             registry.Register(model, entity);

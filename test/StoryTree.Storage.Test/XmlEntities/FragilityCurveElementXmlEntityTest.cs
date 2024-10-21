@@ -20,7 +20,7 @@ namespace StoryTree.Storage.Test.XmlEntities
             {
                 Id = 3,
                 WaterLevel = 2.0,
-                ProbabilityId = 2
+                Probability = 0.459
             };
 
             Stream stream = new MemoryStream();

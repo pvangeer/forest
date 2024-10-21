@@ -6,7 +6,7 @@ namespace StoryTree.Storage.XmlEntities
     [Serializable]
     public class EventTreeXmlEntity : XmlEntityBase
     {
-        [XmlAttribute(AttributeName = "maintreeeventid")]
-        public long MainTreeEventId { get; set; }
+        [XmlElement(ElementName = "maintreeevent")]
+        public TreeEventXmlEntity MainTreeEvent { get; set; }
     }
 }

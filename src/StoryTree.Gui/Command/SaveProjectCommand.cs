@@ -15,12 +15,12 @@ namespace StoryTree.Gui.Command
 
         public bool CanExecute(object parameter)
         {
-            return ViewModel.Gui.Project != null;
+            return ViewModel.CanSaveProject();
         }
 
         public void Execute(object parameter)
         {
-            ViewModel.GuiProjectSercices.SaveProject();
+            ViewModel.SaveProject();
         }
 
         public event EventHandler CanExecuteChanged;

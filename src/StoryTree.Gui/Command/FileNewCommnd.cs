@@ -21,7 +21,7 @@ namespace StoryTree.Gui.Command
 
         public void Execute(object parameter)
         {
-            ViewModel.GuiProjectSercices.NewProject();
+            ViewModel.NewProject();
         }
 
         public event EventHandler CanExecuteChanged;

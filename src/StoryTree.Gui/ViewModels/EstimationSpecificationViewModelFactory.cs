@@ -8,23 +8,23 @@ namespace StoryTree.Gui.ViewModels
 {
     public class EstimationSpecificationViewModelFactory
     {
-        public EstimationSpecificationViewModelFactory(Project project)
+        public EstimationSpecificationViewModelFactory(EventTreeProject eventTreeProject)
         {
-            Project = project;
+            EventTreeProject = eventTreeProject;
         }
 
-        public Project Project { get; }
+        public EventTreeProject EventTreeProject { get; }
 
         public ProbabilitySpecificationViewModelBase CreateViewModel(TreeEvent treeEvent)
         {
             switch (treeEvent.ProbabilitySpecificationType)
             {
                 case ProbabilitySpecificationType.Classes:
-                    return new ClassesProbabilitySpecificationViewModel(treeEvent, Project);
+                    return new ClassesProbabilitySpecificationViewModel(treeEvent, EventTreeProject);
                 case ProbabilitySpecificationType.FixedValue:
                     return new FixedProbabilitySpecificationViewModel(treeEvent);
                 case ProbabilitySpecificationType.FixedFrequency:
-                    return new FixedFragilityCurveSpecificationViewModel(treeEvent, Project);
+                    return new FixedFragilityCurveSpecificationViewModel(treeEvent, EventTreeProject);
                 default:
                     throw new InvalidEnumArgumentException();
             }

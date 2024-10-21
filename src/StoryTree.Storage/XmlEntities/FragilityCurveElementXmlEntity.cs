@@ -9,7 +9,11 @@ namespace StoryTree.Storage.XmlEntities
         [XmlAttribute(AttributeName = "waterlevel")]
         public double WaterLevel { get; set; }
 
-        [XmlAttribute(AttributeName = "probabilityid")]
-        public long ProbabilityId { get; set; }
+        [XmlAttribute(AttributeName = "probability")]
+        public double Probability { get; set; }
+
+        [XmlAttribute(AttributeName = "order")]
+        public long Order { get; set; }
+
     }
 }

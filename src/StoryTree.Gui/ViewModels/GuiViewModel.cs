@@ -20,33 +20,44 @@ namespace StoryTree.Gui.ViewModels
         private ProjectViewModel projectViewModel;
         private MessageListViewModel messageListViewModel;
         private StoryTreeProcess selectedProcess;
+        private readonly StoryTreeGui gui;
 
         public GuiViewModel() : this(new StoryTreeGui()) { }
 
         public GuiViewModel(StoryTreeGui gui)
         {
-            GuiProjectSercices = new GuiProjectServices(this);
-            Gui = gui;
-            if (Gui != null)
+            this.gui = gui;
+            if (this.gui != null)
             {
-                Gui.PropertyChanged += GuiPropertyChanged;
-                Gui.Messages.CollectionChanged += GuiMessagesCollectionChanged;
-                projectViewModel = new ProjectViewModel(Gui.Project);
-                Gui.ShouldSaveOpenChanges = ShouldSaveOpenChanges;
+                gui.ShouldMigrateProject = ShouldMigrateProject;
+                this.gui.PropertyChanged += GuiPropertyChanged;
+                this.gui.Messages.CollectionChanged += GuiMessagesCollectionChanged;
+                projectViewModel = new ProjectViewModel(this.gui.EventTreeProject);
+                this.gui.ShouldSaveOpenChanges = ShouldSaveOpenChanges;
             }
         }
 
-        private bool ShouldSaveOpenChanges()
+        private bool ShouldMigrateProject()
         {
-            string messageBoxText = "U heeft aanpassingen aan uw project nog niet opgeslagen. Wilt u dat alsnog doen?";
-            string caption = "Aanpassingen opslaan";
-
-            MessageBoxButton messageBoxType = MessageBoxButton.YesNo;
-            MessageBoxImage messageBoxImage = MessageBoxImage.Question;
-
-            MessageBoxResult messageBoxResult = MessageBox.Show(messageBoxText, caption, messageBoxType, messageBoxImage);
+            var messageBoxText =
+                "U wilt een verouderd bestand openen. Wilt u dit bestand migreren naar het nieuwe format om het te kunnen openen?";
+            var caption = "Bestand migreren naar nieuwste versie";
+            var messageBoxResult =
+                MessageBox.Show(messageBoxText, caption, MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             return messageBoxResult == MessageBoxResult.Yes;
+        }
+
+        private ShouldProceedState ShouldSaveOpenChanges()
+        {
+            var messageBoxText = "U heeft aanpassingen aan uw project nog niet opgeslagen. Wilt u dat alsnog doen?";
+            var caption = "Aanpassingen opslaan";
+            var messageBoxResult =
+                MessageBox.Show(messageBoxText, caption, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+
+            return messageBoxResult == MessageBoxResult.Yes ? ShouldProceedState.Yes :
+                messageBoxResult == MessageBoxResult.No ? ShouldProceedState.No :
+                ShouldProceedState.Cancel;
         }
 
         private void GuiMessagesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -96,36 +107,28 @@ namespace StoryTree.Gui.ViewModels
 
         public LogMessage PriorityMessage { get; set; }
 
-        public GuiProjectServices GuiProjectSercices { get; }
-
-        public StoryTreeGui Gui { get; }
-
         public StorageState BusyIndicator
         {
-            get => Gui.BusyIndicator;
-            set => Gui.BusyIndicator = value;
+            get => gui.BusyIndicator;
+            set => gui.BusyIndicator = value;
         }
 
         public ProjectViewModel ProjectViewModel => projectViewModel;
 
         public MessageListViewModel MessagesViewModel =>
-            messageListViewModel ?? (messageListViewModel = new MessageListViewModel(Gui.Messages));
+            messageListViewModel ?? (messageListViewModel = new MessageListViewModel(gui.Messages));
 
         public string ProjectFilePath
         {
-            get => Gui.ProjectFilePath;
+            get => gui.ProjectFilePath;
             set
             {
-                Gui.ProjectFilePath = value;
+                gui.ProjectFilePath = value;
                 OnPropertyChanged(nameof(ProjectFileName));
             }
         }
 
-        public Window Win32Window
-        {
-            get => GuiProjectSercices.Win32Window;
-            set => GuiProjectSercices.Win32Window = value;
-        }
+        public Window Win32Window { get; set; }
 
         public ICommand FileNewCommand => new FileNewCommnd(this);
 
@@ -133,7 +136,7 @@ namespace StoryTree.Gui.ViewModels
 
         public ICommand SaveProjectAsCommand => new SaveProjectAsCommand(this);
 
-        public ICommand OpenProjectCommand => new OpenProjectCommand(this);
+        public ICommand OpenProjectCommand => new OpenProjectCommand(this.gui.GuiProjectServices);
 
         public ICommand RemoveLastMessageCommand => new RemovePriorityMessageCommand(this);
 
@@ -166,8 +169,8 @@ namespace StoryTree.Gui.ViewModels
                 case nameof(StoryTreeGui.BusyIndicator):
                     OnPropertyChanged(nameof(BusyIndicator));
                     break;
-                case nameof(StoryTreeGui.Project):
-                    projectViewModel = new ProjectViewModel(Gui.Project);
+                case nameof(StoryTreeGui.EventTreeProject):
+                    projectViewModel = new ProjectViewModel(gui.EventTreeProject);
                     OnPropertyChanged(nameof(ProjectViewModel));
                     break;
                 case nameof(StoryTreeGui.Messages):
@@ -194,17 +197,47 @@ namespace StoryTree.Gui.ViewModels
 
         public void OnExportElicitationForms(string fileLocation, string prefix, Expert[] expertsToExport, EventTree eventTreeToExport)
         {
-            var exporter = new ElicitationFormsExporter(ProjectViewModel.Project);
+            var exporter = new ElicitationFormsExporter(ProjectViewModel.EventTreeProject);
             exporter.Export(fileLocation, prefix, expertsToExport, eventTreeToExport);
         }
 
         public void OnImportElicitationForms(string[] fileLocations)
         {
-            var importer = new ElicitationFormImporter(ProjectViewModel.Project);
+            var importer = new ElicitationFormImporter(ProjectViewModel.EventTreeProject);
             foreach (var fileLocation in fileLocations)
             {
                 importer.Import(fileLocation);
             }
+        }
+
+        public void NewProject()
+        {
+            gui.GuiProjectServices.NewProject();
+        }
+
+        public void OpenProject()
+        {
+            gui.GuiProjectServices.OpenProject();
+        }
+
+        public void SaveProjectAs()
+        {
+            gui.GuiProjectServices.SaveProjectAs();
+        }
+
+        public bool CanSaveProject()
+        {
+            return gui.EventTreeProject != null;
+        }
+
+        public void SaveProject()
+        {
+            gui.GuiProjectServices.SaveProject();
+        }
+
+        public bool ForcedClosingMainWindow()
+        {
+            return gui.GuiProjectServices.HandleUnsavedChanges(() => { });
         }
     }
 }

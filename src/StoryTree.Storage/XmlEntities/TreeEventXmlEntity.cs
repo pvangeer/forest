@@ -16,11 +16,11 @@ namespace StoryTree.Storage.XmlEntities
         [XmlAttribute(AttributeName = "name")]
         public string Name { get; set; }
 
-        [XmlAttribute(AttributeName = "failingeventid")]
-        public long FailingEventId { get; set; }
+        [XmlElement(ElementName = "failingevent")]
+        public TreeEventXmlEntity FailingEvent { get; set; }
 
-        [XmlAttribute(AttributeName = "passingeventid")]
-        public long PassingEvent { get; set; }
+        [XmlElement(ElementName = "passingevent")]
+        public TreeEventXmlEntity PassingEvent { get; set; }
 
         [XmlAttribute(AttributeName = "summary")]
         public string Summary { get; set; }

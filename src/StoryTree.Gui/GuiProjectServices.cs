@@ -6,42 +6,44 @@ using StoryTree.Data;
 using StoryTree.Gui.ViewModels;
 using StoryTree.Messaging;
 using StoryTree.Storage;
+using StoryTree.Storage.Migration;
 
 namespace StoryTree.Gui
 {
     public class GuiProjectServices
     {
         private readonly StoryTreeLog log = new StoryTreeLog(typeof(GuiProjectServices));
-        private readonly GuiViewModel guiViewModel;
-        private readonly StorageSqLite storageSqLite;
+        private readonly StoryTreeGui gui;
+        private readonly StorageXml storageXml;
         
-        public GuiProjectServices(GuiViewModel guiViewModel)
+        public GuiProjectServices(StoryTreeGui gui)
         {
-            this.guiViewModel = guiViewModel;
-            storageSqLite = new StorageSqLite();
+            this.gui = gui;
+            storageXml = new StorageXml();
         }
 
         public Window Win32Window { get; set; }
 
         public void NewProject()
         {
-            HandleUnsavedChanges(guiViewModel.Gui, CreateNewProject);
+            HandleUnsavedChanges(CreateNewProject);
         }
 
         private void CreateNewProject()
         {
-            storageSqLite.UnstageProject();
-            guiViewModel.ProjectFilePath = "";
+            storageXml.UnStageEventTreeProject();
+            gui.ProjectFilePath = "";
 
-            guiViewModel.Gui.Project = new Project();
-            guiViewModel.Gui.OnPropertyChanged(nameof(StoryTreeGui.Project));
+            gui.EventTreeProject = new EventTreeProject();
+            gui.OnPropertyChanged(nameof(StoryTreeGui.EventTreeProject));
         }
 
         public void OpenProject()
         {
-            storageSqLite.UnstageProject();
+            storageXml.UnStageEventTreeProject();
+            storageXml.UnStageVersionInformation();
 
-            HandleUnsavedChanges(guiViewModel.Gui, OpenNewProjectCore);
+            HandleUnsavedChanges(OpenNewProjectCore);
         }
 
         private void OpenNewProjectCore()
@@ -49,43 +51,108 @@ namespace StoryTree.Gui
             var dialog = new OpenFileDialog
             {
                 CheckFileExists = true,
-                Filter = "StoryTree bestand (*.sqlite)|*.sqlite",
-                FileName = guiViewModel.ProjectFilePath,
+                Filter = "Faalpadenproject bestand (*.xml)|*.xml",
+                FileName = gui.ProjectFilePath,
             };
 
-            if ((bool) dialog.ShowDialog(Win32Window))
+            if ((bool) dialog.ShowDialog(Application.Current.MainWindow))
             {
-                ChangeState(StorageState.Busy);
-
-                var worker = new BackgroundWorker();
-                worker.DoWork += OpenProjectAsync;
-                worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o, e,
-                    () =>
-                    {
-                        guiViewModel.ProjectFilePath = dialog.FileName;
-                        log.Info($"Klaar met openen van project uit bestand '{guiViewModel.ProjectFilePath}'.");
-                    });
-                worker.WorkerSupportsCancellation = false;
-
-                worker.RunWorkerAsync(dialog.FileName);
+                OpenProjectCore(dialog.FileName);
             }
+        }
+
+        private void OpenProjectCore(string fileName)
+        {
+            var needsMigration = false;
+            try
+            {
+                needsMigration = XmlStorageMigrationService.NeedsMigration(fileName);
+            }
+            catch (XmlStorageException e)
+            {
+                var message = e.Message;
+                if (e.InnerException != null)
+                    message = $"Er is een fout opgetreden bij het lezen van dit bestand: {e.InnerException}";
+                log.Error(message);
+                return;
+            }
+
+            if (needsMigration && gui.ShouldMigrateProject != null &&
+                gui.ShouldMigrateProject())
+            {
+                if (!MigrateProject(fileName, out var newFileName))
+                    return;
+
+                fileName = newFileName;
+            }
+
+            ChangeState(StorageState.Busy);
+
+            var worker = new BackgroundWorker();
+            worker.DoWork += OpenProjectAsync;
+            worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o, e,
+                () =>
+                {
+                    gui.ProjectFilePath = fileName;
+                    log.Info($"Klaar met openen van project uit bestand '{gui.ProjectFilePath}'.");
+                });
+            worker.WorkerSupportsCancellation = false;
+
+            worker.RunWorkerAsync(fileName);
+        }
+
+        private bool MigrateProject(string fileName, out string newFileName)
+        {
+            var dialog = new SaveFileDialog
+            {
+                CheckPathExists = true,
+                FileName = fileName.Replace(".xml",
+                    $"-migrated-{VersionInfo.Year}.{VersionInfo.MajorVersion}.{VersionInfo.MinorVersion}.xml"),
+                OverwritePrompt = true,
+                Filter = "Faalpadenproject bestand (*.xml)|*.xml"
+            };
+            newFileName = null;
+
+            if ((bool)dialog.ShowDialog(Application.Current.MainWindow))
+            {
+                try
+                {
+                    XmlStorageMigrationService.MigrateFile(fileName, dialog.FileName);
+                }
+                catch (XmlMigrationException e)
+                {
+                    log.Error(e.Message);
+                }
+                catch (Exception e)
+                {
+                    log.Error($"Er is een fout opgetreden bij het migreren van dit bestand: {e.Message}");
+                    return false;
+                }
+
+                newFileName = dialog.FileName;
+                log.Info($"Migratie van bestand '{fileName}' is voltooid. Het resultaat is opgeslagen in het bestand '{newFileName}'");
+                return true;
+            }
+
+            log.Info("Migratie gestopt door de gebruiker. Bestand wordt niet geopend.");
+            return false;
         }
 
         public void SaveProject()
         {
-            storageSqLite.UnstageProject();
+            storageXml.UnStageEventTreeProject();
             SaveProject(null);
         }
 
         public void SaveProjectAs()
         {
-            storageSqLite.UnstageProject();
+            storageXml.UnStageEventTreeProject();
             SaveProjectAs(null);
         }
 
         private void SaveProject(Action followingAction)
         {
-            if (string.IsNullOrWhiteSpace(guiViewModel.ProjectFilePath))
+            if (string.IsNullOrWhiteSpace(gui.ProjectFilePath))
             {
                 SaveProjectAs(followingAction);
                 return;
@@ -99,14 +166,14 @@ namespace StoryTree.Gui
             var dialog = new SaveFileDialog
             {
                 CheckPathExists = true,
-                FileName = guiViewModel.ProjectFilePath,
+                FileName = gui.ProjectFilePath,
                 OverwritePrompt = true,
-                Filter = "StoryTree bestand (*.sqlite)|*.sqlite"
+                Filter = "Faalpadenproject bestand (*.xml)|*.xml"
             };
 
-            if ((bool)dialog.ShowDialog(Win32Window))
+            if ((bool)dialog.ShowDialog(Application.Current.MainWindow))
             {
-                guiViewModel.ProjectFilePath = dialog.FileName;
+                gui.ProjectFilePath = dialog.FileName;
                 StageProjectAndStore(followingAction);
             }
         }
@@ -119,7 +186,7 @@ namespace StoryTree.Gui
             worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o, e,
                 () =>
                 {
-                    log.Info($"Project is opgeslagen in bestand '{guiViewModel.ProjectFilePath}'.");
+                    log.Info($"EventTreeProject is opgeslagen in bestand '{gui.ProjectFilePath}'.");
                     followingAction?.Invoke();
                 });
             worker.WorkerSupportsCancellation = false;
@@ -158,8 +225,17 @@ namespace StoryTree.Gui
             var fileName = e.Argument as string;
             try
             {
-                guiViewModel.Gui.Project = storageSqLite.LoadProject(fileName);
-                guiViewModel.Gui.OnPropertyChanged(nameof(StoryTreeGui.Project));
+                var readProjectData = storageXml.LoadProject(fileName);
+                gui.EventTreeProject = readProjectData.EventTreeProject;
+                gui.VersionInfo = new VersionInfo
+                {
+                    AuthorCreated = readProjectData.Author,
+                    DateCreated = readProjectData.Created
+                };
+                gui.ProjectFilePath = fileName;
+
+                gui.OnPropertyChanged(nameof(StoryTreeGui.EventTreeProject));
+                gui.OnPropertyChanged(nameof(StoryTreeGui.ProjectFilePath));
             }
             catch (Exception exception)
             {
@@ -167,42 +243,48 @@ namespace StoryTree.Gui
             }
         }
 
-        // TODO: Also use this method when exiting the gui 
-        private void HandleUnsavedChanges(StoryTreeGui gui, Action followingAction)
+        public bool HandleUnsavedChanges(Action followingAction)
         {
-            storageSqLite.StageProject(gui.Project);
-            if (storageSqLite.HasStagedProjectChanges(gui.ProjectFilePath))
+            storageXml.StageEventTreeProject(gui.EventTreeProject);
+            storageXml.StageVersionInformation(gui.VersionInfo);
+            if (storageXml.HasStagedProjectChanges())
             {
-                if (gui.ShouldSaveOpenChanges != null && gui.ShouldSaveOpenChanges())
-                {
-                    SaveProject(followingAction);
-                }
+                if (gui.ShouldSaveOpenChanges != null)
+                    switch (gui.ShouldSaveOpenChanges())
+                    {
+                        case ShouldProceedState.Yes:
+                            SaveProject(followingAction);
+                            break;
+                        case ShouldProceedState.No:
+                            followingAction();
+                            break;
+                        case ShouldProceedState.Cancel:
+                            return false;
+                    }
                 else
-                {
                     followingAction();
-                }
             }
             else
             {
                 followingAction();
             }
+            return true;
         }
 
         private void StageAndStoreProjectCore()
         {
-            if (!storageSqLite.HasStagedProject)
+            if (!storageXml.HasStagedEventTreeProject)
             {
-                storageSqLite.StageProject(guiViewModel.Gui.Project);
+                storageXml.StageEventTreeProject(gui.EventTreeProject);
             }
 
-            storageSqLite.SaveProjectAs(guiViewModel.ProjectFilePath);
+            storageXml.SaveProjectAs(gui.ProjectFilePath);
         }
 
         private void ChangeState(StorageState state)
         {
-            guiViewModel.BusyIndicator = state;
-            guiViewModel.OnPropertyChanged(nameof(GuiViewModel.BusyIndicator));
-            guiViewModel.InvokeInvalidateVisual();
+            gui.BusyIndicator = state;
+            gui.OnPropertyChanged(nameof(GuiViewModel.BusyIndicator));
         }
     }
 }

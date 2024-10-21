@@ -7,11 +7,11 @@ using StoryTree.Data.Properties;
 
 namespace StoryTree.Data
 {
-    public class Project : INotifyPropertyChanged
+    public class EventTreeProject : INotifyPropertyChanged
     {
         private EventTree eventTree;
 
-        public Project()
+        public EventTreeProject()
         {
             Name = "Nieuw project";
             AssessmentSection = "1-1";

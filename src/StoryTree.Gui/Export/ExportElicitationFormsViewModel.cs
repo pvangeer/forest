@@ -16,7 +16,7 @@ namespace StoryTree.Gui.Export
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(ExportElicitationFormsViewModel));
 
-        public static Project TestProject = new Project
+        public static EventTreeProject TestEventTreeProject = new EventTreeProject
         {
             Experts =
             {
@@ -26,19 +26,19 @@ namespace StoryTree.Gui.Export
             Name = "Testproject"
         };
 
-        public ExportElicitationFormsViewModel() : this(TestProject) { }
+        public ExportElicitationFormsViewModel() : this(TestEventTreeProject) { }
 
-        public ExportElicitationFormsViewModel(Project project)
+        public ExportElicitationFormsViewModel(EventTreeProject eventTreeProject)
         {
-            Experts = new ObservableCollection<ElicitationFormsExportViewModel>(project.Experts.Select(e => new ElicitationFormsExportViewModel(e)));
+            Experts = new ObservableCollection<ElicitationFormsExportViewModel>(eventTreeProject.Experts.Select(e => new ElicitationFormsExportViewModel(e)));
             foreach (var expertExportViewModel in Experts)
             {
                 expertExportViewModel.PropertyChanged += ViewModelPropertyChanged;
             }
-            EventTree = new EventTreeExportViewModel(project.EventTree);
+            EventTree = new EventTreeExportViewModel(eventTreeProject.EventTree);
             EventTree.PropertyChanged += ViewModelPropertyChanged; 
 
-            Prefix = DateTime.Now.Date.ToString("yyyy-MM-dd") + " - " + project.Name + " - ";
+            Prefix = DateTime.Now.Date.ToString("yyyy-MM-dd") + " - " + eventTreeProject.Name + " - ";
         }
 
         public void OnExportHandler()

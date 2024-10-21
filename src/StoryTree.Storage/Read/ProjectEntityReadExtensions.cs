@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using StoryTree.Data;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Read
 {
     internal static class ProjectEntityReadExtensions
     {
-        internal static Project Read(this ProjectEntity entity, ReadConversionCollector collector)
+        internal static Data.EventTreeProject Read(this EventTreeProjectXmlEntity entity, ReadConversionCollector collector)
         {
             if (entity == null)
             {
@@ -19,18 +17,18 @@ namespace StoryTree.Storage.Read
                 throw new ArgumentNullException(nameof(collector));
             }
 
-            var experts = entity.ExpertEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
-            var hydraulicConditions = entity.HydraulicConditionElementEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
-            var eventTrees = entity.EventTreeEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
+            var experts = entity.Experts.OrderBy(e => e.Order).Select(e => e.Read(collector));
+            var hydraulicConditions = entity.HydraulicConditions.OrderBy(e => e.Order).Select(e => e.Read(collector));
 
-            var project = new Project
+            var project = new Data.EventTreeProject
             {
                 Name = entity.Name,
                 AssessmentSection = entity.AssessmentSection,
                 Description = entity.Description,
                 ProjectInformation = entity.ProjectInformation,
-                ProjectLeader = entity.PersonEntity.Read(collector),
-            };
+                ProjectLeader = entity.ProjectLeader.Read(collector),
+                EventTree = entity.EventTree.Read(collector)
+        };
 
             foreach (var expert in experts)
             {
@@ -41,8 +39,6 @@ namespace StoryTree.Storage.Read
             {
                 project.HydraulicConditions.Add(hydraulicCondition);
             }
-
-            project.EventTree = eventTrees.FirstOrDefault();
 
             return project;
         }

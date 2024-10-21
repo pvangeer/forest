@@ -4,13 +4,13 @@ using System.Linq;
 using StoryTree.Data;
 using StoryTree.Data.Estimations;
 using StoryTree.Data.Tree;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Read
 {
     internal static class TreeEventEntityReadExtensions
     {
-        internal static TreeEvent Read(this TreeEventEntity entity, ReadConversionCollector collector)
+        internal static TreeEvent Read(this TreeEventXmlEntity entity, ReadConversionCollector collector)
         {
             if (entity == null)
             {
@@ -29,9 +29,9 @@ namespace StoryTree.Storage.Read
             var treeEvent = new TreeEvent
             {
                 Name = entity.Name,
-                FixedProbability = entity.FixedProbability == null
+                FixedProbability = double.IsNaN(entity.FixedProbability)
                     ? Probability.NaN
-                    : (Probability) (double) entity.FixedProbability,
+                    : (Probability) entity.FixedProbability,
                 ProbabilitySpecificationType = (ProbabilitySpecificationType) entity.ProbabilitySpecificationType,
                 Summary = entity.Summary,
                 Information = entity.Information,
@@ -39,16 +39,16 @@ namespace StoryTree.Storage.Read
                 // TODO: Add PassPhrase
             };
 
-            ReadFragilityCurve(treeEvent, entity.TreeEventFragilityCurveElementEntities, collector);
+            ReadFragilityCurve(treeEvent, entity.FixedFragilityCurveElements, collector);
 
-            if (entity.TreeEventEntity3 != null)
+            if (entity.FailingEvent != null)
             {
-                treeEvent.FailingEvent = entity.TreeEventEntity3.Read(collector);
+                treeEvent.FailingEvent = entity.FailingEvent.Read(collector);
             }
 
-            if (entity.TreeEventEntity2 != null)
+            if (entity.PassingEvent != null)
             {
-                treeEvent.PassingEvent = entity.TreeEventEntity2.Read(collector);
+                treeEvent.PassingEvent = entity.PassingEvent.Read(collector);
             }
 
             ReadExpertClassSpecifications(entity, collector, treeEvent);
@@ -56,20 +56,20 @@ namespace StoryTree.Storage.Read
             return treeEvent;
         }
 
-        private static void ReadExpertClassSpecifications(TreeEventEntity entity, ReadConversionCollector collector, TreeEvent treeEvent)
+        private static void ReadExpertClassSpecifications(TreeEventXmlEntity entity, ReadConversionCollector collector, TreeEvent treeEvent)
         {
-            var specifications = entity.ExpertClassEstimationEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
+            var specifications = entity.ClassesProbabilitySpecifications.OrderBy(e => e.Order).Select(e => e.Read(collector));
             foreach (var specification in specifications)
             {
                 treeEvent.ClassesProbabilitySpecification.Add(specification);
             }
         }
 
-        private static void ReadFragilityCurve(TreeEvent treeEvent, IEnumerable<TreeEventFragilityCurveElementEntity> entities, ReadConversionCollector collector)
+        private static void ReadFragilityCurve(TreeEvent treeEvent, IEnumerable<FragilityCurveElementXmlEntity> entities, ReadConversionCollector collector)
         {
-            foreach (var treeEventFragilityCurveElementEntity in entities.OrderBy(e => e.Order))
+            foreach (var fragilityCurveElementEntity in entities.OrderBy(e => e.Order))
             {
-                treeEvent.FixedFragilityCurve.Add(treeEventFragilityCurveElementEntity.Read(collector));
+                treeEvent.FixedFragilityCurve.Add(fragilityCurveElementEntity.Read(collector));
             }
         }
     }

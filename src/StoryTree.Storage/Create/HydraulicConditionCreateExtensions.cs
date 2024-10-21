@@ -1,13 +1,12 @@
 ﻿using System;
-using StoryTree.Data;
 using StoryTree.Data.Hydraulics;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Create
 {
     internal static class HydraulicConditionCreateExtensions
     {
-        internal static HydraulicConditionElementEntity Create(this HydraulicCondition model, PersistenceRegistry registry)
+        internal static HydraulicConditionXmlEntity Create(this HydraulicCondition model, PersistenceRegistry registry)
         {
             if (registry == null)
             {
@@ -19,11 +18,12 @@ namespace StoryTree.Storage.Create
                 return registry.Get(model);
             }
 
-            var entity = new HydraulicConditionElementEntity
+            var entity = new HydraulicConditionXmlEntity
             {
-                FragilityCurveElementEntity = ((FragilityCurveElement)model).Create(registry),
-                WaveHeight = model.WaveHeight.ToNaNAsNull(),
-                WavePeriod = model.WavePeriod.ToNaNAsNull()
+                Probability = ((double)model.Probability),
+                WaterLevel = model.WaterLevel,
+                WaveHeight = model.WaveHeight,
+                WavePeriod = model.WavePeriod
             };
 
             registry.Register(model, entity);

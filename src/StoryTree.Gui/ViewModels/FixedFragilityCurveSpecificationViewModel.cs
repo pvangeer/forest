@@ -11,23 +11,23 @@ namespace StoryTree.Gui.ViewModels
     {
         private ObservableCollection<FragilityCurveElementViewModel> fixedFragilityCurveViewModels;
 
-        public FixedFragilityCurveSpecificationViewModel(TreeEvent treeEvent, Project project) : base(treeEvent)
+        public FixedFragilityCurveSpecificationViewModel(TreeEvent treeEvent, EventTreeProject eventTreeProject) : base(treeEvent)
         {
-            Project = project;
+            EventTreeProject = eventTreeProject;
 
             fixedFragilityCurveViewModels = new ObservableCollection<FragilityCurveElementViewModel>(treeEvent.FixedFragilityCurve.Select(e => new FragilityCurveElementViewModel(e)));
             fixedFragilityCurveViewModels.CollectionChanged += FragilityCurveViewModelsCollectionChanged;
 
         }
 
-        public Project Project { get; }
+        public EventTreeProject EventTreeProject { get; }
 
         public ObservableCollection<FragilityCurveElementViewModel> FixedFragilityCurve => FixedFragilityCurveViewModels();
 
         private ObservableCollection<FragilityCurveElementViewModel> FixedFragilityCurveViewModels()
         {
             var estimatedWaterLevels = fixedFragilityCurveViewModels.Select(vm => vm.WaterLevel).ToArray();
-            var currentWaterLevels = Project.HydraulicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w).ToArray();
+            var currentWaterLevels = EventTreeProject.HydraulicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w).ToArray();
             var missingWaterLevels = currentWaterLevels.Except(estimatedWaterLevels).ToArray();
             var waterLevelsToRemove = estimatedWaterLevels.Except(currentWaterLevels).ToArray(); 
             foreach (var waterLevel in waterLevelsToRemove)

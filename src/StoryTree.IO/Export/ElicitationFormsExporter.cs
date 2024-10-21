@@ -16,11 +16,11 @@ namespace StoryTree.IO.Export
         private readonly StoryTreeLog log = new StoryTreeLog(typeof(ElicitationFormsExporter));
         private readonly ElicitationFormWriter writer = new ElicitationFormWriter();
 
-        public Project Project { get; }
+        public EventTreeProject EventTreeProject { get; }
 
-        public ElicitationFormsExporter(Project project)
+        public ElicitationFormsExporter(EventTreeProject eventTreeProject)
         {
-            this.Project = project;
+            this.EventTreeProject = eventTreeProject;
         }
 
         public void Export(string fileLocation, string prefix, Expert[] expertsToExport, EventTree eventTreeToExport)
@@ -42,13 +42,13 @@ namespace StoryTree.IO.Export
                 log.Error("Er moet minimaal 1 expert zijn geselecteerd om te kunnen exporteren.");
                 return;
             }
-            if (expertsToExport.Any(e => !Project.Experts.Contains(e)))
+            if (expertsToExport.Any(e => !EventTreeProject.Experts.Contains(e)))
             {
-                log.Error("Er is iets misgegaan bij het exporteren. Niet alle experts konden in het project worden gevonden.");
+                log.Error("Er is iets misgegaan bij het exporteren. Niet alle experts konden in het eventTreeProject worden gevonden.");
                 return;
             }
 
-            var hydraulicConditions = Project.HydraulicConditions.Distinct(new HydraulicConditionsWaterLevelComparer())
+            var hydraulicConditions = EventTreeProject.HydraulicConditions.Distinct(new HydraulicConditionsWaterLevelComparer())
                 .OrderBy(hc => hc.WaterLevel)
                 .ToArray();
             if (!hydraulicConditions.Any())

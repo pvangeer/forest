@@ -1,12 +1,12 @@
 ﻿using System;
 using StoryTree.Data;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Create
 {
     internal static class PersonCreateExtensions
     {
-        internal static PersonEntity Create(this Person model, PersistenceRegistry registry)
+        internal static PersonXmlEntity Create(this Person model, PersistenceRegistry registry)
         {
             if (registry == null)
             {
@@ -18,7 +18,7 @@ namespace StoryTree.Storage.Create
                 return registry.Get(model);
             }
 
-            var entity = new PersonEntity
+            var entity = new PersonXmlEntity
             {
                 Name = model.Name.DeepClone(),
                 Email = model.Email.DeepClone(),

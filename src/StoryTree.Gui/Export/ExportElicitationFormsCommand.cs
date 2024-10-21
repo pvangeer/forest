@@ -11,7 +11,7 @@ namespace StoryTree.Gui.Export
 
         public bool CanExecute(object parameter)
         {
-            return parameter is GuiViewModel guiViewModel && guiViewModel.ProjectViewModel.Project.Experts.Count != 0;
+            return parameter is GuiViewModel guiViewModel && guiViewModel.ProjectViewModel.EventTreeProject.Experts.Count != 0;
         }
 
         public void Execute(object parameter)
@@ -24,7 +24,7 @@ namespace StoryTree.Gui.Export
 
             var dialog = new ElicitationFormExportDialog
             {
-                DataContext = new ExportElicitationFormsViewModel(guiViewModel.ProjectViewModel.Project)
+                DataContext = new ExportElicitationFormsViewModel(guiViewModel.ProjectViewModel.EventTreeProject)
                 {
                     OnExport = guiViewModel.OnExportElicitationForms
                 },

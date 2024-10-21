@@ -4,48 +4,48 @@ using System.Linq;
 using StoryTree.Data;
 using StoryTree.Data.Hydraulics;
 using StoryTree.Data.Tree;
-using StoryTree.Storage.DbContext;
+using StoryTree.Storage.XmlEntities;
 
 namespace StoryTree.Storage.Create
 {
     public class PersistenceRegistry
     {
-        private readonly Dictionary<Project, ProjectEntity> projects = CreateDictionary<Project, ProjectEntity>();
-        private readonly Dictionary<Expert, ExpertEntity> experts = CreateDictionary<Expert, ExpertEntity>();
-        private readonly Dictionary<Person, PersonEntity> persons = CreateDictionary<Person, PersonEntity>();
-        private readonly Dictionary<HydraulicCondition, HydraulicConditionElementEntity> hydraulicConditions = CreateDictionary<HydraulicCondition, HydraulicConditionElementEntity>();
-        private readonly Dictionary<FragilityCurveElement, FragilityCurveElementEntity> fragilityCurveElements = CreateDictionary<FragilityCurveElement, FragilityCurveElementEntity>();
-        private readonly Dictionary<EventTree, EventTreeEntity> eventTrees = CreateDictionary<EventTree, EventTreeEntity>();
-        private readonly Dictionary<TreeEvent, TreeEventEntity> treeEvents = CreateDictionary<TreeEvent, TreeEventEntity>();
+        private readonly Dictionary<Data.EventTreeProject, ProjectXmlEntity> projects = CreateDictionary<Data.EventTreeProject, ProjectXmlEntity>();
+        private readonly Dictionary<Expert, ExpertXmlEntity> experts = CreateDictionary<Expert, ExpertXmlEntity>();
+        private readonly Dictionary<Person, PersonXmlEntity> persons = CreateDictionary<Person, PersonXmlEntity>();
+        private readonly Dictionary<HydraulicCondition, HydraulicConditionXmlEntity> hydraulicConditions = CreateDictionary<HydraulicCondition, HydraulicConditionXmlEntity>();
+        private readonly Dictionary<FragilityCurveElement, FragilityCurveElementXmlEntity> fragilityCurveElements = CreateDictionary<FragilityCurveElement, FragilityCurveElementXmlEntity>();
+        private readonly Dictionary<EventTree, EventTreeXmlEntity> eventTrees = CreateDictionary<EventTree, EventTreeXmlEntity>();
+        private readonly Dictionary<TreeEvent, TreeEventXmlEntity> treeEvents = CreateDictionary<TreeEvent, TreeEventXmlEntity>();
 
         #region Register Methods
 
-        internal void Register(Project model, ProjectEntity entity)
+        internal void Register(Data.EventTreeProject model, ProjectXmlEntity entity)
         {
             Register(projects, model, entity);
         }
 
-        internal void Register(Expert model, ExpertEntity entity)
+        internal void Register(Expert model, ExpertXmlEntity entity)
         {
             Register(experts, model, entity);
         }
-        internal void Register(Person model, PersonEntity entity)
+        internal void Register(Person model, PersonXmlEntity entity)
         {
             Register(persons, model, entity);
         }
-        internal void Register(HydraulicCondition model, HydraulicConditionElementEntity entity)
+        internal void Register(HydraulicCondition model, HydraulicConditionXmlEntity entity)
         {
             Register(hydraulicConditions, model, entity);
         }
-        internal void Register(FragilityCurveElement model, FragilityCurveElementEntity entity)
+        internal void Register(FragilityCurveElement model, FragilityCurveElementXmlEntity entity)
         {
             Register(fragilityCurveElements, model, entity);
         }
-        internal void Register(EventTree model, EventTreeEntity entity)
+        internal void Register(EventTree model, EventTreeXmlEntity entity)
         {
             Register(eventTrees, model, entity);
         }
-        internal void Register(TreeEvent model, TreeEventEntity entity)
+        internal void Register(TreeEvent model, TreeEventXmlEntity entity)
         {
             Register(treeEvents, model, entity);
         }
@@ -55,7 +55,7 @@ namespace StoryTree.Storage.Create
 
         #region Contains Methods
 
-        internal bool Contains(Project model)
+        internal bool Contains(EventTreeProject model)
         {
             return ContainsValue(projects, model);
         }
@@ -88,32 +88,32 @@ namespace StoryTree.Storage.Create
 
         #region Get Methods
 
-        public ProjectEntity Get(Project model)
+        public ProjectXmlEntity Get(Data.EventTreeProject model)
         {
             return Get(projects, model);
         }
 
-        public ExpertEntity Get(Expert model)
+        public ExpertXmlEntity Get(Expert model)
         {
             return Get(experts, model);
         }
-        public PersonEntity Get(Person model)
+        public PersonXmlEntity Get(Person model)
         {
             return Get(persons, model);
         }
-        public HydraulicConditionElementEntity Get(HydraulicCondition model)
+        public HydraulicConditionXmlEntity Get(HydraulicCondition model)
         {
             return Get(hydraulicConditions, model);
         }
-        public FragilityCurveElementEntity Get(FragilityCurveElement model)
+        public FragilityCurveElementXmlEntity Get(FragilityCurveElement model)
         {
             return Get(fragilityCurveElements, model);
         }
-        public EventTreeEntity Get(EventTree model)
+        public EventTreeXmlEntity Get(EventTree model)
         {
             return Get(eventTrees, model);
         }
-        public TreeEventEntity Get(TreeEvent model)
+        public TreeEventXmlEntity Get(TreeEvent model)
         {
             return Get(treeEvents, model);
         }
