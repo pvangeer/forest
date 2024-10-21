@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="8D0BA88A-3E09-4FF3-89B3-4D60482FF6E2">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="Stakeholderanalyse"
+                  Description="Programma om stakeholderanalyse mee uit te voeren"
+                  Target="[#StakeholderAnalysis.App.File]"
+                  Icon="StakeholderAnalysis.ico"
+                  WorkingDirectory="APPLICATIONROOTDIRECTORY" />
+        <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\Pieter\StakeholderAnalysis" Name="installed" Type="integer" Value="1"
+                       KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+</Wix>

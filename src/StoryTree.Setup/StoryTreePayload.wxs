@@ -1,26 +1,14 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <Fragment>
-        <DirectoryRef Id="BINDIR">
-            <Component Id="cmpCD80E8614F936827C24713CCD5554A39" Guid="{3F1CDED0-716A-4224-A728-625126F0F874}">
-                <File Id="fil7B31FEAE7A9AC4CD35A366EF6A6FFCD7" KeyPath="yes" Source="$(var.ApplicationBinFolder)\ControlzEx.dll" />
-            </Component>
-            <Component Id="cmp2E59A14EF44A8FBAFAB6BBFB1709D0CC" Guid="{8B2F979E-2E63-410F-B396-A4840C5738F5}">
-                <File Id="fil2972C85DBE33EE9946E4C1F16CCB9A70" KeyPath="yes" Source="$(var.ApplicationBinFolder)\ControlzEx.pdb" />
+        <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+            <Component Id="ControlzEx" Guid="{3F1CDED0-716A-4224-A728-625126F0F874}">
+                <File Id="ControlzEx.File" KeyPath="yes" Source="$(var.SolutionDir)\bin\$(var.Configuration)\ControlzEx.dll" />
             </Component>
             <Component Id="cmpD9DE586B5118C23C6220155E39B6CA45" Guid="{3C1318A4-911F-41B8-A2BD-170FC279E26E}">
                 <File Id="fil98788694BC06C5CA3F0841E45B2E2787" KeyPath="yes" Source="$(var.ApplicationBinFolder)\DocumentFormat.OpenXml.dll" />
             </Component>
-            <Component Id="cmp91578AE752DFC52A838871344FF4E63B" Guid="{943EC7E3-2881-4DD5-A67E-6221BDE2802F}">
-                <File Id="fil2D65B28B99DFD234DB22E83E74912DA2" KeyPath="yes" Source="$(var.ApplicationBinFolder)\EntityFramework.dll" />
-            </Component>
-            <Component Id="cmp3099E799981EC19D86674F3D11716569" Guid="{45AAA284-0406-45DA-BE46-A6378F6C0AD3}">
-                <File Id="fil5EE5A0FA989D9ED485B20DF55CBF0A92" KeyPath="yes" Source="$(var.ApplicationBinFolder)\EntityFramework.SqlServer.dll" />
-            </Component>
             <Component Id="cmp0F4B599788682A2D494AC3B4810F80E1" Guid="{C857C011-D6A5-4FDA-979A-8926679B2B48}">
                 <File Id="filE7AFA88AAE357237C8588480D6F8ADBE" KeyPath="yes" Source="$(var.ApplicationBinFolder)\Fluent.dll" />
-            </Component>
-            <Component Id="cmp39B8E0F6B6AF83CDD14E6690C6631B48" Guid="{41188008-8FF8-4A02-A7B3-D016F2843C7C}">
-                <File Id="fil4549DC9B7952B4B702C20079A557C71F" KeyPath="yes" Source="$(var.ApplicationBinFolder)\Fluent.pdb" />
             </Component>
             <Component Id="cmpF6F476FFB99B05F0E4EC9D2591BC7BB0" Guid="{F08B0754-26FD-4CA0-A9F6-C7C7B4DAC291}">
                 <File Id="fil798D3648C25F2E3EF217911DE56FD63A" KeyPath="yes" Source="$(var.ApplicationBinFolder)\Fluent.xml" />
@@ -52,14 +40,8 @@
             <Component Id="cmpF5B21C2A151751C6B2F6A62601C5D443" Guid="{A4D0EC9E-94E8-47B2-A43F-BD09FFD19F29}">
                 <File Id="fil584CBFF410B8F4BD9045BB7E226818FE" KeyPath="yes" Source="$(var.ApplicationBinFolder)\OxyPlot.dll" />
             </Component>
-            <Component Id="cmp11811344EF36A1D6B7FC706BF98883AA" Guid="{AB8E336A-4E70-439C-8C3A-21350D6B5504}">
-                <File Id="fil734D24A8D0340A159AE56EA45333E9E8" KeyPath="yes" Source="$(var.ApplicationBinFolder)\OxyPlot.pdb" />
-            </Component>
             <Component Id="cmp813AB6A61BA13D9D14A1EA56290103B3" Guid="{0B5FE7CE-F846-4A53-8F4F-160F298C195D}">
                 <File Id="fil36B60220C6ABC3EE2881BF3989416393" KeyPath="yes" Source="$(var.ApplicationBinFolder)\OxyPlot.Wpf.dll" />
-            </Component>
-            <Component Id="cmp04EAE4C861848B35B0C1600379A7925F" Guid="{86E8026E-A1DD-4EEA-8A7A-5E12783D5843}">
-                <File Id="fil864B9DEBA42D9655B5FCF8CE3D774F62" KeyPath="yes" Source="$(var.ApplicationBinFolder)\OxyPlot.Wpf.pdb" />
             </Component>
             <Component Id="cmp1F8BCB15A5519A5429E964FC408F05A5" Guid="{05B42F95-9D94-4997-86F4-748279C9F8D0}">
                 <File Id="filDDDF161FC75AE3835CBE9972AB7EBD74" KeyPath="yes" Source="$(var.ApplicationBinFolder)\OxyPlot.Wpf.xml" />
@@ -126,21 +108,6 @@
             </Component>
             <Component Id="cmpD60C30A6706BABC77C5982ABBD9524F5" Guid="{7AEE2EE6-F256-4A21-8698-8C51F986F0D3}">
                 <File Id="filE8D1A54357CD9728C367807E87ED5C92" KeyPath="yes" Source="$(var.ApplicationBinFolder)\System.Console.dll" />
-            </Component>
-            <Component Id="cmp246C5BDE73AF27EB69849C6D2898D2DE" Guid="{4AC0AFD4-7BAD-4307-BA88-CB30079FA93E}">
-                <File Id="fil32CE4FCD8798EED7428D9B97BF4AF9E1" KeyPath="yes" Source="$(var.ApplicationBinFolder)\System.Data.SQLite.dll" />
-            </Component>
-            <Component Id="cmp87529880B13864837F683C18BE2F73DC" Guid="{76B0B24D-B0C5-4461-B2E6-C6129B598022}">
-                <File Id="filFB1A1D31F36518554CB3451124897FE3" KeyPath="yes" Source="$(var.ApplicationBinFolder)\System.Data.SQLite.dll.config" />
-            </Component>
-            <Component Id="cmp8FEEC6CC24C998C4B34ACBB64631ECFC" Guid="{99D2A1D3-AAAA-4C9B-A163-390C6C0437C8}">
-                <File Id="filC6DBCDD70ACACD417B4A86E1A4B07E37" KeyPath="yes" Source="$(var.ApplicationBinFolder)\System.Data.SQLite.EF6.dll" />
-            </Component>
-            <Component Id="cmpE634181963CBAE0B2DFD793D5A2947F2" Guid="{73B5BCD4-9F42-4717-AB36-4B5F61170ECC}">
-                <File Id="fil7C5671217B8208263FAFB667AC7C354A" KeyPath="yes" Source="$(var.ApplicationBinFolder)\System.Data.SQLite.Linq.dll" />
-            </Component>
-            <Component Id="cmp909703CE3577137DFAA00DAA320CC588" Guid="{21BE95ED-E9E4-432C-BA5E-6D565F2924CA}">
-                <File Id="filBE0AD765F57739E26094AFC262F3DD6B" KeyPath="yes" Source="$(var.ApplicationBinFolder)\System.Data.SQLite.xml" />
             </Component>
             <Component Id="cmpB98D99D477844A7C1E6A8A9D210BE2C0" Guid="{759CD8EA-4F91-4CD4-B079-4C2EDAF5A5A2}">
                 <File Id="filA3DBF3BFAE33DCA4E3D969CF848363AC" KeyPath="yes" Source="$(var.ApplicationBinFolder)\System.Diagnostics.DiagnosticSource.dll" />
@@ -274,7 +241,7 @@
         </DirectoryRef>
     </Fragment>
     <Fragment>
-        <ComponentGroup Id="StoryTreeApplicationComponents">
+        <ComponentGroup Id="ControlzEx">
             <ComponentRef Id="cmpCD80E8614F936827C24713CCD5554A39" />
             <ComponentRef Id="cmp2E59A14EF44A8FBAFAB6BBFB1709D0CC" />
             <ComponentRef Id="cmpD9DE586B5118C23C6220155E39B6CA45" />

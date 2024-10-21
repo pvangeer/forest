@@ -1,0 +1,107 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+      <Component Id="ControlzEx" Guid="*">
+        <File Id="ControlsEx.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\ControlzEx.dll" />
+      </Component>
+      <Component Id="Fluent" Guid="*">
+        <File Id="Fluent.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Fluent.dll" />
+      </Component>
+      <Component Id="Log4Net" Guid="*">
+        <File Id="Log4Net.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\log4net.dll" />
+      </Component>
+      <Component Id="Microsoft.Xaml.Behaviors" Guid="*">
+        <File Id="Microsoft.Xaml.Behaviors.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Microsoft.Xaml.Behaviors.dll" />
+      </Component>
+      <Component Id="StakeholderAnalysis.App" Guid="*">
+        <File Id="StakeholderAnalysis.App.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.App.exe" />
+      </Component>
+      <Component Id="StakeholderAnalysis.App.config" Guid="*">
+        <File Id="StakeholderAnalysis.App.config.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.App.exe.config" />
+      </Component>
+      <Component Id="StakeholderAnalysis.Data" Guid="*">
+        <File Id="StakeholderAnalysis.Data.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.Data.dll" />
+      </Component>
+      <Component Id="StakeholderAnalysis.Gui" Guid="*">
+        <File Id="StakeholderAnalysis.Gui.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.Gui.dll" />
+      </Component>
+      <Component Id="StakeholderAnalysis.Messaging" Guid="*">
+        <File Id="StakeholderAnalysis.Messaging.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.Messaging.dll" />
+      </Component>
+      <Component Id="StakeholderAnalysis.Storage" Guid="*">
+        <File Id="StakeholderAnalysis.Storage.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.Storage.dll" />
+      </Component>
+      <Component Id="StakeholderAnalysis.Visualization" Guid="*">
+        <File Id="StakeholderAnalysis.Visualization.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.Visualization.dll" />
+      </Component>
+      <Component Id="Xceed.Wpf.AvalonDock" Guid="*">
+        <File Id="Xceed.Wpf.AvalonDock.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Xceed.Wpf.AvalonDock.dll" />
+      </Component>
+      <Component Id="Xceed.Wpf.AvalonDock.Themes.Aero" Guid="*">
+        <File Id="Xceed.Wpf.AvalonDock.Themes.Aero.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+      </Component>
+      <Component Id="Xceed.Wpf.AvalonDock.Themes.Metro" Guid="*">
+        <File Id="Xceed.Wpf.AvalonDock.Themes.Metro.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+      </Component>
+      <Component Id="Xceed.Wpf.AvalonDock.Themes.VS2010" Guid="*">
+        <File Id="Xceed.Wpf.AvalonDock.Themes.VS2010.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+      </Component>
+      <Component Id="Xceed.Wpf.Toolkit" Guid="*">
+        <File Id="Xceed.Wpf.Toolkit.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Xceed.Wpf.Toolkit.dll" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="StakeholderAnalysis.Binaries">
+      <ComponentRef Id="ControlzEx" />
+      <ComponentRef Id="Fluent" />
+      <ComponentRef Id="Log4Net" />
+      <ComponentRef Id="Microsoft.Xaml.Behaviors" />
+      <ComponentRef Id="StakeholderAnalysis.App" />
+      <ComponentRef Id="StakeholderAnalysis.App.config" />
+      <ComponentRef Id="StakeholderAnalysis.Data" />
+      <ComponentRef Id="StakeholderAnalysis.Gui" />
+      <ComponentRef Id="StakeholderAnalysis.Messaging" />
+      <ComponentRef Id="StakeholderAnalysis.Storage" />
+      <ComponentRef Id="StakeholderAnalysis.Visualization" />
+      <ComponentRef Id="Xceed.Wpf.AvalonDock" />
+      <ComponentRef Id="Xceed.Wpf.AvalonDock.Themes.Aero" />
+      <ComponentRef Id="Xceed.Wpf.AvalonDock.Themes.Metro" />
+      <ComponentRef Id="Xceed.Wpf.AvalonDock.Themes.VS2010" />
+      <ComponentRef Id="Xceed.Wpf.Toolkit" />
+    </ComponentGroup>
+  </Fragment>
+</Wix>

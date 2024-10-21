@@ -19,7 +19,8 @@ namespace StoryTree.Storage
 
         public StorageXml()
         {
-            emptyEventTreeProjectHash = FingerprintHelper.Get(EventTreeProjectFactory.CreateStandardNewProject().Create(new PersistenceRegistry()));
+            emptyEventTreeProjectHash =
+                FingerprintHelper.Get(EventTreeProjectFactory.CreateStandardNewProject().Create(new PersistenceRegistry()));
         }
 
         public bool HasStagedEventTreeProject => stagedEventTreeProjectXmlEntity != null;
