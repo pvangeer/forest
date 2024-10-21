@@ -43,22 +43,38 @@ namespace StoryTree.Gui
 
         private double GetHeightFromTreeEventControl(double controlY, Control control)
         {
-            var contentPresenter = VisualTreeHelper.GetChild(control, 0);
-            var firstChild = (FrameworkElement)VisualTreeHelper.GetChild(contentPresenter, 0);
-            if (firstChild is Image)
+            var titleBlock = FindFirstVisualChild<TextBlock>(control, block => block.Name == "DescriptionTextBlock");
+            if (titleBlock == null)
             {
                 return controlY;
             }
-            var border = VisualTreeHelper.GetChild(firstChild, 0);
-            var innerGrid = VisualTreeHelper.GetChild(border, 0);
-            var textBlock = (FrameworkElement)VisualTreeHelper.GetChild(innerGrid, 2);
 
-            return controlY + control.ActualHeight / 2.0 - textBlock.ActualHeight - 1.5;
+            return controlY + control.ActualHeight / 2.0 - titleBlock.ActualHeight - 1.5;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        private static T FindFirstVisualChild<T>(DependencyObject parent,Func<T,bool> selectionFunc)
+            where T : DependencyObject
+        {
+            for (var i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var childObject = VisualTreeHelper.GetChild(parent,i);
+                if (childObject is T typedChild && selectionFunc(typedChild))
+                {
+                    return typedChild;
+                }
+                var foundControl = FindFirstVisualChild(childObject, selectionFunc);
+                if (foundControl != null)
+                {
+                    return foundControl;
+                }
+            }
+
+            return null;
         }
     }
 }

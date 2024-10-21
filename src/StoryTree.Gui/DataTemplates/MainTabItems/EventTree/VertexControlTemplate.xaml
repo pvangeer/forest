@@ -53,6 +53,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <TextBlock
+                        Name="TitleTextBlock"
                         TextWrapping="Wrap"
                         Grid.Row="0"
                         Text="{Binding Name}"
@@ -65,6 +66,7 @@
                         Height="1"
                         Background="DimGray" />
                     <TextBlock
+                        Name="DescriptionTextBlock"
                         TextWrapping="Wrap"
                         Grid.Row="2"
                         Text="{Binding Summary}"
