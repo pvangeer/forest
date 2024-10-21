@@ -12,10 +12,10 @@ namespace StoryTree.Gui
 {
     public class GuiProjectServices
     {
-        private readonly StoryTreeLog log = new StoryTreeLog(typeof(GuiProjectServices));
         private readonly StoryTreeGui gui;
+        private readonly StoryTreeLog log = new StoryTreeLog(typeof(GuiProjectServices));
         private readonly StorageXml storageXml;
-        
+
         public GuiProjectServices(StoryTreeGui gui)
         {
             this.gui = gui;
@@ -52,13 +52,11 @@ namespace StoryTree.Gui
             {
                 CheckFileExists = true,
                 Filter = "Faalpadenproject bestand (*.xml)|*.xml",
-                FileName = gui.ProjectFilePath,
+                FileName = gui.ProjectFilePath
             };
 
-            if ((bool) dialog.ShowDialog(Application.Current.MainWindow))
-            {
+            if ((bool)dialog.ShowDialog(Application.Current.MainWindow))
                 OpenProjectCore(dialog.FileName);
-            }
         }
 
         private void OpenProjectCore(string fileName)
@@ -209,13 +207,9 @@ namespace StoryTree.Gui
         private void BackgroundWorkerAsyncFinished(object sender, RunWorkerCompletedEventArgs e, Action workFinishedAction)
         {
             if (e.Result is Exception exception)
-            {
                 log.Error(exception.Message);
-            }
             else
-            {
                 workFinishedAction();
-            }
 
             ChangeState(StorageState.Idle);
         }
@@ -268,15 +262,14 @@ namespace StoryTree.Gui
             {
                 followingAction();
             }
+
             return true;
         }
 
         private void StageAndStoreProjectCore()
         {
             if (!storageXml.HasStagedEventTreeProject)
-            {
                 storageXml.StageEventTreeProject(gui.EventTreeProject);
-            }
 
             storageXml.SaveProjectAs(gui.ProjectFilePath);
         }

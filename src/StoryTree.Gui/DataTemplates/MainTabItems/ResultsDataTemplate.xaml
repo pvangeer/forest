@@ -13,25 +13,25 @@
     <DataTemplate x:Key="TreeEventViewModelTemplate" DataType="viewModels:TreeEventViewModel">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Content="Kans"/>
+                <Label Grid.Column="0" Content="Kans" />
                 <TextBlock Grid.Column="1">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Setter Property="Text">
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource CriticalPathToProbabilityTextConverter}">
-                                        <Binding Path="CriticalPath"/>
-                                        <Binding 
-                                Path="DataContext.HydraulicConditionsList" 
-                                RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter, AncestorLevel=2}"/>
+                                        <Binding Path="CriticalPath" />
+                                        <Binding
+                                            Path="DataContext.HydraulicConditionsList"
+                                            RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter, AncestorLevel=2}" />
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
@@ -46,10 +46,10 @@
                             <Setter Property="Model">
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource CriticalPathToPlotModelConverter}">
-                                        <Binding Path="CriticalPath"/>
-                                        <Binding 
-                                            Path="DataContext.HydraulicConditionsList" 
-                                            RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter, AncestorLevel=2}"/>
+                                        <Binding Path="CriticalPath" />
+                                        <Binding
+                                            Path="DataContext.HydraulicConditionsList"
+                                            RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter, AncestorLevel=2}" />
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
@@ -63,17 +63,17 @@
     <DataTemplate x:Key="ResultsDataTemplate" DataType="viewModels:ProjectViewModel">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" MinWidth="200"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*" MinWidth="400"/>
+                <ColumnDefinition Width="*" MinWidth="200" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" MinWidth="400" />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="15" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="{Binding EventTree.Name}" TextAlignment="Center" FontWeight="Bold"/>
-                <controls:ZoomControl 
+                <TextBlock Grid.Row="0" Text="{Binding EventTree.Name}" TextAlignment="Center" FontWeight="Bold" />
+                <controls:ZoomControl
                     Grid.Row="1"
                     AnimationLength="0"
                     Mode="Original"
@@ -81,16 +81,17 @@
                     <controls:ZoomControl.Resources>
                         <ResourceDictionary>
                             <ResourceDictionary.MergedDictionaries>
-                                <ResourceDictionary Source="EventTree/EdgeControlTemplate.xaml"/>
-                                <ResourceDictionary Source="EventTree/VertexControlTemplate.xaml"/>
+                                <ResourceDictionary Source="EventTree/EdgeControlTemplate.xaml" />
+                                <ResourceDictionary Source="EventTree/VertexControlTemplate.xaml" />
                             </ResourceDictionary.MergedDictionaries>
                         </ResourceDictionary>
                     </controls:ZoomControl.Resources>
-                    <eventTree:EventTreeGraphLayout Graph="{Binding EventTree.Graph}"/>
+                    <eventTree:EventTreeGraphLayout Graph="{Binding EventTree.Graph}" />
                 </controls:ZoomControl>
             </Grid>
-            <GridSplitter Grid.Column="1" Width="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            <ContentPresenter Grid.Column="2" Content="{Binding SelectedTreeEvent}" ContentTemplate="{StaticResource TreeEventViewModelTemplate}"/>
+            <GridSplitter Grid.Column="1" Width="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <ContentPresenter Grid.Column="2" Content="{Binding SelectedTreeEvent}"
+                              ContentTemplate="{StaticResource TreeEventViewModelTemplate}" />
         </Grid>
     </DataTemplate>
 

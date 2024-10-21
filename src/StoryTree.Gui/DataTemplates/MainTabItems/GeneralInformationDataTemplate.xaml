@@ -8,72 +8,72 @@
     <DataTemplate x:Key="GeneralInformationDataTemplate" DataType="viewModels:ProjectViewModel">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" MinHeight="120"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" MinHeight="120" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Margin="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="500" MinWidth="250"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*" MinWidth="250"/>
+                    <ColumnDefinition Width="500" MinWidth="250" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" MinWidth="250" />
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Label 
+                    <Label
                         Grid.Row="0"
-                        Content="Projectinformatie" 
+                        Content="Projectinformatie"
                         FontWeight="Bold"
-                        HorizontalAlignment="Left"/>
+                        HorizontalAlignment="Left" />
                     <Grid Grid.Row="1" Margin="2">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Label 
+                        <Label
                             Grid.Column="0"
-                            Content="EventTreeProject" 
+                            Content="EventTreeProject"
                             Width="100"
-                            HorizontalAlignment="Left"/>
-                        <TextBox 
+                            HorizontalAlignment="Left" />
+                        <TextBox
                             Grid.Column="1"
-                            Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}" 
-                            Style="{StaticResource TextBoxStyle}"/>
+                            Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource TextBoxStyle}" />
                     </Grid>
                     <Grid Grid.Row="2" Margin="2">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Label 
+                        <Label
                             Grid.Column="0"
-                            Content="Omschrijving" 
+                            Content="Omschrijving"
                             Width="100"
-                            HorizontalAlignment="Left"/>
-                        <TextBox 
+                            HorizontalAlignment="Left" />
+                        <TextBox
                             Grid.Column="1"
-                            Text="{Binding ProjectDescription, UpdateSourceTrigger=PropertyChanged}" 
-                            VerticalScrollBarVisibility="Auto" 
-                            AcceptsReturn="True" 
-                            TextWrapping="Wrap" 
-                            Style="{StaticResource TextBoxStyle}"/>
+                            Text="{Binding ProjectDescription, UpdateSourceTrigger=PropertyChanged}"
+                            VerticalScrollBarVisibility="Auto"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            Style="{StaticResource TextBoxStyle}" />
                     </Grid>
                     <Grid Grid.Row="3" Margin="2">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Label 
+                        <Label
                             Grid.Column="0"
-                            Content="Traject" 
+                            Content="Traject"
                             Width="100"
-                            HorizontalAlignment="Left"/>
+                            HorizontalAlignment="Left" />
                         <ComboBox
                             Grid.Column="1"
                             Style="{StaticResource ComboBoxFlatStyle}"
@@ -83,54 +83,54 @@
                             UseLayoutRounding="False"
                             BorderThickness="0"
                             HorizontalAlignment="Left"
-                            Width="60"/>
+                            Width="60" />
                     </Grid>
                 </Grid>
                 <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="10" />
                 <Grid Grid.Column="2">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label
                             Grid.Row="0"
                             Content="Projectleider"
-                            FontWeight="Bold"/>
+                            FontWeight="Bold" />
                         <Grid Grid.Row="1" Margin="2">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label Content="Naam" Grid.Column="0"/>
-                            <TextBox 
+                            <Label Content="Naam" Grid.Column="0" />
+                            <TextBox
                                 Grid.Column="1"
                                 Text="{Binding ProjectLeaderName, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource TextBoxStyle}"/>
+                                Style="{StaticResource TextBoxStyle}" />
                         </Grid>
                         <Grid Grid.Row="2" Margin="2">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label Content="Telefoon" Grid.Column="0"/>
-                            <TextBox 
+                            <Label Content="Telefoon" Grid.Column="0" />
+                            <TextBox
                                 Grid.Column="1"
                                 Text="{Binding ProjectLeaderTelephone, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource TextBoxStyle}"/>
+                                Style="{StaticResource TextBoxStyle}" />
                         </Grid>
                         <Grid Grid.Row="3" Margin="2">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label Content="Email" Grid.Column="0"/>
-                            <TextBox 
+                            <Label Content="Email" Grid.Column="0" />
+                            <TextBox
                                 Grid.Column="1"
                                 Text="{Binding ProjectLeaderEmail, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource TextBoxStyle}"/>
+                                Style="{StaticResource TextBoxStyle}" />
                         </Grid>
                     </Grid>
                 </Grid>
@@ -138,19 +138,19 @@
             <GridSplitter Grid.Row="1" VerticalAlignment="Stretch" Height="10" HorizontalAlignment="Stretch" />
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Label 
+                <Label
                     Grid.Row="0"
                     FontWeight="Bold"
-                    Content="Algemene Gegevens"/>
-                <xctk:RichTextBox 
-                        Style="{StaticResource RichtTextBoxStyle}"
-                        Grid.Row="1" 
-                        Text="{Binding ProjectInformation, UpdateSourceTrigger=PropertyChanged}">
+                    Content="Algemene Gegevens" />
+                <xctk:RichTextBox
+                    Style="{StaticResource RichtTextBoxStyle}"
+                    Grid.Row="1"
+                    Text="{Binding ProjectInformation, UpdateSourceTrigger=PropertyChanged}">
                     <xctk:RichTextBoxFormatBarManager.FormatBar>
-                        <xctk:RichTextBoxFormatBar/>
+                        <xctk:RichTextBoxFormatBar />
                     </xctk:RichTextBoxFormatBarManager.FormatBar>
                 </xctk:RichTextBox>
             </Grid>

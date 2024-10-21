@@ -6,19 +6,24 @@
     </Style>
 
     <DataTemplate
-    x:Key="ExpertsDataTemplate" 
-    DataType="viewModels:ProjectViewModel">
+        x:Key="ExpertsDataTemplate"
+        DataType="viewModels:ProjectViewModel">
         <Grid>
-            <DataGrid 
-                ItemsSource="{Binding Experts}" 
+            <DataGrid
+                ItemsSource="{Binding Experts}"
                 AutoGenerateColumns="False"
                 Style="{StaticResource DataGridStyle}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Naam" Binding="{Binding Name}" ElementStyle="{StaticResource ColumnElementStyle}"/>
-                    <DataGridTextColumn Header="Organisatie" Binding="{Binding Organisation}" ElementStyle="{StaticResource ColumnElementStyle}"/>
-                    <DataGridTextColumn Header="Expertise" Binding="{Binding Expertise}" ElementStyle="{StaticResource ColumnElementStyle}"/>
-                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" ElementStyle="{StaticResource ColumnElementStyle}"/>
-                    <DataGridTextColumn Header="Telefoon" Binding="{Binding Telephone}" ElementStyle="{StaticResource ColumnElementStyle}"/>
+                    <DataGridTextColumn Header="Naam" Binding="{Binding Name}"
+                                        ElementStyle="{StaticResource ColumnElementStyle}" />
+                    <DataGridTextColumn Header="Organisatie" Binding="{Binding Organisation}"
+                                        ElementStyle="{StaticResource ColumnElementStyle}" />
+                    <DataGridTextColumn Header="Expertise" Binding="{Binding Expertise}"
+                                        ElementStyle="{StaticResource ColumnElementStyle}" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}"
+                                        ElementStyle="{StaticResource ColumnElementStyle}" />
+                    <DataGridTextColumn Header="Telefoon" Binding="{Binding Telephone}"
+                                        ElementStyle="{StaticResource ColumnElementStyle}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

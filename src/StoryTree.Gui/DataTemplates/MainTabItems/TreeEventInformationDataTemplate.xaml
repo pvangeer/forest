@@ -4,7 +4,7 @@
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="TreeEventsListViewItemDataTemplate.xaml"/>
+        <ResourceDictionary Source="TreeEventsListViewItemDataTemplate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="TreeEventInformationDataTemplate" DataType="viewModels:ProjectViewModel">
@@ -12,18 +12,18 @@
             <DataTemplate x:Key="TreeEventsInformationTemplate" DataType="viewModels:EventTreeViewModel">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"  MinWidth="100"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"  MinWidth="150"/>
+                        <ColumnDefinition Width="Auto" MinWidth="100" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" MinWidth="150" />
                     </Grid.ColumnDefinitions>
-                    <ListView 
-                x:Name="ListView" 
-                Grid.Column="0" 
-                HorizontalContentAlignment="Stretch"
-                BorderThickness="0"
-                ItemsSource="{Binding AllTreeEvents}"
-                SelectedItem="{Binding SelectedTreeEvent, UpdateSourceTrigger=PropertyChanged}"
-                ItemTemplate="{StaticResource ListViewItemTreeEventViewModelDataTemplate}">
+                    <ListView
+                        x:Name="ListView"
+                        Grid.Column="0"
+                        HorizontalContentAlignment="Stretch"
+                        BorderThickness="0"
+                        ItemsSource="{Binding AllTreeEvents}"
+                        SelectedItem="{Binding SelectedTreeEvent, UpdateSourceTrigger=PropertyChanged}"
+                        ItemTemplate="{StaticResource ListViewItemTreeEventViewModelDataTemplate}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="{x:Type ListViewItem}">
                                 <Setter Property="Background" Value="Transparent" />
@@ -37,51 +37,52 @@
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
-                    <GridSplitter Grid.Column="1" Width="10"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <GridSplitter Grid.Column="1" Width="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                     <Grid Grid.Column="2">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Grid.Row="0" Content="Naam" FontWeight="Bold"/>
-                        <TextBox 
+                        <Label Grid.Column="0" Grid.Row="0" Content="Naam" FontWeight="Bold" />
+                        <TextBox
                             Grid.Column="1"
                             Grid.Row="0"
                             Text="{Binding SelectedTreeEvent.Name, UpdateSourceTrigger=PropertyChanged}"
-                            Style="{StaticResource TextBoxStyle}"/>
-                        <Label Grid.Column="0" Grid.Row="1" Content="Omschrijving" FontWeight="Bold"/>
-                        <TextBox 
+                            Style="{StaticResource TextBoxStyle}" />
+                        <Label Grid.Column="0" Grid.Row="1" Content="Omschrijving" FontWeight="Bold" />
+                        <TextBox
                             Grid.Column="1"
                             Grid.Row="1"
                             Text="{Binding SelectedTreeEvent.Summary, UpdateSourceTrigger=PropertyChanged}"
-                            Style="{StaticResource TextBoxStyle}"/>
-                        <Label 
+                            Style="{StaticResource TextBoxStyle}" />
+                        <Label
                             Grid.Row="2"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Content="Knoopinformatie"
                             FontWeight="Bold"
-                            HorizontalContentAlignment="Left"/>
-                        <xctk:RichTextBox 
+                            HorizontalContentAlignment="Left" />
+                        <xctk:RichTextBox
                             Style="{StaticResource RichtTextBoxStyle}"
-                            Grid.Row="3" 
+                            Grid.Row="3"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Text="{Binding SelectedTreeEvent.Information}">
                             <xctk:RichTextBoxFormatBarManager.FormatBar>
-                                <xctk:RichTextBoxFormatBar/>
+                                <xctk:RichTextBoxFormatBar />
                             </xctk:RichTextBoxFormatBarManager.FormatBar>
                         </xctk:RichTextBox>
                     </Grid>
                 </Grid>
             </DataTemplate>
         </DataTemplate.Resources>
-        <ContentPresenter Content="{Binding EventTree}" ContentTemplate="{StaticResource TreeEventsInformationTemplate}"/>
+        <ContentPresenter Content="{Binding EventTree}"
+                          ContentTemplate="{StaticResource TreeEventsInformationTemplate}" />
     </DataTemplate>
 </ResourceDictionary>

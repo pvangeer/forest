@@ -17,12 +17,13 @@ namespace StoryTree.Gui.ViewModels
 {
     public class GuiViewModel : INotifyPropertyChanged
     {
-        private ProjectViewModel projectViewModel;
+        private readonly StoryTreeGui gui;
         private MessageListViewModel messageListViewModel;
         private StoryTreeProcess selectedProcess;
-        private readonly StoryTreeGui gui;
 
-        public GuiViewModel() : this(new StoryTreeGui()) { }
+        public GuiViewModel() : this(new StoryTreeGui())
+        {
+        }
 
         public GuiViewModel(StoryTreeGui gui)
         {
@@ -32,10 +33,68 @@ namespace StoryTree.Gui.ViewModels
                 gui.ShouldMigrateProject = ShouldMigrateProject;
                 this.gui.PropertyChanged += GuiPropertyChanged;
                 this.gui.Messages.CollectionChanged += GuiMessagesCollectionChanged;
-                projectViewModel = new ProjectViewModel(this.gui.EventTreeProject);
+                ProjectViewModel = new ProjectViewModel(this.gui.EventTreeProject);
                 this.gui.ShouldSaveOpenChanges = ShouldSaveOpenChanges;
             }
         }
+
+        public bool ShowMessages { get; set; }
+
+        public LogMessage PriorityMessage { get; set; }
+
+        public StorageState BusyIndicator
+        {
+            get => gui.BusyIndicator;
+            set => gui.BusyIndicator = value;
+        }
+
+        public ProjectViewModel ProjectViewModel { get; private set; }
+
+        public MessageListViewModel MessagesViewModel =>
+            messageListViewModel ?? (messageListViewModel = new MessageListViewModel(gui.Messages));
+
+        public string ProjectFilePath
+        {
+            get => gui.ProjectFilePath;
+            set
+            {
+                gui.ProjectFilePath = value;
+                OnPropertyChanged(nameof(ProjectFileName));
+            }
+        }
+
+        public Window Win32Window { get; set; }
+
+        public ICommand FileNewCommand => new FileNewCommnd(this);
+
+        public ICommand SaveProjectCommand => new SaveProjectCommand(this);
+
+        public ICommand SaveProjectAsCommand => new SaveProjectAsCommand(this);
+
+        public ICommand OpenProjectCommand => new OpenProjectCommand(gui.GuiProjectServices);
+
+        public ICommand RemoveLastMessageCommand => new RemovePriorityMessageCommand(this);
+
+        public ICommand ShowMessageListCommand => new ShowMessageListCommand(this);
+
+        public StoryTreeProcess SelectedProcess
+        {
+            get => selectedProcess;
+            set
+            {
+                selectedProcess = value;
+                OnPropertyChanged();
+                ProjectViewModel.OnProcessChanged();
+            }
+        }
+
+        public ICommand ChangeProcessStepCommand => new ChangeProcessStepCommand(this);
+
+        public string ProjectFileName => string.IsNullOrEmpty(ProjectFilePath)
+            ? "Nieuw bestand*"
+            : Path.GetFileNameWithoutExtension(ProjectFilePath);
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private bool ShouldMigrateProject()
         {
@@ -70,6 +129,7 @@ namespace StoryTree.Gui.ViewModels
                     PriorityMessage = newItem;
                     OnPropertyChanged(nameof(PriorityMessage));
                 }
+
                 OnPropertyChanged(nameof(MessagesViewModel));
             }
 
@@ -77,19 +137,18 @@ namespace StoryTree.Gui.ViewModels
             {
                 var items = e.OldItems.OfType<LogMessage>();
                 foreach (var logMessage in items)
-                {
                     if (PriorityMessage == logMessage)
                     {
                         PriorityMessage = null;
                         OnPropertyChanged(nameof(PriorityMessage));
                     }
-                }
 
                 if (!MessagesViewModel.MessageList.Any())
                 {
                     ShowMessages = false;
                     OnPropertyChanged(nameof(ShowMessages));
                 }
+
                 OnPropertyChanged(nameof(MessagesViewModel));
             }
 
@@ -103,63 +162,6 @@ namespace StoryTree.Gui.ViewModels
             }
         }
 
-        public bool ShowMessages { get; set; }
-
-        public LogMessage PriorityMessage { get; set; }
-
-        public StorageState BusyIndicator
-        {
-            get => gui.BusyIndicator;
-            set => gui.BusyIndicator = value;
-        }
-
-        public ProjectViewModel ProjectViewModel => projectViewModel;
-
-        public MessageListViewModel MessagesViewModel =>
-            messageListViewModel ?? (messageListViewModel = new MessageListViewModel(gui.Messages));
-
-        public string ProjectFilePath
-        {
-            get => gui.ProjectFilePath;
-            set
-            {
-                gui.ProjectFilePath = value;
-                OnPropertyChanged(nameof(ProjectFileName));
-            }
-        }
-
-        public Window Win32Window { get; set; }
-
-        public ICommand FileNewCommand => new FileNewCommnd(this);
-
-        public ICommand SaveProjectCommand => new SaveProjectCommand(this);
-
-        public ICommand SaveProjectAsCommand => new SaveProjectAsCommand(this);
-
-        public ICommand OpenProjectCommand => new OpenProjectCommand(this.gui.GuiProjectServices);
-
-        public ICommand RemoveLastMessageCommand => new RemovePriorityMessageCommand(this);
-
-        public ICommand ShowMessageListCommand => new ShowMessageListCommand(this);
-
-        public StoryTreeProcess SelectedProcess
-        {
-            get => selectedProcess;
-            set
-            {
-                selectedProcess = value;
-                OnPropertyChanged();
-                ProjectViewModel.OnProcessChanged();
-            }
-        }
-
-        public ICommand ChangeProcessStepCommand => new ChangeProcessStepCommand(this);
-
-        public string ProjectFileName => string.IsNullOrEmpty(ProjectFilePath)
-            ? "Nieuw bestand*"
-            : Path.GetFileNameWithoutExtension(ProjectFilePath);
-
-        public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler OnInvalidateVisual;
 
         private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -170,7 +172,7 @@ namespace StoryTree.Gui.ViewModels
                     OnPropertyChanged(nameof(BusyIndicator));
                     break;
                 case nameof(StoryTreeGui.EventTreeProject):
-                    projectViewModel = new ProjectViewModel(gui.EventTreeProject);
+                    ProjectViewModel = new ProjectViewModel(gui.EventTreeProject);
                     OnPropertyChanged(nameof(ProjectViewModel));
                     break;
                 case nameof(StoryTreeGui.Messages):
@@ -205,9 +207,7 @@ namespace StoryTree.Gui.ViewModels
         {
             var importer = new ElicitationFormImporter(ProjectViewModel.EventTreeProject);
             foreach (var fileLocation in fileLocations)
-            {
                 importer.Import(fileLocation);
-            }
         }
 
         public void NewProject()

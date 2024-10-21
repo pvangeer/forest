@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -16,11 +14,15 @@ namespace StoryTree.Gui.ViewModels
     public class ProjectViewModel : INotifyPropertyChanged
     {
         private readonly AddTreeEventCommand addTreeEventCommand;
+
+        private readonly ProjectManipulationService projectManipulationService;
         private readonly RemoveTreeEventCommand removeTreeEventCommand;
 
-        public ProjectViewModel() : this(new EventTreeProject()) { }
+        public ProjectViewModel() : this(new EventTreeProject())
+        {
+        }
 
-        public ProjectViewModel([NotNull]EventTreeProject eventTreeProject)
+        public ProjectViewModel([NotNull] EventTreeProject eventTreeProject)
         {
             BusyIndicator = StorageState.Idle;
 
@@ -37,11 +39,13 @@ namespace StoryTree.Gui.ViewModels
             addTreeEventCommand = new AddTreeEventCommand(this);
             removeTreeEventCommand = new RemoveTreeEventCommand(this);
 
-            expertViewModels = new ObservableCollection<ExpertViewModel>(EventTreeProject.Experts.Select(e => new ExpertViewModel(e)));
-            expertViewModels.CollectionChanged += ExpertViewModelsCollectionChanged;
+            Experts = new ObservableCollection<ExpertViewModel>(EventTreeProject.Experts.Select(e => new ExpertViewModel(e)));
+            Experts.CollectionChanged += ExpertViewModelsCollectionChanged;
 
-            hydraulicsViewModels = new ObservableCollection<HydraulicConditionViewModel>(EventTreeProject.HydraulicConditions.Select(e => new HydraulicConditionViewModel(e)));
-            hydraulicsViewModels.CollectionChanged += HydraulicsViewModelsCollectionChanged;
+            HydraulicConditionsList =
+                new ObservableCollection<HydraulicConditionViewModel>(
+                    EventTreeProject.HydraulicConditions.Select(e => new HydraulicConditionViewModel(e)));
+            HydraulicConditionsList.CollectionChanged += HydraulicsViewModelsCollectionChanged;
         }
 
         public EventTreeProject EventTreeProject { get; }
@@ -74,15 +78,11 @@ namespace StoryTree.Gui.ViewModels
 
         public ICommand AddTreeEventCommand => addTreeEventCommand;
 
-        private readonly ObservableCollection<ExpertViewModel> expertViewModels;
-        private readonly ObservableCollection<HydraulicConditionViewModel> hydraulicsViewModels;
-        private readonly ProjectManipulationService projectManipulationService;
-
         public EventTreeViewModel EventTree { get; }
 
         public TreeEventViewModel SelectedTreeEvent => EventTree.SelectedTreeEvent;
 
-        public ObservableCollection<ExpertViewModel> Experts => expertViewModels;
+        public ObservableCollection<ExpertViewModel> Experts { get; }
 
         public string ProjectLeaderName
         {
@@ -114,55 +114,39 @@ namespace StoryTree.Gui.ViewModels
             }
         }
 
-        public ObservableCollection<HydraulicConditionViewModel> HydraulicConditionsList => hydraulicsViewModels;
+        public ObservableCollection<HydraulicConditionViewModel> HydraulicConditionsList { get; }
 
         public StorageState BusyIndicator { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void HydraulicsViewModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
-            {
                 foreach (var item in e.NewItems.OfType<HydraulicConditionViewModel>())
-                {
                     projectManipulationService.AddHydraulicCondition(item.HydraulicCondition);
-                }
-            }
 
             if (e.Action == NotifyCollectionChangedAction.Remove)
-            {
                 foreach (var item in e.OldItems.OfType<HydraulicConditionViewModel>())
-                {
                     projectManipulationService.RemoveHydraulicCondition(item.HydraulicCondition);
-                }
-            }
         }
 
         private void ExpertViewModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
-            {
                 foreach (var item in e.NewItems.OfType<ExpertViewModel>())
-                {
                     projectManipulationService.AddExpert(item.Expert);
-                }
-            }
 
             if (e.Action == NotifyCollectionChangedAction.Remove)
-            {
                 foreach (var item in e.OldItems.OfType<ExpertViewModel>())
-                {
                     projectManipulationService.RemoveExpert(item.Expert);
-                }
-            }
         }
 
 
         private void EventTreeViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (!(sender is EventTreeViewModel))
-            {
                 return;
-            }
 
             switch (e.PropertyName)
             {
@@ -178,8 +162,6 @@ namespace StoryTree.Gui.ViewModels
                     break;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

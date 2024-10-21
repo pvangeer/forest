@@ -3,12 +3,10 @@
                     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels"
                     xmlns:converters="clr-namespace:StoryTree.Gui.Converters"
                     xmlns:mainTabItems="clr-namespace:StoryTree.Gui.DataTemplates.MainTabItems"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:gui="clr-namespace:StoryTree.Gui"
-                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="TreeEventsListViewItemDataTemplate.xaml"/>
+        <ResourceDictionary Source="TreeEventsListViewItemDataTemplate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <converters:SelectedItemToMainTreeEventViewModelConverter x:Key="SelectedItemToMainTreeEventViewModelConverter" />
@@ -17,7 +15,8 @@
         <DataTemplate.Resources>
             <DataTemplate x:Key="EstimationPerEventTreeDataTemplate" DataType="viewModels:EventTreeViewModel">
                 <DataTemplate.Resources>
-                    <DataTemplate DataType="viewModels:TreeEventViewModel" x:Key="TreeEventEstimationSpecificationDataTempalte">
+                    <DataTemplate DataType="viewModels:TreeEventViewModel"
+                                  x:Key="TreeEventEstimationSpecificationDataTempalte">
                         <DataTemplate.Resources>
                             <!--TODO: Remove template selector and replace for datatriggers in xaml-->
                             <mainTabItems:EstimationContentTemplateSelector x:Key="EstimationContentTemplateSelector" />
@@ -26,21 +25,21 @@
                         <ScrollViewer>
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label 
+                                    <Label
                                         Width="100"
-                                        Grid.Column="0" 
-                                        FontWeight="Bold" 
-                                        Content="Specificatie"/>
-                                    <ComboBox 
-                                        Grid.Column="1" 
+                                        Grid.Column="0"
+                                        FontWeight="Bold"
+                                        Content="Specificatie" />
+                                    <ComboBox
+                                        Grid.Column="1"
                                         Margin="1"
                                         Width="200"
                                         HorizontalAlignment="Left"
@@ -49,16 +48,18 @@
                                         ItemsSource="{Binding EstimationSpecificationOptions}" />
                                 </Grid>
 
-                                <ContentPresenter 
-                                    Grid.Row="1" 
-                                    Content="{Binding EstimationSpecification}" 
+                                <ContentPresenter
+                                    Grid.Row="1"
+                                    Content="{Binding EstimationSpecification}"
                                     ContentTemplateSelector="{StaticResource EstimationContentTemplateSelector}">
                                     <ContentPresenter.Resources>
                                         <ResourceDictionary>
                                             <ResourceDictionary.MergedDictionaries>
-                                                <ResourceDictionary Source="Estimation/FixedValueEstimationTemplate.xaml"/>
-                                                <ResourceDictionary Source="Estimation/ClassEstimationTemplate.xaml"/>
-                                                <ResourceDictionary Source="Estimation/FixedFragilityCurveEstimationTemplate.xaml"/>
+                                                <ResourceDictionary
+                                                    Source="Estimation/FixedValueEstimationTemplate.xaml" />
+                                                <ResourceDictionary Source="Estimation/ClassEstimationTemplate.xaml" />
+                                                <ResourceDictionary
+                                                    Source="Estimation/FixedFragilityCurveEstimationTemplate.xaml" />
                                             </ResourceDictionary.MergedDictionaries>
                                         </ResourceDictionary>
                                     </ContentPresenter.Resources>
@@ -69,21 +70,21 @@
                 </DataTemplate.Resources>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" MinWidth="150"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*" MinWidth="150"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*" MinWidth="150"/>
+                        <ColumnDefinition Width="Auto" MinWidth="150" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" MinWidth="150" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" MinWidth="150" />
                     </Grid.ColumnDefinitions>
                     <Border Grid.Column="0" Background="{StaticResource ComboBoxNormalBackgroundBrush}">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <ListView 
+                            <ListView
                                 Grid.Row="0"
-                                x:Name="ListView" 
+                                x:Name="ListView"
                                 ItemsSource="{Binding AllTreeEvents}"
                                 SelectedItem="{Binding SelectedTreeEvent, UpdateSourceTrigger=PropertyChanged}"
                                 HorizontalContentAlignment="Stretch"
@@ -103,54 +104,53 @@
                                 </ListView.ItemContainerStyle>
                             </ListView>
                             <StackPanel Grid.Row="1" Orientation="Vertical">
-                                <TextBlock 
+                                <TextBlock
                                     Margin="5"
-                                    Text="DOT formulieren" 
-                                    FontWeight="Bold"/>
-                                <Button 
-                                    Content="Exporteren..." 
+                                    Text="DOT formulieren"
+                                    FontWeight="Bold" />
+                                <Button
+                                    Content="Exporteren..."
                                     Margin="5"
                                     Padding="15,5,15,5"
-                                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
+                                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                                     BorderBrush="DarkGray"
                                     Command="{StaticResource ExportElicitationFormsCommand}"
                                     CommandParameter="{Binding ElementName=HostControl, Path=Content}"
-                                    VerticalAlignment="Center">
-                                </Button>
-                                <Button 
+                                    VerticalAlignment="Center" />
+                                <Button
                                     Content="Importeren..."
                                     Margin="5"
                                     Padding="15,5,15,5"
                                     BorderBrush="DarkGray"
-                                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" 
+                                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                                     Command="{StaticResource ImportElicitationFormsCommand}"
                                     CommandParameter="{Binding ElementName=HostControl, Path=Content}"
-                                    VerticalAlignment="Center"/>
+                                    VerticalAlignment="Center" />
                             </StackPanel>
                         </Grid>
                     </Border>
-                    <GridSplitter Grid.Column="1" Width="10"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                    <ContentPresenter 
-                        Grid.Column="2" 
+                    <GridSplitter Grid.Column="1" Width="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    <ContentPresenter
+                        Grid.Column="2"
                         Content="{Binding SelectedTreeEvent}"
                         ContentTemplate="{StaticResource TreeEventEstimationSpecificationDataTempalte}" />
-                    <GridSplitter Grid.Column="3" Width="10"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <GridSplitter Grid.Column="3" Width="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                     <Grid Grid.Column="4">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Label 
+                        <Label
                             Grid.Row="0"
                             FontWeight="Bold"
                             Content="Discussie"
-                            HorizontalContentAlignment="Left"/>
-                        <xctk:RichTextBox 
+                            HorizontalContentAlignment="Left" />
+                        <xctk:RichTextBox
                             Style="{StaticResource RichtTextBoxStyle}"
-                            Grid.Row="1" 
+                            Grid.Row="1"
                             Text="{Binding SelectedTreeEvent.Discussion}">
                             <xctk:RichTextBoxFormatBarManager.FormatBar>
-                                <xctk:RichTextBoxFormatBar/>
+                                <xctk:RichTextBoxFormatBar />
                             </xctk:RichTextBoxFormatBarManager.FormatBar>
                         </xctk:RichTextBox>
                     </Grid>
@@ -158,7 +158,7 @@
             </DataTemplate>
         </DataTemplate.Resources>
         <ContentPresenter
-            Content="{Binding EventTree}" 
-            ContentTemplate="{StaticResource EstimationPerEventTreeDataTemplate}"/>
+            Content="{Binding EventTree}"
+            ContentTemplate="{StaticResource EstimationPerEventTreeDataTemplate}" />
     </DataTemplate>
 </ResourceDictionary>

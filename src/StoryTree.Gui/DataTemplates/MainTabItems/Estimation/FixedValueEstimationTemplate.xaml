@@ -2,27 +2,28 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:StoryTree.Gui.ViewModels">
 
-    <DataTemplate x:Key="FixedValueEstimationTemplate" DataType="{x:Type viewModels:FixedProbabilitySpecificationViewModel}">
+    <DataTemplate x:Key="FixedValueEstimationTemplate"
+                  DataType="{x:Type viewModels:FixedProbabilitySpecificationViewModel}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label 
+            <Label
                 Width="100"
-                HorizontalAlignment="Left" 
-                Grid.Column="0" 
-                Content="Kans" 
-                FontWeight="Bold"/>
-            <TextBox 
+                HorizontalAlignment="Left"
+                Grid.Column="0"
+                Content="Kans"
+                FontWeight="Bold" />
+            <TextBox
                 Style="{StaticResource TextBoxStyle}"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 TextAlignment="Left"
                 Width="100"
                 Height="25"
-                Grid.Column="1" 
-                Text="{Binding FixedProbability, Converter={StaticResource ProbabilityToStringConverter}}"/>
+                Grid.Column="1"
+                Text="{Binding FixedProbability, Converter={StaticResource ProbabilityToStringConverter}}" />
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

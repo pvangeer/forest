@@ -6,36 +6,38 @@
 
     <converters:FragilityCurveToPlotModelConverter x:Key="FragilityCurveToPlotModelConverter" />
 
-    <DataTemplate x:Key="FixedFragilityCurveEstimationTemplate" DataType="{x:Type viewModels:FixedFragilityCurveSpecificationViewModel}">
+    <DataTemplate x:Key="FixedFragilityCurveEstimationTemplate"
+                  DataType="{x:Type viewModels:FixedFragilityCurveSpecificationViewModel}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <DataGrid Grid.Column="0"
                       ItemsSource="{Binding FixedFragilityCurve}"
                       AutoGenerateColumns="False"
                       Style="{StaticResource DataGridStyle}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn 
-                        Header="Waterstand" 
-                        Binding="{Binding WaterLevel}" 
+                    <DataGridTextColumn
+                        Header="Waterstand"
+                        Binding="{Binding WaterLevel}"
                         IsReadOnly="True"
-                        ElementStyle="{StaticResource ColumnElementStyle}"/>
-                    <DataGridTextColumn 
-                        Header="Kans" 
-                        Binding="{Binding Probability, Converter={StaticResource ProbabilityToStringConverter}}" 
-                        ElementStyle="{StaticResource ColumnElementStyle}"/>
+                        ElementStyle="{StaticResource ColumnElementStyle}" />
+                    <DataGridTextColumn
+                        Header="Kans"
+                        Binding="{Binding Probability, Converter={StaticResource ProbabilityToStringConverter}}"
+                        ElementStyle="{StaticResource ColumnElementStyle}" />
                 </DataGrid.Columns>
             </DataGrid>
-            <GridSplitter 
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Width="10" 
-                Grid.Column="1"/>
+            <GridSplitter
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Width="10"
+                Grid.Column="1" />
             <Grid Grid.Column="2" Margin="10">
-                <oxy:PlotView Model="{Binding FixedFragilityCurve, Converter={StaticResource FragilityCurveToPlotModelConverter}}"/>
+                <oxy:PlotView
+                    Model="{Binding FixedFragilityCurve, Converter={StaticResource FragilityCurveToPlotModelConverter}}" />
             </Grid>
         </Grid>
     </DataTemplate>
