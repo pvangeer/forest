@@ -1,42 +1,12 @@
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interactivity;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using Button = System.Windows.Controls.Button;
 
 namespace StoryTree.Gui
 {
     public class FolderDialogBehavior : Behavior<Button>
     {
-        #region Attached Behavior wiring
-        protected override void OnAttached()
-        {
-            base.OnAttached();
-            AssociatedObject.Click += OnClick;
-        }
-
-        protected override void OnDetaching()
-        {
-            AssociatedObject.Click -= OnClick;
-            base.OnDetaching();
-        }
-        #endregion
-
-        #region FolderName Dependency Property
-        public static readonly DependencyProperty FolderName =
-            DependencyProperty.RegisterAttached("FolderName",
-                typeof(string), typeof(FolderDialogBehavior));
-
-        public static string GetFolderName(DependencyObject obj)
-        {
-            return (string)obj.GetValue(FolderName);
-        }
-
-        public static void SetFolderName(DependencyObject obj, string value)
-        {
-            obj.SetValue(FolderName, value);
-        }
-        #endregion
-
         private void OnClick(object sender, RoutedEventArgs e)
         {
             var dlg = new CommonOpenFileDialog
@@ -56,9 +26,41 @@ namespace StoryTree.Gui
             };
 
             if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
-            {
                 SetValue(FolderName, dlg.FileName);
-            }
         }
+
+        #region Attached Behavior wiring
+
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+            AssociatedObject.Click += OnClick;
+        }
+
+        protected override void OnDetaching()
+        {
+            AssociatedObject.Click -= OnClick;
+            base.OnDetaching();
+        }
+
+        #endregion
+
+        #region FolderName Dependency Property
+
+        public static readonly DependencyProperty FolderName =
+            DependencyProperty.RegisterAttached("FolderName",
+                typeof(string), typeof(FolderDialogBehavior));
+
+        public static string GetFolderName(DependencyObject obj)
+        {
+            return (string)obj.GetValue(FolderName);
+        }
+
+        public static void SetFolderName(DependencyObject obj, string value)
+        {
+            obj.SetValue(FolderName, value);
+        }
+
+        #endregion
     }
 }

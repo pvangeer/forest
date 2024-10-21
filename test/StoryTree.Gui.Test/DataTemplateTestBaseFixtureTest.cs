@@ -7,7 +7,8 @@ namespace StoryTree.Gui.Test
     [TestFixture]
     public class DataTemplateTestBaseFixtureTest
     {
-        [Test, Explicit]
+        [Test]
+        [Explicit]
         public void ThisIsATest()
         {
             //Assert.Greater(0,Resources.Count);

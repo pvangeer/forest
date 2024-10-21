@@ -5,12 +5,12 @@ namespace StoryTree.Gui.Command
 {
     public class OpenProjectCommand : ICommand
     {
+        private readonly GuiProjectServices guiProjectServices;
+
         public OpenProjectCommand(GuiProjectServices guiProjectServices)
         {
             this.guiProjectServices = guiProjectServices;
         }
-
-        private readonly GuiProjectServices guiProjectServices;
 
         public bool CanExecute(object parameter)
         {

@@ -23,14 +23,14 @@ namespace StoryTree.Gui
             var endPoint = new Point(targetX - 0.5 * targetWidth, targetY);
             var midPointX = (startPoint.X + endPoint.X) / 2.0;
 
-            return new PathFigureCollection()
+            return new PathFigureCollection
             {
                 new PathFigure(startPoint,
                     new PathSegment[]
                     {
                         new LineSegment(new Point(midPointX, startPoint.Y), true),
                         new LineSegment(new Point(midPointX, endPoint.Y), true),
-                        new LineSegment(endPoint, true),
+                        new LineSegment(endPoint, true)
                     }, false)
             };
         }

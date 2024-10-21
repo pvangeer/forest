@@ -10,5 +10,7 @@ namespace StoryTree.Messaging
         void OnPropertyChanged(string propertyName = null);
     }
 
-    public class MessageList : ObservableCollection<LogMessage> { }
+    public class MessageList : ObservableCollection<LogMessage>
+    {
+    }
 }

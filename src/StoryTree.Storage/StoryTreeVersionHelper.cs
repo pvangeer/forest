@@ -24,7 +24,7 @@ using System;
 namespace StoryTree.Storage
 {
     /// <summary>
-    /// This class is capable of comparing Ringtoets database versions.
+    ///     This class is capable of comparing Ringtoets database versions.
     /// </summary>
     public static class StoryTreeVersionHelper
     {
@@ -32,7 +32,7 @@ namespace StoryTree.Storage
         private const string currentDatabaseVersion = "18.1";
 
         /// <summary>
-        /// Gets the current database version.
+        ///     Gets the current database version.
         /// </summary>
         /// <returns>The database version.</returns>
         public static string GetCurrentDatabaseVersion()
@@ -41,11 +41,13 @@ namespace StoryTree.Storage
         }
 
         /// <summary>
-        /// Returns if the <paramref name="version"/> is newer than the current database version.
+        ///     Returns if the <paramref name="version" /> is newer than the current database version.
         /// </summary>
         /// <param name="version">The version to compare.</param>
-        /// <returns><c>true</c> if <paramref name="version"/> is newer than the current 
-        /// database version, <c>false</c> otherwise.</returns>
+        /// <returns>
+        ///     <c>true</c> if <paramref name="version" /> is newer than the current
+        ///     database version, <c>false</c> otherwise.
+        /// </returns>
         public static bool IsNewerThanCurrent(string version)
         {
             var versionComparer = new StoryTreeVersionComparer();
@@ -53,12 +55,14 @@ namespace StoryTree.Storage
         }
 
         /// <summary>
-        /// Returns if the <paramref name="version"/> is a valid database version.
+        ///     Returns if the <paramref name="version" /> is a valid database version.
         /// </summary>
         /// <param name="version">The version to compare.</param>
-        /// <returns><c>true</c> if <paramref name="version"/> is a valid database version, 
-        /// <c>false</c> otherwise.</returns>
-        /// <remarks>A valid version must be greater than <see cref="validDatabaseVersion"/>.</remarks>
+        /// <returns>
+        ///     <c>true</c> if <paramref name="version" /> is a valid database version,
+        ///     <c>false</c> otherwise.
+        /// </returns>
+        /// <remarks>A valid version must be greater than <see cref="validDatabaseVersion" />.</remarks>
         public static bool IsValidVersion(string version)
         {
             var versionComparer = new StoryTreeVersionComparer();
@@ -66,18 +70,18 @@ namespace StoryTree.Storage
         }
 
         /// <summary>
-        /// Validates if the <paramref name="version"/> is a valid database version.
+        ///     Validates if the <paramref name="version" /> is a valid database version.
         /// </summary>
         /// <param name="version">The version to compare.</param>
-        /// <exception cref="ArgumentException">Thrown when <paramref name="version"/> is not a 
-        /// valid Ringtoets database version.</exception>
-        /// <seealso cref="IsValidVersion"/>
+        /// <exception cref="ArgumentException">
+        ///     Thrown when <paramref name="version" /> is not a
+        ///     valid Ringtoets database version.
+        /// </exception>
+        /// <seealso cref="IsValidVersion" />
         public static void ValidateVersion(string version)
         {
             if (!IsValidVersion(version))
-            {
                 throw new ArgumentException(string.Format("Geen valide versienummer: '{0}'", version), version);
-            }
         }
     }
 }

@@ -24,17 +24,17 @@ using System.Windows.Media;
 namespace StoryTree.Storage
 {
     /// <summary>
-    /// Class that contains extension methods for <see cref="Color"/> to convert them to
-    /// other value types.
+    ///     Class that contains extension methods for <see cref="Color" /> to convert them to
+    ///     other value types.
     /// </summary>
     internal static class ColorConversionExtensions
     {
         public static string ToHexString(this Color value)
         {
-            return "#" + 
-                   value.A.ToString("X2") + 
-                   value.R.ToString("X2") + 
-                   value.G.ToString("X2") + 
+            return "#" +
+                   value.A.ToString("X2") +
+                   value.R.ToString("X2") +
+                   value.G.ToString("X2") +
                    value.B.ToString("X2");
         }
 
@@ -42,9 +42,7 @@ namespace StoryTree.Storage
         {
             var color = ColorConverter.ConvertFromString(value);
             if (color == null)
-            {
                 return Colors.Transparent;
-            }
             return (Color)color;
         }
     }

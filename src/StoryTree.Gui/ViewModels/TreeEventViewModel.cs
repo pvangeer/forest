@@ -15,16 +15,17 @@ namespace StoryTree.Gui.ViewModels
 {
     public class TreeEventViewModel : INotifyPropertyChanged
     {
-        private TreeEventViewModel failingEventViewModel;
-        private TreeEventViewModel passingEventViewModel;
-        private ProbabilitySpecificationViewModelBase probabilityEstimationViewModel;
         private static readonly Dictionary<ProbabilitySpecificationType, string> ProbabilitySpecificationTypes =
             Enum.GetValues(typeof(ProbabilitySpecificationType)).Cast<ProbabilitySpecificationType>()
                 .ToDictionary(t => t, GetEstimationSpecificationTypeDisplayName);
 
         private readonly ProjectManipulationService projectManipulationService;
+        private TreeEventViewModel failingEventViewModel;
+        private TreeEventViewModel passingEventViewModel;
+        private ProbabilitySpecificationViewModelBase probabilityEstimationViewModel;
 
-        public TreeEventViewModel([NotNull]TreeEvent treeEvent, [NotNull]EventTreeViewModel parentEventTreeViewModel, [NotNull]ProjectManipulationService projectManipulationService)
+        public TreeEventViewModel([NotNull] TreeEvent treeEvent, [NotNull] EventTreeViewModel parentEventTreeViewModel,
+            [NotNull] ProjectManipulationService projectManipulationService)
         {
             this.projectManipulationService = projectManipulationService;
             TreeEvent = treeEvent;
@@ -40,7 +41,7 @@ namespace StoryTree.Gui.ViewModels
             set
             {
                 TreeEvent.Name = value;
-                TreeEvent.OnPropertyChanged(nameof(TreeEvent.Name));
+                TreeEvent.OnPropertyChanged();
             }
         }
 
@@ -50,7 +51,7 @@ namespace StoryTree.Gui.ViewModels
             set
             {
                 TreeEvent.Summary = value;
-                TreeEvent.OnPropertyChanged(nameof(TreeEvent.Summary));
+                TreeEvent.OnPropertyChanged();
             }
         }
 
@@ -59,12 +60,10 @@ namespace StoryTree.Gui.ViewModels
             get
             {
                 if (TreeEvent?.PassingEvent == null)
-                {
                     return null;
-                }
 
                 return passingEventViewModel ?? (passingEventViewModel =
-                           new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel, projectManipulationService));
+                    new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel, projectManipulationService));
             }
         }
 
@@ -73,12 +72,10 @@ namespace StoryTree.Gui.ViewModels
             get
             {
                 if (TreeEvent?.FailingEvent == null)
-                {
                     return null;
-                }
 
                 return failingEventViewModel ?? (failingEventViewModel =
-                           new TreeEventViewModel(TreeEvent.FailingEvent, ParentEventTreeViewModel, projectManipulationService));
+                    new TreeEventViewModel(TreeEvent.FailingEvent, ParentEventTreeViewModel, projectManipulationService));
             }
         }
 
@@ -92,7 +89,7 @@ namespace StoryTree.Gui.ViewModels
 
         public ICommand TreeEventClickedCommand => new TreeEventClickedCommand(this);
 
-        public bool IsSelected => TreeEvent != null && ReferenceEquals(TreeEvent,ParentEventTreeViewModel?.SelectedTreeEvent?.TreeEvent);
+        public bool IsSelected => TreeEvent != null && ReferenceEquals(TreeEvent, ParentEventTreeViewModel?.SelectedTreeEvent?.TreeEvent);
 
         public int ProbabilityEstimationTypeIndex
         {
@@ -101,9 +98,7 @@ namespace StoryTree.Gui.ViewModels
             {
                 var selectedType = ProbabilitySpecificationTypes.ElementAt(value).Key;
                 if (TreeEvent.ProbabilitySpecificationType != selectedType)
-                {
                     TreeEventManipulations.ChangeProbabilityEstimationType(TreeEvent, selectedType);
-                }
             }
         }
 
@@ -123,7 +118,7 @@ namespace StoryTree.Gui.ViewModels
             set
             {
                 TreeEvent.Information = value;
-                TreeEvent.OnPropertyChanged(nameof(TreeEvent.Information));
+                TreeEvent.OnPropertyChanged();
             }
         }
 
@@ -133,9 +128,11 @@ namespace StoryTree.Gui.ViewModels
             set
             {
                 TreeEvent.Discussion = value;
-                TreeEvent.OnPropertyChanged(nameof(TreeEvent.Discussion));
+                TreeEvent.OnPropertyChanged();
             }
         }
+
+        private EventTreeViewModel ParentEventTreeViewModel { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -172,8 +169,6 @@ namespace StoryTree.Gui.ViewModels
             }
         }
 
-        private EventTreeViewModel ParentEventTreeViewModel { get; }
-
         private void TreeEventPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -181,10 +176,8 @@ namespace StoryTree.Gui.ViewModels
                 case nameof(TreeEvent.PassingEvent):
                     passingEventViewModel = null;
                     if (PassingEvent == null)
-                    {
                         // TODO: Shouldn't this be done by the command?
                         Select();
-                    }
                     OnPropertyChanged(nameof(PassingEvent));
                     OnPropertyChanged(nameof(IsEndPointEvent));
                     OnPropertyChanged(nameof(HasTrueEventOnly));
@@ -194,10 +187,8 @@ namespace StoryTree.Gui.ViewModels
                 case nameof(TreeEvent.FailingEvent):
                     failingEventViewModel = null;
                     if (FailingEvent == null)
-                    {
                         // TODO: Shouldn't this be done by the command?
                         Select();
-                    }
                     OnPropertyChanged(nameof(FailingEvent));
                     OnPropertyChanged(nameof(IsEndPointEvent));
                     OnPropertyChanged(nameof(HasTrueEventOnly));

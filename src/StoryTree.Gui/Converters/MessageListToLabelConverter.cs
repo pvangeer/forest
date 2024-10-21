@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Globalization;
 using System.Windows.Data;
 using StoryTree.Gui.ViewModels;
-using StoryTree.Messaging;
 
 namespace StoryTree.Gui.Converters
 {
@@ -12,9 +10,7 @@ namespace StoryTree.Gui.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is MessageListViewModel viewModel))
-            {
                 return value;
-            }
 
             return $"{viewModel.MessageList.Count} Berichten";
         }

@@ -9,7 +9,7 @@ namespace StoryTree.Gui.Export
     {
         public EventTreeExportViewModel(EventTree eventTree)
         {
-            this.EventTree = eventTree;
+            EventTree = eventTree;
         }
 
         public EventTree EventTree { get; }

@@ -10,9 +10,7 @@ namespace StoryTree.Gui.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is StorageState storageState))
-            {
                 return value;
-            }
 
             return storageState == StorageState.Idle;
         }

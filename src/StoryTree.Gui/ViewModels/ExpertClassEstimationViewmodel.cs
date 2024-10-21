@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using StoryTree.Data;
 using StoryTree.Data.Estimations;
@@ -12,9 +11,9 @@ namespace StoryTree.Gui.ViewModels
     public class ExpertClassEstimationViewModel : INotifyPropertyChanged
     {
         private readonly ExpertClassEstimation estimation;
-        private bool lastMinEstimationValid = true;
-        private bool lastMaxEstimationValid = true;
         private bool lastAverageEstimationValid = true;
+        private bool lastMaxEstimationValid = true;
+        private bool lastMinEstimationValid = true;
 
         public ExpertClassEstimationViewModel(ExpertClassEstimation estimation)
         {
@@ -31,7 +30,7 @@ namespace StoryTree.Gui.ViewModels
             set
             {
                 estimation.MinEstimation = value;
-                OnPropertyChanged(nameof(MinEstimation));
+                OnPropertyChanged();
             }
         }
 
@@ -41,7 +40,7 @@ namespace StoryTree.Gui.ViewModels
             set
             {
                 estimation.MaxEstimation = value;
-                OnPropertyChanged(nameof(MaxEstimation));
+                OnPropertyChanged();
             }
         }
 
@@ -51,7 +50,7 @@ namespace StoryTree.Gui.ViewModels
             set
             {
                 estimation.AverageEstimation = value;
-                OnPropertyChanged(nameof(AverageEstimation));
+                OnPropertyChanged();
             }
         }
 

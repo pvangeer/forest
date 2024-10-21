@@ -1,5 +1,4 @@
-﻿using System.Windows.Media;
-using StoryTree.Data;
+﻿using StoryTree.Data;
 using StoryTree.Data.Estimations;
 using StoryTree.Data.Hydraulics;
 using StoryTree.Data.Tree;
@@ -14,7 +13,7 @@ namespace StoryTree.Gui
             {
                 EventTree =
                 {
-                    MainTreeEvent = CreateEventTree("Second event tree", 2),
+                    MainTreeEvent = CreateEventTree("Second event tree", 2)
                 },
                 Experts =
                 {
@@ -33,7 +32,7 @@ namespace StoryTree.Gui
                         Expertise = "Niets",
                         Organization = "Ander bedrijf",
                         Telephone = "088-3358339"
-                    },
+                    }
                 }
             };
         }
@@ -46,7 +45,7 @@ namespace StoryTree.Gui
             };
 
             var currentTreeEvent = mainTreeEvent;
-            for (int i = 0; i < numberTreeEvents - 1; i++)
+            for (var i = 0; i < numberTreeEvents - 1; i++)
             {
                 var falseEvent = new TreeEvent
                 {
@@ -102,12 +101,12 @@ namespace StoryTree.Gui
                 Telephone = ""
             };
 
-            var hydraulicCondition23 = new HydraulicCondition(2.3, (Probability)3.33E-02,double.NaN,double.NaN);
-            var hydraulicCondition26 = new HydraulicCondition(2.6, (Probability)1.00E-02,double.NaN,double.NaN);
-            var hydraulicCondition29 = new HydraulicCondition(2.9, (Probability)3.33E-03,double.NaN,double.NaN);
-            var hydraulicCondition32 = new HydraulicCondition(3.2, (Probability)1.00E-03,double.NaN,double.NaN);
-            var hydraulicCondition35 = new HydraulicCondition(3.5, (Probability)3.33E-04,double.NaN,double.NaN);
-            var hydraulicCondition38 = new HydraulicCondition(3.8, (Probability)1.00E-04,double.NaN,double.NaN);
+            var hydraulicCondition23 = new HydraulicCondition(2.3, (Probability)3.33E-02, double.NaN, double.NaN);
+            var hydraulicCondition26 = new HydraulicCondition(2.6, (Probability)1.00E-02, double.NaN, double.NaN);
+            var hydraulicCondition29 = new HydraulicCondition(2.9, (Probability)3.33E-03, double.NaN, double.NaN);
+            var hydraulicCondition32 = new HydraulicCondition(3.2, (Probability)1.00E-03, double.NaN, double.NaN);
+            var hydraulicCondition35 = new HydraulicCondition(3.5, (Probability)3.33E-04, double.NaN, double.NaN);
+            var hydraulicCondition38 = new HydraulicCondition(3.8, (Probability)1.00E-04, double.NaN, double.NaN);
 
             return new EventTreeProject
             {
@@ -275,7 +274,7 @@ namespace StoryTree.Gui
                             {
                                 Expert = dirk, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Five,
                                 MinEstimation = ProbabilityClass.Four, MaxEstimation = ProbabilityClass.Five
-                            },
+                            }
                         },
                         FailingEvent = new TreeEvent
                         {
@@ -416,10 +415,10 @@ namespace StoryTree.Gui
                                 {
                                     Expert = dirk, HydraulicCondition = hydraulicCondition38, AverageEstimation = ProbabilityClass.Three,
                                     MinEstimation = ProbabilityClass.Two, MaxEstimation = ProbabilityClass.Four
-                                },
+                                }
                             }
                         }
-                    },
+                    }
                 },
                 Experts =
                 {
@@ -427,7 +426,7 @@ namespace StoryTree.Gui
                     erik,
                     roy,
                     andries,
-                    dirk,
+                    dirk
                 },
                 HydraulicConditions =
                 {
@@ -436,7 +435,7 @@ namespace StoryTree.Gui
                     hydraulicCondition29,
                     hydraulicCondition32,
                     hydraulicCondition35,
-                    hydraulicCondition38,
+                    hydraulicCondition38
                 }
             };
         }

@@ -5,7 +5,9 @@ namespace StoryTree.Gui.ViewModels
 {
     public class FixedProbabilitySpecificationViewModel : ProbabilitySpecificationViewModelBase
     {
-        public FixedProbabilitySpecificationViewModel(TreeEvent treeEvent) : base(treeEvent) { }
+        public FixedProbabilitySpecificationViewModel(TreeEvent treeEvent) : base(treeEvent)
+        {
+        }
 
         public Probability FixedProbability
         {

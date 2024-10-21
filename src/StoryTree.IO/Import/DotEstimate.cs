@@ -1,6 +1,6 @@
 ﻿namespace StoryTree.IO.Import
 {
-    public class  DotEstimate
+    public class DotEstimate
     {
         public double Frequency { get; set; }
 

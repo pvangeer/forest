@@ -18,9 +18,7 @@ namespace StoryTree.Gui.Command
         {
             var treeEventType = TreeEventType.Failing;
             if (parameter is TreeEventType treeEventTypeCasted)
-            {
                 treeEventType = treeEventTypeCasted;
-            }
             ProjectViewModel?.EventTree.AddTreeEvent(ProjectViewModel?.SelectedTreeEvent, treeEventType);
         }
     }

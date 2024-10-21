@@ -8,17 +8,18 @@ using StoryTree.Messaging;
 namespace StoryTree.Gui
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///     Interaction logic for App.xaml
     /// </summary>
-    public partial class App : System.Windows.Application
+    public partial class App : Application
     {
+        private readonly StoryTreeLog log = new StoryTreeLog(typeof(App));
+
         public App()
         {
-            this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+            DispatcherUnhandledException += App_DispatcherUnhandledException;
         }
 
-        private readonly StoryTreeLog log = new StoryTreeLog(typeof(App));
-        void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             log.Error($"Er is iets onverwachts misgegaan: {e.Exception.Message}");
             e.Handled = true;
@@ -28,16 +29,15 @@ namespace StoryTree.Gui
         {
             base.OnStartup(e);
 
-            EventManager.RegisterClassHandler(typeof(DataGrid), DataGrid.PreviewMouseLeftButtonDownEvent,
+            EventManager.RegisterClassHandler(typeof(DataGrid), UIElement.PreviewMouseLeftButtonDownEvent,
                 new RoutedEventHandler(EventHelper.DataGridPreviewMouseLeftButtonDownEvent));
-
         }
     }
 
     public static class EventHelper
     {
         internal static void DataGridPreviewMouseLeftButtonDownEvent
-                   (object sender, System.Windows.RoutedEventArgs e)
+            (object sender, RoutedEventArgs e)
         {
             //throw new NotImplementedException();
             var mbe = e as MouseButtonEventArgs;
@@ -47,9 +47,7 @@ namespace StoryTree.Gui
             {
                 obj = mbe.OriginalSource as DependencyObject;
                 while (obj != null && !(obj is DataGridCell))
-                {
                     obj = VisualTreeHelper.GetParent(obj);
-                }
             }
 
             DataGridCell cell = null;
@@ -61,9 +59,7 @@ namespace StoryTree.Gui
             if (cell != null && !cell.IsEditing && !cell.IsReadOnly)
             {
                 if (!cell.IsFocused)
-                {
                     cell.Focus();
-                }
                 dataGrid = FindVisualParent<DataGrid>(cell);
                 if (dataGrid != null)
                 {
@@ -77,31 +73,27 @@ namespace StoryTree.Gui
                     {
                         var row = FindVisualParent<DataGridRow>(cell);
                         if (row != null && !row.IsSelected)
-                        {
                             row.IsSelected = true;
-                        }
                     }
                 }
             }
-
         }
         //http://wpf.codeplex.com/wikipage?title=Single-Click%20Editing
         //http://stackoverflow.com/questions/10027182/how-to-set-an-evenhandler-in-wpf-to-all-windows-entire-application
         //http://www.scottlogic.com/blog/2008/12/02/wpf-datagrid-detecting-clicked-cell-and-row.html
 
-        static T FindVisualParent<T>(UIElement element) where T : UIElement
+        private static T FindVisualParent<T>(UIElement element) where T : UIElement
         {
-            UIElement parent = element;
+            var parent = element;
             while (parent != null)
             {
-                T correctlyTyped = parent as T;
+                var correctlyTyped = parent as T;
                 if (correctlyTyped != null)
-                {
                     return correctlyTyped;
-                }
 
                 parent = VisualTreeHelper.GetParent(parent) as UIElement;
             }
+
             return null;
         }
     }

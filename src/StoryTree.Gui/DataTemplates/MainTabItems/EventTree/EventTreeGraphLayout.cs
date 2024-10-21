@@ -31,7 +31,7 @@ namespace StoryTree.Gui.DataTemplates.MainTabItems.EventTree
     public class EventTreeGraphLayout : GraphLayout<GraphVertex, TreeEventConnector, EventTreeGraph>
     {
         /// <summary>
-        /// Creates a new instance of <see cref="EventTreeGraphLayout"/>.
+        ///     Creates a new instance of <see cref="EventTreeGraphLayout" />.
         /// </summary>
         public EventTreeGraphLayout()
         {

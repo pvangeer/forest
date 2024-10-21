@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Data;
 using System.Linq;
 using StoryTree.Data;
 using StoryTree.Data.Properties;
@@ -9,7 +8,7 @@ namespace StoryTree.Gui.ViewModels
 {
     public class ClassesProbabilitySpecificationViewModel : ProbabilitySpecificationViewModelBase
     {
-        public ClassesProbabilitySpecificationViewModel([NotNull]TreeEvent treeEvent, EventTreeProject eventTreeProject) : base(treeEvent)
+        public ClassesProbabilitySpecificationViewModel([NotNull] TreeEvent treeEvent, EventTreeProject eventTreeProject) : base(treeEvent)
         {
             ClassesProbabilitySpecification = new ObservableCollection<ExpertClassEstimationViewModel>(
                 TreeEvent.ClassesProbabilitySpecification.Select(e => new ExpertClassEstimationViewModel(e)));

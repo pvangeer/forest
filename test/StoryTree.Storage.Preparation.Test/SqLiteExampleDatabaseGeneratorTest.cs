@@ -14,7 +14,7 @@ namespace StoryTree.Storage.Preparation.Test
         public void CreateSampleDatabase()
         {
             // Setup
-            string storageFile = GetPathToStorageFile();
+            var storageFile = GetPathToStorageFile();
             if (File.Exists(storageFile))
             {
                 TestDelegate precondition = () => File.Delete(storageFile);
@@ -36,31 +36,27 @@ namespace StoryTree.Storage.Preparation.Test
         public static void CreateDatabaseFile(string databaseFilePath, string databaseSchemaQuery)
         {
             if (string.IsNullOrWhiteSpace(databaseSchemaQuery))
-            {
                 throw new ArgumentNullException(nameof(databaseSchemaQuery));
-            }
             if (string.IsNullOrWhiteSpace(databaseFilePath))
-            {
                 throw new ArgumentNullException(nameof(databaseFilePath));
-            }
 
             SQLiteConnection.CreateFile(databaseFilePath);
             PerformCommandOnDatabase(databaseFilePath, databaseSchemaQuery);
         }
 
         /// <summary>
-        /// Performs the command on a database.
+        ///     Performs the command on a database.
         /// </summary>
         /// <param name="databaseFilePath">The file path to the database.</param>
         /// <param name="commandText">The command text/query.</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="databaseFilePath"/> is <c>null</c> or whitespace.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="databaseFilePath" /> is <c>null</c> or whitespace.</exception>
         private static void PerformCommandOnDatabase(string databaseFilePath, string commandText)
         {
-            string connectionString = BuildSqLiteConnectionString(databaseFilePath, false);
+            var connectionString = BuildSqLiteConnectionString(databaseFilePath, false);
             using (var dbContext = new SQLiteConnection(connectionString, true))
             {
                 dbContext.Open();
-                using (SQLiteCommand command = dbContext.CreateCommand())
+                using (var command = dbContext.CreateCommand())
                 {
                     try
                     {
@@ -83,6 +79,7 @@ namespace StoryTree.Storage.Preparation.Test
                 const string message = @"Cannot create a connection string without the path to the file to connect to.";
                 throw new ArgumentNullException(nameof(filePath), message);
             }
+
             return new SQLiteConnectionStringBuilder
             {
                 FailIfMissing = true,

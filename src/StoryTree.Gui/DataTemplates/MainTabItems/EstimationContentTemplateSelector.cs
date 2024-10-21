@@ -11,15 +11,11 @@ namespace StoryTree.Gui.DataTemplates.MainTabItems
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (!(container is ContentPresenter contentPresenter))
-            {
                 return base.SelectTemplate(item, container);
-            }
 
             if (!(contentPresenter.Content is ProbabilitySpecificationViewModelBase probabilitySpecification))
-            {
                 // TODO: Return default template
                 return null;
-            }
 
             switch (probabilitySpecification.Type)
             {
@@ -28,7 +24,7 @@ namespace StoryTree.Gui.DataTemplates.MainTabItems
                 case ProbabilitySpecificationType.FixedValue:
                     return contentPresenter.Resources["FixedValueEstimationTemplate"] as DataTemplate;
                 case ProbabilitySpecificationType.FixedFrequency:
-                    return contentPresenter.Resources["FixedFragilityCurveEstimationTemplate"] as DataTemplate; 
+                    return contentPresenter.Resources["FixedFragilityCurveEstimationTemplate"] as DataTemplate;
                 default:
                     throw new NotImplementedException();
             }

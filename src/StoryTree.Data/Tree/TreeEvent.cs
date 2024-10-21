@@ -35,7 +35,7 @@ namespace StoryTree.Data.Tree
         public FragilityCurve FixedFragilityCurve { get; }
 
         public ProbabilitySpecificationType ProbabilitySpecificationType { get; set; }
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

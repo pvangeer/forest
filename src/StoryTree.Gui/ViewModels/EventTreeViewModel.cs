@@ -2,22 +2,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows.Media;
 using StoryTree.Data;
 using StoryTree.Data.Properties;
 using StoryTree.Data.Services;
 
 namespace StoryTree.Gui.ViewModels
 {
-    public partial class EventTreeViewModel : INotifyPropertyChanged
+    public class EventTreeViewModel : INotifyPropertyChanged
     {
-        private TreeEventViewModel selectedTreeEvent;
-        private TreeEventViewModel mainTreeEventViewModel;
-        private bool isSelected;
-        private EventTreeGraph graph;
         private readonly ProjectManipulationService projectManipulationService;
-
-        private EventTree EventTree { get; }
+        private EventTreeGraph graph;
+        private bool isSelected;
+        private TreeEventViewModel mainTreeEventViewModel;
+        private TreeEventViewModel selectedTreeEvent;
 
         public EventTreeViewModel()
         {
@@ -27,7 +24,7 @@ namespace StoryTree.Gui.ViewModels
             EventTree.PropertyChanged += EventTreePropertyChanged;
         }
 
-        public EventTreeViewModel([NotNull]EventTree eventTree, ProjectManipulationService projectManipulationService)
+        public EventTreeViewModel([NotNull] EventTree eventTree, ProjectManipulationService projectManipulationService)
         {
             EventTree = eventTree;
             SelectedTreeEvent = MainTreeEventViewModel;
@@ -35,7 +32,48 @@ namespace StoryTree.Gui.ViewModels
             eventTree.PropertyChanged += EventTreePropertyChanged;
         }
 
+        private EventTree EventTree { get; }
+
         public EventTreeGraph Graph => CreateGraph();
+
+        public TreeEventViewModel SelectedTreeEvent
+        {
+            get => selectedTreeEvent;
+            set
+            {
+                selectedTreeEvent = value;
+                MainTreeEventViewModel?.FireSelectedStateChangeRecursive();
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsSelected
+        {
+            get => isSelected;
+            set
+            {
+                isSelected = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public TreeEventViewModel MainTreeEventViewModel
+        {
+            get
+            {
+                if (mainTreeEventViewModel == null && EventTree.MainTreeEvent == null)
+                    return null;
+
+                return mainTreeEventViewModel ??
+                       (mainTreeEventViewModel = new TreeEventViewModel(EventTree.MainTreeEvent, this, projectManipulationService));
+            }
+        }
+
+        public IEnumerable<TreeEventViewModel> AllTreeEvents => GetAllEventsRecursive(MainTreeEventViewModel);
+
+        public EstimationSpecificationViewModelFactory EstimationSpecificationViewModelFactory { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private EventTreeGraph CreateGraph()
         {
@@ -49,16 +87,12 @@ namespace StoryTree.Gui.ViewModels
         private void DrawNode(TreeEventViewModel treeEventViewModel, GraphVertex parent = null)
         {
             if (treeEventViewModel == null)
-            {
                 return;
-            }
 
             var vertex = new GraphVertex(treeEventViewModel);
             graph.AddVertex(vertex);
             if (parent != null)
-            {
                 graph.AddEdge(new TreeEventConnector(parent, vertex));
-            }
 
             if (treeEventViewModel.FailingEvent != null)
             {
@@ -95,51 +129,10 @@ namespace StoryTree.Gui.ViewModels
             }
         }
 
-        public TreeEventViewModel SelectedTreeEvent
-        {
-            get => selectedTreeEvent;
-            set
-            {
-                selectedTreeEvent = value;
-                MainTreeEventViewModel?.FireSelectedStateChangeRecursive();
-                OnPropertyChanged(nameof(SelectedTreeEvent));
-            }
-        }
-
-        public bool IsSelected
-        {
-            get => isSelected;
-            set
-            {
-                isSelected = value;
-                OnPropertyChanged(nameof(IsSelected));
-            }
-        }
-
-        public TreeEventViewModel MainTreeEventViewModel
-        {
-            get
-            {
-                if (mainTreeEventViewModel == null && EventTree.MainTreeEvent == null)
-                {
-                    return null;
-                }
-
-                return mainTreeEventViewModel ??
-                       (mainTreeEventViewModel = new TreeEventViewModel(EventTree.MainTreeEvent, this, projectManipulationService));
-            }
-        }
-
-        public IEnumerable<TreeEventViewModel> AllTreeEvents => GetAllEventsRecursive(MainTreeEventViewModel);
-
-        public EstimationSpecificationViewModelFactory EstimationSpecificationViewModelFactory { get; set; }
-
         public bool IsViewModelFor(EventTree eventTree)
         {
             return Equals(EventTree, eventTree);
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -149,8 +142,9 @@ namespace StoryTree.Gui.ViewModels
 
         public void AddTreeEvent(TreeEventViewModel treeEventViewModel, TreeEventType treeEventType)
         {
-            projectManipulationService.AddTreeEvent(EventTree,treeEventViewModel?.TreeEvent,treeEventType);
-            SelectedTreeEvent = treeEventViewModel == null ? MainTreeEventViewModel : treeEventType == TreeEventType.Failing ? treeEventViewModel.FailingEvent : treeEventViewModel.PassingEvent;
+            projectManipulationService.AddTreeEvent(EventTree, treeEventViewModel?.TreeEvent, treeEventType);
+            SelectedTreeEvent = treeEventViewModel == null ? MainTreeEventViewModel :
+                treeEventType == TreeEventType.Failing ? treeEventViewModel.FailingEvent : treeEventViewModel.PassingEvent;
             OnPropertyChanged(nameof(AllTreeEvents));
             OnPropertyChanged(nameof(Graph));
         }
@@ -165,22 +159,16 @@ namespace StoryTree.Gui.ViewModels
 
         private static IEnumerable<TreeEventViewModel> GetAllEventsRecursive(TreeEventViewModel treeEventViewModel)
         {
-            var list = new[]{treeEventViewModel};
+            var list = new[] { treeEventViewModel };
 
             if (treeEventViewModel == null)
-            {
                 return list;
-            }
 
             if (treeEventViewModel.FailingEvent != null)
-            {
                 list = list.Concat(GetAllEventsRecursive(treeEventViewModel.FailingEvent)).ToArray();
-            }
 
             if (treeEventViewModel.PassingEvent != null)
-            {
                 list = list.Concat(GetAllEventsRecursive(treeEventViewModel.PassingEvent)).ToArray();
-            }
 
             return list;
         }
@@ -191,16 +179,12 @@ namespace StoryTree.Gui.ViewModels
             {
                 case TreeEventType.Failing:
                     if (mainTreeEventViewModel.FailingEvent == null)
-                    {
                         return mainTreeEventViewModel;
-                    }
 
                     return FindLastEventViewModel(mainTreeEventViewModel.FailingEvent, type);
                 case TreeEventType.Passing:
                     if (mainTreeEventViewModel.PassingEvent == null)
-                    {
                         return mainTreeEventViewModel;
-                    }
 
                     return FindLastEventViewModel(mainTreeEventViewModel.PassingEvent, type);
                 default:

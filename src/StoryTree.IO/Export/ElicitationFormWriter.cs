@@ -12,10 +12,12 @@ using StoryTree.Data.Properties;
 using StoryTree.IO.Import;
 using BlipFill = DocumentFormat.OpenXml.Drawing.Spreadsheet.BlipFill;
 using Color = System.Drawing.Color;
+using FromMarker = DocumentFormat.OpenXml.Drawing.Spreadsheet.FromMarker;
 using NonVisualDrawingProperties = DocumentFormat.OpenXml.Drawing.Spreadsheet.NonVisualDrawingProperties;
 using NonVisualPictureDrawingProperties = DocumentFormat.OpenXml.Drawing.Spreadsheet.NonVisualPictureDrawingProperties;
 using NonVisualPictureProperties = DocumentFormat.OpenXml.Drawing.Spreadsheet.NonVisualPictureProperties;
-using Position = DocumentFormat.OpenXml.Drawing.Spreadsheet.Position;
+using Outline = DocumentFormat.OpenXml.Drawing.Outline;
+using Picture = DocumentFormat.OpenXml.Drawing.Spreadsheet.Picture;
 using ShapeProperties = DocumentFormat.OpenXml.Drawing.Spreadsheet.ShapeProperties;
 
 namespace StoryTree.IO.Export
@@ -23,23 +25,23 @@ namespace StoryTree.IO.Export
     public class ElicitationFormWriter
     {
         private readonly char[] columnHeaders = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-        private string elicitationCodeCellRange = "$C$12:$C$18";
+        private readonly string elicitationCodeCellRange = "$C$12:$C$18";
 
         //public void WriteForm(string fileName, string eventName, string eventImageFileName, string expertName, DateTime date, double[] waterLevels, double[] frequencies, string[] eventNodes)
         public void WriteForm(string fileName, DotForm dotForm)
         {
             using (var spreadsheetDocument = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook))
             {
-                WorkbookPart workbookPart = spreadsheetDocument.AddWorkbookPart();
+                var workbookPart = spreadsheetDocument.AddWorkbookPart();
                 workbookPart.Workbook = new Workbook();
                 workbookPart.Workbook.Append(new FileVersion { ApplicationName = "Microsoft Office Excel" });
 
                 // Add stylesheet
-                WorkbookStylesPart workbookStylesPart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                var workbookStylesPart = workbookPart.AddNewPart<WorkbookStylesPart>();
                 workbookStylesPart.Stylesheet = StyleSheetLibrary.StyleSheet;
                 workbookStylesPart.Stylesheet.Save(workbookStylesPart);
 
-                Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
+                var sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild(new Sheets());
                 WriteWorksheet(workbookPart, sheets, dotForm);
 
                 // Save document
@@ -51,15 +53,15 @@ namespace StoryTree.IO.Export
         private void WriteWorksheet(WorkbookPart workbookPart, Sheets sheets, DotForm form)
         {
             //Add data to first sheet
-            WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
-            Worksheet worksheet = new Worksheet();
+            var worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+            var worksheet = new Worksheet();
             worksheetPart.Worksheet = worksheet;
-            Columns columns = new Columns();
-            columns.Append(new Column {Min = 1, Max = 2, Width = 4, CustomWidth = true});
-            columns.Append(new Column {Min = 3, Max = 7, Width = 12, CustomWidth = true});
-            columns.Append(new Column {Min = 8, Max = 8, Width = 40, CustomWidth = true});
-            columns.Append(new Column {Min = 9, Max = 9, Width = 20, CustomWidth = true});
-            columns.Append(new Column {Min = 10, Max = 11, Width = 4, CustomWidth = true});
+            var columns = new Columns();
+            columns.Append(new Column { Min = 1, Max = 2, Width = 4, CustomWidth = true });
+            columns.Append(new Column { Min = 3, Max = 7, Width = 12, CustomWidth = true });
+            columns.Append(new Column { Min = 8, Max = 8, Width = 40, CustomWidth = true });
+            columns.Append(new Column { Min = 9, Max = 9, Width = 20, CustomWidth = true });
+            columns.Append(new Column { Min = 10, Max = 11, Width = 4, CustomWidth = true });
 
             var sheetData = new SheetData();
             var dataValidations = new DataValidations();
@@ -69,11 +71,11 @@ namespace StoryTree.IO.Export
             var mergeCells = CreateOrGetMergeCells(worksheet);
             worksheet.Append(dataValidations);
 
-            Sheet sheet = new Sheet
+            var sheet = new Sheet
             {
                 Name = "Faalpad",
                 SheetId = (uint)sheets.Count() + 1,
-                Id = workbookPart.GetIdOfPart(worksheetPart),
+                Id = workbookPart.GetIdOfPart(worksheetPart)
             };
             sheets.Append(sheet);
 
@@ -110,7 +112,7 @@ namespace StoryTree.IO.Export
         {
             uint rowNumber = 21;
             // Write table parts
-            foreach (DotNode node in form.Nodes)
+            foreach (var node in form.Nodes)
             {
                 var estimates = node.Estimates.OrderBy(n => n.WaterLevel).ToArray();
 
@@ -237,14 +239,14 @@ namespace StoryTree.IO.Export
             AddRow(sheetData, 0, 20);
 
             //append a MergeCell to the mergeCells for each set of merged cells
-            mergeCells.Append(new MergeCell {Reference = new StringValue("F11:G11")});
-            mergeCells.Append(new MergeCell {Reference = new StringValue("F12:G12")});
-            mergeCells.Append(new MergeCell {Reference = new StringValue("F13:G13")});
-            mergeCells.Append(new MergeCell {Reference = new StringValue("F14:G14")});
-            mergeCells.Append(new MergeCell {Reference = new StringValue("F15:G15")});
-            mergeCells.Append(new MergeCell {Reference = new StringValue("F16:G16")});
-            mergeCells.Append(new MergeCell {Reference = new StringValue("F17:G17")});
-            mergeCells.Append(new MergeCell {Reference = new StringValue("F18:G18")});
+            mergeCells.Append(new MergeCell { Reference = new StringValue("F11:G11") });
+            mergeCells.Append(new MergeCell { Reference = new StringValue("F12:G12") });
+            mergeCells.Append(new MergeCell { Reference = new StringValue("F13:G13") });
+            mergeCells.Append(new MergeCell { Reference = new StringValue("F14:G14") });
+            mergeCells.Append(new MergeCell { Reference = new StringValue("F15:G15") });
+            mergeCells.Append(new MergeCell { Reference = new StringValue("F16:G16") });
+            mergeCells.Append(new MergeCell { Reference = new StringValue("F17:G17") });
+            mergeCells.Append(new MergeCell { Reference = new StringValue("F18:G18") });
         }
 
         private void WriteExpertInformation(DotForm form, SheetData sheetData)
@@ -275,8 +277,8 @@ namespace StoryTree.IO.Export
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                 EmptyCell(StyleSheetLibrary.DefaultStyleIndex));
-            mergeCells.Append(new MergeCell {Reference = new StringValue("C5:D5")});
-            mergeCells.Append(new MergeCell {Reference = new StringValue("E5:I5")});
+            mergeCells.Append(new MergeCell { Reference = new StringValue("C5:D5") });
+            mergeCells.Append(new MergeCell { Reference = new StringValue("E5:I5") });
             AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 6);
         }
 
@@ -292,13 +294,13 @@ namespace StoryTree.IO.Export
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex));
-            mergeCells.Append(new MergeCell {Reference = new StringValue("C2:I2")});
+            mergeCells.Append(new MergeCell { Reference = new StringValue("C2:I2") });
             AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 3,
                 ConstructCell("DOT = Deskundigen Oordeel Toets op Maat", CellValues.String));
             AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 4);
         }
 
-        private static MergeCells CreateOrGetMergeCells([NotNull]Worksheet worksheet)
+        private static MergeCells CreateOrGetMergeCells([NotNull] Worksheet worksheet)
         {
             MergeCells mergeCells;
             if (worksheet.Elements<MergeCells>().Any())
@@ -311,41 +313,23 @@ namespace StoryTree.IO.Export
 
                 // Insert a MergeCells object into the specified position.
                 if (worksheet.Elements<CustomSheetView>().Any())
-                {
                     worksheet.InsertAfter(mergeCells, worksheet.Elements<CustomSheetView>().First());
-                }
                 else if (worksheet.Elements<DataConsolidate>().Any())
-                {
                     worksheet.InsertAfter(mergeCells, worksheet.Elements<DataConsolidate>().First());
-                }
                 else if (worksheet.Elements<SortState>().Any())
-                {
                     worksheet.InsertAfter(mergeCells, worksheet.Elements<SortState>().First());
-                }
                 else if (worksheet.Elements<AutoFilter>().Any())
-                {
                     worksheet.InsertAfter(mergeCells, worksheet.Elements<AutoFilter>().First());
-                }
                 else if (worksheet.Elements<Scenarios>().Any())
-                {
                     worksheet.InsertAfter(mergeCells, worksheet.Elements<Scenarios>().First());
-                }
                 else if (worksheet.Elements<ProtectedRanges>().Any())
-                {
                     worksheet.InsertAfter(mergeCells, worksheet.Elements<ProtectedRanges>().First());
-                }
                 else if (worksheet.Elements<SheetProtection>().Any())
-                {
                     worksheet.InsertAfter(mergeCells, worksheet.Elements<SheetProtection>().First());
-                }
                 else if (worksheet.Elements<SheetCalculationProperties>().Any())
-                {
                     worksheet.InsertAfter(mergeCells, worksheet.Elements<SheetCalculationProperties>().First());
-                }
                 else
-                {
                     worksheet.InsertAfter(mergeCells, worksheet.Elements<SheetData>().First());
-                }
             }
 
             return mergeCells;
@@ -353,25 +337,21 @@ namespace StoryTree.IO.Export
 
         private static Cell EmptyCell(uint styleSheetIndex)
         {
-            return new Cell {StyleIndex = styleSheetIndex};
+            return new Cell { StyleIndex = styleSheetIndex };
         }
 
         private void AddRow(SheetData sheetData, uint styleIndex, uint rowNumber, params Cell[] cells)
         {
             while (cells.Length < 8)
-            {
-                cells = cells.Concat(new[] {EmptyCell(StyleSheetLibrary.DefaultStyleIndex) }).ToArray();
-            }
+                cells = cells.Concat(new[] { EmptyCell(StyleSheetLibrary.DefaultStyleIndex) }).ToArray();
 
-            var cellsToWrite = new[] {EmptyCell(StyleSheetLibrary.RightBorderStyleIndex), EmptyCell(styleIndex)}
+            var cellsToWrite = new[] { EmptyCell(StyleSheetLibrary.RightBorderStyleIndex), EmptyCell(styleIndex) }
                 .Concat(cells)
-                .Concat(new[] {EmptyCell(StyleSheetLibrary.LeftBorderStyleIndex)})
+                .Concat(new[] { EmptyCell(StyleSheetLibrary.LeftBorderStyleIndex) })
                 .ToArray();
 
-            for (int i = 0; i < cellsToWrite.Length; i++)
-            {
+            for (var i = 0; i < cellsToWrite.Length; i++)
                 cellsToWrite[i].CellReference = columnHeaders[i] + rowNumber.ToString(CultureInfo.InvariantCulture);
-            }
             var row = new Row { RowIndex = rowNumber };
             row.Append(cellsToWrite);
             sheetData.Append(row);
@@ -387,6 +367,7 @@ namespace StoryTree.IO.Export
                 StyleIndex = styleIndex
             };
         }
+
         private static Cell ConstructCell(double value, CellValues dataType, uint styleIndex = 0)
         {
             return double.IsNaN(value)
@@ -406,9 +387,7 @@ namespace StoryTree.IO.Export
         private static void AddImage(Func<FileStream> fileStreamFunc, WorksheetPart worksheetPart)
         {
             if (fileStreamFunc == null)
-            {
                 return;
-            }
 
             DrawingsPart drawingsPart;
             ImagePart imagePart;
@@ -416,27 +395,25 @@ namespace StoryTree.IO.Export
             using (var fileStream = fileStreamFunc())
             {
                 if (fileStream == null)
-                {
                     return;
-                }
 
                 drawingsPart = worksheetPart.AddNewPart<DrawingsPart>();
                 imagePart = drawingsPart.AddImagePart(ImagePartType.Png, worksheetPart.GetIdOfPart(drawingsPart));
                 imagePart.FeedData(fileStream);
 
-                Image image = Image.FromStream(fileStream);
+                var image = Image.FromStream(fileStream);
                 //http://en.wikipedia.org/wiki/English_Metric_Unit#DrawingML
                 //http://stackoverflow.com/questions/1341930/pixel-to-centimeter
                 //http://stackoverflow.com/questions/139655/how-to-convert-pixels-to-points-px-to-pt-in-net-c
                 extents = new Extents
                 {
-                    Cx = (long)image.Width * (long)((float)914400 / image.HorizontalResolution),
-                    Cy = (long)image.Height * (long)((float)914400 / image.VerticalResolution)
+                    Cx = image.Width * (long)(914400 / image.HorizontalResolution),
+                    Cy = image.Height * (long)(914400 / image.VerticalResolution)
                 };
                 image.Dispose();
             }
 
-            NonVisualPictureProperties pictureNonVisualPictureProperties =
+            var pictureNonVisualPictureProperties =
                 new NonVisualPictureProperties
                 {
                     NonVisualDrawingProperties = new NonVisualDrawingProperties
@@ -455,13 +432,13 @@ namespace StoryTree.IO.Export
                     }
                 };
 
-            Stretch stretch =
+            var stretch =
                 new Stretch
                 {
                     FillRectangle = new FillRectangle()
                 };
 
-            BlipFill blipFill = new BlipFill
+            var blipFill = new BlipFill
             {
                 Blip = new Blip
                 {
@@ -472,7 +449,7 @@ namespace StoryTree.IO.Export
             };
             blipFill.Append(stretch);
 
-            ShapeProperties shapeProperties =
+            var shapeProperties =
                 new ShapeProperties
                 {
                     BlackWhiteMode = BlackWhiteModeValues.Auto,
@@ -486,7 +463,7 @@ namespace StoryTree.IO.Export
                         Extents = extents
                     }
                 };
-            PresetGeometry prstGeom =
+            var prstGeom =
                 new PresetGeometry
                 {
                     Preset = ShapeTypeValues.Rectangle,
@@ -498,12 +475,11 @@ namespace StoryTree.IO.Export
                 RgbColorModelHex = new RgbColorModelHex
                 {
                     Val = Color.White.ToSimpleHexValue()
-
                 }
             });
-            DocumentFormat.OpenXml.Drawing.Outline outline = new DocumentFormat.OpenXml.Drawing.Outline
+            var outline = new Outline
             {
-                Width = 25400,
+                Width = 25400
             };
 
             var solidFill1 = new SolidFill
@@ -516,8 +492,8 @@ namespace StoryTree.IO.Export
             outline.Append(solidFill1);
             shapeProperties.Append(outline);
 
-            DocumentFormat.OpenXml.Drawing.Spreadsheet.Picture picture =
-                new DocumentFormat.OpenXml.Drawing.Spreadsheet.Picture
+            var picture =
+                new Picture
                 {
                     NonVisualPictureProperties = pictureNonVisualPictureProperties,
                     BlipFill = blipFill,
@@ -528,25 +504,25 @@ namespace StoryTree.IO.Export
             var iRowId = 1;
             var lColumnOffset = 0;
             var lRowOffset = 0;
-            OneCellAnchor ocanchor = new OneCellAnchor
+            var ocanchor = new OneCellAnchor
             {
-                FromMarker = new DocumentFormat.OpenXml.Drawing.Spreadsheet.FromMarker
+                FromMarker = new FromMarker
                 {
-                    ColumnId = new ColumnId {Text = iColumnId.ToString(CultureInfo.InvariantCulture)},
-                    ColumnOffset = new ColumnOffset {Text = lColumnOffset.ToString(CultureInfo.InvariantCulture)},
-                    RowId = new RowId {Text = iRowId.ToString(CultureInfo.InvariantCulture)},
-                    RowOffset = new RowOffset {Text = lRowOffset.ToString(CultureInfo.InvariantCulture)}
+                    ColumnId = new ColumnId { Text = iColumnId.ToString(CultureInfo.InvariantCulture) },
+                    ColumnOffset = new ColumnOffset { Text = lColumnOffset.ToString(CultureInfo.InvariantCulture) },
+                    RowId = new RowId { Text = iRowId.ToString(CultureInfo.InvariantCulture) },
+                    RowOffset = new RowOffset { Text = lRowOffset.ToString(CultureInfo.InvariantCulture) }
                 },
-                Extent = new Extent {Cx = extents.Cx, Cy = extents.Cy}
+                Extent = new Extent { Cx = extents.Cx, Cy = extents.Cy }
             };
 
             ocanchor.Append(picture);
             ocanchor.Append(new ClientData());
 
 
-            WorksheetDrawing worksheetDrawing = new WorksheetDrawing();
+            var worksheetDrawing = new WorksheetDrawing();
             worksheetDrawing.Append(ocanchor);
-            Drawing drawing = new Drawing {Id = drawingsPart.GetIdOfPart(imagePart)};
+            var drawing = new Drawing { Id = drawingsPart.GetIdOfPart(imagePart) };
 
             worksheetDrawing.Save(drawingsPart);
 
@@ -554,4 +530,3 @@ namespace StoryTree.IO.Export
         }
     }
 }
-

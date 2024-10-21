@@ -20,7 +20,7 @@ namespace StoryTree.Gui
 
         public Type EnumType
         {
-            get { return enumType; }
+            get => enumType;
             private set
             {
                 if (this.enumType == value)

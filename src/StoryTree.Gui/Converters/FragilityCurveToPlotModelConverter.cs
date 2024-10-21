@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Data;
 using OxyPlot;
 using OxyPlot.Axes;
@@ -17,9 +16,7 @@ namespace StoryTree.Gui.Converters
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is ObservableCollection<HydraulicConditionViewModel> conditions))
-            {
                 return null;
-            }
 
             return CreatePlotModel(conditions);
         }
@@ -33,14 +30,18 @@ namespace StoryTree.Gui.Converters
         public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is ObservableCollection<FragilityCurveElementViewModel> conditions))
-            {
                 return null;
-            }
 
             return CreatePlotModel(conditions);
         }
 
-        protected PlotModel CreatePlotModel<T>(ObservableCollection<T> fragilityCurveElementViewModels) where T : FragilityCurveElementViewModel
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected PlotModel CreatePlotModel<T>(ObservableCollection<T> fragilityCurveElementViewModels)
+            where T : FragilityCurveElementViewModel
         {
             var plotModel = new PlotModel();
             plotModel.Axes.Add(new LogarithmicAxis
@@ -68,9 +69,7 @@ namespace StoryTree.Gui.Converters
 
             fragilityCurveElementViewModels.CollectionChanged += conditionCollectionChangedHandler;
             foreach (var condition in fragilityCurveElementViewModels)
-            {
                 condition.PropertyChanged += hydraulicConditionPropertyChangedHandler;
-            }
 
             return plotModel;
         }
@@ -80,19 +79,16 @@ namespace StoryTree.Gui.Converters
             plotModel.InvalidatePlot(true);
         }
 
-        private void ConditionsCollectionChanged<T>(ObservableCollection<T> conditions, PlotModel plotModel) where T : FragilityCurveElementViewModel
+        private void ConditionsCollectionChanged<T>(ObservableCollection<T> conditions, PlotModel plotModel)
+            where T : FragilityCurveElementViewModel
         {
             foreach (var hydraulicConditionViewModel in conditions)
             {
                 hydraulicConditionViewModel.PropertyChanged -= hydraulicConditionPropertyChangedHandler;
                 hydraulicConditionViewModel.PropertyChanged += hydraulicConditionPropertyChangedHandler;
             }
-            plotModel.InvalidatePlot(true);
-        }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            plotModel.InvalidatePlot(true);
         }
     }
 }

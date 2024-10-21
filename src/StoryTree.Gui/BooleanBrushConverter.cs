@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
-using System.Windows.Media;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace StoryTree.Gui
 {
@@ -13,9 +13,7 @@ namespace StoryTree.Gui
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (FalseBrush == null || TrueBrush == null || !(value is bool isLoading))
-            {
                 return new SolidColorBrush(Colors.Black);
-            }
 
             return isLoading ? TrueBrush : FalseBrush;
         }

@@ -5,6 +5,5 @@
         public string NodeName { get; set; }
 
         public DotEstimate[] Estimates { get; set; }
-
     }
 }

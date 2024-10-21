@@ -34,9 +34,7 @@ namespace StoryTree.Gui.Import
                 };
 
                 if (dialog.ShowDialog(guiViewModel.Win32Window) == true && dialog.FileNames.Any())
-                {
                     guiViewModel.OnImportElicitationForms(dialog.FileNames);
-                }
             }
             catch (Exception e)
             {

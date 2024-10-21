@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 using NUnit.Framework;
 using StoryTree.Storage.XmlEntities;
@@ -16,7 +12,7 @@ namespace StoryTree.Storage.Test.XmlEntities
         [Test]
         public void SerializeFragilityCurveElementXmlEntity()
         {
-            var entity = new FragilityCurveElementXmlEntity()
+            var entity = new FragilityCurveElementXmlEntity
             {
                 Id = 3,
                 WaterLevel = 2.0,

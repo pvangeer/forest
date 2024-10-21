@@ -11,7 +11,7 @@ namespace StoryTree.Gui.Export
 
         public PerformExportElicitationFormsCommand(ExportElicitationFormsViewModel exportElicitationFormsViewModel)
         {
-            this.viewModel = exportElicitationFormsViewModel;
+            viewModel = exportElicitationFormsViewModel;
             exportElicitationFormsViewModel.CanExportChanged += CanExportChanged;
         }
 
@@ -37,11 +37,11 @@ namespace StoryTree.Gui.Export
             }
         }
 
+        public event EventHandler CanExecuteChanged;
+
         private void CanExportChanged(object sender, EventArgs e)
         {
-            CanExecuteChanged?.Invoke(this,null);
+            CanExecuteChanged?.Invoke(this, null);
         }
-
-        public event EventHandler CanExecuteChanged;
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace StoryTree.Gui.Test
 {

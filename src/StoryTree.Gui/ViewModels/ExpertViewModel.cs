@@ -9,7 +9,7 @@ namespace StoryTree.Gui.ViewModels
     {
         public ExpertViewModel()
         {
-            Expert = new Expert {Name = "Naam"};
+            Expert = new Expert { Name = "Naam" };
         }
 
         public ExpertViewModel(Expert expert)

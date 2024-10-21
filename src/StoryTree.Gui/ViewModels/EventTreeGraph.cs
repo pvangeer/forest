@@ -2,7 +2,9 @@
 
 namespace StoryTree.Gui.ViewModels
 {
-    public class EventTreeGraph : BidirectionalGraph<GraphVertex, TreeEventConnector> { }
+    public class EventTreeGraph : BidirectionalGraph<GraphVertex, TreeEventConnector>
+    {
+    }
 
     public class GraphVertex
     {

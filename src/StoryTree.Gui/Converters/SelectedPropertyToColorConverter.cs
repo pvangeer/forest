@@ -10,11 +10,9 @@ namespace StoryTree.Gui.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is bool))
-            {
                 return new SolidColorBrush(Colors.Transparent);
-            }
 
-            var selected = (bool) value;
+            var selected = (bool)value;
             return new SolidColorBrush(selected ? Colors.Red : Colors.Transparent);
         }
 

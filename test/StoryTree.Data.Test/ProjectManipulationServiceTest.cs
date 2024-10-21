@@ -18,14 +18,14 @@ namespace StoryTree.Data.Test
                 EventTree = { MainTreeEvent = treeEvent }
             };
             var projectManipulationService = new ProjectManipulationService(project);
-            Assert.AreEqual(0,treeEvent.ClassesProbabilitySpecification.Count);
+            Assert.AreEqual(0, treeEvent.ClassesProbabilitySpecification.Count);
 
             var expert = new Expert();
             projectManipulationService.AddExpert(expert);
 
             Assert.AreEqual(1, project.Experts.Count);
             Assert.AreEqual(expert, project.Experts.First());
-            Assert.AreEqual(0,treeEvent.ClassesProbabilitySpecification.Count);
+            Assert.AreEqual(0, treeEvent.ClassesProbabilitySpecification.Count);
         }
 
         [Test]
@@ -37,8 +37,8 @@ namespace StoryTree.Data.Test
                 EventTree = { MainTreeEvent = treeEvent },
                 HydraulicConditions =
                 {
-                    new HydraulicCondition(1.0,(Probability)0.01,1,1),
-                    new HydraulicCondition(2.0,(Probability)0.001,1,1),
+                    new HydraulicCondition(1.0, (Probability)0.01, 1, 1),
+                    new HydraulicCondition(2.0, (Probability)0.001, 1, 1)
                 }
             };
             var projectManipulationService = new ProjectManipulationService(project);
@@ -52,7 +52,7 @@ namespace StoryTree.Data.Test
             Assert.AreEqual(expert, project.Experts.First());
             Assert.AreEqual(2, treeEvent.ClassesProbabilitySpecification.Count);
             var firstSpecification = treeEvent.ClassesProbabilitySpecification.First();
-            Assert.AreEqual(expert,firstSpecification.Expert);
+            Assert.AreEqual(expert, firstSpecification.Expert);
             Assert.Contains(firstSpecification.HydraulicCondition, project.HydraulicConditions);
 
             var secondSpecification = treeEvent.ClassesProbabilitySpecification.Last();
@@ -67,22 +67,22 @@ namespace StoryTree.Data.Test
         {
             var expertToRemove = new Expert();
             var otherExpert = new Expert();
-            var hydraulicCondition1 = new HydraulicCondition(1.0, (Probability) 0.01, 1, 1);
-            var hydraulicCondition2 = new HydraulicCondition(2.0, (Probability) 0.001, 1, 1);
+            var hydraulicCondition1 = new HydraulicCondition(1.0, (Probability)0.01, 1, 1);
+            var hydraulicCondition2 = new HydraulicCondition(2.0, (Probability)0.001, 1, 1);
             var treeEvent = new TreeEvent
             {
                 ClassesProbabilitySpecification =
                 {
-                    new ExpertClassEstimation{Expert = expertToRemove, HydraulicCondition = hydraulicCondition1},
-                    new ExpertClassEstimation{Expert = expertToRemove, HydraulicCondition = hydraulicCondition2},
-                    new ExpertClassEstimation{Expert = otherExpert, HydraulicCondition = hydraulicCondition1},
-                    new ExpertClassEstimation{Expert = otherExpert, HydraulicCondition = hydraulicCondition2}
+                    new ExpertClassEstimation { Expert = expertToRemove, HydraulicCondition = hydraulicCondition1 },
+                    new ExpertClassEstimation { Expert = expertToRemove, HydraulicCondition = hydraulicCondition2 },
+                    new ExpertClassEstimation { Expert = otherExpert, HydraulicCondition = hydraulicCondition1 },
+                    new ExpertClassEstimation { Expert = otherExpert, HydraulicCondition = hydraulicCondition2 }
                 }
             };
             var project = new EventTreeProject
             {
                 EventTree =
-                { MainTreeEvent = treeEvent },
+                    { MainTreeEvent = treeEvent },
                 Experts =
                 {
                     expertToRemove,
@@ -91,7 +91,7 @@ namespace StoryTree.Data.Test
                 HydraulicConditions =
                 {
                     hydraulicCondition1,
-                    hydraulicCondition2,
+                    hydraulicCondition2
                 }
             };
             var projectManipulationService = new ProjectManipulationService(project);
@@ -126,7 +126,7 @@ namespace StoryTree.Data.Test
             var project = new EventTreeProject
             {
                 EventTree =
-                { MainTreeEvent = treeEvent },
+                    { MainTreeEvent = treeEvent },
                 Experts =
                 {
                     expertToRemove,
@@ -139,8 +139,8 @@ namespace StoryTree.Data.Test
 
             projectManipulationService.RemoveExpert(expertToRemove);
 
-            Assert.AreEqual(1,project.Experts.Count);
-            Assert.AreEqual(otherExpert,project.Experts.First());
+            Assert.AreEqual(1, project.Experts.Count);
+            Assert.AreEqual(otherExpert, project.Experts.First());
             Assert.AreEqual(0, treeEvent.ClassesProbabilitySpecification.Count);
         }
 
@@ -156,7 +156,7 @@ namespace StoryTree.Data.Test
 
             Assert.AreEqual(0, treeEvent.ClassesProbabilitySpecification.Count);
 
-            var hydraulicCondition = new HydraulicCondition(1.0,(Probability)0.01,1,1);
+            var hydraulicCondition = new HydraulicCondition(1.0, (Probability)0.01, 1, 1);
             projectManipulationService.AddHydraulicCondition(hydraulicCondition);
 
             Assert.AreEqual(1, project.HydraulicConditions.Count);
@@ -181,7 +181,7 @@ namespace StoryTree.Data.Test
 
             Assert.AreEqual(0, treeEvent.ClassesProbabilitySpecification.Count);
 
-            var hydraulicCondition = new HydraulicCondition(1.0,(Probability)0.01,1,1);
+            var hydraulicCondition = new HydraulicCondition(1.0, (Probability)0.01, 1, 1);
             projectManipulationService.AddHydraulicCondition(hydraulicCondition);
 
             Assert.AreEqual(1, project.HydraulicConditions.Count);
@@ -209,16 +209,16 @@ namespace StoryTree.Data.Test
             {
                 ClassesProbabilitySpecification =
                 {
-                    new ExpertClassEstimation{Expert = expert1, HydraulicCondition = hydraulicConditionToRemove},
-                    new ExpertClassEstimation{Expert = expert1, HydraulicCondition = hydraulicCondition2},
-                    new ExpertClassEstimation{Expert = expert2, HydraulicCondition = hydraulicConditionToRemove},
-                    new ExpertClassEstimation{Expert = expert2, HydraulicCondition = hydraulicCondition2}
+                    new ExpertClassEstimation { Expert = expert1, HydraulicCondition = hydraulicConditionToRemove },
+                    new ExpertClassEstimation { Expert = expert1, HydraulicCondition = hydraulicCondition2 },
+                    new ExpertClassEstimation { Expert = expert2, HydraulicCondition = hydraulicConditionToRemove },
+                    new ExpertClassEstimation { Expert = expert2, HydraulicCondition = hydraulicCondition2 }
                 }
             };
             var project = new EventTreeProject
             {
                 EventTree =
-                { MainTreeEvent = treeEvent },
+                    { MainTreeEvent = treeEvent },
                 Experts =
                 {
                     expert1,
@@ -227,7 +227,7 @@ namespace StoryTree.Data.Test
                 HydraulicConditions =
                 {
                     hydraulicConditionToRemove,
-                    hydraulicCondition2,
+                    hydraulicCondition2
                 }
             };
             var projectManipulationService = new ProjectManipulationService(project);
@@ -262,11 +262,11 @@ namespace StoryTree.Data.Test
             var project = new EventTreeProject
             {
                 EventTree =
-                { MainTreeEvent = treeEvent },
+                    { MainTreeEvent = treeEvent },
                 HydraulicConditions =
                 {
                     hydraulicConditionToRemove,
-                    hydraulicCondition2,
+                    hydraulicCondition2
                 }
             };
             var projectManipulationService = new ProjectManipulationService(project);

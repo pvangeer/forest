@@ -7,16 +7,15 @@ namespace StoryTree.Gui.Export
 {
     public class ElicitationFormsExportViewModel : INotifyPropertyChanged
     {
-        private Expert expert;
         private bool isChecked;
 
         public ElicitationFormsExportViewModel(Expert expert)
         {
-            this.expert = expert;
+            Expert = expert;
             IsChecked = true;
         }
 
-        public string Name => expert.Name;
+        public string Name => Expert.Name;
 
         public bool IsChecked
         {
@@ -24,11 +23,11 @@ namespace StoryTree.Gui.Export
             set
             {
                 isChecked = value;
-                OnPropertyChanged(nameof(IsChecked));
+                OnPropertyChanged();
             }
         }
 
-        public Expert Expert => expert;
+        public Expert Expert { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

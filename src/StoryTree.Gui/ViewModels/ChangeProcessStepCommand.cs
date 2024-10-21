@@ -11,6 +11,7 @@ namespace StoryTree.Gui.ViewModels
         }
 
         public GuiViewModel ViewModel { get; }
+
         public bool CanExecute(object parameter)
         {
             return true;
@@ -19,9 +20,7 @@ namespace StoryTree.Gui.ViewModels
         public void Execute(object parameter)
         {
             if (!(parameter is StoryTreeProcess process))
-            {
                 return;
-            }
 
             ViewModel.SelectedProcess = process;
         }

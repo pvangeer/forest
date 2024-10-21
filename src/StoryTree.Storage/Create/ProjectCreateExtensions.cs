@@ -9,9 +9,7 @@ namespace StoryTree.Storage.Create
         internal static EventTreeProjectXmlEntity Create(this EventTreeProject eventTreeProject, PersistenceRegistry registry)
         {
             if (registry == null)
-            {
                 throw new ArgumentNullException(nameof(registry));
-            }
 
             var entity = new EventTreeProjectXmlEntity
             {
@@ -20,7 +18,7 @@ namespace StoryTree.Storage.Create
                 AssessmentSection = eventTreeProject.AssessmentSection.DeepClone(),
                 ProjectInformation = eventTreeProject.ProjectInformation.DeepClone(),
                 ProjectLeader = eventTreeProject.ProjectLeader.Create(registry),
-                EventTree = eventTreeProject.EventTree.Create(registry),
+                EventTree = eventTreeProject.EventTree.Create(registry)
             };
 
             AddEntitiesForExperts(eventTreeProject, entity, registry);
@@ -29,7 +27,8 @@ namespace StoryTree.Storage.Create
             return entity;
         }
 
-        private static void AddEntitiesForHydraulicConditions(EventTreeProject eventTreeProject, EventTreeProjectXmlEntity entity, PersistenceRegistry registry)
+        private static void AddEntitiesForHydraulicConditions(EventTreeProject eventTreeProject, EventTreeProjectXmlEntity entity,
+            PersistenceRegistry registry)
         {
             for (var index = 0; index < eventTreeProject.HydraulicConditions.Count; index++)
             {
@@ -39,7 +38,8 @@ namespace StoryTree.Storage.Create
             }
         }
 
-        private static void AddEntitiesForExperts(EventTreeProject eventTreeProject, EventTreeProjectXmlEntity entity, PersistenceRegistry registry)
+        private static void AddEntitiesForExperts(EventTreeProject eventTreeProject, EventTreeProjectXmlEntity entity,
+            PersistenceRegistry registry)
         {
             for (var index = 0; index < eventTreeProject.Experts.Count; index++)
             {

@@ -34,9 +34,7 @@ namespace StoryTree.Gui.Export
             dialog.ShowDialog();
 
             if (dialog.DialogResult != true)
-            {
                 Log.Info("Exporteren van DOT formulieren is door de gebruiker afgebroken.");
-            }
         }
 
         public event EventHandler CanExecuteChanged;

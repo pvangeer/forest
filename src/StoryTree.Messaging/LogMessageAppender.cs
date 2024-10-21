@@ -1,17 +1,16 @@
-﻿using System;
-using log4net.Appender;
+﻿using log4net.Appender;
 using log4net.Core;
 
 namespace StoryTree.Messaging
 {
     public class LogMessageAppender : AppenderSkeleton
     {
-        public IMessageCollection MessageCollection { get; set; }
-
         public LogMessageAppender()
         {
             Instance = this;
         }
+
+        public IMessageCollection MessageCollection { get; set; }
 
         public static LogMessageAppender Instance { get; set; }
 
@@ -28,7 +27,7 @@ namespace StoryTree.Messaging
                 };
             }
 
-            MessageCollection.Messages.Insert(0,message);
+            MessageCollection.Messages.Insert(0, message);
 
             /*if (message.HasPriority)
             {
@@ -44,14 +43,10 @@ namespace StoryTree.Messaging
                 loggingEventLevel == Level.Error ||
                 loggingEventLevel == Level.Fatal ||
                 loggingEventLevel == Level.Severe)
-            {
                 return MessageSeverity.Error;
-            }
 
             if (loggingEventLevel == Level.Warn)
-            {
                 return MessageSeverity.Warning;
-            }
 
             return MessageSeverity.Information;
         }

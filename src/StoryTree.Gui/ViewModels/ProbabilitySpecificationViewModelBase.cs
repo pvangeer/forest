@@ -6,25 +6,27 @@ using StoryTree.Gui.Annotations;
 
 namespace StoryTree.Gui.ViewModels
 {
-    public class ProbabilitySpecificationViewModelBase: INotifyPropertyChanged
+    public class ProbabilitySpecificationViewModelBase : INotifyPropertyChanged
     {
-        public ProbabilitySpecificationViewModelBase([NotNull]TreeEvent treeEvent)
+        public ProbabilitySpecificationViewModelBase([NotNull] TreeEvent treeEvent)
         {
             TreeEvent = treeEvent;
             TreeEvent.PropertyChanged += TreeEventPropertyChanged;
         }
+
+        public TreeEvent TreeEvent { get; }
+
+        public ProbabilitySpecificationType Type => TreeEvent.ProbabilitySpecificationType;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void TreeEventPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnTreeEventPropertyChanged(e.PropertyName);
         }
 
-        protected virtual void OnTreeEventPropertyChanged(string propertyName) { }
-
-        public TreeEvent TreeEvent { get; }
-
-        public ProbabilitySpecificationType Type => TreeEvent.ProbabilitySpecificationType;
-        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnTreeEventPropertyChanged(string propertyName)
+        {
+        }
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -24,16 +24,17 @@ using System.Globalization;
 
 namespace StoryTree.Data
 {
-    public struct Probability : IEquatable<Probability>, IEquatable<double>, IFormattable, IComparable, IComparable<Probability>, IComparable<double>
+    public struct Probability : IEquatable<Probability>, IEquatable<double>, IFormattable, IComparable, IComparable<Probability>,
+        IComparable<double>
     {
         private static readonly double ToStringPrecision = 1e-100;
 
         /// <summary>
-        /// Represents a value that is not a number (NaN). This field is constant.
+        ///     Represents a value that is not a number (NaN). This field is constant.
         /// </summary>
-        /// <seealso cref="double.NaN"/>
+        /// <seealso cref="double.NaN" />
         public static readonly Probability NaN = new Probability(double.NaN);
-        
+
         public Probability(double probabilityValue)
         {
             ValidateProbabilityValue(probabilityValue);
@@ -41,30 +42,27 @@ namespace StoryTree.Data
         }
 
         /// <summary>
-        /// Gets the value.
+        ///     Gets the value.
         /// </summary>
         public double Value { get; }
 
-        public int ReturnPeriod => (int) Math.Round(1 / Value);
+        public int ReturnPeriod => (int)Math.Round(1 / Value);
 
         /// <summary>
-        /// Validates <paramref name="probability"/> for being a valid probability. This means a double within the range [0-1].
+        ///     Validates <paramref name="probability" /> for being a valid probability. This means a double within the range
+        ///     [0-1].
         /// </summary>
         /// <param name="probability">The probability to validate</param>
-        /// <exception cref="AssemblyToolKernelException">Thrown in case <paramref name="probability"/> is NaN</exception>
-        /// <exception cref="AssemblyToolKernelException">Thrown in case <paramref name="probability"/> is smaller than 0</exception>
-        /// <exception cref="AssemblyToolKernelException">Thrown in case <paramref name="probability"/> exceeds 1</exception>
+        /// <exception cref="AssemblyToolKernelException">Thrown in case <paramref name="probability" /> is NaN</exception>
+        /// <exception cref="AssemblyToolKernelException">Thrown in case <paramref name="probability" /> is smaller than 0</exception>
+        /// <exception cref="AssemblyToolKernelException">Thrown in case <paramref name="probability" /> exceeds 1</exception>
         private static void ValidateProbabilityValue(double probability)
         {
             if (!double.IsNaN(probability) && probability < 0)
-            {
                 throw new ArgumentException("Probability should not be smaller than 0.");
-            }
 
             if (!double.IsNaN(probability) && probability > 1)
-            {
                 throw new ArgumentException("Probability should not be greater than 1.");
-            }
         }
 
         public static bool operator ==(Probability left, Probability right)
@@ -79,12 +77,12 @@ namespace StoryTree.Data
 
         public static Probability operator -(Probability left, Probability right)
         {
-            return new Probability(Math.Max(0,left.Value - right.Value));
+            return new Probability(Math.Max(0, left.Value - right.Value));
         }
 
         public static Probability operator +(Probability left, Probability right)
         {
-            return new Probability(Math.Min(1,left.Value + right.Value));
+            return new Probability(Math.Min(1, left.Value + right.Value));
         }
 
         public static Probability operator *(Probability left, double right)
@@ -155,13 +153,9 @@ namespace StoryTree.Data
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))
-            {
                 return false;
-            }
             if (obj.GetType() != GetType())
-            {
                 return false;
-            }
             return Equals((Probability)obj);
         }
 
@@ -188,24 +182,16 @@ namespace StoryTree.Data
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (Math.Abs(Value) < ToStringPrecision)
-            {
                 return "0";
-            }
 
             if (Math.Abs(Value - 1) < ToStringPrecision)
-            {
                 return "1";
-            }
 
             if (double.IsNaN(Value))
-            {
                 return "Onbekend";
-            }
 
             if (format == null)
-            {
                 return "1/" + (1 / Value).ToString("F0", formatProvider ?? CultureInfo.CurrentCulture);
-            }
 
             return Value.ToString(format, formatProvider ?? CultureInfo.CurrentCulture);
         }
@@ -213,19 +199,13 @@ namespace StoryTree.Data
         public int CompareTo(object obj)
         {
             if (obj == null)
-            { 
                 return 1;
-            }
 
             if (obj is Probability)
-            {
                 return CompareTo((Probability)obj);
-            }
 
             if (obj is double)
-            {
                 return CompareTo((double)obj);
-            }
 
             throw new ArgumentException("Argument must be double or Probability");
         }

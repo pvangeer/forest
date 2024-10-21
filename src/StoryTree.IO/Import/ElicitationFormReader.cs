@@ -32,14 +32,12 @@ namespace StoryTree.IO.Import
 
             var forms = new List<DotForm>();
 
-            using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(fileName, false))
+            using (var spreadsheetDocument = SpreadsheetDocument.Open(fileName, false))
             {
-                WorkbookPart workbookPart = spreadsheetDocument.WorkbookPart;
+                var workbookPart = spreadsheetDocument.WorkbookPart;
 
                 foreach (var worksheetPart in workbookPart.WorksheetParts)
-                {
                     forms.Add(ReadWorkSheet(worksheetPart.Worksheet, workbookPart));
-                }
             }
 
             return forms;
@@ -52,17 +50,15 @@ namespace StoryTree.IO.Import
             var maxRow = worksheet.Descendants<Row>().Count();
 
             string nodeName = null;
-            List<DotEstimate> estimates = new List<DotEstimate>();
+            var estimates = new List<DotEstimate>();
 
-            for (uint iRow = firstNodeRow; iRow < maxRow; iRow++)
+            for (var iRow = firstNodeRow; iRow < maxRow; iRow++)
             {
                 var cCell = GetCell(worksheet, NodeNameColumnReference + iRow.ToString(CultureInfo.InvariantCulture));
                 if (cCell == null || string.IsNullOrWhiteSpace(cCell.InnerText))
                 {
                     if (string.IsNullOrWhiteSpace(nodeName))
-                    {
                         continue;
-                    }
 
                     nodes.Add(new DotNode
                     {
@@ -75,39 +71,41 @@ namespace StoryTree.IO.Import
                     continue;
                 }
 
-                if (cCell.DataType != null && (cCell.DataType == CellValues.SharedString || cCell.DataType == CellValues.String || cCell.DataType == CellValues.InlineString))
+                if (cCell.DataType != null && (cCell.DataType == CellValues.SharedString || cCell.DataType == CellValues.String ||
+                                               cCell.DataType == CellValues.InlineString))
                 {
                     if (string.IsNullOrWhiteSpace(nodeName))
-                    {
                         nodeName = CellValueAsStringFromCell(cCell, workbookPart);
-                    }
                     continue;
                 }
 
                 estimates.Add(new DotEstimate
                 {
                     WaterLevel = GetCellValueAsDoubleFromCell(cCell, workbookPart),
-                    Frequency = GetCellValueAsDouble(worksheet, FrequencyColumnReference + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
-                    LowerEstimate = GetCellValueAsInt(worksheet, LowerEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
-                    BestEstimate = GetCellValueAsInt(worksheet, BestEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
-                    UpperEstimate = GetCellValueAsInt(worksheet, UpperEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture), workbookPart),
-                    Comment = GetCellValueAsString(worksheet, CommentColumnReference + iRow.ToString(CultureInfo.InvariantCulture), workbookPart)
+                    Frequency = GetCellValueAsDouble(worksheet, FrequencyColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
+                        workbookPart),
+                    LowerEstimate = GetCellValueAsInt(worksheet, LowerEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
+                        workbookPart),
+                    BestEstimate = GetCellValueAsInt(worksheet, BestEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
+                        workbookPart),
+                    UpperEstimate = GetCellValueAsInt(worksheet, UpperEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
+                        workbookPart),
+                    Comment = GetCellValueAsString(worksheet, CommentColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
+                        workbookPart)
                 });
             }
 
             if (!string.IsNullOrWhiteSpace(nodeName) && estimates.Any())
-            {
                 nodes.Add(new DotNode
                 {
                     NodeName = nodeName,
                     Estimates = estimates.ToArray()
                 });
-            }
 
             return new DotForm
             {
                 ExpertName = GetCellValueAsString(worksheet, ExpertNameCellReference, workbookPart),
-                Date = GetCellValueAsDateTime(worksheet,DateCellReference),
+                Date = GetCellValueAsDateTime(worksheet, DateCellReference),
                 Nodes = nodes.ToArray()
             };
         }
@@ -116,14 +114,10 @@ namespace StoryTree.IO.Import
         {
             var cellValue = CellValueAsStringFromCell(cell, workbookPart);
             if (string.IsNullOrWhiteSpace(cellValue))
-            {
                 return double.NaN;
-            }
 
             if (!double.TryParse(cellValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var cellValueAsDouble))
-            {
                 return double.NaN;
-            }
 
             return cellValueAsDouble;
         }
@@ -132,14 +126,10 @@ namespace StoryTree.IO.Import
         {
             var cellValue = GetCellValueAsString(worksheet, cellReference, workbookPart);
             if (string.IsNullOrWhiteSpace(cellValue))
-            {
                 return double.NaN;
-            }
 
             if (!double.TryParse(cellValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var cellValueAsDouble))
-            {
                 return double.NaN;
-            }
 
             return cellValueAsDouble;
         }
@@ -148,14 +138,10 @@ namespace StoryTree.IO.Import
         {
             var cellValue = GetCellValueAsString(worksheet, cellReference, workbookPart);
             if (string.IsNullOrWhiteSpace(cellValue))
-            {
-                return default(int);
-            }
+                return default;
 
             if (!int.TryParse(cellValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var cellValueAsInt))
-            {
-                return default(int);
-            }
+                return default;
 
             return cellValueAsInt;
         }
@@ -169,35 +155,27 @@ namespace StoryTree.IO.Import
         {
             var cell = GetCell(worksheet, cellReference);
             if (cell == null)
-            {
                 return "";
-            }
 
             return CellValueAsStringFromCell(cell, workbookPart);
         }
 
         private static string CellValueAsStringFromCell(Cell cell, WorkbookPart workbookPart)
         {
-            string cellValue = string.Empty;
+            var cellValue = string.Empty;
 
             if (cell.DataType != null && cell.DataType == CellValues.SharedString && workbookPart != null)
             {
-                if (Int32.TryParse(cell.InnerText, out var id))
+                if (int.TryParse(cell.InnerText, out var id))
                 {
-                    SharedStringItem item = GetSharedStringItemById(workbookPart, id);
+                    var item = GetSharedStringItemById(workbookPart, id);
 
                     if (item.Text != null)
-                    {
                         cellValue = item.Text.Text;
-                    }
                     else if (item.InnerText != null)
-                    {
                         cellValue = item.InnerText;
-                    }
                     else if (item.InnerXml != null)
-                    {
                         cellValue = item.InnerXml;
-                    }
                 }
             }
             else
@@ -215,21 +193,15 @@ namespace StoryTree.IO.Import
 
         private static DateTime GetCellValueAsDateTime(Worksheet worksheet, string cellReference)
         {
-            var cellValueAsString = GetCellValueAsString(worksheet,cellReference, null);
+            var cellValueAsString = GetCellValueAsString(worksheet, cellReference, null);
             if (string.IsNullOrWhiteSpace(cellValueAsString))
-            {
-                return default(DateTime);
-            }
+                return default;
 
-            if (!double.TryParse(cellValueAsString, NumberStyles.Any, CultureInfo.InvariantCulture, out double cellValueAsDouble))
-            {
-                return default(DateTime);
-            }
+            if (!double.TryParse(cellValueAsString, NumberStyles.Any, CultureInfo.InvariantCulture, out var cellValueAsDouble))
+                return default;
 
             if (cellValueAsDouble < 0)
-            {
-                return default(DateTime);
-            }
+                return default;
 
             return DateTime.FromOADate(cellValueAsDouble);
         }

@@ -6,12 +6,12 @@ namespace StoryTree.Gui.Command
 {
     public class TreeEventClickedCommand : ICommand
     {
-        public TreeEventViewModel TreeEventViewModel { get; }
-
         public TreeEventClickedCommand(TreeEventViewModel treeEventViewModel)
         {
             TreeEventViewModel = treeEventViewModel;
         }
+
+        public TreeEventViewModel TreeEventViewModel { get; }
 
         public bool CanExecute(object parameter)
         {

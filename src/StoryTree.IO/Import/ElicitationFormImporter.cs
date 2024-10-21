@@ -12,16 +12,15 @@ namespace StoryTree.IO.Import
     {
         private readonly StoryTreeLog log = new StoryTreeLog(typeof(ElicitationFormImporter));
 
-        public EventTreeProject EventTreeProject { get; }
-
         public ElicitationFormImporter(EventTreeProject eventTreeProject)
         {
-            this.EventTreeProject = eventTreeProject;
+            EventTreeProject = eventTreeProject;
         }
+
+        public EventTreeProject EventTreeProject { get; }
 
         public void Import(string fileName)
         {
-
             DotForm[] formContent;
             try
             {
@@ -37,15 +36,13 @@ namespace StoryTree.IO.Import
             {
                 var validationResult = DotFormValidator.Validate(dotForm, EventTreeProject);
                 if (ValidationFailed(fileName, validationResult, dotForm))
-                {
                     return;
-                }
             }
 
             foreach (var dotForm in formContent)
             {
                 var expert = EventTreeProject.Experts.First(ex => ex.Name == dotForm.ExpertName);
-                
+
                 foreach (var dotFormNode in dotForm.Nodes)
                 {
                     var node = EventTreeProject.EventTree.MainTreeEvent.FindTreeEvent(n => n.Name == dotFormNode.NodeName);
@@ -57,6 +54,7 @@ namespace StoryTree.IO.Import
                         specification.AverageEstimation = (ProbabilityClass)dotEstimate.BestEstimate;
                         specification.MaxEstimation = (ProbabilityClass)dotEstimate.UpperEstimate;
                     }
+
                     node.OnPropertyChanged(nameof(TreeEvent.ClassesProbabilitySpecification));
                 }
             }
@@ -74,7 +72,7 @@ namespace StoryTree.IO.Import
             if (validationResult.ExpertValidation == ExpertValidationResult.NoExperts)
             {
                 log.Error(
-                    $"Het eventTreeProject bevat nog geen experts. Daardoor is het niet mogelijk om een elicitatieformulier in te lezen.");
+                    "Het eventTreeProject bevat nog geen experts. Daardoor is het niet mogelijk om een elicitatieformulier in te lezen.");
                 return true;
             }
 

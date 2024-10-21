@@ -28,12 +28,12 @@ using StoryTree.Storage.XmlEntities;
 namespace StoryTree.Storage
 {
     /// <summary>
-    /// This class is capable of generating a hashcode for serializable object instance
-    /// such that the hashcode can be used to detect changes.
+    ///     This class is capable of generating a hashcode for serializable object instance
+    ///     such that the hashcode can be used to detect changes.
     /// </summary>
     public static class FingerprintHelper
     {
-       /// <summary>
+        /// <summary>
         ///     Gets the fingerprint for the given <see cref="AnalysisXmlEntity" />.
         /// </summary>
         /// <param name="entity">The <see cref="AnalysisXmlEntity" /> to generate a hashcode for.</param>
@@ -44,7 +44,7 @@ namespace StoryTree.Storage
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
             return ComputeHash(entity);
-    }
+        }
 
         /// <summary>
         ///     While using a target file as storage, determines the fingerprint for the given

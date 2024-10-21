@@ -31,7 +31,7 @@ namespace StoryTree.Storage.XmlEntities
         [XmlAttribute(AttributeName = "discussion")]
         public string Discussion { get; set; }
 
-        [XmlAttribute(AttributeName = "probabilityspecificationtype")] 
+        [XmlAttribute(AttributeName = "probabilityspecificationtype")]
         public byte ProbabilitySpecificationType { get; set; }
 
         [XmlAttribute(AttributeName = "fixedprobability")]
@@ -44,7 +44,5 @@ namespace StoryTree.Storage.XmlEntities
         [XmlArray(ElementName = "fragilitycurve")]
         [XmlArrayItem(ElementName = "fragilitycurveelement")]
         public Collection<FragilityCurveElementXmlEntity> FixedFragilityCurveElements { get; }
-
-        
     }
 }

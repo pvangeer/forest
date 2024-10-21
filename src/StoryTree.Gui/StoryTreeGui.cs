@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -35,6 +34,12 @@ namespace StoryTree.Gui
 
         public string ProjectFilePath { get; set; }
 
+        public Func<ShouldProceedState> ShouldSaveOpenChanges { get; set; }
+
+        public VersionInfo VersionInfo { get; set; }
+
+        public Func<bool> ShouldMigrateProject { get; set; }
+
         public MessageList Messages { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -47,7 +52,7 @@ namespace StoryTree.Gui
 
         private void ConfigureMessaging()
         {
-            Logger rootLogger = ((Hierarchy)LogManager.GetRepository()).Root;
+            var rootLogger = ((Hierarchy)LogManager.GetRepository()).Root;
 
             if (!rootLogger.Appenders.Cast<IAppender>().Any(a => a is LogMessageAppender))
             {
@@ -55,11 +60,5 @@ namespace StoryTree.Gui
                 rootLogger.Repository.Configured = true;
             }
         }
-
-        public Func<ShouldProceedState> ShouldSaveOpenChanges { get; set; }
-
-        public VersionInfo VersionInfo { get; set; }
-
-        public Func<bool> ShouldMigrateProject { get; set; }
     }
 }

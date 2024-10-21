@@ -12,9 +12,15 @@ namespace StoryTree.Gui.ViewModels
     {
         public MessageListViewModel(MessageList messageList)
         {
-            this.MessageList = messageList;
+            MessageList = messageList;
             MessageList.CollectionChanged += MessageListCollectionChanged;
         }
+
+        public MessageList MessageList { get; }
+
+        public ICommand RemoveAllMessagesCommand => new RemoveAllMessagesCommand(this);
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void MessageListCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -22,16 +28,10 @@ namespace StoryTree.Gui.ViewModels
             OnPropertyChanged(nameof(MessageList));
         }
 
-        public MessageList MessageList { get; }
-
-        public ICommand RemoveAllMessagesCommand => new RemoveAllMessagesCommand(this);
-
         public void ClearAllMessages()
         {
             MessageList.Clear();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

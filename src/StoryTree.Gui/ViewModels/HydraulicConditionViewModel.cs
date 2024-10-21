@@ -4,7 +4,9 @@ namespace StoryTree.Gui.ViewModels
 {
     public class HydraulicConditionViewModel : FragilityCurveElementViewModel
     {
-        public HydraulicConditionViewModel():this(new HydraulicCondition()) { }
+        public HydraulicConditionViewModel() : this(new HydraulicCondition())
+        {
+        }
 
         public HydraulicConditionViewModel(HydraulicCondition condition) : base(condition)
         {
@@ -19,7 +21,7 @@ namespace StoryTree.Gui.ViewModels
             set
             {
                 HydraulicCondition.WavePeriod = value;
-                HydraulicCondition.OnPropertyChanged(nameof(HydraulicCondition.WavePeriod));
+                HydraulicCondition.OnPropertyChanged();
                 OnPropertyChanged();
             }
         }
@@ -31,7 +33,7 @@ namespace StoryTree.Gui.ViewModels
             {
                 HydraulicCondition.WaveHeight = value;
                 OnPropertyChanged();
-                HydraulicCondition.OnPropertyChanged(nameof(HydraulicCondition.WaveHeight));
+                HydraulicCondition.OnPropertyChanged();
             }
         }
     }

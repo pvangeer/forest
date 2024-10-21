@@ -10,9 +10,7 @@ namespace StoryTree.Gui.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is EventTreeViewModel eventTreeViewModel))
-            {
                 return null;
-            }
 
             return eventTreeViewModel.MainTreeEventViewModel;
         }

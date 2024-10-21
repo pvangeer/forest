@@ -1,10 +1,9 @@
 ﻿using System.Windows;
-using System.Windows.Input;
 
 namespace StoryTree.Gui.Export
 {
     /// <summary>
-    /// Interaction logic for ElicitationFormExportDialog.xaml
+    ///     Interaction logic for ElicitationFormExportDialog.xaml
     /// </summary>
     public partial class ElicitationFormExportDialog : Window
     {
@@ -16,7 +15,7 @@ namespace StoryTree.Gui.Export
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
-            this.Close();
+            Close();
         }
     }
 }

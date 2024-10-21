@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using StoryTree.Data;
 using StoryTree.Gui.ViewModels;
 
 namespace StoryTree.Gui.Command

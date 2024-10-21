@@ -6,12 +6,12 @@ namespace StoryTree.Gui.Command
 {
     public abstract class EventTreeCommand : ICommand
     {
-        protected ProjectViewModel ProjectViewModel { get; }
-
         protected EventTreeCommand(ProjectViewModel projectViewModel)
         {
             ProjectViewModel = projectViewModel;
         }
+
+        protected ProjectViewModel ProjectViewModel { get; }
 
         public virtual bool CanExecute(object parameter)
         {

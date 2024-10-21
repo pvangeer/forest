@@ -15,10 +15,10 @@ namespace StoryTree.IO.Test
         {
             var fileName = @"D:\Test\ThisIsATest.xlsx";
             var eventImageFileName = @"C:\src\storytree\src\StoryTree.IO\giraffe-png-images-8.png";
-            string expertName = "Test Expert";
-            DateTime date = DateTime.Now;
-            double[] waterLevels = {1.0, 2.0, 3.0, 4.0};
-            double[] frequencies = {0.0001, 0.001, 0.01, 0.1};
+            var expertName = "Test Expert";
+            var date = DateTime.Now;
+            double[] waterLevels = { 1.0, 2.0, 3.0, 4.0 };
+            double[] frequencies = { 0.0001, 0.001, 0.01, 0.1 };
 
             var writer = new ElicitationFormWriter();
 
@@ -27,31 +27,29 @@ namespace StoryTree.IO.Test
                 Date = date,
                 GetFileStream = () => new FileStream(eventImageFileName, FileMode.Open),
                 ExpertName = expertName,
-                Nodes = new DotNode[]
+                Nodes = new[]
                 {
                     CreateNode("Knoop 1", waterLevels, frequencies),
-                    CreateNode("Knoop 2", waterLevels, frequencies),
+                    CreateNode("Knoop 2", waterLevels, frequencies)
                 }
             };
 
-            writer.WriteForm(fileName,  form );
+            writer.WriteForm(fileName, form);
         }
 
         private static DotNode CreateNode(string nodeName, double[] waterlevels, double[] frequencies)
         {
             var estimates = new List<DotEstimate>();
-            for (int i = 0; i < waterlevels.Length; i++)
-            {
+            for (var i = 0; i < waterlevels.Length; i++)
                 estimates.Add(new DotEstimate
                 {
                     WaterLevel = waterlevels[i],
                     Frequency = frequencies[i],
-                    BestEstimate =  4,
+                    BestEstimate = 4,
                     LowerEstimate = 3,
                     UpperEstimate = 5,
                     Comment = "Test comment"
                 });
-            }
             return new DotNode
             {
                 NodeName = nodeName,

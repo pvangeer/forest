@@ -13,26 +13,20 @@ namespace StoryTree.Storage.Read
         internal static TreeEvent Read(this TreeEventXmlEntity entity, ReadConversionCollector collector)
         {
             if (entity == null)
-            {
                 throw new ArgumentNullException(nameof(entity));
-            }
             if (collector == null)
-            {
                 throw new ArgumentNullException(nameof(collector));
-            }
 
             if (collector.Contains(entity))
-            {
                 return collector.Get(entity);
-            }
 
             var treeEvent = new TreeEvent
             {
                 Name = entity.Name,
                 FixedProbability = double.IsNaN(entity.FixedProbability)
                     ? Probability.NaN
-                    : (Probability) entity.FixedProbability,
-                ProbabilitySpecificationType = (ProbabilitySpecificationType) entity.ProbabilitySpecificationType,
+                    : (Probability)entity.FixedProbability,
+                ProbabilitySpecificationType = (ProbabilitySpecificationType)entity.ProbabilitySpecificationType,
                 Summary = entity.Summary,
                 Information = entity.Information,
                 Discussion = entity.Discussion
@@ -42,17 +36,13 @@ namespace StoryTree.Storage.Read
             ReadFragilityCurve(treeEvent, entity.FixedFragilityCurveElements, collector);
 
             if (entity.FailingEvent != null)
-            {
                 treeEvent.FailingEvent = entity.FailingEvent.Read(collector);
-            }
 
             if (entity.PassingEvent != null)
-            {
                 treeEvent.PassingEvent = entity.PassingEvent.Read(collector);
-            }
 
             ReadExpertClassSpecifications(entity, collector, treeEvent);
-            collector.Collect(entity,treeEvent);
+            collector.Collect(entity, treeEvent);
             return treeEvent;
         }
 
@@ -60,17 +50,14 @@ namespace StoryTree.Storage.Read
         {
             var specifications = entity.ClassesProbabilitySpecifications.OrderBy(e => e.Order).Select(e => e.Read(collector));
             foreach (var specification in specifications)
-            {
                 treeEvent.ClassesProbabilitySpecification.Add(specification);
-            }
         }
 
-        private static void ReadFragilityCurve(TreeEvent treeEvent, IEnumerable<FragilityCurveElementXmlEntity> entities, ReadConversionCollector collector)
+        private static void ReadFragilityCurve(TreeEvent treeEvent, IEnumerable<FragilityCurveElementXmlEntity> entities,
+            ReadConversionCollector collector)
         {
             foreach (var fragilityCurveElementEntity in entities.OrderBy(e => e.Order))
-            {
                 treeEvent.FixedFragilityCurve.Add(fragilityCurveElementEntity.Read(collector));
-            }
         }
     }
 }

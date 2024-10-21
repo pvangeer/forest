@@ -21,19 +21,15 @@ namespace StoryTree.Data.Services
             eventTreeProject.HydraulicConditions.Add(hydraulicCondition);
 
             foreach (var treeEvent in eventTreeProject.EventTree.MainTreeEvent.GetAllEventsRecursive())
-            {
-                foreach (var expert in eventTreeProject.Experts)
+            foreach (var expert in eventTreeProject.Experts)
+                treeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
                 {
-                    treeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
-                    {
-                        Expert = expert,
-                        HydraulicCondition = hydraulicCondition,
-                        AverageEstimation = ProbabilityClass.None,
-                        MaxEstimation = ProbabilityClass.None,
-                        MinEstimation = ProbabilityClass.None
-                    });
-                }
-            }
+                    Expert = expert,
+                    HydraulicCondition = hydraulicCondition,
+                    AverageEstimation = ProbabilityClass.None,
+                    MaxEstimation = ProbabilityClass.None,
+                    MinEstimation = ProbabilityClass.None
+                });
         }
 
         public void RemoveHydraulicCondition(HydraulicCondition hydraulicCondition)
@@ -41,16 +37,12 @@ namespace StoryTree.Data.Services
             eventTreeProject.HydraulicConditions.Remove(hydraulicCondition);
 
             foreach (var treeEvent in eventTreeProject.EventTree.MainTreeEvent.GetAllEventsRecursive())
+            foreach (var expert in eventTreeProject.Experts)
             {
-                foreach (var expert in eventTreeProject.Experts)
-                {
-                    var estimatesToRemove = treeEvent.ClassesProbabilitySpecification.Where(e =>
-                        e.Expert == expert && e.HydraulicCondition == hydraulicCondition).ToArray();
-                    foreach (var estimation in estimatesToRemove)
-                    {
-                        treeEvent.ClassesProbabilitySpecification.Remove(estimation);
-                    }
-                }
+                var estimatesToRemove = treeEvent.ClassesProbabilitySpecification.Where(e =>
+                    e.Expert == expert && e.HydraulicCondition == hydraulicCondition).ToArray();
+                foreach (var estimation in estimatesToRemove)
+                    treeEvent.ClassesProbabilitySpecification.Remove(estimation);
             }
         }
 
@@ -59,19 +51,15 @@ namespace StoryTree.Data.Services
             eventTreeProject.Experts.Add(expert);
 
             foreach (var treeEvent in eventTreeProject.EventTree.MainTreeEvent.GetAllEventsRecursive())
-            {
-                foreach (var hydraulicCondition in eventTreeProject.HydraulicConditions)
+            foreach (var hydraulicCondition in eventTreeProject.HydraulicConditions)
+                treeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
                 {
-                    treeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
-                    {
-                        Expert = expert,
-                        HydraulicCondition = hydraulicCondition,
-                        AverageEstimation = ProbabilityClass.None,
-                        MaxEstimation = ProbabilityClass.None,
-                        MinEstimation = ProbabilityClass.None
-                    });
-                }
-            }
+                    Expert = expert,
+                    HydraulicCondition = hydraulicCondition,
+                    AverageEstimation = ProbabilityClass.None,
+                    MaxEstimation = ProbabilityClass.None,
+                    MinEstimation = ProbabilityClass.None
+                });
         }
 
         public void RemoveExpert(Expert expert)
@@ -79,16 +67,12 @@ namespace StoryTree.Data.Services
             eventTreeProject.Experts.Remove(expert);
 
             foreach (var treeEvent in eventTreeProject.EventTree.MainTreeEvent.GetAllEventsRecursive())
+            foreach (var hydraulicCondition in eventTreeProject.HydraulicConditions)
             {
-                foreach (var hydraulicCondition in eventTreeProject.HydraulicConditions)
-                {
-                    var estimatesToRemove = treeEvent.ClassesProbabilitySpecification.Where(e =>
-                        e.Expert == expert && e.HydraulicCondition == hydraulicCondition).ToArray();
-                    foreach (var estimation in estimatesToRemove)
-                    {
-                        treeEvent.ClassesProbabilitySpecification.Remove(estimation);
-                    }
-                }
+                var estimatesToRemove = treeEvent.ClassesProbabilitySpecification.Where(e =>
+                    e.Expert == expert && e.HydraulicCondition == hydraulicCondition).ToArray();
+                foreach (var estimation in estimatesToRemove)
+                    treeEvent.ClassesProbabilitySpecification.Remove(estimation);
             }
         }
 
@@ -102,11 +86,9 @@ namespace StoryTree.Data.Services
             }
 
             var parent = eventTree.MainTreeEvent.FindTreeEvent(treeEvent => treeEvent.FailingEvent == selectedTreeEventToRemove ||
-                             treeEvent.PassingEvent == selectedTreeEventToRemove);
+                                                                            treeEvent.PassingEvent == selectedTreeEventToRemove);
             if (parent == null)
-            {
                 throw new ArgumentNullException();
-            }
 
             if (parent.FailingEvent == selectedTreeEventToRemove)
             {
@@ -129,19 +111,15 @@ namespace StoryTree.Data.Services
                 Name = "Nieuwe gebeurtenis"
             };
             foreach (var expert in eventTreeProject.Experts)
-            {
-                foreach (var hydraulicCondition in eventTreeProject.HydraulicConditions)
+            foreach (var hydraulicCondition in eventTreeProject.HydraulicConditions)
+                newTreeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
                 {
-                    newTreeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
-                    {
-                        Expert = expert,
-                        HydraulicCondition = hydraulicCondition,
-                        AverageEstimation = ProbabilityClass.None,
-                        MinEstimation = ProbabilityClass.None,
-                        MaxEstimation = ProbabilityClass.None
-                    });
-                }
-            }
+                    Expert = expert,
+                    HydraulicCondition = hydraulicCondition,
+                    AverageEstimation = ProbabilityClass.None,
+                    MinEstimation = ProbabilityClass.None,
+                    MaxEstimation = ProbabilityClass.None
+                });
 
             if (eventTree.MainTreeEvent == null)
             {

@@ -14,7 +14,7 @@ namespace StoryTree.Storage.Create
                 HydraulicConditionId = model.HydraulicCondition.Create(registry).Id,
                 AverageEstimation = Convert.ToByte(model.AverageEstimation),
                 MaxEstimation = Convert.ToByte(model.MaxEstimation),
-                MinEstimation = Convert.ToByte(model.MinEstimation),
+                MinEstimation = Convert.ToByte(model.MinEstimation)
                 // TODO: Add Comment to data model and map
             };
 

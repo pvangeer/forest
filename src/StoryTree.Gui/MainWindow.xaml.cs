@@ -6,7 +6,7 @@ using StoryTree.Gui.ViewModels;
 namespace StoryTree.Gui
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow
     {
@@ -22,7 +22,7 @@ namespace StoryTree.Gui
             {
                 Win32Window = this
             };
-            guiViewModel.OnInvalidateVisual += (o,e) =>
+            guiViewModel.OnInvalidateVisual += (o, e) =>
             {
                 HostControl.InvalidateVisual();
                 InvalidateVisual();
@@ -32,7 +32,7 @@ namespace StoryTree.Gui
 
         private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void MainWindowClosing(object sender, CancelEventArgs e)
@@ -41,6 +41,4 @@ namespace StoryTree.Gui
                 e.Cancel = !viewModel.ForcedClosingMainWindow();
         }
     }
-
-    
 }

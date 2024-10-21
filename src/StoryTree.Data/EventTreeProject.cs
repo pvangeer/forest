@@ -38,9 +38,7 @@ namespace StoryTree.Data
             {
                 eventTree = value;
                 if (eventTree == null)
-                {
                     throw new ArgumentNullException();
-                }
             }
         }
 
@@ -48,7 +46,7 @@ namespace StoryTree.Data
 
         public ObservableCollection<HydraulicCondition> HydraulicConditions { get; }
 
-       
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

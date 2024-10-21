@@ -24,60 +24,50 @@ using System.Globalization;
 namespace StoryTree.Storage
 {
     /// <summary>
-    /// This class defines extension methods for <see cref="string"/> objects.
+    ///     This class defines extension methods for <see cref="string" /> objects.
     /// </summary>
     public static class StringExtensions
     {
         /// <summary>
-        /// Creates a deep clone of a string.
+        ///     Creates a deep clone of a string.
         /// </summary>
         public static string DeepClone(this string original)
         {
             if (original == null)
-            {
                 return null;
-            }
             return string.Format(CultureInfo.CurrentCulture,
-                                 "{0}",
-                                 original);
+                "{0}",
+                original);
         }
 
         /// <summary>
-        /// Sets the first letter of a string to upper case.
+        ///     Sets the first letter of a string to upper case.
         /// </summary>
         /// <param name="str">The string to set the first letter to upper case for.</param>
         /// <returns>A string with the first letter set to upper case.</returns>
         public static string FirstToUpper(this string str)
         {
             if (str == null)
-            {
                 return null;
-            }
 
             if (str.Length > 1)
-            {
                 return char.ToUpper(str[0], CultureInfo.CurrentCulture) + str.Substring(1);
-            }
 
             return str.ToUpper(CultureInfo.CurrentCulture);
         }
 
         /// <summary>
-        /// Sets the first letter of a string to lower case.
+        ///     Sets the first letter of a string to lower case.
         /// </summary>
         /// <param name="str">The string to set the first letter to lower case for.</param>
         /// <returns>A string with the first letter set to lower case.</returns>
         public static string FirstToLower(this string str)
         {
             if (str == null)
-            {
                 return null;
-            }
 
             if (str.Length > 1)
-            {
                 return char.ToLower(str[0], CultureInfo.CurrentCulture) + str.Substring(1);
-            }
 
             return str.ToLower(CultureInfo.CurrentCulture);
         }

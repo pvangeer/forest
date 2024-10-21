@@ -13,7 +13,7 @@ namespace StoryTree.Gui.Command
 
         public void Execute(object parameter)
         {
-            ((Calendar) parameter).SelectedDate = DateTime.Now.Date;
+            ((Calendar)parameter).SelectedDate = DateTime.Now.Date;
         }
 
         public event EventHandler CanExecuteChanged;

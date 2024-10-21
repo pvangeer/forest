@@ -14,6 +14,5 @@ namespace StoryTree.Storage.XmlEntities
 
         [XmlAttribute(AttributeName = "order")]
         public long Order { get; set; }
-
     }
 }

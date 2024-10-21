@@ -8,9 +8,7 @@ namespace StoryTree.Data.Services
         public static void ChangeProbabilityEstimationType(TreeEvent treeEvent, ProbabilitySpecificationType type)
         {
             if (treeEvent.ProbabilitySpecificationType == type)
-            {
                 return;
-            }
 
             treeEvent.ProbabilitySpecificationType = type;
             treeEvent.OnPropertyChanged(nameof(TreeEvent.ProbabilitySpecificationType));

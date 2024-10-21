@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
 using System.Xml.Serialization;
 using NUnit.Framework;
 using StoryTree.Storage.XmlEntities;
@@ -37,7 +32,6 @@ namespace StoryTree.Storage.Test.XmlEntities
 
             // TODO: Add correct asserts (by deserializing?) This is not a test.
             Assert.AreNotEqual(0, stream.Length);
-
         }
     }
 }

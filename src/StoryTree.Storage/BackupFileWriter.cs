@@ -25,21 +25,21 @@ using System.IO;
 namespace StoryTree.Storage
 {
     /// <summary>
-    /// Class for providing a safe way of writing files by creating a temporary backup file of targeted files.
+    ///     Class for providing a safe way of writing files by creating a temporary backup file of targeted files.
     /// </summary>
     public class BackedUpFileWriter
     {
         private const string temporarySuffix = "~";
+        private readonly string targetFilePath;
 
         private readonly string temporaryFilePath;
-        private readonly string targetFilePath;
         private bool isTemporaryFileCreated;
 
         /// <summary>
-        /// Creates an instance of <see cref="BackedUpFileWriter"/>.
+        ///     Creates an instance of <see cref="BackedUpFileWriter" />.
         /// </summary>
         /// <param name="targetFilePath">The path of the file which will be overwritten.</param>
-        /// <exception cref="ArgumentException"><paramref name="targetFilePath"/> is not a valid path.</exception>
+        /// <exception cref="ArgumentException"><paramref name="targetFilePath" /> is not a valid path.</exception>
         public BackedUpFileWriter(string targetFilePath)
         {
             IOUtils.ValidateFilePath(targetFilePath);
@@ -49,20 +49,21 @@ namespace StoryTree.Storage
         }
 
         /// <summary>
-        /// Performs the <paramref name="writeAction"/> in a safe way by backing up the targeted file provided when
-        /// constructing the <see cref="BackedUpFileWriter"/>. It is expected that the <paramref name="writeAction"/>
-        /// will throw an exception when the operation fails, so that the backed up target file can be restored.
+        ///     Performs the <paramref name="writeAction" /> in a safe way by backing up the targeted file provided when
+        ///     constructing the <see cref="BackedUpFileWriter" />. It is expected that the <paramref name="writeAction" />
+        ///     will throw an exception when the operation fails, so that the backed up target file can be restored.
         /// </summary>
         /// <param name="writeAction">The action to perform after backing up the targeted file. </param>
-        /// <exception cref="IOException">Thrown when:
-        /// <list type="bullet">
-        /// <item>The temporary file already exists and cannot be deleted.</item>
-        /// <item>The temporary file cannot be created from the target file.</item>
-        /// <item>When reverting, the original file cannot be restored.</item>
-        /// </list>
+        /// <exception cref="IOException">
+        ///     Thrown when:
+        ///     <list type="bullet">
+        ///         <item>The temporary file already exists and cannot be deleted.</item>
+        ///         <item>The temporary file cannot be created from the target file.</item>
+        ///         <item>When reverting, the original file cannot be restored.</item>
+        ///     </list>
         /// </exception>
         /// <exception cref="CannotDeleteBackupFileException">Thrown when cleaning up, the temporary file cannot be removed.</exception>
-        /// <remarks>Any <see cref="Exception"/> thrown by <paramref name="writeAction"/> will be rethrown.</remarks>
+        /// <remarks>Any <see cref="Exception" /> thrown by <paramref name="writeAction" /> will be rethrown.</remarks>
         public void Perform(Action writeAction)
         {
             CreateTemporaryFile();
@@ -76,43 +77,41 @@ namespace StoryTree.Storage
                 Revert();
                 throw;
             }
+
             Finish();
         }
 
         /// <summary>
-        /// Removes the temporary file if it was created.
+        ///     Removes the temporary file if it was created.
         /// </summary>
         /// <exception cref="CannotDeleteBackupFileException">The temporary file cannot be removed.</exception>
         private void Finish()
         {
             if (isTemporaryFileCreated)
-            {
                 DeleteTemporaryFile();
-            }
         }
 
         /// <summary>
-        /// Reverts the target file to the temporary file if it was created. If the operation fails, 
-        /// the temporary file will remain in the directory of the target file.
+        ///     Reverts the target file to the temporary file if it was created. If the operation fails,
+        ///     the temporary file will remain in the directory of the target file.
         /// </summary>
         /// <exception cref="IOException">The original file cannot be restored.</exception>
         private void Revert()
         {
             if (isTemporaryFileCreated)
-            {
                 RestoreOriginalFile();
-            }
         }
 
         /// <summary>
-        /// Creates a temporary file from the target file, if there is any. Creates a new file at the target
-        /// file path.
+        ///     Creates a temporary file from the target file, if there is any. Creates a new file at the target
+        ///     file path.
         /// </summary>
-        /// <exception cref="IOException">Thrown when either:
-        /// <list type="bullet">
-        /// <item>The temporary file already exists and cannot be deleted.</item>
-        /// <item>The temporary file cannot be created from the target file.</item>
-        /// </list>
+        /// <exception cref="IOException">
+        ///     Thrown when either:
+        ///     <list type="bullet">
+        ///         <item>The temporary file already exists and cannot be deleted.</item>
+        ///         <item>The temporary file cannot be created from the target file.</item>
+        ///     </list>
         /// </exception>
         private void CreateTemporaryFile()
         {
@@ -127,13 +126,12 @@ namespace StoryTree.Storage
         }
 
         /// <summary>
-        /// Removes the temporary file for the target file if it already exists.
+        ///     Removes the temporary file for the target file if it already exists.
         /// </summary>
         /// <exception cref="IOException">The temporary file already exists and cannot be deleted.</exception>
         private void RemoveAlreadyExistingTemporaryFile()
         {
             if (File.Exists(temporaryFilePath))
-            {
                 try
                 {
                     File.Delete(temporaryFilePath);
@@ -142,18 +140,18 @@ namespace StoryTree.Storage
                 {
                     if (e is ArgumentException || e is IOException || e is NotSupportedException || e is UnauthorizedAccessException)
                     {
-                        string message = string.Format(
+                        var message = string.Format(
                             "Het is niet gelukt het tijdelijke bestand te verwijderen: {0}",
                             temporaryFilePath);
                         throw new IOException(message, e);
                     }
+
                     throw;
                 }
-            }
         }
 
         /// <summary>
-        /// Creates a temporary file from the target file.
+        ///     Creates a temporary file from the target file.
         /// </summary>
         /// <exception cref="IOException">The temporary file cannot be created from the target file.</exception>
         private void CreateNewTemporaryFile()
@@ -166,24 +164,27 @@ namespace StoryTree.Storage
             {
                 if (e is ArgumentException || e is IOException || e is UnauthorizedAccessException || e is NotSupportedException)
                 {
-                    string message = string.Format(
+                    var message = string.Format(
                         "Het is niet gelukt om het oude projectbestand weg te schrijven in een tijdelijk bestand met de naam: {0}",
                         temporaryFilePath);
                     throw new IOException(message, e);
                 }
+
                 throw;
             }
         }
 
         /// <summary>
-        /// Moves the temporary file back to the original path. If the operation fails, the temporary file
-        /// will remain.
+        ///     Moves the temporary file back to the original path. If the operation fails, the temporary file
+        ///     will remain.
         /// </summary>
-        /// <exception cref="IOException">Thrown when either:
-        /// <list type="bullet">
-        /// <item>The new file could not be deleted.</item>
-        /// <item>The temporary file could not be moved to its original place.</item>
-        /// </list></exception>
+        /// <exception cref="IOException">
+        ///     Thrown when either:
+        ///     <list type="bullet">
+        ///         <item>The new file could not be deleted.</item>
+        ///         <item>The temporary file could not be moved to its original place.</item>
+        ///     </list>
+        /// </exception>
         private void RestoreOriginalFile()
         {
             try
@@ -195,17 +196,18 @@ namespace StoryTree.Storage
             {
                 if (e is ArgumentException || e is IOException || e is NotSupportedException || e is UnauthorizedAccessException)
                 {
-                    string message = string.Format(
+                    var message = string.Format(
                         "Het was niet meer mogelijk om terug te gaan naar het originele bestand: {0}",
                         targetFilePath);
                     throw new IOException(message, e);
                 }
+
                 throw;
             }
         }
 
         /// <summary>
-        /// Deletes the created temporary file.
+        ///     Deletes the created temporary file.
         /// </summary>
         /// <exception cref="CannotDeleteBackupFileException">The temporary file cannot be removed.</exception>
         private void DeleteTemporaryFile()
@@ -218,11 +220,12 @@ namespace StoryTree.Storage
             {
                 if (e is ArgumentException || e is IOException || e is NotSupportedException || e is UnauthorizedAccessException)
                 {
-                    string message = string.Format(
+                    var message = string.Format(
                         "Het is niet gelukt om het tijdelijke bestand te verwijderen: {0}",
                         temporaryFilePath);
                     throw new Exception(message, e);
                 }
+
                 throw;
             }
         }
