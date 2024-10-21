@@ -46,11 +46,11 @@
                 <Border.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding TreeEventClickedCommand}" />
                 </Border.InputBindings>
-                <Grid MinWidth="120" MaxWidth="320" Background="Transparent" Grid.IsSharedSizeScope="True">
+                <Grid MinWidth="120" MaxWidth="320" Background="Transparent">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*" SharedSizeGroup="sharedHeight" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="1" />
-                        <RowDefinition Height="*" SharedSizeGroup="sharedHeight" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <TextBlock
                         TextWrapping="Wrap"

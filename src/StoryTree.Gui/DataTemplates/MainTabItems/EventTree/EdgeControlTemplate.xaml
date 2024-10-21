@@ -31,18 +31,11 @@
                                         <Binding RelativeSource="{RelativeSource TemplatedParent}"
                                                  Path="Source.(graphSharpControls:GraphCanvas.Y)" />
                                         <Binding RelativeSource="{RelativeSource TemplatedParent}"
-                                                 Path="Source.ActualWidth" />
-                                        <Binding RelativeSource="{RelativeSource TemplatedParent}"
-                                                 Path="Source.ActualHeight" />
-                                        <Binding RelativeSource="{RelativeSource TemplatedParent}"
                                                  Path="Target.(graphSharpControls:GraphCanvas.X)" />
                                         <Binding RelativeSource="{RelativeSource TemplatedParent}"
                                                  Path="Target.(graphSharpControls:GraphCanvas.Y)" />
-                                        <Binding RelativeSource="{RelativeSource TemplatedParent}"
-                                                 Path="Target.ActualWidth" />
-                                        <Binding RelativeSource="{RelativeSource TemplatedParent}"
-                                                 Path="Target.ActualHeight" />
-                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="RoutePoints" />
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Source" />
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Target" />
                                     </MultiBinding>
                                 </PathGeometry.Figures>
                             </PathGeometry>
