@@ -34,9 +34,9 @@ namespace Forest.Storage
     public static class FingerprintHelper
     {
         /// <summary>
-        ///     Gets the fingerprint for the given <see cref="AnalysisXmlEntity" />.
+        ///     Gets the fingerprint for the given <see cref="EventTreeProjectXmlEntity" />.
         /// </summary>
-        /// <param name="entity">The <see cref="AnalysisXmlEntity" /> to generate a hashcode for.</param>
+        /// <param name="entity">The <see cref="EventTreeProjectXmlEntity" /> to generate a hashcode for.</param>
         /// <returns>The binary hashcode for <paramref name="entity" />.</returns>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity" /> is <c>null</c>.</exception>
         public static int Get(EventTreeProjectXmlEntity entity)
@@ -48,7 +48,7 @@ namespace Forest.Storage
 
         /// <summary>
         ///     While using a target file as storage, determines the fingerprint for the given
-        ///     <see cref="AnalysisXmlEntity" />.
+        ///     <see cref="EventTreeProjectXmlEntity" />.
         /// </summary>
         /// <param name="entity">The <see cref="AnalysisXmlEntity" /> to generate a hashcode for.</param>
         /// <returns>The binary hashcode for <paramref name="entity" />.</returns>

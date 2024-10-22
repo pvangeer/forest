@@ -3,7 +3,7 @@ using Forest.Data.Estimations;
 using Forest.Data.Hydraulics;
 using Forest.Data.Tree;
 
-namespace Forest.Gui
+namespace Forest.TestHelpers
 {
     public static class TestDataGenerator
     {

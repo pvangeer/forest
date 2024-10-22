@@ -86,7 +86,7 @@
                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                         VerticalAlignment="Center">
                         <i:Interaction.Behaviors>
-                            <gui:FolderDialogBehavior FolderName="{Binding ExportLocation, Mode=TwoWay}" />
+                            <export:FolderDialogBehavior FolderName="{Binding ExportLocation, Mode=TwoWay}" />
                         </i:Interaction.Behaviors>
                     </Button>
                     <TextBlock

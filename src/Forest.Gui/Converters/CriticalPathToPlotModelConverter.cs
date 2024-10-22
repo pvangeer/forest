@@ -4,11 +4,11 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
 using Forest.Calculators;
+using Forest.Data.Tree;
 using Forest.Gui.ViewModels;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
-using Forest.Data.Tree;
 
 namespace Forest.Gui.Converters
 {

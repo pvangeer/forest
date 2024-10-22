@@ -16,7 +16,7 @@ namespace Forest.Gui
 
             var forestGui = new ForestGui
             {
-                EventTreeProject = new EventTreeProject()
+                EventTreeProject = EventTreeProjectFactory.CreateStandardNewProject()
             };
             var guiViewModel = new GuiViewModel(forestGui)
             {

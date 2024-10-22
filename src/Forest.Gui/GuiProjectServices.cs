@@ -22,8 +22,6 @@ namespace Forest.Gui
             storageXml = new StorageXml();
         }
 
-        public Window Win32Window { get; set; }
-
         public void NewProject()
         {
             HandleUnsavedChanges(CreateNewProject);
@@ -34,7 +32,7 @@ namespace Forest.Gui
             storageXml.UnStageEventTreeProject();
             gui.ProjectFilePath = "";
 
-            gui.EventTreeProject = new EventTreeProject();
+            gui.EventTreeProject = EventTreeProjectFactory.CreateStandardNewProject();
             gui.OnPropertyChanged(nameof(ForestGui.EventTreeProject));
         }
 

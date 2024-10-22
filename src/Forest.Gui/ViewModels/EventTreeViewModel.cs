@@ -18,7 +18,7 @@ namespace Forest.Gui.ViewModels
 
         public EventTreeViewModel()
         {
-            var project = new EventTreeProject();
+            var project = EventTreeProjectFactory.CreateStandardNewProject();
             projectManipulationService = new ProjectManipulationService(project);
             EventTree = project.EventTree;
             EventTree.PropertyChanged += EventTreePropertyChanged;

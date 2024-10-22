@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Forest.Data;
-using Forest.Gui.Annotations;
+using Forest.Gui.Properties;
 using log4net;
 
 namespace Forest.Gui.Export
@@ -14,6 +14,8 @@ namespace Forest.Gui.Export
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ExportElicitationFormsViewModel));
 
+
+        // TODO: Remove this code. No test data in the code base please.
         public static EventTreeProject TestEventTreeProject = new EventTreeProject
         {
             Experts =

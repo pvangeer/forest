@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using Forest.Data.Estimations;
 using Forest.Data.Tree;
-using Forest.Gui.Annotations;
+using Forest.Gui.Properties;
 
 namespace Forest.Gui.ViewModels
 {

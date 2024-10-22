@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Forest.Data;
-using Forest.Gui.Annotations;
+using Forest.Gui.Properties;
 
 namespace Forest.Gui.Export
 {

@@ -73,17 +73,9 @@
       <Project>{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}</Project>
       <Name>Forest.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Forest.Gui\Forest.Gui.csproj">
-      <Project>{349CD8FE-3AF9-4EA5-9EA0-5318FB20E123}</Project>
-      <Name>Forest.Gui</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Forest.Storage\Forest.Storage.csproj">
       <Project>{A5C2B4E5-1758-4B14-800E-E3F2AA64EA64}</Project>
       <Name>Forest.Storage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Forest.TestHelpers\Forest.TestHelpers.csproj">
-      <Project>{24D09D6E-5221-4612-8A93-06F2EAA35401}</Project>
-      <Name>Forest.TestHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

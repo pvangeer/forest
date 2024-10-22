@@ -8,7 +8,6 @@ using Forest.Gui.ViewModels;
 using Forest.Messaging;
 using Forest.Storage;
 using log4net;
-using log4net.Appender;
 using log4net.Repository.Hierarchy;
 
 namespace Forest.Gui
@@ -20,7 +19,7 @@ namespace Forest.Gui
             ConfigureMessaging();
             BusyIndicator = StorageState.Idle;
             Messages = new MessageList();
-            EventTreeProject = new EventTreeProject();
+            EventTreeProject = EventTreeProjectFactory.CreateStandardNewProject();
             ProjectFilePath = "";
             GuiProjectServices = new GuiProjectServices(this);
             LogMessageAppender.Instance.MessageCollection = this;
@@ -54,7 +53,7 @@ namespace Forest.Gui
         {
             var rootLogger = ((Hierarchy)LogManager.GetRepository()).Root;
 
-            if (!rootLogger.Appenders.Cast<IAppender>().Any(a => a is LogMessageAppender))
+            if (!rootLogger.Appenders.Any(a => a is LogMessageAppender))
             {
                 rootLogger.AddAppender(new LogMessageAppender());
                 rootLogger.Repository.Configured = true;

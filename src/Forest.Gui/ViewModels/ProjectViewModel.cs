@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Forest.Data;
-using Forest.Data.Properties;
 using Forest.Data.Services;
 using Forest.Gui.Command;
 
@@ -22,7 +21,7 @@ namespace Forest.Gui.ViewModels
         {
         }
 
-        public ProjectViewModel([NotNull] EventTreeProject eventTreeProject)
+        public ProjectViewModel(EventTreeProject eventTreeProject)
         {
             BusyIndicator = StorageState.Idle;
 
@@ -163,8 +162,7 @@ namespace Forest.Gui.ViewModels
             }
         }
 
-        [NotifyPropertyChangedInvocator]
-        public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

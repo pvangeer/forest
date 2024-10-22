@@ -8,8 +8,6 @@ namespace Forest.Storage.XmlEntities
     [XmlRoot(ElementName = "eventtreeproject", IsNullable = false)]
     public class EventTreeProjectXmlEntity : XmlEntityBase
     {
-        public const string VersionInformationElementName = "versioninformation";
-
         public EventTreeProjectXmlEntity()
         {
             Experts = new Collection<ExpertXmlEntity>();
