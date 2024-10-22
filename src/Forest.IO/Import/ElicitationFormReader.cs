@@ -20,7 +20,7 @@ namespace Forest.IO.Import
         private const string CommentColumnReference = "I";
         private const string NodeNameColumnReference = "C";
 
-        private static readonly StoryTreeLog Log = new StoryTreeLog(typeof(ElicitationFormReader));
+        private static readonly ForestLog Log = new ForestLog(typeof(ElicitationFormReader));
 
         public static IEnumerable<DotForm> ReadElicitationForm(string fileName)
         {

@@ -13,9 +13,9 @@ using log4net.Repository.Hierarchy;
 
 namespace Forest.Gui
 {
-    public class StoryTreeGui : IMessageCollection
+    public class ForestGui : IMessageCollection
     {
-        public StoryTreeGui()
+        public ForestGui()
         {
             ConfigureMessaging();
             BusyIndicator = StorageState.Idle;

@@ -12,7 +12,7 @@ namespace Forest.Gui
     /// </summary>
     public partial class App : Application
     {
-        private readonly StoryTreeLog log = new StoryTreeLog(typeof(App));
+        private readonly ForestLog log = new ForestLog(typeof(App));
 
         public App()
         {

@@ -17,15 +17,15 @@ namespace Forest.Gui.ViewModels
 {
     public class GuiViewModel : INotifyPropertyChanged
     {
-        private readonly StoryTreeGui gui;
+        private readonly ForestGui gui;
         private MessageListViewModel messageListViewModel;
-        private StoryTreeProcess selectedProcess;
+        private ForestProcess selectedProcess;
 
-        public GuiViewModel() : this(new StoryTreeGui())
+        public GuiViewModel() : this(new ForestGui())
         {
         }
 
-        public GuiViewModel(StoryTreeGui gui)
+        public GuiViewModel(ForestGui gui)
         {
             this.gui = gui;
             if (this.gui != null)
@@ -77,7 +77,7 @@ namespace Forest.Gui.ViewModels
 
         public ICommand ShowMessageListCommand => new ShowMessageListCommand(this);
 
-        public StoryTreeProcess SelectedProcess
+        public ForestProcess SelectedProcess
         {
             get => selectedProcess;
             set
@@ -168,18 +168,18 @@ namespace Forest.Gui.ViewModels
         {
             switch (e.PropertyName)
             {
-                case nameof(StoryTreeGui.BusyIndicator):
+                case nameof(ForestGui.BusyIndicator):
                     OnPropertyChanged(nameof(BusyIndicator));
                     break;
-                case nameof(StoryTreeGui.EventTreeProject):
+                case nameof(ForestGui.EventTreeProject):
                     ProjectViewModel = new ProjectViewModel(gui.EventTreeProject);
                     OnPropertyChanged(nameof(ProjectViewModel));
                     break;
-                case nameof(StoryTreeGui.Messages):
+                case nameof(ForestGui.Messages):
                     messageListViewModel = null;
                     OnPropertyChanged(nameof(MessagesViewModel));
                     break;
-                case nameof(StoryTreeGui.ProjectFilePath):
+                case nameof(ForestGui.ProjectFilePath):
                     OnPropertyChanged(nameof(ProjectFilePath));
                     OnPropertyChanged(nameof(ProjectFileName));
                     break;

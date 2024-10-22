@@ -19,32 +19,32 @@
 
         <DataTemplate.Triggers>
             <DataTrigger Binding="{Binding SelectedProcess}"
-                         Value="{x:Static viewModels:StoryTreeProcess.GeneralInformation}">
+                         Value="{x:Static viewModels:ForestProcess.GeneralInformation}">
                 <Setter TargetName="Hoster" Property="ContentTemplate"
                         Value="{StaticResource GeneralInformationDataTemplate}" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.Experts}">
+            <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:ForestProcess.Experts}">
                 <Setter TargetName="Hoster" Property="ContentTemplate" Value="{StaticResource ExpertsDataTemplate}" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.Hydraulics}">
+            <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:ForestProcess.Hydraulics}">
                 <Setter TargetName="Hoster" Property="ContentTemplate" Value="{StaticResource HydraulicsDataTemplate}" />
             </DataTrigger>
 
             <DataTrigger Binding="{Binding SelectedProcess}"
-                         Value="{x:Static viewModels:StoryTreeProcess.TreeEventsDefinition}">
+                         Value="{x:Static viewModels:ForestProcess.TreeEventsDefinition}">
                 <Setter TargetName="Hoster" Property="ContentTemplate" Value="{StaticResource TreeEventsTemplate}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding SelectedProcess}"
-                         Value="{x:Static viewModels:StoryTreeProcess.TreeEventsInformation}">
+                         Value="{x:Static viewModels:ForestProcess.TreeEventsInformation}">
                 <Setter TargetName="Hoster" Property="ContentTemplate"
                         Value="{StaticResource TreeEventInformationDataTemplate}" />
             </DataTrigger>
 
-            <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.Estimation}">
+            <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:ForestProcess.Estimation}">
                 <Setter TargetName="Hoster" Property="ContentTemplate" Value="{StaticResource EstimationDataTemplate}" />
             </DataTrigger>
 
-            <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:StoryTreeProcess.Results}">
+            <DataTrigger Binding="{Binding SelectedProcess}" Value="{x:Static viewModels:ForestProcess.Results}">
                 <Setter TargetName="Hoster" Property="ContentTemplate" Value="{StaticResource ResultsDataTemplate}" />
             </DataTrigger>
         </DataTemplate.Triggers>

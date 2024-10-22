@@ -12,11 +12,11 @@ namespace Forest.Gui
 {
     public class GuiProjectServices
     {
-        private readonly StoryTreeGui gui;
-        private readonly StoryTreeLog log = new StoryTreeLog(typeof(GuiProjectServices));
+        private readonly ForestGui gui;
+        private readonly ForestLog log = new ForestLog(typeof(GuiProjectServices));
         private readonly StorageXml storageXml;
 
-        public GuiProjectServices(StoryTreeGui gui)
+        public GuiProjectServices(ForestGui gui)
         {
             this.gui = gui;
             storageXml = new StorageXml();
@@ -35,7 +35,7 @@ namespace Forest.Gui
             gui.ProjectFilePath = "";
 
             gui.EventTreeProject = new EventTreeProject();
-            gui.OnPropertyChanged(nameof(StoryTreeGui.EventTreeProject));
+            gui.OnPropertyChanged(nameof(ForestGui.EventTreeProject));
         }
 
         public void OpenProject()
@@ -228,8 +228,8 @@ namespace Forest.Gui
                 };
                 gui.ProjectFilePath = fileName;
 
-                gui.OnPropertyChanged(nameof(StoryTreeGui.EventTreeProject));
-                gui.OnPropertyChanged(nameof(StoryTreeGui.ProjectFilePath));
+                gui.OnPropertyChanged(nameof(ForestGui.EventTreeProject));
+                gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));
             }
             catch (Exception exception)
             {

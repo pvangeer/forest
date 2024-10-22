@@ -10,14 +10,14 @@ namespace Forest.Gui.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(parameter is StoryTreeProcess buttonProcess) || !(value is StoryTreeProcess selectedProcess))
+            if (!(parameter is ForestProcess buttonProcess) || !(value is ForestProcess selectedProcess))
                 return DependencyProperty.UnsetValue;
             return buttonProcess == selectedProcess;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(parameter is StoryTreeProcess buttonProcess) || !(value is bool isSelectedProcess))
+            if (!(parameter is ForestProcess buttonProcess) || !(value is bool isSelectedProcess))
                 return DependencyProperty.UnsetValue;
 
             return isSelectedProcess ? buttonProcess : DependencyProperty.UnsetValue;

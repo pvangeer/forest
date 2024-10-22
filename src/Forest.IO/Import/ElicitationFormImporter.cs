@@ -10,7 +10,7 @@ namespace Forest.IO.Import
 {
     public class ElicitationFormImporter
     {
-        private readonly StoryTreeLog log = new StoryTreeLog(typeof(ElicitationFormImporter));
+        private readonly ForestLog log = new ForestLog(typeof(ElicitationFormImporter));
 
         public ElicitationFormImporter(EventTreeProject eventTreeProject)
         {

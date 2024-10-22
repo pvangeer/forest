@@ -14,11 +14,11 @@ namespace Forest.Gui
         {
             InitializeComponent();
 
-            var storyTreeGui = new StoryTreeGui
+            var forestGui = new ForestGui
             {
                 EventTreeProject = new EventTreeProject()
             };
-            var guiViewModel = new GuiViewModel(storyTreeGui)
+            var guiViewModel = new GuiViewModel(forestGui)
             {
                 Win32Window = this
             };

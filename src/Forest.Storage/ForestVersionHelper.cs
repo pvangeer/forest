@@ -26,7 +26,7 @@ namespace Forest.Storage
     /// <summary>
     ///     This class is capable of comparing Ringtoets database versions.
     /// </summary>
-    public static class StoryTreeVersionHelper
+    public static class ForestVersionHelper
     {
         private const string validDatabaseVersion = "5";
         private const string currentDatabaseVersion = "18.1";
@@ -50,7 +50,7 @@ namespace Forest.Storage
         /// </returns>
         public static bool IsNewerThanCurrent(string version)
         {
-            var versionComparer = new StoryTreeVersionComparer();
+            var versionComparer = new ForestVersionComparer();
             return versionComparer.Compare(version, currentDatabaseVersion) > 0;
         }
 
@@ -65,7 +65,7 @@ namespace Forest.Storage
         /// <remarks>A valid version must be greater than <see cref="validDatabaseVersion" />.</remarks>
         public static bool IsValidVersion(string version)
         {
-            var versionComparer = new StoryTreeVersionComparer();
+            var versionComparer = new ForestVersionComparer();
             return versionComparer.Compare(version, validDatabaseVersion) >= 0;
         }
 

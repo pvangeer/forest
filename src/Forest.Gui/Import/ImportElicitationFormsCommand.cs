@@ -9,7 +9,7 @@ namespace Forest.Gui.Import
 {
     public class ImportElicitationFormsCommand : ICommand
     {
-        private readonly StoryTreeLog log = new StoryTreeLog(typeof(ImportElicitationFormsCommand));
+        private readonly ForestLog log = new ForestLog(typeof(ImportElicitationFormsCommand));
 
         public bool CanExecute(object parameter)
         {

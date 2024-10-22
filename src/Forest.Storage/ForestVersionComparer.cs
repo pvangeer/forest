@@ -30,7 +30,7 @@ namespace Forest.Storage
     /// <summary>
     ///     This class can be used to compare Ringtoets database files.
     /// </summary>
-    public class StoryTreeVersionComparer : IComparer, IComparer<string>
+    public class ForestVersionComparer : IComparer, IComparer<string>
     {
         private const string versionSeparator = ".";
 

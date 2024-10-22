@@ -1,6 +1,6 @@
 ﻿namespace Forest.Gui.ViewModels
 {
-    public enum StoryTreeProcess
+    public enum ForestProcess
     {
         GeneralInformation,
         Experts,

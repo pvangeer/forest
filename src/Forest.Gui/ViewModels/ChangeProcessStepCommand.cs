@@ -19,7 +19,7 @@ namespace Forest.Gui.ViewModels
 
         public void Execute(object parameter)
         {
-            if (!(parameter is StoryTreeProcess process))
+            if (!(parameter is ForestProcess process))
                 return;
 
             ViewModel.SelectedProcess = process;

@@ -12,7 +12,7 @@ namespace Forest.IO.Export
 {
     public class ElicitationFormsExporter
     {
-        private readonly StoryTreeLog log = new StoryTreeLog(typeof(ElicitationFormsExporter));
+        private readonly ForestLog log = new ForestLog(typeof(ElicitationFormsExporter));
         private readonly ElicitationFormWriter writer = new ElicitationFormWriter();
 
         public ElicitationFormsExporter(EventTreeProject eventTreeProject)

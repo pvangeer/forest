@@ -113,15 +113,15 @@
                             <Setter Property="Visibility" Value="Visible" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding SelectedProcess}"
-                                             Value="{x:Static viewModels:StoryTreeProcess.GeneralInformation}">
+                                             Value="{x:Static viewModels:ForestProcess.GeneralInformation}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding SelectedProcess}"
-                                             Value="{x:Static viewModels:StoryTreeProcess.Experts}">
+                                             Value="{x:Static viewModels:ForestProcess.Experts}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding SelectedProcess}"
-                                             Value="{x:Static viewModels:StoryTreeProcess.Hydraulics}">
+                                             Value="{x:Static viewModels:ForestProcess.Hydraulics}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                 </DataTrigger>
                             </Style.Triggers>
@@ -138,23 +138,23 @@
                         Header="Projectgegevens"
                         LargeIcon="/Forest.Gui;component\Resources\project-information.png"
                         Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.GeneralInformation}}"
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.GeneralInformation}}"
                         Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:StoryTreeProcess.GeneralInformation}" />
+                        CommandParameter="{x:Static viewModels:ForestProcess.GeneralInformation}" />
                     <fluent:ToggleButton
                         Header="Experts"
                         LargeIcon="/Forest.Gui;component\Resources\experts.png"
                         Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Experts}}"
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.Experts}}"
                         Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:StoryTreeProcess.Experts}" />
+                        CommandParameter="{x:Static viewModels:ForestProcess.Experts}" />
                     <fluent:ToggleButton
                         Header="Hydraulische gegevens"
                         LargeIcon="/Forest.Gui;component\Resources\hydraulics.png"
                         Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Hydraulics}}"
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.Hydraulics}}"
                         Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:StoryTreeProcess.Hydraulics}" />
+                        CommandParameter="{x:Static viewModels:ForestProcess.Hydraulics}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
             <fluent:RibbonTabItem
@@ -165,9 +165,9 @@
                         Header="Faalpaden tonen"
                         LargeIcon="/Forest.Gui;component\Resources\add-eventtree.png"
                         Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.TreeEventsDefinition}}"
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.TreeEventsDefinition}}"
                         Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:StoryTreeProcess.TreeEventsDefinition}" />
+                        CommandParameter="{x:Static viewModels:ForestProcess.TreeEventsDefinition}" />
                     <fluent:Button
                         Header="Toevoegen (falen)"
                         LargeIcon="/Forest.Gui;component\Resources\add-tree-event.png"
@@ -189,27 +189,27 @@
                         Header="Knoopinformatie"
                         LargeIcon="/Forest.Gui;component\Resources\tree-event-info.png"
                         Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.TreeEventsInformation}}"
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.TreeEventsInformation}}"
                         Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:StoryTreeProcess.TreeEventsInformation}" />
+                        CommandParameter="{x:Static viewModels:ForestProcess.TreeEventsInformation}" />
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Overgangskansen">
                     <fluent:ToggleButton
                         Header="Overgangskansen"
                         LargeIcon="/Forest.Gui;component\Resources\estimation.png"
                         Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Estimation}}"
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.Estimation}}"
                         Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:StoryTreeProcess.Estimation}" />
+                        CommandParameter="{x:Static viewModels:ForestProcess.Estimation}" />
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Resultaten">
                     <fluent:ToggleButton
                         Header="Resultaten"
                         LargeIcon="/Forest.Gui;component\Resources\results.png"
                         Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:StoryTreeProcess.Results}}"
+                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.Results}}"
                         Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:StoryTreeProcess.Results}" />
+                        CommandParameter="{x:Static viewModels:ForestProcess.Results}" />
                 </fluent:RibbonGroupBox>
 
             </fluent:RibbonTabItem>

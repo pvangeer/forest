@@ -3,11 +3,11 @@ using log4net;
 
 namespace Forest.Messaging
 {
-    public class StoryTreeLog
+    public class ForestLog
     {
         private readonly ILog log;
 
-        public StoryTreeLog(Type loggerType)
+        public ForestLog(Type loggerType)
         {
             log = LogManager.GetLogger(loggerType);
         }

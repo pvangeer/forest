@@ -208,7 +208,7 @@
     <Compile Include="Command\RemovePriorityMessageCommand.cs" />
     <Compile Include="ViewModels\StorageState.cs" />
     <Compile Include="Command\ShowMessageListCommand.cs" />
-    <Compile Include="ViewModels\StoryTreeProcess.cs" />
+    <Compile Include="ViewModels\ForestProcess.cs" />
     <Compile Include="ViewModels\TreeEventViewModel.cs" />
     <Page Include="DataTemplates\ContentPresenterDataTemplate.xaml">
       <SubType>Designer</SubType>
