@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{349CD8FE-3AF9-4EA5-9EA0-5318FB20E123}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Forest.Gui</RootNamespace>
+    <AssemblyName>Forest.Gui</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <OutputPath Condition="$(OutputPath) == ''">$(SolutionDir)\bin\$(Configuration)\</OutputPath>
+    <OutDir>$(OutputPath)</OutDir>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>eventtree.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CreateInstaller|x86'">
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Fluent, Version=6.1.0.233, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fluent.Ribbon.6.1.0.233\lib\net45\Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphSharp, Version=1.0.2.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GraphSharp.Controls, Version=1.1.0.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.Controls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=3.0.1.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.3.0.1\lib\netstandard2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.3.3, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft-WindowsAPICodePack-Core.1.1.3.3\lib\net452\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.3.3, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft-WindowsAPICodePack-Shell.1.1.3.3\lib\net452\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\OxyPlot.Wpf.1.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Data, Version=3.6.61114.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Graphviz, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Serialization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Configuration.ConfigurationManager.4.5.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Principal.Windows.4.5.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WPFExtensions, Version=1.0.3437.34043, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WPFExtensions.1.0.0\lib\WPFExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BooleanBrushConverter.cs" />
+    <Compile Include="Command\RemoveAllMessagesCommand.cs" />
+    <Compile Include="Converters\EventTypeToColorConverter.cs" />
+    <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />
+    <Compile Include="Command\ProjectViewModelCommand.cs" />
+    <Compile Include="Converters\CriticalPathConverter.cs" />
+    <Compile Include="Converters\CriticalPathToPlotModelConverter.cs" />
+    <Compile Include="Converters\CriticalPathToProbabilityTextConverter.cs" />
+    <Compile Include="DataTemplates\MainTabItems\EstimationContentTemplateSelector.cs" />
+    <Compile Include="Converters\SelectedItemToMainTreeEventViewModelConverter.cs" />
+    <Compile Include="Converters\SelectedPropertyToColorConverter.cs" />
+    <Compile Include="Command\AddTreeEventCommand.cs" />
+    <Compile Include="Command\EventTreeCommand.cs" />
+    <Compile Include="Converters\ProbabilityToStringConverter.cs" />
+    <Compile Include="Converters\FragilityCurveToPlotModelConverter.cs" />
+    <Compile Include="Converters\EventTreesToCountConverter.cs" />
+    <Compile Include="DataTemplates\MainTabItems\EventTree\EventTreeGraphLayout.cs" />
+    <Compile Include="EnumerationExtension.cs" />
+    <Compile Include="EstimationToBackgroundConverter.cs" />
+    <Compile Include="Export\EventTreeExportViewModel.cs" />
+    <Compile Include="Export\ExportElicitationFormsViewModel.cs" />
+    <Compile Include="Export\ElicitationFormExportDialog.xaml.cs">
+      <DependentUpon>ElicitationFormExportDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Export\ElicitationFormsExportViewModel.cs" />
+    <Compile Include="Export\ExportElicitationFormsCommand.cs" />
+    <Compile Include="ForestGui.cs" />
+    <Compile Include="Import\ImportElicitationFormsCommand.cs" />
+    <Compile Include="Export\PerformExportElicitationFormsCommand.cs" />
+    <Compile Include="Export\SelectFileLocationCommand.cs" />
+    <Compile Include="Export\FolderDialogBehavior.cs" />
+    <Compile Include="GuiProjectServices.cs" />
+    <Compile Include="Converters\MessageListToLabelConverter.cs" />
+    <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
+    <Compile Include="Converters\SelectedProcessToCheckedConverter.cs" />
+    <Compile Include="Command\SelectTodayCommand.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="RouteToPathConverterManual.cs" />
+    <Compile Include="ShouldProceedState.cs" />
+    <Compile Include="StringToProbabilityClassValidationRule.cs" />
+    <Compile Include="TreeEventConnector.cs" />
+    <Compile Include="ViewModels\ChangeProcessStepCommand.cs" />
+    <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
+    <Compile Include="ViewModels\EstimationSpecificationViewModelFactory.cs" />
+    <Compile Include="ViewModels\EventTreeGraph.cs" />
+    <Compile Include="ViewModels\EventTreeViewModel.cs" />
+    <Compile Include="ViewModels\ExpertClassEstimationViewModel.cs" />
+    <Compile Include="ViewModels\ExpertViewModel.cs" />
+    <Compile Include="Command\FileNewCommnd.cs" />
+    <Compile Include="ViewModels\FixedFragilityCurveSpecificationViewModel.cs" />
+    <Compile Include="ViewModels\FixedProbabilitySpecificationViewModel.cs" />
+    <Compile Include="ViewModels\FragilityCurveElementViewModel.cs" />
+    <Compile Include="ViewModels\FragilityCurveViewModel.cs" />
+    <Compile Include="ViewModels\GuiViewModel.cs" />
+    <Compile Include="ViewModels\HydraulicConditionViewModel.cs" />
+    <Compile Include="Command\OpenProjectCommand.cs" />
+    <Compile Include="ViewModels\MessageListViewModel.cs" />
+    <Compile Include="ViewModels\ProbabilitySpecificationViewModelBase.cs" />
+    <Compile Include="ViewModels\ProjectViewModel.cs" />
+    <Compile Include="Command\RemoveTreeEventCommand.cs" />
+    <Compile Include="Command\TreeEventClickedCommand.cs" />
+    <Compile Include="Command\SaveProjectAsCommand.cs" />
+    <Compile Include="Command\SaveProjectCommand.cs" />
+    <Compile Include="Command\RemovePriorityMessageCommand.cs" />
+    <Compile Include="ViewModels\StorageState.cs" />
+    <Compile Include="Command\ShowMessageListCommand.cs" />
+    <Compile Include="ViewModels\StoryTreeProcess.cs" />
+    <Compile Include="ViewModels\TreeEventViewModel.cs" />
+    <Page Include="DataTemplates\ContentPresenterDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\General\AssessmentSections.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\General\ComboBoxFlatStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\EstimationDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\Estimation\ClassEstimationTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\Estimation\FixedFragilityCurveEstimationTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\Estimation\FixedValueEstimationTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\ExpertsDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\GeneralInformationDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\HydraulicsDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\TreeEventInformationDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\TreeEventsListViewItemDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MessageDataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\ResultsDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataTemplates\General\TabControlFlatStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\TreeEventsDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\EventTree\EdgeControlTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataTemplates\MainTabItems\EventTree\VertexControlTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Export\ElicitationFormExportDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Forest.Calculators\Forest.Calculators.csproj">
+      <Project>{A7090218-547D-412B-A4F5-F80C8B4890F3}</Project>
+      <Name>Forest.Calculators</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forest.Data\Forest.Data.csproj">
+      <Project>{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}</Project>
+      <Name>Forest.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forest.IO\Forest.IO.csproj">
+      <Project>{64AC0A2F-B6D4-45C8-812B-AAC0BAEC1D11}</Project>
+      <Name>Forest.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forest.Messaging\Forest.Messaging.csproj">
+      <Project>{7F6BB180-3B8C-4761-8BB6-E7562FB37895}</Project>
+      <Name>Forest.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forest.Storage\Forest.Storage.csproj">
+      <Project>{A5C2B4E5-1758-4B14-800E-E3F2AA64EA64}</Project>
+      <Name>Forest.Storage</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\EventTree.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\busy-white.png" />
+    <Resource Include="Resources\idle-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\alert-icon 32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\close-icon 32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\information-icon 32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="eventtree.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add-eventtree.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\remove-eventtree.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add-tree-event.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\remove-tree-event.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\estimation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\experts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\hydraulics.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\results.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\tree-event-info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\project-information.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\check_green.png" />
+    <Resource Include="Resources\cross_red.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
