@@ -63,8 +63,6 @@ namespace Forest.Gui.ViewModels
             }
         }
 
-        public Window Win32Window { get; set; }
-
         public ICommand FileNewCommand => new FileNewCommnd(this);
 
         public ICommand SaveProjectCommand => new SaveProjectCommand(this);

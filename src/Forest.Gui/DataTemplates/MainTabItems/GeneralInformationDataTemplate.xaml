@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Forest.Gui.ViewModels"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:command="clr-namespace:Forest.Gui.Command">
+                    xmlns:command="clr-namespace:Forest.Gui.Command"
+                    xmlns:gui="clr-namespace:Forest.Gui">
 
     <command:SelectTodayCommand x:Key="SelectTodayCommand" />
     <DataTemplate x:Key="GeneralInformationDataTemplate" DataType="viewModels:ProjectViewModel">
@@ -152,6 +153,9 @@
                     <xctk:RichTextBoxFormatBarManager.FormatBar>
                         <xctk:RichTextBoxFormatBar />
                     </xctk:RichTextBoxFormatBarManager.FormatBar>
+                    <xctk:RichTextBox.TextFormatter>
+                        <gui:RichTextFormatter />
+                    </xctk:RichTextBox.TextFormatter>
                 </xctk:RichTextBox>
             </Grid>
         </Grid>

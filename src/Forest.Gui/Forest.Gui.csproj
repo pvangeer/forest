@@ -173,6 +173,7 @@
     <Compile Include="Converters\SelectedProcessToCheckedConverter.cs" />
     <Compile Include="Command\SelectTodayCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="RichTextFormatter.cs" />
     <Compile Include="RouteToPathConverterManual.cs" />
     <Compile Include="ShouldProceedState.cs" />
     <Compile Include="StringToProbabilityClassValidationRule.cs" />

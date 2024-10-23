@@ -15,6 +15,8 @@ namespace Forest.Data
         {
             Name = "Nieuw project";
             AssessmentSection = "1-1";
+            Description = "";
+            ProjectInformation = "";
             ProjectLeader = new Person();
             EventTree = new EventTree();
             Experts = new ObservableCollection<Expert>();

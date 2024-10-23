@@ -1,4 +1,6 @@
 using System;
+using System.Net.Mime;
+using System.Windows;
 using System.Windows.Input;
 using Forest.Gui.ViewModels;
 using log4net;
@@ -28,7 +30,7 @@ namespace Forest.Gui.Export
                 {
                     OnExport = guiViewModel.OnExportElicitationForms
                 },
-                Owner = guiViewModel.Win32Window
+                Owner = Application.Current.MainWindow
             };
 
             dialog.ShowDialog();

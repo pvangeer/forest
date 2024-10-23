@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Net.Mime;
+using System.Windows;
 using System.Windows.Input;
 using Forest.Gui.ViewModels;
 using Forest.Messaging;
@@ -33,7 +35,7 @@ namespace Forest.Gui.Import
                     Filter = "Excel bestand (*.xlsx)|*.xlsx|Alle bestanden (*.*)|*.*"
                 };
 
-                if (dialog.ShowDialog(guiViewModel.Win32Window) == true && dialog.FileNames.Any())
+                if (dialog.ShowDialog(Application.Current.MainWindow) == true && dialog.FileNames.Any())
                     guiViewModel.OnImportElicitationForms(dialog.FileNames);
             }
             catch (Exception e)

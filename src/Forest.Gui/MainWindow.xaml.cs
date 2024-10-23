@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 using Forest.Data;
 using Forest.Gui.ViewModels;
@@ -13,21 +14,18 @@ namespace Forest.Gui
         public MainWindow()
         {
             InitializeComponent();
-
             var forestGui = new ForestGui
             {
                 EventTreeProject = EventTreeProjectFactory.CreateStandardNewProject()
             };
-            var guiViewModel = new GuiViewModel(forestGui)
-            {
-                Win32Window = this
-            };
-            guiViewModel.OnInvalidateVisual += (o, e) =>
+            var guiViewModel = new GuiViewModel(forestGui);
+            guiViewModel.OnInvalidateVisual += (o, ea) =>
             {
                 HostControl.InvalidateVisual();
                 InvalidateVisual();
             };
             DataContext = guiViewModel;
+
         }
 
         private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
