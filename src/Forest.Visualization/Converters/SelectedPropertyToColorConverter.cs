@@ -1,19 +1,19 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using Forest.Gui.Components;
-using Forest.Gui.ViewModels;
+using System.Windows.Media;
 
-namespace Forest.Gui.Converters
+namespace Forest.Visualization.Converters
 {
-    public class BusyIndicatorToEnabledConverter : IValueConverter
+    public class SelectedPropertyToColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is StorageState storageState))
-                return value;
+            if (!(value is bool))
+                return new SolidColorBrush(Colors.Transparent);
 
-            return storageState == StorageState.Idle;
+            var selected = (bool)value;
+            return new SolidColorBrush(selected ? Colors.Red : Colors.Transparent);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

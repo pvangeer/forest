@@ -13,7 +13,7 @@ namespace Forest.Gui.Export
 
         public bool CanExecute(object parameter)
         {
-            return parameter is GuiViewModel guiViewModel && guiViewModel.ProjectViewModel.EventTreeProject.Experts.Count != 0;
+            return parameter is GuiViewModel guiViewModel && guiViewModel.ProjectHasExperts();
         }
 
         public void Execute(object parameter)
@@ -26,7 +26,7 @@ namespace Forest.Gui.Export
 
             var dialog = new ElicitationFormExportDialog
             {
-                DataContext = new ExportElicitationFormsViewModel(guiViewModel.ProjectViewModel.EventTreeProject)
+                DataContext = new ExportElicitationFormsViewModel(guiViewModel.GetEventTreeProject())
                 {
                     OnExport = guiViewModel.OnExportElicitationForms
                 },

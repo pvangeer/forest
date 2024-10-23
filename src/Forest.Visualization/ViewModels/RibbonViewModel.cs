@@ -1,12 +1,9 @@
 using System.Windows.Input;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Forest.Gui;
 using Forest.Gui.Components;
 using Forest.Visualization.Commands;
-using Forest.Data;
 using Forest.Data.Services;
 using Forest.Data.Tree;
 
@@ -101,10 +98,8 @@ namespace Forest.Visualization.ViewModels
 
         public void AddTreeEvent(TreeEventType treeEventType)
         {
-            projectManipulationService.AddTreeEvent(gui.EventTreeProject.EventTree, SelectedTreeEvent, treeEventType);
-            gui.SelectionManager.SelectTreeEvent(treeEventType == TreeEventType.Failing
-                ? gui.SelectionManager.SelectedTreeEvent.FailingEvent
-                : gui.SelectionManager.SelectedTreeEvent.PassingEvent);
+            var newTreeEvent = projectManipulationService.AddTreeEvent(gui.EventTreeProject.EventTree, SelectedTreeEvent, treeEventType);
+            gui.SelectionManager.SelectTreeEvent(newTreeEvent);
         }
 
         public void RemoveTreeEvent(TreeEventType eventType)

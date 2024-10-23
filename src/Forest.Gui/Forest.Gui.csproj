@@ -140,19 +140,14 @@
     <Compile Include="Command\RemoveAllMessagesCommand.cs" />
     <Compile Include="Converters\EventTypeToColorConverter.cs" />
     <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />
-    <Compile Include="Command\ProjectViewModelCommand.cs" />
     <Compile Include="Converters\CriticalPathConverter.cs" />
     <Compile Include="Converters\CriticalPathToPlotModelConverter.cs" />
     <Compile Include="Converters\CriticalPathToProbabilityTextConverter.cs" />
     <Compile Include="DataTemplates\MainTabItems\EstimationContentTemplateSelector.cs" />
-    <Compile Include="Converters\SelectedItemToMainTreeEventViewModelConverter.cs" />
     <Compile Include="Converters\SelectedPropertyToColorConverter.cs" />
-    <Compile Include="Command\AddTreeEventCommand.cs" />
-    <Compile Include="Command\EventTreeCommand.cs" />
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
     <Compile Include="Converters\FragilityCurveToPlotModelConverter.cs" />
     <Compile Include="Converters\EventTreesToCountConverter.cs" />
-    <Compile Include="DataTemplates\MainTabItems\EventTree\EventTreeGraphLayout.cs" />
     <Compile Include="EnumerationExtension.cs" />
     <Compile Include="EstimationToBackgroundConverter.cs" />
     <Compile Include="Export\EventTreeExportViewModel.cs" />
@@ -162,12 +157,10 @@
     </Compile>
     <Compile Include="Export\ElicitationFormsExportViewModel.cs" />
     <Compile Include="Export\ExportElicitationFormsCommand.cs" />
-    <Compile Include="ForestGui.cs" />
     <Compile Include="Import\ImportElicitationFormsCommand.cs" />
     <Compile Include="Export\PerformExportElicitationFormsCommand.cs" />
     <Compile Include="Export\SelectFileLocationCommand.cs" />
     <Compile Include="Export\FolderDialogBehavior.cs" />
-    <Compile Include="GuiProjectServices.cs" />
     <Compile Include="Converters\MessageListToLabelConverter.cs" />
     <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
     <Compile Include="Converters\SelectedProcessToCheckedConverter.cs" />
@@ -175,14 +168,10 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RichTextFormatter.cs" />
     <Compile Include="RouteToPathConverterManual.cs" />
-    <Compile Include="ShouldProceedState.cs" />
     <Compile Include="StringToProbabilityClassValidationRule.cs" />
-    <Compile Include="TreeEventConnector.cs" />
     <Compile Include="ViewModels\ChangeProcessStepCommand.cs" />
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\EstimationSpecificationViewModelFactory.cs" />
-    <Compile Include="ViewModels\EventTreeGraph.cs" />
-    <Compile Include="ViewModels\EventTreeViewModel.cs" />
     <Compile Include="ViewModels\ExpertClassEstimationViewModel.cs" />
     <Compile Include="ViewModels\ExpertViewModel.cs" />
     <Compile Include="Command\FileNewCommnd.cs" />
@@ -195,29 +184,15 @@
     <Compile Include="Command\OpenProjectCommand.cs" />
     <Compile Include="ViewModels\MessageListViewModel.cs" />
     <Compile Include="ViewModels\ProbabilitySpecificationViewModelBase.cs" />
-    <Compile Include="ViewModels\ProjectViewModel.cs" />
-    <Compile Include="Command\RemoveTreeEventCommand.cs" />
-    <Compile Include="Command\TreeEventClickedCommand.cs" />
     <Compile Include="Command\SaveProjectAsCommand.cs" />
     <Compile Include="Command\SaveProjectCommand.cs" />
     <Compile Include="Command\RemovePriorityMessageCommand.cs" />
-    <Compile Include="ViewModels\StorageState.cs" />
     <Compile Include="Command\ShowMessageListCommand.cs" />
-    <Compile Include="ViewModels\ForestProcess.cs" />
-    <Compile Include="ViewModels\TreeEventViewModel.cs" />
-    <Page Include="DataTemplates\ContentPresenterDataTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="DataTemplates\General\AssessmentSections.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataTemplates\General\ComboBoxFlatStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\MainTabItems\EstimationDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,49 +208,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DataTemplates\MainTabItems\ExpertsDataTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\MainTabItems\GeneralInformationDataTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\MainTabItems\HydraulicsDataTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\MainTabItems\TreeEventInformationDataTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\MainTabItems\TreeEventsListViewItemDataTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="DataTemplates\MessageDataTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DataTemplates\MainTabItems\ResultsDataTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="DataTemplates\General\TabControlFlatStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\MainTabItems\TreeEventsDataTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\MainTabItems\EventTree\EdgeControlTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="DataTemplates\MainTabItems\EventTree\VertexControlTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Export\ElicitationFormExportDialog.xaml">
       <SubType>Designer</SubType>
@@ -387,6 +326,10 @@
       <Project>{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}</Project>
       <Name>Forest.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Forest.Gui.Components\Forest.Gui.Components.csproj">
+      <Project>{5ACE288D-CC7F-47D4-8A2A-2764101BC5E6}</Project>
+      <Name>Forest.Gui.Components</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forest.IO\Forest.IO.csproj">
       <Project>{64AC0A2F-B6D4-45C8-812B-AAC0BAEC1D11}</Project>
       <Name>Forest.IO</Name>
@@ -399,6 +342,11 @@
       <Project>{A5C2B4E5-1758-4B14-800E-E3F2AA64EA64}</Project>
       <Name>Forest.Storage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Forest.Visualization\Forest.Visualization.csproj">
+      <Project>{354E5594-846B-499E-BCE6-2E8DE93B928C}</Project>
+      <Name>Forest.Visualization</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

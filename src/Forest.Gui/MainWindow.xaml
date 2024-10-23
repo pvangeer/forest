@@ -5,7 +5,8 @@
     xmlns:fluent="urn:fluent-ribbon"
     xmlns:converters="clr-namespace:Forest.Gui.Converters"
     xmlns:viewModels="clr-namespace:Forest.Gui.ViewModels"
-    xmlns:services="clr-namespace:Forest.Data.Services;assembly=Forest.Data"
+    xmlns:components="clr-namespace:Forest.Gui.Components;assembly=Forest.Gui.Components"
+    xmlns:visualization="clr-namespace:Forest.Visualization;assembly=Forest.Visualization"
     Closing="MainWindowClosing"
     Title="Faalpad"
     Height="800"
@@ -19,8 +20,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml" />
-                <ResourceDictionary Source="/DataTemplates/ContentPresenterDataTemplate.xaml" />
-                <ResourceDictionary Source="/DataTemplates/MessageDataTemplates.xaml" />
+                <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/ContentPresenterDataTemplate.xaml" />
+                <ResourceDictionary Source="/Forest.Gui;component/DataTemplates/MessageDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="Spinner" TargetType="Image">
@@ -50,7 +51,6 @@
             <converters:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
             <converters:ShouldShowPriorityMessageToBoolConverter x:Key="ShouldShowPriorityMessageToBoolConverter" />
             <converters:MessageListToLabelConverter x:Key="MessageListToLabelConverter" />
-            <converters:SelectedProcessToCheckedConverter x:Key="SelectedProcessToBoolConverter" />
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
@@ -64,164 +64,16 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <fluent:Ribbon
-            IsEnabled="{Binding BusyIndicator, Converter={StaticResource BusyIndicatorToEnabledConverter}}"
-            Focusable="True">
-            <!--Backstage-->
-            <fluent:Ribbon.Menu>
-                <fluent:Backstage Background="{StaticResource ApplicationBorderColorBrush}">
-                    <fluent:BackstageTabControl>
-                        <fluent:Button Header="Nieuw bestand"
-                                       Icon="/Core.Common.Gui;component\Resources\DocumentHS.png"
-                                       fluent:KeyTip.Keys="N"
-                                       Command="{Binding FileNewCommand}" />
-
-                        <fluent:Button Header="Opslaan"
-                                       Icon="/Core.Common.Gui;component\Resources\saveHS.png"
-                                       fluent:KeyTip.Keys="S"
-                                       Command="{Binding SaveProjectCommand}" />
-
-                        <fluent:Button Header="Opslaan Als"
-                                       Icon="/Core.Common.Gui;component\Resources\SaveAsHH.png"
-                                       fluent:KeyTip.Keys="A"
-                                       Command="{Binding SaveProjectAsCommand}" />
-
-                        <fluent:Button Header="Openen"
-                                       Icon="/Core.Common.Gui;component\Resources\openfolderHS.png"
-                                       fluent:KeyTip.Keys="O"
-                                       Command="{Binding OpenProjectCommand}" />
-
-                        <fluent:SeparatorTabItem />
-
-                        <fluent:Button Header="Afsluiten"
-                                       Icon="/Core.Common.Gui;component\Resources\ClosePreviewHH.png"
-                                       fluent:KeyTip.Keys="X"
-                                       Command="ApplicationCommands.Close" />
-
-                    </fluent:BackstageTabControl>
-                </fluent:Backstage>
-            </fluent:Ribbon.Menu>
-
-            <fluent:Ribbon.ContextualGroups>
-                <fluent:RibbonContextualTabGroup
-                    Name="EventTreeFunctionsGroup"
-                    Header="Gebeurtenissen"
-                    Background="CornflowerBlue"
-                    BorderBrush="DodgerBlue">
-                    <fluent:RibbonContextualTabGroup.Style>
-                        <Style TargetType="fluent:RibbonContextualTabGroup">
-                            <Setter Property="Visibility" Value="Visible" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding SelectedProcess}"
-                                             Value="{x:Static viewModels:ForestProcess.GeneralInformation}">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding SelectedProcess}"
-                                             Value="{x:Static viewModels:ForestProcess.Experts}">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding SelectedProcess}"
-                                             Value="{x:Static viewModels:ForestProcess.Hydraulics}">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </fluent:RibbonContextualTabGroup.Style>
-                </fluent:RibbonContextualTabGroup>
-            </fluent:Ribbon.ContextualGroups>
-
-            <fluent:RibbonTabItem
-                Header="Proces"
-                fluent:KeyTip.Keys="P">
-                <fluent:RibbonGroupBox Header="Algemeen">
-                    <fluent:ToggleButton
-                        Header="Projectgegevens"
-                        LargeIcon="/Forest.Gui;component\Resources\project-information.png"
-                        Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.GeneralInformation}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:ForestProcess.GeneralInformation}" />
-                    <fluent:ToggleButton
-                        Header="Experts"
-                        LargeIcon="/Forest.Gui;component\Resources\experts.png"
-                        Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.Experts}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:ForestProcess.Experts}" />
-                    <fluent:ToggleButton
-                        Header="Hydraulische gegevens"
-                        LargeIcon="/Forest.Gui;component\Resources\hydraulics.png"
-                        Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.Hydraulics}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:ForestProcess.Hydraulics}" />
-                </fluent:RibbonGroupBox>
-            </fluent:RibbonTabItem>
-            <fluent:RibbonTabItem
-                Header="Faalpaden"
-                fluent:KeyTip.Keys="F">
-                <fluent:RibbonGroupBox Header="Gebeurtenissen">
-                    <fluent:ToggleButton
-                        Header="Faalpaden tonen"
-                        LargeIcon="/Forest.Gui;component\Resources\add-eventtree.png"
-                        Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.TreeEventsDefinition}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:ForestProcess.TreeEventsDefinition}" />
-                    <fluent:Button
-                        Header="Toevoegen (falen)"
-                        LargeIcon="/Forest.Gui;component\Resources\add-tree-event.png"
-                        Size="Large"
-                        Command="{Binding ProjectViewModel.AddTreeEventCommand}"
-                        CommandParameter="{x:Static services:TreeEventType.Failing}" />
-                    <fluent:Button
-                        Header="Toevoegen (niet falen)"
-                        LargeIcon="/Forest.Gui;component\Resources\add-tree-event.png"
-                        Size="Large"
-                        Command="{Binding ProjectViewModel.AddTreeEventCommand}"
-                        CommandParameter="{x:Static services:TreeEventType.Passing}" />
-                    <fluent:Button
-                        Header="Verwijderen"
-                        LargeIcon="/Forest.Gui;component\Resources\remove-tree-event.png"
-                        Size="Large"
-                        Command="{Binding ProjectViewModel.RemoveTreeEventCommand}" />
-                    <fluent:ToggleButton
-                        Header="Knoopinformatie"
-                        LargeIcon="/Forest.Gui;component\Resources\tree-event-info.png"
-                        Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.TreeEventsInformation}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:ForestProcess.TreeEventsInformation}" />
-                </fluent:RibbonGroupBox>
-                <fluent:RibbonGroupBox Header="Overgangskansen">
-                    <fluent:ToggleButton
-                        Header="Overgangskansen"
-                        LargeIcon="/Forest.Gui;component\Resources\estimation.png"
-                        Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.Estimation}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:ForestProcess.Estimation}" />
-                </fluent:RibbonGroupBox>
-                <fluent:RibbonGroupBox Header="Resultaten">
-                    <fluent:ToggleButton
-                        Header="Resultaten"
-                        LargeIcon="/Forest.Gui;component\Resources\results.png"
-                        Size="Large"
-                        IsChecked="{Binding SelectedProcess, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static viewModels:ForestProcess.Results}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static viewModels:ForestProcess.Results}" />
-                </fluent:RibbonGroupBox>
-
-            </fluent:RibbonTabItem>
-
-        </fluent:Ribbon>
+        <visualization:ForestRibbonControl
+            Grid.Row="0"
+            DataContext="{Binding RibbonViewModel}"/>
 
         <Grid Grid.Row="1" ZIndex="2">
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Setter Property="Visibility" Value="Collapsed" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding BusyIndicator}" Value="{x:Static viewModels:StorageState.Busy}">
+                        <DataTrigger Binding="{Binding BusyIndicator}" Value="{x:Static components:StorageState.Busy}">
                             <Setter Property="Visibility" Value="Visible" />
                         </DataTrigger>
                     </Style.Triggers>
@@ -246,11 +98,12 @@
                 Source="/Forest.Gui;component/Resources/busy-white.png"
                 Style="{StaticResource Spinner}" />
         </Grid>
+
         <ContentPresenter
             Grid.Row="1"
             IsEnabled="{Binding BusyIndicator, Converter={StaticResource BusyIndicatorToEnabledConverter}}"
             Name="HostControl"
-            Content="{Binding }"
+            Content="{Binding ContentPresenterViewModel}"
             ContentTemplate="{StaticResource ContentPresenterDataTemplate}" />
 
         <fluent:StatusBar
@@ -298,14 +151,14 @@
                 Content="{Binding BusyIndicator}"
                 Margin="1,1,5,1">
                 <StatusBarItem.Resources>
-                    <DataTemplate x:Key="BusyIconTemplate" DataType="viewModels:StorageState">
+                    <DataTemplate x:Key="BusyIconTemplate" DataType="{x:Type components:StorageState}">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock Text="Bezig" Margin="4,0,4,0" VerticalAlignment="Center" />
                             <Image Source="/Forest.Gui;component/Resources/busy-white.png"
                                    Style="{StaticResource Spinner}" />
                         </StackPanel>
                     </DataTemplate>
-                    <DataTemplate x:Key="IdleIconTemplate" DataType="viewModels:StorageState">
+                    <DataTemplate x:Key="IdleIconTemplate" DataType="{x:Type components:StorageState}">
                         <Image Source="/Forest.Gui;component/Resources/idle-white.png" />
                     </DataTemplate>
                 </StatusBarItem.Resources>
@@ -316,7 +169,7 @@
                             Content="{Binding }"
                             ContentTemplate="{StaticResource IdleIconTemplate}" />
                         <DataTemplate.Triggers>
-                            <DataTrigger Binding="{Binding }" Value="{x:Static viewModels:StorageState.Busy}">
+                            <DataTrigger Binding="{Binding }" Value="{x:Static components:StorageState.Busy}">
                                 <Setter TargetName="busyIconPresenter" Property="ContentTemplate"
                                         Value="{StaticResource BusyIconTemplate}" />
                             </DataTrigger>

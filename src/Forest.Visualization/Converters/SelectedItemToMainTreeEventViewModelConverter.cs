@@ -1,19 +1,18 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using Forest.Gui.Components;
-using Forest.Gui.ViewModels;
+using Forest.Visualization.ViewModels;
 
-namespace Forest.Gui.Converters
+namespace Forest.Visualization.Converters
 {
-    public class BusyIndicatorToEnabledConverter : IValueConverter
+    public class SelectedItemToMainTreeEventViewModelConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is StorageState storageState))
-                return value;
+            if (!(value is EventTreeViewModel eventTreeViewModel))
+                return null;
 
-            return storageState == StorageState.Idle;
+            return eventTreeViewModel.MainTreeEventViewModel;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:visualization="clr-namespace:Forest.Visualization"
+                    xmlns:viewModels="clr-namespace:Forest.Gui.Components;assembly=Forest.Gui.Components">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/GeneralInformationDataTemplate.xaml" />
+        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/ExpertsDataTemplate.xaml" />
+        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/HydraulicsDataTemplate.xaml" />
+        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/EstimationDataTemplate.xaml" />
+        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/TreeEventsDataTemplate.xaml" />
+        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/TreeEventInformationDataTemplate.xaml" />
+        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/ResultsDataTemplate.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate x:Key="ContentPresenterDataTemplate" DataType="visualization:ContentPresenterViewModel">
+        <ContentPresenter
+            Name="Hoster"
+            Content="{Binding .}" />
+
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding SelectedGuiState}"
+                         Value="{x:Static viewModels:ForestGuiState.GeneralInformation}">
+                <Setter TargetName="Hoster" Property="ContentTemplate"
+                        Value="{StaticResource GeneralInformationDataTemplate}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding SelectedGuiState}" Value="{x:Static viewModels:ForestGuiState.Experts}">
+                <Setter TargetName="Hoster" Property="ContentTemplate" Value="{StaticResource ExpertsDataTemplate}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding SelectedGuiState}" Value="{x:Static viewModels:ForestGuiState.Hydraulics}">
+                <Setter TargetName="Hoster" Property="ContentTemplate" Value="{StaticResource HydraulicsDataTemplate}" />
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding SelectedGuiState}"
+                         Value="{x:Static viewModels:ForestGuiState.TreeEventsDefinition}">
+                <Setter TargetName="Hoster" Property="ContentTemplate" Value="{StaticResource TreeEventsTemplate}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding SelectedGuiState}"
+                         Value="{x:Static viewModels:ForestGuiState.TreeEventsInformation}">
+                <Setter TargetName="Hoster" Property="ContentTemplate"
+                        Value="{StaticResource TreeEventInformationDataTemplate}" />
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding SelectedGuiState}" Value="{x:Static viewModels:ForestGuiState.Estimation}">
+                <Setter TargetName="Hoster" Property="ContentTemplate" Value="{StaticResource EstimationDataTemplate}" />
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding SelectedGuiState}" Value="{x:Static viewModels:ForestGuiState.Results}">
+                <Setter TargetName="Hoster" Property="ContentTemplate" Value="{StaticResource ResultsDataTemplate}" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+
+    </DataTemplate>
+</ResourceDictionary>

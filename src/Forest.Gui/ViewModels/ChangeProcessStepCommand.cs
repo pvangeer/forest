@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using Forest.Gui.Components;
 
 namespace Forest.Gui.ViewModels
 {
@@ -19,10 +20,10 @@ namespace Forest.Gui.ViewModels
 
         public void Execute(object parameter)
         {
-            if (!(parameter is ForestProcess process))
+            if (!(parameter is ForestGuiState process))
                 return;
 
-            ViewModel.SelectedProcess = process;
+            ViewModel.SelectedState = process;
         }
 
         public event EventHandler CanExecuteChanged;

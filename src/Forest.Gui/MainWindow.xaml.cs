@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using Forest.Data;
+using Forest.Gui.Components;
 using Forest.Gui.ViewModels;
 
 namespace Forest.Gui

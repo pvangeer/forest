@@ -9,9 +9,12 @@ using System.Windows.Input;
 using Forest.Data;
 using Forest.Data.Properties;
 using Forest.Gui.Command;
+using Forest.Gui.Components;
 using Forest.IO.Export;
 using Forest.IO.Import;
 using Forest.Messaging;
+using Forest.Visualization;
+using Forest.Visualization.ViewModels;
 
 namespace Forest.Gui.ViewModels
 {
@@ -19,7 +22,6 @@ namespace Forest.Gui.ViewModels
     {
         private readonly ForestGui gui;
         private MessageListViewModel messageListViewModel;
-        private ForestProcess selectedProcess;
 
         public GuiViewModel() : this(new ForestGui())
         {
@@ -33,7 +35,8 @@ namespace Forest.Gui.ViewModels
                 gui.ShouldMigrateProject = ShouldMigrateProject;
                 this.gui.PropertyChanged += GuiPropertyChanged;
                 this.gui.Messages.CollectionChanged += GuiMessagesCollectionChanged;
-                ProjectViewModel = new ProjectViewModel(this.gui.EventTreeProject);
+                ContentPresenterViewModel = new ContentPresenterViewModel(gui);
+                RibbonViewModel = new RibbonViewModel(gui);
                 this.gui.ShouldSaveOpenChanges = ShouldSaveOpenChanges;
             }
         }
@@ -48,8 +51,6 @@ namespace Forest.Gui.ViewModels
             set => gui.BusyIndicator = value;
         }
 
-        public ProjectViewModel ProjectViewModel { get; private set; }
-
         public MessageListViewModel MessagesViewModel =>
             messageListViewModel ?? (messageListViewModel = new MessageListViewModel(gui.Messages));
 
@@ -63,26 +64,18 @@ namespace Forest.Gui.ViewModels
             }
         }
 
-        public ICommand FileNewCommand => new FileNewCommnd(this);
-
-        public ICommand SaveProjectCommand => new SaveProjectCommand(this);
-
-        public ICommand SaveProjectAsCommand => new SaveProjectAsCommand(this);
-
-        public ICommand OpenProjectCommand => new OpenProjectCommand(gui.GuiProjectServices);
-
         public ICommand RemoveLastMessageCommand => new RemovePriorityMessageCommand(this);
 
         public ICommand ShowMessageListCommand => new ShowMessageListCommand(this);
 
-        public ForestProcess SelectedProcess
+        public ForestGuiState SelectedState
         {
-            get => selectedProcess;
+            get => gui.SelectedState;
             set
             {
-                selectedProcess = value;
+                gui.SelectedState = value;
+                gui.OnPropertyChanged(nameof(ForestGui.SelectedState));
                 OnPropertyChanged();
-                ProjectViewModel.OnProcessChanged();
             }
         }
 
@@ -91,6 +84,10 @@ namespace Forest.Gui.ViewModels
         public string ProjectFileName => string.IsNullOrEmpty(ProjectFilePath)
             ? "Nieuw bestand*"
             : Path.GetFileNameWithoutExtension(ProjectFilePath);
+
+        public ContentPresenterViewModel ContentPresenterViewModel { get; }
+
+        public RibbonViewModel RibbonViewModel { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -169,10 +166,6 @@ namespace Forest.Gui.ViewModels
                 case nameof(ForestGui.BusyIndicator):
                     OnPropertyChanged(nameof(BusyIndicator));
                     break;
-                case nameof(ForestGui.EventTreeProject):
-                    ProjectViewModel = new ProjectViewModel(gui.EventTreeProject);
-                    OnPropertyChanged(nameof(ProjectViewModel));
-                    break;
                 case nameof(ForestGui.Messages):
                     messageListViewModel = null;
                     OnPropertyChanged(nameof(MessagesViewModel));
@@ -197,13 +190,13 @@ namespace Forest.Gui.ViewModels
 
         public void OnExportElicitationForms(string fileLocation, string prefix, Expert[] expertsToExport, EventTree eventTreeToExport)
         {
-            var exporter = new ElicitationFormsExporter(ProjectViewModel.EventTreeProject);
+            var exporter = new ElicitationFormsExporter(gui.EventTreeProject);
             exporter.Export(fileLocation, prefix, expertsToExport, eventTreeToExport);
         }
 
         public void OnImportElicitationForms(string[] fileLocations)
         {
-            var importer = new ElicitationFormImporter(ProjectViewModel.EventTreeProject);
+            var importer = new ElicitationFormImporter(gui.EventTreeProject);
             foreach (var fileLocation in fileLocations)
                 importer.Import(fileLocation);
         }
@@ -236,6 +229,16 @@ namespace Forest.Gui.ViewModels
         public bool ForcedClosingMainWindow()
         {
             return gui.GuiProjectServices.HandleUnsavedChanges(() => { });
+        }
+
+        public bool ProjectHasExperts()
+        {
+            return gui.EventTreeProject.Experts.Any();
+        }
+
+        public EventTreeProject GetEventTreeProject()
+        {
+            return gui.EventTreeProject;
         }
     }
 }

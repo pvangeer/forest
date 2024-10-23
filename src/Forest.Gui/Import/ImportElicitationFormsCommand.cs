@@ -15,7 +15,7 @@ namespace Forest.Gui.Import
 
         public bool CanExecute(object parameter)
         {
-            return parameter is GuiViewModel guiViewModel && guiViewModel.ProjectViewModel.EventTreeProject.Experts.Count != 0;
+            return parameter is GuiViewModel guiViewModel && guiViewModel.ProjectHasExperts();
         }
 
         public void Execute(object parameter)

@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
+                    xmlns:viewModels1="clr-namespace:Forest.Visualization.ViewModels"
+                    xmlns:eventTree="clr-namespace:Forest.Visualization.DataTemplates.MainTabItems.EventTree"
+                    xmlns:visualization="clr-namespace:Forest.Visualization">
+
+    <DataTemplate x:Key="TreeEventViewModelTemplate" DataType="viewModels1:TreeEventViewModel">
+        <Grid />
+    </DataTemplate>
+
+    <DataTemplate x:Key="TreeEventsTemplate" DataType="{x:Type visualization:ContentPresenterViewModel}">
+        <controls:ZoomControl ZoomDeltaMultiplier="5">
+            <controls:ZoomControl.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary
+                            Source="/Forest.Visualization;component/DataTemplates/MainTabItems/EventTree/EdgeControlTemplate.xaml" />
+                        <ResourceDictionary
+                            Source="/Forest.Visualization;component/DataTemplates/MainTabItems/EventTree/VertexControlTemplate.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </controls:ZoomControl.Resources>
+            <eventTree:EventTreeGraphLayout Graph="{Binding EventTree.Graph}" />
+        </controls:ZoomControl>
+    </DataTemplate>
+</ResourceDictionary>
