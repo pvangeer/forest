@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{354E5594-846B-499E-BCE6-2E8DE93B928C}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>Forest.Visualization</RootNamespace>
+    <AssemblyName>Forest.Visualization</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Fluent, Version=6.1.0.233, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fluent.Ribbon.6.1.0.233\lib\net462\Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\AddTreeEventCommand.cs" />
+    <Compile Include="Commands\ChangeProcessStepCommand.cs" />
+    <Compile Include="Commands\EventTreeCommand.cs" />
+    <Compile Include="Commands\FileNewCommand.cs" />
+    <Compile Include="Commands\OpenProjectCommand.cs" />
+    <Compile Include="Commands\RemoveTreeEventCommand.cs" />
+    <Compile Include="Commands\SaveProjectAsCommand.cs" />
+    <Compile Include="Commands\SaveProjectCommand.cs" />
+    <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />
+    <Compile Include="Converters\SelectedProcessToCheckedConverter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="RibbonControl.xaml.cs">
+      <DependentUpon>RibbonControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\RibbonViewModel.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="RibbonControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Forest.Calculators\Forest.Calculators.csproj">
+      <Project>{a7090218-547d-412b-a4f5-f80c8b4890f3}</Project>
+      <Name>Forest.Calculators</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forest.Data\Forest.Data.csproj">
+      <Project>{2f5ce516-bf3b-4b33-951f-2dc8bcf08e43}</Project>
+      <Name>Forest.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forest.Gui.Components\Forest.Gui.Components.csproj">
+      <Project>{5ace288d-cc7f-47d4-8a2a-2764101bc5e6}</Project>
+      <Name>Forest.Gui.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forest.IO\Forest.IO.csproj">
+      <Project>{64ac0a2f-b6d4-45c8-812b-aac0baec1d11}</Project>
+      <Name>Forest.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forest.Storage\Forest.Storage.csproj">
+      <Project>{a5c2b4e5-1758-4b14-800e-e3f2aa64ea64}</Project>
+      <Name>Forest.Storage</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\project-information.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\dismiss.ico" />
+    <Resource Include="Resources\document.ico" />
+    <Resource Include="Resources\folder_open_regular.ico" />
+    <Resource Include="Resources\save_edit_regular.ico" />
+    <Resource Include="Resources\save_regular.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\experts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\hydraulics.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add-eventtree.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add-tree-event.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\remove-tree-event.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\estimation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\tree-event-info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\results.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\remove-eventtree.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
