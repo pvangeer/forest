@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Forest.Visualization
 {
     /// <summary>
-    /// Interaction logic for RibbonControl.xaml
+    /// Interaction logic for ForestRibbonControl.xaml
     /// </summary>
-    public partial class RibbonControl : UserControl
+    public partial class ForestRibbonControl : UserControl
     {
-        public RibbonControl()
+        public ForestRibbonControl()
         {
             InitializeComponent();
         }

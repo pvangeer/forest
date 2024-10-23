@@ -81,8 +81,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="RibbonControl.xaml.cs">
-      <DependentUpon>RibbonControl.xaml</DependentUpon>
+    <Compile Include="ForestRibbonControl.xaml.cs">
+      <DependentUpon>ForestRibbonControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\RibbonViewModel.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -96,7 +96,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="RibbonControl.xaml">
+    <Page Include="ForestRibbonControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
