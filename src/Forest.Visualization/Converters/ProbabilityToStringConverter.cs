@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using Forest.Data;
 
-namespace Forest.Gui.Converters
+namespace Forest.Visualization.Converters
 {
     public class ProbabilityToStringConverter : IValueConverter
     {

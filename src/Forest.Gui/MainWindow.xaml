@@ -14,7 +14,7 @@
     BorderThickness="1"
     BorderBrush="MediumBlue">
     <Window.DataContext>
-        <viewModels:GuiViewModel />
+        <viewModels:MainWindowViewModel />
     </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>

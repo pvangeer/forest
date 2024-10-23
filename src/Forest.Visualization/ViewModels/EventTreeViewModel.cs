@@ -16,7 +16,6 @@ namespace Forest.Visualization.ViewModels
         private EventTreeGraph graph;
         private bool isSelected;
         private TreeEventViewModel mainTreeEventViewModel;
-        private TreeEventViewModel selectedTreeEvent;
         private readonly SelectionManager selectionManager;
 
         public EventTreeViewModel()

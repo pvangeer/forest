@@ -52,7 +52,7 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
-    <DataTemplate x:Key="PopupErrorMessageTemplate" DataType="viewModels:GuiViewModel">
+    <DataTemplate x:Key="PopupErrorMessageTemplate" DataType="viewModels:MainWindowViewModel">
         <Border BorderThickness="1" BorderBrush="CornflowerBlue">
             <Grid>
                 <Grid.RowDefinitions>

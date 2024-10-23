@@ -6,12 +6,12 @@ namespace Forest.Gui.Command
 {
     public class ShowMessageListCommand : ICommand
     {
-        public ShowMessageListCommand(GuiViewModel guiViewModel)
+        public ShowMessageListCommand(MainWindowViewModel mainWindowViewModel)
         {
-            ViewModel = guiViewModel;
+            ViewModel = mainWindowViewModel;
         }
 
-        public GuiViewModel ViewModel { get; }
+        public MainWindowViewModel ViewModel { get; }
 
         public bool CanExecute(object parameter)
         {
@@ -21,7 +21,7 @@ namespace Forest.Gui.Command
         public void Execute(object parameter)
         {
             ViewModel.ShowMessages = ViewModel.MessagesViewModel.MessageList.Count != 0;
-            ViewModel.OnPropertyChanged(nameof(GuiViewModel.ShowMessages));
+            ViewModel.OnPropertyChanged(nameof(MainWindowViewModel.ShowMessages));
         }
 
         public event EventHandler CanExecuteChanged;

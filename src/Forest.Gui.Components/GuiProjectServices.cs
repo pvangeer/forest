@@ -21,42 +21,10 @@ namespace Forest.Gui.Components
             storageXml = new StorageXml();
         }
 
-        public Func<FileNameQuestionResult> OpenProjectFileNameFunc { get; set; }
-        // TODO: Move this to visualization (not GUI functionality
-        /*var dialog = new OpenFileDialog
-        {
-            CheckFileExists = true,
-            Filter = "Faalpadenproject bestand (*.xml)|*.xml",
-            FileName = gui.ProjectFilePath
-        };
-
-        if ((bool)dialog.ShowDialog(Application.Current.MainWindow))
-            OpenProjectCore(dialog.FileName);*/
-        public Func<string,FileNameQuestionResult> SaveProjectFileNameFunc { get; set; }
-        /*
-         //TODO: Inject
-         From Migration:
-         var dialog = new SaveFileDialog
-            {
-                CheckPathExists = true,
-                FileName = fileName.Replace(".xml",
-                    $"-migrated-{VersionInfo.Year}.{VersionInfo.MajorVersion}.{VersionInfo.MinorVersion}.xml"),
-                OverwritePrompt = true,
-                Filter = "Faalpadenproject bestand (*.xml)|*.xml"
-            };
+        public Func<string,FileNameQuestionResult> OpenProjectFileNameFunc { get; set; }
         
-         if ((bool)dialog.ShowDialog(Application.Current.MainWindow))
-
-        var dialog = new SaveFileDialog
-            {
-                CheckPathExists = true,
-                FileName = gui.ProjectFilePath,
-                OverwritePrompt = true,
-                Filter = "Faalpadenproject bestand (*.xml)|*.xml"
-            };
-
-         */
-
+        public Func<string,FileNameQuestionResult> SaveProjectFileNameFunc { get; set; }
+        
         public void NewProject()
         {
             HandleUnsavedChanges(CreateNewProject);
@@ -78,7 +46,7 @@ namespace Forest.Gui.Components
 
             HandleUnsavedChanges(() =>
             {
-                var result = OpenProjectFileNameFunc();
+                var result = OpenProjectFileNameFunc(gui.ProjectFilePath);
                 if (result.Proceed)
                 {
                     OpenProjectCore(result.FileName);
@@ -133,7 +101,8 @@ namespace Forest.Gui.Components
             {
                 throw new XmlMigrationException("SaveProjectFileNameFunc was not specified.");
             }
-            var result = SaveProjectFileNameFunc(fileName);
+            var result = SaveProjectFileNameFunc(fileName.Replace(".xml",
+                $"-migrated-{VersionInfo.Year}.{VersionInfo.MajorVersion}.{VersionInfo.MinorVersion}.xml"));
 
             newFileName = null;
 

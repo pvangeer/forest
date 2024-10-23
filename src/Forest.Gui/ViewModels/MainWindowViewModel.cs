@@ -14,24 +14,27 @@ using Forest.IO.Export;
 using Forest.IO.Import;
 using Forest.Messaging;
 using Forest.Visualization;
+using Forest.Visualization.Dialogs;
 using Forest.Visualization.ViewModels;
 
 namespace Forest.Gui.ViewModels
 {
-    public class GuiViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         private readonly ForestGui gui;
         private MessageListViewModel messageListViewModel;
 
-        public GuiViewModel() : this(new ForestGui())
+        public MainWindowViewModel() : this(new ForestGui())
         {
         }
 
-        public GuiViewModel(ForestGui gui)
+        public MainWindowViewModel(ForestGui gui)
         {
             this.gui = gui;
             if (this.gui != null)
             {
+                gui.GuiProjectServices.SaveProjectFileNameFunc = FileDialogFactory.AskUserForFileNameToSaveToFunc();
+                gui.GuiProjectServices.OpenProjectFileNameFunc = FileDialogFactory.AskUserForFileNameToOpenFunc();
                 gui.ShouldMigrateProject = ShouldMigrateProject;
                 this.gui.PropertyChanged += GuiPropertyChanged;
                 this.gui.Messages.CollectionChanged += GuiMessagesCollectionChanged;
@@ -40,6 +43,8 @@ namespace Forest.Gui.ViewModels
                 this.gui.ShouldSaveOpenChanges = ShouldSaveOpenChanges;
             }
         }
+
+        #region Statusbar related
 
         public bool ShowMessages { get; set; }
 
@@ -54,15 +59,12 @@ namespace Forest.Gui.ViewModels
         public MessageListViewModel MessagesViewModel =>
             messageListViewModel ?? (messageListViewModel = new MessageListViewModel(gui.Messages));
 
-        public string ProjectFilePath
-        {
-            get => gui.ProjectFilePath;
-            set
-            {
-                gui.ProjectFilePath = value;
-                OnPropertyChanged(nameof(ProjectFileName));
-            }
-        }
+        public string ProjectFileName => string.IsNullOrEmpty(gui.ProjectFilePath)
+            ? "Nieuw bestand*"
+            : Path.GetFileNameWithoutExtension(gui.ProjectFilePath);
+
+        #endregion
+        
 
         public ICommand RemoveLastMessageCommand => new RemovePriorityMessageCommand(this);
 
@@ -78,12 +80,6 @@ namespace Forest.Gui.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        public ICommand ChangeProcessStepCommand => new ChangeProcessStepCommand(this);
-
-        public string ProjectFileName => string.IsNullOrEmpty(ProjectFilePath)
-            ? "Nieuw bestand*"
-            : Path.GetFileNameWithoutExtension(ProjectFilePath);
 
         public ContentPresenterViewModel ContentPresenterViewModel { get; }
 
@@ -171,7 +167,6 @@ namespace Forest.Gui.ViewModels
                     OnPropertyChanged(nameof(MessagesViewModel));
                     break;
                 case nameof(ForestGui.ProjectFilePath):
-                    OnPropertyChanged(nameof(ProjectFilePath));
                     OnPropertyChanged(nameof(ProjectFileName));
                     break;
             }

@@ -18,7 +18,7 @@ namespace Forest.Gui
             {
                 EventTreeProject = EventTreeProjectFactory.CreateStandardNewProject()
             };
-            var guiViewModel = new GuiViewModel(forestGui);
+            var guiViewModel = new MainWindowViewModel(forestGui);
             guiViewModel.OnInvalidateVisual += (o, ea) =>
             {
                 HostControl.InvalidateVisual();
@@ -35,7 +35,7 @@ namespace Forest.Gui
 
         private void MainWindowClosing(object sender, CancelEventArgs e)
         {
-            if (DataContext is GuiViewModel viewModel)
+            if (DataContext is MainWindowViewModel viewModel)
                 e.Cancel = !viewModel.ForcedClosingMainWindow();
         }
     }

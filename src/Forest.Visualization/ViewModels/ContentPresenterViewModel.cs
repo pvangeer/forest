@@ -103,7 +103,7 @@ namespace Forest.Visualization
 
         private EventTreeProject EventTreeProject => gui.EventTreeProject;
 
-        public EventTreeViewModel EventTree { get; }
+        public EventTreeViewModel EventTree { get; set; }
 
         public TreeEventViewModel SelectedTreeEvent => EventTree.SelectedTreeEvent;
 
@@ -123,6 +123,14 @@ namespace Forest.Visualization
             {
                 case nameof(ForestGui.SelectedState):
                     OnPropertyChanged(nameof(SelectedGuiState));
+                    break;
+                case nameof(ForestGui.EventTreeProject):
+                    EventTree = new EventTreeViewModel(EventTreeProject.EventTree, projectManipulationService, gui.SelectionManager)
+                    {
+                        EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(gui.EventTreeProject)
+                    };
+                    OnPropertyChanged(nameof(EventTree));
+                    OnPropertyChanged(nameof(SelectedTreeEvent));
                     break;
             }
         }

@@ -2,8 +2,13 @@
 {
     public class FileNameQuestionResult
     {
-        public string FileName { get; set; }
+        public FileNameQuestionResult(bool proceed, string fileName)
+        {
+            Proceed = proceed;
+            FileName = fileName;
+        }
+        public string FileName { get; }
 
-        public bool Proceed { get; set; }
+        public bool Proceed { get; }
     }
 }

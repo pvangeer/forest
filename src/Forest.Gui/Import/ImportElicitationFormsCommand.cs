@@ -15,12 +15,12 @@ namespace Forest.Gui.Import
 
         public bool CanExecute(object parameter)
         {
-            return parameter is GuiViewModel guiViewModel && guiViewModel.ProjectHasExperts();
+            return parameter is MainWindowViewModel guiViewModel && guiViewModel.ProjectHasExperts();
         }
 
         public void Execute(object parameter)
         {
-            if (!(parameter is GuiViewModel guiViewModel))
+            if (!(parameter is MainWindowViewModel guiViewModel))
             {
                 log.Error("Er is iets misgegaan, waardoor exporteren niet mogelijk is.");
                 return;

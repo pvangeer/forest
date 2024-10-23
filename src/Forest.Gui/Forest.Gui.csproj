@@ -136,20 +136,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BooleanBrushConverter.cs" />
     <Compile Include="Command\RemoveAllMessagesCommand.cs" />
-    <Compile Include="Converters\EventTypeToColorConverter.cs" />
     <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />
-    <Compile Include="Converters\CriticalPathConverter.cs" />
-    <Compile Include="Converters\CriticalPathToPlotModelConverter.cs" />
-    <Compile Include="Converters\CriticalPathToProbabilityTextConverter.cs" />
-    <Compile Include="DataTemplates\MainTabItems\EstimationContentTemplateSelector.cs" />
-    <Compile Include="Converters\SelectedPropertyToColorConverter.cs" />
-    <Compile Include="Converters\ProbabilityToStringConverter.cs" />
-    <Compile Include="Converters\FragilityCurveToPlotModelConverter.cs" />
-    <Compile Include="Converters\EventTreesToCountConverter.cs" />
-    <Compile Include="EnumerationExtension.cs" />
-    <Compile Include="EstimationToBackgroundConverter.cs" />
     <Compile Include="Export\EventTreeExportViewModel.cs" />
     <Compile Include="Export\ExportElicitationFormsViewModel.cs" />
     <Compile Include="Export\ElicitationFormExportDialog.xaml.cs">
@@ -163,56 +151,12 @@
     <Compile Include="Export\FolderDialogBehavior.cs" />
     <Compile Include="Converters\MessageListToLabelConverter.cs" />
     <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
-    <Compile Include="Converters\SelectedProcessToCheckedConverter.cs" />
-    <Compile Include="Command\SelectTodayCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="RichTextFormatter.cs" />
-    <Compile Include="RouteToPathConverterManual.cs" />
-    <Compile Include="StringToProbabilityClassValidationRule.cs" />
-    <Compile Include="ViewModels\ChangeProcessStepCommand.cs" />
-    <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
-    <Compile Include="ViewModels\EstimationSpecificationViewModelFactory.cs" />
-    <Compile Include="ViewModels\ExpertClassEstimationViewModel.cs" />
-    <Compile Include="ViewModels\ExpertViewModel.cs" />
-    <Compile Include="Command\FileNewCommnd.cs" />
-    <Compile Include="ViewModels\FixedFragilityCurveSpecificationViewModel.cs" />
-    <Compile Include="ViewModels\FixedProbabilitySpecificationViewModel.cs" />
-    <Compile Include="ViewModels\FragilityCurveElementViewModel.cs" />
-    <Compile Include="ViewModels\FragilityCurveViewModel.cs" />
-    <Compile Include="ViewModels\GuiViewModel.cs" />
-    <Compile Include="ViewModels\HydraulicConditionViewModel.cs" />
-    <Compile Include="Command\OpenProjectCommand.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MessageListViewModel.cs" />
-    <Compile Include="ViewModels\ProbabilitySpecificationViewModelBase.cs" />
-    <Compile Include="Command\SaveProjectAsCommand.cs" />
-    <Compile Include="Command\SaveProjectCommand.cs" />
     <Compile Include="Command\RemovePriorityMessageCommand.cs" />
     <Compile Include="Command\ShowMessageListCommand.cs" />
-    <Page Include="DataTemplates\General\AssessmentSections.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\General\ComboBoxFlatStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\MainTabItems\Estimation\ClassEstimationTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\MainTabItems\Estimation\FixedFragilityCurveEstimationTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\MainTabItems\Estimation\FixedValueEstimationTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="DataTemplates\MessageDataTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\General\TabControlFlatStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

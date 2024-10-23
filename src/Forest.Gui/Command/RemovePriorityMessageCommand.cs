@@ -6,12 +6,12 @@ namespace Forest.Gui.Command
 {
     public class RemovePriorityMessageCommand : ICommand
     {
-        public RemovePriorityMessageCommand(GuiViewModel guiViewModel)
+        public RemovePriorityMessageCommand(MainWindowViewModel mainWindowViewModel)
         {
-            ViewModel = guiViewModel;
+            ViewModel = mainWindowViewModel;
         }
 
-        private GuiViewModel ViewModel { get; }
+        private MainWindowViewModel ViewModel { get; }
 
         public bool CanExecute(object parameter)
         {
@@ -21,7 +21,7 @@ namespace Forest.Gui.Command
         public void Execute(object parameter)
         {
             ViewModel.PriorityMessage = null;
-            ViewModel.OnPropertyChanged(nameof(GuiViewModel.PriorityMessage));
+            ViewModel.OnPropertyChanged(nameof(MainWindowViewModel.PriorityMessage));
         }
 
         public event EventHandler CanExecuteChanged;
