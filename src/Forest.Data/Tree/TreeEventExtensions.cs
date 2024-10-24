@@ -8,24 +8,24 @@ namespace Forest.Data.Tree
 {
     public static class TreeEventExtensions
     {
-        public static FragilityCurve GetFragilityCurve(this TreeEvent treeEvent, IEnumerable<double> waterLevels)
+        public static FragilityCurve GetFragilityCurve(this TreeEventProbabilityEstimation estimation, IEnumerable<double> waterLevels)
         {
-            switch (treeEvent.ProbabilitySpecificationType)
+            switch (estimation.ProbabilitySpecificationType)
             {
                 case ProbabilitySpecificationType.Classes:
                     var classCurve = new FragilityCurve();
                     foreach (var waterLevel in waterLevels)
                         classCurve.Add(
-                            new FragilityCurveElement(waterLevel, GetClassesBasedProbabilityForWaterLevel(treeEvent, waterLevel)));
+                            new FragilityCurveElement(waterLevel, GetClassesBasedProbabilityForWaterLevel(estimation.ClassProbabilitySpecification, waterLevel)));
 
                     return classCurve;
                 case ProbabilitySpecificationType.FixedFrequency:
                     // TODO: Interpolate if necessary
-                    return treeEvent.FixedFragilityCurve;
+                    return estimation.FragilityCurve;
                 case ProbabilitySpecificationType.FixedValue:
                     var curve = new FragilityCurve();
                     foreach (var waterLevel in waterLevels)
-                        curve.Add(new FragilityCurveElement(waterLevel, treeEvent.FixedProbability));
+                        curve.Add(new FragilityCurveElement(waterLevel, estimation.FixedProbability));
 
                     return curve;
                 default:
@@ -33,50 +33,50 @@ namespace Forest.Data.Tree
             }
         }
 
-        public static FragilityCurve GetUpperFragilityCurves(this TreeEvent treeEvent, IEnumerable<double> orderedWaterLevels)
+        public static FragilityCurve GetUpperFragilityCurves(this TreeEventProbabilityEstimation estimation, IEnumerable<double> orderedWaterLevels)
         {
-            if (treeEvent.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
-                return treeEvent.GetClassBasedUpperFragilityCurve(orderedWaterLevels);
+            if (estimation.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
+                return GetClassBasedUpperFragilityCurve(estimation.ClassProbabilitySpecification.ToArray(),orderedWaterLevels);
 
-            return treeEvent.GetFragilityCurve(orderedWaterLevels);
+            return estimation.GetFragilityCurve(orderedWaterLevels);
         }
 
-        public static FragilityCurve GetLowerFragilityCurve(this TreeEvent treeEvent, IEnumerable<double> orderedWaterLevels)
+        public static FragilityCurve GetLowerFragilityCurve(this TreeEventProbabilityEstimation estimation, IEnumerable<double> orderedWaterLevels)
         {
-            if (treeEvent.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
-                return treeEvent.GetClassBasedLowerFragilityCurve(orderedWaterLevels);
+            if (estimation.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
+                return GetClassBasedLowerFragilityCurve(estimation.ClassProbabilitySpecification.ToArray(), orderedWaterLevels);
 
-            return treeEvent.GetFragilityCurve(orderedWaterLevels);
+            return estimation.GetFragilityCurve(orderedWaterLevels);
         }
 
-        public static FragilityCurve GetClassBasedUpperFragilityCurve(this TreeEvent treeEvent, IEnumerable<double> waterLevels)
-        {
-            var curve = new FragilityCurve();
-            foreach (var waterLevel in waterLevels)
-                curve.Add(new FragilityCurveElement(waterLevel,
-                    GetClassesBasedProbabilityForWaterLevel(treeEvent, waterLevel, e => e.MaxEstimation)));
-
-            return curve;
-        }
-
-        public static FragilityCurve GetClassBasedLowerFragilityCurve(this TreeEvent treeEvent, IEnumerable<double> waterLevels)
+        public static FragilityCurve GetClassBasedUpperFragilityCurve(ExpertClassEstimation[] estimations, IEnumerable<double> waterLevels)
         {
             var curve = new FragilityCurve();
             foreach (var waterLevel in waterLevels)
                 curve.Add(new FragilityCurveElement(waterLevel,
-                    GetClassesBasedProbabilityForWaterLevel(treeEvent, waterLevel, e => e.MinEstimation)));
+                    GetClassesBasedProbabilityForWaterLevel(estimations, waterLevel, e => e.MaxEstimation)));
 
             return curve;
         }
 
-        public static Probability GetClassesBasedProbabilityForWaterLevel(this TreeEvent treeEvent, double waterLevel,
+        public static FragilityCurve GetClassBasedLowerFragilityCurve(ExpertClassEstimation[] estimations, IEnumerable<double> waterLevels)
+        {
+            var curve = new FragilityCurve();
+            foreach (var waterLevel in waterLevels)
+                curve.Add(new FragilityCurveElement(waterLevel,
+                    GetClassesBasedProbabilityForWaterLevel(estimations, waterLevel, e => e.MinEstimation)));
+
+            return curve;
+        }
+
+        public static Probability GetClassesBasedProbabilityForWaterLevel(IEnumerable<ExpertClassEstimation> estimations, double waterLevel,
             Func<ExpertClassEstimation, ProbabilityClass> getProbabilityClassFunc = null)
         {
             if (getProbabilityClassFunc == null)
                 getProbabilityClassFunc = e => e.AverageEstimation;
 
-            var relevantEstimations = treeEvent.ClassesProbabilitySpecification
-                .Where(e => Math.Abs(e.HydraulicCondition.WaterLevel - waterLevel) < 1e-8).ToArray();
+            var relevantEstimations = estimations
+                .Where(e => Math.Abs(e.HydrodynamicCondition.WaterLevel - waterLevel) < 1e-8).ToArray();
             if (relevantEstimations.Length == 0)
                 return Probability.NaN;
 

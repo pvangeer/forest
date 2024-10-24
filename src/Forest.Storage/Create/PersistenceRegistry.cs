@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Forest.Data;
-using Forest.Data.Hydraulics;
+using Forest.Data.Estimations;
+using Forest.Data.Experts;
+using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
 using Forest.Storage.XmlEntities;
 
@@ -16,16 +18,16 @@ namespace Forest.Storage.Create
         private readonly Dictionary<FragilityCurveElement, FragilityCurveElementXmlEntity> fragilityCurveElements =
             CreateDictionary<FragilityCurveElement, FragilityCurveElementXmlEntity>();
 
-        private readonly Dictionary<HydraulicCondition, HydraulicConditionXmlEntity> hydraulicConditions =
-            CreateDictionary<HydraulicCondition, HydraulicConditionXmlEntity>();
+        private readonly Dictionary<HydrodynamicCondition, HydrodynamicConditionXmlEntity> hydraulicConditions =
+            CreateDictionary<HydrodynamicCondition, HydrodynamicConditionXmlEntity>();
 
         private readonly Dictionary<Person, PersonXmlEntity> persons = CreateDictionary<Person, PersonXmlEntity>();
-        private readonly Dictionary<EventTreeProject, ProjectXmlEntity> projects = CreateDictionary<EventTreeProject, ProjectXmlEntity>();
+        private readonly Dictionary<ForestAnalysis, ProjectXmlEntity> projects = CreateDictionary<ForestAnalysis, ProjectXmlEntity>();
         private readonly Dictionary<TreeEvent, TreeEventXmlEntity> treeEvents = CreateDictionary<TreeEvent, TreeEventXmlEntity>();
 
         #region Register Methods
 
-        internal void Register(EventTreeProject model, ProjectXmlEntity entity)
+        internal void Register(ForestAnalysis model, ProjectXmlEntity entity)
         {
             Register(projects, model, entity);
         }
@@ -40,7 +42,7 @@ namespace Forest.Storage.Create
             Register(persons, model, entity);
         }
 
-        internal void Register(HydraulicCondition model, HydraulicConditionXmlEntity entity)
+        internal void Register(HydrodynamicCondition model, HydrodynamicConditionXmlEntity entity)
         {
             Register(hydraulicConditions, model, entity);
         }
@@ -64,7 +66,7 @@ namespace Forest.Storage.Create
 
         #region Contains Methods
 
-        internal bool Contains(EventTreeProject model)
+        internal bool Contains(ForestAnalysis model)
         {
             return ContainsValue(projects, model);
         }
@@ -79,7 +81,7 @@ namespace Forest.Storage.Create
             return ContainsValue(persons, model);
         }
 
-        internal bool Contains(HydraulicCondition model)
+        internal bool Contains(HydrodynamicCondition model)
         {
             return ContainsValue(hydraulicConditions, model);
         }
@@ -103,7 +105,7 @@ namespace Forest.Storage.Create
 
         #region Get Methods
 
-        public ProjectXmlEntity Get(EventTreeProject model)
+        public ProjectXmlEntity Get(ForestAnalysis model)
         {
             return Get(projects, model);
         }
@@ -118,7 +120,7 @@ namespace Forest.Storage.Create
             return Get(persons, model);
         }
 
-        public HydraulicConditionXmlEntity Get(HydraulicCondition model)
+        public HydrodynamicConditionXmlEntity Get(HydrodynamicCondition model)
         {
             return Get(hydraulicConditions, model);
         }

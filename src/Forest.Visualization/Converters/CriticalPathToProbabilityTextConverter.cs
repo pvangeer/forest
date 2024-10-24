@@ -10,7 +10,7 @@ namespace Forest.Visualization.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (ExtractInput(values, out var hydraulics, out var curves, out var criticalPath))
+            if (ExtractInput(values, out var hydraulics, out var estimations, out var curves, out var criticalPath))
                 return values;
 
             return !hydraulics.Any() || !curves.Any()

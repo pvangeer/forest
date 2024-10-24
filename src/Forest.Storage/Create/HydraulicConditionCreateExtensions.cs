@@ -1,12 +1,12 @@
 ﻿using System;
-using Forest.Data.Hydraulics;
+using Forest.Data.Hydrodynamics;
 using Forest.Storage.XmlEntities;
 
 namespace Forest.Storage.Create
 {
     internal static class HydraulicConditionCreateExtensions
     {
-        internal static HydraulicConditionXmlEntity Create(this HydraulicCondition model, PersistenceRegistry registry)
+        internal static HydrodynamicConditionXmlEntity Create(this HydrodynamicCondition model, PersistenceRegistry registry)
         {
             if (registry == null)
                 throw new ArgumentNullException(nameof(registry));
@@ -14,7 +14,7 @@ namespace Forest.Storage.Create
             if (registry.Contains(model))
                 return registry.Get(model);
 
-            var entity = new HydraulicConditionXmlEntity
+            var entity = new HydrodynamicConditionXmlEntity
             {
                 Probability = model.Probability,
                 WaterLevel = model.WaterLevel,

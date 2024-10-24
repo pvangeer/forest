@@ -18,6 +18,6 @@ namespace Forest.Storage.XmlEntities
         public VersionXmlEntity VersionInformation { get; set; }
 
         [XmlElement(ElementName = "eventtreeproject")]
-        public EventTreeProjectXmlEntity EventTreeProject { get; set; }
+        public ForestAnalysisXmlEntity ForestAnalysis { get; set; }
     }
 }

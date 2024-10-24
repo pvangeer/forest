@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using Forest.Data;
+using Forest.Data.Experts;
 using Forest.Storage.Create;
 using Forest.Storage.XmlEntities;
 using NUnit.Framework;
@@ -44,7 +45,7 @@ namespace Forest.Storage.Test.Create
         {
             var xmlEntity = new ProjectXmlEntity
             {
-                EventTreeProject = new EventTreeProject().Create(new PersistenceRegistry()),
+                ForestAnalysis = new ForestAnalysis().Create(new PersistenceRegistry()),
                 VersionInformation =
                 {
                     Creator = "Me",

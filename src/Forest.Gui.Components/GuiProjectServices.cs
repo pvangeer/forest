@@ -33,8 +33,8 @@ namespace Forest.Gui.Components
             storageXml.UnStageEventTreeProject();
             gui.ProjectFilePath = "";
 
-            gui.EventTreeProject = EventTreeProjectFactory.CreateStandardNewProject();
-            gui.OnPropertyChanged(nameof(ForestGui.EventTreeProject));
+            gui.ForestAnalysis = ForestAnalysisFactory.CreateStandardNewProject();
+            gui.OnPropertyChanged(nameof(ForestGui.ForestAnalysis));
         }
 
         public void OpenProject()
@@ -84,7 +84,7 @@ namespace Forest.Gui.Components
                 {
                     gui.ProjectFilePath = fileName;
 
-                    gui.OnPropertyChanged(nameof(ForestGui.EventTreeProject));
+                    gui.OnPropertyChanged(nameof(ForestGui.ForestAnalysis));
                     gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));
 
                     log.Info($"Klaar met openen van project uit bestand '{gui.ProjectFilePath}'.");
@@ -170,7 +170,7 @@ namespace Forest.Gui.Components
             worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o, e,
                 () =>
                 {
-                    log.Info($"EventTreeProject is opgeslagen in bestand '{gui.ProjectFilePath}'.");
+                    log.Info($"ForestAnalysis is opgeslagen in bestand '{gui.ProjectFilePath}'.");
                     followingAction?.Invoke();
                 });
             worker.WorkerSupportsCancellation = false;
@@ -206,7 +206,7 @@ namespace Forest.Gui.Components
             try
             {
                 var readProjectData = storageXml.LoadProject(fileName);
-                gui.EventTreeProject = readProjectData.EventTreeProject;
+                gui.ForestAnalysis = readProjectData.ForestAnalysis;
                 gui.VersionInfo = new VersionInfo
                 {
                     AuthorCreated = readProjectData.Author,
@@ -222,7 +222,7 @@ namespace Forest.Gui.Components
 
         public bool HandleUnsavedChanges(Action followingAction)
         {
-            storageXml.StageEventTreeProject(gui.EventTreeProject);
+            storageXml.StageEventTreeProject(gui.ForestAnalysis);
             storageXml.StageVersionInformation(gui.VersionInfo);
             if (storageXml.HasStagedProjectChanges())
             {
@@ -252,7 +252,7 @@ namespace Forest.Gui.Components
         private void StageAndStoreProjectCore()
         {
             if (!storageXml.HasStagedEventTreeProject)
-                storageXml.StageEventTreeProject(gui.EventTreeProject);
+                storageXml.StageEventTreeProject(gui.ForestAnalysis);
 
             storageXml.SaveProjectAs(gui.ProjectFilePath);
         }

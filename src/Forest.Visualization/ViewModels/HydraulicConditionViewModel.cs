@@ -1,39 +1,39 @@
-﻿using Forest.Data.Hydraulics;
+﻿using Forest.Data.Hydrodynamics;
 
 namespace Forest.Visualization.ViewModels
 {
     public class HydraulicConditionViewModel : FragilityCurveElementViewModel
     {
-        public HydraulicConditionViewModel() : this(new HydraulicCondition())
+        public HydraulicConditionViewModel() : this(new HydrodynamicCondition())
         {
         }
 
-        public HydraulicConditionViewModel(HydraulicCondition condition) : base(condition)
+        public HydraulicConditionViewModel(HydrodynamicCondition condition) : base(condition)
         {
-            HydraulicCondition = condition;
+            HydrodynamicCondition = condition;
         }
 
-        public HydraulicCondition HydraulicCondition { get; }
+        public HydrodynamicCondition HydrodynamicCondition { get; }
 
         public double WavePeriod
         {
-            get => HydraulicCondition.WavePeriod;
+            get => HydrodynamicCondition.WavePeriod;
             set
             {
-                HydraulicCondition.WavePeriod = value;
-                HydraulicCondition.OnPropertyChanged();
+                HydrodynamicCondition.WavePeriod = value;
+                HydrodynamicCondition.OnPropertyChanged();
                 OnPropertyChanged();
             }
         }
 
         public double WaveHeight
         {
-            get => HydraulicCondition.WaveHeight;
+            get => HydrodynamicCondition.WaveHeight;
             set
             {
-                HydraulicCondition.WaveHeight = value;
+                HydrodynamicCondition.WaveHeight = value;
                 OnPropertyChanged();
-                HydraulicCondition.OnPropertyChanged();
+                HydrodynamicCondition.OnPropertyChanged();
             }
         }
     }

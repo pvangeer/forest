@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Forest.Data;
-using Forest.Data.Hydraulics;
+using Forest.Data.Estimations;
+using Forest.Data.Hydrodynamics;
 
 namespace Forest.Calculators
 {
     public static class ClassEstimationFragilityCurveCalculator
     {
-        public static Probability CalculateProbability(HydraulicCondition[] conditions, CriticalPathElement[] treeEventCurves)
+        public static Probability CalculateProbability(HydrodynamicCondition[] conditions, CriticalPathElement[] treeEventCurves)
         {
             return CalculateProbability(CalculateCombinedProbabilityFragilityCurve(conditions, treeEventCurves));
         }
@@ -18,7 +19,7 @@ namespace Forest.Calculators
             return (Probability)partialProbabilityCurve.Sum(p => p.Probability);
         }
 
-        public static FragilityCurve CalculateCombinedProbabilityFragilityCurve(HydraulicCondition[] conditions,
+        public static FragilityCurve CalculateCombinedProbabilityFragilityCurve(HydrodynamicCondition[] conditions,
             CriticalPathElement[] treeEventCurves)
         {
             if (!CheckProbabilitiesAreEqual(conditions, treeEventCurves))
@@ -47,7 +48,7 @@ namespace Forest.Calculators
             return curve;
         }
 
-        public static FragilityCurve CalculateCombinedFragilityCurve(HydraulicCondition[] conditions,
+        public static FragilityCurve CalculateCombinedFragilityCurve(HydrodynamicCondition[] conditions,
             CriticalPathElement[] criticalPathElements)
         {
             if (!CheckProbabilitiesAreEqual(criticalPathElements))
@@ -86,7 +87,7 @@ namespace Forest.Calculators
             return true;
         }
 
-        private static bool CheckProbabilitiesAreEqual(IEnumerable<HydraulicCondition> hydraulicConditions,
+        private static bool CheckProbabilitiesAreEqual(IEnumerable<HydrodynamicCondition> hydraulicConditions,
             IEnumerable<CriticalPathElement> treeEventCurves)
         {
             //

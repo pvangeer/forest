@@ -2,13 +2,20 @@
 using System.Runtime.CompilerServices;
 using Forest.Data.Properties;
 
-namespace Forest.Data
+namespace Forest.Data.Estimations
 {
-    public class Person : INotifyPropertyChanged
+    public class FragilityCurveElement : INotifyPropertyChanged
     {
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Telephone { get; set; }
+        public FragilityCurveElement(double waterLevel, Probability probability)
+        {
+            Probability = probability;
+            WaterLevel = waterLevel;
+        }
+
+        public double WaterLevel { get; set; }
+
+        public Probability Probability { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

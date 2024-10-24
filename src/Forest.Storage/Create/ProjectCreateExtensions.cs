@@ -6,44 +6,44 @@ namespace Forest.Storage.Create
 {
     internal static class ProjectCreateExtensions
     {
-        internal static EventTreeProjectXmlEntity Create(this EventTreeProject eventTreeProject, PersistenceRegistry registry)
+        internal static ForestAnalysisXmlEntity Create(this ForestAnalysis forestAnalysis, PersistenceRegistry registry)
         {
             if (registry == null)
                 throw new ArgumentNullException(nameof(registry));
 
-            var entity = new EventTreeProjectXmlEntity
+            var entity = new ForestAnalysisXmlEntity
             {
-                Name = eventTreeProject.Name.DeepClone(),
-                Description = eventTreeProject.Description.DeepClone(),
-                AssessmentSection = eventTreeProject.AssessmentSection.DeepClone(),
-                ProjectInformation = eventTreeProject.ProjectInformation.DeepClone(),
-                ProjectLeader = eventTreeProject.ProjectLeader.Create(registry),
-                EventTree = eventTreeProject.EventTree.Create(registry)
+                Name = forestAnalysis.Name.DeepClone(),
+                Description = forestAnalysis.Description.DeepClone(),
+                AssessmentSection = forestAnalysis.AssessmentSection.DeepClone(),
+                ProjectInformation = forestAnalysis.ProjectInformation.DeepClone(),
+                ProjectLeader = forestAnalysis.ProjectLeader.Create(registry),
+                EventTree = forestAnalysis.EventTree.Create(registry)
             };
 
-            AddEntitiesForExperts(eventTreeProject, entity, registry);
-            AddEntitiesForHydraulicConditions(eventTreeProject, entity, registry);
+            AddEntitiesForExperts(forestAnalysis, entity, registry);
+            AddEntitiesForHydraulicConditions(forestAnalysis, entity, registry);
 
             return entity;
         }
 
-        private static void AddEntitiesForHydraulicConditions(EventTreeProject eventTreeProject, EventTreeProjectXmlEntity entity,
+        private static void AddEntitiesForHydraulicConditions(ForestAnalysis forestAnalysis, ForestAnalysisXmlEntity entity,
             PersistenceRegistry registry)
         {
-            for (var index = 0; index < eventTreeProject.HydraulicConditions.Count; index++)
+            for (var index = 0; index < forestAnalysis.HydrodynamicConditions.Count; index++)
             {
-                var hydraulicConditionElementEntity = eventTreeProject.HydraulicConditions[index].Create(registry);
-                hydraulicConditionElementEntity.Order = index;
-                entity.HydraulicConditions.Add(hydraulicConditionElementEntity);
+                var hydrodynamicConditionElementEntity = forestAnalysis.HydrodynamicConditions[index].Create(registry);
+                hydrodynamicConditionElementEntity.Order = index;
+                entity.HydraulicConditions.Add(hydrodynamicConditionElementEntity);
             }
         }
 
-        private static void AddEntitiesForExperts(EventTreeProject eventTreeProject, EventTreeProjectXmlEntity entity,
+        private static void AddEntitiesForExperts(ForestAnalysis forestAnalysis, ForestAnalysisXmlEntity entity,
             PersistenceRegistry registry)
         {
-            for (var index = 0; index < eventTreeProject.Experts.Count; index++)
+            for (var index = 0; index < forestAnalysis.Experts.Count; index++)
             {
-                var expertEntity = eventTreeProject.Experts[index].Create(registry);
+                var expertEntity = forestAnalysis.Experts[index].Create(registry);
                 expertEntity.Order = index;
                 entity.Experts.Add(expertEntity);
             }

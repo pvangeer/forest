@@ -1,7 +1,6 @@
 ﻿using System;
-using Forest.Data.Tree;
 
-namespace Forest.Data
+namespace Forest.Data.Tree
 {
     public class TreeEventsChangedEventArgs : EventArgs
     {

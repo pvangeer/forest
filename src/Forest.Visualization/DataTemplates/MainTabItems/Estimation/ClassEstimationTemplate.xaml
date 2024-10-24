@@ -24,9 +24,9 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Expert" Binding="{Binding Expert.Name}" IsReadOnly="True"
                                     ElementStyle="{StaticResource ColumnElementStyle}" />
-                <DataGridTextColumn Header="Waterstand" Binding="{Binding HydraulicCondition.WaterLevel}"
+                <DataGridTextColumn Header="Waterstand" Binding="{Binding HydrodynamicCondition.WaterLevel}"
                                     IsReadOnly="True" ElementStyle="{StaticResource ColumnElementStyle}" />
-                <DataGridTextColumn Header="Frequentie" Binding="{Binding HydraulicCondition.Probability}"
+                <DataGridTextColumn Header="Frequentie" Binding="{Binding HydrodynamicCondition.Probability}"
                                     IsReadOnly="True" ElementStyle="{StaticResource ColumnElementStyle}" />
                 <DataGridTemplateColumn Header="Gemiddelde">
                     <DataGridTemplateColumn.CellTemplate>

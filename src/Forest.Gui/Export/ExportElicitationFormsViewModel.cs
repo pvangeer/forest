@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Forest.Data;
+using Forest.Data.Experts;
 using Forest.Data.Tree;
 using Forest.Gui.Properties;
 using log4net;
@@ -17,7 +18,7 @@ namespace Forest.Gui.Export
 
 
         // TODO: Remove this code. No test data in the code base please.
-        public static EventTreeProject TestEventTreeProject = new EventTreeProject
+        public static ForestAnalysis TestForestAnalysis = new ForestAnalysis
         {
             Experts =
             {
@@ -29,20 +30,20 @@ namespace Forest.Gui.Export
 
         private string exportLocation;
 
-        public ExportElicitationFormsViewModel() : this(TestEventTreeProject)
+        public ExportElicitationFormsViewModel() : this(TestForestAnalysis)
         {
         }
 
-        public ExportElicitationFormsViewModel(EventTreeProject eventTreeProject)
+        public ExportElicitationFormsViewModel(ForestAnalysis forestAnalysis)
         {
             Experts = new ObservableCollection<ElicitationFormsExportViewModel>(
-                eventTreeProject.Experts.Select(e => new ElicitationFormsExportViewModel(e)));
+                forestAnalysis.Experts.Select(e => new ElicitationFormsExportViewModel(e)));
             foreach (var expertExportViewModel in Experts)
                 expertExportViewModel.PropertyChanged += ViewModelPropertyChanged;
-            EventTree = new EventTreeExportViewModel(eventTreeProject.EventTree);
+            EventTree = new EventTreeExportViewModel(forestAnalysis.EventTree);
             EventTree.PropertyChanged += ViewModelPropertyChanged;
 
-            Prefix = DateTime.Now.Date.ToString("yyyy-MM-dd") + " - " + eventTreeProject.Name + " - ";
+            Prefix = DateTime.Now.Date.ToString("yyyy-MM-dd") + " - " + forestAnalysis.Name + " - ";
         }
 
         public Action<string, string, Expert[], EventTree> OnExport { get; set; }

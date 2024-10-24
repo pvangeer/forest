@@ -11,7 +11,7 @@ namespace Forest.Storage.Create
             var entity = new ExpertClassEstimationXmlEntity
             {
                 ExpertId = model.Expert.Create(registry).Id,
-                HydraulicConditionId = model.HydraulicCondition.Create(registry).Id,
+                HydraulicConditionId = model.HydrodynamicCondition.Create(registry).Id,
                 AverageEstimation = Convert.ToByte(model.AverageEstimation),
                 MaxEstimation = Convert.ToByte(model.MaxEstimation),
                 MinEstimation = Convert.ToByte(model.MinEstimation)

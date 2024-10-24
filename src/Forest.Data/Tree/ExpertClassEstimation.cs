@@ -1,5 +1,6 @@
 ﻿using Forest.Data.Estimations;
-using Forest.Data.Hydraulics;
+using Forest.Data.Experts;
+using Forest.Data.Hydrodynamics;
 
 namespace Forest.Data.Tree
 {
@@ -7,7 +8,7 @@ namespace Forest.Data.Tree
     {
         public Expert Expert { get; set; }
 
-        public HydraulicCondition HydraulicCondition { get; set; }
+        public HydrodynamicCondition HydrodynamicCondition { get; set; }
 
         public ProbabilityClass MinEstimation { get; set; }
 

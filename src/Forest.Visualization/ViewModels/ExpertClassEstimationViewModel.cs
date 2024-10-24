@@ -2,7 +2,8 @@
 using System.Runtime.CompilerServices;
 using Forest.Data;
 using Forest.Data.Estimations;
-using Forest.Data.Hydraulics;
+using Forest.Data.Experts;
+using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
 
 namespace Forest.Visualization.ViewModels
@@ -16,7 +17,7 @@ namespace Forest.Visualization.ViewModels
             this.estimation = estimation;
         }
 
-        public HydraulicCondition HydraulicCondition => estimation.HydraulicCondition;
+        public HydrodynamicCondition HydrodynamicCondition => estimation.HydrodynamicCondition;
 
         public Expert Expert => estimation.Expert;
 

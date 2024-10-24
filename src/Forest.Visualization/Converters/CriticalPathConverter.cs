@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Forest.Calculators;
-using Forest.Data.Hydraulics;
+using Forest.Data.Estimations;
+using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
 using Forest.Visualization.ViewModels;
 
@@ -10,33 +11,43 @@ namespace Forest.Visualization.Converters
 {
     public class CriticalPathConverter
     {
-        protected static bool ExtractInput(object[] values, out HydraulicCondition[] hydraulicConditions,
+        protected static bool ExtractInput(object[] values, out HydrodynamicCondition[] hydraulicConditions, out TreeEventProbabilityEstimation[] estimations,
             out CriticalPathElement[] elements, out TreeEvent[] treeEvents)
         {
             hydraulicConditions = null;
             elements = new CriticalPathElement[] { };
+            estimations = new TreeEventProbabilityEstimation[] { };
             treeEvents = new TreeEvent[] { };
 
-            if (values.Length != 2)
+            if (values.Length != 3)
                 return true;
 
-            var hydraulicConditionViewModels = values[1] as ObservableCollection<HydraulicConditionViewModel>;
+            var hydrodynamicConditionViewModels = values[1] as ObservableCollection<HydraulicConditionViewModel>;
+            if (values[2] is ObservableCollection<TreeEventProbabilityEstimation> estimatesCollection)
+            {
+                estimations = estimatesCollection.ToArray();
+            }
+            
             if (!(values[0] is TreeEvent[] criticalPath) ||
-                hydraulicConditionViewModels == null)
+                hydrodynamicConditionViewModels == null || estimations == null)
                 return true;
 
-            var orderedWaterLevels = hydraulicConditionViewModels.Select(h => h.WaterLevel).Distinct();
+            
+            var orderedWaterLevels = hydrodynamicConditionViewModels.Select(h => h.WaterLevel).Distinct().ToArray();
 
-            hydraulicConditions = hydraulicConditionViewModels.Select(vm => vm.HydraulicCondition).OrderBy(c => c.WaterLevel).ToArray();
+            hydraulicConditions = hydrodynamicConditionViewModels.Select(vm => vm.HydrodynamicCondition).OrderBy(c => c.WaterLevel).ToArray();
             var allElements = new List<CriticalPathElement>();
             for (var i = 0; i < criticalPath.Length; i++)
             {
                 var failElement = true;
                 if (i < criticalPath.Length - 1)
+                    // TODO: A critical path can also contain a passing event.
                     failElement = criticalPath[i].FailingEvent != null && criticalPath[i].FailingEvent == criticalPath[i + 1];
 
+                var estimation = estimations.FirstOrDefault(e => e.TreeEvent == criticalPath[i]);
+
                 allElements.Add(
-                    new CriticalPathElement(criticalPath[i], criticalPath[i].GetFragilityCurve(orderedWaterLevels), failElement));
+                    new CriticalPathElement(criticalPath[i], estimation.GetFragilityCurve(orderedWaterLevels), failElement));
             }
 
             elements = allElements.ToArray();

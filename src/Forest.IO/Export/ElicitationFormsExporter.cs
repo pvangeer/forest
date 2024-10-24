@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Forest.Data;
-using Forest.Data.Hydraulics;
+using Forest.Data.Experts;
+using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
 using Forest.IO.Import;
 using Forest.Messaging;
@@ -15,12 +16,12 @@ namespace Forest.IO.Export
         private readonly ForestLog log = new ForestLog(typeof(ElicitationFormsExporter));
         private readonly ElicitationFormWriter writer = new ElicitationFormWriter();
 
-        public ElicitationFormsExporter(EventTreeProject eventTreeProject)
+        public ElicitationFormsExporter(ForestAnalysis forestAnalysis)
         {
-            EventTreeProject = eventTreeProject;
+            ForestAnalysis = forestAnalysis;
         }
 
-        public EventTreeProject EventTreeProject { get; }
+        public ForestAnalysis ForestAnalysis { get; }
 
         public void Export(string fileLocation, string prefix, Expert[] expertsToExport, EventTree eventTreeToExport)
         {
@@ -42,13 +43,13 @@ namespace Forest.IO.Export
                 return;
             }
 
-            if (expertsToExport.Any(e => !EventTreeProject.Experts.Contains(e)))
+            if (expertsToExport.Any(e => !ForestAnalysis.Experts.Contains(e)))
             {
-                log.Error("Er is iets misgegaan bij het exporteren. Niet alle experts konden in het eventTreeProject worden gevonden.");
+                log.Error("Er is iets misgegaan bij het exporteren. Niet alle experts konden in het forestAnalysis worden gevonden.");
                 return;
             }
 
-            var hydraulicConditions = EventTreeProject.HydraulicConditions.Distinct(new HydraulicConditionsWaterLevelComparer())
+            var hydraulicConditions = ForestAnalysis.HydrodynamicConditions.Distinct(new HydraulicConditionsWaterLevelComparer())
                 .OrderBy(hc => hc.WaterLevel)
                 .ToArray();
             if (!hydraulicConditions.Any())
@@ -65,7 +66,7 @@ namespace Forest.IO.Export
             log.Info($"{expertsToExport.Length} DOT formulieren geëxporteerd naar locatie '{fileLocation}'", true);
         }
 
-        private DotForm EventTreeToDotForm(EventTree eventTree, string expertName, HydraulicCondition[] hydraulicConditions)
+        private DotForm EventTreeToDotForm(EventTree eventTree, string expertName, HydrodynamicCondition[] hydraulicConditions)
         {
             var nodes = new List<DotNode>();
             foreach (var treeEvent in eventTree.MainTreeEvent.GetAllEventsRecursive())
@@ -75,8 +76,8 @@ namespace Forest.IO.Export
                     Estimates = treeEvent.ClassesProbabilitySpecification.Where(e => e.Expert.Name == expertName).Select(s =>
                         new DotEstimate
                         {
-                            WaterLevel = s.HydraulicCondition.WaterLevel,
-                            Frequency = s.HydraulicCondition.Probability,
+                            WaterLevel = s.HydrodynamicCondition.WaterLevel,
+                            Frequency = s.HydrodynamicCondition.Probability,
                             BestEstimate = (int)s.AverageEstimation,
                             LowerEstimate = (int)s.MinEstimation,
                             UpperEstimate = (int)s.MaxEstimation

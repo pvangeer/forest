@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Forest.Data;
-using Forest.Data.Hydraulics;
+using Forest.Data.Estimations;
+using Forest.Data.Experts;
+using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
 using Forest.Storage.XmlEntities;
 
@@ -20,8 +22,8 @@ namespace Forest.Storage.Read
         private readonly Dictionary<FragilityCurveElementXmlEntity, FragilityCurveElement> fragilityCurveElements =
             CreateDictionary<FragilityCurveElementXmlEntity, FragilityCurveElement>();
 
-        private readonly Dictionary<HydraulicConditionXmlEntity, HydraulicCondition> hydraulicConditions =
-            CreateDictionary<HydraulicConditionXmlEntity, HydraulicCondition>();
+        private readonly Dictionary<HydrodynamicConditionXmlEntity, HydrodynamicCondition> hydraulicConditions =
+            CreateDictionary<HydrodynamicConditionXmlEntity, HydrodynamicCondition>();
 
         private readonly Dictionary<PersonXmlEntity, Person> persons = CreateDictionary<PersonXmlEntity, Person>();
         private readonly Dictionary<TreeEventXmlEntity, TreeEvent> treeEvents = CreateDictionary<TreeEventXmlEntity, TreeEvent>();
@@ -37,7 +39,7 @@ namespace Forest.Storage.Read
             Collect(experts, entity, model);
         }
 
-        internal void Collect(HydraulicConditionXmlEntity entity, HydraulicCondition model)
+        internal void Collect(HydrodynamicConditionXmlEntity entity, HydrodynamicCondition model)
         {
             Collect(hydraulicConditions, entity, model);
         }
@@ -72,7 +74,7 @@ namespace Forest.Storage.Read
             return Contains(experts, entity);
         }
 
-        internal bool Contains(HydraulicConditionXmlEntity entity)
+        internal bool Contains(HydrodynamicConditionXmlEntity entity)
         {
             return Contains(hydraulicConditions, entity);
         }
@@ -107,7 +109,7 @@ namespace Forest.Storage.Read
             return Get(experts, entity);
         }
 
-        internal HydraulicCondition Get(HydraulicConditionXmlEntity entity)
+        internal HydrodynamicCondition Get(HydrodynamicConditionXmlEntity entity)
         {
             return Get(hydraulicConditions, entity);
         }
@@ -140,11 +142,11 @@ namespace Forest.Storage.Read
                 : Get(key);
         }
 
-        public HydraulicCondition GetReferencedHydraulicCondition(long id)
+        public HydrodynamicCondition GetReferencedHydraulicCondition(long id)
         {
             var key = hydraulicConditions.Keys.FirstOrDefault(k => k.Id == id);
             return key == null
-                ? throw new ReadReferencedObjectsFirstException(nameof(HydraulicCondition))
+                ? throw new ReadReferencedObjectsFirstException(nameof(HydrodynamicCondition))
                 : Get(key);
         }
 

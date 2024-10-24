@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -19,19 +20,29 @@ namespace Forest.Visualization.ViewModels
             Enum.GetValues(typeof(ProbabilitySpecificationType)).Cast<ProbabilitySpecificationType>()
                 .ToDictionary(t => t, GetEstimationSpecificationTypeDisplayName);
 
-        private readonly ProjectManipulationService projectManipulationService;
+        private readonly AnalysisManipulationService analysisManipulationService;
         private TreeEventViewModel failingEventViewModel;
         private TreeEventViewModel passingEventViewModel;
         private ProbabilitySpecificationViewModelBase probabilityEstimationViewModel;
+        private readonly ObservableCollection<ProbabilityEstimation> probabilityEstimations;
 
         public TreeEventViewModel([NotNull] TreeEvent treeEvent, [NotNull] EventTreeViewModel parentEventTreeViewModel,
-            [NotNull] ProjectManipulationService projectManipulationService)
+            [NotNull] AnalysisManipulationService analysisManipulationService, [NotNull] ObservableCollection<ProbabilityEstimation> probabilityEstimations)
         {
-            this.projectManipulationService = projectManipulationService;
+            this.analysisManipulationService = analysisManipulationService;
             TreeEvent = treeEvent;
+            this.probabilityEstimations = probabilityEstimations;
             ParentEventTreeViewModel = parentEventTreeViewModel;
+            Estimation = probabilityEstimations?.OfType<ProbabilityEstimationPerTreeEvent>().FirstOrDefault(pe => parentEventTreeViewModel.IsViewModelFor(pe.EventTree));
+            if (Estimation != null)
+            {
+                Estimation.PropertyChanged += EstimationPropertyChanged;
+            }
+
             treeEvent.PropertyChanged += TreeEventPropertyChanged;
         }
+
+        public ProbabilityEstimationPerTreeEvent Estimation { get; }
 
         public TreeEvent TreeEvent { get; }
 
@@ -63,7 +74,7 @@ namespace Forest.Visualization.ViewModels
                     return null;
 
                 return passingEventViewModel ?? (passingEventViewModel =
-                    new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel, projectManipulationService));
+                    new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel, analysisManipulationService, probabilityEstimations));
             }
         }
 
@@ -75,7 +86,7 @@ namespace Forest.Visualization.ViewModels
                     return null;
 
                 return failingEventViewModel ?? (failingEventViewModel =
-                    new TreeEventViewModel(TreeEvent.FailingEvent, ParentEventTreeViewModel, projectManipulationService));
+                    new TreeEventViewModel(TreeEvent.FailingEvent, ParentEventTreeViewModel, analysisManipulationService, probabilityEstimations));
             }
         }
 
@@ -93,12 +104,12 @@ namespace Forest.Visualization.ViewModels
 
         public int ProbabilityEstimationTypeIndex
         {
-            get => ProbabilitySpecificationTypes.Keys.ToList().IndexOf(TreeEvent.ProbabilitySpecificationType);
+            get => ProbabilitySpecificationTypes.Keys.ToList().IndexOf(EstimationSpecification.Type);
             set
             {
                 var selectedType = ProbabilitySpecificationTypes.ElementAt(value).Key;
-                if (TreeEvent.ProbabilitySpecificationType != selectedType)
-                    TreeEventManipulations.ChangeProbabilityEstimationType(TreeEvent, selectedType);
+                if (EstimationSpecification.Type!= selectedType)
+                    TreeEventManipulations.ChangeProbabilityEstimationType(EstimationSpecification.Estimation, selectedType);
             }
         }
 
@@ -106,7 +117,7 @@ namespace Forest.Visualization.ViewModels
 
         public ProbabilitySpecificationViewModelBase EstimationSpecification =>
             probabilityEstimationViewModel ?? (probabilityEstimationViewModel =
-                ParentEventTreeViewModel.EstimationSpecificationViewModelFactory.CreateViewModel(TreeEvent));
+                ParentEventTreeViewModel.EstimationSpecificationViewModelFactory.CreateViewModel(TreeEvent, probabilityEstimations?.OfType<ProbabilityEstimationPerTreeEvent>().FirstOrDefault()?.Estimations.ToArray()));
 
         public TreeEvent[] CriticalPath => TreeEvent == null ? null :
             ParentEventTreeViewModel.MainTreeEventViewModel == null ? null :
@@ -202,16 +213,23 @@ namespace Forest.Visualization.ViewModels
                 case nameof(TreeEvent.Summary):
                     OnPropertyChanged(nameof(Summary));
                     break;
-                case nameof(TreeEvent.ProbabilitySpecificationType):
-                    probabilityEstimationViewModel = null;
-                    OnPropertyChanged(nameof(ProbabilityEstimationTypeIndex));
-                    OnPropertyChanged(nameof(EstimationSpecification));
-                    break;
                 case nameof(TreeEvent.Information):
                     OnPropertyChanged(nameof(Information));
                     break;
                 case nameof(TreeEvent.Discussion):
                     OnPropertyChanged(nameof(Discussion));
+                    break;
+            }
+        }
+
+        private void EstimationPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(TreeEventProbabilityEstimation.ProbabilitySpecificationType):
+                    probabilityEstimationViewModel = null;
+                    OnPropertyChanged(nameof(ProbabilityEstimationTypeIndex));
+                    OnPropertyChanged(nameof(EstimationSpecification));
                     break;
             }
         }

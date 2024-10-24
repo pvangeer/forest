@@ -7,7 +7,7 @@ namespace Forest.Storage.Read
 {
     internal static class ProjectEntityReadExtensions
     {
-        internal static EventTreeProject Read(this EventTreeProjectXmlEntity entity, ReadConversionCollector collector)
+        internal static ForestAnalysis Read(this ForestAnalysisXmlEntity entity, ReadConversionCollector collector)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -17,7 +17,7 @@ namespace Forest.Storage.Read
             var experts = entity.Experts.OrderBy(e => e.Order).Select(e => e.Read(collector));
             var hydraulicConditions = entity.HydraulicConditions.OrderBy(e => e.Order).Select(e => e.Read(collector));
 
-            var project = new EventTreeProject
+            var project = new ForestAnalysis
             {
                 Name = entity.Name,
                 AssessmentSection = entity.AssessmentSection,
@@ -31,7 +31,7 @@ namespace Forest.Storage.Read
                 project.Experts.Add(expert);
 
             foreach (var hydraulicCondition in hydraulicConditions)
-                project.HydraulicConditions.Add(hydraulicCondition);
+                project.HydrodynamicConditions.Add(hydraulicCondition);
 
             return project;
         }

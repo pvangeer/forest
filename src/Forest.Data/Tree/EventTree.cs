@@ -7,6 +7,10 @@ namespace Forest.Data.Tree
 {
     public class EventTree : INotifyPropertyChanged
     {
+        public EventTree()
+        {
+        }
+
         public TreeEvent MainTreeEvent { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;

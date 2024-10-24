@@ -34,12 +34,12 @@ namespace Forest.Storage
     public static class FingerprintHelper
     {
         /// <summary>
-        ///     Gets the fingerprint for the given <see cref="EventTreeProjectXmlEntity" />.
+        ///     Gets the fingerprint for the given <see cref="ForestAnalysisXmlEntity" />.
         /// </summary>
-        /// <param name="entity">The <see cref="EventTreeProjectXmlEntity" /> to generate a hashcode for.</param>
+        /// <param name="entity">The <see cref="ForestAnalysisXmlEntity" /> to generate a hashcode for.</param>
         /// <returns>The binary hashcode for <paramref name="entity" />.</returns>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity" /> is <c>null</c>.</exception>
-        public static int Get(EventTreeProjectXmlEntity entity)
+        public static int Get(ForestAnalysisXmlEntity entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
@@ -48,7 +48,7 @@ namespace Forest.Storage
 
         /// <summary>
         ///     While using a target file as storage, determines the fingerprint for the given
-        ///     <see cref="EventTreeProjectXmlEntity" />.
+        ///     <see cref="ForestAnalysisXmlEntity" />.
         /// </summary>
         /// <param name="entity">The <see cref="AnalysisXmlEntity" /> to generate a hashcode for.</param>
         /// <returns>The binary hashcode for <paramref name="entity" />.</returns>
@@ -65,9 +65,9 @@ namespace Forest.Storage
         ///     An I/O exception occurred while creating the file
         ///     at <paramref name="filePath" />.
         /// </exception>
-        private static int ComputeHash(EventTreeProjectXmlEntity entity)
+        private static int ComputeHash(ForestAnalysisXmlEntity entity)
         {
-            var xmlSerializer = new XmlSerializer(typeof(EventTreeProjectXmlEntity));
+            var xmlSerializer = new XmlSerializer(typeof(ForestAnalysisXmlEntity));
             using (var textWriter = new StringWriter())
             {
                 xmlSerializer.Serialize(textWriter, entity);

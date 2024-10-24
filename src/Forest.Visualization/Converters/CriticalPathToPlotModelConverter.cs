@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
 using Forest.Calculators;
+using Forest.Data.Estimations;
 using Forest.Data.Tree;
 using Forest.Visualization.ViewModels;
 using OxyPlot;
@@ -16,7 +17,7 @@ namespace Forest.Visualization.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (ExtractInput(values, out var hydraulics, out var pathElements, out var criticalPath))
+            if (ExtractInput(values, out var hydraulics, out var estimations,out var pathElements, out var criticalPath))
                 return values;
 
             var plotModel = new PlotModel();
@@ -31,11 +32,17 @@ namespace Forest.Visualization.Converters
 
             var orderedWaterLevels = hydraulics.Select(h => h.WaterLevel).Distinct().ToArray();
             var lowerElements = pathElements.Select(p =>
-                new CriticalPathElement(p.Element, p.Element.GetLowerFragilityCurve(orderedWaterLevels), p.ElementFails)).ToArray();
+            {
+                var estimation = estimations.FirstOrDefault(e => e.TreeEvent == p.Element);
+                return new CriticalPathElement(p.Element, estimation.GetLowerFragilityCurve(orderedWaterLevels), p.ElementFails);
+            }).ToArray();
             var lowerCurve = ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics, lowerElements);
 
             var upperCurves = pathElements.Select(p =>
-                new CriticalPathElement(p.Element, p.Element.GetUpperFragilityCurves(orderedWaterLevels), p.ElementFails)).ToArray();
+            {
+                var estimation = estimations.FirstOrDefault(e => e.TreeEvent == p.Element);
+                return new CriticalPathElement(p.Element, estimation.GetUpperFragilityCurves(orderedWaterLevels), p.ElementFails);
+            }).ToArray();
             var upperCurve = ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics, upperCurves);
 
             var polygonDatas = new List<PolygonData>();

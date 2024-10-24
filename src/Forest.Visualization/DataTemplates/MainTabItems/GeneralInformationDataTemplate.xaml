@@ -39,7 +39,7 @@
                         </Grid.ColumnDefinitions>
                         <Label
                             Grid.Column="0"
-                            Content="EventTreeProject"
+                            Content="ForestAnalysis"
                             Width="100"
                             HorizontalAlignment="Left" />
                         <TextBox

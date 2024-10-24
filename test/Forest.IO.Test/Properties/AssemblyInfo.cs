@@ -18,7 +18,7 @@ using System.Runtime.InteropServices;
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
-// The following GUID is for the ID of the typelib if this eventTreeProject is exposed to COM
+// The following GUID is for the ID of the typelib if this forestAnalysis is exposed to COM
 [assembly: Guid("760cdee8-d145-4d26-9ad8-6de0abbc3be9")]
 
 // Version information for an assembly consists of the following four values:

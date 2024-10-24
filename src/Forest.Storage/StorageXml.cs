@@ -14,33 +14,33 @@ namespace Forest.Storage
     {
         private readonly int emptyEventTreeProjectHash;
         private int lastOpenedOrSavedEventTreeProjectHash;
-        private EventTreeProjectXmlEntity stagedEventTreeProjectXmlEntity;
+        private ForestAnalysisXmlEntity stagedForestAnalysisXmlEntity;
         private VersionInfo versionInfo;
 
         public StorageXml()
         {
             emptyEventTreeProjectHash =
-                FingerprintHelper.Get(EventTreeProjectFactory.CreateStandardNewProject().Create(new PersistenceRegistry()));
+                FingerprintHelper.Get(ForestAnalysisFactory.CreateStandardNewProject().Create(new PersistenceRegistry()));
         }
 
-        public bool HasStagedEventTreeProject => stagedEventTreeProjectXmlEntity != null;
+        public bool HasStagedEventTreeProject => stagedForestAnalysisXmlEntity != null;
 
         public void StageVersionInformation(VersionInfo newVersionInfo)
         {
             versionInfo = newVersionInfo;
         }
 
-        public void StageEventTreeProject(EventTreeProject eventTreeProject)
+        public void StageEventTreeProject(ForestAnalysis forestAnalysis)
         {
-            if (eventTreeProject == null)
-                throw new ArgumentNullException(nameof(eventTreeProject));
+            if (forestAnalysis == null)
+                throw new ArgumentNullException(nameof(forestAnalysis));
 
-            stagedEventTreeProjectXmlEntity = eventTreeProject.Create(new PersistenceRegistry());
+            stagedForestAnalysisXmlEntity = forestAnalysis.Create(new PersistenceRegistry());
         }
 
         public void UnStageEventTreeProject()
         {
-            stagedEventTreeProjectXmlEntity = null;
+            stagedForestAnalysisXmlEntity = null;
         }
 
         public void UnStageVersionInformation()
@@ -91,10 +91,10 @@ namespace Forest.Storage
                     }
                 }
 
-                lastOpenedOrSavedEventTreeProjectHash = FingerprintHelper.Get(projectXmlEntity.EventTreeProject);
+                lastOpenedOrSavedEventTreeProjectHash = FingerprintHelper.Get(projectXmlEntity.ForestAnalysis);
                 return new Project
                 {
-                    EventTreeProject = projectXmlEntity.EventTreeProject.Read(new ReadConversionCollector()),
+                    ForestAnalysis = projectXmlEntity.ForestAnalysis.Read(new ReadConversionCollector()),
                     Created = projectXmlEntity.VersionInformation.Created,
                     Author = projectXmlEntity.VersionInformation.Creator
                 };
@@ -110,7 +110,7 @@ namespace Forest.Storage
             if (!HasStagedEventTreeProject)
                 throw new InvalidOperationException("Call 'StageAnalysis(IProject)' first before calling this method.");
 
-            var hash = FingerprintHelper.Get(stagedEventTreeProjectXmlEntity);
+            var hash = FingerprintHelper.Get(stagedForestAnalysisXmlEntity);
             return hash != emptyEventTreeProjectHash &&
                    lastOpenedOrSavedEventTreeProjectHash != hash;
         }
@@ -121,7 +121,7 @@ namespace Forest.Storage
 
             try
             {
-                var projectXmlEntity = new ProjectXmlEntity { EventTreeProject = stagedEventTreeProjectXmlEntity };
+                var projectXmlEntity = new ProjectXmlEntity { ForestAnalysis = stagedForestAnalysisXmlEntity };
                 projectXmlEntity.VersionInformation.Created = versionInfo != null
                     ? versionInfo.DateCreated
                     : projectXmlEntity.VersionInformation.LastChanged;
@@ -136,7 +136,7 @@ namespace Forest.Storage
                     serializer.Serialize(writer, projectXmlEntity);
                 }
 
-                lastOpenedOrSavedEventTreeProjectHash = FingerprintHelper.Get(stagedEventTreeProjectXmlEntity);
+                lastOpenedOrSavedEventTreeProjectHash = FingerprintHelper.Get(stagedForestAnalysisXmlEntity);
             }
             catch (DataException exception)
             {
@@ -185,7 +185,7 @@ namespace Forest.Storage
 
     public class Project
     {
-        public EventTreeProject EventTreeProject { get; set; }
+        public ForestAnalysis ForestAnalysis { get; set; }
 
         public string Created { get; set; }
 

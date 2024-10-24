@@ -10,10 +10,10 @@ namespace Forest.Calculators.Test
         [Test]
         public void CalculateCriticalPathWorks()
         {
-            var targetNode = new TreeEvent { Name = "Scooooreee!!" };
-            var node1 = new TreeEvent { FailingEvent = targetNode, PassingEvent = new TreeEvent() };
-            var node2 = new TreeEvent { FailingEvent = node1 };
-            var mainNode = new TreeEvent { FailingEvent = node2 };
+            var targetNode = new TreeEvent("Scooooreee!!");
+            var node1 = new TreeEvent (""){ FailingEvent = targetNode, PassingEvent = new TreeEvent("") };
+            var node2 = new TreeEvent (""){ FailingEvent = node1 };
+            var mainNode = new TreeEvent ("") { FailingEvent = node2 };
 
             var path = CriticalPathCalculator.GetCriticalPath(mainNode, targetNode).ToArray();
 

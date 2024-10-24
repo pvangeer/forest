@@ -1,13 +1,14 @@
 ﻿using System;
 using Forest.Data;
-using Forest.Data.Hydraulics;
+using Forest.Data.Estimations;
+using Forest.Data.Hydrodynamics;
 using Forest.Storage.XmlEntities;
 
 namespace Forest.Storage.Read
 {
     internal static class HydraulicConditionEntityReadExtensions
     {
-        internal static HydraulicCondition Read(this HydraulicConditionXmlEntity entity, ReadConversionCollector collector)
+        internal static HydrodynamicCondition Read(this HydrodynamicConditionXmlEntity entity, ReadConversionCollector collector)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -17,7 +18,7 @@ namespace Forest.Storage.Read
             if (collector.Contains(entity))
                 return collector.Get(entity);
 
-            var condition = new HydraulicCondition
+            var condition = new HydrodynamicCondition
             {
                 Probability = double.IsNaN(entity.Probability) ? Probability.NaN : (Probability)entity.Probability,
                 WaterLevel = entity.WaterLevel,

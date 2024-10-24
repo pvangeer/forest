@@ -16,7 +16,7 @@ namespace Forest.Gui
             InitializeComponent();
             var forestGui = new ForestGui
             {
-                EventTreeProject = EventTreeProjectFactory.CreateStandardNewProject()
+                ForestAnalysis = ForestAnalysisFactory.CreateStandardNewProject()
             };
             var guiViewModel = new MainWindowViewModel(forestGui);
             DataContext = guiViewModel;

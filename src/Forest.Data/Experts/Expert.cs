@@ -1,4 +1,4 @@
-﻿namespace Forest.Data
+﻿namespace Forest.Data.Experts
 {
     public class Expert : Person
     {

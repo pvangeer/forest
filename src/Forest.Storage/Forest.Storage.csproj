@@ -62,9 +62,9 @@
     <Compile Include="XmlEntities\ExpertClassEstimationXmlEntity.cs" />
     <Compile Include="XmlEntities\ExpertXmlEntity.cs" />
     <Compile Include="XmlEntities\FragilityCurveElementXmlEntity.cs" />
-    <Compile Include="XmlEntities\HydraulicConditionXmlEntity.cs" />
+    <Compile Include="XmlEntities\HydrodynamicConditionXmlEntity.cs" />
     <Compile Include="XmlEntities\PersonXmlEntity.cs" />
-    <Compile Include="XmlEntities\EventTreeProjectXmlEntity.cs" />
+    <Compile Include="XmlEntities\ForestAnalysisXmlEntity.cs" />
     <Compile Include="XmlEntities\ProjectXmlEntity.cs" />
     <Compile Include="XmlEntities\TreeEventXmlEntity.cs" />
     <Compile Include="XmlEntities\VersionXmlEntity.cs" />

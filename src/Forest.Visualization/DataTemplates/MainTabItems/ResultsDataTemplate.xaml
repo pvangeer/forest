@@ -31,7 +31,10 @@
                                     <MultiBinding Converter="{StaticResource CriticalPathToProbabilityTextConverter}">
                                         <Binding Path="CriticalPath" />
                                         <Binding
-                                            Path="DataContext.HydraulicConditionsList"
+                                            Path="DataContext.HydrodynamicConditionsList"
+                                            RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter, AncestorLevel=2}" />
+                                        <Binding
+                                            Path="DataContext.ProbabilityEstimations"
                                             RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter, AncestorLevel=2}" />
                                     </MultiBinding>
                                 </Setter.Value>

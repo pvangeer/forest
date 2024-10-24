@@ -12,12 +12,12 @@ namespace Forest.IO.Import
     {
         private readonly ForestLog log = new ForestLog(typeof(ElicitationFormImporter));
 
-        public ElicitationFormImporter(EventTreeProject eventTreeProject)
+        public ElicitationFormImporter(ForestAnalysis forestAnalysis)
         {
-            EventTreeProject = eventTreeProject;
+            ForestAnalysis = forestAnalysis;
         }
 
-        public EventTreeProject EventTreeProject { get; }
+        public ForestAnalysis ForestAnalysis { get; }
 
         public void Import(string fileName)
         {
@@ -34,22 +34,22 @@ namespace Forest.IO.Import
 
             foreach (var dotForm in formContent)
             {
-                var validationResult = DotFormValidator.Validate(dotForm, EventTreeProject);
+                var validationResult = DotFormValidator.Validate(dotForm, ForestAnalysis);
                 if (ValidationFailed(fileName, validationResult, dotForm))
                     return;
             }
 
             foreach (var dotForm in formContent)
             {
-                var expert = EventTreeProject.Experts.First(ex => ex.Name == dotForm.ExpertName);
+                var expert = ForestAnalysis.Experts.First(ex => ex.Name == dotForm.ExpertName);
 
                 foreach (var dotFormNode in dotForm.Nodes)
                 {
-                    var node = EventTreeProject.EventTree.MainTreeEvent.FindTreeEvent(n => n.Name == dotFormNode.NodeName);
+                    var node = ForestAnalysis.EventTree.MainTreeEvent.FindTreeEvent(n => n.Name == dotFormNode.NodeName);
                     foreach (var dotEstimate in dotFormNode.Estimates)
                     {
                         var specification = node.ClassesProbabilitySpecification.First(s =>
-                            s.Expert == expert && Math.Abs(s.HydraulicCondition.WaterLevel - dotEstimate.WaterLevel) < 1e-6);
+                            s.Expert == expert && Math.Abs(s.HydrodynamicCondition.WaterLevel - dotEstimate.WaterLevel) < 1e-6);
                         specification.MinEstimation = (ProbabilityClass)dotEstimate.LowerEstimate;
                         specification.AverageEstimation = (ProbabilityClass)dotEstimate.BestEstimate;
                         specification.MaxEstimation = (ProbabilityClass)dotEstimate.UpperEstimate;
@@ -65,14 +65,14 @@ namespace Forest.IO.Import
             if (validationResult.ExpertValidation == ExpertValidationResult.ExpertNotFound)
             {
                 log.Error(
-                    $"Fout bij het lezen van bestand {fileName}: De gespecificeerde expert ({dotForm.ExpertName}) kon niet in het eventTreeProject worden gevonden.");
+                    $"Fout bij het lezen van bestand {fileName}: De gespecificeerde expert ({dotForm.ExpertName}) kon niet in het forestAnalysis worden gevonden.");
                 return true;
             }
 
             if (validationResult.ExpertValidation == ExpertValidationResult.NoExperts)
             {
                 log.Error(
-                    "Het eventTreeProject bevat nog geen experts. Daardoor is het niet mogelijk om een elicitatieformulier in te lezen.");
+                    "Het forestAnalysis bevat nog geen experts. Daardoor is het niet mogelijk om een elicitatieformulier in te lezen.");
                 return true;
             }
 
@@ -95,14 +95,14 @@ namespace Forest.IO.Import
                 if (nodeValidationResult.Value == NodeValidationResult.InvalidFrequencyForWaterLevel)
                 {
                     log.Error(
-                        $"Fout bij het lezen van bestand {fileName}: Een van de waterstanden voor knoop '{nodeValidationResult.Key.NodeName}' heeft een afwijkende frequentie ten opzichte van het eventTreeProject.");
+                        $"Fout bij het lezen van bestand {fileName}: Een van de waterstanden voor knoop '{nodeValidationResult.Key.NodeName}' heeft een afwijkende frequentie ten opzichte van het forestAnalysis.");
                     return true;
                 }
 
                 if (nodeValidationResult.Value == NodeValidationResult.WaterLevelNotFound)
                 {
                     log.Error(
-                        $"Fout bij het lezen van bestand {fileName}: Een van de waterstanden voor knoop '{nodeValidationResult.Key.NodeName}' kan niet in het eventTreeProject worden gevonden.");
+                        $"Fout bij het lezen van bestand {fileName}: Een van de waterstanden voor knoop '{nodeValidationResult.Key.NodeName}' kan niet in het forestAnalysis worden gevonden.");
                     return true;
                 }
             }

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Forest.Data;
+using Forest.Data.Estimations;
 using Forest.Data.Services;
 using Forest.Gui.Components;
 using Forest.Visualization.ViewModels;
@@ -14,7 +15,7 @@ namespace Forest.Visualization
     public class ContentPresenterViewModel : INotifyPropertyChanged
     {
         private readonly ForestGui gui;
-        private readonly ProjectManipulationService projectManipulationService;
+        private readonly AnalysisManipulationService analysisManipulationService;
 
         public ContentPresenterViewModel(ForestGui gui)
         {
@@ -24,83 +25,84 @@ namespace Forest.Visualization
                 gui.PropertyChanged += GuiPropertyChanged;
                 gui.SelectionManager.PropertyChanged += SelectionChanged;
 
-                projectManipulationService = new ProjectManipulationService(gui.EventTreeProject);
+                analysisManipulationService = new AnalysisManipulationService(gui.ForestAnalysis);
 
-                EventTree = new EventTreeViewModel(EventTreeProject.EventTree, projectManipulationService, gui.SelectionManager)
+                EventTree = new EventTreeViewModel(ForestAnalysis.EventTree, analysisManipulationService, gui.SelectionManager, gui.ForestAnalysis.ProbabilityEstimations)
                 {
-                    EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(gui.EventTreeProject)
+                    EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(gui.ForestAnalysis)
                 };
 
-                Experts = new ObservableCollection<ExpertViewModel>(EventTreeProject.Experts.Select(e => new ExpertViewModel(e)));
+                Experts = new ObservableCollection<ExpertViewModel>(ForestAnalysis.Experts.Select(e => new ExpertViewModel(e)));
                 Experts.CollectionChanged += ExpertViewModelsCollectionChanged;
 
-                HydraulicConditionsList =
+                HydrodynamicConditionsList =
                     new ObservableCollection<HydraulicConditionViewModel>(
-                        EventTreeProject.HydraulicConditions.Select(e => new HydraulicConditionViewModel(e)));
-                HydraulicConditionsList.CollectionChanged += HydraulicsViewModelsCollectionChanged;
+                        ForestAnalysis.HydrodynamicConditions.Select(e => new HydraulicConditionViewModel(e)));
+                HydrodynamicConditionsList.CollectionChanged += HydraulicsViewModelsCollectionChanged;
             }
         }
 
         public string ProjectName
         {
-            get => EventTreeProject.Name;
-            set => EventTreeProject.Name = value;
+            get => ForestAnalysis.Name;
+            set => ForestAnalysis.Name = value;
         }
 
         public string ProjectDescription
         {
-            get => EventTreeProject.Description;
-            set => EventTreeProject.Description = value;
+            get => ForestAnalysis.Description;
+            set => ForestAnalysis.Description = value;
         }
 
         public string AssessmentSection
         {
-            get => EventTreeProject.AssessmentSection;
-            set => EventTreeProject.AssessmentSection = value;
+            get => ForestAnalysis.AssessmentSection;
+            set => ForestAnalysis.AssessmentSection = value;
         }
 
         public string ProjectInformation
         {
-            get => EventTreeProject.ProjectInformation;
-            set => EventTreeProject.ProjectInformation = value;
+            get => ForestAnalysis.ProjectInformation;
+            set => ForestAnalysis.ProjectInformation = value;
         }
 
         public string ProjectLeaderName
         {
-            get => EventTreeProject.ProjectLeader.Name;
+            get => ForestAnalysis.ProjectLeader.Name;
             set
             {
-                EventTreeProject.ProjectLeader.Name = value;
-                EventTreeProject.ProjectLeader.OnPropertyChanged(nameof(EventTreeProject.ProjectLeader.Name));
+                ForestAnalysis.ProjectLeader.Name = value;
+                ForestAnalysis.ProjectLeader.OnPropertyChanged(nameof(ForestAnalysis.ProjectLeader.Name));
             }
         }
 
         public string ProjectLeaderEmail
         {
-            get => EventTreeProject.ProjectLeader.Email;
+            get => ForestAnalysis.ProjectLeader.Email;
             set
             {
-                EventTreeProject.ProjectLeader.Email = value;
-                EventTreeProject.ProjectLeader.OnPropertyChanged(nameof(EventTreeProject.ProjectLeader.Email));
+                ForestAnalysis.ProjectLeader.Email = value;
+                ForestAnalysis.ProjectLeader.OnPropertyChanged(nameof(ForestAnalysis.ProjectLeader.Email));
             }
         }
 
         public string ProjectLeaderTelephone
         {
-            get => EventTreeProject.ProjectLeader.Telephone;
+            get => ForestAnalysis.ProjectLeader.Telephone;
             set
             {
-                EventTreeProject.ProjectLeader.Telephone = value;
-                EventTreeProject.ProjectLeader.OnPropertyChanged(nameof(EventTreeProject.ProjectLeader.Telephone));
+                ForestAnalysis.ProjectLeader.Telephone = value;
+                ForestAnalysis.ProjectLeader.OnPropertyChanged(nameof(ForestAnalysis.ProjectLeader.Telephone));
             }
         }
 
         public ObservableCollection<ExpertViewModel> Experts { get; }
 
-        public ObservableCollection<HydraulicConditionViewModel> HydraulicConditionsList { get; }
+        public ObservableCollection<HydraulicConditionViewModel> HydrodynamicConditionsList { get; }
 
+        public ObservableCollection<TreeEventProbabilityEstimation> ProbabilityEstimations { get; }
 
-        private EventTreeProject EventTreeProject => gui.EventTreeProject;
+        private ForestAnalysis ForestAnalysis => gui.ForestAnalysis;
 
         public EventTreeViewModel EventTree { get; set; }
 
@@ -126,10 +128,10 @@ namespace Forest.Visualization
                 case nameof(ForestGui.SelectedState):
                     OnPropertyChanged(nameof(SelectedGuiState));
                     break;
-                case nameof(ForestGui.EventTreeProject):
-                    EventTree = new EventTreeViewModel(EventTreeProject.EventTree, projectManipulationService, gui.SelectionManager)
+                case nameof(ForestGui.ForestAnalysis):
+                    EventTree = new EventTreeViewModel(ForestAnalysis.EventTree, analysisManipulationService, gui.SelectionManager, gui.ForestAnalysis.ProbabilityEstimations)
                     {
-                        EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(gui.EventTreeProject)
+                        EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(gui.ForestAnalysis)
                     };
                     OnPropertyChanged(nameof(EventTree));
                     OnPropertyChanged(nameof(SelectedTreeEvent));
@@ -146,22 +148,22 @@ namespace Forest.Visualization
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
                 foreach (var item in e.NewItems.OfType<HydraulicConditionViewModel>())
-                    projectManipulationService.AddHydraulicCondition(item.HydraulicCondition);
+                    analysisManipulationService.AddHydraulicCondition(item.HydrodynamicCondition);
 
             if (e.Action == NotifyCollectionChangedAction.Remove)
                 foreach (var item in e.OldItems.OfType<HydraulicConditionViewModel>())
-                    projectManipulationService.RemoveHydraulicCondition(item.HydraulicCondition);
+                    analysisManipulationService.RemoveHydraulicCondition(item.HydrodynamicCondition);
         }
 
         private void ExpertViewModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
                 foreach (var item in e.NewItems.OfType<ExpertViewModel>())
-                    projectManipulationService.AddExpert(item.Expert);
+                    analysisManipulationService.AddExpert(item.Expert);
 
             if (e.Action == NotifyCollectionChangedAction.Remove)
                 foreach (var item in e.OldItems.OfType<ExpertViewModel>())
-                    projectManipulationService.RemoveExpert(item.Expert);
+                    analysisManipulationService.RemoveExpert(item.Expert);
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

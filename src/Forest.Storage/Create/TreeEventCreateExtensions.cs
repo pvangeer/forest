@@ -19,7 +19,6 @@ namespace Forest.Storage.Create
                 Name = model.Name.DeepClone(),
                 Summary = model.Summary.DeepClone(),
                 FixedProbability = model.FixedProbability,
-                ProbabilitySpecificationType = Convert.ToByte(model.ProbabilitySpecificationType),
                 Information = model.Information.DeepClone(),
                 Discussion = model.Discussion.DeepClone()
                 // Add passphrase

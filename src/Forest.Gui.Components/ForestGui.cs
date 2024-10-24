@@ -18,7 +18,7 @@ namespace Forest.Gui.Components
             ConfigureMessaging();
             BusyIndicator = StorageState.Idle;
             Messages = new MessageList();
-            EventTreeProject = EventTreeProjectFactory.CreateStandardNewProject();
+            ForestAnalysis = ForestAnalysisFactory.CreateStandardNewProject();
             ProjectFilePath = "";
             GuiProjectServices = new GuiProjectServices(this);
             SelectionManager = new SelectionManager(this);
@@ -31,7 +31,7 @@ namespace Forest.Gui.Components
 
         public StorageState BusyIndicator { get; set; }
 
-        public EventTreeProject EventTreeProject { get; set; }
+        public ForestAnalysis ForestAnalysis { get; set; }
 
         public string ProjectFilePath { get; set; }
 

@@ -13,7 +13,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <DataGrid Grid.Column="0"
-                      ItemsSource="{Binding HydraulicConditionsList}"
+                      ItemsSource="{Binding HydrodynamicConditionsList}"
                       AutoGenerateColumns="False"
                       Style="{StaticResource DataGridStyle}">
                 <DataGrid.Columns>
@@ -42,7 +42,7 @@
                 Grid.Column="1" />
             <Grid Grid.Column="2" Margin="10">
                 <oxy:PlotView
-                    Model="{Binding HydraulicConditionsList, Converter={StaticResource HydraulicsListToPlotModelConverter}}" />
+                    Model="{Binding HydrodynamicConditionsList, Converter={StaticResource HydraulicsListToPlotModelConverter}}" />
             </Grid>
         </Grid>
     </DataTemplate>

@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Forest.Data;
+using Forest.Data.Experts;
 using Forest.Data.Properties;
 
 namespace Forest.Visualization.ViewModels

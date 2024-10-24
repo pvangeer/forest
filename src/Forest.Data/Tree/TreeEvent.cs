@@ -8,9 +8,9 @@ namespace Forest.Data.Tree
 {
     public class TreeEvent : INotifyPropertyChanged
     {
-        public TreeEvent()
+        public TreeEvent(string name)
         {
-            ProbabilitySpecificationType = ProbabilitySpecificationType.FixedValue;
+            Name = name;
             FixedProbability = (Probability)1;
             ClassesProbabilitySpecification = new ObservableCollection<ExpertClassEstimation>();
             FixedFragilityCurve = new FragilityCurve();
@@ -33,8 +33,6 @@ namespace Forest.Data.Tree
         public Probability FixedProbability { get; set; }
 
         public FragilityCurve FixedFragilityCurve { get; }
-
-        public ProbabilitySpecificationType ProbabilitySpecificationType { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

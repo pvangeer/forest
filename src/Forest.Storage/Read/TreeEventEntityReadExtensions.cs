@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Forest.Data;
 using Forest.Data.Estimations;
 using Forest.Data.Tree;
 using Forest.Storage.XmlEntities;
@@ -20,13 +19,11 @@ namespace Forest.Storage.Read
             if (collector.Contains(entity))
                 return collector.Get(entity);
 
-            var treeEvent = new TreeEvent
+            var treeEvent = new TreeEvent(entity.Name)
             {
-                Name = entity.Name,
                 FixedProbability = double.IsNaN(entity.FixedProbability)
                     ? Probability.NaN
                     : (Probability)entity.FixedProbability,
-                ProbabilitySpecificationType = (ProbabilitySpecificationType)entity.ProbabilitySpecificationType,
                 Summary = entity.Summary,
                 Information = entity.Information,
                 Discussion = entity.Discussion

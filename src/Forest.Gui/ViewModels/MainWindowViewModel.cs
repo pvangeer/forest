@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using Forest.Data;
+using Forest.Data.Experts;
 using Forest.Data.Properties;
 using Forest.Data.Tree;
 using Forest.Gui.Command;
@@ -146,13 +147,13 @@ namespace Forest.Gui.ViewModels
 
         public void OnExportElicitationForms(string fileLocation, string prefix, Expert[] expertsToExport, EventTree eventTreeToExport)
         {
-            var exporter = new ElicitationFormsExporter(gui.EventTreeProject);
+            var exporter = new ElicitationFormsExporter(gui.ForestAnalysis);
             exporter.Export(fileLocation, prefix, expertsToExport, eventTreeToExport);
         }
 
         public void OnImportElicitationForms(string[] fileLocations)
         {
-            var importer = new ElicitationFormImporter(gui.EventTreeProject);
+            var importer = new ElicitationFormImporter(gui.ForestAnalysis);
             foreach (var fileLocation in fileLocations)
                 importer.Import(fileLocation);
         }
@@ -164,12 +165,12 @@ namespace Forest.Gui.ViewModels
 
         public bool ProjectHasExperts()
         {
-            return gui.EventTreeProject.Experts.Any();
+            return gui.ForestAnalysis.Experts.Any();
         }
 
-        public EventTreeProject GetEventTreeProject()
+        public ForestAnalysis GetEventTreeProject()
         {
-            return gui.EventTreeProject;
+            return gui.ForestAnalysis;
         }
 
         #region Statusbar related

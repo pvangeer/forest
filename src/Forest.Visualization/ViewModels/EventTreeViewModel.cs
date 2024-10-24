@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Forest.Data;
+using Forest.Data.Estimations;
 using Forest.Data.Properties;
 using Forest.Data.Services;
 using Forest.Data.Tree;
@@ -12,30 +14,33 @@ namespace Forest.Visualization.ViewModels
 {
     public class EventTreeViewModel : INotifyPropertyChanged
     {
-        private readonly ProjectManipulationService projectManipulationService;
+        private readonly AnalysisManipulationService analysisManipulationService;
         private readonly SelectionManager selectionManager;
         private EventTreeGraph graph;
         private bool isSelected;
         private TreeEventViewModel mainTreeEventViewModel;
+        private readonly ObservableCollection<ProbabilityEstimation> estimations;
 
         public EventTreeViewModel()
         {
-            var project = EventTreeProjectFactory.CreateStandardNewProject();
-            projectManipulationService = new ProjectManipulationService(project);
+            var project = ForestAnalysisFactory.CreateStandardNewProject();
+            analysisManipulationService = new AnalysisManipulationService(project);
             EventTree = project.EventTree;
             EventTree.PropertyChanged += EventTreePropertyChanged;
             EventTree.TreeEventsChanged += TreeEventsChanged;
         }
 
-        public EventTreeViewModel([NotNull] EventTree eventTree, ProjectManipulationService projectManipulationService,
-            SelectionManager selectionManager)
+        public EventTreeViewModel([NotNull] EventTree eventTree, AnalysisManipulationService analysisManipulationService,
+            SelectionManager selectionManager, ObservableCollection<ProbabilityEstimation> estimations)
         {
             EventTree = eventTree;
             this.selectionManager = selectionManager;
-            SelectedTreeEvent = MainTreeEventViewModel;
-            this.projectManipulationService = projectManipulationService;
+            this.estimations = estimations;
+            this.analysisManipulationService = analysisManipulationService;
             eventTree.PropertyChanged += EventTreePropertyChanged;
             EventTree.TreeEventsChanged += TreeEventsChanged;
+
+            SelectedTreeEvent = MainTreeEventViewModel;
         }
 
         private EventTree EventTree { get; }
@@ -71,7 +76,7 @@ namespace Forest.Visualization.ViewModels
                     return null;
 
                 return mainTreeEventViewModel ??
-                       (mainTreeEventViewModel = new TreeEventViewModel(EventTree.MainTreeEvent, this, projectManipulationService));
+                       (mainTreeEventViewModel = new TreeEventViewModel(EventTree.MainTreeEvent, this, analysisManipulationService, estimations));
             }
         }
 
@@ -166,6 +171,11 @@ namespace Forest.Visualization.ViewModels
                 list = list.Concat(GetAllEventsRecursive(treeEventViewModel.PassingEvent)).ToArray();
 
             return list;
+        }
+
+        public bool IsViewModelFor(EventTree argEventTree)
+        {
+            return argEventTree == EventTree;
         }
     }
 }

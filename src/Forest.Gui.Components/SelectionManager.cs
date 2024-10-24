@@ -12,7 +12,7 @@ namespace Forest.Gui.Components
         public SelectionManager(ForestGui gui)
         {
             this.gui = gui;
-            SelectedTreeEvent = gui.EventTreeProject.EventTree.MainTreeEvent;
+            SelectedTreeEvent = gui.ForestAnalysis.EventTree.MainTreeEvent;
         }
 
         public TreeEvent SelectedTreeEvent { get; private set; }

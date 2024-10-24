@@ -8,15 +8,19 @@ namespace Forest.Visualization.ViewModels
 {
     public class ProbabilitySpecificationViewModelBase : INotifyPropertyChanged
     {
-        public ProbabilitySpecificationViewModelBase([NotNull] TreeEvent treeEvent)
+        public ProbabilitySpecificationViewModelBase([NotNull] TreeEvent treeEvent, [NotNull] TreeEventProbabilityEstimation estimation)
         {
+            Estimation = estimation;
             TreeEvent = treeEvent;
             TreeEvent.PropertyChanged += TreeEventPropertyChanged;
         }
 
         public TreeEvent TreeEvent { get; }
 
-        public ProbabilitySpecificationType Type => TreeEvent.ProbabilitySpecificationType;
+        public TreeEventProbabilityEstimation Estimation { get; }
+
+        public ProbabilitySpecificationType Type => Estimation.ProbabilitySpecificationType;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void TreeEventPropertyChanged(object sender, PropertyChangedEventArgs e)

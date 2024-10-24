@@ -21,7 +21,7 @@ namespace Forest.Storage.Read
             var estimation = new ExpertClassEstimation
             {
                 Expert = collector.GetReferencedExpert(entity.ExpertId),
-                HydraulicCondition = collector.GetReferencedHydraulicCondition(entity.HydraulicConditionId),
+                HydrodynamicCondition = collector.GetReferencedHydraulicCondition(entity.HydraulicConditionId),
                 AverageEstimation = (ProbabilityClass)entity.AverageEstimation,
                 MinEstimation = (ProbabilityClass)entity.MinEstimation,
                 MaxEstimation = (ProbabilityClass)entity.MaxEstimation

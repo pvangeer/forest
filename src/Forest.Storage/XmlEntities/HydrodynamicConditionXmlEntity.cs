@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace Forest.Storage.XmlEntities
 {
     [Serializable]
-    public class HydraulicConditionXmlEntity : FragilityCurveElementXmlEntity
+    public class HydrodynamicConditionXmlEntity : FragilityCurveElementXmlEntity
     {
         [XmlAttribute(AttributeName = "waveperiod")]
         public double WavePeriod { get; set; }

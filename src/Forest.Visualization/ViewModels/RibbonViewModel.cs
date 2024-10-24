@@ -12,7 +12,7 @@ namespace Forest.Visualization.ViewModels
     public class RibbonViewModel : INotifyPropertyChanged
     {
         private readonly ForestGui gui;
-        private readonly ProjectManipulationService projectManipulationService;
+        private readonly AnalysisManipulationService analysisManipulationService;
 
         public RibbonViewModel() : this(new ForestGui())
         {
@@ -28,7 +28,7 @@ namespace Forest.Visualization.ViewModels
                 gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
             }
 
-            projectManipulationService = new ProjectManipulationService(gui.EventTreeProject);
+            analysisManipulationService = new AnalysisManipulationService(gui.ForestAnalysis);
 
             AddTreeEventCommand = new AddTreeEventCommand(this);
             RemoveTreeEventCommand = new RemoveTreeEventCommand(this);
@@ -83,7 +83,7 @@ namespace Forest.Visualization.ViewModels
 
         public bool CanSaveProject()
         {
-            return gui.EventTreeProject != null;
+            return gui.ForestAnalysis != null;
         }
 
         public void SaveProject()
@@ -98,14 +98,14 @@ namespace Forest.Visualization.ViewModels
 
         public void AddTreeEvent(TreeEventType treeEventType)
         {
-            var newTreeEvent = projectManipulationService.AddTreeEvent(gui.EventTreeProject.EventTree, SelectedTreeEvent, treeEventType);
+            var newTreeEvent = analysisManipulationService.AddTreeEvent(gui.ForestAnalysis.EventTree, SelectedTreeEvent, treeEventType);
             gui.SelectionManager.SelectTreeEvent(newTreeEvent);
         }
 
         public void RemoveTreeEvent(TreeEventType eventType)
         {
-            var parent = projectManipulationService.RemoveTreeEvent(gui.EventTreeProject.EventTree, gui.SelectionManager.SelectedTreeEvent);
-            gui.SelectionManager.SelectTreeEvent(parent ?? gui.EventTreeProject.EventTree.MainTreeEvent);
+            var parent = analysisManipulationService.RemoveTreeEvent(gui.ForestAnalysis.EventTree, gui.SelectionManager.SelectedTreeEvent);
+            gui.SelectionManager.SelectTreeEvent(parent ?? gui.ForestAnalysis.EventTree.MainTreeEvent);
         }
 
         private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -147,7 +147,7 @@ namespace Forest.Visualization.ViewModels
 
         public bool CanRemoveSelectedTreeEvent()
         {
-            return SelectedTreeEvent != gui.EventTreeProject.EventTree.MainTreeEvent;
+            return SelectedTreeEvent != gui.ForestAnalysis.EventTree.MainTreeEvent;
         }
     }
 }
