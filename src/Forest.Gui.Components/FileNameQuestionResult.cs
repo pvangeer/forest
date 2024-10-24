@@ -7,6 +7,7 @@
             Proceed = proceed;
             FileName = fileName;
         }
+
         public string FileName { get; }
 
         public bool Proceed { get; }

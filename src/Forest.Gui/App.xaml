@@ -86,9 +86,12 @@
             <import:ImportElicitationFormsCommand x:Key="ImportElicitationFormsCommand" />
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/General/ComboBoxFlatStyle.xaml" />
-                <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/General/TabControlFlatStyle.xaml" />
-                <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/General/AssessmentSections.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/DataTemplates/General/ComboBoxFlatStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/DataTemplates/General/TabControlFlatStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/DataTemplates/General/AssessmentSections.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

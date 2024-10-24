@@ -11,9 +11,7 @@ namespace Forest.Visualization.DataTemplates.MainTabItems
         public string GetText(FlowDocument document)
         {
             if (emptyText == null)
-            {
                 emptyText = rtfFormatter.GetText(document);
-            }
 
             var text = rtfFormatter.GetText(document);
             return text == emptyText ? "" : text;
@@ -21,7 +19,7 @@ namespace Forest.Visualization.DataTemplates.MainTabItems
 
         public void SetText(FlowDocument document, string text)
         {
-            rtfFormatter.SetText(document,text);
+            rtfFormatter.SetText(document, text);
         }
     }
 }

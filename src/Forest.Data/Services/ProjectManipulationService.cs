@@ -113,19 +113,15 @@ namespace Forest.Data.Services
                 Name = "Nieuwe gebeurtenis"
             };
             foreach (var expert in eventTreeProject.Experts)
-            {
-                foreach (var hydraulicCondition in eventTreeProject.HydraulicConditions)
+            foreach (var hydraulicCondition in eventTreeProject.HydraulicConditions)
+                newTreeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
                 {
-                    newTreeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
-                    {
-                        Expert = expert,
-                        HydraulicCondition = hydraulicCondition,
-                        AverageEstimation = ProbabilityClass.None,
-                        MinEstimation = ProbabilityClass.None,
-                        MaxEstimation = ProbabilityClass.None
-                    });
-                }
-            }
+                    Expert = expert,
+                    HydraulicCondition = hydraulicCondition,
+                    AverageEstimation = ProbabilityClass.None,
+                    MinEstimation = ProbabilityClass.None,
+                    MaxEstimation = ProbabilityClass.None
+                });
 
             if (eventTree.MainTreeEvent == null)
             {
@@ -146,7 +142,8 @@ namespace Forest.Data.Services
                     break;
             }
 
-            eventTree.OnTreeEventsChanged(new TreeEventsChangedEventArgs(EventTreeModification.Add, selectedTreeEventToAddTo, newTreeEvent));
+            eventTree.OnTreeEventsChanged(new TreeEventsChangedEventArgs(EventTreeModification.Add, selectedTreeEventToAddTo,
+                newTreeEvent));
 
             return newTreeEvent;
         }

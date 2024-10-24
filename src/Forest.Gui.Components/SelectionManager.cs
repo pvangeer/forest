@@ -15,15 +15,15 @@ namespace Forest.Gui.Components
             SelectedTreeEvent = gui.EventTreeProject.EventTree.MainTreeEvent;
         }
 
+        public TreeEvent SelectedTreeEvent { get; private set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public void SelectTreeEvent(TreeEvent treeEvent)
         {
             SelectedTreeEvent = treeEvent;
             OnPropertyChanged(nameof(SelectedTreeEvent));
         }
-
-        public TreeEvent SelectedTreeEvent { get; private set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

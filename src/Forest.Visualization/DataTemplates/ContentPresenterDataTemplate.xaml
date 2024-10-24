@@ -4,13 +4,20 @@
                     xmlns:viewModels="clr-namespace:Forest.Gui.Components;assembly=Forest.Gui.Components">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/GeneralInformationDataTemplate.xaml" />
-        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/ExpertsDataTemplate.xaml" />
-        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/HydraulicsDataTemplate.xaml" />
-        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/EstimationDataTemplate.xaml" />
-        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/TreeEventsDataTemplate.xaml" />
-        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/TreeEventInformationDataTemplate.xaml" />
-        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/ResultsDataTemplate.xaml" />
+        <ResourceDictionary
+            Source="/Forest.Visualization;component/DataTemplates/MainTabItems/GeneralInformationDataTemplate.xaml" />
+        <ResourceDictionary
+            Source="/Forest.Visualization;component/DataTemplates/MainTabItems/ExpertsDataTemplate.xaml" />
+        <ResourceDictionary
+            Source="/Forest.Visualization;component/DataTemplates/MainTabItems/HydraulicsDataTemplate.xaml" />
+        <ResourceDictionary
+            Source="/Forest.Visualization;component/DataTemplates/MainTabItems/EstimationDataTemplate.xaml" />
+        <ResourceDictionary
+            Source="/Forest.Visualization;component/DataTemplates/MainTabItems/TreeEventsDataTemplate.xaml" />
+        <ResourceDictionary
+            Source="/Forest.Visualization;component/DataTemplates/MainTabItems/TreeEventInformationDataTemplate.xaml" />
+        <ResourceDictionary
+            Source="/Forest.Visualization;component/DataTemplates/MainTabItems/ResultsDataTemplate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="ContentPresenterDataTemplate" DataType="visualization:ContentPresenterViewModel">

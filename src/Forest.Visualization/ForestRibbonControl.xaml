@@ -1,14 +1,14 @@
 ﻿<UserControl x:Class="Forest.Visualization.ForestRibbonControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fluent="urn:fluent-ribbon"
              xmlns:converters="clr-namespace:Forest.Visualization.Converters"
              xmlns:gui="clr-namespace:Forest.Gui.Components;assembly=Forest.Gui.Components"
              xmlns:data="clr-namespace:Forest.Data.Services;assembly=Forest.Data"
              xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -22,7 +22,7 @@
     </UserControl.Resources>
 
     <UserControl.DataContext>
-        <viewModels:RibbonViewModel/>
+        <viewModels:RibbonViewModel />
     </UserControl.DataContext>
 
     <Grid>
@@ -34,31 +34,31 @@
                 <fluent:Backstage Background="{StaticResource ApplicationBorderColorBrush}">
                     <fluent:BackstageTabControl>
                         <fluent:Button Header="Nieuw bestand"
-                               Icon="/Forest.Visualization;component\Resources\document.png"
-                               fluent:KeyTip.Keys="N"
-                               Command="{Binding FileNewCommand}" />
+                                       Icon="/Forest.Visualization;component\Resources\document.png"
+                                       fluent:KeyTip.Keys="N"
+                                       Command="{Binding FileNewCommand}" />
 
                         <fluent:Button Header="Opslaan"
-                               Icon="/Forest.Visualization;component\Resources\save_regular.png"
-                               fluent:KeyTip.Keys="S"
-                               Command="{Binding SaveProjectCommand}" />
+                                       Icon="/Forest.Visualization;component\Resources\save_regular.png"
+                                       fluent:KeyTip.Keys="S"
+                                       Command="{Binding SaveProjectCommand}" />
 
                         <fluent:Button Header="Opslaan Als"
-                               Icon="/Forest.Visualization;component\Resources\save_edit_regular.png"
-                               fluent:KeyTip.Keys="A"
-                               Command="{Binding SaveProjectAsCommand}" />
+                                       Icon="/Forest.Visualization;component\Resources\save_edit_regular.png"
+                                       fluent:KeyTip.Keys="A"
+                                       Command="{Binding SaveProjectAsCommand}" />
 
                         <fluent:Button Header="Openen"
-                               Icon="/Forest.Visualization;component\Resources\folder_open_regular.png"
-                               fluent:KeyTip.Keys="O"
-                               Command="{Binding OpenProjectCommand}" />
+                                       Icon="/Forest.Visualization;component\Resources\folder_open_regular.png"
+                                       fluent:KeyTip.Keys="O"
+                                       Command="{Binding OpenProjectCommand}" />
 
                         <fluent:SeparatorTabItem />
 
                         <fluent:Button Header="Afsluiten"
-                               Icon="/Forest.Visualization;component\Resources\dismiss.png"
-                               fluent:KeyTip.Keys="X"
-                               Command="ApplicationCommands.Close" />
+                                       Icon="/Forest.Visualization;component\Resources\dismiss.png"
+                                       fluent:KeyTip.Keys="X"
+                                       Command="ApplicationCommands.Close" />
 
                     </fluent:BackstageTabControl>
                 </fluent:Backstage>
@@ -75,15 +75,15 @@
                             <Setter Property="Visibility" Value="Visible" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding SelectedState}"
-                                     Value="{x:Static gui:ForestGuiState.GeneralInformation}">
+                                             Value="{x:Static gui:ForestGuiState.GeneralInformation}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding SelectedState}"
-                                     Value="{x:Static gui:ForestGuiState.Experts}">
+                                             Value="{x:Static gui:ForestGuiState.Experts}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding SelectedState}"
-                                     Value="{x:Static gui:ForestGuiState.Hydraulics}">
+                                             Value="{x:Static gui:ForestGuiState.Hydraulics}">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                 </DataTrigger>
                             </Style.Triggers>
@@ -93,8 +93,8 @@
             </fluent:Ribbon.ContextualGroups>
 
             <fluent:RibbonTabItem
-        Header="Proces"
-        fluent:KeyTip.Keys="P">
+                Header="Proces"
+                fluent:KeyTip.Keys="P">
                 <fluent:RibbonGroupBox Header="Algemeen">
                     <fluent:ToggleButton
                         Header="Projectgegevens"

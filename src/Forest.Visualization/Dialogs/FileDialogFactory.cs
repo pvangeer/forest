@@ -7,9 +7,9 @@ namespace Forest.Visualization.Dialogs
 {
     public static class FileDialogFactory
     {
-        public static Func<string,FileNameQuestionResult> AskUserForFileNameToOpenFunc()
+        public static Func<string, FileNameQuestionResult> AskUserForFileNameToOpenFunc()
         {
-            return (fileName) =>    
+            return fileName =>
             {
                 var dialog = new OpenFileDialog
                 {
@@ -24,7 +24,7 @@ namespace Forest.Visualization.Dialogs
 
         public static Func<string, FileNameQuestionResult> AskUserForFileNameToSaveToFunc()
         {
-            return (fileName) =>
+            return fileName =>
             {
                 var dialog = new SaveFileDialog
                 {

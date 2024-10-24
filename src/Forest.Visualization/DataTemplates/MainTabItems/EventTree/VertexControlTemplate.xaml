@@ -29,8 +29,8 @@
         </DrawingBrush.Drawing>
     </DrawingBrush>
     <converters:BooleanToBrushConverter x:Key="BooleanToBrushConverter"
-                               FalseBrush="{StaticResource UnSelectedBorderBrush}"
-                               TrueBrush="{StaticResource SelectedBorderBrush}" />
+                                        FalseBrush="{StaticResource UnSelectedBorderBrush}"
+                                        TrueBrush="{StaticResource SelectedBorderBrush}" />
 
     <DataTemplate x:Key="TreeEventDataTemplate" DataType="viewModels1:TreeEventViewModel">
         <Grid Width="200" IsSharedSizeScope="True">

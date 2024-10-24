@@ -20,7 +20,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml" />
-                <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/ContentPresenterDataTemplate.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/DataTemplates/ContentPresenterDataTemplate.xaml" />
                 <ResourceDictionary Source="/Forest.Gui;component/DataTemplates/MessageDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
@@ -66,7 +67,7 @@
 
         <visualization:ForestRibbonControl
             Grid.Row="0"
-            DataContext="{Binding RibbonViewModel}"/>
+            DataContext="{Binding RibbonViewModel}" />
 
         <Grid Grid.Row="1" ZIndex="2">
             <Grid.Style>

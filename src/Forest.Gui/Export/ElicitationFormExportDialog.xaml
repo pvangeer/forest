@@ -1,7 +1,6 @@
 ﻿<Window x:Class="Forest.Gui.Export.ElicitationFormExportDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:gui="clr-namespace:Forest.Gui"
         xmlns:export="clr-namespace:Forest.Gui.Export"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         BorderBrush="{StaticResource ApplicationBorderColorBrush}"

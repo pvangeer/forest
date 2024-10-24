@@ -11,19 +11,7 @@ namespace Forest.Visualization.Commands
         {
             ViewModel = viewModel;
             if (ViewModel != null)
-            {
                 viewModel.PropertyChanged += ViewModelPropertyChanged;
-            }
-        }
-
-        private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(RibbonViewModel.SelectedTreeEvent):
-                    FireCanExecuteChanged();
-                    break;
-            }
         }
 
         protected RibbonViewModel ViewModel { get; }
@@ -36,6 +24,16 @@ namespace Forest.Visualization.Commands
         public abstract void Execute(object parameter);
 
         public event EventHandler CanExecuteChanged;
+
+        private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(RibbonViewModel.SelectedTreeEvent):
+                    FireCanExecuteChanged();
+                    break;
+            }
+        }
 
         public void FireCanExecuteChanged()
         {

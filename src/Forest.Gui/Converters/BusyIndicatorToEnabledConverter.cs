@@ -2,7 +2,6 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using Forest.Gui.Components;
-using Forest.Gui.ViewModels;
 
 namespace Forest.Gui.Converters
 {
