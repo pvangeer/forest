@@ -3,6 +3,6 @@
     public enum EventTreeModification
     {
         Add = 0,
-        Remove = 1,
+        Remove = 1
     }
 }

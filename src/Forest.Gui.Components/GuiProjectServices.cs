@@ -4,8 +4,6 @@ using Forest.Data;
 using Forest.Messaging;
 using Forest.Storage;
 using Forest.Storage.Migration;
-using log4net;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Forest.Gui.Components
 {
@@ -21,10 +19,10 @@ namespace Forest.Gui.Components
             storageXml = new StorageXml();
         }
 
-        public Func<string,FileNameQuestionResult> OpenProjectFileNameFunc { get; set; }
-        
-        public Func<string,FileNameQuestionResult> SaveProjectFileNameFunc { get; set; }
-        
+        public Func<string, FileNameQuestionResult> OpenProjectFileNameFunc { get; set; }
+
+        public Func<string, FileNameQuestionResult> SaveProjectFileNameFunc { get; set; }
+
         public void NewProject()
         {
             HandleUnsavedChanges(CreateNewProject);
@@ -48,10 +46,7 @@ namespace Forest.Gui.Components
             {
                 var result = OpenProjectFileNameFunc(gui.ProjectFilePath);
                 if (result.Proceed)
-                {
                     OpenProjectCore(result.FileName);
-                }
-
             });
         }
 
@@ -91,21 +86,18 @@ namespace Forest.Gui.Components
 
                     gui.OnPropertyChanged(nameof(ForestGui.EventTreeProject));
                     gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));
-                    
+
                     log.Info($"Klaar met openen van project uit bestand '{gui.ProjectFilePath}'.");
                 });
             worker.WorkerSupportsCancellation = false;
 
             worker.RunWorkerAsync(fileName);
-
         }
 
         private bool MigrateProject(string fileName, out string newFileName)
         {
             if (SaveProjectFileNameFunc == null)
-            {
                 throw new XmlMigrationException("SaveProjectFileNameFunc was not specified.");
-            }
             var result = SaveProjectFileNameFunc(fileName.Replace(".xml",
                 $"-migrated-{VersionInfo.Year}.{VersionInfo.MajorVersion}.{VersionInfo.MinorVersion}.xml"));
 
@@ -162,7 +154,7 @@ namespace Forest.Gui.Components
         private void SaveProjectAs(Action followingAction)
         {
             var result = SaveProjectFileNameFunc(gui.ProjectFilePath);
-            
+
             if (result.Proceed)
             {
                 gui.ProjectFilePath = result.FileName;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -45,27 +44,6 @@ namespace Forest.Gui.ViewModels
             }
         }
 
-        #region Statusbar related
-
-        public bool ShowMessages { get; set; }
-
-        public LogMessage PriorityMessage { get; set; }
-
-        public StorageState BusyIndicator
-        {
-            get => gui.BusyIndicator;
-            set => gui.BusyIndicator = value;
-        }
-
-        public MessageListViewModel MessagesViewModel =>
-            messageListViewModel ?? (messageListViewModel = new MessageListViewModel(gui.Messages));
-
-        public string ProjectFileName => string.IsNullOrEmpty(gui.ProjectFilePath)
-            ? "Nieuw bestand*"
-            : Path.GetFileNameWithoutExtension(gui.ProjectFilePath);
-
-        #endregion
-        
 
         public ICommand RemoveLastMessageCommand => new RemovePriorityMessageCommand(this);
 
@@ -193,5 +171,26 @@ namespace Forest.Gui.ViewModels
         {
             return gui.EventTreeProject;
         }
+
+        #region Statusbar related
+
+        public bool ShowMessages { get; set; }
+
+        public LogMessage PriorityMessage { get; set; }
+
+        public StorageState BusyIndicator
+        {
+            get => gui.BusyIndicator;
+            set => gui.BusyIndicator = value;
+        }
+
+        public MessageListViewModel MessagesViewModel =>
+            messageListViewModel ?? (messageListViewModel = new MessageListViewModel(gui.Messages));
+
+        public string ProjectFileName => string.IsNullOrEmpty(gui.ProjectFilePath)
+            ? "Nieuw bestand*"
+            : Path.GetFileNameWithoutExtension(gui.ProjectFilePath);
+
+        #endregion
     }
 }

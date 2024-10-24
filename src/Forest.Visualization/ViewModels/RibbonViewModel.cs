@@ -1,11 +1,11 @@
-using System.Windows.Input;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Forest.Gui.Components;
-using Forest.Visualization.Commands;
+using System.Windows.Input;
 using Forest.Data.Services;
 using Forest.Data.Tree;
+using Forest.Gui.Components;
+using Forest.Visualization.Commands;
 
 namespace Forest.Visualization.ViewModels
 {
@@ -16,7 +16,6 @@ namespace Forest.Visualization.ViewModels
 
         public RibbonViewModel() : this(new ForestGui())
         {
-            
         }
 
         public RibbonViewModel(ForestGui gui)
@@ -33,7 +32,6 @@ namespace Forest.Visualization.ViewModels
 
             AddTreeEventCommand = new AddTreeEventCommand(this);
             RemoveTreeEventCommand = new RemoveTreeEventCommand(this);
-
         }
 
         public ForestGuiState SelectedState
@@ -44,7 +42,7 @@ namespace Forest.Visualization.ViewModels
             {
                 gui.SelectedState = value;
                 OnPropertyChanged();
-                gui.OnPropertyChanged(nameof(ForestGui.SelectedState));
+                gui.OnPropertyChanged();
             }
         }
 
@@ -70,6 +68,8 @@ namespace Forest.Visualization.ViewModels
         public ICommand AddTreeEventCommand { get; }
 
         public TreeEvent SelectedTreeEvent => gui.SelectionManager.SelectedTreeEvent;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void NewProject()
         {
@@ -130,8 +130,6 @@ namespace Forest.Visualization.ViewModels
                     break;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

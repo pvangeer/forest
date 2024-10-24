@@ -38,7 +38,6 @@ namespace Forest.Visualization
                     new ObservableCollection<HydraulicConditionViewModel>(
                         EventTreeProject.HydraulicConditions.Select(e => new HydraulicConditionViewModel(e)));
                 HydraulicConditionsList.CollectionChanged += HydraulicsViewModelsCollectionChanged;
-
             }
         }
 
@@ -117,6 +116,9 @@ namespace Forest.Visualization
             }
         }
 
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -162,9 +164,6 @@ namespace Forest.Visualization
                     projectManipulationService.RemoveExpert(item.Expert);
         }
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

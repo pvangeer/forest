@@ -5,7 +5,8 @@
                     xmlns:visualization="clr-namespace:Forest.Visualization">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/TreeEventsListViewItemDataTemplate.xaml" />
+        <ResourceDictionary
+            Source="/Forest.Visualization;component/DataTemplates/MainTabItems/TreeEventsListViewItemDataTemplate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="TreeEventInformationDataTemplate" DataType="{x:Type visualization:ContentPresenterViewModel}">

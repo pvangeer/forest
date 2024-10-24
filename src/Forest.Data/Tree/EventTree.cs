@@ -9,14 +9,14 @@ namespace Forest.Data.Tree
     {
         public TreeEvent MainTreeEvent { get; set; }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public event EventHandler<TreeEventsChangedEventArgs> TreeEventsChanged;
 
         public virtual void OnTreeEventsChanged(TreeEventsChangedEventArgs e)
         {
             TreeEventsChanged?.Invoke(this, e);
         }
-        
-        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

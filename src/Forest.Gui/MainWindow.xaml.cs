@@ -20,7 +20,6 @@ namespace Forest.Gui
             };
             var guiViewModel = new MainWindowViewModel(forestGui);
             DataContext = guiViewModel;
-
         }
 
         private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)

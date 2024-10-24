@@ -43,9 +43,9 @@ namespace Forest.Gui.Components
         // TODO: Implement
         public Func<bool> ShouldMigrateProject { get; set; }
 
-        public MessageList Messages { get; }
-
         public ForestGuiState SelectedState { get; set; }
+
+        public MessageList Messages { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

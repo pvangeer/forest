@@ -13,10 +13,10 @@ namespace Forest.Visualization.ViewModels
     public class EventTreeViewModel : INotifyPropertyChanged
     {
         private readonly ProjectManipulationService projectManipulationService;
+        private readonly SelectionManager selectionManager;
         private EventTreeGraph graph;
         private bool isSelected;
         private TreeEventViewModel mainTreeEventViewModel;
-        private readonly SelectionManager selectionManager;
 
         public EventTreeViewModel()
         {
@@ -27,7 +27,8 @@ namespace Forest.Visualization.ViewModels
             EventTree.TreeEventsChanged += TreeEventsChanged;
         }
 
-        public EventTreeViewModel([NotNull] EventTree eventTree, ProjectManipulationService projectManipulationService, SelectionManager selectionManager)
+        public EventTreeViewModel([NotNull] EventTree eventTree, ProjectManipulationService projectManipulationService,
+            SelectionManager selectionManager)
         {
             EventTree = eventTree;
             this.selectionManager = selectionManager;
@@ -47,9 +48,7 @@ namespace Forest.Visualization.ViewModels
             set
             {
                 if (value != null)
-                {
                     selectionManager.SelectTreeEvent(value.TreeEvent);
-                }
                 OnPropertyChanged();
             }
         }

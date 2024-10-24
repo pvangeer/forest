@@ -83,8 +83,10 @@
                     <controls:ZoomControl.Resources>
                         <ResourceDictionary>
                             <ResourceDictionary.MergedDictionaries>
-                                <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/EventTree/EdgeControlTemplate.xaml" />
-                                <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainTabItems/EventTree/VertexControlTemplate.xaml" />
+                                <ResourceDictionary
+                                    Source="/Forest.Visualization;component/DataTemplates/MainTabItems/EventTree/EdgeControlTemplate.xaml" />
+                                <ResourceDictionary
+                                    Source="/Forest.Visualization;component/DataTemplates/MainTabItems/EventTree/VertexControlTemplate.xaml" />
                             </ResourceDictionary.MergedDictionaries>
                         </ResourceDictionary>
                     </controls:ZoomControl.Resources>
