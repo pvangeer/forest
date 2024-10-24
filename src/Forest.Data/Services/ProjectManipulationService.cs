@@ -101,6 +101,8 @@ namespace Forest.Data.Services
                 parent.OnPropertyChanged(nameof(parent.PassingEvent));
             }
 
+            eventTree.OnTreeEventsChanged(new TreeEventsChangedEventArgs(EventTreeModification.Remove, parent));
+
             return parent;
         }
 
@@ -111,15 +113,19 @@ namespace Forest.Data.Services
                 Name = "Nieuwe gebeurtenis"
             };
             foreach (var expert in eventTreeProject.Experts)
-            foreach (var hydraulicCondition in eventTreeProject.HydraulicConditions)
-                newTreeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
+            {
+                foreach (var hydraulicCondition in eventTreeProject.HydraulicConditions)
                 {
-                    Expert = expert,
-                    HydraulicCondition = hydraulicCondition,
-                    AverageEstimation = ProbabilityClass.None,
-                    MinEstimation = ProbabilityClass.None,
-                    MaxEstimation = ProbabilityClass.None
-                });
+                    newTreeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
+                    {
+                        Expert = expert,
+                        HydraulicCondition = hydraulicCondition,
+                        AverageEstimation = ProbabilityClass.None,
+                        MinEstimation = ProbabilityClass.None,
+                        MaxEstimation = ProbabilityClass.None
+                    });
+                }
+            }
 
             if (eventTree.MainTreeEvent == null)
             {
@@ -139,6 +145,8 @@ namespace Forest.Data.Services
                     selectedTreeEventToAddTo.OnPropertyChanged(nameof(selectedTreeEventToAddTo.PassingEvent));
                     break;
             }
+
+            eventTree.OnTreeEventsChanged(new TreeEventsChangedEventArgs(EventTreeModification.Add, selectedTreeEventToAddTo, newTreeEvent));
 
             return newTreeEvent;
         }

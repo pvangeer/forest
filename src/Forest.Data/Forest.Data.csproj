@@ -12,7 +12,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventTree.cs" />
+    <Compile Include="Tree\EventTree.cs" />
+    <Compile Include="Tree\EventTreeModification.cs" />
     <Compile Include="EventTreeProjectFactory.cs" />
     <Compile Include="Expert.cs" />
     <Compile Include="FragilityCurve.cs" />
@@ -24,6 +25,7 @@
     <Compile Include="Services\ProjectManipulationService.cs" />
     <Compile Include="Services\TreeEventManipulations.cs" />
     <Compile Include="Services\TreeEventType.cs" />
+    <Compile Include="TreeEventsChangedEventArgs.cs" />
     <Compile Include="Tree\ExpertClassEstimation.cs" />
     <Compile Include="Probability.cs" />
     <Compile Include="Estimations\ProbabilityClass.cs" />

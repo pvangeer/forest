@@ -24,6 +24,7 @@ namespace Forest.Visualization.ViewModels
             projectManipulationService = new ProjectManipulationService(project);
             EventTree = project.EventTree;
             EventTree.PropertyChanged += EventTreePropertyChanged;
+            EventTree.TreeEventsChanged += TreeEventsChanged;
         }
 
         public EventTreeViewModel([NotNull] EventTree eventTree, ProjectManipulationService projectManipulationService, SelectionManager selectionManager)
@@ -33,6 +34,7 @@ namespace Forest.Visualization.ViewModels
             SelectedTreeEvent = MainTreeEventViewModel;
             this.projectManipulationService = projectManipulationService;
             eventTree.PropertyChanged += EventTreePropertyChanged;
+            EventTree.TreeEventsChanged += TreeEventsChanged;
         }
 
         private EventTree EventTree { get; }
@@ -139,32 +141,16 @@ namespace Forest.Visualization.ViewModels
             }
         }
 
-        public bool IsViewModelFor(EventTree eventTree)
+        private void TreeEventsChanged(object sender, TreeEventsChangedEventArgs e)
         {
-            return Equals(EventTree, eventTree);
+            OnPropertyChanged(nameof(AllTreeEvents));
+            OnPropertyChanged(nameof(Graph));
         }
 
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public void AddTreeEvent(TreeEventViewModel treeEventViewModel, TreeEventType treeEventType)
-        {
-            projectManipulationService.AddTreeEvent(EventTree, treeEventViewModel?.TreeEvent, treeEventType);
-            SelectedTreeEvent = treeEventViewModel == null ? MainTreeEventViewModel :
-                treeEventType == TreeEventType.Failing ? treeEventViewModel.FailingEvent : treeEventViewModel.PassingEvent;
-            OnPropertyChanged(nameof(AllTreeEvents));
-            OnPropertyChanged(nameof(Graph));
-        }
-
-        public void RemoveTreeEvent(TreeEventViewModel treeEventViewModel, TreeEventType eventType)
-        {
-            var parent = projectManipulationService.RemoveTreeEvent(EventTree, treeEventViewModel.TreeEvent);
-            SelectedTreeEvent = parent == null ? MainTreeEventViewModel : FindLastEventViewModel(MainTreeEventViewModel, eventType);
-            OnPropertyChanged(nameof(AllTreeEvents));
-            OnPropertyChanged(nameof(Graph));
         }
 
         private static IEnumerable<TreeEventViewModel> GetAllEventsRecursive(TreeEventViewModel treeEventViewModel)
@@ -181,25 +167,6 @@ namespace Forest.Visualization.ViewModels
                 list = list.Concat(GetAllEventsRecursive(treeEventViewModel.PassingEvent)).ToArray();
 
             return list;
-        }
-
-        private static TreeEventViewModel FindLastEventViewModel(TreeEventViewModel mainTreeEventViewModel, TreeEventType type)
-        {
-            switch (type)
-            {
-                case TreeEventType.Failing:
-                    if (mainTreeEventViewModel.FailingEvent == null)
-                        return mainTreeEventViewModel;
-
-                    return FindLastEventViewModel(mainTreeEventViewModel.FailingEvent, type);
-                case TreeEventType.Passing:
-                    if (mainTreeEventViewModel.PassingEvent == null)
-                        return mainTreeEventViewModel;
-
-                    return FindLastEventViewModel(mainTreeEventViewModel.PassingEvent, type);
-                default:
-                    throw new InvalidEnumArgumentException();
-            }
         }
     }
 }

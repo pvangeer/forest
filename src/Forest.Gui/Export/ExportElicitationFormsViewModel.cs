@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Forest.Data;
+using Forest.Data.Tree;
 using Forest.Gui.Properties;
 using log4net;
 

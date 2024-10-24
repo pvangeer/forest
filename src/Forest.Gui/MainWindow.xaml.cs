@@ -19,11 +19,6 @@ namespace Forest.Gui
                 EventTreeProject = EventTreeProjectFactory.CreateStandardNewProject()
             };
             var guiViewModel = new MainWindowViewModel(forestGui);
-            guiViewModel.OnInvalidateVisual += (o, ea) =>
-            {
-                HostControl.InvalidateVisual();
-                InvalidateVisual();
-            };
             DataContext = guiViewModel;
 
         }

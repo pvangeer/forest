@@ -18,7 +18,8 @@ namespace Forest.Gui.Export
 
         public void Execute(object parameter)
         {
-            if (!(parameter is MainWindowViewModel guiViewModel))
+            // TODO: Parameter should not be mainWindowViewModel
+            if (!(parameter is MainWindowViewModel mainWindowViewModel))
             {
                 Log.Error("Er is iets misgegaan, waardoor exporteren niet mogelijk is.");
                 return;
@@ -26,9 +27,9 @@ namespace Forest.Gui.Export
 
             var dialog = new ElicitationFormExportDialog
             {
-                DataContext = new ExportElicitationFormsViewModel(guiViewModel.GetEventTreeProject())
+                DataContext = new ExportElicitationFormsViewModel(mainWindowViewModel.GetEventTreeProject())
                 {
-                    OnExport = guiViewModel.OnExportElicitationForms
+                    OnExport = mainWindowViewModel.OnExportElicitationForms
                 },
                 Owner = Application.Current.MainWindow
             };

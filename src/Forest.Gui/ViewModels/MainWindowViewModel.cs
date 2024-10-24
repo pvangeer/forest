@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using Forest.Data;
 using Forest.Data.Properties;
+using Forest.Data.Tree;
 using Forest.Gui.Command;
 using Forest.Gui.Components;
 using Forest.IO.Export;
@@ -69,17 +70,6 @@ namespace Forest.Gui.ViewModels
         public ICommand RemoveLastMessageCommand => new RemovePriorityMessageCommand(this);
 
         public ICommand ShowMessageListCommand => new ShowMessageListCommand(this);
-
-        public ForestGuiState SelectedState
-        {
-            get => gui.SelectedState;
-            set
-            {
-                gui.SelectedState = value;
-                gui.OnPropertyChanged(nameof(ForestGui.SelectedState));
-                OnPropertyChanged();
-            }
-        }
 
         public ContentPresenterViewModel ContentPresenterViewModel { get; }
 
@@ -153,8 +143,6 @@ namespace Forest.Gui.ViewModels
             }
         }
 
-        public event EventHandler OnInvalidateVisual;
-
         private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -170,11 +158,6 @@ namespace Forest.Gui.ViewModels
                     OnPropertyChanged(nameof(ProjectFileName));
                     break;
             }
-        }
-
-        public void InvokeInvalidateVisual()
-        {
-            OnInvalidateVisual?.Invoke(this, null);
         }
 
         [NotifyPropertyChangedInvocator]
@@ -194,31 +177,6 @@ namespace Forest.Gui.ViewModels
             var importer = new ElicitationFormImporter(gui.EventTreeProject);
             foreach (var fileLocation in fileLocations)
                 importer.Import(fileLocation);
-        }
-
-        public void NewProject()
-        {
-            gui.GuiProjectServices.NewProject();
-        }
-
-        public void OpenProject()
-        {
-            gui.GuiProjectServices.OpenProject();
-        }
-
-        public void SaveProjectAs()
-        {
-            gui.GuiProjectServices.SaveProjectAs();
-        }
-
-        public bool CanSaveProject()
-        {
-            return gui.EventTreeProject != null;
-        }
-
-        public void SaveProject()
-        {
-            gui.GuiProjectServices.SaveProject();
         }
 
         public bool ForcedClosingMainWindow()
