@@ -88,11 +88,16 @@ namespace Forest.Gui.Components
                 () =>
                 {
                     gui.ProjectFilePath = fileName;
+
+                    gui.OnPropertyChanged(nameof(ForestGui.EventTreeProject));
+                    gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));
+                    
                     log.Info($"Klaar met openen van project uit bestand '{gui.ProjectFilePath}'.");
                 });
             worker.WorkerSupportsCancellation = false;
 
             worker.RunWorkerAsync(fileName);
+
         }
 
         private bool MigrateProject(string fileName, out string newFileName)
@@ -216,9 +221,6 @@ namespace Forest.Gui.Components
                     DateCreated = readProjectData.Created
                 };
                 gui.ProjectFilePath = fileName;
-
-                gui.OnPropertyChanged(nameof(ForestGui.EventTreeProject));
-                gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));
             }
             catch (Exception exception)
             {
