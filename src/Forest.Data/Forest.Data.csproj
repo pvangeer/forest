@@ -12,10 +12,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Estimations\PerTreeEvet\ProbabilityEstimationPerTreeEvent.cs" />
+    <Compile Include="Estimations\PerTreeEvent\ProbabilityEstimationPerTreeEvent.cs" />
     <Compile Include="Estimations\ProbabilityEstimation.cs" />
-    <Compile Include="Estimations\PerTreeEvet\TreeEventProbabilityEstimation.cs" />
-    <Compile Include="Estimations\PerTreeEvet\ProbabilityEstimationPerTreeEventExtensions.cs" />
+    <Compile Include="Estimations\PerTreeEvent\TreeEventProbabilityEstimation.cs" />
+    <Compile Include="Estimations\PerTreeEvent\ProbabilityEstimationPerTreeEventExtensions.cs" />
     <Compile Include="Tree\EventTree.cs" />
     <Compile Include="Services\EventTreeModification.cs" />
     <Compile Include="ForestAnalysisFactory.cs" />
@@ -27,17 +27,17 @@
     <Compile Include="ForestAnalysis.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\AnalysisManipulationService.cs" />
-    <Compile Include="Estimations\PerTreeEvet\ExpertClassEstimationUtils.cs" />
+    <Compile Include="Estimations\PerTreeEvent\ExpertClassEstimationUtils.cs" />
     <Compile Include="Tree\TreeEventExtensions.cs" />
     <Compile Include="Tree\TreeEventType.cs" />
     <Compile Include="Services\TreeEventsChangedEventArgs.cs" />
-    <Compile Include="Estimations\PerTreeEvet\ExpertClassEstimation.cs" />
+    <Compile Include="Estimations\PerTreeEvent\ExpertClassEstimation.cs" />
     <Compile Include="Probabilities\Probability.cs" />
-    <Compile Include="Estimations\PerTreeEvet\ProbabilityClass.cs" />
-    <Compile Include="Estimations\PerTreeEvet\ProbabilitySpecificationType.cs" />
+    <Compile Include="Estimations\PerTreeEvent\ProbabilityClass.cs" />
+    <Compile Include="Estimations\PerTreeEvent\ProbabilitySpecificationType.cs" />
     <Compile Include="Tree\TreeEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Estimations\PerTreeEvet\TreeEventProbabilityEstimationExtensions.cs" />
+    <Compile Include="Estimations\PerTreeEvent\TreeEventProbabilityEstimationExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
 </Project>

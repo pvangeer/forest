@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using Forest.Data.Estimations;
-using Forest.Data.Estimations.PerTreeEvet;
+using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Experts;
 using Forest.Data.Properties;
 using Forest.Gui.Command;

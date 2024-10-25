@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Data;
 using Forest.Calculators;
 using Forest.Data.Estimations;
-using Forest.Data.Estimations.PerTreeEvet;
+using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Visualization.ViewModels;
 using OxyPlot;
 using OxyPlot.Axes;

@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using Forest.Data.Probabilities;
 
-namespace Forest.Data.Estimations.PerTreeEvet
+namespace Forest.Data.Estimations.PerTreeEvent
 {
     public static class ExpertClassEstimationUtils
     {

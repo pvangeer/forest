@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Forest.Data.Estimations;
-using Forest.Data.Estimations.PerTreeEvet;
+using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Tree;
 
 namespace Forest.IO.Import.DotFormValidation

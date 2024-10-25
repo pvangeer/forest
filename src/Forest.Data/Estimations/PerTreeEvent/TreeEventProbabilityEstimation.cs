@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using Forest.Data.Probabilities;
 using Forest.Data.Tree;
 
-namespace Forest.Data.Estimations.PerTreeEvet
+namespace Forest.Data.Estimations.PerTreeEvent
 {
     public class TreeEventProbabilityEstimation : INotifyPropertyChanged
     {

@@ -5,7 +5,7 @@
                     xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
                     xmlns:converters="clr-namespace:Forest.Visualization.Converters"
                     xmlns:estimation="clr-namespace:Forest.Visualization.DataTemplates.MainTabItems.Estimation"
-                    xmlns:perTreeEvet="clr-namespace:Forest.Data.Estimations.PerTreeEvet;assembly=Forest.Data">
+                    xmlns:perTreeEvet="clr-namespace:Forest.Data.Estimations.PerTreeEvent;assembly=Forest.Data">
 
     <converters:EstimationToBackgroundConverter x:Key="EstimationToBackgroundConverter" />
 

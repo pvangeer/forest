@@ -1,7 +1,7 @@
 ﻿using Forest.Data.Experts;
 using Forest.Data.Hydrodynamics;
 
-namespace Forest.Data.Estimations.PerTreeEvet
+namespace Forest.Data.Estimations.PerTreeEvent
 {
     public class ExpertClassEstimation
     {
