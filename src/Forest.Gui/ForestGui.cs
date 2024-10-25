@@ -37,10 +37,8 @@ namespace Forest.Gui
 
         public VersionInfo VersionInfo { get; set; }
 
-        // TODO: Implement
         public Func<ShouldProceedState> ShouldSaveOpenChanges { get; set; }
 
-        // TODO: Implement
         public Func<bool> ShouldMigrateProject { get; set; }
 
         public ForestGuiState SelectedState { get; set; }

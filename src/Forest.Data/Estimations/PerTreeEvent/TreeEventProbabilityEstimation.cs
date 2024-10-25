@@ -7,7 +7,7 @@ using Forest.Data.Tree;
 
 namespace Forest.Data.Estimations.PerTreeEvent
 {
-    public class TreeEventProbabilityEstimation : INotifyPropertyChanged
+    public class TreeEventProbabilityEstimation : NotifyPropertyChangedObject
     {
         public TreeEventProbabilityEstimation(TreeEvent treeEvent)
         {
@@ -26,21 +26,5 @@ namespace Forest.Data.Estimations.PerTreeEvent
         public FragilityCurve FragilityCurve { get; set; }
 
         public ProbabilitySpecificationType ProbabilitySpecificationType { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value))
-                return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
     }
 }

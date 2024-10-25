@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using Forest.Data;
 using Forest.Data.Estimations.PerTreeEvent;
 
 namespace Forest.Visualization.ViewModels

@@ -1,10 +1,6 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Forest.Data.Properties;
-
-namespace Forest.Data.Probabilities
+﻿namespace Forest.Data.Probabilities
 {
-    public class FragilityCurveElement : INotifyPropertyChanged
+    public class FragilityCurveElement : NotifyPropertyChangedObject
     {
         public FragilityCurveElement(double waterLevel, Probability probability)
         {
@@ -15,13 +11,5 @@ namespace Forest.Data.Probabilities
         public double WaterLevel { get; set; }
 
         public Probability Probability { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

@@ -3,7 +3,7 @@ using Forest.Data.Hydrodynamics;
 
 namespace Forest.Data.Estimations.PerTreeEvent
 {
-    public class ExpertClassEstimation
+    public class ExpertClassEstimation : NotifyPropertyChangedObject
     {
         public Expert Expert { get; set; }
 

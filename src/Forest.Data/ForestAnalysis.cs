@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Forest.Data.Estimations;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Experts;
-using Forest.Data.Properties;
 using Forest.Data.Tree;
 
 namespace Forest.Data
 {
-    public class ForestAnalysis : INotifyPropertyChanged
+    public class ForestAnalysis : NotifyPropertyChangedObject
     {
         private EventTree eventTree;
 
@@ -56,13 +53,5 @@ namespace Forest.Data
         }
 
         public ObservableCollection<ProbabilityEstimation> ProbabilityEstimations { get; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

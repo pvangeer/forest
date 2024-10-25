@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using Forest.Data;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Experts;
 using log4net;

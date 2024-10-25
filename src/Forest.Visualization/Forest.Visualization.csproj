@@ -133,7 +133,6 @@
     <Compile Include="ViewModels\HydrodynamicsViewModel.cs" />
     <Compile Include="ViewModels\ExpertsViewModel.cs" />
     <Compile Include="GuiViewModelBase.cs" />
-    <Compile Include="NotifyPropertyChangedObject.cs" />
     <Compile Include="Ribbon\IO\Export\ElicitationFormExportDialog.xaml.cs">
       <DependentUpon>ElicitationFormExportDialog.xaml</DependentUpon>
     </Compile>
