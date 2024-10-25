@@ -1,9 +1,9 @@
-﻿using Forest.Data.Experts;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using Forest.Data.Experts;
 using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
 
-namespace Forest.Data.Estimations
+namespace Forest.Data.Estimations.PerTreeEvet
 {
     public class ProbabilityEstimationPerTreeEvent : ProbabilityEstimation
     {

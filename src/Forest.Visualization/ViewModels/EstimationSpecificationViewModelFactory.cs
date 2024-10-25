@@ -1,7 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using Forest.Data;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
+using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
 
 namespace Forest.Visualization.ViewModels
@@ -15,13 +18,12 @@ namespace Forest.Visualization.ViewModels
 
         public ForestAnalysis ForestAnalysis { get; }
 
-        public ProbabilitySpecificationViewModelBase CreateViewModel(TreeEvent treeEvent, TreeEventProbabilityEstimation[] estimations)
+        public ProbabilitySpecificationViewModelBase CreateViewModel(TreeEvent treeEvent, TreeEventProbabilityEstimation[] estimations,
+            ObservableCollection<HydrodynamicCondition> hydrodynamicConditions)
         {
             var estimation = estimations?.FirstOrDefault(e => e.TreeEvent == treeEvent);
             if (estimation == null)
-            {
                 return null;
-            }
 
             switch (estimation.ProbabilitySpecificationType)
             {
@@ -30,7 +32,7 @@ namespace Forest.Visualization.ViewModels
                 case ProbabilitySpecificationType.FixedValue:
                     return new FixedProbabilitySpecificationViewModel(treeEvent, estimation);
                 case ProbabilitySpecificationType.FixedFrequency:
-                    return new FixedFragilityCurveSpecificationViewModel(treeEvent, ForestAnalysis, estimation);
+                    return new FixedFragilityCurveSpecificationViewModel(treeEvent, estimation, hydrodynamicConditions);
                 default:
                     throw new InvalidEnumArgumentException();
             }

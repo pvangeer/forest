@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
 using Forest.Data.Experts;
 using Forest.Data.Hydrodynamics;
-using Forest.Data.Services;
+using Forest.Data.Probabilities;
 using Forest.Data.Tree;
 using NUnit.Framework;
 
@@ -26,7 +27,6 @@ namespace Forest.Data.Test.Estimations
                 {
                     firstEstimation,
                     secondEstimation
-
                 }
             };
 
@@ -46,13 +46,12 @@ namespace Forest.Data.Test.Estimations
         [Test]
         public void AddExpertChangesClassEstimatesWithHydraulicConditions()
         {
-            
             var secondTreeEvent = new TreeEvent("");
-            var treeEvent = new TreeEvent(""){FailingEvent = secondTreeEvent};
+            var treeEvent = new TreeEvent("") { FailingEvent = secondTreeEvent };
             var eventTree = new EventTree { MainTreeEvent = treeEvent };
             var estimationFirstTreeEvent = new TreeEventProbabilityEstimation(treeEvent);
             var estimationSecondTreeEvent = new TreeEventProbabilityEstimation(secondTreeEvent);
-            var estimation = new ProbabilityEstimationPerTreeEvent()
+            var estimation = new ProbabilityEstimationPerTreeEvent
             {
                 EventTree = eventTree,
                 HydrodynamicConditions =
@@ -66,7 +65,7 @@ namespace Forest.Data.Test.Estimations
                     estimationSecondTreeEvent
                 }
             };
-            
+
             Assert.AreEqual(0, estimationFirstTreeEvent.ClassProbabilitySpecification.Count);
             Assert.AreEqual(0, estimationSecondTreeEvent.ClassProbabilitySpecification.Count);
 
@@ -93,7 +92,6 @@ namespace Forest.Data.Test.Estimations
             Assert.AreEqual(expert, fourthSpecification.Expert);
             Assert.Contains(fourthSpecification.HydrodynamicCondition, estimation.HydrodynamicConditions);
             Assert.AreNotEqual(thirdSpecification.HydrodynamicCondition, fourthSpecification.HydrodynamicCondition);
-
         }
 
         [Test]
@@ -104,7 +102,7 @@ namespace Forest.Data.Test.Estimations
             var hydraulicCondition1 = new HydrodynamicCondition(1.0, (Probability)0.01, 1, 1);
             var hydraulicCondition2 = new HydrodynamicCondition(2.0, (Probability)0.001, 1, 1);
             var treeEvent = new TreeEvent("");
-            var eventTree = new EventTree()
+            var eventTree = new EventTree
             {
                 MainTreeEvent = treeEvent
             };
@@ -167,7 +165,7 @@ namespace Forest.Data.Test.Estimations
             var expertToRemove = new Expert();
             var otherExpert = new Expert();
             var eventTree = new EventTree { MainTreeEvent = treeEvent };
-            var estimation = new ProbabilityEstimationPerTreeEvent()
+            var estimation = new ProbabilityEstimationPerTreeEvent
             {
                 EventTree = eventTree,
                 Experts =
@@ -188,7 +186,7 @@ namespace Forest.Data.Test.Estimations
             var treeEvent = new TreeEvent("");
             var eventTree = new EventTree { MainTreeEvent = treeEvent };
             var estimation = new ProbabilityEstimationPerTreeEvent { EventTree = eventTree };
-            
+
             var hydraulicCondition = new HydrodynamicCondition(1.0, (Probability)0.01, 1, 1);
             estimation.AddHydraulicCondition(hydraulicCondition);
 
@@ -200,7 +198,7 @@ namespace Forest.Data.Test.Estimations
         public void AddHydraulicConditionChangesClassEstimatesWithExperts()
         {
             var treeEvent = new TreeEvent("");
-            var eventTree = new EventTree()
+            var eventTree = new EventTree
             {
                 MainTreeEvent = treeEvent
             };
@@ -218,7 +216,7 @@ namespace Forest.Data.Test.Estimations
                     firstEstimation
                 }
             };
-            
+
             Assert.AreEqual(0, firstEstimation.ClassProbabilitySpecification.Count);
 
             var hydraulicCondition = new HydrodynamicCondition(1.0, (Probability)0.01, 1, 1);

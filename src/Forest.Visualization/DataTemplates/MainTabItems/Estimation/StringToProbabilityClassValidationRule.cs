@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Windows.Controls;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
 
 namespace Forest.Visualization.DataTemplates.MainTabItems.Estimation
 {

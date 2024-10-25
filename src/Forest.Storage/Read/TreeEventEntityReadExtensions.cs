@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Forest.Data.Estimations;
 using Forest.Data.Tree;
 using Forest.Storage.XmlEntities;
 

@@ -1,8 +1,7 @@
-﻿using Forest.Data.Estimations;
-using Forest.Data.Experts;
+﻿using Forest.Data.Experts;
 using Forest.Data.Hydrodynamics;
 
-namespace Forest.Data.Tree
+namespace Forest.Data.Estimations.PerTreeEvet
 {
     public class ExpertClassEstimation
     {

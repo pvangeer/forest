@@ -6,7 +6,6 @@
              xmlns:fluent="urn:fluent-ribbon"
              xmlns:converters="clr-namespace:Forest.Visualization.Converters"
              xmlns:gui="clr-namespace:Forest.Gui.Components;assembly=Forest.Gui.Components"
-             xmlns:data="clr-namespace:Forest.Data.Services;assembly=Forest.Data"
              xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
              xmlns:tree="clr-namespace:Forest.Data.Tree;assembly=Forest.Data"
              mc:Ignorable="d"

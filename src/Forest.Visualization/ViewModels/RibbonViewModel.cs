@@ -11,8 +11,8 @@ namespace Forest.Visualization.ViewModels
 {
     public class RibbonViewModel : INotifyPropertyChanged
     {
-        private readonly ForestGui gui;
         private readonly AnalysisManipulationService analysisManipulationService;
+        private readonly ForestGui gui;
 
         public RibbonViewModel() : this(new ForestGui())
         {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using Forest.Data;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
 using Forest.Data.Experts;
 using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
@@ -16,15 +16,16 @@ namespace Forest.IO.Export
     public class ElicitationFormsExporter
     {
         private readonly ForestLog log = new ForestLog(typeof(ElicitationFormsExporter));
-        private readonly ElicitationFormWriter writer = new ElicitationFormWriter();
         private readonly ProbabilityEstimationPerTreeEvent probabilityEstimation;
+        private readonly ElicitationFormWriter writer = new ElicitationFormWriter();
 
         public ElicitationFormsExporter(ProbabilityEstimationPerTreeEvent probabilityEstimation)
         {
             this.probabilityEstimation = probabilityEstimation;
         }
 
-        public void Export(string fileLocation, string prefix, Expert[] expertsToExport, ProbabilityEstimationPerTreeEvent estimationToExport)
+        public void Export(string fileLocation, string prefix, Expert[] expertsToExport,
+            ProbabilityEstimationPerTreeEvent estimationToExport)
         {
             if (string.IsNullOrWhiteSpace(fileLocation))
             {
@@ -50,7 +51,7 @@ namespace Forest.IO.Export
                 return;
             }
 
-            if (expertsToExport.Any(e => !this.probabilityEstimation.Experts.Contains(e)))
+            if (expertsToExport.Any(e => !probabilityEstimation.Experts.Contains(e)))
             {
                 log.Error("Er is iets misgegaan bij het exporteren. Niet alle experts konden in het forestAnalysis worden gevonden.");
                 return;
@@ -66,7 +67,8 @@ namespace Forest.IO.Export
             {
                 var fileName = Path.Combine(fileLocation, prefix + expert.Name + ".xlsx");
 
-                writer.WriteForm(fileName, EventTreeToDotForm(estimationToExport.EventTree, expert.Name, hydraulicConditions, probabilityEstimation.Estimations));
+                writer.WriteForm(fileName,
+                    EventTreeToDotForm(estimationToExport.EventTree, expert.Name, hydraulicConditions, probabilityEstimation.Estimations));
                 log.Info($"Bestand '{fileName}' geëxporteerd voor expert '{expert.Name}'");
             }
 
@@ -81,9 +83,7 @@ namespace Forest.IO.Export
             {
                 var treeEventEstimate = estimates.FirstOrDefault(e => e.TreeEvent == treeEvent);
                 if (treeEventEstimate == null)
-                {
                     throw new ArgumentNullException();
-                }
 
                 nodes.Add(new DotNode
                 {
@@ -97,7 +97,8 @@ namespace Forest.IO.Export
                             LowerEstimate = (int)s.MinEstimation,
                             UpperEstimate = (int)s.MaxEstimation
                         }).ToArray()
-                });}
+                });
+            }
 
             return new DotForm
             {

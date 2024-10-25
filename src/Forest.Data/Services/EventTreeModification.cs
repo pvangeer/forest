@@ -1,4 +1,4 @@
-﻿namespace Forest.Data.Tree
+﻿namespace Forest.Data.Services
 {
     public enum EventTreeModification
     {

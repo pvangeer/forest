@@ -15,11 +15,11 @@ namespace Forest.Visualization.ViewModels
     public class EventTreeViewModel : INotifyPropertyChanged
     {
         private readonly AnalysisManipulationService analysisManipulationService;
+        private readonly ObservableCollection<ProbabilityEstimation> estimations;
         private readonly SelectionManager selectionManager;
         private EventTreeGraph graph;
         private bool isSelected;
         private TreeEventViewModel mainTreeEventViewModel;
-        private readonly ObservableCollection<ProbabilityEstimation> estimations;
 
         public EventTreeViewModel()
         {
@@ -76,7 +76,8 @@ namespace Forest.Visualization.ViewModels
                     return null;
 
                 return mainTreeEventViewModel ??
-                       (mainTreeEventViewModel = new TreeEventViewModel(EventTree.MainTreeEvent, this, analysisManipulationService, estimations));
+                       (mainTreeEventViewModel =
+                           new TreeEventViewModel(EventTree.MainTreeEvent, this, analysisManipulationService, estimations));
             }
         }
 

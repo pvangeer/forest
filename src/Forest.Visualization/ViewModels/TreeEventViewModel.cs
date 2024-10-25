@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Forest.Calculators;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
 using Forest.Data.Properties;
 using Forest.Data.Services;
 using Forest.Data.Tree;
@@ -21,23 +22,23 @@ namespace Forest.Visualization.ViewModels
                 .ToDictionary(t => t, GetEstimationSpecificationTypeDisplayName);
 
         private readonly AnalysisManipulationService analysisManipulationService;
+        private readonly ObservableCollection<ProbabilityEstimation> probabilityEstimations;
         private TreeEventViewModel failingEventViewModel;
         private TreeEventViewModel passingEventViewModel;
         private ProbabilitySpecificationViewModelBase probabilityEstimationViewModel;
-        private readonly ObservableCollection<ProbabilityEstimation> probabilityEstimations;
 
         public TreeEventViewModel([NotNull] TreeEvent treeEvent, [NotNull] EventTreeViewModel parentEventTreeViewModel,
-            [NotNull] AnalysisManipulationService analysisManipulationService, [NotNull] ObservableCollection<ProbabilityEstimation> probabilityEstimations)
+            [NotNull] AnalysisManipulationService analysisManipulationService,
+            [NotNull] ObservableCollection<ProbabilityEstimation> probabilityEstimations)
         {
             this.analysisManipulationService = analysisManipulationService;
             TreeEvent = treeEvent;
             this.probabilityEstimations = probabilityEstimations;
             ParentEventTreeViewModel = parentEventTreeViewModel;
-            Estimation = probabilityEstimations?.OfType<ProbabilityEstimationPerTreeEvent>().FirstOrDefault(pe => parentEventTreeViewModel.IsViewModelFor(pe.EventTree));
+            Estimation = probabilityEstimations?.OfType<ProbabilityEstimationPerTreeEvent>()
+                .FirstOrDefault(pe => parentEventTreeViewModel.IsViewModelFor(pe.EventTree));
             if (Estimation != null)
-            {
                 Estimation.PropertyChanged += EstimationPropertyChanged;
-            }
 
             treeEvent.PropertyChanged += TreeEventPropertyChanged;
         }
@@ -74,7 +75,8 @@ namespace Forest.Visualization.ViewModels
                     return null;
 
                 return passingEventViewModel ?? (passingEventViewModel =
-                    new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel, analysisManipulationService, probabilityEstimations));
+                    new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel, analysisManipulationService,
+                        probabilityEstimations));
             }
         }
 
@@ -86,7 +88,8 @@ namespace Forest.Visualization.ViewModels
                     return null;
 
                 return failingEventViewModel ?? (failingEventViewModel =
-                    new TreeEventViewModel(TreeEvent.FailingEvent, ParentEventTreeViewModel, analysisManipulationService, probabilityEstimations));
+                    new TreeEventViewModel(TreeEvent.FailingEvent, ParentEventTreeViewModel, analysisManipulationService,
+                        probabilityEstimations));
             }
         }
 
@@ -108,16 +111,23 @@ namespace Forest.Visualization.ViewModels
             set
             {
                 var selectedType = ProbabilitySpecificationTypes.ElementAt(value).Key;
-                if (EstimationSpecification.Type!= selectedType)
-                    TreeEventManipulations.ChangeProbabilityEstimationType(EstimationSpecification.Estimation, selectedType);
+                if (EstimationSpecification.Type != selectedType)
+                    EstimationSpecification.Estimation.ChangeProbabilityEstimationType(selectedType);
             }
         }
 
         public IEnumerable<string> EstimationSpecificationOptions => ProbabilitySpecificationTypes.Values;
 
-        public ProbabilitySpecificationViewModelBase EstimationSpecification =>
-            probabilityEstimationViewModel ?? (probabilityEstimationViewModel =
-                ParentEventTreeViewModel.EstimationSpecificationViewModelFactory.CreateViewModel(TreeEvent, probabilityEstimations?.OfType<ProbabilityEstimationPerTreeEvent>().FirstOrDefault()?.Estimations.ToArray()));
+        public ProbabilitySpecificationViewModelBase EstimationSpecification
+        {
+            get
+            {
+                var estimationPerTreeEvent = probabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().First();
+                return probabilityEstimationViewModel ?? (probabilityEstimationViewModel =
+                    ParentEventTreeViewModel.EstimationSpecificationViewModelFactory.CreateViewModel(TreeEvent,
+                        estimationPerTreeEvent.Estimations.ToArray(), estimationPerTreeEvent.HydrodynamicConditions));
+            }
+        }
 
         public TreeEvent[] CriticalPath => TreeEvent == null ? null :
             ParentEventTreeViewModel.MainTreeEventViewModel == null ? null :

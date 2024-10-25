@@ -5,6 +5,7 @@ using Forest.Data;
 using Forest.Data.Estimations;
 using Forest.Data.Experts;
 using Forest.Data.Hydrodynamics;
+using Forest.Data.Probabilities;
 using Forest.Data.Tree;
 using Forest.Storage.XmlEntities;
 

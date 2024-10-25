@@ -4,7 +4,8 @@
                     xmlns:System="clr-namespace:System;assembly=mscorlib"
                     xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
                     xmlns:converters="clr-namespace:Forest.Visualization.Converters"
-                    xmlns:estimation="clr-namespace:Forest.Visualization.DataTemplates.MainTabItems.Estimation">
+                    xmlns:estimation="clr-namespace:Forest.Visualization.DataTemplates.MainTabItems.Estimation"
+                    xmlns:perTreeEvet="clr-namespace:Forest.Data.Estimations.PerTreeEvet;assembly=Forest.Data">
 
     <converters:EstimationToBackgroundConverter x:Key="EstimationToBackgroundConverter" />
 
@@ -17,7 +18,7 @@
                                     MethodName="GetValues"
                                     ObjectType="{x:Type System:Enum}">
                     <ObjectDataProvider.MethodParameters>
-                        <x:Type TypeName="estimations:ProbabilityClass" />
+                        <x:Type TypeName="perTreeEvet:ProbabilityClass" />
                     </ObjectDataProvider.MethodParameters>
                 </ObjectDataProvider>
             </DataGrid.Resources>
@@ -34,7 +35,7 @@
                             <Border
                                 Background="{Binding UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EstimationToBackgroundConverter}}">
                                 <ComboBox IsEditable="True"
-                                          ItemsSource="{Binding Source={estimation:Enumeration {x:Type estimations:ProbabilityClass}}}"
+                                          ItemsSource="{Binding Source={estimation:Enumeration {x:Type perTreeEvet:ProbabilityClass}}}"
                                           DisplayMemberPath="Description"
                                           SelectedValuePath="Value"
                                           Style="{StaticResource ComboBoxFlatTransparantStyle}">
@@ -57,7 +58,7 @@
                             <Border
                                 Background="{Binding UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EstimationToBackgroundConverter}}">
                                 <ComboBox IsEditable="True"
-                                          ItemsSource="{Binding Source={estimation:Enumeration {x:Type estimations:ProbabilityClass}}}"
+                                          ItemsSource="{Binding Source={estimation:Enumeration {x:Type perTreeEvet:ProbabilityClass}}}"
                                           DisplayMemberPath="Description"
                                           SelectedValuePath="Value"
                                           Style="{StaticResource ComboBoxFlatTransparantStyle}">
@@ -80,7 +81,7 @@
                             <Border
                                 Background="{Binding UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EstimationToBackgroundConverter}}">
                                 <ComboBox IsEditable="True"
-                                          ItemsSource="{Binding Source={estimation:Enumeration {x:Type estimations:ProbabilityClass}}}"
+                                          ItemsSource="{Binding Source={estimation:Enumeration {x:Type perTreeEvet:ProbabilityClass}}}"
                                           DisplayMemberPath="Description"
                                           SelectedValuePath="Value"
                                           Style="{StaticResource ComboBoxFlatTransparantStyle}">

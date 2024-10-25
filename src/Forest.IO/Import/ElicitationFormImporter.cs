@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
 using Forest.Data.Tree;
 using Forest.IO.Import.DotFormValidation;
 using Forest.Messaging;
@@ -45,7 +46,7 @@ namespace Forest.IO.Import
                 {
                     var treeEvent = probabilityEstimation.EventTree.MainTreeEvent.FindTreeEvent(n => n.Name == dotFormNode.NodeName);
                     var estimations = probabilityEstimation.Estimations.First(e => e.TreeEvent == treeEvent);
-                    
+
                     foreach (var dotEstimate in dotFormNode.Estimates)
                     {
                         var specification = estimations.ClassProbabilitySpecification.First(s =>

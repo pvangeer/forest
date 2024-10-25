@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
 using Forest.Data.Properties;
 using Forest.Data.Tree;
 
@@ -29,14 +30,13 @@ namespace Forest.Data.Services
             if (parent == null)
                 throw new ArgumentNullException();
 
-            var estimation = forestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().FirstOrDefault(e => e.EventTree == eventTree);
+            var estimation = forestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>()
+                .FirstOrDefault(e => e.EventTree == eventTree);
             if (estimation != null)
             {
                 var estimationToRemove = estimation.Estimations.FirstOrDefault(e => e.TreeEvent == selectedTreeEventToRemove);
                 if (estimationToRemove != null)
-                {
                     estimation.Estimations.Remove(estimationToRemove);
-                }
             }
 
             if (parent.FailingEvent == selectedTreeEventToRemove)

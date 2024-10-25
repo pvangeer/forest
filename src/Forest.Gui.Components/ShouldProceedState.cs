@@ -1,4 +1,4 @@
-﻿namespace Forest.Gui
+﻿namespace Forest.Gui.Components
 {
     public enum ShouldProceedState
     {

@@ -1,5 +1,5 @@
-using Forest.Data;
 using Forest.Data.Estimations;
+using Forest.Data.Probabilities;
 using Forest.Data.Tree;
 
 namespace Forest.Calculators

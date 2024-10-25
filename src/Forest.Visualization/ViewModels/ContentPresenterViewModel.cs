@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using Forest.Data;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
 using Forest.Data.Services;
 using Forest.Gui.Components;
 
@@ -12,8 +12,8 @@ namespace Forest.Visualization.ViewModels
 {
     public class ContentPresenterViewModel : INotifyPropertyChanged
     {
-        private readonly ForestGui gui;
         private readonly AnalysisManipulationService analysisManipulationService;
+        private readonly ForestGui gui;
 
         public ContentPresenterViewModel(ForestGui gui)
         {
@@ -25,15 +25,11 @@ namespace Forest.Visualization.ViewModels
 
                 analysisManipulationService = new AnalysisManipulationService(gui.ForestAnalysis);
 
-                EventTree = new EventTreeViewModel(ForestAnalysis.EventTree, analysisManipulationService, gui.SelectionManager, gui.ForestAnalysis.ProbabilityEstimations)
+                EventTree = new EventTreeViewModel(ForestAnalysis.EventTree, analysisManipulationService, gui.SelectionManager,
+                    gui.ForestAnalysis.ProbabilityEstimations)
                 {
                     EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(gui.ForestAnalysis)
                 };
-
-                HydrodynamicConditionsList =
-                    new ObservableCollection<HydraulicConditionViewModel>(
-                        ForestAnalysis.HydrodynamicConditions.Select(e => new HydraulicConditionViewModel(e)));
-                //HydrodynamicConditionsList.CollectionChanged += HydrodynamicsViewModelsCollectionChanged;
             }
         }
 
@@ -91,8 +87,6 @@ namespace Forest.Visualization.ViewModels
             }
         }
 
-        public ObservableCollection<HydraulicConditionViewModel> HydrodynamicConditionsList { get; }
-
         public ObservableCollection<TreeEventProbabilityEstimation> ProbabilityEstimations { get; }
 
         private ForestAnalysis ForestAnalysis => gui.ForestAnalysis;
@@ -122,7 +116,8 @@ namespace Forest.Visualization.ViewModels
                     OnPropertyChanged(nameof(SelectedGuiState));
                     break;
                 case nameof(ForestGui.ForestAnalysis):
-                    EventTree = new EventTreeViewModel(ForestAnalysis.EventTree, analysisManipulationService, gui.SelectionManager, gui.ForestAnalysis.ProbabilityEstimations)
+                    EventTree = new EventTreeViewModel(ForestAnalysis.EventTree, analysisManipulationService, gui.SelectionManager,
+                        gui.ForestAnalysis.ProbabilityEstimations)
                     {
                         EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(gui.ForestAnalysis)
                     };

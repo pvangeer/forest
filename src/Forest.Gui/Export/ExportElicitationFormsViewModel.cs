@@ -5,8 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
 using Forest.Data.Experts;
-using Forest.Data.Tree;
 using Forest.Gui.Properties;
 using log4net;
 
@@ -24,11 +24,12 @@ namespace Forest.Gui.Export
             {
                 new Expert { Name = "Pietje" },
                 new Expert { Name = "Jantje" }
-            },
+            }
         };
 
-        private string exportLocation;
         private readonly ProbabilityEstimationPerTreeEvent estimation;
+
+        private string exportLocation;
 
         public ExportElicitationFormsViewModel() : this(TestEstimation)
         {

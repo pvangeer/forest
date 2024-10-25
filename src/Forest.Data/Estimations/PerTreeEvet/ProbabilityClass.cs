@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Forest.Data.Estimations
+namespace Forest.Data.Estimations.PerTreeEvet
 {
     public enum ProbabilityClass
     {

@@ -21,20 +21,7 @@ namespace Forest.Storage.Create
                 EventTree = forestAnalysis.EventTree.Create(registry)
             };
 
-            AddEntitiesForHydraulicConditions(forestAnalysis, entity, registry);
-
             return entity;
-        }
-
-        private static void AddEntitiesForHydraulicConditions(ForestAnalysis forestAnalysis, ForestAnalysisXmlEntity entity,
-            PersistenceRegistry registry)
-        {
-            for (var index = 0; index < forestAnalysis.HydrodynamicConditions.Count; index++)
-            {
-                var hydrodynamicConditionElementEntity = forestAnalysis.HydrodynamicConditions[index].Create(registry);
-                hydrodynamicConditionElementEntity.Order = index;
-                entity.HydraulicConditions.Add(hydrodynamicConditionElementEntity);
-            }
         }
     }
 }

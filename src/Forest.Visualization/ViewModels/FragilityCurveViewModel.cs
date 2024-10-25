@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Forest.Data;
 using Forest.Data.Estimations;
+using Forest.Data.Probabilities;
 using Forest.Data.Properties;
 
 namespace Forest.Visualization.ViewModels

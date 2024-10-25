@@ -1,7 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Forest.Data.Estimations;
 using Forest.Data.Properties;
 
 namespace Forest.Data.Tree

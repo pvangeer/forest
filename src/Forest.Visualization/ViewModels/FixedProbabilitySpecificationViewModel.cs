@@ -1,12 +1,14 @@
-﻿using Forest.Data;
-using Forest.Data.Estimations;
+﻿using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
+using Forest.Data.Probabilities;
 using Forest.Data.Tree;
 
 namespace Forest.Visualization.ViewModels
 {
     public class FixedProbabilitySpecificationViewModel : ProbabilitySpecificationViewModelBase
     {
-        public FixedProbabilitySpecificationViewModel(TreeEvent treeEvent, TreeEventProbabilityEstimation estimation) : base(treeEvent, estimation)
+        public FixedProbabilitySpecificationViewModel(TreeEvent treeEvent, TreeEventProbabilityEstimation estimation) : base(treeEvent,
+            estimation)
         {
         }
 

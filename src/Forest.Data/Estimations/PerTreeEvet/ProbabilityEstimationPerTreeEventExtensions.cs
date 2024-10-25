@@ -3,7 +3,7 @@ using Forest.Data.Experts;
 using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
 
-namespace Forest.Data.Estimations
+namespace Forest.Data.Estimations.PerTreeEvet
 {
     public static class ProbabilityEstimationPerTreeEventExtensions
     {
@@ -16,9 +16,7 @@ namespace Forest.Data.Estimations
             {
                 var estimationsForThisTreeEvent = probabilityEstimation.Estimations.FirstOrDefault(e => e.TreeEvent == treeEvent);
                 if (estimationsForThisTreeEvent == null)
-                {
                     continue;
-                }
 
                 foreach (var expert in probabilityEstimation.Experts)
                     estimationsForThisTreeEvent.ClassProbabilitySpecification.Add(new ExpertClassEstimation
@@ -32,7 +30,8 @@ namespace Forest.Data.Estimations
             }
         }
 
-        public static void RemoveHydraulicCondition(this ProbabilityEstimationPerTreeEvent probabilityEstimation, HydrodynamicCondition hydrodynamicCondition)
+        public static void RemoveHydraulicCondition(this ProbabilityEstimationPerTreeEvent probabilityEstimation,
+            HydrodynamicCondition hydrodynamicCondition)
         {
             probabilityEstimation.HydrodynamicConditions.Remove(hydrodynamicCondition);
 
@@ -40,9 +39,7 @@ namespace Forest.Data.Estimations
             {
                 var estimationsForThisTreeEvent = probabilityEstimation.Estimations.FirstOrDefault(e => e.TreeEvent == treeEvent);
                 if (estimationsForThisTreeEvent == null)
-                {
                     continue;
-                }
 
                 var estimatesToRemove = estimationsForThisTreeEvent.ClassProbabilitySpecification.Where(e =>
                     e.HydrodynamicCondition == hydrodynamicCondition).ToArray();
@@ -58,9 +55,7 @@ namespace Forest.Data.Estimations
             {
                 var estimationsForThisTreeEvent = probabilityEstimation.Estimations.FirstOrDefault(e => e.TreeEvent == treeEvent);
                 if (estimationsForThisTreeEvent == null)
-                {
                     continue;
-                }
 
                 foreach (var hydraulicCondition in probabilityEstimation.HydrodynamicConditions)
                     estimationsForThisTreeEvent.ClassProbabilitySpecification.Add(new ExpertClassEstimation
@@ -82,9 +77,7 @@ namespace Forest.Data.Estimations
             {
                 var estimationsForThisTreeEvent = probabilityEstimation.Estimations.FirstOrDefault(e => e.TreeEvent == treeEvent);
                 if (estimationsForThisTreeEvent == null)
-                {
                     continue;
-                }
                 var estimatesToRemove = estimationsForThisTreeEvent.ClassProbabilitySpecification.Where(e =>
                     e.Expert == expert).ToArray();
                 foreach (var estimationToRemove in estimatesToRemove)

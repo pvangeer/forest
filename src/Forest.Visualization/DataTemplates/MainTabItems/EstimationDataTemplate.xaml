@@ -3,8 +3,7 @@
                     xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
                     xmlns:converters="clr-namespace:Forest.Visualization.Converters"
                     xmlns:mainTabItems="clr-namespace:Forest.Visualization.DataTemplates.MainTabItems"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:visualization="clr-namespace:Forest.Visualization">
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary

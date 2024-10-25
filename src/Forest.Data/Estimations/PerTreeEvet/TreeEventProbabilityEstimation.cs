@@ -2,9 +2,10 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Forest.Data.Probabilities;
 using Forest.Data.Tree;
 
-namespace Forest.Data.Estimations
+namespace Forest.Data.Estimations.PerTreeEvet
 {
     public class TreeEventProbabilityEstimation : INotifyPropertyChanged
     {

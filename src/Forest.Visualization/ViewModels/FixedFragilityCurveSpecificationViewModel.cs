@@ -2,8 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using Forest.Data;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
+using Forest.Data.Hydrodynamics;
+using Forest.Data.Probabilities;
 using Forest.Data.Tree;
 
 namespace Forest.Visualization.ViewModels
@@ -11,11 +13,12 @@ namespace Forest.Visualization.ViewModels
     public class FixedFragilityCurveSpecificationViewModel : ProbabilitySpecificationViewModelBase
     {
         private readonly ObservableCollection<FragilityCurveElementViewModel> fixedFragilityCurveViewModels;
+        private readonly ObservableCollection<HydrodynamicCondition> hydrodynamicConditions;
 
-        public FixedFragilityCurveSpecificationViewModel(TreeEvent treeEvent, ForestAnalysis forestAnalysis,
-            TreeEventProbabilityEstimation estimation) : base(treeEvent, estimation)
+        public FixedFragilityCurveSpecificationViewModel(TreeEvent treeEvent, TreeEventProbabilityEstimation estimation,
+            ObservableCollection<HydrodynamicCondition> hydrodynamicConditions) : base(treeEvent, estimation)
         {
-            ForestAnalysis = forestAnalysis;
+            this.hydrodynamicConditions = hydrodynamicConditions;
 
             fixedFragilityCurveViewModels =
                 new ObservableCollection<FragilityCurveElementViewModel>(
@@ -23,14 +26,12 @@ namespace Forest.Visualization.ViewModels
             fixedFragilityCurveViewModels.CollectionChanged += FragilityCurveViewModelsCollectionChanged;
         }
 
-        public ForestAnalysis ForestAnalysis { get; }
-
         public ObservableCollection<FragilityCurveElementViewModel> FixedFragilityCurve => FixedFragilityCurveViewModels();
 
         private ObservableCollection<FragilityCurveElementViewModel> FixedFragilityCurveViewModels()
         {
             var estimatedWaterLevels = fixedFragilityCurveViewModels.Select(vm => vm.WaterLevel).ToArray();
-            var currentWaterLevels = ForestAnalysis.HydrodynamicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w).ToArray();
+            var currentWaterLevels = hydrodynamicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w).ToArray();
             var missingWaterLevels = currentWaterLevels.Except(estimatedWaterLevels).ToArray();
             var waterLevelsToRemove = estimatedWaterLevels.Except(currentWaterLevels).ToArray();
             foreach (var waterLevel in waterLevelsToRemove)

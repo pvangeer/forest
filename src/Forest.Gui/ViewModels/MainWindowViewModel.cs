@@ -5,17 +5,15 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using Forest.Data;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
 using Forest.Data.Experts;
 using Forest.Data.Properties;
-using Forest.Data.Tree;
 using Forest.Gui.Command;
 using Forest.Gui.Components;
 using Forest.IO.Export;
 using Forest.IO.Import;
 using Forest.Messaging;
-using Forest.Visualization;
 using Forest.Visualization.Dialogs;
 using Forest.Visualization.ViewModels;
 
@@ -146,7 +144,8 @@ namespace Forest.Gui.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void OnExportElicitationForms(string fileLocation, string prefix, Expert[] expertsToExport, ProbabilityEstimationPerTreeEvent estimationToExport)
+        public void OnExportElicitationForms(string fileLocation, string prefix, Expert[] expertsToExport,
+            ProbabilityEstimationPerTreeEvent estimationToExport)
         {
             var exporter = new ElicitationFormsExporter(estimationToExport);
             exporter.Export(fileLocation, prefix, expertsToExport, estimationToExport);
@@ -156,9 +155,7 @@ namespace Forest.Gui.ViewModels
         {
             var estimationToImportTo = gui.SelectionManager.Selection as ProbabilityEstimationPerTreeEvent;
             if (estimationToImportTo == null)
-            {
                 return;
-            }
             var importer = new ElicitationFormImporter(estimationToImportTo);
             foreach (var fileLocation in fileLocations)
                 importer.Import(fileLocation);

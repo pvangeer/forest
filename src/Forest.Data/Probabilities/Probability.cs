@@ -22,7 +22,7 @@
 using System;
 using System.Globalization;
 
-namespace Forest.Data.Estimations
+namespace Forest.Data.Probabilities
 {
     public struct Probability : IEquatable<Probability>, IEquatable<double>, IFormattable, IComparable, IComparable<Probability>,
         IComparable<double>

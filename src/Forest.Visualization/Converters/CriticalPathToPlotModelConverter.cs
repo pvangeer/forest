@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Data;
 using Forest.Calculators;
 using Forest.Data.Estimations;
-using Forest.Data.Tree;
+using Forest.Data.Estimations.PerTreeEvet;
 using Forest.Visualization.ViewModels;
 using OxyPlot;
 using OxyPlot.Axes;
@@ -17,7 +17,7 @@ namespace Forest.Visualization.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (ExtractInput(values, out var hydraulics, out var estimations,out var pathElements, out var criticalPath))
+            if (ExtractInput(values, out var hydraulics, out var estimations, out var pathElements, out var criticalPath))
                 return values;
 
             var plotModel = new PlotModel();

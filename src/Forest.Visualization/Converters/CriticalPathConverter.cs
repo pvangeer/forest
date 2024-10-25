@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Forest.Calculators;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
 using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
 using Forest.Visualization.ViewModels;
@@ -11,7 +12,8 @@ namespace Forest.Visualization.Converters
 {
     public class CriticalPathConverter
     {
-        protected static bool ExtractInput(object[] values, out HydrodynamicCondition[] hydraulicConditions, out TreeEventProbabilityEstimation[] estimations,
+        protected static bool ExtractInput(object[] values, out HydrodynamicCondition[] hydraulicConditions,
+            out TreeEventProbabilityEstimation[] estimations,
             out CriticalPathElement[] elements, out TreeEvent[] treeEvents)
         {
             hydraulicConditions = null;
@@ -24,10 +26,8 @@ namespace Forest.Visualization.Converters
 
             var hydrodynamicConditionViewModels = values[1] as ObservableCollection<HydraulicConditionViewModel>;
             if (values[2] is ObservableCollection<TreeEventProbabilityEstimation> estimatesCollection)
-            {
                 estimations = estimatesCollection.ToArray();
-            }
-            
+
             if (!(values[0] is TreeEvent[] criticalPath) ||
                 hydrodynamicConditionViewModels == null || estimations == null)
                 return true;
@@ -36,7 +36,8 @@ namespace Forest.Visualization.Converters
             return false;
             var orderedWaterLevels = hydrodynamicConditionViewModels.Select(h => h.WaterLevel).Distinct().ToArray();
 
-            hydraulicConditions = hydrodynamicConditionViewModels.Select(vm => vm.HydrodynamicCondition).OrderBy(c => c.WaterLevel).ToArray();
+            hydraulicConditions = hydrodynamicConditionViewModels.Select(vm => vm.HydrodynamicCondition).OrderBy(c => c.WaterLevel)
+                .ToArray();
             var allElements = new List<CriticalPathElement>();
             for (var i = 0; i < criticalPath.Length; i++)
             {

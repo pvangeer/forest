@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using Forest.Data.Properties;
 
-namespace Forest.Data.Estimations
+namespace Forest.Data.Probabilities
 {
     public class FragilityCurveElement : INotifyPropertyChanged
     {

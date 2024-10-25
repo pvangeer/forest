@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Forest.Data;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvet;
 using Forest.Data.Tree;
 
 namespace Forest.IO.Import.DotFormValidation
@@ -27,7 +27,8 @@ namespace Forest.IO.Import.DotFormValidation
             return validationResult;
         }
 
-        private static Dictionary<DotNode, NodeValidationResult> ValidateNodes(DotForm form, ProbabilityEstimationPerTreeEvent probabilityEstimation)
+        private static Dictionary<DotNode, NodeValidationResult> ValidateNodes(DotForm form,
+            ProbabilityEstimationPerTreeEvent probabilityEstimation)
         {
             var results = new Dictionary<DotNode, NodeValidationResult>();
 
