@@ -59,10 +59,11 @@ namespace Forest.Data
 
         public ObservableCollection<ProbabilityEstimation> ProbabilityEstimations { get; }
 
+        // TODO: Move to ProbabilityEstimationPerTreeEvent
         public ObservableCollection<Expert> Experts { get; }
 
+        // TODO: Move to ProbabilityEstimationPerTreeEvent
         public ObservableCollection<HydrodynamicCondition> HydrodynamicConditions { get; }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

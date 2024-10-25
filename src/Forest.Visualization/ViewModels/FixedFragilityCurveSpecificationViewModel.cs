@@ -19,7 +19,7 @@ namespace Forest.Visualization.ViewModels
 
             fixedFragilityCurveViewModels =
                 new ObservableCollection<FragilityCurveElementViewModel>(
-                    treeEvent.FixedFragilityCurve.Select(e => new FragilityCurveElementViewModel(e)));
+                    estimation.FragilityCurve.Select(e => new FragilityCurveElementViewModel(e)));
             fixedFragilityCurveViewModels.CollectionChanged += FragilityCurveViewModelsCollectionChanged;
         }
 
@@ -52,11 +52,11 @@ namespace Forest.Visualization.ViewModels
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
                 foreach (var item in e.NewItems.OfType<FragilityCurveElementViewModel>())
-                    TreeEvent.FixedFragilityCurve.Add(item.FragilityCurveElement);
+                    Estimation.FragilityCurve.Add(item.FragilityCurveElement);
 
             if (e.Action == NotifyCollectionChangedAction.Remove)
                 foreach (var item in e.OldItems.OfType<FragilityCurveElementViewModel>())
-                    TreeEvent.FixedFragilityCurve.Remove(item.FragilityCurveElement);
+                    Estimation.FragilityCurve.Remove(item.FragilityCurveElement);
         }
     }
 }

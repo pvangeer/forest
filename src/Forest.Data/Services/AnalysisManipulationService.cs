@@ -30,7 +30,7 @@ namespace Forest.Data.Services
                         continue;
                     }
                     foreach (var expert in forestAnalysis.Experts)
-                        treeEvent.ClassesProbabilitySpecification.Add(new ExpertClassEstimation
+                        estimationsForThisTreeEvent.ClassProbabilitySpecification.Add(new ExpertClassEstimation
                         {
                             Expert = expert,
                             HydrodynamicCondition = hydrodynamicCondition,

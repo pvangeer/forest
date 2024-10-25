@@ -12,8 +12,8 @@ namespace Forest.Visualization.ViewModels
 
         public Probability FixedProbability
         {
-            get => TreeEvent.FixedProbability;
-            set => TreeEvent.FixedProbability = value;
+            get => Estimation.FixedProbability;
+            set => Estimation.FixedProbability = value;
         }
     }
 }

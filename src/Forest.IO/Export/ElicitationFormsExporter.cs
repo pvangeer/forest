@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Forest.Data;
+using Forest.Data.Estimations;
 using Forest.Data.Experts;
 using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
@@ -55,25 +57,41 @@ namespace Forest.IO.Export
             if (!hydraulicConditions.Any())
                 log.Error("Er moet minimaal 1 hydraulische conditie zijn gespecificeerd om te kunnen exporteren.");
 
+            var probabilityEstimation = ForestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>()
+                .FirstOrDefault(e => e.EventTree == eventTreeToExport);
+            if (probabilityEstimation == null)
+            {
+                log.Error("Er is iets fout gegaan bij het exporteren. Er konden geen objecten worden gevonden om te exporteren.");
+                return;
+            }
+
             foreach (var expert in expertsToExport)
             {
                 var fileName = Path.Combine(fileLocation, prefix + expert.Name + ".xlsx");
 
-                writer.WriteForm(fileName, EventTreeToDotForm(eventTreeToExport, expert.Name, hydraulicConditions));
+                writer.WriteForm(fileName, EventTreeToDotForm(eventTreeToExport, expert.Name, hydraulicConditions, probabilityEstimation.Estimations));
                 log.Info($"Bestand '{fileName}' geëxporteerd voor expert '{expert.Name}'");
             }
 
             log.Info($"{expertsToExport.Length} DOT formulieren geëxporteerd naar locatie '{fileLocation}'", true);
         }
 
-        private DotForm EventTreeToDotForm(EventTree eventTree, string expertName, HydrodynamicCondition[] hydraulicConditions)
+        private DotForm EventTreeToDotForm(EventTree eventTree, string expertName, HydrodynamicCondition[] hydraulicConditions,
+            ObservableCollection<TreeEventProbabilityEstimation> estimates)
         {
             var nodes = new List<DotNode>();
             foreach (var treeEvent in eventTree.MainTreeEvent.GetAllEventsRecursive())
+            {
+                var treeEventEstimate = estimates.FirstOrDefault(e => e.TreeEvent == treeEvent);
+                if (treeEventEstimate == null)
+                {
+                    throw new ArgumentNullException();
+                }
+
                 nodes.Add(new DotNode
                 {
                     NodeName = treeEvent.Name,
-                    Estimates = treeEvent.ClassesProbabilitySpecification.Where(e => e.Expert.Name == expertName).Select(s =>
+                    Estimates = treeEventEstimate.ClassProbabilitySpecification.Where(e => e.Expert.Name == expertName).Select(s =>
                         new DotEstimate
                         {
                             WaterLevel = s.HydrodynamicCondition.WaterLevel,
@@ -82,7 +100,7 @@ namespace Forest.IO.Export
                             LowerEstimate = (int)s.MinEstimation,
                             UpperEstimate = (int)s.MaxEstimation
                         }).ToArray()
-                });
+                });}
 
             return new DotForm
             {

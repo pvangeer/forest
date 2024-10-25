@@ -11,7 +11,9 @@ namespace Forest.Data.Estimations
         public TreeEventProbabilityEstimation(TreeEvent treeEvent)
         {
             TreeEvent = treeEvent;
+            FixedProbability = (Probability)1;
             ClassProbabilitySpecification = new ObservableCollection<ExpertClassEstimation>();
+            FragilityCurve = new FragilityCurve();
         }
 
         public TreeEvent TreeEvent { get; }

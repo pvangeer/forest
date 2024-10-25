@@ -31,9 +31,6 @@ namespace Forest.Storage.XmlEntities
         [XmlAttribute(AttributeName = "discussion")]
         public string Discussion { get; set; }
 
-        [XmlAttribute(AttributeName = "fixedprobability")]
-        public double FixedProbability { get; set; }
-
         [XmlArray(ElementName = "classprobabilityspecifications")]
         [XmlArrayItem(ElementName = "specification")]
         public Collection<ExpertClassEstimationXmlEntity> ClassesProbabilitySpecifications { get; }

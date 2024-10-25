@@ -45,17 +45,20 @@ namespace Forest.IO.Import
 
                 foreach (var dotFormNode in dotForm.Nodes)
                 {
-                    var node = ForestAnalysis.EventTree.MainTreeEvent.FindTreeEvent(n => n.Name == dotFormNode.NodeName);
+                    var treeEvent = ForestAnalysis.EventTree.MainTreeEvent.FindTreeEvent(n => n.Name == dotFormNode.NodeName);
+                    var estimations = ForestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().First()
+                        ?.Estimations.First(e => e.TreeEvent == treeEvent);
+                    
                     foreach (var dotEstimate in dotFormNode.Estimates)
                     {
-                        var specification = node.ClassesProbabilitySpecification.First(s =>
+                        var specification = estimations.ClassProbabilitySpecification.First(s =>
                             s.Expert == expert && Math.Abs(s.HydrodynamicCondition.WaterLevel - dotEstimate.WaterLevel) < 1e-6);
                         specification.MinEstimation = (ProbabilityClass)dotEstimate.LowerEstimate;
                         specification.AverageEstimation = (ProbabilityClass)dotEstimate.BestEstimate;
                         specification.MaxEstimation = (ProbabilityClass)dotEstimate.UpperEstimate;
                     }
 
-                    node.OnPropertyChanged(nameof(TreeEvent.ClassesProbabilitySpecification));
+                    // TODO: Notify?
                 }
             }
         }
