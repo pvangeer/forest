@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Windows.Input;
-using Forest.Gui.ViewModels;
+using Forest.Visualization.ViewModels;
 
-namespace Forest.Gui.Command
+namespace Forest.Visualization.Commands
 {
     public class RemovePriorityMessageCommand : ICommand
     {
-        public RemovePriorityMessageCommand(MainWindowViewModel mainWindowViewModel)
+        public RemovePriorityMessageCommand(StatusBarViewModel statusBarViewModel)
         {
-            ViewModel = mainWindowViewModel;
+            ViewModel = statusBarViewModel;
         }
 
-        private MainWindowViewModel ViewModel { get; }
+        private StatusBarViewModel ViewModel { get; }
 
         public bool CanExecute(object parameter)
         {
@@ -21,7 +21,7 @@ namespace Forest.Gui.Command
         public void Execute(object parameter)
         {
             ViewModel.PriorityMessage = null;
-            ViewModel.OnPropertyChanged(nameof(MainWindowViewModel.PriorityMessage));
+            ViewModel.OnPropertyChanged(nameof(StatusBarViewModel.PriorityMessage));
         }
 
         public event EventHandler CanExecuteChanged;

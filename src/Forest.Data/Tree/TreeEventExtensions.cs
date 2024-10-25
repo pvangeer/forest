@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Forest.Data.Tree
 {
-    public static class TreeEventExtensions 
+    public static class TreeEventExtensions
     {
         public static IEnumerable<TreeEvent> GetAllEventsRecursive(this TreeEvent treeEvent)
         {

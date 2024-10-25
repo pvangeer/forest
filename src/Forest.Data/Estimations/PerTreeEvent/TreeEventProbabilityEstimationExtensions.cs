@@ -16,7 +16,8 @@ namespace Forest.Data.Estimations.PerTreeEvent
                     foreach (var waterLevel in waterLevels)
                         classCurve.Add(
                             new FragilityCurveElement(waterLevel,
-                                ExpertClassEstimationUtils.GetClassesBasedProbabilityForWaterLevel(estimation.ClassProbabilitySpecification, waterLevel)));
+                                ExpertClassEstimationUtils.GetClassesBasedProbabilityForWaterLevel(estimation.ClassProbabilitySpecification,
+                                    waterLevel)));
 
                     return classCurve;
                 case ProbabilitySpecificationType.FixedFrequency:
@@ -37,7 +38,8 @@ namespace Forest.Data.Estimations.PerTreeEvent
             IEnumerable<double> orderedWaterLevels)
         {
             if (estimation.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
-                return ExpertClassEstimationUtils.GetClassBasedUpperFragilityCurve(estimation.ClassProbabilitySpecification.ToArray(), orderedWaterLevels);
+                return ExpertClassEstimationUtils.GetClassBasedUpperFragilityCurve(estimation.ClassProbabilitySpecification.ToArray(),
+                    orderedWaterLevels);
 
             return estimation.GetFragilityCurve(orderedWaterLevels);
         }
@@ -46,12 +48,14 @@ namespace Forest.Data.Estimations.PerTreeEvent
             IEnumerable<double> orderedWaterLevels)
         {
             if (estimation.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
-                return ExpertClassEstimationUtils.GetClassBasedLowerFragilityCurve(estimation.ClassProbabilitySpecification.ToArray(), orderedWaterLevels);
+                return ExpertClassEstimationUtils.GetClassBasedLowerFragilityCurve(estimation.ClassProbabilitySpecification.ToArray(),
+                    orderedWaterLevels);
 
             return estimation.GetFragilityCurve(orderedWaterLevels);
         }
 
-        public static void ChangeProbabilityEstimationType(this TreeEventProbabilityEstimation estimation, ProbabilitySpecificationType type)
+        public static void ChangeProbabilityEstimationType(this TreeEventProbabilityEstimation estimation,
+            ProbabilitySpecificationType type)
         {
             if (estimation.ProbabilitySpecificationType == type)
                 return;

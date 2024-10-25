@@ -105,13 +105,20 @@
     <Compile Include="Commands\EventTreeCommand.cs" />
     <Compile Include="Commands\FileNewCommand.cs" />
     <Compile Include="Commands\OpenProjectCommand.cs" />
+    <Compile Include="Commands\RemoveAllMessagesCommand.cs" />
+    <Compile Include="Commands\RemovePriorityMessageCommand.cs" />
     <Compile Include="Commands\RemoveTreeEventCommand.cs" />
     <Compile Include="Commands\SaveProjectAsCommand.cs" />
     <Compile Include="Commands\SaveProjectCommand.cs" />
     <Compile Include="Commands\SelectTodayCommand.cs" />
+    <Compile Include="Commands\ShowMessageListCommand.cs" />
     <Compile Include="Commands\TreeEventClickedCommand.cs" />
+    <Compile Include="Converters\MessageListToLabelConverter.cs" />
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
+    <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
     <Compile Include="Dialogs\FileDialogFactory.cs" />
+    <Compile Include="ViewModels\MessageListViewModel.cs" />
+    <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\ContentPresenterViewModel.cs" />
     <Compile Include="Converters\BooleanToBrushConverter.cs" />
     <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />
@@ -184,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="DataTemplates\General\SpinnerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataTemplates\General\TabControlFlatStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -239,6 +250,14 @@
     <Page Include="DataTemplates\MainTabItems\TreeEventsListViewItemDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataTemplates\MessageDataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataTemplates\StatusBarDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ForestRibbonControl.xaml">
       <SubType>Designer</SubType>
@@ -308,6 +327,14 @@
   <ItemGroup>
     <Resource Include="Resources\remove-eventtree.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\idle-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\busy-white.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

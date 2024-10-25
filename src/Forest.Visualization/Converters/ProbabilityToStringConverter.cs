@@ -1,7 +1,6 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using Forest.Data.Estimations;
 using Forest.Data.Probabilities;
 
 namespace Forest.Visualization.Converters

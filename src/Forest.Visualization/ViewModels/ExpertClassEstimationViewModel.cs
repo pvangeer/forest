@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Forest.Data.Estimations;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Experts;
 using Forest.Data.Hydrodynamics;
-using Forest.Data.Tree;
 
 namespace Forest.Visualization.ViewModels
 {

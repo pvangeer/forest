@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Windows.Input;
-using Forest.Gui.ViewModels;
+using Forest.Visualization.ViewModels;
 
-namespace Forest.Gui.Command
+namespace Forest.Visualization.Commands
 {
     public class ShowMessageListCommand : ICommand
     {
-        public ShowMessageListCommand(MainWindowViewModel mainWindowViewModel)
+        public ShowMessageListCommand(StatusBarViewModel statusBarViewModel)
         {
-            ViewModel = mainWindowViewModel;
+            ViewModel = statusBarViewModel;
         }
 
-        public MainWindowViewModel ViewModel { get; }
+        public StatusBarViewModel ViewModel { get; }
 
         public bool CanExecute(object parameter)
         {
@@ -21,7 +21,7 @@ namespace Forest.Gui.Command
         public void Execute(object parameter)
         {
             ViewModel.ShowMessages = ViewModel.MessagesViewModel.MessageList.Count != 0;
-            ViewModel.OnPropertyChanged(nameof(MainWindowViewModel.ShowMessages));
+            ViewModel.OnPropertyChanged(nameof(StatusBarViewModel.ShowMessages));
         }
 
         public event EventHandler CanExecuteChanged;

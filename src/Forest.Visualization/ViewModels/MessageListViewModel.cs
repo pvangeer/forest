@@ -3,10 +3,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Forest.Data.Properties;
-using Forest.Gui.Command;
 using Forest.Messaging;
+using Forest.Visualization.Commands;
 
-namespace Forest.Gui.ViewModels
+namespace Forest.Visualization.ViewModels
 {
     public class MessageListViewModel : INotifyPropertyChanged
     {

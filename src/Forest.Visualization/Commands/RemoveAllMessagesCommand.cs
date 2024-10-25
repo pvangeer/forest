@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using System.Windows.Input;
-using Forest.Gui.ViewModels;
+using Forest.Visualization.ViewModels;
 
-namespace Forest.Gui.Command
+namespace Forest.Visualization.Commands
 {
     public class RemoveAllMessagesCommand : ICommand
     {

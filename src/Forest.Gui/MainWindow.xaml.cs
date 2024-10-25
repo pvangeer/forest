@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 using Forest.Data;
 using Forest.Gui.Components;
@@ -14,12 +15,6 @@ namespace Forest.Gui
         public MainWindow()
         {
             InitializeComponent();
-            var forestGui = new ForestGui
-            {
-                ForestAnalysis = ForestAnalysisFactory.CreateStandardNewProject()
-            };
-            var guiViewModel = new MainWindowViewModel(forestGui);
-            DataContext = guiViewModel;
         }
 
         private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
@@ -31,6 +26,14 @@ namespace Forest.Gui
         {
             if (DataContext is MainWindowViewModel viewModel)
                 e.Cancel = !viewModel.ForcedClosingMainWindow();
+        }
+
+        private void MainWindowLoaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = new MainWindowViewModel(new ForestGui
+            {
+                ForestAnalysis = ForestAnalysisFactory.CreateStandardNewProject()
+            });
         }
     }
 }

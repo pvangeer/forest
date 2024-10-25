@@ -1,19 +1,13 @@
-﻿using System.Collections.Specialized;
-using System.ComponentModel;
-using System.IO;
+﻿using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Input;
-using Forest.Data.Estimations;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Experts;
 using Forest.Data.Properties;
-using Forest.Gui.Command;
 using Forest.Gui.Components;
 using Forest.IO.Export;
 using Forest.IO.Import;
-using Forest.Messaging;
 using Forest.Visualization.Dialogs;
 using Forest.Visualization.ViewModels;
 
@@ -22,7 +16,6 @@ namespace Forest.Gui.ViewModels
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private readonly ForestGui gui;
-        private MessageListViewModel messageListViewModel;
 
         public MainWindowViewModel() : this(new ForestGui())
         {
@@ -35,23 +28,28 @@ namespace Forest.Gui.ViewModels
             {
                 gui.GuiProjectServices.SaveProjectFileNameFunc = FileDialogFactory.AskUserForFileNameToSaveToFunc();
                 gui.GuiProjectServices.OpenProjectFileNameFunc = FileDialogFactory.AskUserForFileNameToOpenFunc();
-                gui.ShouldMigrateProject = ShouldMigrateProject;
-                this.gui.PropertyChanged += GuiPropertyChanged;
-                this.gui.Messages.CollectionChanged += GuiMessagesCollectionChanged;
+
                 ContentPresenterViewModel = new ContentPresenterViewModel(gui);
                 RibbonViewModel = new RibbonViewModel(gui);
+                StatusBarViewModel = new StatusBarViewModel(gui);
+
+                gui.ShouldMigrateProject = ShouldMigrateProject;
+                this.gui.PropertyChanged += GuiPropertyChanged;
                 this.gui.ShouldSaveOpenChanges = ShouldSaveOpenChanges;
             }
         }
 
-
-        public ICommand RemoveLastMessageCommand => new RemovePriorityMessageCommand(this);
-
-        public ICommand ShowMessageListCommand => new ShowMessageListCommand(this);
-
         public ContentPresenterViewModel ContentPresenterViewModel { get; }
 
         public RibbonViewModel RibbonViewModel { get; }
+
+        public StatusBarViewModel StatusBarViewModel { get; }
+
+        public StorageState BusyIndicator
+        {
+            get => gui.BusyIndicator;
+            set => gui.BusyIndicator = value;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -78,62 +76,12 @@ namespace Forest.Gui.ViewModels
                 ShouldProceedState.Cancel;
         }
 
-        private void GuiMessagesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == NotifyCollectionChangedAction.Add)
-            {
-                var newItem = e.NewItems.OfType<LogMessage>().First();
-                if (newItem.HasPriority)
-                {
-                    PriorityMessage = newItem;
-                    OnPropertyChanged(nameof(PriorityMessage));
-                }
-
-                OnPropertyChanged(nameof(MessagesViewModel));
-            }
-
-            if (e.Action == NotifyCollectionChangedAction.Remove)
-            {
-                var items = e.OldItems.OfType<LogMessage>();
-                foreach (var logMessage in items)
-                    if (PriorityMessage == logMessage)
-                    {
-                        PriorityMessage = null;
-                        OnPropertyChanged(nameof(PriorityMessage));
-                    }
-
-                if (!MessagesViewModel.MessageList.Any())
-                {
-                    ShowMessages = false;
-                    OnPropertyChanged(nameof(ShowMessages));
-                }
-
-                OnPropertyChanged(nameof(MessagesViewModel));
-            }
-
-            if (e.Action == NotifyCollectionChangedAction.Reset)
-            {
-                PriorityMessage = null;
-                OnPropertyChanged(nameof(PriorityMessage));
-                OnPropertyChanged(nameof(MessagesViewModel));
-                ShowMessages = false;
-                OnPropertyChanged(nameof(ShowMessages));
-            }
-        }
-
         private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
                 case nameof(ForestGui.BusyIndicator):
                     OnPropertyChanged(nameof(BusyIndicator));
-                    break;
-                case nameof(ForestGui.Messages):
-                    messageListViewModel = null;
-                    OnPropertyChanged(nameof(MessagesViewModel));
-                    break;
-                case nameof(ForestGui.ProjectFilePath):
-                    OnPropertyChanged(nameof(ProjectFileName));
                     break;
             }
         }
@@ -176,26 +124,5 @@ namespace Forest.Gui.ViewModels
         {
             return gui.SelectionManager.Selection as ProbabilityEstimationPerTreeEvent;
         }
-
-        #region Statusbar related
-
-        public bool ShowMessages { get; set; }
-
-        public LogMessage PriorityMessage { get; set; }
-
-        public StorageState BusyIndicator
-        {
-            get => gui.BusyIndicator;
-            set => gui.BusyIndicator = value;
-        }
-
-        public MessageListViewModel MessagesViewModel =>
-            messageListViewModel ?? (messageListViewModel = new MessageListViewModel(gui.Messages));
-
-        public string ProjectFileName => string.IsNullOrEmpty(gui.ProjectFilePath)
-            ? "Nieuw bestand*"
-            : Path.GetFileNameWithoutExtension(gui.ProjectFilePath);
-
-        #endregion
     }
 }

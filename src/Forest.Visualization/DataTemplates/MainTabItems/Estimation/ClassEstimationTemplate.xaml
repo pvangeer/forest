@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:estimations="clr-namespace:Forest.Data.Estimations;assembly=Forest.Data"
                     xmlns:System="clr-namespace:System;assembly=mscorlib"
                     xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
                     xmlns:converters="clr-namespace:Forest.Visualization.Converters"

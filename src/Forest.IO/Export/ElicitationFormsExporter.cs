@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using Forest.Data.Estimations;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Experts;
 using Forest.Data.Hydrodynamics;

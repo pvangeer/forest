@@ -7,7 +7,9 @@
     xmlns:viewModels="clr-namespace:Forest.Gui.ViewModels"
     xmlns:components="clr-namespace:Forest.Gui.Components;assembly=Forest.Gui.Components"
     xmlns:visualization="clr-namespace:Forest.Visualization;assembly=Forest.Visualization"
+    Icon="/Forest.Gui;component/forest.ico"
     Closing="MainWindowClosing"
+    Loaded="MainWindowLoaded"
     Title="Faalpad"
     Height="800"
     Width="1200"
@@ -22,36 +24,10 @@
                 <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml" />
                 <ResourceDictionary
                     Source="/Forest.Visualization;component/DataTemplates/ContentPresenterDataTemplate.xaml" />
-                <ResourceDictionary Source="/Forest.Gui;component/DataTemplates/MessageDataTemplates.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/DataTemplates/StatusBarDataTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <Style x:Key="Spinner" TargetType="Image">
-                <Setter Property="Height" Value="24" />
-                <Setter Property="RenderTransform">
-                    <Setter.Value>
-                        <RotateTransform CenterX="12" CenterY="12" />
-                    </Setter.Value>
-                </Setter>
-                <Style.Triggers>
-                    <Trigger Property="IsEnabled" Value="True">
-                        <Trigger.EnterActions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
-                                        Storyboard.TargetProperty="RenderTransform.Angle"
-                                        From="0"
-                                        To="360"
-                                        Duration="0:0:1"
-                                        RepeatBehavior="Forever" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </Trigger.EnterActions>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
             <converters:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
-            <converters:ShouldShowPriorityMessageToBoolConverter x:Key="ShouldShowPriorityMessageToBoolConverter" />
-            <converters:MessageListToLabelConverter x:Key="MessageListToLabelConverter" />
         </ResourceDictionary>
     </Window.Resources>
     <Window.CommandBindings>
@@ -107,86 +83,9 @@
             Content="{Binding ContentPresenterViewModel}"
             ContentTemplate="{StaticResource ContentPresenterDataTemplate}" />
 
-        <fluent:StatusBar
+        <ContentPresenter
             Grid.Row="2"
-            Background="{StaticResource ApplicationBorderColorBrush}">
-            <fluent:StatusBarItem HorizontalAlignment="Left">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="/Forest.Gui;component/Resources/file.png" Height="24" />
-                    <TextBlock
-                        Text="{Binding ProjectFileName}"
-                        VerticalAlignment="Center"
-                        Margin="2,0,10,0" />
-                </StackPanel>
-            </fluent:StatusBarItem>
-
-            <fluent:StatusBarItem
-                HorizontalAlignment="Right">
-                <StackPanel>
-                    <Label Name="MessagesLabel" VerticalAlignment="Center">
-                        <Hyperlink
-                            Command="{Binding ShowMessageListCommand}"
-                            Foreground="AliceBlue">
-                            <TextBlock
-                                Text="{Binding MessagesViewModel, Converter={StaticResource MessageListToLabelConverter}}" />
-                        </Hyperlink>
-                    </Label>
-                    <Popup IsOpen="{Binding ShowMessages}"
-                           PlacementTarget="{Binding ElementName=MessagesLabel}"
-                           AllowsTransparency="True"
-                           HorizontalOffset="-250"
-                           Placement="Top"
-                           StaysOpen="False"
-                           PopupAnimation="Slide">
-                        <ContentPresenter Content="{Binding MessagesViewModel}"
-                                          ContentTemplate="{StaticResource MessageListTemplate}" />
-                    </Popup>
-                </StackPanel>
-            </fluent:StatusBarItem>
-
-            <Separator HorizontalAlignment="Right" />
-
-            <fluent:StatusBarItem
-                x:Name="StatusBarItem"
-                HorizontalAlignment="Right"
-                Content="{Binding BusyIndicator}"
-                Margin="1,1,5,1">
-                <StatusBarItem.Resources>
-                    <DataTemplate x:Key="BusyIconTemplate" DataType="{x:Type components:StorageState}">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock Text="Bezig" Margin="4,0,4,0" VerticalAlignment="Center" />
-                            <Image Source="/Forest.Gui;component/Resources/busy-white.png"
-                                   Style="{StaticResource Spinner}" />
-                        </StackPanel>
-                    </DataTemplate>
-                    <DataTemplate x:Key="IdleIconTemplate" DataType="{x:Type components:StorageState}">
-                        <Image Source="/Forest.Gui;component/Resources/idle-white.png" />
-                    </DataTemplate>
-                </StatusBarItem.Resources>
-                <StatusBarItem.ContentTemplate>
-                    <DataTemplate>
-                        <ContentPresenter
-                            Name="busyIconPresenter"
-                            Content="{Binding }"
-                            ContentTemplate="{StaticResource IdleIconTemplate}" />
-                        <DataTemplate.Triggers>
-                            <DataTrigger Binding="{Binding }" Value="{x:Static components:StorageState.Busy}">
-                                <Setter TargetName="busyIconPresenter" Property="ContentTemplate"
-                                        Value="{StaticResource BusyIconTemplate}" />
-                            </DataTrigger>
-                        </DataTemplate.Triggers>
-                    </DataTemplate>
-                </StatusBarItem.ContentTemplate>
-            </fluent:StatusBarItem>
-            <Popup
-                IsOpen="{Binding PriorityMessage, Converter={StaticResource ShouldShowPriorityMessageToBoolConverter}}"
-                PlacementTarget="{Binding ElementName=StatusBarItem}"
-                HorizontalOffset="-290"
-                AllowsTransparency="True"
-                Placement="Top"
-                PopupAnimation="Slide">
-                <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource PopupErrorMessageTemplate}" />
-            </Popup>
-        </fluent:StatusBar>
+            Content="{Binding StatusBarViewModel}"
+            ContentTemplate="{StaticResource StatusBarDataTemplate}" />
     </Grid>
 </fluent:RibbonWindow>

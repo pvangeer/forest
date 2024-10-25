@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using Forest.Gui.ViewModels;
+using Forest.Visualization.ViewModels;
 
-namespace Forest.Gui.Converters
+namespace Forest.Visualization.Converters
 {
     public class MessageListToLabelConverter : IValueConverter
     {

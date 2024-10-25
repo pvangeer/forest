@@ -28,12 +28,6 @@ namespace Forest.Messaging
             }
 
             MessageCollection.Messages.Insert(0, message);
-
-            /*if (message.HasPriority)
-            {
-                MessageCollection.PriorityMessage = message;
-                MessageCollection.OnPropertyChanged(nameof(IMessageCollection.PriorityMessage));
-            }*/
         }
 
         private MessageSeverity GetMessageSeverityFromNativeLevel(Level loggingEventLevel)

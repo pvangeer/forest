@@ -92,6 +92,8 @@
                     Source="/Forest.Visualization;component/DataTemplates/General/TabControlFlatStyle.xaml" />
                 <ResourceDictionary
                     Source="/Forest.Visualization;component/DataTemplates/General/AssessmentSections.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/DataTemplates/General/SpinnerStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

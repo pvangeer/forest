@@ -170,6 +170,7 @@ namespace Forest.Gui.Components
             worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o, e,
                 () =>
                 {
+                    gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));
                     log.Info($"ForestAnalysis is opgeslagen in bestand '{gui.ProjectFilePath}'.");
                     followingAction?.Invoke();
                 });
