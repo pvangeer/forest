@@ -88,11 +88,11 @@
     </DataTemplate>
 
     <DataTemplate x:Key="FailingEndpointTemplate" DataType="viewModels1:GraphVertex">
-        <Image Source="/Forest.Gui;component\Resources\cross_red.png" Width="32" />
+        <Image Source="/Forest.Visualization;component\Resources\cross_red.png" Width="32" />
     </DataTemplate>
 
     <DataTemplate x:Key="PassingEndpointTemplate" DataType="viewModels1:GraphVertex">
-        <Image Source="/Forest.Gui;component\Resources\check_green.png" Width="32" />
+        <Image Source="/Forest.Visualization;component\Resources\check_green.png" Width="32" />
     </DataTemplate>
 
     <Style TargetType="{x:Type graphSharpControls:VertexControl}">

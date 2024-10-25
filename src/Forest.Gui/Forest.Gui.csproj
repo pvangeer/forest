@@ -149,6 +149,11 @@
     <Compile Include="Export\SelectFileLocationCommand.cs" />
     <Compile Include="Export\FolderDialogBehavior.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="Export\ElicitationFormExportDialog.xaml">
       <SubType>Designer</SubType>
@@ -171,11 +176,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -183,8 +183,8 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -196,57 +196,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\EventTree.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\busy-white.png" />
-    <Resource Include="Resources\idle-white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\alert-icon 32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\close-icon 32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\information-icon 32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\add-eventtree.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\remove-eventtree.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\add-tree-event.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\remove-tree-event.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\estimation.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\experts.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\hydraulics.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\results.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\tree-event-info.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\project-information.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\file.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\check_green.png" />
-    <Resource Include="Resources\cross_red.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="forest.ico" />
@@ -281,6 +231,5 @@
       <Name>Forest.Visualization</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
