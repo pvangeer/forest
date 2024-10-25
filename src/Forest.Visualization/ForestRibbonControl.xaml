@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fluent="urn:fluent-ribbon"
              xmlns:converters="clr-namespace:Forest.Visualization.Converters"
-             xmlns:gui="clr-namespace:Forest.Gui.Components;assembly=Forest.Gui.Components"
+             xmlns:gui="clr-namespace:Forest.Gui;assembly=Forest.Gui"
              xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
              xmlns:tree="clr-namespace:Forest.Data.Tree;assembly=Forest.Data"
              mc:Ignorable="d"

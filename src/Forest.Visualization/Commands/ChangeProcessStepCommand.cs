@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using Forest.Gui.Components;
+using Forest.Gui;
 using Forest.Visualization.ViewModels;
 
 namespace Forest.Visualization.Commands

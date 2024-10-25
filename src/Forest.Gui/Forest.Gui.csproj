@@ -7,8 +7,8 @@
     <ProjectGuid>{5ACE288D-CC7F-47D4-8A2A-2764101BC5E6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Forest.Gui.Components</RootNamespace>
-    <AssemblyName>Forest.Gui.Components</AssemblyName>
+    <RootNamespace>Forest.Gui</RootNamespace>
+    <AssemblyName>Forest.Gui</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

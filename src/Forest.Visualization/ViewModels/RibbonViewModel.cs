@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Forest.Data.Services;
 using Forest.Data.Tree;
-using Forest.Gui.Components;
+using Forest.Gui;
 using Forest.Visualization.Commands;
 
 namespace Forest.Visualization.ViewModels

@@ -309,9 +309,9 @@
       <Project>{2f5ce516-bf3b-4b33-951f-2dc8bcf08e43}</Project>
       <Name>Forest.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Forest.Gui.Components\Forest.Gui.Components.csproj">
-      <Project>{5ace288d-cc7f-47d4-8a2a-2764101bc5e6}</Project>
-      <Name>Forest.Gui.Components</Name>
+    <ProjectReference Include="..\Forest.Gui\Forest.Gui.csproj">
+      <Project>{5ACE288D-CC7F-47D4-8A2A-2764101BC5E6}</Project>
+      <Name>Forest.Gui</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forest.IO\Forest.IO.csproj">
       <Project>{64ac0a2f-b6d4-45c8-812b-aac0baec1d11}</Project>
@@ -376,6 +376,8 @@
     <Resource Include="Resources\check_green.png" />
     <Resource Include="Resources\cross_red.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\forest.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

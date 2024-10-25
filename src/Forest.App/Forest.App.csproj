@@ -191,9 +191,9 @@
       <Project>{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}</Project>
       <Name>Forest.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Forest.Gui.Components\Forest.Gui.Components.csproj">
+    <ProjectReference Include="..\Forest.Gui\Forest.Gui.csproj">
       <Project>{5ACE288D-CC7F-47D4-8A2A-2764101BC5E6}</Project>
-      <Name>Forest.Gui.Components</Name>
+      <Name>Forest.Gui</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forest.IO\Forest.IO.csproj">
       <Project>{64AC0A2F-B6D4-45C8-812B-AAC0BAEC1D11}</Project>

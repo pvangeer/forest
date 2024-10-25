@@ -9,7 +9,7 @@ using Forest.Storage;
 using log4net;
 using log4net.Repository.Hierarchy;
 
-namespace Forest.Gui.Components
+namespace Forest.Gui
 {
     public class ForestGui : IMessageCollection
     {

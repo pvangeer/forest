@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using Forest.Gui.Components;
+using Forest.Gui;
 using Microsoft.Win32;
 
 namespace Forest.Visualization.Dialogs

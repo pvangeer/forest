@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:components="clr-namespace:Forest.Gui.Components;assembly=Forest.Gui.Components"
-                    xmlns:viewModels="clr-namespace:Forest.Visualization">
+                    xmlns:viewModels="clr-namespace:Forest.Visualization"
+                    xmlns:gui="clr-namespace:Forest.Gui;assembly=Forest.Gui">
 
     <DataTemplate x:Key="BusyOverlayDataTemplate" DataType="{x:Type viewModels:BusyOverlayViewModel}">
         <Grid Grid.Row="1" ZIndex="2">
@@ -9,7 +9,7 @@
                 <Style TargetType="Grid">
                     <Setter Property="Visibility" Value="Collapsed" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding BusyIndicator}" Value="{x:Static components:StorageState.Busy}">
+                        <DataTrigger Binding="{Binding BusyIndicator}" Value="{x:Static gui:StorageState.Busy}">
                             <Setter Property="Visibility" Value="Visible" />
                         </DataTrigger>
                     </Style.Triggers>
@@ -31,7 +31,7 @@
             <Image
                 Grid.Row="1"
                 Grid.Column="1"
-                Source="/Forest.Gui;component/Resources/busy-white.png"
+                Source="/Forest.Visualization;component/Resources/busy-white.png"
                 Style="{StaticResource Spinner}" />
         </Grid>
     </DataTemplate>

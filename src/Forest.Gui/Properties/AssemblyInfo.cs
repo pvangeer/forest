@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Forest.Gui.Test")]
+[assembly: AssemblyTitle("Forest.Gui")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Forest.Gui.Test")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2018")]
+[assembly: AssemblyCompany("Stichting Deltares")]
+[assembly: AssemblyProduct("Forest.Gui")]
+[assembly: AssemblyCopyright("Copyright © Stichting Deltares 2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -18,8 +18,8 @@ using System.Runtime.InteropServices;
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
-// The following GUID is for the ID of the typelib if this eventTreeProject is exposed to COM
-[assembly: Guid("42800156-f7f8-41c8-90f4-95b89ccada1f")]
+// The following GUID is for the ID of the typelib if this project is exposed to COM
+[assembly: Guid("5ace288d-cc7f-47d4-8a2a-2764101bc5e6")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -28,8 +28,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

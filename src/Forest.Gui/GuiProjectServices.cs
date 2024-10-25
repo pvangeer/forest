@@ -5,7 +5,7 @@ using Forest.Messaging;
 using Forest.Storage;
 using Forest.Storage.Migration;
 
-namespace Forest.Gui.Components
+namespace Forest.Gui
 {
     public class GuiProjectServices
     {

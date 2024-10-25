@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Forest.Gui.Components;
+using Forest.Gui;
 using Forest.Messaging;
 using Forest.Visualization.Commands;
 

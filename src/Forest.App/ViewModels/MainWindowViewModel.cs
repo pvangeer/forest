@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using Forest.Gui.Components;
+using Forest.Gui;
 using Forest.Visualization;
 using Forest.Visualization.Dialogs;
 using Forest.Visualization.ViewModels;

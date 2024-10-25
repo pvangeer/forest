@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:gui="clr-namespace:Forest.Gui.Components;assembly=Forest.Gui.Components"
+                    xmlns:gui="clr-namespace:Forest.Gui;assembly=Forest.Gui"
                     xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
                     xmlns:converters="clr-namespace:Forest.Visualization.Converters">
 

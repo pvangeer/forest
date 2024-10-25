@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Tree;
 
-namespace Forest.Gui.Components
+namespace Forest.Gui
 {
     public class SelectionManager : INotifyPropertyChanged
     {

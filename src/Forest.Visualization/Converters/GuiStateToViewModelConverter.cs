@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using Forest.Gui.Components;
+using Forest.Gui;
 using Forest.Visualization.ViewModels;
 
 namespace Forest.Visualization.Converters

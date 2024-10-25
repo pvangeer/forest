@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using Forest.App.ViewModels;
 using Forest.Data;
-using Forest.Gui.Components;
+using Forest.Gui;
 
 namespace Forest.App
 {

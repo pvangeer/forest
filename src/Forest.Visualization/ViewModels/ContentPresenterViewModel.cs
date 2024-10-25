@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using Forest.Data;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Services;
-using Forest.Gui.Components;
+using Forest.Gui;
 
 namespace Forest.Visualization.ViewModels
 {

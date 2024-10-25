@@ -1,4 +1,4 @@
-﻿namespace Forest.Gui.Components
+﻿namespace Forest.Gui
 {
     public class FileNameQuestionResult
     {
