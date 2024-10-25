@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using Forest.Gui.Components;
 
-namespace Forest.Gui.Converters
+namespace Forest.App.Converters
 {
     public class BusyIndicatorToEnabledConverter : IValueConverter
     {

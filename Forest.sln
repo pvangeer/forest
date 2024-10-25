@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{93BD55D2-78A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{92A2A41A-A057-41B7-9549-A1E2EC8A94A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forest.Gui", "src\Forest.Gui\Forest.Gui.csproj", "{349CD8FE-3AF9-4EA5-9EA0-5318FB20E123}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forest.App", "src\Forest.App\Forest.App.csproj", "{349CD8FE-3AF9-4EA5-9EA0-5318FB20E123}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forest.Data", "src\Forest.Data\Forest.Data.csproj", "{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}"
 EndProject

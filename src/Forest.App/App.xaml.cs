@@ -5,7 +5,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using Forest.Messaging;
 
-namespace Forest.Gui
+namespace Forest.App
 {
     /// <summary>
     ///     Interaction logic for App.xaml

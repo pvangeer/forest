@@ -4,7 +4,7 @@ using Forest.Visualization;
 using Forest.Visualization.Dialogs;
 using Forest.Visualization.ViewModels;
 
-namespace Forest.Gui.ViewModels
+namespace Forest.App.ViewModels
 {
     public class MainWindowViewModel : NotifyPropertyChangedObject
     {
