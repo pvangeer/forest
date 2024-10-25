@@ -14,7 +14,7 @@ namespace Forest.Gui.Import
 
         public bool CanExecute(object parameter)
         {
-            return parameter is MainWindowViewModel guiViewModel && guiViewModel.ProjectHasExperts();
+            return parameter is MainWindowViewModel guiViewModel && guiViewModel.SelectedEstimationHasExperts();
         }
 
         public void Execute(object parameter)

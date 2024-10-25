@@ -3,10 +3,11 @@
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:visualization="clr-namespace:Forest.Visualization"
                     xmlns:mainTabItems="clr-namespace:Forest.Visualization.DataTemplates.MainTabItems"
-                    xmlns:commands="clr-namespace:Forest.Visualization.Commands">
+                    xmlns:commands="clr-namespace:Forest.Visualization.Commands"
+                    xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels">
 
     <commands:SelectTodayCommand x:Key="SelectTodayCommand" />
-    <DataTemplate x:Key="GeneralInformationDataTemplate" DataType="{x:Type visualization:ContentPresenterViewModel}">
+    <DataTemplate x:Key="GeneralInformationDataTemplate" DataType="{x:Type viewModels:ContentPresenterViewModel}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" MinHeight="120" />

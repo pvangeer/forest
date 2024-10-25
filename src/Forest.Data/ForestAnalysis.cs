@@ -24,7 +24,6 @@ namespace Forest.Data
             ProjectInformation = "";
             ProjectLeader = new Person();
             EventTree = tree;
-            Experts = new ObservableCollection<Expert>();
             HydrodynamicConditions = new ObservableCollection<HydrodynamicCondition>();
             ProbabilityEstimations = new ObservableCollection<ProbabilityEstimation>
             {
@@ -58,9 +57,6 @@ namespace Forest.Data
         }
 
         public ObservableCollection<ProbabilityEstimation> ProbabilityEstimations { get; }
-
-        // TODO: Move to ProbabilityEstimationPerTreeEvent
-        public ObservableCollection<Expert> Experts { get; }
 
         // TODO: Move to ProbabilityEstimationPerTreeEvent
         public ObservableCollection<HydrodynamicCondition> HydrodynamicConditions { get; }

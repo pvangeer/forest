@@ -9,7 +9,7 @@
             Source="/Forest.Visualization;component/DataTemplates/MainTabItems/TreeEventsListViewItemDataTemplate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <DataTemplate x:Key="TreeEventInformationDataTemplate" DataType="{x:Type visualization:ContentPresenterViewModel}">
+    <DataTemplate x:Key="TreeEventInformationDataTemplate" DataType="{x:Type viewModels1:ContentPresenterViewModel}">
         <DataTemplate.Resources>
             <DataTemplate x:Key="TreeEventsInformationTemplate" DataType="viewModels1:EventTreeViewModel">
                 <Grid>

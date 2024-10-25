@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Forest.Data.Estimations;
 using Forest.Data.Tree;
 
 namespace Forest.Gui.Components
@@ -16,6 +17,15 @@ namespace Forest.Gui.Components
         }
 
         public TreeEvent SelectedTreeEvent { get; private set; }
+
+        // TODO: Maybe merge? Or keep dictionary of selected tree event per eventtree?
+        public object Selection { get; private set; }
+
+        public void SetSelection(object selection)
+        {
+            this.Selection = selection;
+            OnPropertyChanged(nameof(Selection));
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

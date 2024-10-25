@@ -32,7 +32,8 @@ namespace Forest.Visualization.Converters
                 hydrodynamicConditionViewModels == null || estimations == null)
                 return true;
 
-            
+            // TODO: Temp, since this needs to be refactored
+            return false;
             var orderedWaterLevels = hydrodynamicConditionViewModels.Select(h => h.WaterLevel).Distinct().ToArray();
 
             hydraulicConditions = hydrodynamicConditionViewModels.Select(vm => vm.HydrodynamicCondition).OrderBy(c => c.WaterLevel).ToArray();

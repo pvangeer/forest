@@ -13,7 +13,7 @@
 
     <converters:SelectedItemToMainTreeEventViewModelConverter x:Key="SelectedItemToMainTreeEventViewModelConverter" />
 
-    <DataTemplate x:Key="EstimationDataTemplate" DataType="{x:Type visualization:ContentPresenterViewModel}">
+    <DataTemplate x:Key="EstimationDataTemplate" DataType="{x:Type viewModels:ContentPresenterViewModel}">
         <DataTemplate.Resources>
             <DataTemplate x:Key="EstimationPerEventTreeDataTemplate" DataType="viewModels:EventTreeViewModel">
                 <DataTemplate.Resources>

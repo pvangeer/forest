@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:visualization="clr-namespace:Forest.Visualization"
-                    xmlns:viewModels="clr-namespace:Forest.Gui.Components;assembly=Forest.Gui.Components">
+                    xmlns:viewModels="clr-namespace:Forest.Gui.Components;assembly=Forest.Gui.Components"
+                    xmlns:viewModels1="clr-namespace:Forest.Visualization.ViewModels">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary
@@ -20,7 +21,7 @@
             Source="/Forest.Visualization;component/DataTemplates/MainTabItems/ResultsDataTemplate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <DataTemplate x:Key="ContentPresenterDataTemplate" DataType="visualization:ContentPresenterViewModel">
+    <DataTemplate x:Key="ContentPresenterDataTemplate" DataType="viewModels1:ContentPresenterViewModel">
         <ContentPresenter
             Name="Hoster"
             Content="{Binding .}" />

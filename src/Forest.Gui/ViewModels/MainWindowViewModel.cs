@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using Forest.Data;
+using Forest.Data.Estimations;
 using Forest.Data.Experts;
 using Forest.Data.Properties;
 using Forest.Data.Tree;
@@ -145,15 +146,20 @@ namespace Forest.Gui.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void OnExportElicitationForms(string fileLocation, string prefix, Expert[] expertsToExport, EventTree eventTreeToExport)
+        public void OnExportElicitationForms(string fileLocation, string prefix, Expert[] expertsToExport, ProbabilityEstimationPerTreeEvent estimationToExport)
         {
-            var exporter = new ElicitationFormsExporter(gui.ForestAnalysis);
-            exporter.Export(fileLocation, prefix, expertsToExport, eventTreeToExport);
+            var exporter = new ElicitationFormsExporter(estimationToExport);
+            exporter.Export(fileLocation, prefix, expertsToExport, estimationToExport);
         }
 
         public void OnImportElicitationForms(string[] fileLocations)
         {
-            var importer = new ElicitationFormImporter(gui.ForestAnalysis);
+            var estimationToImportTo = gui.SelectionManager.Selection as ProbabilityEstimationPerTreeEvent;
+            if (estimationToImportTo == null)
+            {
+                return;
+            }
+            var importer = new ElicitationFormImporter(estimationToImportTo);
             foreach (var fileLocation in fileLocations)
                 importer.Import(fileLocation);
         }
@@ -163,14 +169,15 @@ namespace Forest.Gui.ViewModels
             return gui.GuiProjectServices.HandleUnsavedChanges(() => { });
         }
 
-        public bool ProjectHasExperts()
+        public bool SelectedEstimationHasExperts()
         {
-            return gui.ForestAnalysis.Experts.Any();
+            var selectedEstimation = gui.SelectionManager.Selection as ProbabilityEstimationPerTreeEvent;
+            return selectedEstimation != null && selectedEstimation.Experts.Any();
         }
 
-        public ForestAnalysis GetEventTreeProject()
+        public ProbabilityEstimationPerTreeEvent GetSelectedEstimationPerTreeEvent()
         {
-            return gui.ForestAnalysis;
+            return gui.SelectionManager.Selection as ProbabilityEstimationPerTreeEvent;
         }
 
         #region Statusbar related

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -8,9 +7,8 @@ using Forest.Data;
 using Forest.Data.Estimations;
 using Forest.Data.Services;
 using Forest.Gui.Components;
-using Forest.Visualization.ViewModels;
 
-namespace Forest.Visualization
+namespace Forest.Visualization.ViewModels
 {
     public class ContentPresenterViewModel : INotifyPropertyChanged
     {
@@ -32,13 +30,10 @@ namespace Forest.Visualization
                     EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(gui.ForestAnalysis)
                 };
 
-                Experts = new ObservableCollection<ExpertViewModel>(ForestAnalysis.Experts.Select(e => new ExpertViewModel(e)));
-                Experts.CollectionChanged += ExpertViewModelsCollectionChanged;
-
                 HydrodynamicConditionsList =
                     new ObservableCollection<HydraulicConditionViewModel>(
                         ForestAnalysis.HydrodynamicConditions.Select(e => new HydraulicConditionViewModel(e)));
-                HydrodynamicConditionsList.CollectionChanged += HydraulicsViewModelsCollectionChanged;
+                //HydrodynamicConditionsList.CollectionChanged += HydrodynamicsViewModelsCollectionChanged;
             }
         }
 
@@ -96,8 +91,6 @@ namespace Forest.Visualization
             }
         }
 
-        public ObservableCollection<ExpertViewModel> Experts { get; }
-
         public ObservableCollection<HydraulicConditionViewModel> HydrodynamicConditionsList { get; }
 
         public ObservableCollection<TreeEventProbabilityEstimation> ProbabilityEstimations { get; }
@@ -144,7 +137,7 @@ namespace Forest.Visualization
             OnPropertyChanged(nameof(SelectedTreeEvent));
         }
 
-        private void HydraulicsViewModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        /*private void HydrodynamicsViewModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
                 foreach (var item in e.NewItems.OfType<HydraulicConditionViewModel>())
@@ -164,7 +157,7 @@ namespace Forest.Visualization
             if (e.Action == NotifyCollectionChangedAction.Remove)
                 foreach (var item in e.OldItems.OfType<ExpertViewModel>())
                     analysisManipulationService.RemoveExpert(item.Expert);
-        }
+        }*/
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

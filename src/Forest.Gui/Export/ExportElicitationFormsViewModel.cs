@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Forest.Data;
+using Forest.Data.Estimations;
 using Forest.Data.Experts;
 using Forest.Data.Tree;
 using Forest.Gui.Properties;
@@ -18,35 +18,34 @@ namespace Forest.Gui.Export
 
 
         // TODO: Remove this code. No test data in the code base please.
-        public static ForestAnalysis TestForestAnalysis = new ForestAnalysis
+        public static ProbabilityEstimationPerTreeEvent TestEstimation = new ProbabilityEstimationPerTreeEvent
         {
             Experts =
             {
                 new Expert { Name = "Pietje" },
                 new Expert { Name = "Jantje" }
             },
-            Name = "Testproject"
         };
 
         private string exportLocation;
+        private readonly ProbabilityEstimationPerTreeEvent estimation;
 
-        public ExportElicitationFormsViewModel() : this(TestForestAnalysis)
+        public ExportElicitationFormsViewModel() : this(TestEstimation)
         {
         }
 
-        public ExportElicitationFormsViewModel(ForestAnalysis forestAnalysis)
+        public ExportElicitationFormsViewModel(ProbabilityEstimationPerTreeEvent estimation)
         {
+            this.estimation = estimation;
             Experts = new ObservableCollection<ElicitationFormsExportViewModel>(
-                forestAnalysis.Experts.Select(e => new ElicitationFormsExportViewModel(e)));
+                estimation.Experts.Select(e => new ElicitationFormsExportViewModel(e)));
             foreach (var expertExportViewModel in Experts)
                 expertExportViewModel.PropertyChanged += ViewModelPropertyChanged;
-            EventTree = new EventTreeExportViewModel(forestAnalysis.EventTree);
-            EventTree.PropertyChanged += ViewModelPropertyChanged;
 
-            Prefix = DateTime.Now.Date.ToString("yyyy-MM-dd") + " - " + forestAnalysis.Name + " - ";
+            Prefix = DateTime.Now.Date.ToString("yyyy-MM-dd") + " - " + estimation.Name + " - ";
         }
 
-        public Action<string, string, Expert[], EventTree> OnExport { get; set; }
+        public Action<string, string, Expert[], ProbabilityEstimationPerTreeEvent> OnExport { get; set; }
 
         public ObservableCollection<ElicitationFormsExportViewModel> Experts { get; }
 
@@ -60,8 +59,6 @@ namespace Forest.Gui.Export
             }
         }
 
-        public EventTreeExportViewModel EventTree { get; }
-
         public ICommand ExportElicitationFormsCommand => new PerformExportElicitationFormsCommand(this);
 
         public string Prefix { get; set; }
@@ -71,7 +68,6 @@ namespace Forest.Gui.Export
         public void OnExportHandler()
         {
             var expertsToExport = Experts.Where(e => e.IsChecked).Select(e => e.Expert).ToArray();
-            var eventTreeToExport = EventTree.EventTree;
             var location = ExportLocation;
             var prefix = Prefix;
 
@@ -81,7 +77,7 @@ namespace Forest.Gui.Export
                 return;
             }
 
-            OnExport(location, prefix, expertsToExport, eventTreeToExport);
+            OnExport(location, prefix, expertsToExport, estimation);
         }
 
         public event EventHandler CanExportChanged;

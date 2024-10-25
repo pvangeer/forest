@@ -12,7 +12,7 @@ namespace Forest.Gui.Export
 
         public bool CanExecute(object parameter)
         {
-            return parameter is MainWindowViewModel guiViewModel && guiViewModel.ProjectHasExperts();
+            return parameter is MainWindowViewModel guiViewModel && guiViewModel.SelectedEstimationHasExperts();
         }
 
         public void Execute(object parameter)
@@ -26,7 +26,7 @@ namespace Forest.Gui.Export
 
             var dialog = new ElicitationFormExportDialog
             {
-                DataContext = new ExportElicitationFormsViewModel(mainWindowViewModel.GetEventTreeProject())
+                DataContext = new ExportElicitationFormsViewModel(mainWindowViewModel.GetSelectedEstimationPerTreeEvent())
                 {
                     OnExport = mainWindowViewModel.OnExportElicitationForms
                 },

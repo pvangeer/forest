@@ -17,15 +17,14 @@ namespace Forest.IO.Export
     {
         private readonly ForestLog log = new ForestLog(typeof(ElicitationFormsExporter));
         private readonly ElicitationFormWriter writer = new ElicitationFormWriter();
+        private readonly ProbabilityEstimationPerTreeEvent probabilityEstimation;
 
-        public ElicitationFormsExporter(ForestAnalysis forestAnalysis)
+        public ElicitationFormsExporter(ProbabilityEstimationPerTreeEvent probabilityEstimation)
         {
-            ForestAnalysis = forestAnalysis;
+            this.probabilityEstimation = probabilityEstimation;
         }
 
-        public ForestAnalysis ForestAnalysis { get; }
-
-        public void Export(string fileLocation, string prefix, Expert[] expertsToExport, EventTree eventTreeToExport)
+        public void Export(string fileLocation, string prefix, Expert[] expertsToExport, ProbabilityEstimationPerTreeEvent estimationToExport)
         {
             if (string.IsNullOrWhiteSpace(fileLocation))
             {
@@ -45,31 +44,29 @@ namespace Forest.IO.Export
                 return;
             }
 
-            if (expertsToExport.Any(e => !ForestAnalysis.Experts.Contains(e)))
-            {
-                log.Error("Er is iets misgegaan bij het exporteren. Niet alle experts konden in het forestAnalysis worden gevonden.");
-                return;
-            }
-
-            var hydraulicConditions = ForestAnalysis.HydrodynamicConditions.Distinct(new HydraulicConditionsWaterLevelComparer())
-                .OrderBy(hc => hc.WaterLevel)
-                .ToArray();
-            if (!hydraulicConditions.Any())
-                log.Error("Er moet minimaal 1 hydraulische conditie zijn gespecificeerd om te kunnen exporteren.");
-
-            var probabilityEstimation = ForestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>()
-                .FirstOrDefault(e => e.EventTree == eventTreeToExport);
             if (probabilityEstimation == null)
             {
                 log.Error("Er is iets fout gegaan bij het exporteren. Er konden geen objecten worden gevonden om te exporteren.");
                 return;
             }
 
+            if (expertsToExport.Any(e => !this.probabilityEstimation.Experts.Contains(e)))
+            {
+                log.Error("Er is iets misgegaan bij het exporteren. Niet alle experts konden in het forestAnalysis worden gevonden.");
+                return;
+            }
+
+            var hydraulicConditions = probabilityEstimation.HydrodynamicConditions.Distinct(new HydraulicConditionsWaterLevelComparer())
+                .OrderBy(hc => hc.WaterLevel)
+                .ToArray();
+            if (!hydraulicConditions.Any())
+                log.Error("Er moet minimaal 1 hydraulische conditie zijn gespecificeerd om te kunnen exporteren.");
+
             foreach (var expert in expertsToExport)
             {
                 var fileName = Path.Combine(fileLocation, prefix + expert.Name + ".xlsx");
 
-                writer.WriteForm(fileName, EventTreeToDotForm(eventTreeToExport, expert.Name, hydraulicConditions, probabilityEstimation.Estimations));
+                writer.WriteForm(fileName, EventTreeToDotForm(estimationToExport.EventTree, expert.Name, hydraulicConditions, probabilityEstimation.Estimations));
                 log.Info($"Bestand '{fileName}' geëxporteerd voor expert '{expert.Name}'");
             }
 

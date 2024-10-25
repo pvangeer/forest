@@ -9,7 +9,7 @@
         <Grid />
     </DataTemplate>
 
-    <DataTemplate x:Key="TreeEventsTemplate" DataType="{x:Type visualization:ContentPresenterViewModel}">
+    <DataTemplate x:Key="TreeEventsTemplate" DataType="{x:Type viewModels1:ContentPresenterViewModel}">
         <controls:ZoomControl ZoomDeltaMultiplier="5">
             <controls:ZoomControl.Resources>
                 <ResourceDictionary>

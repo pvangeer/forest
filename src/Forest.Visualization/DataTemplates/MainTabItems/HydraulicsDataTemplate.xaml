@@ -2,10 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:oxy="http://oxyplot.org/wpf"
                     xmlns:converters="clr-namespace:Forest.Visualization.Converters"
-                    xmlns:visualization="clr-namespace:Forest.Visualization">
+                    xmlns:visualization="clr-namespace:Forest.Visualization"
+                    xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels">
 
     <converters:HydraulicsListToPlotModelConverter x:Key="HydraulicsListToPlotModelConverter" />
-    <DataTemplate x:Key="HydraulicsDataTemplate" DataType="{x:Type visualization:ContentPresenterViewModel}">
+    <DataTemplate x:Key="HydraulicsDataTemplate" DataType="{x:Type viewModels:ContentPresenterViewModel}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300" />

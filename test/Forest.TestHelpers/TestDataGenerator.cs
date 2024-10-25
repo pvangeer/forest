@@ -10,29 +10,35 @@ namespace Forest.TestHelpers
     {
         public static ForestAnalysis CreateTestViewModel()
         {
+            var treeEvent = CreateEventTree("Second event tree", 2);
+            var eventTree = new EventTree { MainTreeEvent = treeEvent };
             return new ForestAnalysis
             {
-                EventTree =
+                EventTree = eventTree,
+                ProbabilityEstimations =
                 {
-                    MainTreeEvent = CreateEventTree("Second event tree", 2)
-                },
-                Experts =
-                {
-                    new Expert
+                    new ProbabilityEstimationPerTreeEvent
                     {
-                        Name = "Klaas",
-                        Email = "email@domein.nl",
-                        Expertise = "Alles",
-                        Organization = "Eigen bedrijf",
-                        Telephone = "088-3358339"
-                    },
-                    new Expert
-                    {
-                        Name = "Piet",
-                        Email = "piet@email.nl",
-                        Expertise = "Niets",
-                        Organization = "Ander bedrijf",
-                        Telephone = "088-3358339"
+                        EventTree = eventTree,
+                        Experts =
+                        {
+                            new Expert
+                            {
+                                Name = "Klaas",
+                                Email = "email@domein.nl",
+                                Expertise = "Alles",
+                                Organization = "Eigen bedrijf",
+                                Telephone = "088-3358339"
+                            },
+                            new Expert
+                            {
+                                Name = "Piet",
+                                Email = "piet@email.nl",
+                                Expertise = "Niets",
+                                Organization = "Ander bedrijf",
+                                Telephone = "088-3358339"
+                            }
+                        }
                     }
                 }
             };
@@ -114,6 +120,23 @@ namespace Forest.TestHelpers
 
             var probabilityEstimation1 = new ProbabilityEstimationPerTreeEvent
             {
+                Experts =
+                {
+                    andre,
+                    erik,
+                    roy,
+                    andries,
+                    dirk
+                },
+                HydrodynamicConditions =
+                {
+                    hydraulicCondition23,
+                    hydraulicCondition26,
+                    hydraulicCondition29,
+                    hydraulicCondition32,
+                    hydraulicCondition35,
+                    hydraulicCondition38
+                },
                 Estimations =
                 {
                     new TreeEventProbabilityEstimation(mainTreeEvent)
@@ -417,6 +440,8 @@ namespace Forest.TestHelpers
                 }
             };
 
+            var eventTree = new EventTree { MainTreeEvent = mainTreeEvent };
+
             return new ForestAnalysis
             {
                 Name = "AGK - HHNK",
@@ -426,27 +451,7 @@ namespace Forest.TestHelpers
                     Name = "Goaitske de Vries"
                 },
                 AssessmentSection = "12-3",
-                EventTree =
-                {
-                    MainTreeEvent = mainTreeEvent
-                },
-                Experts =
-                {
-                    andre,
-                    erik,
-                    roy,
-                    andries,
-                    dirk
-                },
-                HydrodynamicConditions =
-                {
-                    hydraulicCondition23,
-                    hydraulicCondition26,
-                    hydraulicCondition29,
-                    hydraulicCondition32,
-                    hydraulicCondition35,
-                    hydraulicCondition38
-                },
+                EventTree = eventTree,
                 ProbabilityEstimations =
                 {
                     probabilityEstimation1

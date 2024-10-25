@@ -64,7 +64,8 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="ResultsDataTemplate" DataType="{x:Type visualization:ContentPresenterViewModel}">
+    <!--TODO: Change this ViewModel to a new viewmodel for ProbabilityEstimationPerTreeEvent-->
+    <DataTemplate x:Key="ResultsDataTemplate" DataType="{x:Type viewModels:ContentPresenterViewModel}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" MinWidth="200" />

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Forest.Data;
 using Forest.Data.Estimations;
 using Forest.Data.Tree;
 using Forest.IO.Import.DotFormValidation;
@@ -11,13 +10,12 @@ namespace Forest.IO.Import
     public class ElicitationFormImporter
     {
         private readonly ForestLog log = new ForestLog(typeof(ElicitationFormImporter));
+        private readonly ProbabilityEstimationPerTreeEvent probabilityEstimation;
 
-        public ElicitationFormImporter(ForestAnalysis forestAnalysis)
+        public ElicitationFormImporter(ProbabilityEstimationPerTreeEvent probabilityEstimation)
         {
-            ForestAnalysis = forestAnalysis;
+            this.probabilityEstimation = probabilityEstimation;
         }
-
-        public ForestAnalysis ForestAnalysis { get; }
 
         public void Import(string fileName)
         {
@@ -34,20 +32,19 @@ namespace Forest.IO.Import
 
             foreach (var dotForm in formContent)
             {
-                var validationResult = DotFormValidator.Validate(dotForm, ForestAnalysis);
+                var validationResult = DotFormValidator.Validate(dotForm, probabilityEstimation);
                 if (ValidationFailed(fileName, validationResult, dotForm))
                     return;
             }
 
             foreach (var dotForm in formContent)
             {
-                var expert = ForestAnalysis.Experts.First(ex => ex.Name == dotForm.ExpertName);
+                var expert = probabilityEstimation.Experts.First(ex => ex.Name == dotForm.ExpertName);
 
                 foreach (var dotFormNode in dotForm.Nodes)
                 {
-                    var treeEvent = ForestAnalysis.EventTree.MainTreeEvent.FindTreeEvent(n => n.Name == dotFormNode.NodeName);
-                    var estimations = ForestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().First()
-                        ?.Estimations.First(e => e.TreeEvent == treeEvent);
+                    var treeEvent = probabilityEstimation.EventTree.MainTreeEvent.FindTreeEvent(n => n.Name == dotFormNode.NodeName);
+                    var estimations = probabilityEstimation.Estimations.First(e => e.TreeEvent == treeEvent);
                     
                     foreach (var dotEstimate in dotFormNode.Estimates)
                     {

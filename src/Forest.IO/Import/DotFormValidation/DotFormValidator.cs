@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using Forest.Data;
+using Forest.Data.Estimations;
 using Forest.Data.Tree;
 
 namespace Forest.IO.Import.DotFormValidation
 {
     public static class DotFormValidator
     {
-        public static DotFormValidationResult Validate(DotForm form, ForestAnalysis forestAnalysis)
+        public static DotFormValidationResult Validate(DotForm form, ProbabilityEstimationPerTreeEvent probabilityEstimation)
         {
-            if (forestAnalysis == null)
-                throw new ArgumentNullException(nameof(forestAnalysis));
+            if (probabilityEstimation == null)
+                throw new ArgumentNullException(nameof(probabilityEstimation));
 
-            var nodesValidationResult = ValidateNodes(form, forestAnalysis);
+            var nodesValidationResult = ValidateNodes(form, probabilityEstimation);
 
             var validationResult = new DotFormValidationResult
             {
-                ExpertValidation = ValidateExperts(form, forestAnalysis)
+                ExpertValidation = ValidateExperts(form, probabilityEstimation)
             };
 
             if (validationResult.ExpertValidation == ExpertValidationResult.Valid)
@@ -26,7 +27,7 @@ namespace Forest.IO.Import.DotFormValidation
             return validationResult;
         }
 
-        private static Dictionary<DotNode, NodeValidationResult> ValidateNodes(DotForm form, ForestAnalysis forestAnalysis)
+        private static Dictionary<DotNode, NodeValidationResult> ValidateNodes(DotForm form, ProbabilityEstimationPerTreeEvent probabilityEstimation)
         {
             var results = new Dictionary<DotNode, NodeValidationResult>();
 
@@ -37,14 +38,14 @@ namespace Forest.IO.Import.DotFormValidation
             foreach (var formNode in form.Nodes)
             {
                 var estimatedTreeEvent =
-                    forestAnalysis.EventTree.MainTreeEvent.FindTreeEvent(treeEvent => treeEvent.Name == formNode.NodeName);
+                    probabilityEstimation.EventTree.MainTreeEvent.FindTreeEvent(treeEvent => treeEvent.Name == formNode.NodeName);
                 if (estimatedTreeEvent == null)
                     results[formNode] = NodeValidationResult.NodeNotFound;
 
                 foreach (var estimate in formNode.Estimates)
                 {
                     var condition =
-                        forestAnalysis.HydrodynamicConditions.FirstOrDefault(hc =>
+                        probabilityEstimation.HydrodynamicConditions.FirstOrDefault(hc =>
                             Math.Abs(hc.WaterLevel - estimate.WaterLevel) < 1e-6);
 
                     if (condition == null)
@@ -72,12 +73,12 @@ namespace Forest.IO.Import.DotFormValidation
             return results;
         }
 
-        private static ExpertValidationResult ValidateExperts(DotForm form, ForestAnalysis forestAnalysis)
+        private static ExpertValidationResult ValidateExperts(DotForm form, ProbabilityEstimationPerTreeEvent probabilityEstimation)
         {
-            if (forestAnalysis.Experts == null || !forestAnalysis.Experts.Any())
+            if (probabilityEstimation.Experts == null || !probabilityEstimation.Experts.Any())
                 return ExpertValidationResult.NoExperts;
 
-            if (forestAnalysis.Experts.Any(e => e.Name == form.ExpertName))
+            if (probabilityEstimation.Experts.Any(e => e.Name == form.ExpertName))
                 return ExpertValidationResult.Valid;
 
             return ExpertValidationResult.ExpertNotFound;

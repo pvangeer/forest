@@ -27,9 +27,6 @@ namespace Forest.Storage.Read
                 EventTree = entity.EventTree.Read(collector)
             };
 
-            foreach (var expert in experts)
-                project.Experts.Add(expert);
-
             foreach (var hydraulicCondition in hydraulicConditions)
                 project.HydrodynamicConditions.Add(hydraulicCondition);
 
