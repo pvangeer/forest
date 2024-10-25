@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using System.Linq;
+using Forest.Data;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Tree;
 
 namespace Forest.Gui
 {
-    public class SelectionManager : INotifyPropertyChanged
+    public class SelectionManager : NotifyPropertyChangedObject
     {
         private readonly ForestGui gui;
 
@@ -24,8 +22,6 @@ namespace Forest.Gui
         // TODO: Maybe merge? Or keep dictionary of selected tree event per eventtree?
         public object Selection { get; private set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public void SetSelection(object selection)
         {
             Selection = selection;
@@ -36,20 +32,6 @@ namespace Forest.Gui
         {
             SelectedTreeEvent = treeEvent;
             OnPropertyChanged(nameof(SelectedTreeEvent));
-        }
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value))
-                return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
         }
     }
 }

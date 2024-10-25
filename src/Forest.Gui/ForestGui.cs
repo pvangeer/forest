@@ -1,9 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Forest.Data;
-using Forest.Data.Properties;
 using Forest.Messaging;
 using Forest.Storage;
 using log4net;
@@ -11,7 +8,7 @@ using log4net.Repository.Hierarchy;
 
 namespace Forest.Gui
 {
-    public class ForestGui : IMessageCollection
+    public class ForestGui : NotifyPropertyChangedObject, IMessageCollection
     {
         public ForestGui()
         {
@@ -44,14 +41,6 @@ namespace Forest.Gui
         public ForestGuiState SelectedState { get; set; }
 
         public MessageList Messages { get; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         private void ConfigureMessaging()
         {
