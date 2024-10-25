@@ -26,6 +26,8 @@
                     Source="/Forest.Visualization;component/DataTemplates/ContentPresenterDataTemplate.xaml" />
                 <ResourceDictionary
                     Source="/Forest.Visualization;component/DataTemplates/StatusBarDataTemplate.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/DataTemplates/BusyOverlayDataTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
         </ResourceDictionary>
@@ -46,39 +48,13 @@
             DataContext="{Binding RibbonViewModel}" />
 
         <Grid Grid.Row="1" ZIndex="2">
-            <Grid.Style>
-                <Style TargetType="Grid">
-                    <Setter Property="Visibility" Value="Collapsed" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding BusyIndicator}" Value="{x:Static components:StorageState.Busy}">
-                            <Setter Property="Visibility" Value="Visible" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Style>
-            <Grid.Background>
-                <SolidColorBrush Color="White" Opacity="0.6" />
-            </Grid.Background>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Image
-                Grid.Row="1"
-                Grid.Column="1"
-                Source="/Forest.Gui;component/Resources/busy-white.png"
-                Style="{StaticResource Spinner}" />
+            <ContentPresenter 
+                Content="{Binding}"
+                ContentTemplate="{StaticResource BusyOverlayDataTemplate}"/>
         </Grid>
-
         <ContentPresenter
             Grid.Row="1"
-            IsEnabled="{Binding BusyIndicator, Converter={StaticResource BusyIndicatorToEnabledConverter}}"
+            IsEnabled="{Binding BusyOverlayViewModel.BusyIndicator, Converter={StaticResource BusyIndicatorToEnabledConverter}}"
             Name="HostControl"
             Content="{Binding ContentPresenterViewModel}"
             ContentTemplate="{StaticResource ContentPresenterDataTemplate}" />

@@ -1,19 +1,17 @@
-﻿using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using System.Linq;
 using System.Windows;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Experts;
-using Forest.Data.Properties;
 using Forest.Gui.Components;
 using Forest.IO.Export;
 using Forest.IO.Import;
+using Forest.Visualization;
 using Forest.Visualization.Dialogs;
 using Forest.Visualization.ViewModels;
 
 namespace Forest.Gui.ViewModels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : NotifyPropertyChangedObject
     {
         private readonly ForestGui gui;
 
@@ -32,9 +30,9 @@ namespace Forest.Gui.ViewModels
                 ContentPresenterViewModel = new ContentPresenterViewModel(gui);
                 RibbonViewModel = new RibbonViewModel(gui);
                 StatusBarViewModel = new StatusBarViewModel(gui);
+                BusyOverlayViewModel = new BusyOverlayViewModel(gui);
 
                 gui.ShouldMigrateProject = ShouldMigrateProject;
-                this.gui.PropertyChanged += GuiPropertyChanged;
                 this.gui.ShouldSaveOpenChanges = ShouldSaveOpenChanges;
             }
         }
@@ -45,13 +43,7 @@ namespace Forest.Gui.ViewModels
 
         public StatusBarViewModel StatusBarViewModel { get; }
 
-        public StorageState BusyIndicator
-        {
-            get => gui.BusyIndicator;
-            set => gui.BusyIndicator = value;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public BusyOverlayViewModel BusyOverlayViewModel { get; }
 
         private bool ShouldMigrateProject()
         {
@@ -74,22 +66,6 @@ namespace Forest.Gui.ViewModels
             return messageBoxResult == MessageBoxResult.Yes ? ShouldProceedState.Yes :
                 messageBoxResult == MessageBoxResult.No ? ShouldProceedState.No :
                 ShouldProceedState.Cancel;
-        }
-
-        private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(ForestGui.BusyIndicator):
-                    OnPropertyChanged(nameof(BusyIndicator));
-                    break;
-            }
-        }
-
-        [NotifyPropertyChangedInvocator]
-        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void OnExportElicitationForms(string fileLocation, string prefix, Expert[] expertsToExport,

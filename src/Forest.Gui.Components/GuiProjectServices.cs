@@ -35,6 +35,7 @@ namespace Forest.Gui.Components
 
             gui.ForestAnalysis = ForestAnalysisFactory.CreateStandardNewProject();
             gui.OnPropertyChanged(nameof(ForestGui.ForestAnalysis));
+            gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));
         }
 
         public void OpenProject()

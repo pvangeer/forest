@@ -100,6 +100,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusyOverlayViewModel.cs" />
     <Compile Include="Commands\AddTreeEventCommand.cs" />
     <Compile Include="Commands\ChangeProcessStepCommand.cs" />
     <Compile Include="Commands\EventTreeCommand.cs" />
@@ -117,6 +118,8 @@
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
     <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
     <Compile Include="Dialogs\FileDialogFactory.cs" />
+    <Compile Include="GuiViewModelBase.cs" />
+    <Compile Include="NotifyPropertyChangedObject.cs" />
     <Compile Include="ViewModels\MessageListViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\ContentPresenterViewModel.cs" />
@@ -179,6 +182,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="DataTemplates\BusyOverlayDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataTemplates\ContentPresenterDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
