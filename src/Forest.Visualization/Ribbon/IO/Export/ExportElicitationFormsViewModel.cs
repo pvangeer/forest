@@ -2,19 +2,16 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Experts;
-using Forest.Gui.Properties;
 using log4net;
 
-namespace Forest.Gui.Export
+namespace Forest.Visualization.Ribbon.IO.Export
 {
-    public class ExportElicitationFormsViewModel : INotifyPropertyChanged
+    public class ExportElicitationFormsViewModel : NotifyPropertyChangedObject
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ExportElicitationFormsViewModel));
-
 
         // TODO: Remove this code. No test data in the code base please.
         public static ProbabilityEstimationPerTreeEvent TestEstimation = new ProbabilityEstimationPerTreeEvent
@@ -63,8 +60,6 @@ namespace Forest.Gui.Export
 
         public string Prefix { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public void OnExportHandler()
         {
             var expertsToExport = Experts.Where(e => e.IsChecked).Select(e => e.Expert).ToArray();
@@ -81,12 +76,6 @@ namespace Forest.Gui.Export
         }
 
         public event EventHandler CanExportChanged;
-
-        [NotifyPropertyChangedInvocator]
-        public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

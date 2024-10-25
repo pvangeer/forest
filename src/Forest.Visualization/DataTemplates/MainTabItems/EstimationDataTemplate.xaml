@@ -116,7 +116,7 @@
                                     Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                                     BorderBrush="DarkGray"
                                     Command="{StaticResource ExportElicitationFormsCommand}"
-                                    CommandParameter="{Binding ElementName=HostControl, Path=Content}"
+                                    CommandParameter="{Binding Path=.}"
                                     VerticalAlignment="Center" />
                                 <Button
                                     Content="Importeren..."
@@ -125,7 +125,7 @@
                                     BorderBrush="DarkGray"
                                     Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                                     Command="{StaticResource ImportElicitationFormsCommand}"
-                                    CommandParameter="{Binding ElementName=HostControl, Path=Content}"
+                                    CommandParameter="{Binding Path=.}"
                                     VerticalAlignment="Center" />
                             </StackPanel>
                         </Grid>

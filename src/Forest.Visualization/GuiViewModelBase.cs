@@ -11,14 +11,11 @@ namespace Forest.Visualization
         {
             Gui = gui;
             if (gui != null)
-            {
                 gui.PropertyChanged += GuiPropertyChanged;
-            }
         }
 
         protected virtual void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            
         }
     }
 }

@@ -2,7 +2,7 @@ using System;
 using System.Windows.Input;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
-namespace Forest.Gui.Export
+namespace Forest.Visualization.Ribbon.IO.Export
 {
     public class SelectFileLocationCommand : ICommand
     {

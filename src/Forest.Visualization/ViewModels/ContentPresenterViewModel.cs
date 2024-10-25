@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Forest.Data;
 using Forest.Data.Estimations.PerTreeEvent;
@@ -29,6 +30,11 @@ namespace Forest.Visualization.ViewModels
                 {
                     EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(gui.ForestAnalysis)
                 };
+                var probabilityEstimationPerTreeEvent =
+                    gui.ForestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().First();
+                ExpertsViewModel =
+                    new ExpertsViewModel(probabilityEstimationPerTreeEvent);
+                HydrodynamicsViewModel = new HydrodynamicsViewModel(probabilityEstimationPerTreeEvent);
             }
         }
 
@@ -104,6 +110,8 @@ namespace Forest.Visualization.ViewModels
             }
         }
 
+        public ExpertsViewModel ExpertsViewModel { get; }
+        public HydrodynamicsViewModel HydrodynamicsViewModel { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -134,11 +142,11 @@ namespace Forest.Visualization.ViewModels
         /*private void HydrodynamicsViewModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
-                foreach (var item in e.NewItems.OfType<HydraulicConditionViewModel>())
-                    analysisManipulationService.AddHydraulicCondition(item.HydrodynamicCondition);
+                foreach (var item in e.NewItems.OfType<HydrodynamicConditionViewModel>())
+                    analysisManipulationService.AddHydrodynamicCondition(item.HydrodynamicCondition);
 
             if (e.Action == NotifyCollectionChangedAction.Remove)
-                foreach (var item in e.OldItems.OfType<HydraulicConditionViewModel>())
+                foreach (var item in e.OldItems.OfType<HydrodynamicConditionViewModel>())
                     analysisManipulationService.RemoveHydraulicCondition(item.HydrodynamicCondition);
         }
 

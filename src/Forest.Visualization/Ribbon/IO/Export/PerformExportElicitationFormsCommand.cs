@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Forest.Gui.Export
+namespace Forest.Visualization.Ribbon.IO.Export
 {
     public class PerformExportElicitationFormsCommand : ICommand
     {

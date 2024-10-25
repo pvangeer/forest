@@ -187,7 +187,7 @@ namespace Forest.Data.Test.Estimations
             var estimation = new ProbabilityEstimationPerTreeEvent { EventTree = eventTree };
 
             var hydraulicCondition = new HydrodynamicCondition(1.0, (Probability)0.01, 1, 1);
-            estimation.AddHydraulicCondition(hydraulicCondition);
+            estimation.AddHydrodynamicCondition(hydraulicCondition);
 
             Assert.AreEqual(1, estimation.HydrodynamicConditions.Count);
             Assert.AreEqual(hydraulicCondition, estimation.HydrodynamicConditions.First());
@@ -219,7 +219,7 @@ namespace Forest.Data.Test.Estimations
             Assert.AreEqual(0, firstEstimation.ClassProbabilitySpecification.Count);
 
             var hydraulicCondition = new HydrodynamicCondition(1.0, (Probability)0.01, 1, 1);
-            probabilityEstimation.AddHydraulicCondition(hydraulicCondition);
+            probabilityEstimation.AddHydrodynamicCondition(hydraulicCondition);
 
             // TODO: Should be added to the probability estimation, not the project.
             Assert.AreEqual(1, probabilityEstimation.HydrodynamicConditions.Count);

@@ -137,17 +137,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />
-    <Compile Include="Export\EventTreeExportViewModel.cs" />
-    <Compile Include="Export\ExportElicitationFormsViewModel.cs" />
-    <Compile Include="Export\ElicitationFormExportDialog.xaml.cs">
-      <DependentUpon>ElicitationFormExportDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Export\ElicitationFormsExportViewModel.cs" />
-    <Compile Include="Export\ExportElicitationFormsCommand.cs" />
-    <Compile Include="Import\ImportElicitationFormsCommand.cs" />
-    <Compile Include="Export\PerformExportElicitationFormsCommand.cs" />
-    <Compile Include="Export\SelectFileLocationCommand.cs" />
-    <Compile Include="Export\FolderDialogBehavior.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -155,10 +144,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Page Include="Export\ElicitationFormExportDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

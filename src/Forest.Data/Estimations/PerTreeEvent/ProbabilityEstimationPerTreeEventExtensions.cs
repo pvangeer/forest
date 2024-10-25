@@ -7,7 +7,7 @@ namespace Forest.Data.Estimations.PerTreeEvent
 {
     public static class ProbabilityEstimationPerTreeEventExtensions
     {
-        public static void AddHydraulicCondition(this ProbabilityEstimationPerTreeEvent probabilityEstimation,
+        public static void AddHydrodynamicCondition(this ProbabilityEstimationPerTreeEvent probabilityEstimation,
             HydrodynamicCondition hydrodynamicCondition)
         {
             probabilityEstimation.HydrodynamicConditions.Add(hydrodynamicCondition);

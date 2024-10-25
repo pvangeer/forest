@@ -20,7 +20,7 @@ namespace Forest.Visualization
         {
             switch (e.PropertyName)
             {
-                case (nameof(ForestGui.BusyIndicator)):
+                case nameof(ForestGui.BusyIndicator):
                     OnPropertyChanged(nameof(BusyIndicator));
                     break;
             }

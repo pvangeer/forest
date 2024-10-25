@@ -5,7 +5,6 @@
     xmlns:fluent="urn:fluent-ribbon"
     xmlns:converters="clr-namespace:Forest.Gui.Converters"
     xmlns:viewModels="clr-namespace:Forest.Gui.ViewModels"
-    xmlns:components="clr-namespace:Forest.Gui.Components;assembly=Forest.Gui.Components"
     xmlns:visualization="clr-namespace:Forest.Visualization;assembly=Forest.Visualization"
     Icon="/Forest.Gui;component/forest.ico"
     Closing="MainWindowClosing"
@@ -48,9 +47,9 @@
             DataContext="{Binding RibbonViewModel}" />
 
         <Grid Grid.Row="1" ZIndex="2">
-            <ContentPresenter 
+            <ContentPresenter
                 Content="{Binding}"
-                ContentTemplate="{StaticResource BusyOverlayDataTemplate}"/>
+                ContentTemplate="{StaticResource BusyOverlayDataTemplate}" />
         </Grid>
         <ContentPresenter
             Grid.Row="1"

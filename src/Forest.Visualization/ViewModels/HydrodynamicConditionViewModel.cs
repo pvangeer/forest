@@ -2,13 +2,13 @@
 
 namespace Forest.Visualization.ViewModels
 {
-    public class HydraulicConditionViewModel : FragilityCurveElementViewModel
+    public class HydrodynamicConditionViewModel : FragilityCurveElementViewModel
     {
-        public HydraulicConditionViewModel() : this(new HydrodynamicCondition())
+        public HydrodynamicConditionViewModel() : this(new HydrodynamicCondition())
         {
         }
 
-        public HydraulicConditionViewModel(HydrodynamicCondition condition) : base(condition)
+        public HydrodynamicConditionViewModel(HydrodynamicCondition condition) : base(condition)
         {
             HydrodynamicCondition = condition;
         }

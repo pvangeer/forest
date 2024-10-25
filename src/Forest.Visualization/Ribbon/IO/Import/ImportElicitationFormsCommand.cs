@@ -2,11 +2,11 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using Forest.Gui.ViewModels;
 using Forest.Messaging;
+using Forest.Visualization.ViewModels;
 using Microsoft.Win32;
 
-namespace Forest.Gui.Import
+namespace Forest.Visualization.Ribbon.IO.Import
 {
     public class ImportElicitationFormsCommand : ICommand
     {
@@ -14,12 +14,12 @@ namespace Forest.Gui.Import
 
         public bool CanExecute(object parameter)
         {
-            return parameter is MainWindowViewModel guiViewModel && guiViewModel.SelectedEstimationHasExperts();
+            return parameter is EventTreeViewModel eventTreeViewModel && eventTreeViewModel.SelectedEstimationHasExperts();
         }
 
         public void Execute(object parameter)
         {
-            if (!(parameter is MainWindowViewModel guiViewModel))
+            if (!(parameter is EventTreeViewModel eventTreeViewModel))
             {
                 log.Error("Er is iets misgegaan, waardoor exporteren niet mogelijk is.");
                 return;
@@ -35,7 +35,7 @@ namespace Forest.Gui.Import
                 };
 
                 if (dialog.ShowDialog(Application.Current.MainWindow) == true && dialog.FileNames.Any())
-                    guiViewModel.OnImportElicitationForms(dialog.FileNames);
+                    eventTreeViewModel.OnImportElicitationForms(dialog.FileNames);
             }
             catch (Exception e)
             {

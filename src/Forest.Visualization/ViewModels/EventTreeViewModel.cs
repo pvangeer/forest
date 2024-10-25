@@ -5,10 +5,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Forest.Data;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvent;
+using Forest.Data.Experts;
 using Forest.Data.Properties;
 using Forest.Data.Services;
 using Forest.Data.Tree;
 using Forest.Gui.Components;
+using Forest.IO.Export;
+using Forest.IO.Import;
 
 namespace Forest.Visualization.ViewModels
 {
@@ -86,6 +90,34 @@ namespace Forest.Visualization.ViewModels
         public EstimationSpecificationViewModelFactory EstimationSpecificationViewModelFactory { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnExportElicitationForms(string fileLocation, string prefix, Expert[] expertsToExport,
+            ProbabilityEstimationPerTreeEvent estimationToExport)
+        {
+            var exporter = new ElicitationFormsExporter(estimationToExport);
+            exporter.Export(fileLocation, prefix, expertsToExport, estimationToExport);
+        }
+
+        public void OnImportElicitationForms(string[] fileLocations)
+        {
+            var estimationToImportTo = selectionManager.Selection as ProbabilityEstimationPerTreeEvent;
+            if (estimationToImportTo == null)
+                return;
+            var importer = new ElicitationFormImporter(estimationToImportTo);
+            foreach (var fileLocation in fileLocations)
+                importer.Import(fileLocation);
+        }
+
+        public bool SelectedEstimationHasExperts()
+        {
+            var selectedEstimation = selectionManager.Selection as ProbabilityEstimationPerTreeEvent;
+            return selectedEstimation != null && selectedEstimation.Experts.Any();
+        }
+
+        public ProbabilityEstimationPerTreeEvent GetSelectedEstimationPerTreeEvent()
+        {
+            return selectionManager.Selection as ProbabilityEstimationPerTreeEvent;
+        }
 
         private TreeEventViewModel FindTreeEventViewModel(TreeEvent treeEvent)
         {

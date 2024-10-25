@@ -47,6 +47,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.Controls.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=3.0.1.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.3.0.1\lib\net462\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.3.3, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft-WindowsAPICodePack-Core.1.1.3.3\lib\net452\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.3.3, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft-WindowsAPICodePack-Shell.1.1.3.3\lib\net452\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
@@ -60,7 +69,9 @@
       <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -118,8 +129,22 @@
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
     <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
     <Compile Include="Dialogs\FileDialogFactory.cs" />
+    <Compile Include="Converters\GuiStateToViewModelConverter.cs" />
+    <Compile Include="ViewModels\HydrodynamicsViewModel.cs" />
+    <Compile Include="ViewModels\ExpertsViewModel.cs" />
     <Compile Include="GuiViewModelBase.cs" />
     <Compile Include="NotifyPropertyChangedObject.cs" />
+    <Compile Include="Ribbon\IO\Export\ElicitationFormExportDialog.xaml.cs">
+      <DependentUpon>ElicitationFormExportDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\IO\Export\ElicitationFormsExportViewModel.cs" />
+    <Compile Include="Ribbon\IO\Export\EventTreeExportViewModel.cs" />
+    <Compile Include="Ribbon\IO\Export\ExportElicitationFormsCommand.cs" />
+    <Compile Include="Ribbon\IO\Export\ExportElicitationFormsViewModel.cs" />
+    <Compile Include="Ribbon\IO\Export\FolderDialogBehavior.cs" />
+    <Compile Include="Ribbon\IO\Export\PerformExportElicitationFormsCommand.cs" />
+    <Compile Include="Ribbon\IO\Export\SelectFileLocationCommand.cs" />
+    <Compile Include="Ribbon\IO\Import\ImportElicitationFormsCommand.cs" />
     <Compile Include="ViewModels\MessageListViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\ContentPresenterViewModel.cs" />
@@ -166,7 +191,7 @@
     <Compile Include="ViewModels\FixedProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\FragilityCurveElementViewModel.cs" />
     <Compile Include="ViewModels\FragilityCurveViewModel.cs" />
-    <Compile Include="ViewModels\HydraulicConditionViewModel.cs" />
+    <Compile Include="ViewModels\HydrodynamicConditionViewModel.cs" />
     <Compile Include="ViewModels\ProbabilitySpecificationViewModelBase.cs" />
     <Compile Include="ViewModels\RibbonViewModel.cs" />
     <Compile Include="ViewModels\TreeEventConnector.cs" />
@@ -270,6 +295,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Ribbon\IO\Export\ElicitationFormExportDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forest.Calculators\Forest.Calculators.csproj">
@@ -347,5 +376,6 @@
     <Resource Include="Resources\check_green.png" />
     <Resource Include="Resources\cross_red.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

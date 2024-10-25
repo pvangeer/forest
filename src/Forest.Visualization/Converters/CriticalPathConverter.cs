@@ -23,7 +23,7 @@ namespace Forest.Visualization.Converters
             if (values.Length != 3)
                 return true;
 
-            var hydrodynamicConditionViewModels = values[1] as ObservableCollection<HydraulicConditionViewModel>;
+            var hydrodynamicConditionViewModels = values[1] as ObservableCollection<HydrodynamicConditionViewModel>;
             if (values[2] is ObservableCollection<TreeEventProbabilityEstimation> estimatesCollection)
                 estimations = estimatesCollection.ToArray();
 

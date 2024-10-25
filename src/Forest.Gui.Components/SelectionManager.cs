@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Tree;
 
 namespace Forest.Gui.Components
@@ -13,6 +15,8 @@ namespace Forest.Gui.Components
         {
             this.gui = gui;
             SelectedTreeEvent = gui.ForestAnalysis.EventTree.MainTreeEvent;
+            // TODO: Change this once a selection can be made (and estimations can be added/removed)
+            Selection = gui.ForestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().First();
         }
 
         public TreeEvent SelectedTreeEvent { get; private set; }

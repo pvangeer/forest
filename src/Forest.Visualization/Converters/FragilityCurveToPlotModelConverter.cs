@@ -11,11 +11,11 @@ using OxyPlot.Series;
 
 namespace Forest.Visualization.Converters
 {
-    public class HydraulicsListToPlotModelConverter : FragilityCurveToPlotModelConverter
+    public class HydrodynamicsToPlotModelConverter : FragilityCurveToPlotModelConverter
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is ObservableCollection<HydraulicConditionViewModel> conditions))
+            if (!(value is ObservableCollection<HydrodynamicConditionViewModel> conditions))
                 return null;
 
             return CreatePlotModel(conditions);

@@ -7,7 +7,7 @@
 
     <DataTemplate
         x:Key="ExpertsDataTemplate"
-        DataType="{x:Type viewModels:ContentPresenterViewModel}">
+        DataType="{x:Type viewModels:ExpertsViewModel}">
         <Grid>
             <DataGrid
                 ItemsSource="{Binding Experts}"

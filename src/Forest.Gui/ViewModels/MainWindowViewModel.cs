@@ -1,10 +1,5 @@
-﻿using System.Linq;
-using System.Windows;
-using Forest.Data.Estimations.PerTreeEvent;
-using Forest.Data.Experts;
+﻿using System.Windows;
 using Forest.Gui.Components;
-using Forest.IO.Export;
-using Forest.IO.Import;
 using Forest.Visualization;
 using Forest.Visualization.Dialogs;
 using Forest.Visualization.ViewModels;
@@ -68,37 +63,9 @@ namespace Forest.Gui.ViewModels
                 ShouldProceedState.Cancel;
         }
 
-        public void OnExportElicitationForms(string fileLocation, string prefix, Expert[] expertsToExport,
-            ProbabilityEstimationPerTreeEvent estimationToExport)
-        {
-            var exporter = new ElicitationFormsExporter(estimationToExport);
-            exporter.Export(fileLocation, prefix, expertsToExport, estimationToExport);
-        }
-
-        public void OnImportElicitationForms(string[] fileLocations)
-        {
-            var estimationToImportTo = gui.SelectionManager.Selection as ProbabilityEstimationPerTreeEvent;
-            if (estimationToImportTo == null)
-                return;
-            var importer = new ElicitationFormImporter(estimationToImportTo);
-            foreach (var fileLocation in fileLocations)
-                importer.Import(fileLocation);
-        }
-
         public bool ForcedClosingMainWindow()
         {
             return gui.GuiProjectServices.HandleUnsavedChanges(() => { });
-        }
-
-        public bool SelectedEstimationHasExperts()
-        {
-            var selectedEstimation = gui.SelectionManager.Selection as ProbabilityEstimationPerTreeEvent;
-            return selectedEstimation != null && selectedEstimation.Experts.Any();
-        }
-
-        public ProbabilityEstimationPerTreeEvent GetSelectedEstimationPerTreeEvent()
-        {
-            return gui.SelectionManager.Selection as ProbabilityEstimationPerTreeEvent;
         }
     }
 }

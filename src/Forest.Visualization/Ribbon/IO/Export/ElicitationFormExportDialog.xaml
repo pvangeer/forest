@@ -3,13 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:export="clr-namespace:Forest.Gui.Export"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:export1="clr-namespace:Forest.Visualization.Ribbon.IO.Export"
         BorderBrush="{StaticResource ApplicationBorderColorBrush}"
         BorderThickness="1"
         WindowStyle="None"
         ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner" Height="460" Width="650">
     <Window.DataContext>
-        <export:ExportElicitationFormsViewModel />
+        <export1:ExportElicitationFormsViewModel />
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -30,7 +31,7 @@
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Exporteren">
                             <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate DataType="export:ElicitationFormsExportViewModel">
+                                <DataTemplate DataType="export1:ElicitationFormsExportViewModel">
                                     <CheckBox
                                         IsChecked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         HorizontalAlignment="Center" Style="{StaticResource CheckBoxStyle}" />

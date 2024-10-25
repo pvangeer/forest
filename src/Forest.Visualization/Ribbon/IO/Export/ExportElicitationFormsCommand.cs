@@ -1,10 +1,11 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
-using Forest.Gui.ViewModels;
+using Forest.Gui.Export;
+using Forest.Visualization.ViewModels;
 using log4net;
 
-namespace Forest.Gui.Export
+namespace Forest.Visualization.Ribbon.IO.Export
 {
     public class ExportElicitationFormsCommand : ICommand
     {
@@ -12,13 +13,13 @@ namespace Forest.Gui.Export
 
         public bool CanExecute(object parameter)
         {
-            return parameter is MainWindowViewModel guiViewModel && guiViewModel.SelectedEstimationHasExperts();
+            return parameter is EventTreeViewModel eventTreeViewModel && eventTreeViewModel.SelectedEstimationHasExperts();
         }
 
         public void Execute(object parameter)
         {
             // TODO: Parameter should not be mainWindowViewModel
-            if (!(parameter is MainWindowViewModel mainWindowViewModel))
+            if (!(parameter is EventTreeViewModel eventTreeViewModel))
             {
                 Log.Error("Er is iets misgegaan, waardoor exporteren niet mogelijk is.");
                 return;
@@ -26,9 +27,9 @@ namespace Forest.Gui.Export
 
             var dialog = new ElicitationFormExportDialog
             {
-                DataContext = new ExportElicitationFormsViewModel(mainWindowViewModel.GetSelectedEstimationPerTreeEvent())
+                DataContext = new ExportElicitationFormsViewModel(eventTreeViewModel.GetSelectedEstimationPerTreeEvent())
                 {
-                    OnExport = mainWindowViewModel.OnExportElicitationForms
+                    OnExport = eventTreeViewModel.OnExportElicitationForms
                 },
                 Owner = Application.Current.MainWindow
             };
