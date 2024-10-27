@@ -78,7 +78,7 @@
             Grid.Row="0"
             DataContext="{Binding RibbonViewModel}" />
 
-        <Grid Grid.Row="1" ZIndex="2">
+        <Grid Grid.Row="1" ZIndex="100">
             <ContentPresenter
                 Content="{Binding}"
                 ContentTemplate="{StaticResource BusyOverlayDataTemplate}" />
@@ -86,7 +86,6 @@
         <ContentPresenter
             Grid.Row="1"
             IsEnabled="{Binding BusyOverlayViewModel.BusyIndicator, Converter={StaticResource BusyIndicatorToEnabledConverter}}"
-            Name="HostControl"
             Content="{Binding ContentPresenterViewModel}"
             ContentTemplate="{StaticResource ContentPresenterDataTemplate}" />
 

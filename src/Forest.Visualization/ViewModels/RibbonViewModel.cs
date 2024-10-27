@@ -35,14 +35,18 @@ namespace Forest.Visualization.ViewModels
             {
                 gui.SelectedState = value;
                 OnPropertyChanged();
-                gui.OnPropertyChanged();
+                gui.OnPropertyChanged(nameof(ForestGui.SelectedState));
             }
         }
 
         public StorageState BusyIndicator
         {
             get => gui.BusyIndicator;
-            set => gui.BusyIndicator = value;
+            set
+            {
+                gui.BusyIndicator = value;
+                gui.OnPropertyChanged(nameof(ForestGui.BusyIndicator));
+            }
         }
 
 

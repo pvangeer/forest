@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using Forest.App.Properties;
+﻿using Forest.App.Properties;
 using Forest.Data;
 using Forest.Gui;
 using Forest.Visualization;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Dynamic;
 using System.Linq;
 using Forest.Data;
 using Forest.Messaging;
@@ -23,27 +22,27 @@ namespace Forest.Gui
             LogMessageAppender.Instance.MessageCollection = this;
         }
 
+        public ForestAnalysis ForestAnalysis { get; set; }
+
+        public VersionInfo VersionInfo { get; set; }
+
+        public StorageState BusyIndicator { get; set; }
+        
+        public ForestGuiState SelectedState { get; set; }
+
+        public bool IsSaveToImage { get; set; }
+
+        public string ProjectFilePath { get; set; }
+
+        public MessageList Messages { get; }
+
         public GuiProjectServices GuiProjectServices { get; }
 
         public SelectionManager SelectionManager { get; }
 
-        public StorageState BusyIndicator { get; set; }
-
-        public bool IsSaveToImage { get; set; }
-
-        public ForestAnalysis ForestAnalysis { get; set; }
-
-        public string ProjectFilePath { get; set; }
-
-        public VersionInfo VersionInfo { get; set; }
-
         public Func<ShouldProceedState> ShouldSaveOpenChanges { get; set; }
 
         public Func<bool> ShouldMigrateProject { get; set; }
-
-        public ForestGuiState SelectedState { get; set; }
-
-        public MessageList Messages { get; }
 
         private void ConfigureMessaging()
         {
