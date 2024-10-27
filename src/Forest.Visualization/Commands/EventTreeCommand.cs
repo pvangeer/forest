@@ -1,41 +1,47 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Input;
-using Forest.Visualization.ViewModels;
+using Forest.Data.Services;
+using Forest.Gui;
 
 namespace Forest.Visualization.Commands
 {
     public abstract class EventTreeCommand : ICommand
     {
-        protected EventTreeCommand(RibbonViewModel viewModel)
-        {
-            ViewModel = viewModel;
-            if (ViewModel != null)
-                viewModel.PropertyChanged += ViewModelPropertyChanged;
-        }
+        protected readonly ForestGui Gui;
+        protected readonly AnalysisManipulationService ManipulationService;
 
-        protected RibbonViewModel ViewModel { get; }
+        protected EventTreeCommand(ForestGui gui)
+        {
+            this.Gui = gui;
+            if (this.Gui != null)
+            {
+                gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
+                ManipulationService = new AnalysisManipulationService(gui.ForestAnalysis);
+            }
+
+        }
 
         public virtual bool CanExecute(object parameter)
         {
-            return ViewModel?.SelectedTreeEvent != null;
+            return Gui.SelectionManager.SelectedTreeEvent != null;
         }
 
         public abstract void Execute(object parameter);
 
         public event EventHandler CanExecuteChanged;
 
-        private void ViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void SelectionManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(RibbonViewModel.SelectedTreeEvent):
+                case nameof(SelectionManager.SelectedTreeEvent):
                     FireCanExecuteChanged();
                     break;
             }
         }
 
-        public void FireCanExecuteChanged()
+        private void FireCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, null);
         }

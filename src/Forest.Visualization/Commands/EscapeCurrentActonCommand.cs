@@ -1,27 +1,30 @@
 ﻿using System;
 using System.Windows.Input;
 using Forest.Gui;
-using Forest.Visualization.ViewModels;
 
 namespace Forest.Visualization.Commands
 {
-    public class SaveProjectCommand : ICommand
+    public class EscapeCurrentActionCommand : ICommand
     {
         private readonly ForestGui gui;
 
-        public SaveProjectCommand(ForestGui gui)
+        public EscapeCurrentActionCommand(ForestGui gui)
         {
             this.gui = gui;
         }
 
         public bool CanExecute(object parameter)
         {
-            return gui.ForestAnalysis != null;
+            return gui.IsSaveToImage;
         }
 
         public void Execute(object parameter)
         {
-            gui.GuiProjectServices.SaveProject();
+            if (gui.IsSaveToImage)
+            {
+                gui.IsSaveToImage = false;
+                gui.OnPropertyChanged(nameof(ForestGui.IsSaveToImage));
+            }
         }
 
         public event EventHandler CanExecuteChanged;

@@ -7,22 +7,27 @@
     xmlns:viewModels="clr-namespace:Forest.App.ViewModels"
     xmlns:converters="clr-namespace:Forest.App.Converters"
     Icon="/Forest.App;component/forest.ico"
-    Closing="MainWindowClosing"
-    Loaded="MainWindowLoaded"
     Title="Faalpad"
     Height="800"
     Width="1200"
+    WindowStartupLocation="CenterScreen"
+    Closing="MainWindowClosing"
+    Loaded="MainWindowLoaded"
     BorderThickness="1"
     BorderBrush="MediumBlue">
+
     <Window.DataContext>
         <viewModels:MainWindowViewModel />
     </Window.DataContext>
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml" />
                 <ResourceDictionary
                     Source="/Forest.Visualization;component/DataTemplates/ContentPresenterDataTemplate.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/DataTemplates/General/GeneralStyles.xaml" />
                 <ResourceDictionary
                     Source="/Forest.Visualization;component/DataTemplates/StatusBarDataTemplate.xaml" />
                 <ResourceDictionary
@@ -31,10 +36,37 @@
             <converters:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
         </ResourceDictionary>
     </Window.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding
+            Command="{Binding RibbonViewModel.FileNewCommand}"
+            Key="N"
+            Modifiers="Control" />
+        <KeyBinding
+            Command="{Binding RibbonViewModel.OpenProjectCommand}"
+            Key="O"
+            Modifiers="Control" />
+        <KeyBinding
+            Command="{Binding RibbonViewModel.SaveProjectCommand}"
+            Key="S"
+            Modifiers="Control" />
+        <KeyBinding
+            Command="{Binding RibbonViewModel.SaveProjectAsCommand}"
+            Key="F12" />
+        <KeyBinding
+            Command="{Binding RibbonViewModel.EscapeCommand}"
+            Key="Escape" />
+    </Window.InputBindings>
+
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Close"
                         Executed="CloseCommandHandler" />
     </Window.CommandBindings>
+
+    <fluent:RibbonWindow.TitleBarHeight>
+        <Binding Source="{StaticResource DefaultItemHeight}" />
+    </fluent:RibbonWindow.TitleBarHeight>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

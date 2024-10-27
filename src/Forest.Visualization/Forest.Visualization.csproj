@@ -114,9 +114,12 @@
     <Compile Include="BusyOverlayViewModel.cs" />
     <Compile Include="Commands\AddTreeEventCommand.cs" />
     <Compile Include="Commands\ChangeProcessStepCommand.cs" />
+    <Compile Include="Commands\CommandFactory.cs" />
+    <Compile Include="Commands\EscapeCurrentActonCommand.cs" />
     <Compile Include="Commands\EventTreeCommand.cs" />
     <Compile Include="Commands\FileNewCommand.cs" />
     <Compile Include="Commands\OpenProjectCommand.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\RemoveAllMessagesCommand.cs" />
     <Compile Include="Commands\RemovePriorityMessageCommand.cs" />
     <Compile Include="Commands\RemoveTreeEventCommand.cs" />
@@ -221,6 +224,10 @@
     <Page Include="DataTemplates\General\ComboBoxFlatStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataTemplates\General\GeneralStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataTemplates\General\SpinnerStyle.xaml">
       <SubType>Designer</SubType>

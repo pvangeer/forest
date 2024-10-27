@@ -1,18 +1,16 @@
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Forest.Data.Services;
+using Forest.Data;
 using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.Commands;
 
 namespace Forest.Visualization.ViewModels
 {
-    public class RibbonViewModel : INotifyPropertyChanged
+    public class RibbonViewModel : NotifyPropertyChangedObject
     {
-        private readonly AnalysisManipulationService analysisManipulationService;
         private readonly ForestGui gui;
+        private readonly CommandFactory commandFactory;
 
         public RibbonViewModel() : this(new ForestGui())
         {
@@ -24,19 +22,14 @@ namespace Forest.Visualization.ViewModels
             if (gui != null)
             {
                 gui.PropertyChanged += GuiPropertyChanged;
-
                 gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
+
+                commandFactory = new CommandFactory(gui);
             }
-
-            analysisManipulationService = new AnalysisManipulationService(gui.ForestAnalysis);
-
-            AddTreeEventCommand = new AddTreeEventCommand(this);
-            RemoveTreeEventCommand = new RemoveTreeEventCommand(this);
         }
 
         public ForestGuiState SelectedState
         {
-            // TODO: Move to ForestGui as a property?
             get => gui.SelectedState;
             set
             {
@@ -53,60 +46,23 @@ namespace Forest.Visualization.ViewModels
         }
 
 
-        public ICommand FileNewCommand => new FileNewCommand(this);
+        public ICommand FileNewCommand => commandFactory.CreateNewProjectCommand();
 
-        public ICommand SaveProjectCommand => new SaveProjectCommand(this);
+        public ICommand SaveProjectCommand => commandFactory.CreateSaveProjectCommand();
 
-        public ICommand SaveProjectAsCommand => new SaveProjectAsCommand(this);
+        public ICommand SaveProjectAsCommand => commandFactory.CreateSaveProjectAsCommand();
 
-        public ICommand OpenProjectCommand => new OpenProjectCommand(this);
+        public ICommand OpenProjectCommand => commandFactory.CreateOpenProjectCommand();
 
-        public ICommand ChangeProcessStepCommand => new ChangeProcessStepCommand(this);
+        public ICommand ChangeProcessStepCommand => commandFactory.CreateChangeProcessStepCommand();
 
-        public ICommand RemoveTreeEventCommand { get; }
+        public ICommand RemoveTreeEventCommand => commandFactory.CreateRemoveTreeEventCommand();
 
-        public ICommand AddTreeEventCommand { get; }
+        public ICommand AddTreeEventCommand => commandFactory.CreateAddTreeEventCommand();
 
         public TreeEvent SelectedTreeEvent => gui.SelectionManager.SelectedTreeEvent;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void NewProject()
-        {
-            gui.GuiProjectServices.NewProject();
-        }
-
-        public void OpenProject()
-        {
-            gui.GuiProjectServices.OpenProject();
-        }
-
-        public bool CanSaveProject()
-        {
-            return gui.ForestAnalysis != null;
-        }
-
-        public void SaveProject()
-        {
-            gui.GuiProjectServices.SaveProject();
-        }
-
-        public void SaveProjectAs()
-        {
-            gui.GuiProjectServices.SaveProjectAs();
-        }
-
-        public void AddTreeEvent(TreeEventType treeEventType)
-        {
-            var newTreeEvent = analysisManipulationService.AddTreeEvent(gui.ForestAnalysis.EventTree, SelectedTreeEvent, treeEventType);
-            gui.SelectionManager.SelectTreeEvent(newTreeEvent);
-        }
-
-        public void RemoveTreeEvent(TreeEventType eventType)
-        {
-            var parent = analysisManipulationService.RemoveTreeEvent(gui.ForestAnalysis.EventTree, gui.SelectionManager.SelectedTreeEvent);
-            gui.SelectionManager.SelectTreeEvent(parent ?? gui.ForestAnalysis.EventTree.MainTreeEvent);
-        }
+        public ICommand EscapeCommand => commandFactory.CreateEscapeCommand();
 
         private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -129,25 +85,6 @@ namespace Forest.Visualization.ViewModels
                     OnPropertyChanged(nameof(SelectedTreeEvent));
                     break;
             }
-        }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value))
-                return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
-
-        public bool CanRemoveSelectedTreeEvent()
-        {
-            return SelectedTreeEvent != gui.ForestAnalysis.EventTree.MainTreeEvent;
         }
     }
 }

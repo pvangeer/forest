@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Windows.Input;
+using Forest.Gui;
 using Forest.Visualization.ViewModels;
 
 namespace Forest.Visualization.Commands
 {
     public class OpenProjectCommand : ICommand
     {
-        private readonly RibbonViewModel viewModel;
+        private readonly ForestGui gui;
 
-        public OpenProjectCommand(RibbonViewModel viewModel)
+        public OpenProjectCommand(ForestGui gui)
         {
-            this.viewModel = viewModel;
+            this.gui = gui;
         }
 
         public bool CanExecute(object parameter)
@@ -20,7 +21,7 @@ namespace Forest.Visualization.Commands
 
         public void Execute(object parameter)
         {
-            viewModel.OpenProject();
+            gui.GuiProjectServices.OpenProject();
         }
 
         public event EventHandler CanExecuteChanged;

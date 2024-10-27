@@ -1,17 +1,17 @@
 using Forest.Data.Tree;
-using Forest.Visualization.ViewModels;
+using Forest.Gui;
 
 namespace Forest.Visualization.Commands
 {
     public class AddTreeEventCommand : EventTreeCommand
     {
-        public AddTreeEventCommand(RibbonViewModel viewModel) : base(viewModel)
+        public AddTreeEventCommand(ForestGui gui) : base(gui)
         {
         }
 
         public override bool CanExecute(object parameter)
         {
-            return ViewModel != null;
+            return true;
         }
 
         public override void Execute(object parameter)
@@ -19,7 +19,9 @@ namespace Forest.Visualization.Commands
             var treeEventType = TreeEventType.Failing;
             if (parameter is TreeEventType treeEventTypeCasted)
                 treeEventType = treeEventTypeCasted;
-            ViewModel?.AddTreeEvent(treeEventType);
+
+            var newTreeEvent = ManipulationService.AddTreeEvent(Gui.ForestAnalysis.EventTree, Gui.SelectionManager.SelectedTreeEvent, treeEventType);
+            Gui.SelectionManager.SelectTreeEvent(newTreeEvent);
         }
     }
 }

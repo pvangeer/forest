@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Dynamic;
 using System.Linq;
 using Forest.Data;
 using Forest.Messaging;
@@ -27,6 +28,8 @@ namespace Forest.Gui
         public SelectionManager SelectionManager { get; }
 
         public StorageState BusyIndicator { get; set; }
+
+        public bool IsSaveToImage { get; set; }
 
         public ForestAnalysis ForestAnalysis { get; set; }
 

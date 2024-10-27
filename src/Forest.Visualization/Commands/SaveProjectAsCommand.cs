@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Windows.Input;
-using Forest.Visualization.ViewModels;
+using Forest.Gui;
 
 namespace Forest.Visualization.Commands
 {
     public class SaveProjectAsCommand : ICommand
     {
-        public SaveProjectAsCommand(RibbonViewModel viewModel)
-        {
-            ViewModel = viewModel;
-        }
+        private readonly ForestGui gui;
 
-        public RibbonViewModel ViewModel { get; }
+        public SaveProjectAsCommand(ForestGui gui)
+        {
+            this.gui = gui;
+        }
 
         public bool CanExecute(object parameter)
         {
-            return ViewModel.CanSaveProject();
+            return gui.ForestAnalysis != null;
         }
 
         public void Execute(object parameter)
         {
-            ViewModel.SaveProjectAs();
+            gui.GuiProjectServices.SaveProjectAs();
         }
 
         public event EventHandler CanExecuteChanged;

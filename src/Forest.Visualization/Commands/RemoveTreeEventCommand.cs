@@ -1,22 +1,22 @@
-using Forest.Data.Tree;
-using Forest.Visualization.ViewModels;
+using Forest.Gui;
 
 namespace Forest.Visualization.Commands
 {
     public class RemoveTreeEventCommand : EventTreeCommand
     {
-        public RemoveTreeEventCommand(RibbonViewModel viewModel) : base(viewModel)
+        public RemoveTreeEventCommand(ForestGui gui) : base(gui)
         {
         }
 
         public override bool CanExecute(object parameter)
         {
-            return ViewModel?.SelectedTreeEvent != null && ViewModel.CanRemoveSelectedTreeEvent();
+            return Gui.SelectionManager.SelectedTreeEvent != Gui.ForestAnalysis.EventTree.MainTreeEvent;
         }
 
         public override void Execute(object parameter)
         {
-            ViewModel?.RemoveTreeEvent(TreeEventType.Failing);
+            var parent = ManipulationService.RemoveTreeEvent(Gui.ForestAnalysis.EventTree, Gui.SelectionManager.SelectedTreeEvent);
+            Gui.SelectionManager.SelectTreeEvent(parent ?? Gui.ForestAnalysis.EventTree.MainTreeEvent);
         }
     }
 }

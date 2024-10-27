@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Windows.Input;
 using Forest.Gui;
-using Forest.Visualization.ViewModels;
 
 namespace Forest.Visualization.Commands
 {
     public class ChangeProcessStepCommand : ICommand
     {
-        private readonly RibbonViewModel viewModel;
+        private readonly ForestGui gui;
 
-        public ChangeProcessStepCommand(RibbonViewModel viewModel)
+        public ChangeProcessStepCommand(ForestGui gui)
         {
-            this.viewModel = viewModel;
+            this.gui = gui;
         }
 
         public bool CanExecute(object parameter)
@@ -24,7 +23,8 @@ namespace Forest.Visualization.Commands
             if (!(parameter is ForestGuiState guiState))
                 return;
 
-            viewModel.SelectedState = guiState;
+            gui.SelectedState = guiState;
+            gui.OnPropertyChanged(nameof(ForestGui.SelectedState));
         }
 
         public event EventHandler CanExecuteChanged;
