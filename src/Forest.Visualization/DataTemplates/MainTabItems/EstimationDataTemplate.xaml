@@ -159,7 +159,7 @@
             </DataTemplate>
         </DataTemplate.Resources>
         <ContentPresenter
-            Content="{Binding EventTree}"
+            Content="{Binding EventTreeViewModel}"
             ContentTemplate="{StaticResource EstimationPerEventTreeDataTemplate}" />
     </DataTemplate>
 </ResourceDictionary>

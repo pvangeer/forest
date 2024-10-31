@@ -10,25 +10,22 @@ using Forest.Gui;
 
 namespace Forest.Visualization.ViewModels
 {
-    public class ContentPresenterViewModel : INotifyPropertyChanged
+    public class ContentPresenterViewModel : GuiViewModelBase
     {
         private readonly AnalysisManipulationService analysisManipulationService;
-        private readonly ForestGui gui;
 
-        public ContentPresenterViewModel(ForestGui gui)
+        public ContentPresenterViewModel(ViewModelFactory factory,ForestGui gui) : base(factory, gui)
         {
-            this.gui = gui;
-            if (gui != null)
+            if (Gui != null)
             {
-                gui.PropertyChanged += GuiPropertyChanged;
-                gui.SelectionManager.PropertyChanged += SelectionChanged;
+                Gui.SelectionManager.PropertyChanged += SelectionChanged;
 
-                analysisManipulationService = new AnalysisManipulationService(gui.ForestAnalysis);
+                analysisManipulationService = new AnalysisManipulationService(Gui.ForestAnalysis);
 
-                EventTree = new EventTreeViewModel(ForestAnalysis.EventTree, analysisManipulationService, gui.SelectionManager,
+                EventTreeViewModel = new EventTreeViewModel(ForestAnalysis.EventTree, analysisManipulationService, Gui.SelectionManager,
                     gui.ForestAnalysis.ProbabilityEstimations)
                 {
-                    EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(gui.ForestAnalysis)
+                    EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(Gui.ForestAnalysis)
                 };
                 var probabilityEstimationPerTreeEvent =
                     gui.ForestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().First();
@@ -94,28 +91,27 @@ namespace Forest.Visualization.ViewModels
 
         public ObservableCollection<TreeEventProbabilityEstimation> ProbabilityEstimations { get; }
 
-        private ForestAnalysis ForestAnalysis => gui.ForestAnalysis;
+        private ForestAnalysis ForestAnalysis => Gui.ForestAnalysis;
 
-        public EventTreeViewModel EventTree { get; set; }
+        public EventTreeViewModel EventTreeViewModel { get; set; }
 
-        public TreeEventViewModel SelectedTreeEvent => EventTree.SelectedTreeEvent;
+        public TreeEventViewModel SelectedTreeEvent => EventTreeViewModel.SelectedTreeEvent;
 
         public ForestGuiState SelectedGuiState
         {
-            get => gui.SelectedState;
+            get => Gui.SelectedState;
             set
             {
-                gui.SelectedState = value;
-                gui.OnPropertyChanged(nameof(ForestGui.SelectedState));
+                Gui.SelectedState = value;
+                Gui.OnPropertyChanged(nameof(ForestGui.SelectedState));
             }
         }
 
         public ExpertsViewModel ExpertsViewModel { get; }
+
         public HydrodynamicsViewModel HydrodynamicsViewModel { get; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -123,12 +119,12 @@ namespace Forest.Visualization.ViewModels
                     OnPropertyChanged(nameof(SelectedGuiState));
                     break;
                 case nameof(ForestGui.ForestAnalysis):
-                    EventTree = new EventTreeViewModel(ForestAnalysis.EventTree, analysisManipulationService, gui.SelectionManager,
-                        gui.ForestAnalysis.ProbabilityEstimations)
+                    EventTreeViewModel = new EventTreeViewModel(ForestAnalysis.EventTree, analysisManipulationService, Gui.SelectionManager,
+                        Gui.ForestAnalysis.ProbabilityEstimations)
                     {
-                        EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(gui.ForestAnalysis)
+                        EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(Gui.ForestAnalysis)
                     };
-                    OnPropertyChanged(nameof(EventTree));
+                    OnPropertyChanged(nameof(EventTreeViewModel));
                     OnPropertyChanged(nameof(SelectedTreeEvent));
                     break;
             }
@@ -160,19 +156,5 @@ namespace Forest.Visualization.ViewModels
                 foreach (var item in e.OldItems.OfType<ExpertViewModel>())
                     analysisManipulationService.RemoveExpert(item.Expert);
         }*/
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value))
-                return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
     }
 }

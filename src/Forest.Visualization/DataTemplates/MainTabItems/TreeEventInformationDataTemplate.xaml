@@ -83,7 +83,7 @@
                 </Grid>
             </DataTemplate>
         </DataTemplate.Resources>
-        <ContentPresenter Content="{Binding EventTree}"
+        <ContentPresenter Content="{Binding EventTreeViewModel}"
                           ContentTemplate="{StaticResource TreeEventsInformationTemplate}" />
     </DataTemplate>
 </ResourceDictionary>

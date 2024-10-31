@@ -133,6 +133,7 @@
     <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
     <Compile Include="Dialogs\FileDialogFactory.cs" />
     <Compile Include="Converters\GuiStateToViewModelConverter.cs" />
+    <Compile Include="ViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenterViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\PropertiesCollectionViewModelBase.cs" />

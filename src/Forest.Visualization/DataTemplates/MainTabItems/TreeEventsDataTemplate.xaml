@@ -20,7 +20,7 @@
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </controls:ZoomControl.Resources>
-            <eventTree:EventTreeGraphLayout Graph="{Binding EventTree.Graph}" />
+            <eventTree:EventTreeGraphLayout Graph="{Binding EventTreeViewModel.Graph}" />
         </controls:ZoomControl>
     </DataTemplate>
 </ResourceDictionary>

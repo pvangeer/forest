@@ -10,7 +10,7 @@ namespace Forest.App.ViewModels
     public class MainWindowViewModel : Entity
     {
         private readonly ForestGui gui;
-
+        
         public MainWindowViewModel() : this(new ForestGui())
         {
         }
@@ -23,11 +23,12 @@ namespace Forest.App.ViewModels
             gui.GuiProjectServices.OpenProjectFileNameFunc = FileDialogFactory.AskUserForFileNameToOpenFunc();
             gui.ShouldMigrateProject = FileDialogFactory.ShouldMigrateProject;
             gui.ShouldSaveOpenChanges = FileDialogFactory.ShouldSaveOpenChanges; 
-            
-            ContentPresenterViewModel = new ContentPresenterViewModel(gui);
-            RibbonViewModel = new RibbonViewModel(gui);
-            StatusBarViewModel = new StatusBarViewModel(gui);
-            BusyOverlayViewModel = new BusyOverlayViewModel(gui);
+            var viewModelFactory = new ViewModelFactory(gui);
+
+            ContentPresenterViewModel = viewModelFactory.CreateContentPresenterViewModel();
+            RibbonViewModel = viewModelFactory.CreateRibbonViewModel();
+            StatusBarViewModel = viewModelFactory.CreateStatusBarViewModel();
+            BusyOverlayViewModel = viewModelFactory.CreateBusyOverlayViewModel();
         }
 
         public ContentPresenterViewModel ContentPresenterViewModel { get; }

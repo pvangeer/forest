@@ -18,7 +18,7 @@ namespace Forest.Visualization.ViewModels
             throw new System.NotImplementedException();
         }
 
-        public ITreeNodeViewModel CreateProjectExplorerProbabilityAnalysesCollectionViewModel()
+        public ITreeNodeViewModel CreateProjectExplorerProbabilityAnalysisCollectionViewModel()
         {
             throw new System.NotImplementedException();
         }
@@ -26,6 +26,26 @@ namespace Forest.Visualization.ViewModels
         public ProjectExplorerViewModel CreateProjectExplorerViewModel()
         {
             return new ProjectExplorerViewModel(gui);
+        }
+
+        public ContentPresenterViewModel CreateContentPresenterViewModel()
+        {
+            return new ContentPresenterViewModel(this, gui);
+        }
+
+        public BusyOverlayViewModel CreateBusyOverlayViewModel()
+        {
+            return new BusyOverlayViewModel(this, gui);
+        }
+
+        public RibbonViewModel CreateRibbonViewModel()
+        {
+            return new RibbonViewModel(this, gui);
+        }
+
+        public StatusBarViewModel CreateStatusBarViewModel()
+        {
+            return new StatusBarViewModel(this, gui);
         }
     }
 }

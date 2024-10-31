@@ -1,14 +1,14 @@
 using System.ComponentModel;
-using Forest.Data;
 using Forest.Gui;
+using Forest.Visualization.ViewModels;
 
 namespace Forest.Visualization
 {
-    public class GuiViewModelBase : Entity
+    public class GuiViewModelBase : ViewModelBase
     {
         protected readonly ForestGui Gui;
 
-        protected GuiViewModelBase(ForestGui gui)
+        protected GuiViewModelBase(ViewModelFactory factory, ForestGui gui) : base(factory)
         {
             Gui = gui;
             if (gui != null)

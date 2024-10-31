@@ -77,7 +77,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <!--TODO: EventTree does not have a name anymore-->
-                <TextBlock Grid.Row="0" Text="{Binding EventTree.Name}" TextAlignment="Center" FontWeight="Bold" />
+                <TextBlock Grid.Row="0" Text="{Binding EventTreeViewModel.Name}" TextAlignment="Center" FontWeight="Bold" />
                 <controls:ZoomControl
                     Grid.Row="1"
                     AnimationLength="0"
@@ -93,7 +93,7 @@
                             </ResourceDictionary.MergedDictionaries>
                         </ResourceDictionary>
                     </controls:ZoomControl.Resources>
-                    <eventTree:EventTreeGraphLayout Graph="{Binding EventTree.Graph}" />
+                    <eventTree:EventTreeGraphLayout Graph="{Binding EventTreeViewModel.Graph}" />
                 </controls:ZoomControl>
             </Grid>
             <GridSplitter Grid.Column="1" Width="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />

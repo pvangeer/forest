@@ -1,51 +1,46 @@
 using System.ComponentModel;
 using System.Windows.Input;
-using Forest.Data;
 using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.Commands;
 
 namespace Forest.Visualization.ViewModels
 {
-    public class RibbonViewModel : Entity
+    public class RibbonViewModel : GuiViewModelBase
     {
-        private readonly ForestGui gui;
         private readonly CommandFactory commandFactory;
 
-        public RibbonViewModel() : this(new ForestGui())
+        public RibbonViewModel() : this(null, new ForestGui())
         {
         }
 
-        public RibbonViewModel(ForestGui gui)
+        public RibbonViewModel(ViewModelFactory factory, ForestGui gui) : base(factory, gui)
         {
-            this.gui = gui;
-            if (gui != null)
+            if (Gui != null)
             {
-                gui.PropertyChanged += GuiPropertyChanged;
-                gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
-
+                Gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
                 commandFactory = new CommandFactory(gui);
             }
         }
 
         public ForestGuiState SelectedState
         {
-            get => gui.SelectedState;
+            get => Gui.SelectedState;
             set
             {
-                gui.SelectedState = value;
+                Gui.SelectedState = value;
                 OnPropertyChanged();
-                gui.OnPropertyChanged(nameof(ForestGui.SelectedState));
+                Gui.OnPropertyChanged(nameof(ForestGui.SelectedState));
             }
         }
 
         public StorageState BusyIndicator
         {
-            get => gui.BusyIndicator;
+            get => Gui.BusyIndicator;
             set
             {
-                gui.BusyIndicator = value;
-                gui.OnPropertyChanged(nameof(ForestGui.BusyIndicator));
+                Gui.BusyIndicator = value;
+                Gui.OnPropertyChanged(nameof(ForestGui.BusyIndicator));
             }
         }
 
@@ -64,11 +59,11 @@ namespace Forest.Visualization.ViewModels
 
         public ICommand AddTreeEventCommand => commandFactory.CreateAddTreeEventCommand();
 
-        public TreeEvent SelectedTreeEvent => gui.SelectionManager.SelectedTreeEvent;
+        public TreeEvent SelectedTreeEvent => Gui.SelectionManager.SelectedTreeEvent;
 
         public ICommand EscapeCommand => commandFactory.CreateEscapeCommand();
 
-        private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {

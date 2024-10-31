@@ -1,11 +1,12 @@
 using System.ComponentModel;
 using Forest.Gui;
+using Forest.Visualization.ViewModels;
 
 namespace Forest.Visualization
 {
     public class BusyOverlayViewModel : GuiViewModelBase
     {
-        public BusyOverlayViewModel(ForestGui gui) : base(gui)
+        public BusyOverlayViewModel(ViewModelFactory factory, ForestGui gui) : base(factory, gui)
         {
         }
 

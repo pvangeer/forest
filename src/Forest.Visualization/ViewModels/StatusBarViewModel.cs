@@ -11,28 +11,25 @@ using Forest.Visualization.Commands;
 
 namespace Forest.Visualization.ViewModels
 {
-    public class StatusBarViewModel : INotifyPropertyChanged
+    public class StatusBarViewModel : GuiViewModelBase
     {
-        private readonly ForestGui gui;
         private MessageListViewModel messageListViewModel;
 
-        public StatusBarViewModel() : this(new ForestGui())
+        public StatusBarViewModel() : this(null, new ForestGui())
         {
         }
 
-        public StatusBarViewModel(ForestGui gui)
+        public StatusBarViewModel(ViewModelFactory factory, ForestGui gui) : base(factory, gui)
         {
-            this.gui = gui;
-            if (this.gui != null)
+            if (Gui != null)
             {
-                this.gui.PropertyChanged += GuiPropertyChanged;
-                this.gui.Messages.CollectionChanged += GuiMessagesCollectionChanged;
+                Gui.Messages.CollectionChanged += GuiMessagesCollectionChanged;
             }
         }
 
-        public string ProjectFileName => string.IsNullOrEmpty(gui.ProjectFilePath)
+        public string ProjectFileName => string.IsNullOrEmpty(Gui.ProjectFilePath)
             ? "Nieuw bestand*"
-            : Path.GetFileNameWithoutExtension(gui.ProjectFilePath);
+            : Path.GetFileNameWithoutExtension(Gui.ProjectFilePath);
 
         public ICommand RemoveLastMessageCommand => new RemovePriorityMessageCommand(this);
 
@@ -44,12 +41,12 @@ namespace Forest.Visualization.ViewModels
 
         public StorageState BusyIndicator
         {
-            get => gui.BusyIndicator;
-            set => gui.BusyIndicator = value;
+            get => Gui.BusyIndicator;
+            set => Gui.BusyIndicator = value;
         }
 
         public MessageListViewModel MessagesViewModel =>
-            messageListViewModel ?? (messageListViewModel = new MessageListViewModel(gui.Messages));
+            messageListViewModel ?? (messageListViewModel = new MessageListViewModel(Gui.Messages));
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -96,7 +93,7 @@ namespace Forest.Visualization.ViewModels
             }
         }
 
-        private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {

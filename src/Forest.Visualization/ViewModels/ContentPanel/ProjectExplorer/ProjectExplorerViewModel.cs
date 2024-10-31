@@ -16,7 +16,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
             Items = new ObservableCollection<ITreeNodeViewModel>
             {
                 viewModelFactory.CreateProjectExplorerEventTreeCollectionViewModel(),
-                viewModelFactory.CreateProjectExplorerProbabilityAnalysesCollectionViewModel(),
+                viewModelFactory.CreateProjectExplorerProbabilityAnalysisCollectionViewModel(),
             };
 
             gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
