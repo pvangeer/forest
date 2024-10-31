@@ -25,7 +25,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml" />
                 <ResourceDictionary
-                    Source="/Forest.Visualization;component/DataTemplates/ContentPresenterDataTemplate.xaml" />
+                    Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/MainContentPresenterDataTemplate.xaml" />
                 <ResourceDictionary
                     Source="/Forest.Visualization;component/DataTemplates/General/GeneralStyles.xaml" />
                 <ResourceDictionary
@@ -86,8 +86,8 @@
         <ContentPresenter
             Grid.Row="1"
             IsEnabled="{Binding BusyOverlayViewModel.BusyIndicator, Converter={StaticResource BusyIndicatorToEnabledConverter}}"
-            Content="{Binding ContentPresenterViewModel}"
-            ContentTemplate="{StaticResource ContentPresenterDataTemplate}" />
+            Content="{Binding MainContentPresenterViewModel}"
+            ContentTemplate="{StaticResource MainContentPresenterDataTemplate}" />
 
         <ContentPresenter
             Grid.Row="2"

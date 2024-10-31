@@ -43,7 +43,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 
         public virtual string DisplayName => "";
 
-        public string IconSourceString => "";
+        public virtual string IconSourceString => "";
 
         public virtual bool CanRemove => false;
 

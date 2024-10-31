@@ -4,6 +4,7 @@ using Forest.Gui;
 using Forest.Visualization;
 using Forest.Visualization.Dialogs;
 using Forest.Visualization.ViewModels;
+using Forest.Visualization.ViewModels.ContentPanel;
 
 namespace Forest.App.ViewModels
 {
@@ -25,13 +26,13 @@ namespace Forest.App.ViewModels
             gui.ShouldSaveOpenChanges = FileDialogFactory.ShouldSaveOpenChanges; 
             var viewModelFactory = new ViewModelFactory(gui);
 
-            ContentPresenterViewModel = viewModelFactory.CreateContentPresenterViewModel();
+            MainContentPresenterViewModel = viewModelFactory.CreateMainContentPresenterViewModel();
             RibbonViewModel = viewModelFactory.CreateRibbonViewModel();
             StatusBarViewModel = viewModelFactory.CreateStatusBarViewModel();
             BusyOverlayViewModel = viewModelFactory.CreateBusyOverlayViewModel();
         }
 
-        public ContentPresenterViewModel ContentPresenterViewModel { get; }
+        public MainContentPresenterViewModel MainContentPresenterViewModel { get; }
 
         public RibbonViewModel RibbonViewModel { get; }
 

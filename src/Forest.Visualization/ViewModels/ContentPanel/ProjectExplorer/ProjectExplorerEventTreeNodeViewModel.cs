@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.TreeView.Data;
@@ -16,15 +17,30 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
             this.gui = gui;
 
             this.eventTree = eventTree;
+            this.eventTree.PropertyChanged += EventTreePropertyChanged;
             Items = GetItems();
             IsExpanded = false;
         }
 
-        // TODO: Add remove command
+        public override string DisplayName => eventTree.Name;
+
+        // TODO: Change icon
+        public override string IconSourceString =>
+            "pack://application:,,,/Forest.Visualization;component/Resources/forest.ico";
 
         public override bool IsViewModelFor(object o)
         {
             return o as EventTree == eventTree;
+        }
+
+        private void EventTreePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(EventTree.Name):
+                    OnPropertyChanged(nameof(DisplayName));
+                    break;
+            }
         }
 
         private ObservableCollection<ITreeNodeViewModel> GetItems()

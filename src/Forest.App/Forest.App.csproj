@@ -207,6 +207,10 @@
       <Project>{A5C2B4E5-1758-4B14-800E-E3F2AA64EA64}</Project>
       <Name>Forest.Storage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Forest.Visualization.TreeView\Forest.Visualization.TreeView.csproj">
+      <Project>{140124e3-8d13-4122-bf1e-c78743bd45e0}</Project>
+      <Name>Forest.Visualization.TreeView</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forest.Visualization\Forest.Visualization.csproj">
       <Project>{354E5594-846B-499E-BCE6-2E8DE93B928C}</Project>
       <Name>Forest.Visualization</Name>

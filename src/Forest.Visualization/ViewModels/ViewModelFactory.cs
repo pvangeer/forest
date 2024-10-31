@@ -2,6 +2,7 @@
 using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.TreeView.Data;
+using Forest.Visualization.ViewModels.ContentPanel;
 using Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer;
 
 namespace Forest.Visualization.ViewModels
@@ -30,11 +31,6 @@ namespace Forest.Visualization.ViewModels
             return new ProjectExplorerViewModel(gui);
         }
 
-        public ContentPresenterViewModel CreateContentPresenterViewModel()
-        {
-            return new ContentPresenterViewModel(gui);
-        }
-
         public BusyOverlayViewModel CreateBusyOverlayViewModel()
         {
             return new BusyOverlayViewModel(gui);
@@ -59,13 +55,10 @@ namespace Forest.Visualization.ViewModels
         {
             return new ProjectExplorerEstimationItemViewModel(estimation, this);
         }
-    }
 
-    public class ProjectExplorerEstimationItemViewModel : PropertiesCollectionViewModelBase
-    {
-        public ProjectExplorerEstimationItemViewModel(ProbabilityEstimation estimation, ViewModelFactory factory) : base(factory)
+        public MainContentPresenterViewModel CreateMainContentPresenterViewModel()
         {
-            throw new System.NotImplementedException();
+            return new MainContentPresenterViewModel(gui);
         }
     }
 }

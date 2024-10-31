@@ -13,7 +13,10 @@ namespace Forest.Data
 
         public ForestAnalysis()
         {
-            var tree = new EventTree();
+            var tree = new EventTree
+            {
+                Name = "Nieuw faalpad"
+            };
 
             Name = "Nieuw project";
             AssessmentSection = "1-1";

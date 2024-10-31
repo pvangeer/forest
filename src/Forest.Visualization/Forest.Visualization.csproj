@@ -158,6 +158,7 @@
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEventTreeNodeViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerProbabilityEstimationCollectionViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerProbabilityEstimationCollectionViewModel.cs" />
+    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEstimationItemViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\ContentPresenterViewModel.cs" />
     <Compile Include="Converters\BooleanToBrushConverter.cs" />

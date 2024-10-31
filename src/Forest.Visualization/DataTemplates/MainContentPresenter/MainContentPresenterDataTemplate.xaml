@@ -3,7 +3,7 @@
                     xmlns:contentPanel="clr-namespace:Forest.Visualization.ViewModels.ContentPanel">
     
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/TreeView/TreeViewDataTemplate.xaml"/>
+        <ResourceDictionary Source="/Forest.Visualization.TreeView;component/DataTemplates/TreeViewDataTemplate.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="MainContentPresenterDataTemplate" DataType="{x:Type contentPanel:MainContentPresenterViewModel}">
