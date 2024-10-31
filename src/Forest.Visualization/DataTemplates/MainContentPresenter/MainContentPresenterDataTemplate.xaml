@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:contentPanel="clr-namespace:Forest.Visualization.ViewModels.ContentPanel">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/TreeView/TreeViewDataTemplate.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate x:Key="MainContentPresenterDataTemplate" DataType="{x:Type contentPanel:MainContentPresenterViewModel}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ScrollViewer 
+                Grid.Column="0"
+                Content="{Binding ProjectExplorerViewModel}"
+                ContentTemplate="{StaticResource IPropertyCollectionTreeNodesDataTemplate}"/>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="10" />
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,0 +1,279 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:viewModels="clr-namespace:Forest.Visualization.TreeView.ViewModels"
+                    xmlns:data="clr-namespace:Forest.Visualization.TreeView.Data"
+                    xmlns:converters="clr-namespace:Forest.Visualization.TreeView.Converters"
+                    xmlns:dataTemplates="clr-namespace:Forest.Visualization.TreeView.DataTemplates"
+                    xmlns:behaviors="clr-namespace:Forest.Visualization.TreeView.Behaviors">
+
+    <converters:SourceStringToVisibilityConverter x:Key="SourceStringToVisibilityConverter" />
+    <converters:HasItemsToVisibilityConverter x:Key="HasItemsToVisibilityConverter" />
+    <converters:LineStyleToDashArrayConverter x:Key="LineStyleToDashArrayConverter" />
+
+    <DataTemplate x:Key="ColorPropertyDataTemplate" DataType="{x:Type viewModels:IColorPropertyTreeNodeViewModel}">
+        <xctk:ColorPicker
+            StandardColors="{Binding ElementName=MainContentPresenter, Path=DataContext.StandardColorPallet}"
+            Height="20"
+            SelectedColor="{Binding ColorValue}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="LineStyleDataTemplate" DataType="{x:Type viewModels:ILineStylePropertyTreeNodeViewModel}">
+        <DataTemplate.Resources>
+            <ObjectDataProvider x:Key="LineStyles" MethodName="GetValues"
+                                ObjectType="{x:Type system:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="data:LineStyle" />
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </DataTemplate.Resources>
+        <ComboBox
+            ItemsSource="{Binding Source={StaticResource LineStyles}}"
+            SelectedItem="{Binding LineStyleValue}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type data:LineStyle}">
+                    <StackPanel Orientation="Horizontal" Height="20" VerticalAlignment="Center">
+                        <Canvas>
+                            <Line
+                                StrokeThickness="3"
+                                Stroke="Black"
+                                X1="5" X2="50" Y1="10" Y2="10"
+                                StrokeDashArray="{Binding Converter={StaticResource LineStyleToDashArrayConverter}}" />
+                        </Canvas>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DoubleUpDownPropertyDataTemplate"
+                  DataType="{x:Type viewModels:IDoubleUpDownPropertyTreeNodeViewModel}">
+        <xctk:DoubleUpDown
+            Value="{Binding DoubleValue}"
+            Minimum="{Binding MinValue}"
+            Maximum="{Binding MaxValue}"
+            Increment="{Binding Increment}"
+            FormatString="{Binding StringFormat}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CheckBoxTemplate" DataType="{x:Type viewModels:IBooleanPropertyTreeNodeViewModel}">
+        <CheckBox
+            Height="20"
+            HorizontalAlignment="Center"
+            VerticalContentAlignment="Center"
+            IsChecked="{Binding BooleanValue}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="StringTemplate" DataType="{x:Type data:IStringPropertyTreeNodeViewModel}">
+        <TextBox
+            Text="{Binding StringValue, UpdateSourceTrigger=PropertyChanged}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="FontFamilySelectorTemplate" DataType="{x:Type viewModels:IFontFamilyPropertyTreeNodeViewModel}">
+        <ComboBox
+            ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}"
+            SelectedItem="{Binding SelectedValue}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="SliderPropertyDataTemplate"
+                  DataType="{x:Type data:ISliderPropertyTreeNodeViewModel}">
+        <Slider
+            Value="{Binding Value}"
+            BorderBrush="{StaticResource Deltares.Brushes.DarkGreen}"
+            MinWidth="80"
+            Minimum="{Binding MinValue}"
+            Maximum="{Binding MaxValue}" />
+    </DataTemplate>
+
+    <dataTemplates:PropertyValueTreeNodeTemplateSelector x:Key="PropertyValueContentTemplateSelector"
+                                                         FontFamilySelectorTemplate="{StaticResource FontFamilySelectorTemplate}"
+                                                         CheckBoxTemplate="{StaticResource CheckBoxTemplate}"
+                                                         StringTemplate="{StaticResource StringTemplate}"
+                                                         ColorTemplate="{StaticResource ColorPropertyDataTemplate}"
+                                                         LineStyleTemplate="{StaticResource LineStyleDataTemplate}"
+                                                         DoubleUpDownTemplate="{StaticResource DoubleUpDownPropertyDataTemplate}"
+                                                         SliderTemplate="{StaticResource SliderPropertyDataTemplate}" />
+
+
+    <DataTemplate x:Key="ITreeNodeItemDataTemplate" DataType="{x:Type data:ITreeNodeViewModel}">
+        <Border BorderThickness="0">
+            <Border.Style>
+                <Style TargetType="Border" BasedOn="{StaticResource TreeNodeBorderStyle}">
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding CanOpen}" Value="True" />
+                                <Condition Binding="{Binding CanSelect}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter Property="behaviors:AttachInputBindingsBehavior.InputBindings">
+                                    <Setter.Value>
+                                        <InputBindingCollection>
+                                            <MouseBinding MouseAction="LeftDoubleClick"
+                                                          Command="{Binding OpenViewCommand}" />
+                                            <MouseBinding MouseAction="LeftClick" Command="{Binding SelectItemCommand}" />
+                                        </InputBindingCollection>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding CanOpen}" Value="True" />
+                                <Condition Binding="{Binding CanSelect}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter Property="behaviors:AttachInputBindingsBehavior.InputBindings">
+                                    <Setter.Value>
+                                        <InputBindingCollection>
+                                            <MouseBinding MouseAction="LeftDoubleClick"
+                                                          Command="{Binding OpenViewCommand}" />
+                                        </InputBindingCollection>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding CanOpen}" Value="False" />
+                                <Condition Binding="{Binding CanSelect}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter Property="behaviors:AttachInputBindingsBehavior.InputBindings">
+                                    <Setter.Value>
+                                        <InputBindingCollection>
+                                            <MouseBinding MouseAction="LeftClick" Command="{Binding SelectItemCommand}" />
+                                        </InputBindingCollection>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <Binding Path="IsSelected" />
+                            </DataTrigger.Binding>
+                            <Setter Property="Background" Value="{StaticResource Deltares.Brushes.DarkGreen}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Border.ContextMenu>
+                <ContextMenu
+                    Visibility="{Binding ContextMenuItems, Converter={StaticResource HasItemsToVisibilityConverter}}"
+                    ItemsSource="{Binding ContextMenuItems}"
+                    ItemContainerStyle="{StaticResource MenuItemStyle}" />
+            </Border.ContextMenu>
+            <Grid
+                Height="{StaticResource DefaultItemHeight}"
+                VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Column="0"
+                    Width="24"
+                    Command="{Binding ToggleIsExpandedCommand}"
+                    Visibility="{Binding IsExpandable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Style="{StaticResource ExpandCollapseButtonStyle}" />
+                <Image
+                    Grid.Column="1"
+                    Width="24"
+                    Height="24"
+                    Margin="2,0,5,0"
+                    Visibility="{Binding IconSourceString, Converter={StaticResource SourceStringToVisibilityConverter}}"
+                    Source="{Binding IconSourceString}" />
+                <TextBlock
+                    TextAlignment="Left"
+                    Grid.Column="2"
+                    Text="{Binding DisplayName}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Center"
+                    FontSize="12" />
+                <Button
+                    Grid.Column="3"
+                    Margin="2"
+                    Visibility="{Binding CanRemove, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Command="{Binding RemoveItemCommand}"
+                    Style="{StaticResource RemoveButtonStyle}" />
+                <Button
+                    Grid.Column="4"
+                    Margin="2"
+                    Visibility="{Binding CanAdd, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Command="{Binding AddItemCommand}"
+                    Style="{StaticResource AddButtonStyle}" />
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PropertyValueItemDataTemplate" DataType="{x:Type data:ITreeNodeViewModel}">
+        <Border Style="{StaticResource TreeNodeBorderStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="True" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Margin="10"
+                    Grid.Column="0"
+                    Text="{Binding DisplayName}"
+                    TextAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="Transparent" />
+                <GridSplitter Grid.Column="1" Width="5" Background="Gainsboro" HorizontalAlignment="Stretch"
+                              ResizeBehavior="BasedOnAlignment" />
+                <ContentPresenter
+                    Grid.Column="2"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Content="{Binding }"
+                    ContentTemplateSelector="{StaticResource PropertyValueContentTemplateSelector}" />
+            </Grid>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="IPropertyCollectionTreeNodesDataTemplate"
+                  DataType="{x:Type data:ITreeNodeCollectionViewModel}">
+        <ItemsControl
+            ItemsSource="{Binding Items}"
+            Grid.IsSharedSizeScope="True">
+            <ItemsControl.Style>
+                <Style TargetType="ItemsControl">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CollectionType}"
+                                     Value="{x:Static data:CollectionType.PropertyValue}">
+                            <Setter Property="ItemTemplate"
+                                    Value="{StaticResource PropertyValueItemDataTemplate}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding CollectionType}"
+                                     Value="{x:Static data:CollectionType.PropertyItemsCollection}">
+                            <Setter Property="ItemTemplate"
+                                    Value="{DynamicResource IPropertyCollectionItemDataTemplate}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ItemsControl.Style>
+        </ItemsControl>
+    </DataTemplate>
+
+    <DataTemplate x:Key="IPropertyCollectionItemDataTemplate"
+                  DataType="{x:Type data:ITreeNodeCollectionViewModel}">
+        <StackPanel Orientation="Vertical">
+            <ContentPresenter Content="{Binding }" ContentTemplate="{StaticResource ITreeNodeItemDataTemplate}" />
+            <Grid Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="24" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ContentPresenter Grid.Column="1"
+                                  Content="{Binding .}"
+                                  ContentTemplate="{StaticResource IPropertyCollectionTreeNodesDataTemplate}" />
+            </Grid>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

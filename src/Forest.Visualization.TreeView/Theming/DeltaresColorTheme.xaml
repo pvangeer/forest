@@ -1,0 +1,69 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color x:Key="DeltaresBlack">#000000</Color>
+
+    <Color x:Key="Deltares.Colors.DarkBlue">#080C80</Color>
+    <Color x:Key="Deltares.Colors.Blue">#0D38E0</Color>
+    <Color x:Key="Deltares.Colors.LightBlue">#0EBBF0</Color>
+
+    <Color x:Key="Deltares.Colors.DarkGreen">#00B389</Color>
+    <Color x:Key="Deltares.Colors.Green">#00CC96</Color>
+    <Color x:Key="Deltares.Colors.LightGreen">#00E6A1</Color>
+
+    <Color x:Key="Deltares.Colors.LightGray">#FFF2F2F2</Color>
+    <Color x:Key="Deltares.Colors.MidGray">#FFE6E6E6</Color>
+
+    <Color x:Key="Deltares.Colors.Yellow">#FFD814</Color>
+    <Color x:Key="Deltares.Colors.Academy">#FF960D</Color>
+
+    <Color x:Key="Deltares.Colors.Header">#0EBBF0</Color>
+    <Color x:Key="Deltares.Colors.MousePressedHighlight">#00CC96</Color>
+    <Color x:Key="Deltares.Colors.MouseOverHighlight">#00E6A1</Color>
+    <Color x:Key="Deltares.Colors.Selected">#00B389</Color>
+
+    <!--Control colors.-->
+    <Color x:Key="Deltares.Colors.ContentArea.Light">#FFF2F2F2</Color>
+    <Color x:Key="Deltares.Colors.ContentArea.Dark">#FFE6E6E6</Color>
+
+    <Color x:Key="Deltares.Colors.ControlLight">White</Color>
+    <Color x:Key="Deltares.Colors.Glyph">#FF444444</Color>
+
+    <!--Border colors-->
+    <Color x:Key="Deltares.Colors.Border.Light">#FFCCCCCC</Color>
+    <Color x:Key="Deltares.Colors.Border.Dark">#FF444444</Color>
+
+    <!--Control-specific resources.-->
+    <Color x:Key="Deltares.Colors.CurrentCell.Border">#FFE6E6E6</Color>
+
+    <Color x:Key="Deltares.Colors.Foreground">Black</Color>
+    <Color x:Key="Deltares.Colors.DefaultBackground">White</Color>
+
+    <SolidColorBrush x:Key="Deltares.Brushes.DarkBlue" Color="{StaticResource Deltares.Colors.DarkBlue}" />
+    <SolidColorBrush x:Key="Deltares.Brushes.Blue" Color="{StaticResource Deltares.Colors.Blue}" />
+    <SolidColorBrush x:Key="Deltares.Brushes.LightBlue" Color="{StaticResource Deltares.Colors.LightBlue}" />
+
+    <SolidColorBrush x:Key="Deltares.Brushes.DarkGreen" Color="{StaticResource Deltares.Colors.DarkGreen}" />
+    <SolidColorBrush x:Key="Deltares.Brushes.Green" Color="{StaticResource Deltares.Colors.Green}" />
+    <SolidColorBrush x:Key="Deltares.Brushes.LightGreen" Color="{StaticResource Deltares.Colors.LightGreen}" />
+
+    <SolidColorBrush x:Key="Deltares.Brushes.LightGray" Color="{StaticResource Deltares.Colors.LightGray}" />
+    <SolidColorBrush x:Key="Deltares.Brushes.MidGray" Color="{StaticResource Deltares.Colors.MidGray}" />
+
+    <SolidColorBrush x:Key="Deltares.Brushes.Yellow" Color="{StaticResource Deltares.Colors.Yellow}" />
+    <SolidColorBrush x:Key="Deltares.Brushes.Academy" Color="{StaticResource Deltares.Colors.Academy}" />
+
+    <SolidColorBrush x:Key="Deltares.Brushes.MouseOverHighlight"
+                     Color="{StaticResource Deltares.Colors.MouseOverHighlight}" />
+    <SolidColorBrush x:Key="Deltares.Brushes.MousePressedHighlight"
+                     Color="{StaticResource Deltares.Colors.MousePressedHighlight}" />
+    <SolidColorBrush x:Key="Deltares.Brushes.Header" Color="{StaticResource Deltares.Colors.Header}" />
+
+    <SolidColorBrush x:Key="Deltares.Brushes.Border.Light" Color="{StaticResource Deltares.Colors.Border.Light}" />
+    <SolidColorBrush x:Key="Deltares.Brushes.Border.Dark" Color="{StaticResource Deltares.Colors.Border.Dark}" />
+
+    <SolidColorBrush x:Key="Deltares.Brushes.Foreground"
+                     Color="{StaticResource Deltares.Colors.Foreground}" />
+    <SolidColorBrush x:Key="Deltares.Brushes.DefaultBackground"
+                     Color="{StaticResource Deltares.Colors.DefaultBackground}" />
+
+</ResourceDictionary>

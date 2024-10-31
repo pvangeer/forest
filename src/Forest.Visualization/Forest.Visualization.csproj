@@ -133,6 +133,9 @@
     <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
     <Compile Include="Dialogs\FileDialogFactory.cs" />
     <Compile Include="Converters\GuiStateToViewModelConverter.cs" />
+    <Compile Include="ViewModels\ContentPanel\MainContentPresenterViewModel.cs" />
+    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerViewModel.cs" />
+    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\PropertiesCollectionViewModelBase.cs" />
     <Compile Include="ViewModels\HydrodynamicsViewModel.cs" />
     <Compile Include="ViewModels\ExpertsViewModel.cs" />
     <Compile Include="GuiViewModelBase.cs" />
@@ -198,6 +201,7 @@
     <Compile Include="ViewModels\RibbonViewModel.cs" />
     <Compile Include="ViewModels\TreeEventConnector.cs" />
     <Compile Include="ViewModels\TreeEventViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelFactory.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -236,6 +240,10 @@
     <Page Include="DataTemplates\General\TabControlFlatStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataTemplates\MainContentPresenter\MainContentPresenterDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataTemplates\MainTabItems\EstimationDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -331,6 +339,10 @@
       <Project>{a5c2b4e5-1758-4b14-800e-e3f2aa64ea64}</Project>
       <Name>Forest.Storage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Forest.Visualization.TreeView\Forest.Visualization.TreeView.csproj">
+      <Project>{140124E3-8D13-4122-BF1E-C78743BD45E0}</Project>
+      <Name>Forest.Visualization.TreeView</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\project-information.png" />
@@ -384,6 +396,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\forest.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\Ribbon\" />
+    <Folder Include="ViewModels\StatusBar\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Operations\collapsed.png" />
+    <Resource Include="Resources\Operations\expanded.png" />
+    <Resource Include="Resources\Operations\plus.png" />
+    <Resource Include="Resources\Operations\remove.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

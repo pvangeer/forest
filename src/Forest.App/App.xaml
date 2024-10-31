@@ -82,6 +82,7 @@
 
             <export:ExportElicitationFormsCommand x:Key="ExportElicitationFormsCommand" />
             <import:ImportElicitationFormsCommand x:Key="ImportElicitationFormsCommand" />
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary
@@ -92,6 +93,12 @@
                     Source="/Forest.Visualization;component/DataTemplates/General/AssessmentSections.xaml" />
                 <ResourceDictionary
                     Source="/Forest.Visualization;component/DataTemplates/General/SpinnerStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/DataTemplates/General/GeneralStyles.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization.TreeView;component/Theming/DeltaresColorTheme.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization.TreeView;component/Theming/TreeViewStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
