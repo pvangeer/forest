@@ -3,7 +3,7 @@ using Forest.Data.Tree;
 
 namespace Forest.Visualization.Ribbon.IO.Export
 {
-    public class EventTreeExportViewModel : NotifyPropertyChangedObject
+    public class EventTreeExportViewModel : Entity
     {
         public EventTreeExportViewModel(EventTree eventTree)
         {

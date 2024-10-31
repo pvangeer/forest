@@ -6,7 +6,7 @@ using Forest.Data.Services;
 
 namespace Forest.Data.Tree
 {
-    public class EventTree : NotifyPropertyChangedObject
+    public class EventTree : Entity
     {
         public TreeEvent MainTreeEvent { get; set; }
 

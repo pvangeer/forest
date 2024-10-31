@@ -5,7 +5,7 @@ using Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer;
 
 namespace Forest.Visualization.ViewModels.ContentPanel
 {
-    public class MainContentPresenterViewModel : NotifyPropertyChangedObject
+    public class MainContentPresenterViewModel : Entity
     {
         private readonly ForestGui gui;
         private readonly ViewModelFactory viewModelFactory;

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace Forest.Data
 {
-    public class NotifyPropertyChangedObject : INotifyPropertyChanged
+    public class Entity : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

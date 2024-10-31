@@ -1,6 +1,6 @@
 ﻿namespace Forest.Data.Tree
 {
-    public class TreeEvent : NotifyPropertyChangedObject
+    public class TreeEvent : Entity
     {
         public TreeEvent(string name)
         {

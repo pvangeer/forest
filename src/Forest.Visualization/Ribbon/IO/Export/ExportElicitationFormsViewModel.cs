@@ -10,7 +10,7 @@ using log4net;
 
 namespace Forest.Visualization.Ribbon.IO.Export
 {
-    public class ExportElicitationFormsViewModel : NotifyPropertyChangedObject
+    public class ExportElicitationFormsViewModel : Entity
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ExportElicitationFormsViewModel));
 

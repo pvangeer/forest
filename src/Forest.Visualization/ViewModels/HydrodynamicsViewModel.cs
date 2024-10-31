@@ -6,7 +6,7 @@ using Forest.Data.Estimations.PerTreeEvent;
 
 namespace Forest.Visualization.ViewModels
 {
-    public class HydrodynamicsViewModel : NotifyPropertyChangedObject
+    public class HydrodynamicsViewModel : Entity
     {
         private readonly ProbabilityEstimationPerTreeEvent estimationObject;
 

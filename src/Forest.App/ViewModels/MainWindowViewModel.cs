@@ -7,7 +7,7 @@ using Forest.Visualization.ViewModels;
 
 namespace Forest.App.ViewModels
 {
-    public class MainWindowViewModel : NotifyPropertyChangedObject
+    public class MainWindowViewModel : Entity
     {
         private readonly ForestGui gui;
 

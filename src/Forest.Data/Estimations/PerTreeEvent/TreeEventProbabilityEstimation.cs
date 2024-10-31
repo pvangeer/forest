@@ -7,7 +7,7 @@ using Forest.Data.Tree;
 
 namespace Forest.Data.Estimations.PerTreeEvent
 {
-    public class TreeEventProbabilityEstimation : NotifyPropertyChangedObject
+    public class TreeEventProbabilityEstimation : Entity
     {
         public TreeEventProbabilityEstimation(TreeEvent treeEvent)
         {

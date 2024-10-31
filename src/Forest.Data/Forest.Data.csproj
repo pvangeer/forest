@@ -16,7 +16,7 @@
     <Compile Include="Estimations\ProbabilityEstimation.cs" />
     <Compile Include="Estimations\PerTreeEvent\TreeEventProbabilityEstimation.cs" />
     <Compile Include="Estimations\PerTreeEvent\ProbabilityEstimationPerTreeEventExtensions.cs" />
-    <Compile Include="NotifyPropertyChangedObject.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="Tree\EventTree.cs" />
     <Compile Include="Services\EventTreeModification.cs" />
     <Compile Include="ForestAnalysisFactory.cs" />

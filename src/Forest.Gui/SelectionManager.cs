@@ -5,7 +5,7 @@ using Forest.Data.Tree;
 
 namespace Forest.Gui
 {
-    public class SelectionManager : NotifyPropertyChangedObject
+    public class SelectionManager : Entity
     {
         private readonly ForestGui gui;
 

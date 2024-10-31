@@ -8,7 +8,7 @@ using log4net.Repository.Hierarchy;
 
 namespace Forest.Gui
 {
-    public class ForestGui : NotifyPropertyChangedObject, IMessageCollection
+    public class ForestGui : Entity, IMessageCollection
     {
         public ForestGui()
         {

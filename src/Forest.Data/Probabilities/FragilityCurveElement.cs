@@ -1,6 +1,6 @@
 ﻿namespace Forest.Data.Probabilities
 {
-    public class FragilityCurveElement : NotifyPropertyChangedObject
+    public class FragilityCurveElement : Entity
     {
         public FragilityCurveElement(double waterLevel, Probability probability)
         {

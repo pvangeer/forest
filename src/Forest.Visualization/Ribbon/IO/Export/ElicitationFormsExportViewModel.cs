@@ -3,7 +3,7 @@ using Forest.Data.Experts;
 
 namespace Forest.Visualization.Ribbon.IO.Export
 {
-    public class ElicitationFormsExportViewModel : NotifyPropertyChangedObject
+    public class ElicitationFormsExportViewModel : Entity
     {
         private bool isChecked;
 

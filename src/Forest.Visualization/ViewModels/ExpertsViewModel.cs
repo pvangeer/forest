@@ -6,7 +6,7 @@ using Forest.Data.Estimations.PerTreeEvent;
 
 namespace Forest.Visualization.ViewModels
 {
-    public class ExpertsViewModel : NotifyPropertyChangedObject
+    public class ExpertsViewModel : Entity
     {
         private readonly ProbabilityEstimationPerTreeEvent estimationObject;
 

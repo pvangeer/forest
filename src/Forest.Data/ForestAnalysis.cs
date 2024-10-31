@@ -7,7 +7,7 @@ using Forest.Data.Tree;
 
 namespace Forest.Data
 {
-    public class ForestAnalysis : NotifyPropertyChangedObject
+    public class ForestAnalysis : Entity
     {
         private EventTree eventTree;
 

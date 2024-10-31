@@ -1,6 +1,6 @@
 ﻿namespace Forest.Data.Experts
 {
-    public class Person : NotifyPropertyChangedObject
+    public class Person : Entity
     {
         public string Name { get; set; }
         

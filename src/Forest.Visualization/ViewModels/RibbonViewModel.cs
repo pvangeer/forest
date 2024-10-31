@@ -7,7 +7,7 @@ using Forest.Visualization.Commands;
 
 namespace Forest.Visualization.ViewModels
 {
-    public class RibbonViewModel : NotifyPropertyChangedObject
+    public class RibbonViewModel : Entity
     {
         private readonly ForestGui gui;
         private readonly CommandFactory commandFactory;

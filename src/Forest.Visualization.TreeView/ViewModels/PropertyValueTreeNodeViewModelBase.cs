@@ -5,7 +5,7 @@ using Forest.Visualization.TreeView.Data;
 
 namespace Forest.Visualization.TreeView.ViewModels
 {
-    public abstract class PropertyValueTreeNodeViewModelBase : NotifyPropertyChangedObject, ITreeNodeViewModel
+    public abstract class PropertyValueTreeNodeViewModelBase : Entity, ITreeNodeViewModel
     {
         public PropertyValueTreeNodeViewModelBase(string displayName)
         {

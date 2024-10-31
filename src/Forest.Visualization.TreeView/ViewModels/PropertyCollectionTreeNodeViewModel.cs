@@ -6,7 +6,7 @@ using Forest.Visualization.TreeView.Data;
 
 namespace Forest.Visualization.TreeView.ViewModels
 {
-    public class PropertyCollectionTreeNodeViewModel : NotifyPropertyChangedObject, ITreeNodeCollectionViewModel
+    public class PropertyCollectionTreeNodeViewModel : Entity, ITreeNodeCollectionViewModel
     {
         private string iconSourceString;
         private bool isExpanded;

@@ -6,7 +6,7 @@ using Forest.Visualization.TreeView.ViewModels;
 
 namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 {
-    public abstract class PropertiesCollectionViewModelBase : NotifyPropertyChangedObject, ITreeNodeCollectionViewModel
+    public abstract class PropertiesCollectionViewModelBase : Entity, ITreeNodeCollectionViewModel
     {
         private bool isExpanded = true;
 

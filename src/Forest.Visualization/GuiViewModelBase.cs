@@ -4,7 +4,7 @@ using Forest.Gui;
 
 namespace Forest.Visualization
 {
-    public class GuiViewModelBase : NotifyPropertyChangedObject
+    public class GuiViewModelBase : Entity
     {
         protected readonly ForestGui Gui;
 

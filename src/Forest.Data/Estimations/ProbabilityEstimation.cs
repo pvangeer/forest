@@ -1,6 +1,6 @@
 ﻿namespace Forest.Data.Estimations
 {
-    public class ProbabilityEstimation : NotifyPropertyChangedObject
+    public class ProbabilityEstimation : Entity
     {
     }
 }
