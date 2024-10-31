@@ -4,7 +4,7 @@ namespace Forest.Storage.Read
 {
     internal class ReadReferencedObjectsFirstException : Exception
     {
-        public ReadReferencedObjectsFirstException(string positionedStakeholderName)
+        public ReadReferencedObjectsFirstException(string name)
         {
         }
     }
