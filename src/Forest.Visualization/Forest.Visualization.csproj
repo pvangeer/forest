@@ -136,10 +136,13 @@
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenterViewModel.cs" />
     <Compile Include="Commands\CanAlwaysExecuteActionCommand.cs" />
+    <Compile Include="Commands\AddEventTreeCommand.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerCommandFactory.cs" />
+    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerItemViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ItemsCollectionViewModelBase.cs" />
-    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\SelectItemCommand.cs" />
+    <Compile Include="Commands\RemoveEventTreeCommand.cs" />
+    <Compile Include="Commands\SelectItemCommand.cs" />
     <Compile Include="ViewModels\HydrodynamicsViewModel.cs" />
     <Compile Include="ViewModels\ExpertsViewModel.cs" />
     <Compile Include="GuiViewModelBase.cs" />

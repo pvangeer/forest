@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Forest.Gui.Export
+namespace Forest.Visualization.Ribbon.IO.Export
 {
     /// <summary>
     ///     Interaction logic for ElicitationFormExportDialog.xaml

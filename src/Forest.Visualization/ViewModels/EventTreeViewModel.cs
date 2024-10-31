@@ -25,11 +25,11 @@ namespace Forest.Visualization.ViewModels
         private bool isSelected;
         private TreeEventViewModel mainTreeEventViewModel;
 
-        public EventTreeViewModel()
+        public EventTreeViewModel(EventTree eventTree)
         {
             var project = ForestAnalysisFactory.CreateStandardNewProject();
             analysisManipulationService = new AnalysisManipulationService(project);
-            EventTree = project.EventTree;
+            EventTree = eventTree;
             EventTree.PropertyChanged += EventTreePropertyChanged;
             EventTree.TreeEventsChanged += TreeEventsChanged;
         }

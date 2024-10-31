@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Forest.Gui;
 using Forest.Visualization.TreeView.Data;
 
-namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
+namespace Forest.Visualization.Commands
 {
     public class SelectItemCommand : ICommand
     {

@@ -17,11 +17,24 @@ namespace Forest.Storage.Create
                 Description = forestAnalysis.Description.DeepClone(),
                 AssessmentSection = forestAnalysis.AssessmentSection.DeepClone(),
                 ProjectInformation = forestAnalysis.ProjectInformation.DeepClone(),
-                ProjectLeader = forestAnalysis.ProjectLeader.Create(registry),
-                EventTree = forestAnalysis.EventTree.Create(registry)
+                ProjectLeader = forestAnalysis.ProjectLeader.Create(registry)
             };
 
+            AddEntriesForEventTrees(forestAnalysis, entity, registry);
+
+            // TODO: Store also probability analysis
+
             return entity;
+        }
+
+        private static void AddEntriesForEventTrees(ForestAnalysis analysis, ForestAnalysisXmlEntity entity, PersistenceRegistry registry)
+        {
+            for (var index = 0; index < analysis.EventTrees.Count; index++)
+            {
+                var eventTreeEntity = analysis.EventTrees[index].Create(registry);
+                eventTreeEntity.Order = index;
+                entity.EventTreeXmlEntities.Add(eventTreeEntity);
+            }
         }
     }
 }

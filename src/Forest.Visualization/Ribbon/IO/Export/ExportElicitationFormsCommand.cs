@@ -1,7 +1,6 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
-using Forest.Gui.Export;
 using Forest.Visualization.ViewModels;
 using log4net;
 
@@ -18,7 +17,6 @@ namespace Forest.Visualization.Ribbon.IO.Export
 
         public void Execute(object parameter)
         {
-            // TODO: Parameter should not be mainWindowViewModel
             if (!(parameter is EventTreeViewModel eventTreeViewModel))
             {
                 Log.Error("Er is iets misgegaan, waardoor exporteren niet mogelijk is.");

@@ -119,5 +119,29 @@ namespace Forest.Data.Services
         {
             forestAnalysis.ProbabilityEstimations.Remove(estimation);
         }
+
+        public EventTree AddEventTree()
+        {
+            var eventTree = new EventTree
+            {
+                Name = "Nieuw faalpad"
+            };
+            forestAnalysis.EventTrees.Add(eventTree);
+            return eventTree;
+        }
+
+        public void RemoveEventTree(EventTree eventTree)
+        {
+            if (eventTree == null || !forestAnalysis.EventTrees.Contains(eventTree))
+            {
+                return;
+            }
+
+            foreach (var estimation in forestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().Where(e => e.EventTree == eventTree))
+            {
+                RemoveProbabilityEstimation(estimation);
+            }
+            forestAnalysis.EventTrees.Remove(eventTree);
+        }
     }
 }

@@ -9,8 +9,6 @@ namespace Forest.Data
 {
     public class ForestAnalysis : Entity
     {
-        private EventTree eventTree;
-
         public ForestAnalysis()
         {
             var tree = new EventTree
@@ -23,7 +21,13 @@ namespace Forest.Data
             Description = "";
             ProjectInformation = "";
             ProjectLeader = new Person();
-            EventTree = tree;
+            EventTrees = new ObservableCollection<EventTree>
+            {
+                new EventTree
+                {
+                    Name = "Nieuw faalpad"
+                }
+            };
             ProbabilityEstimations = new ObservableCollection<ProbabilityEstimation>
             {
                 new ProbabilityEstimationPerTreeEvent
@@ -44,17 +48,7 @@ namespace Forest.Data
 
         public Person ProjectLeader { get; set; }
 
-        // TODO: Make this a list
-        public EventTree EventTree
-        {
-            get => eventTree;
-            set
-            {
-                eventTree = value;
-                if (eventTree == null)
-                    throw new ArgumentNullException();
-            }
-        }
+        public ObservableCollection<EventTree> EventTrees { get; }
 
         public ObservableCollection<ProbabilityEstimation> ProbabilityEstimations { get; }
     }

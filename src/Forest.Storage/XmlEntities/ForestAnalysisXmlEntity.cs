@@ -12,6 +12,7 @@ namespace Forest.Storage.XmlEntities
         {
             Experts = new Collection<ExpertXmlEntity>();
             HydraulicConditions = new Collection<HydrodynamicConditionXmlEntity>();
+            EventTreeXmlEntities = new Collection<EventTreeXmlEntity>();
         }
 
         [XmlAttribute(AttributeName = "name")]
@@ -29,8 +30,9 @@ namespace Forest.Storage.XmlEntities
         [XmlElement(ElementName = "projectleader")]
         public PersonXmlEntity ProjectLeader { get; set; }
 
-        [XmlElement(ElementName = "eventtree")]
-        public EventTreeXmlEntity EventTree { get; set; }
+        [XmlArray(ElementName = "eventtrees")]
+        [XmlArrayItem(ElementName = "eventtree")]
+        public Collection<EventTreeXmlEntity> EventTreeXmlEntities { get; set; }
 
         [XmlArray(ElementName = "experts")]
         [XmlArrayItem(ElementName = "expert")]

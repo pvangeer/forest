@@ -1,3 +1,4 @@
+using Forest.Data.Tree;
 using Forest.Gui;
 
 namespace Forest.Visualization.Commands
@@ -10,13 +11,14 @@ namespace Forest.Visualization.Commands
 
         public override bool CanExecute(object parameter)
         {
-            return Gui.SelectionManager.SelectedTreeEvent != Gui.ForestAnalysis.EventTree.MainTreeEvent;
+            return Gui.SelectionManager.Selection is EventTree && Gui.SelectionManager.SelectedTreeEvent != ((EventTree)Gui.SelectionManager.Selection).MainTreeEvent;
         }
 
         public override void Execute(object parameter)
         {
-            var parent = ManipulationService.RemoveTreeEvent(Gui.ForestAnalysis.EventTree, Gui.SelectionManager.SelectedTreeEvent);
-            Gui.SelectionManager.SelectTreeEvent(parent ?? Gui.ForestAnalysis.EventTree.MainTreeEvent);
+            var eventTree = (EventTree)Gui.SelectionManager.Selection;
+            var parent = ManipulationService.RemoveTreeEvent(eventTree, Gui.SelectionManager.SelectedTreeEvent);
+            Gui.SelectionManager.SelectTreeEvent(parent ?? eventTree.MainTreeEvent);
         }
     }
 }

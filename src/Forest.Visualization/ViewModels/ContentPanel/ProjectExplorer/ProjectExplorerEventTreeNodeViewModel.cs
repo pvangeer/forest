@@ -36,8 +36,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
         public override string IconSourceString =>
             "pack://application:,,,/Forest.Visualization;component/Resources/forest.ico";
 
-        // TODO: Implement once it is a list.
-        public override ICommand RemoveItemCommand => null;
+        public override ICommand RemoveItemCommand => commandFactory.CreateRemoveEventTreeCommand(eventTree);
 
         public override bool IsViewModelFor(object o)
         {
@@ -52,15 +51,6 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
                     OnPropertyChanged(nameof(DisplayName));
                     break;
             }
-        }
-
-        private ObservableCollection<ITreeNodeViewModel> GetItems()
-        {
-            return new ObservableCollection<ITreeNodeViewModel>
-            {
-                new StringPropertyValueTreeNodeViewModel<EventTree>(eventTree,
-                    nameof(EventTree.Name), "Naam"),
-            };
         }
     }
 }

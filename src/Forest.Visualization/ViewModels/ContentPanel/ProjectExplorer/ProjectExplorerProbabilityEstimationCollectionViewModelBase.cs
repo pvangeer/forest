@@ -45,10 +45,11 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 
         public override bool CanAdd => true;
 
+        // TODO: Can not execute in case there is no eventtree..
         public override ICommand AddItemCommand => CommandFactory.CreateCanAlwaysExecuteActionCommand(p =>
         {
             var service = new AnalysisManipulationService(Gui.ForestAnalysis);
-            service.AddProbabilityEstimationPerTreeEvent(Gui.ForestAnalysis.EventTree);
+            service.AddProbabilityEstimationPerTreeEvent(Gui.ForestAnalysis.EventTrees.FirstOrDefault());
         });
 
         private void EstimationsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

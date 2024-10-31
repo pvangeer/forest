@@ -15,7 +15,10 @@ namespace Forest.TestHelpers
             var eventTree = new EventTree { MainTreeEvent = treeEvent };
             return new ForestAnalysis
             {
-                EventTree = eventTree,
+                EventTrees =
+                {
+                    eventTree
+                },
                 ProbabilityEstimations =
                 {
                     new ProbabilityEstimationPerTreeEvent
@@ -452,7 +455,10 @@ namespace Forest.TestHelpers
                     Name = "Goaitske de Vries"
                 },
                 AssessmentSection = "12-3",
-                EventTree = eventTree,
+                EventTrees =
+                {
+                    eventTree
+                },
                 ProbabilityEstimations =
                 {
                     probabilityEstimation1

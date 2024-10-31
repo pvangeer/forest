@@ -22,11 +22,11 @@ namespace Forest.Visualization.ViewModels
 
                 analysisManipulationService = new AnalysisManipulationService(Gui.ForestAnalysis);
 
-                EventTreeViewModel = new EventTreeViewModel(ForestAnalysis.EventTree, analysisManipulationService, Gui.SelectionManager,
+                /*EventTreeViewModel = new EventTreeViewModel(ForestAnalysis.EventTrees, analysisManipulationService, Gui.SelectionManager,
                     gui.ForestAnalysis.ProbabilityEstimations)
                 {
                     EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(Gui.ForestAnalysis)
-                };
+                };*/
                 var probabilityEstimationPerTreeEvent =
                     gui.ForestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().First();
                 ExpertsViewModel =
@@ -119,11 +119,11 @@ namespace Forest.Visualization.ViewModels
                     OnPropertyChanged(nameof(SelectedGuiState));
                     break;
                 case nameof(ForestGui.ForestAnalysis):
-                    EventTreeViewModel = new EventTreeViewModel(ForestAnalysis.EventTree, analysisManipulationService, Gui.SelectionManager,
+                    /*EventTreeViewModel = new EventTreeViewModel(ForestAnalysis.EventTrees, analysisManipulationService, Gui.SelectionManager,
                         Gui.ForestAnalysis.ProbabilityEstimations)
                     {
                         EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(Gui.ForestAnalysis)
-                    };
+                    };*/
                     OnPropertyChanged(nameof(EventTreeViewModel));
                     OnPropertyChanged(nameof(SelectedTreeEvent));
                     break;

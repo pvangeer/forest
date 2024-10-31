@@ -14,8 +14,10 @@ namespace Forest.Storage.Read
             if (collector == null)
                 throw new ArgumentNullException(nameof(collector));
 
+            // TODO: Move this to probabilityspecifications
             var experts = entity.Experts.OrderBy(e => e.Order).Select(e => e.Read(collector));
             var hydraulicConditions = entity.HydraulicConditions.OrderBy(e => e.Order).Select(e => e.Read(collector));
+            var eventTrees = entity.EventTreeXmlEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
 
             var project = new ForestAnalysis
             {
@@ -24,8 +26,12 @@ namespace Forest.Storage.Read
                 Description = entity.Description,
                 ProjectInformation = entity.ProjectInformation,
                 ProjectLeader = entity.ProjectLeader.Read(collector),
-                EventTree = entity.EventTree.Read(collector)
             };
+
+            foreach (var eventTree in eventTrees)
+            {
+                project.EventTrees.Add(eventTree);
+            }
 
             return project;
         }

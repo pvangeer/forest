@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.Commands;
 using Forest.Visualization.TreeView.Commands;
@@ -32,6 +34,16 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
         public ICommand CreateSelectItemCommand(ISelectable selectable)
         {
             return new SelectItemCommand(gui.SelectionManager, selectable);
+        }
+
+        public ICommand CreateAddEventTreeCommand()
+        {
+            return new AddEventTreeCommand(gui);
+        }
+
+        public ICommand CreateRemoveEventTreeCommand(EventTree eventTree)
+        {
+            return new RemoveEventTreeCommand(gui, eventTree);
         }
     }
 }

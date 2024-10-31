@@ -11,7 +11,7 @@ namespace Forest.Visualization.Commands
 
         public override bool CanExecute(object parameter)
         {
-            return true;
+            return Gui.SelectionManager.Selection is EventTree;
         }
 
         public override void Execute(object parameter)
@@ -20,7 +20,7 @@ namespace Forest.Visualization.Commands
             if (parameter is TreeEventType treeEventTypeCasted)
                 treeEventType = treeEventTypeCasted;
 
-            var newTreeEvent = ManipulationService.AddTreeEvent(Gui.ForestAnalysis.EventTree, Gui.SelectionManager.SelectedTreeEvent, treeEventType);
+            var newTreeEvent = ManipulationService.AddTreeEvent(Gui.SelectionManager.Selection as EventTree, Gui.SelectionManager.SelectedTreeEvent, treeEventType);
             Gui.SelectionManager.SelectTreeEvent(newTreeEvent);
         }
     }

@@ -12,9 +12,8 @@ namespace Forest.Gui
         public SelectionManager(ForestGui gui)
         {
             this.gui = gui;
-            SelectedTreeEvent = gui.ForestAnalysis.EventTree.MainTreeEvent;
-            // TODO: Change this once a selection can be made (and estimations can be added/removed)
-            Selection = gui.ForestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().First();
+            SelectedTreeEvent = gui.ForestAnalysis.EventTrees.FirstOrDefault()?.MainTreeEvent;
+            Selection = gui.ForestAnalysis.EventTrees.FirstOrDefault();
         }
 
         public TreeEvent SelectedTreeEvent { get; private set; }

@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Interactivity;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
-namespace Forest.Gui.Export
+namespace Forest.Visualization.Ribbon.IO.Export
 {
     public class FolderDialogBehavior : Behavior<Button>
     {
