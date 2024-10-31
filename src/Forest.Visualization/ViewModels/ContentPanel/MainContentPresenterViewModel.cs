@@ -11,10 +11,23 @@ namespace Forest.Visualization.ViewModels.ContentPanel
             if (gui != null)
             {
                 ProjectExplorerViewModel = ViewModelFactory.CreateProjectExplorerViewModel();
+                gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
+            }
+        }
+
+        private void SelectionManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(SelectionManager.Selection):
+                    OnPropertyChanged(nameof(SelectedContentItem));
+                    break;
             }
         }
 
         public ProjectExplorerViewModel ProjectExplorerViewModel { get; private set; }
+
+        public object SelectedContentItem => Gui?.SelectionManager.Selection;
 
         protected override void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

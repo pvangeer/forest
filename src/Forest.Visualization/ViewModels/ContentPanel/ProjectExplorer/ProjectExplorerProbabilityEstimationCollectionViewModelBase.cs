@@ -7,10 +7,11 @@ using System.Linq;
 using System.Windows.Input;
 using Forest.Data.Estimations;
 using Forest.Visualization.TreeView.ViewModels;
+using Forest.Data.Services;
 
 namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 {
-    public class ProjectExplorerProbabilityEstimationCollectionViewModelBase : PropertiesCollectionViewModelBase
+    public class ProjectExplorerProbabilityEstimationCollectionViewModelBase : ItemsCollectionViewModelBase
     {
         protected readonly ProjectExplorerCommandFactory CommandFactory;
         protected readonly ForestGui Gui;
@@ -41,6 +42,14 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
         public override bool IsExpandable => true;
 
         public override ICommand ToggleIsExpandedCommand => CommandFactory.CreateToggleIsExpandedCommand(this);
+
+        public override bool CanAdd => true;
+
+        public override ICommand AddItemCommand => CommandFactory.CreateCanAlwaysExecuteActionCommand(p =>
+        {
+            var service = new AnalysisManipulationService(Gui.ForestAnalysis);
+            service.AddProbabilityEstimationPerTreeEvent(Gui.ForestAnalysis.EventTree);
+        });
 
         private void EstimationsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {

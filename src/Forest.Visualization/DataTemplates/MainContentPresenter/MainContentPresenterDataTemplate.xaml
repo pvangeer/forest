@@ -18,6 +18,9 @@
                 Content="{Binding ProjectExplorerViewModel}"
                 ContentTemplate="{StaticResource IPropertyCollectionTreeNodesDataTemplate}"/>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="10" />
+            <ContentPresenter
+                Grid.Column="2"
+                Content="{Binding SelectedContentItem}"/>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

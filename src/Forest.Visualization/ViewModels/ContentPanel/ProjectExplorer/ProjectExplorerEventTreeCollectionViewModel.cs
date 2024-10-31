@@ -7,7 +7,7 @@ using Forest.Visualization.TreeView.Data;
 
 namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 {
-    public class ProjectExplorerEventTreeCollectionViewModel : PropertiesCollectionViewModelBase
+    public class ProjectExplorerEventTreeCollectionViewModel : ItemsCollectionViewModelBase
     {
         protected readonly ProjectExplorerCommandFactory ProjectExplorerCommandFactory;
         private readonly ForestGui gui;

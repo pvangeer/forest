@@ -28,5 +28,10 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
                 ExecuteAction = action
             };
         }
+
+        public ICommand CreateSelectItemCommand(ISelectable selectable)
+        {
+            return new SelectItemCommand(gui.SelectionManager, selectable);
+        }
     }
 }

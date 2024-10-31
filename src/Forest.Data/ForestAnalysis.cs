@@ -28,7 +28,8 @@ namespace Forest.Data
             {
                 new ProbabilityEstimationPerTreeEvent
                 {
-                    EventTree = tree
+                    EventTree = tree,
+                    Name = "Faalkansinschatting per gebeurtenis"
                 }
             };
         }
