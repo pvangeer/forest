@@ -53,7 +53,7 @@ namespace Forest.Visualization.ViewModels
 
         public ITreeNodeViewModel CreateProjectExplorerEstimationItemViewModel(ProbabilityEstimation estimation)
         {
-            return new ProjectExplorerEstimationItemViewModel(estimation, this);
+            return new ProjectExplorerEstimationItemViewModel(estimation, gui);
         }
 
         public MainContentPresenterViewModel CreateMainContentPresenterViewModel()

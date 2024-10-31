@@ -415,5 +415,8 @@
     <Resource Include="Resources\Operations\plus.png" />
     <Resource Include="Resources\Operations\remove.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ProjectExplorer\probability_estimation.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

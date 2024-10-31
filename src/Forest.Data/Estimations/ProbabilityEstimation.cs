@@ -2,5 +2,6 @@
 {
     public class ProbabilityEstimation : Entity
     {
+        public string Name { get; set; }
     }
 }

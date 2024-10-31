@@ -14,8 +14,6 @@ namespace Forest.Data.Estimations.PerTreeEvent
             Estimations = new ObservableCollection<TreeEventProbabilityEstimation>();
         }
 
-        public string Name { get; set; }
-
         public EventTree EventTree { get; set; }
 
         public ObservableCollection<Expert> Experts { get; }
