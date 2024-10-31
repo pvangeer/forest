@@ -1,12 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Reflection;
+using Forest.Data;
 using Forest.Visualization.TreeView.Data;
 
 namespace Forest.Visualization.TreeView.ViewModels
 {
     public class SliderPropertyValueTreeNodeViewModel<TContent> : PropertyValueTreeNodeViewModelBase,
-        ISliderPropertyTreeNodeViewModel where TContent : INotifyPropertyChangedImplementation
+        ISliderPropertyTreeNodeViewModel where TContent : Entity
     {
         private readonly PropertyInfo propertyInfo;
         private TContent content;

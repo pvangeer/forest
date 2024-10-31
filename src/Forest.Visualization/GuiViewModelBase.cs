@@ -8,7 +8,7 @@ namespace Forest.Visualization
     {
         protected readonly ForestGui Gui;
 
-        protected GuiViewModelBase(ViewModelFactory factory, ForestGui gui) : base(factory)
+        protected GuiViewModelBase(ForestGui gui) : base(new ViewModelFactory(gui))
         {
             Gui = gui;
             if (gui != null)

@@ -15,11 +15,11 @@ namespace Forest.Visualization.ViewModels
     {
         private MessageListViewModel messageListViewModel;
 
-        public StatusBarViewModel() : this(null, new ForestGui())
+        public StatusBarViewModel() : this(new ForestGui())
         {
         }
 
-        public StatusBarViewModel(ViewModelFactory factory, ForestGui gui) : base(factory, gui)
+        public StatusBarViewModel(ForestGui gui) : base(gui)
         {
             if (Gui != null)
             {

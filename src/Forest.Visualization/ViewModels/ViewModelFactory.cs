@@ -1,4 +1,6 @@
-﻿using Forest.Gui;
+﻿using Forest.Data.Estimations;
+using Forest.Data.Tree;
+using Forest.Gui;
 using Forest.Visualization.TreeView.Data;
 using Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer;
 
@@ -15,12 +17,12 @@ namespace Forest.Visualization.ViewModels
 
         public ITreeNodeViewModel CreateProjectExplorerEventTreeCollectionViewModel()
         {
-            throw new System.NotImplementedException();
+            return new ProjectExplorerEventTreeCollectionViewModel(gui);
         }
 
-        public ITreeNodeViewModel CreateProjectExplorerProbabilityAnalysisCollectionViewModel()
+        public ITreeNodeViewModel CreateProjectExplorerProbabilityEstimationCollectionViewModel()
         {
-            throw new System.NotImplementedException();
+            return new ProjectExplorerProbabilityEstimationCollectionViewModel(gui);
         }
 
         public ProjectExplorerViewModel CreateProjectExplorerViewModel()
@@ -30,22 +32,40 @@ namespace Forest.Visualization.ViewModels
 
         public ContentPresenterViewModel CreateContentPresenterViewModel()
         {
-            return new ContentPresenterViewModel(this, gui);
+            return new ContentPresenterViewModel(gui);
         }
 
         public BusyOverlayViewModel CreateBusyOverlayViewModel()
         {
-            return new BusyOverlayViewModel(this, gui);
+            return new BusyOverlayViewModel(gui);
         }
 
         public RibbonViewModel CreateRibbonViewModel()
         {
-            return new RibbonViewModel(this, gui);
+            return new RibbonViewModel(gui);
         }
 
         public StatusBarViewModel CreateStatusBarViewModel()
         {
-            return new StatusBarViewModel(this, gui);
+            return new StatusBarViewModel(gui);
+        }
+
+        public ITreeNodeViewModel CreateProjectExplorerEventTreeNodeViewModel(EventTree eventTree)
+        {
+            return new ProjectExplorerEventTreeNodeViewModel(eventTree, gui);
+        }
+
+        public ITreeNodeViewModel CreateProjectExplorerEstimationItemViewModel(ProbabilityEstimation estimation)
+        {
+            return new ProjectExplorerEstimationItemViewModel(estimation, this);
+        }
+    }
+
+    public class ProjectExplorerEstimationItemViewModel : PropertiesCollectionViewModelBase
+    {
+        public ProjectExplorerEstimationItemViewModel(ProbabilityEstimation estimation, ViewModelFactory factory) : base(factory)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

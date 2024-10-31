@@ -1,34 +1,27 @@
 ﻿using System.ComponentModel;
-using Forest.Data;
 using Forest.Gui;
 using Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer;
 
 namespace Forest.Visualization.ViewModels.ContentPanel
 {
-    public class MainContentPresenterViewModel : Entity
+    public class MainContentPresenterViewModel : GuiViewModelBase
     {
-        private readonly ForestGui gui;
-        private readonly ViewModelFactory viewModelFactory;
-
-        public MainContentPresenterViewModel(ForestGui gui)
+        public MainContentPresenterViewModel(ForestGui gui) : base(gui)
         {
-            this.gui = gui;
             if (gui != null)
             {
-                gui.PropertyChanged += GuiPropertyChanged;
-                viewModelFactory = new ViewModelFactory(gui);
-                ProjectExplorerViewModel = viewModelFactory.CreateProjectExplorerViewModel();
+                ProjectExplorerViewModel = ViewModelFactory.CreateProjectExplorerViewModel();
             }
         }
 
         public ProjectExplorerViewModel ProjectExplorerViewModel { get; private set; }
 
-        private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
                 case nameof(ForestGui.ForestAnalysis):
-                    ProjectExplorerViewModel = viewModelFactory.CreateProjectExplorerViewModel();
+                    ProjectExplorerViewModel = ViewModelFactory.CreateProjectExplorerViewModel();
                     OnPropertyChanged(nameof(ProjectExplorerViewModel));
                     break;
             }

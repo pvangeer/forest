@@ -10,11 +10,11 @@ namespace Forest.Visualization.ViewModels
     {
         private readonly CommandFactory commandFactory;
 
-        public RibbonViewModel() : this(null, new ForestGui())
+        public RibbonViewModel() : this(new ForestGui())
         {
         }
 
-        public RibbonViewModel(ViewModelFactory factory, ForestGui gui) : base(factory, gui)
+        public RibbonViewModel(ForestGui gui) : base(gui)
         {
             if (Gui != null)
             {

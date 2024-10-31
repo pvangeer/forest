@@ -5,11 +5,11 @@ namespace Forest.Visualization
 {
     public class ViewModelBase : Entity
     {
-        protected readonly ViewModelFactory Factory;
+        protected readonly ViewModelFactory ViewModelFactory;
 
-        protected ViewModelBase(ViewModelFactory factory)
+        protected ViewModelBase(ViewModelFactory viewModelFactory)
         {
-            Factory = factory;
+            ViewModelFactory = viewModelFactory;
         }
     }
 }

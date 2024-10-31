@@ -2,12 +2,13 @@
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Media;
+using Forest.Data;
 using Forest.Visualization.TreeView.Data;
 
 namespace Forest.Visualization.TreeView.ViewModels
 {
     public class FontFamilyPropertyValueTreeNodeViewModel<TContent> : PropertyValueTreeNodeViewModelBase,
-        IFontFamilyPropertyTreeNodeViewModel where TContent : INotifyPropertyChangedImplementation
+        IFontFamilyPropertyTreeNodeViewModel where TContent : Entity
     {
         private readonly PropertyInfo propertyInfo;
         private TContent content;

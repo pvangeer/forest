@@ -135,6 +135,8 @@
     <Compile Include="Converters\GuiStateToViewModelConverter.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenterViewModel.cs" />
+    <Compile Include="Commands\CanAlwaysExecuteActionCommand.cs" />
+    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerCommandFactory.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\PropertiesCollectionViewModelBase.cs" />
     <Compile Include="ViewModels\HydrodynamicsViewModel.cs" />
@@ -152,6 +154,10 @@
     <Compile Include="Ribbon\IO\Export\SelectFileLocationCommand.cs" />
     <Compile Include="Ribbon\IO\Import\ImportElicitationFormsCommand.cs" />
     <Compile Include="ViewModels\MessageListViewModel.cs" />
+    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEventTreeCollectionViewModel.cs" />
+    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEventTreeNodeViewModel.cs" />
+    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerProbabilityEstimationCollectionViewModelBase.cs" />
+    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerProbabilityEstimationCollectionViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\ContentPresenterViewModel.cs" />
     <Compile Include="Converters\BooleanToBrushConverter.cs" />

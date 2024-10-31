@@ -14,7 +14,7 @@ namespace Forest.Visualization.ViewModels
     {
         private readonly AnalysisManipulationService analysisManipulationService;
 
-        public ContentPresenterViewModel(ViewModelFactory factory,ForestGui gui) : base(factory, gui)
+        public ContentPresenterViewModel(ForestGui gui) : base(gui)
         {
             if (Gui != null)
             {

@@ -1,14 +1,20 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Forest.Data;
+using Forest.Gui;
 using Forest.Visualization.TreeView.Data;
 using Forest.Visualization.TreeView.ViewModels;
 
 namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 {
-    public abstract class PropertiesCollectionViewModelBase : Entity, ITreeNodeCollectionViewModel
+    public class PropertiesCollectionViewModelBase : ViewModelBase, ITreeNodeCollectionViewModel
     {
         private bool isExpanded = true;
+
+        protected PropertiesCollectionViewModelBase(ViewModelFactory factory) : base(factory)
+        {
+            Items = new ObservableCollection<ITreeNodeViewModel>();
+            ContextMenuItems = new ObservableCollection<ContextMenuItemViewModel>();
+        }
 
         public virtual bool IsExpandable => false;
 
@@ -51,13 +57,16 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 
         public ICommand OpenViewCommand => null;
 
-        public virtual ObservableCollection<ContextMenuItemViewModel> ContextMenuItems =>
-            new ObservableCollection<ContextMenuItemViewModel>();
+        public ObservableCollection<ContextMenuItemViewModel> ContextMenuItems { get; protected set; }
 
-        public abstract bool IsViewModelFor(object item);
+        public virtual bool IsViewModelFor(object item)
+        {
+            return false;
+        }
 
-        public virtual ObservableCollection<ITreeNodeViewModel> Items => new ObservableCollection<ITreeNodeViewModel>();
+        public ObservableCollection<ITreeNodeViewModel> Items { get; protected set; }
 
-        public abstract CollectionType CollectionType { get; }
+        public CollectionType CollectionType => CollectionType.PropertyItemsCollection;
+
     }
 }

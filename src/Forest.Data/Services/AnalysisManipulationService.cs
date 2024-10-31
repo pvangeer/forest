@@ -104,5 +104,14 @@ namespace Forest.Data.Services
 
             return newTreeEvent;
         }
+
+        public void AddProbabilityEstimationPerTreeEvent(EventTree eventTree)
+        {
+            forestAnalysis.ProbabilityEstimations.Add(new ProbabilityEstimationPerTreeEvent
+            {
+                Name = "Nieuwe faalkansinschatting",
+                EventTree = eventTree,
+            });
+        }
     }
 }

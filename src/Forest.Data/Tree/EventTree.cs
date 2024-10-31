@@ -1,13 +1,12 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Forest.Data.Properties;
 using Forest.Data.Services;
 
 namespace Forest.Data.Tree
 {
     public class EventTree : Entity
     {
+        public string Name { get; set; }
+
         public TreeEvent MainTreeEvent { get; set; }
 
         public event EventHandler<TreeEventsChangedEventArgs> TreeEventsChanged;

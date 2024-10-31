@@ -1,15 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Reflection;
+using Forest.Data;
 using Forest.Visualization.TreeView.Data;
 
 namespace Forest.Visualization.TreeView.ViewModels
 {
     public class StringPropertyValueTreeNodeViewModel<TContent> : PropertyValueTreeNodeViewModelBase,
-        IStringPropertyTreeNodeViewModel where TContent : INotifyPropertyChangedImplementation
+        IStringPropertyTreeNodeViewModel where TContent : Entity
     {
         private readonly PropertyInfo propertyInfo;
-        private INotifyPropertyChangedImplementation content;
+        private Entity content;
 
         public StringPropertyValueTreeNodeViewModel(TContent content, string propertyName, string displayName)
             : base(displayName)
@@ -22,7 +23,7 @@ namespace Forest.Visualization.TreeView.ViewModels
             if (Content != null) Content.PropertyChanged += ContentPropertyChanged;
         }
 
-        public INotifyPropertyChangedImplementation Content
+        public Entity Content
         {
             get => content;
             set

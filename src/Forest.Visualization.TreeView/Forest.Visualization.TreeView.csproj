@@ -102,7 +102,6 @@
     <Compile Include="Data\IExpandable.cs" />
     <Compile Include="ViewModels\IFontFamilyPropertyTreeNodeViewModel.cs" />
     <Compile Include="ViewModels\ILineStylePropertyTreeNodeViewModel.cs" />
-    <Compile Include="Data\INotifyPropertyChangedImplementation.cs" />
     <Compile Include="Data\ISliderPropertyTreeNodeViewModel.cs" />
     <Compile Include="Data\IStringPropertyTreeNodeViewModel.cs" />
     <Compile Include="Data\ITreeNodeCollectionViewModel.cs" />

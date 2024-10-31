@@ -9,26 +9,16 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
     {
         private readonly ForestGui gui;
 
-        public ProjectExplorerViewModel(ForestGui gui)
+        public ProjectExplorerViewModel(ForestGui gui) : base(new ViewModelFactory(gui))
         {
             this.gui = gui;
-            var viewModelFactory = new ViewModelFactory(gui);
             Items = new ObservableCollection<ITreeNodeViewModel>
             {
-                viewModelFactory.CreateProjectExplorerEventTreeCollectionViewModel(),
-                viewModelFactory.CreateProjectExplorerProbabilityAnalysisCollectionViewModel(),
+                ViewModelFactory.CreateProjectExplorerEventTreeCollectionViewModel(),
+                ViewModelFactory.CreateProjectExplorerProbabilityEstimationCollectionViewModel(),
             };
 
             gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
-        }
-
-        public override ObservableCollection<ITreeNodeViewModel> Items { get; }
-
-        public override CollectionType CollectionType => CollectionType.PropertyItemsCollection;
-
-        public override bool IsViewModelFor(object item)
-        {
-            return false;
         }
 
         private void SelectionManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
