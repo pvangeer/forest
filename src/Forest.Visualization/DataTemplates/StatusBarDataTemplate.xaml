@@ -3,15 +3,15 @@
                     xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
                     xmlns:fluent="urn:fluent-ribbon"
                     xmlns:components="clr-namespace:Forest.Gui;assembly=Forest.Gui"
-                    xmlns:converters="clr-namespace:Forest.Visualization.Converters">
+                    xmlns:taskbar="clr-namespace:Forest.Visualization.Converters.Taskbar">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MessageDataTemplates.xaml" />
         <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/General/SpinnerStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <converters:ShouldShowPriorityMessageToBoolConverter x:Key="ShouldShowPriorityMessageToBoolConverter" />
-    <converters:MessageListToLabelConverter x:Key="MessageListToLabelConverter" />
+    <taskbar:ShouldShowPriorityMessageToBoolConverter x:Key="ShouldShowPriorityMessageToBoolConverter" />
+    <taskbar:MessageListToLabelConverter x:Key="MessageListToLabelConverter" />
 
     <DataTemplate x:Key="StatusBarDataTemplate" DataType="{x:Type viewModels:StatusBarViewModel}">
         <fluent:StatusBar

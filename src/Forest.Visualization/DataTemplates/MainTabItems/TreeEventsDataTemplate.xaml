@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
                     xmlns:viewModels1="clr-namespace:Forest.Visualization.ViewModels"
-                    xmlns:eventTree="clr-namespace:Forest.Visualization.DataTemplates.MainTabItems.EventTree">
+                    xmlns:eventTree="clr-namespace:Forest.Visualization.DataTemplates.MainContentPresenter.EventTree">
 
     <DataTemplate x:Key="TreeEventViewModelTemplate" DataType="viewModels1:TreeEventViewModelOld">
         <Grid />

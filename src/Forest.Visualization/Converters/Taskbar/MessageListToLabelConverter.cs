@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using Forest.Visualization.ViewModels;
 
-namespace Forest.Visualization.Converters
+namespace Forest.Visualization.Converters.Taskbar
 {
     public class MessageListToLabelConverter : IValueConverter
     {

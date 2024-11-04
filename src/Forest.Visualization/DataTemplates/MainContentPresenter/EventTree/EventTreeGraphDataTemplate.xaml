@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mainContentPanel="clr-namespace:Forest.Visualization.ViewModels.MainContentPanel"
                     xmlns:controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
-                    xmlns:eventTree="clr-namespace:Forest.Visualization.DataTemplates.MainTabItems.EventTree">
+                    xmlns:eventTree="clr-namespace:Forest.Visualization.DataTemplates.MainContentPresenter.EventTree">
     <DataTemplate DataType="{x:Type mainContentPanel:EventTreeMainContentViewModel}" x:Key="EventTreeGraphDataTemplate">
         <controls:ZoomControl ZoomDeltaMultiplier="5">
             <controls:ZoomControl.Resources>

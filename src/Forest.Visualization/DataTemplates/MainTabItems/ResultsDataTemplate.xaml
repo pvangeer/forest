@@ -3,8 +3,8 @@
                     xmlns:oxy="http://oxyplot.org/wpf"
                     xmlns:controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
                     xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
-                    xmlns:eventTree="clr-namespace:Forest.Visualization.DataTemplates.MainTabItems.EventTree"
-                    xmlns:converters="clr-namespace:Forest.Visualization.Converters">
+                    xmlns:converters="clr-namespace:Forest.Visualization.Converters"
+                    xmlns:eventTree="clr-namespace:Forest.Visualization.DataTemplates.MainContentPresenter.EventTree">
 
     <converters:CriticalPathToProbabilityTextConverter x:Key="CriticalPathToProbabilityTextConverter" />
 

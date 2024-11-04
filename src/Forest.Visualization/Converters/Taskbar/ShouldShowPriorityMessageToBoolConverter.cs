@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using Forest.Messaging;
 
-namespace Forest.Visualization.Converters
+namespace Forest.Visualization.Converters.Taskbar
 {
     public class ShouldShowPriorityMessageToBoolConverter : IValueConverter
     {

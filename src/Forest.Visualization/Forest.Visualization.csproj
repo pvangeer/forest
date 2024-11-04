@@ -69,18 +69,11 @@
       <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -126,9 +119,9 @@
     <Compile Include="Commands\Project\SaveProjectCommand.cs" />
     <Compile Include="Commands\Taskbar\ShowMessageListCommand.cs" />
     <Compile Include="Commands\EventTrees\TreeEventClickedCommand.cs" />
-    <Compile Include="Converters\MessageListToLabelConverter.cs" />
+    <Compile Include="Converters\Taskbar\MessageListToLabelConverter.cs" />
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
-    <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
+    <Compile Include="Converters\Taskbar\ShouldShowPriorityMessageToBoolConverter.cs" />
     <Compile Include="Dialogs\FileDialogFactory.cs" />
     <Compile Include="MainContentTemplateSelector.cs" />
     <Compile Include="ViewModelBase.cs" />
@@ -346,10 +339,6 @@
     <ProjectReference Include="..\Forest.Messaging\Forest.Messaging.csproj">
       <Project>{7F6BB180-3B8C-4761-8BB6-E7562FB37895}</Project>
       <Name>Forest.Messaging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Forest.Storage\Forest.Storage.csproj">
-      <Project>{a5c2b4e5-1758-4b14-800e-e3f2aa64ea64}</Project>
-      <Name>Forest.Storage</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forest.Visualization.TreeView\Forest.Visualization.TreeView.csproj">
       <Project>{140124E3-8D13-4122-BF1E-C78743BD45E0}</Project>
