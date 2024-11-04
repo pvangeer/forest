@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows.Input;
 using Forest.Visualization.ViewModels;
 
-namespace Forest.Visualization.Commands
+namespace Forest.Visualization.Commands.Taskbar
 {
     public class RemoveAllMessagesCommand : ICommand
     {

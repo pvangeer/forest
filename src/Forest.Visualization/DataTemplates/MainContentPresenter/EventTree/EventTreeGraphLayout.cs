@@ -21,6 +21,7 @@
 
 using System;
 using Forest.Visualization.ViewModels;
+using Forest.Visualization.ViewModels.MainContentPanel;
 using GraphSharp.Algorithms.Layout;
 using GraphSharp.Algorithms.Layout.Simple.Tree;
 using GraphSharp.Algorithms.OverlapRemoval;

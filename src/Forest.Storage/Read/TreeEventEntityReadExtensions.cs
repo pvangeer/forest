@@ -20,8 +20,6 @@ namespace Forest.Storage.Read
             {
                 Summary = entity.Summary,
                 Information = entity.Information,
-                Discussion = entity.Discussion
-                // TODO: Add PassPhrase
             };
 
             if (entity.FailingEvent != null)

@@ -10,7 +10,7 @@
 
     <converters:CriticalPathToPlotModelConverter x:Key="CriticalPathToPlotModelConverter" />
 
-    <DataTemplate x:Key="TreeEventViewModelTemplate" DataType="viewModels:TreeEventViewModel">
+    <DataTemplate x:Key="TreeEventViewModelTemplate" DataType="viewModels:TreeEventViewModelOld">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

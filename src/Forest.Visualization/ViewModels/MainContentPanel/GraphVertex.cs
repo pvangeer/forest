@@ -1,11 +1,5 @@
-﻿using QuickGraph;
-
-namespace Forest.Visualization.ViewModels
+﻿namespace Forest.Visualization.ViewModels.MainContentPanel
 {
-    public class EventTreeGraph : BidirectionalGraph<GraphVertex, TreeEventConnector>
-    {
-    }
-
     public class GraphVertex
     {
         public GraphVertex(bool isPassingEndPoint)

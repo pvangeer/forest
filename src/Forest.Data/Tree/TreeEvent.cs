@@ -16,7 +16,5 @@
         public string Summary { get; set; }
 
         public string Information { get; set; }
-
-        public string Discussion { get; set; }
     }
 }

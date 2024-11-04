@@ -2,10 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:mainTabItems="clr-namespace:Forest.Visualization.DataTemplates.MainTabItems"
-                    xmlns:commands="clr-namespace:Forest.Visualization.Commands"
                     xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels">
 
-    <commands:SelectTodayCommand x:Key="SelectTodayCommand" />
     <DataTemplate x:Key="GeneralInformationDataTemplate" DataType="{x:Type viewModels:ContentPresenterViewModel}">
         <Grid>
             <Grid.RowDefinitions>

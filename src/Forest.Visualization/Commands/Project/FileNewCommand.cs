@@ -2,25 +2,24 @@
 using System.Windows.Input;
 using Forest.Gui;
 
-namespace Forest.Visualization.Commands
+namespace Forest.Visualization.Commands.Project
 {
-    public class SaveProjectAsCommand : ICommand
+    public class FileNewCommand : ICommand
     {
         private readonly ForestGui gui;
-
-        public SaveProjectAsCommand(ForestGui gui)
+        public FileNewCommand(ForestGui gui)
         {
             this.gui = gui;
         }
 
         public bool CanExecute(object parameter)
         {
-            return gui.ForestAnalysis != null;
+            return true;
         }
 
         public void Execute(object parameter)
         {
-            gui.GuiProjectServices.SaveProjectAs();
+            gui.GuiProjectServices.NewProject();
         }
 
         public event EventHandler CanExecuteChanged;

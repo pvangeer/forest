@@ -19,7 +19,6 @@ namespace Forest.Storage.Create
                 Name = model.Name.DeepClone(),
                 Summary = model.Summary.DeepClone(),
                 Information = model.Information.DeepClone(),
-                Discussion = model.Discussion.DeepClone()
             };
 
             if (model.FailingEvent != null)

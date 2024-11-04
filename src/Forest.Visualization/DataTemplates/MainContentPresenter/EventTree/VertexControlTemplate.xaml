@@ -6,8 +6,8 @@
     xmlns:graphSharpControls="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
     xmlns:wpfExtensionsAttachedBehaviours="clr-namespace:WPFExtensions.AttachedBehaviours;assembly=WPFExtensions"
     xmlns:fluent="urn:fluent-ribbon"
-    xmlns:viewModels1="clr-namespace:Forest.Visualization.ViewModels"
-    xmlns:converters="clr-namespace:Forest.Visualization.Converters">
+    xmlns:converters="clr-namespace:Forest.Visualization.Converters"
+    xmlns:mainContentPanel="clr-namespace:Forest.Visualization.ViewModels.MainContentPanel">
 
     <converters:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
 
@@ -32,13 +32,13 @@
                                         FalseBrush="{StaticResource UnSelectedBorderBrush}"
                                         TrueBrush="{StaticResource SelectedBorderBrush}" />
 
-    <DataTemplate x:Key="TreeEventDataTemplate" DataType="viewModels1:TreeEventViewModel">
+    <DataTemplate x:Key="TreeEventDataTemplate" DataType="{x:Type mainContentPanel:TreeEventViewModel}">
         <Grid Width="200" IsSharedSizeScope="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" SharedSizeGroup="eventSharedHeightGroup" />
             </Grid.RowDefinitions>
             <Border
-                BorderBrush="{StaticResource UnSelectedBorderBrush}"
+                BorderBrush="{Binding IsSelected, Converter={StaticResource BooleanToBrushConverter}}"
                 BorderThickness="1"
                 CornerRadius="8"
                 MaxWidth="300">
@@ -87,11 +87,11 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="FailingEndpointTemplate" DataType="viewModels1:GraphVertex">
+    <DataTemplate x:Key="FailingEndpointTemplate" DataType="mainContentPanel:GraphVertex">
         <Image Source="/Forest.Visualization;component\Resources\cross_red.png" Width="32" />
     </DataTemplate>
 
-    <DataTemplate x:Key="PassingEndpointTemplate" DataType="viewModels1:GraphVertex">
+    <DataTemplate x:Key="PassingEndpointTemplate" DataType="mainContentPanel:GraphVertex">
         <Image Source="/Forest.Visualization;component\Resources\check_green.png" Width="32" />
     </DataTemplate>
 

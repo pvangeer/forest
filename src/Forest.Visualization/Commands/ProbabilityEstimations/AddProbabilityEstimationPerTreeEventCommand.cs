@@ -5,7 +5,7 @@ using Forest.Data.Services;
 using Forest.Data.Tree;
 using Forest.Gui;
 
-namespace Forest.Visualization.Commands
+namespace Forest.Visualization.Commands.ProbabilityEstimations
 {
     public class AddProbabilityEstimationPerTreeEventCommand : ICommand
     {

@@ -84,9 +84,9 @@ namespace Forest.Visualization.ViewModels
 
         private ForestAnalysis ForestAnalysis => Gui.ForestAnalysis;
 
-        public EventTreeViewModel EventTreeViewModel { get; set; }
+        public EventTreeViewModelOld EventTreeViewModel { get; set; }
 
-        public TreeEventViewModel SelectedTreeEvent => EventTreeViewModel.SelectedTreeEvent;
+        public TreeEventViewModelOld SelectedTreeEvent => EventTreeViewModel.SelectedTreeEvent;
 
         public ExpertsViewModel ExpertsViewModel { get; }
 

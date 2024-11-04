@@ -9,7 +9,7 @@ namespace Forest.Visualization.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is EventTreeViewModel eventTreeViewModel))
+            if (!(value is EventTreeViewModelOld eventTreeViewModel))
                 return null;
 
             return eventTreeViewModel.MainTreeEventViewModel;

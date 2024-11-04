@@ -4,7 +4,7 @@ using System.Windows.Input;
 using Forest.Data.Services;
 using Forest.Gui;
 
-namespace Forest.Visualization.Commands
+namespace Forest.Visualization.Commands.EventTrees
 {
     public abstract class EventTreeCommand : ICommand
     {

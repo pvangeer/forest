@@ -1,7 +1,7 @@
 using Forest.Data.Tree;
 using Forest.Gui;
 
-namespace Forest.Visualization.Commands
+namespace Forest.Visualization.Commands.EventTrees
 {
     public class RemoveTreeEventCommand : EventTreeCommand
     {
@@ -11,7 +11,7 @@ namespace Forest.Visualization.Commands
 
         public override bool CanExecute(object parameter)
         {
-            return Gui.SelectionManager.Selection is EventTree && Gui.SelectionManager.SelectedTreeEvent != ((EventTree)Gui.SelectionManager.Selection).MainTreeEvent;
+            return Gui.SelectionManager.Selection is EventTree;
         }
 
         public override void Execute(object parameter)

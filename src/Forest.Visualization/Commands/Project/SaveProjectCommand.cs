@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Windows.Input;
 using Forest.Gui;
-using Forest.Visualization.ViewModels;
 
-namespace Forest.Visualization.Commands
+namespace Forest.Visualization.Commands.Project
 {
-    public class OpenProjectCommand : ICommand
+    public class SaveProjectCommand : ICommand
     {
         private readonly ForestGui gui;
 
-        public OpenProjectCommand(ForestGui gui)
+        public SaveProjectCommand(ForestGui gui)
         {
             this.gui = gui;
         }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return gui.ForestAnalysis != null;
         }
 
         public void Execute(object parameter)
         {
-            gui.GuiProjectServices.OpenProject();
+            gui.GuiProjectServices.SaveProject();
         }
 
         public event EventHandler CanExecuteChanged;

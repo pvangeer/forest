@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Windows.Input;
-using Forest.Data.Services;
 using Forest.Gui;
 
-namespace Forest.Visualization.Commands
+namespace Forest.Visualization.Commands.Project
 {
-    public class AddEventTreeCommand : ICommand
+    public class OpenProjectCommand : ICommand
     {
         private readonly ForestGui gui;
 
-        public AddEventTreeCommand(ForestGui gui)
+        public OpenProjectCommand(ForestGui gui)
         {
             this.gui = gui;
         }
@@ -21,8 +20,7 @@ namespace Forest.Visualization.Commands
 
         public void Execute(object parameter)
         {
-            var service = new AnalysisManipulationService(gui.ForestAnalysis);
-            gui.SelectionManager.SetSelection(service.AddEventTree());
+            gui.GuiProjectServices.OpenProject();
         }
 
         public event EventHandler CanExecuteChanged;

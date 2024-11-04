@@ -14,9 +14,9 @@
 
     <DataTemplate x:Key="EstimationDataTemplate" DataType="{x:Type viewModels:ContentPresenterViewModel}">
         <DataTemplate.Resources>
-            <DataTemplate x:Key="EstimationPerEventTreeDataTemplate" DataType="viewModels:EventTreeViewModel">
+            <DataTemplate x:Key="EstimationPerEventTreeDataTemplate" DataType="viewModels:EventTreeViewModelOld">
                 <DataTemplate.Resources>
-                    <DataTemplate DataType="viewModels:TreeEventViewModel"
+                    <DataTemplate DataType="viewModels:TreeEventViewModelOld"
                                   x:Key="TreeEventEstimationSpecificationDataTemplate">
                         <DataTemplate.Resources>
                             <!--TODO: Remove template selector and replace for datatriggers in xaml-->

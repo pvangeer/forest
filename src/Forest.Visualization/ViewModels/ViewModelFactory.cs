@@ -1,9 +1,11 @@
 ﻿using Forest.Data.Estimations;
+using Forest.Data.Services;
 using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.TreeView.Data;
 using Forest.Visualization.ViewModels.ContentPanel;
 using Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer;
+using Forest.Visualization.ViewModels.MainContentPanel;
 
 namespace Forest.Visualization.ViewModels
 {
@@ -14,6 +16,11 @@ namespace Forest.Visualization.ViewModels
         public ViewModelFactory(ForestGui gui)
         {
             this.gui = gui;
+        }
+
+        private EventTreeViewModelOld CreateEventTreeMainViewModel(EventTree eventTree)
+        {
+            throw new System.NotImplementedException();
         }
 
         public ITreeNodeViewModel CreateProjectExplorerEventTreeCollectionViewModel()
@@ -59,6 +66,21 @@ namespace Forest.Visualization.ViewModels
         public MainContentPresenterViewModel CreateMainContentPresenterViewModel()
         {
             return new MainContentPresenterViewModel(gui);
+        }
+
+        public object CreateMainContentViewModel(object selection)
+        {
+            if (selection is EventTree eventTree)
+            {
+                return new EventTreeMainContentViewModel(eventTree, gui);
+            }
+
+            return selection;
+        }
+
+        public TreeEventViewModel CreateTreeEventViewModel(TreeEvent treeEvent)
+        {
+            return (treeEvent != null) ? new TreeEventViewModel(treeEvent, gui) : null;
         }
     }
 }

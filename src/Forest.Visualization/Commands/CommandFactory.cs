@@ -4,6 +4,11 @@ using Forest.Visualization.TreeView.Commands;
 using Forest.Visualization.TreeView.Data;
 using System;
 using System.Windows.Input;
+using Forest.Visualization.Commands.EventTrees;
+using Forest.Visualization.Commands.ProbabilityEstimations;
+using Forest.Visualization.Commands.Project;
+using Forest.Visualization.Commands.ProjectExplorer;
+using Forest.Visualization.ViewModels.MainContentPanel;
 
 namespace Forest.Visualization.Commands
 {
@@ -99,5 +104,9 @@ namespace Forest.Visualization.Commands
             return new AddProbabilityEstimationPerTreeEventCommand(gui);
         }
 
+        public ICommand CreateTreeEventClickedCommand(TreeEventViewModel treeEventViewModel)
+        {
+            return new TreeEventClickedCommand(treeEventViewModel);
+        }
     }
 }

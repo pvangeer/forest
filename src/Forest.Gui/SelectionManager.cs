@@ -18,19 +18,18 @@ namespace Forest.Gui
 
         public TreeEvent SelectedTreeEvent { get; private set; }
 
-        // TODO: Maybe merge? Or keep dictionary of selected tree event per eventtree?
+        public void SelectTreeEvent(TreeEvent treeEvent)
+        {
+            SelectedTreeEvent = treeEvent;
+            OnPropertyChanged(nameof(SelectedTreeEvent));
+        }
+
         public object Selection { get; private set; }
 
         public void SetSelection(object selection)
         {
             Selection = selection;
             OnPropertyChanged(nameof(Selection));
-        }
-
-        public void SelectTreeEvent(TreeEvent treeEvent)
-        {
-            SelectedTreeEvent = treeEvent;
-            OnPropertyChanged(nameof(SelectedTreeEvent));
         }
     }
 }

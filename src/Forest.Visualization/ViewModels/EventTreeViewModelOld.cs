@@ -13,19 +13,20 @@ using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.IO.Export;
 using Forest.IO.Import;
+using Forest.Visualization.ViewModels.MainContentPanel;
 
 namespace Forest.Visualization.ViewModels
 {
-    public class EventTreeViewModel : INotifyPropertyChanged
+    public class EventTreeViewModelOld : Entity
     {
         private readonly AnalysisManipulationService analysisManipulationService;
         private readonly ObservableCollection<ProbabilityEstimation> estimations;
         private readonly SelectionManager selectionManager;
         private EventTreeGraph graph;
         private bool isSelected;
-        private TreeEventViewModel mainTreeEventViewModel;
+        private TreeEventViewModelOld mainTreeEventViewModel;
 
-        public EventTreeViewModel(EventTree eventTree)
+        public EventTreeViewModelOld(EventTree eventTree)
         {
             var project = ForestAnalysisFactory.CreateStandardNewAnalysis();
             analysisManipulationService = new AnalysisManipulationService(project);
@@ -34,7 +35,7 @@ namespace Forest.Visualization.ViewModels
             EventTree.TreeEventsChanged += TreeEventsChanged;
         }
 
-        public EventTreeViewModel([NotNull] EventTree eventTree, AnalysisManipulationService analysisManipulationService,
+        public EventTreeViewModelOld([NotNull] EventTree eventTree, AnalysisManipulationService analysisManipulationService,
             SelectionManager selectionManager, ObservableCollection<ProbabilityEstimation> estimations)
         {
             EventTree = eventTree;
@@ -51,7 +52,7 @@ namespace Forest.Visualization.ViewModels
 
         public EventTreeGraph Graph => CreateGraph();
 
-        public TreeEventViewModel SelectedTreeEvent
+        public TreeEventViewModelOld SelectedTreeEvent
         {
             get => FindTreeEventViewModel(selectionManager.SelectedTreeEvent);
             set
@@ -72,7 +73,7 @@ namespace Forest.Visualization.ViewModels
             }
         }
 
-        public TreeEventViewModel MainTreeEventViewModel
+        public TreeEventViewModelOld MainTreeEventViewModel
         {
             get
             {
@@ -81,11 +82,11 @@ namespace Forest.Visualization.ViewModels
 
                 return mainTreeEventViewModel ??
                        (mainTreeEventViewModel =
-                           new TreeEventViewModel(EventTree.MainTreeEvent, this, analysisManipulationService, estimations));
+                           new TreeEventViewModelOld(EventTree.MainTreeEvent, this, analysisManipulationService, estimations));
             }
         }
 
-        public IEnumerable<TreeEventViewModel> AllTreeEvents => GetAllEventsRecursive(MainTreeEventViewModel);
+        public IEnumerable<TreeEventViewModelOld> AllTreeEvents => GetAllEventsRecursive(MainTreeEventViewModel);
 
         public EstimationSpecificationViewModelFactory EstimationSpecificationViewModelFactory { get; set; }
 
@@ -119,7 +120,7 @@ namespace Forest.Visualization.ViewModels
             return selectionManager.Selection as ProbabilityEstimationPerTreeEvent;
         }
 
-        private TreeEventViewModel FindTreeEventViewModel(TreeEvent treeEvent)
+        private TreeEventViewModelOld FindTreeEventViewModel(TreeEvent treeEvent)
         {
             return treeEvent == null ? null : AllTreeEvents?.FirstOrDefault(e => e.TreeEvent == treeEvent);
         }
@@ -133,12 +134,12 @@ namespace Forest.Visualization.ViewModels
             return graph;
         }
 
-        private void DrawNode(TreeEventViewModel treeEventViewModel, GraphVertex parent = null)
+        private void DrawNode(TreeEventViewModelOld treeEventViewModel, GraphVertex parent = null)
         {
             if (treeEventViewModel == null)
                 return;
 
-            var vertex = new GraphVertex(treeEventViewModel);
+            /*var vertex = new GraphVertex(treeEventViewModel);
             graph.AddVertex(vertex);
             if (parent != null)
                 graph.AddEdge(new TreeEventConnector(parent, vertex));
@@ -163,7 +164,7 @@ namespace Forest.Visualization.ViewModels
                 var lastVertex = new GraphVertex(true);
                 graph.AddVertex(lastVertex);
                 graph.AddEdge(new TreeEventConnector(vertex, lastVertex));
-            }
+            }*/
         }
 
         private void EventTreePropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -190,7 +191,7 @@ namespace Forest.Visualization.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private static IEnumerable<TreeEventViewModel> GetAllEventsRecursive(TreeEventViewModel treeEventViewModel)
+        private static IEnumerable<TreeEventViewModelOld> GetAllEventsRecursive(TreeEventViewModelOld treeEventViewModel)
         {
             var list = new[] { treeEventViewModel };
 

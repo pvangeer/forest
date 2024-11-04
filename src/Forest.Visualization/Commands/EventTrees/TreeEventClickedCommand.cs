@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Windows.Input;
 using Forest.Visualization.ViewModels;
+using Forest.Visualization.ViewModels.MainContentPanel;
 
-namespace Forest.Visualization.Commands
+namespace Forest.Visualization.Commands.EventTrees
 {
     public class TreeEventClickedCommand : ICommand
     {
+        private readonly TreeEventViewModel treeEventViewModel;
+
         public TreeEventClickedCommand(TreeEventViewModel treeEventViewModel)
         {
-            TreeEventViewModel = treeEventViewModel;
+            this.treeEventViewModel = treeEventViewModel;
         }
 
-        public TreeEventViewModel TreeEventViewModel { get; }
-
+        
         public bool CanExecute(object parameter)
         {
             return true;
@@ -20,7 +22,7 @@ namespace Forest.Visualization.Commands
 
         public void Execute(object parameter)
         {
-            TreeEventViewModel.Select();
+            treeEventViewModel.Select();
         }
 
         public event EventHandler CanExecuteChanged;

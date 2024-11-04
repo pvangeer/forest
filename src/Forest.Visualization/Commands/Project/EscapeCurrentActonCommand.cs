@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using Forest.Gui;
 
-namespace Forest.Visualization.Commands
+namespace Forest.Visualization.Commands.Project
 {
     public class EscapeCurrentActionCommand : ICommand
     {

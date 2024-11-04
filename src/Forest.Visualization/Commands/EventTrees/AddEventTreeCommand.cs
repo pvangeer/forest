@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Windows.Input;
+using Forest.Data.Services;
 using Forest.Gui;
-using Forest.Visualization.ViewModels;
 
-namespace Forest.Visualization.Commands
+namespace Forest.Visualization.Commands.EventTrees
 {
-    public class SaveProjectCommand : ICommand
+    public class AddEventTreeCommand : ICommand
     {
         private readonly ForestGui gui;
 
-        public SaveProjectCommand(ForestGui gui)
+        public AddEventTreeCommand(ForestGui gui)
         {
             this.gui = gui;
         }
 
         public bool CanExecute(object parameter)
         {
-            return gui.ForestAnalysis != null;
+            return true;
         }
 
         public void Execute(object parameter)
         {
-            gui.GuiProjectServices.SaveProject();
+            var service = new AnalysisManipulationService(gui.ForestAnalysis);
+            gui.SelectionManager.SetSelection(service.AddEventTree());
         }
 
         public event EventHandler CanExecuteChanged;

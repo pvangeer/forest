@@ -11,11 +11,11 @@ using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Properties;
 using Forest.Data.Services;
 using Forest.Data.Tree;
-using Forest.Visualization.Commands;
+using Forest.Visualization.Commands.EventTrees;
 
 namespace Forest.Visualization.ViewModels
 {
-    public class TreeEventViewModel : INotifyPropertyChanged
+    public class TreeEventViewModelOld : INotifyPropertyChanged
     {
         private static readonly Dictionary<ProbabilitySpecificationType, string> ProbabilitySpecificationTypes =
             Enum.GetValues(typeof(ProbabilitySpecificationType)).Cast<ProbabilitySpecificationType>()
@@ -23,11 +23,11 @@ namespace Forest.Visualization.ViewModels
 
         private readonly AnalysisManipulationService analysisManipulationService;
         private readonly ObservableCollection<ProbabilityEstimation> probabilityEstimations;
-        private TreeEventViewModel failingEventViewModel;
-        private TreeEventViewModel passingEventViewModel;
+        private TreeEventViewModelOld failingEventViewModel;
+        private TreeEventViewModelOld passingEventViewModel;
         private ProbabilitySpecificationViewModelBase probabilityEstimationViewModel;
 
-        public TreeEventViewModel([NotNull] TreeEvent treeEvent, [NotNull] EventTreeViewModel parentEventTreeViewModel,
+        public TreeEventViewModelOld([NotNull] TreeEvent treeEvent, [NotNull] EventTreeViewModelOld parentEventTreeViewModel,
             [NotNull] AnalysisManipulationService analysisManipulationService,
             [NotNull] ObservableCollection<ProbabilityEstimation> probabilityEstimations)
         {
@@ -67,7 +67,7 @@ namespace Forest.Visualization.ViewModels
             }
         }
 
-        public TreeEventViewModel PassingEvent
+        public TreeEventViewModelOld PassingEvent
         {
             get
             {
@@ -75,12 +75,12 @@ namespace Forest.Visualization.ViewModels
                     return null;
 
                 return passingEventViewModel ?? (passingEventViewModel =
-                    new TreeEventViewModel(TreeEvent.PassingEvent, ParentEventTreeViewModel, analysisManipulationService,
+                    new TreeEventViewModelOld(TreeEvent.PassingEvent, ParentEventTreeViewModel, analysisManipulationService,
                         probabilityEstimations));
             }
         }
 
-        public TreeEventViewModel FailingEvent
+        public TreeEventViewModelOld FailingEvent
         {
             get
             {
@@ -88,7 +88,7 @@ namespace Forest.Visualization.ViewModels
                     return null;
 
                 return failingEventViewModel ?? (failingEventViewModel =
-                    new TreeEventViewModel(TreeEvent.FailingEvent, ParentEventTreeViewModel, analysisManipulationService,
+                    new TreeEventViewModelOld(TreeEvent.FailingEvent, ParentEventTreeViewModel, analysisManipulationService,
                         probabilityEstimations));
             }
         }
@@ -101,7 +101,7 @@ namespace Forest.Visualization.ViewModels
 
         public bool HasTwoEvents => TreeEvent.PassingEvent != null && TreeEvent.FailingEvent != null;
 
-        public ICommand TreeEventClickedCommand => new TreeEventClickedCommand(this);
+        //public ICommand TreeEventClickedCommand => new TreeEventClickedCommand(this);
 
         public bool IsSelected => TreeEvent != null && ReferenceEquals(TreeEvent, ParentEventTreeViewModel?.SelectedTreeEvent?.TreeEvent);
 
@@ -143,17 +143,9 @@ namespace Forest.Visualization.ViewModels
             }
         }
 
-        public string Discussion
-        {
-            get => TreeEvent.Discussion;
-            set
-            {
-                TreeEvent.Discussion = value;
-                TreeEvent.OnPropertyChanged();
-            }
-        }
+        public string Discussion { get; set; }
 
-        private EventTreeViewModel ParentEventTreeViewModel { get; }
+        private EventTreeViewModelOld ParentEventTreeViewModel { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -225,9 +217,6 @@ namespace Forest.Visualization.ViewModels
                     break;
                 case nameof(TreeEvent.Information):
                     OnPropertyChanged(nameof(Information));
-                    break;
-                case nameof(TreeEvent.Discussion):
-                    OnPropertyChanged(nameof(Discussion));
                     break;
             }
         }

@@ -12,12 +12,12 @@ namespace Forest.Visualization.Ribbon.IO.Export
 
         public bool CanExecute(object parameter)
         {
-            return parameter is EventTreeViewModel eventTreeViewModel && eventTreeViewModel.SelectedEstimationHasExperts();
+            return parameter is EventTreeViewModelOld eventTreeViewModel && eventTreeViewModel.SelectedEstimationHasExperts();
         }
 
         public void Execute(object parameter)
         {
-            if (!(parameter is EventTreeViewModel eventTreeViewModel))
+            if (!(parameter is EventTreeViewModelOld eventTreeViewModel))
             {
                 Log.Error("Er is iets misgegaan, waardoor exporteren niet mogelijk is.");
                 return;

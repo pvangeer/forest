@@ -10,7 +10,7 @@
 
     <DataTemplate x:Key="TreeEventInformationDataTemplate" DataType="{x:Type viewModels1:ContentPresenterViewModel}">
         <DataTemplate.Resources>
-            <DataTemplate x:Key="TreeEventsInformationTemplate" DataType="viewModels1:EventTreeViewModel">
+            <DataTemplate x:Key="TreeEventsInformationTemplate" DataType="viewModels1:EventTreeViewModelOld">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" MinWidth="100" />

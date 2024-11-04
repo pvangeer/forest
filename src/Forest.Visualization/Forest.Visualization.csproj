@@ -112,35 +112,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusyOverlayViewModel.cs" />
-    <Compile Include="Commands\AddTreeEventCommand.cs" />
+    <Compile Include="Commands\EventTrees\AddTreeEventCommand.cs" />
     <Compile Include="Commands\CommandFactory.cs" />
-    <Compile Include="Commands\EscapeCurrentActonCommand.cs" />
-    <Compile Include="Commands\EventTreeCommand.cs" />
-    <Compile Include="Commands\FileNewCommand.cs" />
-    <Compile Include="Commands\OpenProjectCommand.cs" />
+    <Compile Include="Commands\Project\EscapeCurrentActonCommand.cs" />
+    <Compile Include="Commands\EventTrees\EventTreeCommand.cs" />
+    <Compile Include="Commands\Project\FileNewCommand.cs" />
+    <Compile Include="Commands\Project\OpenProjectCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Commands\RemoveAllMessagesCommand.cs" />
-    <Compile Include="Commands\RemovePriorityMessageCommand.cs" />
-    <Compile Include="Commands\RemoveTreeEventCommand.cs" />
-    <Compile Include="Commands\SaveProjectAsCommand.cs" />
-    <Compile Include="Commands\SaveProjectCommand.cs" />
-    <Compile Include="Commands\SelectTodayCommand.cs" />
-    <Compile Include="Commands\ShowMessageListCommand.cs" />
-    <Compile Include="Commands\TreeEventClickedCommand.cs" />
+    <Compile Include="Commands\Taskbar\RemoveAllMessagesCommand.cs" />
+    <Compile Include="Commands\Taskbar\RemovePriorityMessageCommand.cs" />
+    <Compile Include="Commands\EventTrees\RemoveTreeEventCommand.cs" />
+    <Compile Include="Commands\Project\SaveProjectAsCommand.cs" />
+    <Compile Include="Commands\Project\SaveProjectCommand.cs" />
+    <Compile Include="Commands\Taskbar\ShowMessageListCommand.cs" />
+    <Compile Include="Commands\EventTrees\TreeEventClickedCommand.cs" />
     <Compile Include="Converters\MessageListToLabelConverter.cs" />
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
     <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
     <Compile Include="Dialogs\FileDialogFactory.cs" />
+    <Compile Include="MainContentTemplateSelector.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenterViewModel.cs" />
     <Compile Include="Commands\CanAlwaysExecuteActionCommand.cs" />
-    <Compile Include="Commands\AddEventTreeCommand.cs" />
-    <Compile Include="Commands\AddProbabilityEstimationPerTreeEventCommand.cs" />
+    <Compile Include="Commands\EventTrees\AddEventTreeCommand.cs" />
+    <Compile Include="Commands\ProbabilityEstimations\AddProbabilityEstimationPerTreeEventCommand.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerItemViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ItemsCollectionViewModelBase.cs" />
-    <Compile Include="Commands\RemoveEventTreeCommand.cs" />
-    <Compile Include="Commands\SelectItemCommand.cs" />
+    <Compile Include="Commands\EventTrees\RemoveEventTreeCommand.cs" />
+    <Compile Include="Commands\ProjectExplorer\SelectItemCommand.cs" />
     <Compile Include="ViewModels\HydrodynamicsViewModel.cs" />
     <Compile Include="ViewModels\ExpertsViewModel.cs" />
     <Compile Include="GuiViewModelBase.cs" />
@@ -155,6 +155,8 @@
     <Compile Include="Ribbon\IO\Export\PerformExportElicitationFormsCommand.cs" />
     <Compile Include="Ribbon\IO\Export\SelectFileLocationCommand.cs" />
     <Compile Include="Ribbon\IO\Import\ImportElicitationFormsCommand.cs" />
+    <Compile Include="ViewModels\MainContentPanel\EventTreeMainContentViewModel.cs" />
+    <Compile Include="ViewModels\MainContentPanel\GraphVertex.cs" />
     <Compile Include="ViewModels\MessageListViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEventTreeCollectionViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEventTreeNodeViewModel.cs" />
@@ -177,7 +179,7 @@
     <Compile Include="DataTemplates\MainTabItems\Estimation\EnumerationExtension.cs" />
     <Compile Include="DataTemplates\MainTabItems\EstimationContentTemplateSelector.cs" />
     <Compile Include="DataTemplates\MainTabItems\Estimation\StringToProbabilityClassValidationRule.cs" />
-    <Compile Include="DataTemplates\MainTabItems\EventTree\EventTreeGraphLayout.cs" />
+    <Compile Include="DataTemplates\MainContentPresenter\EventTree\EventTreeGraphLayout.cs" />
     <Compile Include="DataTemplates\MainTabItems\RichTextFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -197,8 +199,8 @@
     </Compile>
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\EstimationSpecificationViewModelFactory.cs" />
-    <Compile Include="ViewModels\EventTreeGraph.cs" />
-    <Compile Include="ViewModels\EventTreeViewModel.cs" />
+    <Compile Include="ViewModels\MainContentPanel\EventTreeGraph.cs" />
+    <Compile Include="ViewModels\EventTreeViewModelOld.cs" />
     <Compile Include="ViewModels\ExpertClassEstimationViewModel.cs" />
     <Compile Include="ViewModels\ExpertViewModel.cs" />
     <Compile Include="ViewModels\FixedFragilityCurveSpecificationViewModel.cs" />
@@ -208,8 +210,9 @@
     <Compile Include="ViewModels\HydrodynamicConditionViewModel.cs" />
     <Compile Include="ViewModels\ProbabilitySpecificationViewModelBase.cs" />
     <Compile Include="ViewModels\RibbonViewModel.cs" />
-    <Compile Include="ViewModels\TreeEventConnector.cs" />
-    <Compile Include="ViewModels\TreeEventViewModel.cs" />
+    <Compile Include="ViewModels\MainContentPanel\TreeEventConnector.cs" />
+    <Compile Include="ViewModels\MainContentPanel\TreeEventViewModel.cs" />
+    <Compile Include="ViewModels\TreeEventViewModelOld.cs" />
     <Compile Include="ViewModels\ViewModelFactory.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -246,6 +249,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="DataTemplates\MainContentPresenter\EventTree\EventTreeGraphDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataTemplates\MainContentPresenter\MainContentPresenterDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -266,11 +273,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DataTemplates\MainTabItems\EventTree\EdgeControlTemplate.xaml">
+    <Page Include="DataTemplates\MainContentPresenter\EventTree\EdgeControlTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DataTemplates\MainTabItems\EventTree\VertexControlTemplate.xaml">
+    <Page Include="DataTemplates\MainContentPresenter\EventTree\VertexControlTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -403,6 +410,7 @@
     <Resource Include="Resources\forest.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DataTemplates\MainTabItems\EventTree\" />
     <Folder Include="ViewModels\Ribbon\" />
     <Folder Include="ViewModels\StatusBar\" />
   </ItemGroup>

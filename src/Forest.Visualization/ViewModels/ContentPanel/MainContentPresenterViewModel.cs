@@ -15,19 +15,9 @@ namespace Forest.Visualization.ViewModels.ContentPanel
             }
         }
 
-        private void SelectionManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(SelectionManager.Selection):
-                    OnPropertyChanged(nameof(SelectedContentItem));
-                    break;
-            }
-        }
-
         public ProjectExplorerViewModel ProjectExplorerViewModel { get; private set; }
 
-        public object SelectedContentItem => Gui?.SelectionManager.Selection;
+        public object SelectedContentItem => ViewModelFactory.CreateMainContentViewModel(Gui?.SelectionManager.Selection);
 
         protected override void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -36,6 +26,16 @@ namespace Forest.Visualization.ViewModels.ContentPanel
                 case nameof(ForestGui.ForestAnalysis):
                     ProjectExplorerViewModel = ViewModelFactory.CreateProjectExplorerViewModel();
                     OnPropertyChanged(nameof(ProjectExplorerViewModel));
+                    break;
+            }
+        }
+
+        private void SelectionManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(SelectionManager.Selection):
+                    OnPropertyChanged(nameof(SelectedContentItem));
                     break;
             }
         }
