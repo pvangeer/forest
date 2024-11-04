@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="FileNameQuestionResult.cs" />
     <Compile Include="ForestGui.cs" />
-    <Compile Include="ForestGuiState.cs" />
     <Compile Include="GuiProjectServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectionManager.cs" />

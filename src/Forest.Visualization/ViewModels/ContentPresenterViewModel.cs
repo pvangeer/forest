@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Forest.Data;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Services;
@@ -10,6 +7,7 @@ using Forest.Gui;
 
 namespace Forest.Visualization.ViewModels
 {
+    // TODO: Remove this viewmodel
     public class ContentPresenterViewModel : GuiViewModelBase
     {
         private readonly AnalysisManipulationService analysisManipulationService;
@@ -22,11 +20,6 @@ namespace Forest.Visualization.ViewModels
 
                 analysisManipulationService = new AnalysisManipulationService(Gui.ForestAnalysis);
 
-                /*EventTreeViewModel = new EventTreeViewModel(ForestAnalysis.EventTrees, analysisManipulationService, Gui.SelectionManager,
-                    gui.ForestAnalysis.ProbabilityEstimations)
-                {
-                    EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(Gui.ForestAnalysis)
-                };*/
                 var probabilityEstimationPerTreeEvent =
                     gui.ForestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().First();
                 ExpertsViewModel =
@@ -89,23 +82,11 @@ namespace Forest.Visualization.ViewModels
             }
         }
 
-        public ObservableCollection<TreeEventProbabilityEstimation> ProbabilityEstimations { get; }
-
         private ForestAnalysis ForestAnalysis => Gui.ForestAnalysis;
 
         public EventTreeViewModel EventTreeViewModel { get; set; }
 
         public TreeEventViewModel SelectedTreeEvent => EventTreeViewModel.SelectedTreeEvent;
-
-        public ForestGuiState SelectedGuiState
-        {
-            get => Gui.SelectedState;
-            set
-            {
-                Gui.SelectedState = value;
-                Gui.OnPropertyChanged(nameof(ForestGui.SelectedState));
-            }
-        }
 
         public ExpertsViewModel ExpertsViewModel { get; }
 
@@ -115,15 +96,7 @@ namespace Forest.Visualization.ViewModels
         {
             switch (e.PropertyName)
             {
-                case nameof(ForestGui.SelectedState):
-                    OnPropertyChanged(nameof(SelectedGuiState));
-                    break;
                 case nameof(ForestGui.ForestAnalysis):
-                    /*EventTreeViewModel = new EventTreeViewModel(ForestAnalysis.EventTrees, analysisManipulationService, Gui.SelectionManager,
-                        Gui.ForestAnalysis.ProbabilityEstimations)
-                    {
-                        EstimationSpecificationViewModelFactory = new EstimationSpecificationViewModelFactory(Gui.ForestAnalysis)
-                    };*/
                     OnPropertyChanged(nameof(EventTreeViewModel));
                     OnPropertyChanged(nameof(SelectedTreeEvent));
                     break;
@@ -134,27 +107,5 @@ namespace Forest.Visualization.ViewModels
         {
             OnPropertyChanged(nameof(SelectedTreeEvent));
         }
-
-        /*private void HydrodynamicsViewModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == NotifyCollectionChangedAction.Add)
-                foreach (var item in e.NewItems.OfType<HydrodynamicConditionViewModel>())
-                    analysisManipulationService.AddHydrodynamicCondition(item.HydrodynamicCondition);
-
-            if (e.Action == NotifyCollectionChangedAction.Remove)
-                foreach (var item in e.OldItems.OfType<HydrodynamicConditionViewModel>())
-                    analysisManipulationService.RemoveHydraulicCondition(item.HydrodynamicCondition);
-        }
-
-        private void ExpertViewModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == NotifyCollectionChangedAction.Add)
-                foreach (var item in e.NewItems.OfType<ExpertViewModel>())
-                    analysisManipulationService.AddExpert(item.Expert);
-
-            if (e.Action == NotifyCollectionChangedAction.Remove)
-                foreach (var item in e.OldItems.OfType<ExpertViewModel>())
-                    analysisManipulationService.RemoveExpert(item.Expert);
-        }*/
     }
 }

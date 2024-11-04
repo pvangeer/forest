@@ -28,8 +28,6 @@ namespace Forest.Gui
 
         public StorageState BusyIndicator { get; set; }
         
-        public ForestGuiState SelectedState { get; set; }
-
         public bool IsSaveToImage { get; set; }
 
         public string ProjectFilePath { get; set; }

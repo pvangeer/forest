@@ -36,11 +36,6 @@ namespace Forest.Visualization.Commands
             return new EscapeCurrentActionCommand(gui);
         }
 
-        public ICommand CreateChangeProcessStepCommand()
-        {
-            return new ChangeProcessStepCommand(gui);
-        }
-
         public ICommand CreateOpenProjectCommand()
         {
             return new OpenProjectCommand(gui);

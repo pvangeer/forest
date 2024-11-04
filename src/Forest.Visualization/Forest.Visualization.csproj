@@ -113,7 +113,6 @@
   <ItemGroup>
     <Compile Include="BusyOverlayViewModel.cs" />
     <Compile Include="Commands\AddTreeEventCommand.cs" />
-    <Compile Include="Commands\ChangeProcessStepCommand.cs" />
     <Compile Include="Commands\CommandFactory.cs" />
     <Compile Include="Commands\EscapeCurrentActonCommand.cs" />
     <Compile Include="Commands\EventTreeCommand.cs" />
@@ -132,7 +131,6 @@
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
     <Compile Include="Converters\ShouldShowPriorityMessageToBoolConverter.cs" />
     <Compile Include="Dialogs\FileDialogFactory.cs" />
-    <Compile Include="Converters\GuiStateToViewModelConverter.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenterViewModel.cs" />
     <Compile Include="Commands\CanAlwaysExecuteActionCommand.cs" />
@@ -175,7 +173,6 @@
     <Compile Include="Converters\FragilityCurveToPlotModelConverter.cs" />
     <Compile Include="Converters\RouteToPathConverterManual.cs" />
     <Compile Include="Converters\SelectedItemToMainTreeEventViewModelConverter.cs" />
-    <Compile Include="Converters\SelectedProcessToCheckedConverter.cs" />
     <Compile Include="Converters\SelectedPropertyToColorConverter.cs" />
     <Compile Include="DataTemplates\MainTabItems\Estimation\EnumerationExtension.cs" />
     <Compile Include="DataTemplates\MainTabItems\EstimationContentTemplateSelector.cs" />
@@ -228,10 +225,6 @@
     <Page Include="DataTemplates\BusyOverlayDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\ContentPresenterDataTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="DataTemplates\General\AssessmentSections.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -23,17 +23,6 @@ namespace Forest.Visualization.ViewModels
             }
         }
 
-        public ForestGuiState SelectedState
-        {
-            get => Gui.SelectedState;
-            set
-            {
-                Gui.SelectedState = value;
-                OnPropertyChanged();
-                Gui.OnPropertyChanged(nameof(ForestGui.SelectedState));
-            }
-        }
-
         public StorageState BusyIndicator
         {
             get => Gui.BusyIndicator;
@@ -53,8 +42,6 @@ namespace Forest.Visualization.ViewModels
 
         public ICommand OpenProjectCommand => commandFactory.CreateOpenProjectCommand();
 
-        public ICommand ChangeProcessStepCommand => commandFactory.CreateChangeProcessStepCommand();
-
         public ICommand RemoveTreeEventCommand => commandFactory.CreateRemoveTreeEventCommand();
 
         public ICommand AddTreeEventCommand => commandFactory.CreateAddTreeEventCommand();
@@ -71,9 +58,6 @@ namespace Forest.Visualization.ViewModels
         {
             switch (e.PropertyName)
             {
-                case nameof(ForestGui.SelectedState):
-                    OnPropertyChanged(nameof(SelectedState));
-                    break;
                 case nameof(ForestGui.BusyIndicator):
                     OnPropertyChanged(nameof(BusyIndicator));
                     break;

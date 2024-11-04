@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fluent="urn:fluent-ribbon"
              xmlns:converters="clr-namespace:Forest.Visualization.Converters"
-             xmlns:gui="clr-namespace:Forest.Gui;assembly=Forest.Gui"
              xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
              xmlns:tree="clr-namespace:Forest.Data.Tree;assembly=Forest.Data"
              mc:Ignorable="d"
@@ -17,7 +16,6 @@
             </ResourceDictionary.MergedDictionaries>
 
             <converters:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
-            <converters:SelectedProcessToCheckedConverter x:Key="SelectedProcessToBoolConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -119,10 +117,7 @@
                         Header="Knoopinformatie"
                         LargeIcon="/Forest.Visualization;component\Resources\tree-event-info.png"
                         Size="Large"
-                        IsEnabled="False"
-                        IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.TreeEventsInformation}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static gui:ForestGuiState.TreeEventsInformation}" />
+                        IsEnabled="False"/>
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 
@@ -134,38 +129,30 @@
                         Header="Experts"
                         LargeIcon="/Forest.Visualization;component\Resources\experts.png"
                         Size="Large"
-                        IsEnabled="False"
-                        IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.Experts}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static gui:ForestGuiState.Experts}" />
+                        IsEnabled="False"/>
+                        <!--TODO: Make tabcontrol in main page to switch-->
                     <fluent:ToggleButton
                         Header="Hydraulische gegevens"
                         LargeIcon="/Forest.Visualization;component\Resources\hydraulics.png"
                         Size="Large"
-                        IsEnabled="False"
-                        IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.Hydraulics}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static gui:ForestGuiState.Hydraulics}" />
+                        IsEnabled="False"/>
+                        <!--TODO: Make tabcontrol in main page to switch-->
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Overgangskansen">
                     <fluent:ToggleButton
                         Header="Overgangskansen"
                         LargeIcon="/Forest.Visualization;component\Resources\estimation.png"
                         Size="Large"
-                        IsEnabled="False"
-                        IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.Estimation}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static gui:ForestGuiState.Estimation}" />
+                        IsEnabled="False"/>
+                        <!--TODO: Make tabcontrol in main page to switch-->
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Resultaten">
                     <fluent:ToggleButton
                         Header="Resultaten"
                         LargeIcon="/Forest.Visualization;component\Resources\results.png"
                         Size="Large"
-                        IsEnabled="False"
-                        IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.Results}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static gui:ForestGuiState.Results}" />
+                        IsEnabled="False"/>
+                        <!--TODO: Make tabcontrol in main page to switch-->
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
         </fluent:Ribbon>
