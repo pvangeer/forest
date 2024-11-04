@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Forest.Gui;
 using Forest.Messaging;
-using Forest.Visualization.Commands;
 using Forest.Visualization.Commands.Taskbar;
 
 namespace Forest.Visualization.ViewModels
@@ -23,9 +22,7 @@ namespace Forest.Visualization.ViewModels
         public StatusBarViewModel(ForestGui gui) : base(gui)
         {
             if (Gui != null)
-            {
                 Gui.Messages.CollectionChanged += GuiMessagesCollectionChanged;
-            }
         }
 
         public string ProjectFileName => string.IsNullOrEmpty(Gui.ProjectFilePath)

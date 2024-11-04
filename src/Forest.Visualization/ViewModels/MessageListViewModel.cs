@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Forest.Data.Properties;
 using Forest.Messaging;
-using Forest.Visualization.Commands;
 using Forest.Visualization.Commands.Taskbar;
 
 namespace Forest.Visualization.ViewModels

@@ -8,8 +8,8 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 {
     public class ProjectExplorerEstimationItemViewModel : ProjectExplorerItemViewModelBase
     {
-        private readonly ProbabilityEstimation estimation;
         private readonly CommandFactory commandFactory;
+        private readonly ProbabilityEstimation estimation;
         private readonly ForestGui gui;
 
         public ProjectExplorerEstimationItemViewModel(ProbabilityEstimation estimation, ForestGui gui) : base(new ViewModelFactory(gui))
@@ -21,25 +21,25 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 
         public override ICommand SelectItemCommand => commandFactory.CreateSelectItemCommand(this);
 
-        public override object GetSelectableObject()
-        {
-            return estimation;
-        }
-
         public override string DisplayName => estimation.Name;
 
         public override string IconSourceString =>
             "pack://application:,,,/Forest.Visualization;component/Resources/ProjectExplorer/probability_estimation.ico";
-
-        public override bool IsViewModelFor(object item)
-        {
-            return item is ProbabilityEstimation probability && probability == estimation;
-        }
 
         public override ICommand RemoveItemCommand => commandFactory.CreateCanAlwaysExecuteActionCommand(o =>
         {
             var service = new AnalysisManipulationService(gui.ForestAnalysis);
             service.RemoveProbabilityEstimation(estimation);
         });
+
+        public override object GetSelectableObject()
+        {
+            return estimation;
+        }
+
+        public override bool IsViewModelFor(object item)
+        {
+            return item is ProbabilityEstimation probability && probability == estimation;
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Forest.Data;
-using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Tree;
 
 namespace Forest.Gui
@@ -18,13 +17,13 @@ namespace Forest.Gui
 
         public TreeEvent SelectedTreeEvent { get; private set; }
 
+        public object Selection { get; private set; }
+
         public void SelectTreeEvent(TreeEvent treeEvent)
         {
             SelectedTreeEvent = treeEvent;
             OnPropertyChanged(nameof(SelectedTreeEvent));
         }
-
-        public object Selection { get; private set; }
 
         public void SetSelection(object selection)
         {

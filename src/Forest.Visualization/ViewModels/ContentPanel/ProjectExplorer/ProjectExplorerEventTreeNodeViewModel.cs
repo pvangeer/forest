@@ -8,25 +8,20 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 {
     public class ProjectExplorerEventTreeNodeViewModel : ProjectExplorerItemViewModelBase
     {
+        private readonly CommandFactory commandFactory;
         private readonly EventTree eventTree;
         private readonly ForestGui gui;
-        private readonly CommandFactory commandFactory;
 
         public ProjectExplorerEventTreeNodeViewModel(EventTree eventTree, ForestGui gui) : base(new ViewModelFactory(gui))
         {
             this.gui = gui;
-            this.commandFactory = new CommandFactory(gui);
+            commandFactory = new CommandFactory(gui);
             this.eventTree = eventTree;
             this.eventTree.PropertyChanged += EventTreePropertyChanged;
             IsExpanded = false;
         }
 
         public override ICommand SelectItemCommand => commandFactory.CreateSelectItemCommand(this);
-
-        public override object GetSelectableObject()
-        {
-            return eventTree;
-        }
 
         public override string DisplayName => eventTree.Name;
 
@@ -35,6 +30,11 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
             "pack://application:,,,/Forest.Visualization;component/Resources/forest.ico";
 
         public override ICommand RemoveItemCommand => commandFactory.CreateRemoveEventTreeCommand(eventTree);
+
+        public override object GetSelectableObject()
+        {
+            return eventTree;
+        }
 
         public override bool IsViewModelFor(object o)
         {

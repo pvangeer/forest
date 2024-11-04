@@ -27,12 +27,10 @@ namespace Forest.Gui
         public VersionInfo VersionInfo { get; set; }
 
         public StorageState BusyIndicator { get; set; }
-        
+
         public bool IsSaveToImage { get; set; }
 
         public string ProjectFilePath { get; set; }
-
-        public MessageList Messages { get; }
 
         public GuiProjectServices GuiProjectServices { get; }
 
@@ -41,6 +39,8 @@ namespace Forest.Gui
         public Func<ShouldProceedState> ShouldSaveOpenChanges { get; set; }
 
         public Func<bool> ShouldMigrateProject { get; set; }
+
+        public MessageList Messages { get; }
 
         private void ConfigureMessaging()
         {

@@ -66,6 +66,5 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
         public ObservableCollection<ITreeNodeViewModel> Items { get; protected set; }
 
         public CollectionType CollectionType => CollectionType.PropertyItemsCollection;
-
     }
 }

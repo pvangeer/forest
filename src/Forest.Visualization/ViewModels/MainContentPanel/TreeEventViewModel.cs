@@ -1,22 +1,20 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Input;
 using Forest.Data;
 using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.Commands;
-using Forest.Visualization.Commands.EventTrees;
 
 namespace Forest.Visualization.ViewModels.MainContentPanel
 {
     public class TreeEventViewModel : Entity
     {
+        private readonly CommandFactory commandFactory;
+        private readonly ForestGui gui;
+        private readonly TreeEvent treeEvent;
+        private readonly ViewModelFactory viewModelFactory;
         private TreeEventViewModel failingEventViewModel;
         private TreeEventViewModel passingEventViewModel;
-        private readonly ForestGui gui;
-        private readonly ViewModelFactory viewModelFactory;
-        private readonly TreeEvent treeEvent;
-        private readonly CommandFactory commandFactory;
 
         public TreeEventViewModel(TreeEvent treeEvent, ForestGui gui)
         {
@@ -24,15 +22,11 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
             viewModelFactory = new ViewModelFactory(gui);
             commandFactory = new CommandFactory(gui);
             if (gui != null)
-            {
                 gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
-            }
             this.treeEvent = treeEvent;
 
             if (treeEvent != null)
-            {
                 treeEvent.PropertyChanged += TreeEventPropertyChanged;
-            }
         }
 
         public string Name

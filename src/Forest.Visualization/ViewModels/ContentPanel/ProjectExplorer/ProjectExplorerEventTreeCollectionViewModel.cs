@@ -23,6 +23,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
                 gui.PropertyChanged += GuiPropertyChanged;
                 gui.ForestAnalysis.EventTrees.CollectionChanged += EventTreeCollectionChanged;
             }
+
             commandFactory = new CommandFactory(gui);
             RefreshChildItems();
         }
@@ -51,19 +52,16 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
             {
                 case NotifyCollectionChangedAction.Add:
                     foreach (var eventTree in e.NewItems.OfType<EventTree>())
-                    {
                         Items.Add(ViewModelFactory.CreateProjectExplorerEventTreeNodeViewModel(eventTree));
-                    }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (var eventTree in e.OldItems.OfType<EventTree>())
                     {
                         var itemToRemove = Items.FirstOrDefault(i => i.IsViewModelFor(eventTree));
                         if (itemToRemove != null)
-                        {
                             Items.Remove(itemToRemove);
-                        }
                     }
+
                     break;
             }
         }

@@ -2,31 +2,33 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:contentPanel="clr-namespace:Forest.Visualization.ViewModels.ContentPanel"
                     xmlns:visualization="clr-namespace:Forest.Visualization">
-    
+
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Forest.Visualization.TreeView;component/DataTemplates/TreeViewDataTemplate.xaml"/>
-        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/EventTree/EventTreeGraphDataTemplate.xaml"/>
+        <ResourceDictionary Source="/Forest.Visualization.TreeView;component/DataTemplates/TreeViewDataTemplate.xaml" />
+        <ResourceDictionary
+            Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/EventTree/EventTreeGraphDataTemplate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <visualization:MainContentTemplateSelector x:Key="MainContentTemplateSelector"
-                                               EventTreeDataTemplate ="{StaticResource EventTreeGraphDataTemplate}"/>
+                                               EventTreeDataTemplate="{StaticResource EventTreeGraphDataTemplate}" />
 
-    <DataTemplate x:Key="MainContentPresenterDataTemplate" DataType="{x:Type contentPanel:MainContentPresenterViewModel}">
+    <DataTemplate x:Key="MainContentPresenterDataTemplate"
+                  DataType="{x:Type contentPanel:MainContentPresenterViewModel}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ScrollViewer 
+            <ScrollViewer
                 Grid.Column="0"
                 Content="{Binding ProjectExplorerViewModel}"
-                ContentTemplate="{StaticResource IPropertyCollectionTreeNodesDataTemplate}"/>
+                ContentTemplate="{StaticResource IPropertyCollectionTreeNodesDataTemplate}" />
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="10" />
             <ContentPresenter
                 Grid.Column="2"
                 Content="{Binding SelectedContentItem}"
-                ContentTemplateSelector="{StaticResource MainContentTemplateSelector}"/>
+                ContentTemplateSelector="{StaticResource MainContentTemplateSelector}" />
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

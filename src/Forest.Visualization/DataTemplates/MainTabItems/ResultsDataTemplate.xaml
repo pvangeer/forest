@@ -77,7 +77,8 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <!--TODO: EventTree does not have a name anymore-->
-                <TextBlock Grid.Row="0" Text="{Binding EventTreeViewModel.Name}" TextAlignment="Center" FontWeight="Bold" />
+                <TextBlock Grid.Row="0" Text="{Binding EventTreeViewModel.Name}" TextAlignment="Center"
+                           FontWeight="Bold" />
                 <controls:ZoomControl
                     Grid.Row="1"
                     AnimationLength="0"

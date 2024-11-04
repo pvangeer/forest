@@ -111,7 +111,7 @@ namespace Forest.Data.Services
             forestAnalysis.ProbabilityEstimations.Add(new ProbabilityEstimationPerTreeEvent
             {
                 Name = "Nieuwe faalkansinschatting",
-                EventTree = eventTree,
+                EventTree = eventTree
             });
         }
 
@@ -133,9 +133,7 @@ namespace Forest.Data.Services
         public void RemoveEventTree(EventTree eventTree)
         {
             if (eventTree == null || !forestAnalysis.EventTrees.Contains(eventTree))
-            {
                 return;
-            }
 
             var estimationsToRemove = forestAnalysis.ProbabilityEstimations
                 .OfType<ProbabilityEstimationPerTreeEvent>()
@@ -143,9 +141,7 @@ namespace Forest.Data.Services
                 .ToArray();
 
             foreach (var estimation in estimationsToRemove)
-            {
                 RemoveProbabilityEstimation(estimation);
-            }
             forestAnalysis.EventTrees.Remove(eventTree);
         }
     }

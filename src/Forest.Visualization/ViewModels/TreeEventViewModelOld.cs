@@ -4,14 +4,12 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using Forest.Calculators;
 using Forest.Data.Estimations;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Properties;
 using Forest.Data.Services;
 using Forest.Data.Tree;
-using Forest.Visualization.Commands.EventTrees;
 
 namespace Forest.Visualization.ViewModels
 {

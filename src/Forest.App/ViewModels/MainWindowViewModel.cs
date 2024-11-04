@@ -11,19 +11,19 @@ namespace Forest.App.ViewModels
     public class MainWindowViewModel : Entity
     {
         private readonly ForestGui gui;
-        
+
         public MainWindowViewModel() : this(new ForestGui())
         {
         }
 
-        public MainWindowViewModel([NotNull]ForestGui gui)
+        public MainWindowViewModel([NotNull] ForestGui gui)
         {
             this.gui = gui;
 
             gui.GuiProjectServices.SaveProjectFileNameFunc = FileDialogFactory.AskUserForFileNameToSaveToFunc();
             gui.GuiProjectServices.OpenProjectFileNameFunc = FileDialogFactory.AskUserForFileNameToOpenFunc();
             gui.ShouldMigrateProject = FileDialogFactory.ShouldMigrateProject;
-            gui.ShouldSaveOpenChanges = FileDialogFactory.ShouldSaveOpenChanges; 
+            gui.ShouldSaveOpenChanges = FileDialogFactory.ShouldSaveOpenChanges;
             var viewModelFactory = new ViewModelFactory(gui);
 
             MainContentPresenterViewModel = viewModelFactory.CreateMainContentPresenterViewModel();

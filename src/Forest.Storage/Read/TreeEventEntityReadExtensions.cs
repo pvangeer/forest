@@ -19,7 +19,7 @@ namespace Forest.Storage.Read
             var treeEvent = new TreeEvent(entity.Name)
             {
                 Summary = entity.Summary,
-                Information = entity.Information,
+                Information = entity.Information
             };
 
             if (entity.FailingEvent != null)

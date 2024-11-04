@@ -17,7 +17,7 @@ namespace Forest.Storage.Read
             // TODO: Move this to probabilityspecifications
             var experts = entity.Experts.OrderBy(e => e.Order).Select(e => e.Read(collector));
             var hydraulicConditions = entity.HydraulicConditions.OrderBy(e => e.Order).Select(e => e.Read(collector));
-            
+
             var eventTrees = entity.EventTreeXmlEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
 
             var project = new ForestAnalysis
@@ -25,8 +25,7 @@ namespace Forest.Storage.Read
                 Name = entity.Name,
                 AssessmentSection = entity.AssessmentSection,
                 Description = entity.Description,
-                ProjectInformation = entity.ProjectInformation,
-                
+                ProjectInformation = entity.ProjectInformation
             };
             var projectLeader = entity.ProjectLeader.Read(collector);
             project.ProjectLeader.Name = projectLeader.Name;
@@ -34,9 +33,7 @@ namespace Forest.Storage.Read
             project.ProjectLeader.Telephone = projectLeader.Telephone;
 
             foreach (var eventTree in eventTrees)
-            {
                 project.EventTrees.Add(eventTree);
-            }
 
             return project;
         }

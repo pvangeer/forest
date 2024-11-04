@@ -1,13 +1,13 @@
-﻿using Forest.Data.Tree;
-using Forest.Gui;
-using Forest.Visualization.TreeView.Commands;
-using Forest.Visualization.TreeView.Data;
-using System;
+﻿using System;
 using System.Windows.Input;
+using Forest.Data.Tree;
+using Forest.Gui;
 using Forest.Visualization.Commands.EventTrees;
 using Forest.Visualization.Commands.ProbabilityEstimations;
 using Forest.Visualization.Commands.Project;
 using Forest.Visualization.Commands.ProjectExplorer;
+using Forest.Visualization.TreeView.Commands;
+using Forest.Visualization.TreeView.Data;
 using Forest.Visualization.ViewModels.MainContentPanel;
 
 namespace Forest.Visualization.Commands

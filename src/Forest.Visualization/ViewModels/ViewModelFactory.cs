@@ -1,5 +1,5 @@
-﻿using Forest.Data.Estimations;
-using Forest.Data.Services;
+﻿using System;
+using Forest.Data.Estimations;
 using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.TreeView.Data;
@@ -20,7 +20,7 @@ namespace Forest.Visualization.ViewModels
 
         private EventTreeViewModelOld CreateEventTreeMainViewModel(EventTree eventTree)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public ITreeNodeViewModel CreateProjectExplorerEventTreeCollectionViewModel()
@@ -71,16 +71,14 @@ namespace Forest.Visualization.ViewModels
         public object CreateMainContentViewModel(object selection)
         {
             if (selection is EventTree eventTree)
-            {
                 return new EventTreeMainContentViewModel(eventTree, gui);
-            }
 
             return selection;
         }
 
         public TreeEventViewModel CreateTreeEventViewModel(TreeEvent treeEvent)
         {
-            return (treeEvent != null) ? new TreeEventViewModel(treeEvent, gui) : null;
+            return treeEvent != null ? new TreeEventViewModel(treeEvent, gui) : null;
         }
     }
 }

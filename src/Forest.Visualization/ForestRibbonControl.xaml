@@ -70,12 +70,12 @@
                         Header="Faalpad toevoegen"
                         Size="Large"
                         LargeIcon="/Forest.Visualization;component\Resources\add-eventtree.png"
-                        Command="{Binding AddEventTreeCommand}"/>
+                        Command="{Binding AddEventTreeCommand}" />
                     <fluent:Button
                         Header="Faalpad verwijderen"
                         Size="Large"
                         LargeIcon="/Forest.Visualization;component\Resources\remove-eventtree.png"
-                        Command="{Binding RemoveEventTreeCommand}"/>
+                        Command="{Binding RemoveEventTreeCommand}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 
@@ -87,12 +87,12 @@
                         Header="Faalpad toevoegen"
                         Size="Large"
                         LargeIcon="/Forest.Visualization;component\Resources\add-eventtree.png"
-                        Command="{Binding AddEventTreeCommand}"/>
+                        Command="{Binding AddEventTreeCommand}" />
                     <fluent:Button
                         Header="Faalpad verwijderen"
                         Size="Large"
                         LargeIcon="/Forest.Visualization;component\Resources\remove-eventtree.png"
-                        Command="{Binding RemoveEventTreeCommand}"/>
+                        Command="{Binding RemoveEventTreeCommand}" />
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:Button
@@ -117,7 +117,7 @@
                         Header="Knoopinformatie"
                         LargeIcon="/Forest.Visualization;component\Resources\tree-event-info.png"
                         Size="Large"
-                        IsEnabled="False"/>
+                        IsEnabled="False" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 
@@ -129,30 +129,30 @@
                         Header="Experts"
                         LargeIcon="/Forest.Visualization;component\Resources\experts.png"
                         Size="Large"
-                        IsEnabled="False"/>
-                        <!--TODO: Make tabcontrol in main page to switch-->
+                        IsEnabled="False" />
+                    <!--TODO: Make tabcontrol in main page to switch-->
                     <fluent:ToggleButton
                         Header="Hydraulische gegevens"
                         LargeIcon="/Forest.Visualization;component\Resources\hydraulics.png"
                         Size="Large"
-                        IsEnabled="False"/>
-                        <!--TODO: Make tabcontrol in main page to switch-->
+                        IsEnabled="False" />
+                    <!--TODO: Make tabcontrol in main page to switch-->
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Overgangskansen">
                     <fluent:ToggleButton
                         Header="Overgangskansen"
                         LargeIcon="/Forest.Visualization;component\Resources\estimation.png"
                         Size="Large"
-                        IsEnabled="False"/>
-                        <!--TODO: Make tabcontrol in main page to switch-->
+                        IsEnabled="False" />
+                    <!--TODO: Make tabcontrol in main page to switch-->
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Resultaten">
                     <fluent:ToggleButton
                         Header="Resultaten"
                         LargeIcon="/Forest.Visualization;component\Resources\results.png"
                         Size="Large"
-                        IsEnabled="False"/>
-                        <!--TODO: Make tabcontrol in main page to switch-->
+                        IsEnabled="False" />
+                    <!--TODO: Make tabcontrol in main page to switch-->
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
         </fluent:Ribbon>

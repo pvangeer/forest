@@ -14,9 +14,7 @@ namespace Forest.Visualization.Commands.EventTrees
             if (Gui.SelectionManager.Selection is EventTree eventTree)
             {
                 if (eventTree.MainTreeEvent == null)
-                {
                     return true;
-                }
 
                 var treeEventType = TreeEventType.Failing;
                 if (parameter is TreeEventType treeEventTypeCasted)
@@ -36,7 +34,8 @@ namespace Forest.Visualization.Commands.EventTrees
             if (parameter is TreeEventType treeEventTypeCasted)
                 treeEventType = treeEventTypeCasted;
 
-            var newTreeEvent = ManipulationService.AddTreeEvent(Gui.SelectionManager.Selection as EventTree, Gui.SelectionManager.SelectedTreeEvent, treeEventType);
+            var newTreeEvent = ManipulationService.AddTreeEvent(Gui.SelectionManager.Selection as EventTree,
+                Gui.SelectionManager.SelectedTreeEvent, treeEventType);
             Gui.SelectionManager.SelectTreeEvent(newTreeEvent);
         }
     }

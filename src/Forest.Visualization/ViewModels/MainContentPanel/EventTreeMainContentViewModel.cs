@@ -9,15 +9,15 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
     public class EventTreeMainContentViewModel : Entity
     {
         private readonly EventTree eventTree;
-        private EventTreeGraph graph;
         private readonly ViewModelFactory viewModelFactory;
+        private EventTreeGraph graph;
 
         public EventTreeMainContentViewModel(EventTree eventTree, ForestGui gui)
         {
             this.eventTree = eventTree;
             this.eventTree.PropertyChanged += EventTreePropertyChanged;
             this.eventTree.TreeEventsChanged += TreeEventsChanged;
-            this.viewModelFactory = new ViewModelFactory(gui);
+            viewModelFactory = new ViewModelFactory(gui);
         }
 
         public EventTreeGraph Graph => CreateGraph();

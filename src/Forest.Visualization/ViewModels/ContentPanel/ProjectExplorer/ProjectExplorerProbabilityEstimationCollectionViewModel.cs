@@ -1,6 +1,4 @@
-﻿using System.Windows.Input;
-using Forest.Data.Services;
-using Forest.Gui;
+﻿using Forest.Gui;
 
 namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using Forest.Visualization.ViewModels;
 using Forest.Visualization.ViewModels.MainContentPanel;
 
 namespace Forest.Visualization.Commands.EventTrees
@@ -14,7 +13,7 @@ namespace Forest.Visualization.Commands.EventTrees
             this.treeEventViewModel = treeEventViewModel;
         }
 
-        
+
         public bool CanExecute(object parameter)
         {
             return true;

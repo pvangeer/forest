@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using Forest.Gui;
-using Forest.Visualization.ViewModels;
 
 namespace Forest.Visualization
 {

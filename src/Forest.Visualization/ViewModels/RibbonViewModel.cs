@@ -29,7 +29,7 @@ namespace Forest.Visualization.ViewModels
             set
             {
                 Gui.BusyIndicator = value;
-                Gui.OnPropertyChanged(nameof(ForestGui.BusyIndicator));
+                Gui.OnPropertyChanged();
             }
         }
 

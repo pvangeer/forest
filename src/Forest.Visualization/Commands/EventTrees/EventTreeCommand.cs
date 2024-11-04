@@ -13,13 +13,12 @@ namespace Forest.Visualization.Commands.EventTrees
 
         protected EventTreeCommand(ForestGui gui)
         {
-            this.Gui = gui;
-            if (this.Gui != null)
+            Gui = gui;
+            if (Gui != null)
             {
                 gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
                 ManipulationService = new AnalysisManipulationService(gui.ForestAnalysis);
             }
-
         }
 
         public virtual bool CanExecute(object parameter)

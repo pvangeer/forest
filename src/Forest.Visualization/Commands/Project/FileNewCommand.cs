@@ -7,6 +7,7 @@ namespace Forest.Visualization.Commands.Project
     public class FileNewCommand : ICommand
     {
         private readonly ForestGui gui;
+
         public FileNewCommand(ForestGui gui)
         {
             this.gui = gui;

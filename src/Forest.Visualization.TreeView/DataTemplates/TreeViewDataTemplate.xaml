@@ -70,7 +70,8 @@
             Text="{Binding StringValue, UpdateSourceTrigger=PropertyChanged}" />
     </DataTemplate>
 
-    <DataTemplate x:Key="FontFamilySelectorTemplate" DataType="{x:Type viewModels:IFontFamilyPropertyTreeNodeViewModel}">
+    <DataTemplate x:Key="FontFamilySelectorTemplate"
+                  DataType="{x:Type viewModels:IFontFamilyPropertyTreeNodeViewModel}">
         <ComboBox
             ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}"
             SelectedItem="{Binding SelectedValue}" />
@@ -206,7 +207,7 @@
                     Visibility="{Binding CanAdd, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Command="{Binding AddItemCommand}"
                     Style="{StaticResource AddButtonStyle}" />
-                    <!--TODO: Change color or icon of the button based on CanExecute of the command.-->
+                <!--TODO: Change color or icon of the button based on CanExecute of the command.-->
             </Grid>
         </Border>
     </DataTemplate>
