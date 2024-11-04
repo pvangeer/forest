@@ -45,5 +45,10 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
         {
             return new RemoveEventTreeCommand(gui, eventTree);
         }
+
+        public ICommand CreateAddProbabilityEstimationCommand()
+        {
+            return new AddProbabilityEstimationPerTreeEventCommand(gui);
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace Forest.Storage
         public StorageXml()
         {
             emptyEventTreeProjectHash =
-                FingerprintHelper.Get(ForestAnalysisFactory.CreateStandardNewProject().Create(new PersistenceRegistry()));
+                FingerprintHelper.Get(ForestAnalysisFactory.CreateStandardNewAnalysis().Create(new PersistenceRegistry()));
         }
 
         public bool HasStagedEventTreeProject => stagedForestAnalysisXmlEntity != null;

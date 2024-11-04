@@ -137,7 +137,12 @@ namespace Forest.Data.Services
                 return;
             }
 
-            foreach (var estimation in forestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().Where(e => e.EventTree == eventTree))
+            var estimationsToRemove = forestAnalysis.ProbabilityEstimations
+                .OfType<ProbabilityEstimationPerTreeEvent>()
+                .Where(e => e.EventTree == eventTree)
+                .ToArray();
+
+            foreach (var estimation in estimationsToRemove)
             {
                 RemoveProbabilityEstimation(estimation);
             }

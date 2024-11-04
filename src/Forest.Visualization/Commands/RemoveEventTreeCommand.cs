@@ -30,17 +30,22 @@ namespace Forest.Visualization.Commands
 
         public bool CanExecute(object parameter)
         {
-            return gui.ForestAnalysis.EventTrees.Count > 1;
+            return true;
         }
 
         public void Execute(object parameter)
         {
             var service = new AnalysisManipulationService(gui.ForestAnalysis);
             service.RemoveEventTree(eventTree);
+            var index = gui.ForestAnalysis.EventTrees.IndexOf(eventTree);
             if (gui.SelectionManager.Selection == eventTree)
             {
-                // TODO: What should be the new selection?
-                gui.SelectionManager.SetSelection(gui.ForestAnalysis.EventTrees.FirstOrDefault());
+                if (index >= gui.ForestAnalysis.EventTrees.Count)
+                {
+                    index = gui.ForestAnalysis.EventTrees.Count - 1;
+                }
+
+                gui.SelectionManager.SetSelection(index > -1 ? gui.ForestAnalysis.EventTrees.ElementAt(index) : null);
             }
         }
 

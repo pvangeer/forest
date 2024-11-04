@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Forest.Data.Estimations;
 using Forest.Visualization.TreeView.ViewModels;
 using Forest.Data.Services;
+using Forest.Data.Tree;
 
 namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 {
@@ -45,13 +46,8 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 
         public override bool CanAdd => true;
 
-        // TODO: Can not execute in case there is no eventtree..
-        public override ICommand AddItemCommand => CommandFactory.CreateCanAlwaysExecuteActionCommand(p =>
-        {
-            var service = new AnalysisManipulationService(Gui.ForestAnalysis);
-            service.AddProbabilityEstimationPerTreeEvent(Gui.ForestAnalysis.EventTrees.FirstOrDefault());
-        });
-
+        public override ICommand AddItemCommand => CommandFactory.CreateAddProbabilityEstimationCommand();
+        
         private void EstimationsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)

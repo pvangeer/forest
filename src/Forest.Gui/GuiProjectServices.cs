@@ -33,7 +33,7 @@ namespace Forest.Gui
             storageXml.UnStageEventTreeProject();
             gui.ProjectFilePath = "";
 
-            gui.ForestAnalysis = ForestAnalysisFactory.CreateStandardNewProject();
+            gui.ForestAnalysis = ForestAnalysisFactory.CreateStandardNewAnalysis();
             gui.OnPropertyChanged(nameof(ForestGui.ForestAnalysis));
             gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));
         }

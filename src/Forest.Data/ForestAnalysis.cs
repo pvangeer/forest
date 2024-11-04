@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Forest.Data.Estimations;
-using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Experts;
 using Forest.Data.Tree;
 
@@ -11,31 +9,9 @@ namespace Forest.Data
     {
         public ForestAnalysis()
         {
-            var tree = new EventTree
-            {
-                Name = "Nieuw faalpad"
-            };
-
-            Name = "Nieuw project";
-            AssessmentSection = "1-1";
-            Description = "";
-            ProjectInformation = "";
             ProjectLeader = new Person();
-            EventTrees = new ObservableCollection<EventTree>
-            {
-                new EventTree
-                {
-                    Name = "Nieuw faalpad"
-                }
-            };
-            ProbabilityEstimations = new ObservableCollection<ProbabilityEstimation>
-            {
-                new ProbabilityEstimationPerTreeEvent
-                {
-                    EventTree = tree,
-                    Name = "Faalkansinschatting per gebeurtenis"
-                }
-            };
+            EventTrees = new ObservableCollection<EventTree>();
+            ProbabilityEstimations = new ObservableCollection<ProbabilityEstimation>();
         }
 
         public string Name { get; set; }
@@ -46,7 +22,7 @@ namespace Forest.Data
 
         public string ProjectInformation { get; set; }
 
-        public Person ProjectLeader { get; set; }
+        public Person ProjectLeader { get; }
 
         public ObservableCollection<EventTree> EventTrees { get; }
 

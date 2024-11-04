@@ -27,7 +27,7 @@ namespace Forest.Visualization.ViewModels
 
         public EventTreeViewModel(EventTree eventTree)
         {
-            var project = ForestAnalysisFactory.CreateStandardNewProject();
+            var project = ForestAnalysisFactory.CreateStandardNewAnalysis();
             analysisManipulationService = new AnalysisManipulationService(project);
             EventTree = eventTree;
             EventTree.PropertyChanged += EventTreePropertyChanged;

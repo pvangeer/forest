@@ -150,7 +150,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Operations\plus-grey.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forest.Data\Forest.Data.csproj">
       <Project>{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}</Project>

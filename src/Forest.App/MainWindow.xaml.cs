@@ -32,7 +32,7 @@ namespace Forest.App
         {
             DataContext = new MainWindowViewModel(new ForestGui
             {
-                ForestAnalysis = ForestAnalysisFactory.CreateStandardNewProject()
+                ForestAnalysis = ForestAnalysisFactory.CreateStandardNewAnalysis()
             });
         }
     }

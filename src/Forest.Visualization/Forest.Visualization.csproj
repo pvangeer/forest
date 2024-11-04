@@ -137,6 +137,7 @@
     <Compile Include="ViewModels\ContentPanel\MainContentPresenterViewModel.cs" />
     <Compile Include="Commands\CanAlwaysExecuteActionCommand.cs" />
     <Compile Include="Commands\AddEventTreeCommand.cs" />
+    <Compile Include="Commands\AddProbabilityEstimationPerTreeEventCommand.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerCommandFactory.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerItemViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerViewModel.cs" />
@@ -412,12 +413,6 @@
   <ItemGroup>
     <Folder Include="ViewModels\Ribbon\" />
     <Folder Include="ViewModels\StatusBar\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Operations\collapsed.png" />
-    <Resource Include="Resources\Operations\expanded.png" />
-    <Resource Include="Resources\Operations\plus.png" />
-    <Resource Include="Resources\Operations\remove.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ProjectExplorer\probability_estimation.ico" />

@@ -206,6 +206,7 @@
                     Visibility="{Binding CanAdd, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Command="{Binding AddItemCommand}"
                     Style="{StaticResource AddButtonStyle}" />
+                    <!--TODO: Change color or icon of the button based on CanExecute of the command.-->
             </Grid>
         </Border>
     </DataTemplate>

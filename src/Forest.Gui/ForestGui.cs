@@ -15,7 +15,7 @@ namespace Forest.Gui
             ConfigureMessaging();
             BusyIndicator = StorageState.Idle;
             Messages = new MessageList();
-            ForestAnalysis = ForestAnalysisFactory.CreateStandardNewProject();
+            ForestAnalysis = ForestAnalysisFactory.CreateStandardNewAnalysis();
             ProjectFilePath = "";
             GuiProjectServices = new GuiProjectServices(this);
             SelectionManager = new SelectionManager(this);

@@ -1,15 +1,25 @@
-﻿namespace Forest.Data
+﻿using Forest.Data.Services;
+
+namespace Forest.Data
 {
     public static class ForestAnalysisFactory
     {
-        public static ForestAnalysis CreateEmptyProject()
+        public static ForestAnalysis CreateEmptyAnalysis()
         {
             return new ForestAnalysis();
         }
 
-        public static ForestAnalysis CreateStandardNewProject()
+        public static ForestAnalysis CreateStandardNewAnalysis()
         {
-            return new ForestAnalysis();
+            var analysis = new ForestAnalysis
+            {
+                Name = "Nieuw project",
+                AssessmentSection = "1-1"
+            };
+
+            var service = new AnalysisManipulationService(analysis);
+            service.AddProbabilityEstimationPerTreeEvent(service.AddEventTree());
+            return analysis;
         }
     }
 }
