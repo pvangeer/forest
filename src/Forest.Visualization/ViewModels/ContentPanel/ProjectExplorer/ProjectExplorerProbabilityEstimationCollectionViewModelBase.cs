@@ -7,14 +7,13 @@ using System.Linq;
 using System.Windows.Input;
 using Forest.Data.Estimations;
 using Forest.Visualization.TreeView.ViewModels;
-using Forest.Data.Services;
-using Forest.Data.Tree;
+using Forest.Visualization.Commands;
 
 namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 {
     public class ProjectExplorerProbabilityEstimationCollectionViewModelBase : ItemsCollectionViewModelBase
     {
-        protected readonly ProjectExplorerCommandFactory CommandFactory;
+        protected readonly CommandFactory CommandFactory;
         protected readonly ForestGui Gui;
 
         public ProjectExplorerProbabilityEstimationCollectionViewModelBase(ForestGui gui) : base(new ViewModelFactory(gui))
@@ -35,7 +34,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
                 }
             }
 
-            CommandFactory = new ProjectExplorerCommandFactory(gui);
+            CommandFactory = new CommandFactory(gui);
             ContextMenuItems = new ObservableCollection<ContextMenuItemViewModel>();
         }
 

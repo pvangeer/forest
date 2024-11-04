@@ -63,6 +63,10 @@ namespace Forest.Visualization.ViewModels
 
         public ICommand EscapeCommand => commandFactory.CreateEscapeCommand();
 
+        public ICommand AddEventTreeCommand => commandFactory.CreateAddEventTreeCommand();
+
+        public ICommand RemoveEventTreeCommand => commandFactory.CreateRemoveEventTreeCommand();
+
         protected override void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)

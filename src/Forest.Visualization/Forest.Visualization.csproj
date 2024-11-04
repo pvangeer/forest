@@ -138,7 +138,6 @@
     <Compile Include="Commands\CanAlwaysExecuteActionCommand.cs" />
     <Compile Include="Commands\AddEventTreeCommand.cs" />
     <Compile Include="Commands\AddProbabilityEstimationPerTreeEventCommand.cs" />
-    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerCommandFactory.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerItemViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ItemsCollectionViewModelBase.cs" />

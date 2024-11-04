@@ -1,4 +1,8 @@
-﻿using Forest.Gui;
+﻿using Forest.Data.Tree;
+using Forest.Gui;
+using Forest.Visualization.TreeView.Commands;
+using Forest.Visualization.TreeView.Data;
+using System;
 using System.Windows.Input;
 
 namespace Forest.Visualization.Commands
@@ -66,5 +70,39 @@ namespace Forest.Visualization.Commands
         {
             return new AddTreeEventCommand(gui);
         }
+
+        public ICommand CreateToggleIsExpandedCommand(IExpandable expandableContentViewModel)
+        {
+            return new ToggleIsExpandedCommand(expandableContentViewModel);
+        }
+
+        public ICommand CreateCanAlwaysExecuteActionCommand(Action<object> action)
+        {
+            return new CanAlwaysExecuteActionCommand
+            {
+                ExecuteAction = action
+            };
+        }
+
+        public ICommand CreateSelectItemCommand(ISelectable selectable)
+        {
+            return new SelectItemCommand(gui.SelectionManager, selectable);
+        }
+
+        public ICommand CreateAddEventTreeCommand()
+        {
+            return new AddEventTreeCommand(gui);
+        }
+
+        public ICommand CreateRemoveEventTreeCommand(EventTree eventTree = null)
+        {
+            return new RemoveEventTreeCommand(gui, eventTree);
+        }
+
+        public ICommand CreateAddProbabilityEstimationCommand()
+        {
+            return new AddProbabilityEstimationPerTreeEventCommand(gui);
+        }
+
     }
 }

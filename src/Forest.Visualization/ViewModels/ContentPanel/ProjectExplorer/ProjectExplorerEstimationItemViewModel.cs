@@ -2,20 +2,21 @@
 using Forest.Data.Estimations;
 using Forest.Data.Services;
 using Forest.Gui;
+using Forest.Visualization.Commands;
 
 namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 {
     public class ProjectExplorerEstimationItemViewModel : ProjectExplorerItemViewModelBase
     {
         private readonly ProbabilityEstimation estimation;
-        private readonly ProjectExplorerCommandFactory commandFactory;
+        private readonly CommandFactory commandFactory;
         private readonly ForestGui gui;
 
         public ProjectExplorerEstimationItemViewModel(ProbabilityEstimation estimation, ForestGui gui) : base(new ViewModelFactory(gui))
         {
             this.estimation = estimation;
             this.gui = gui;
-            commandFactory = new ProjectExplorerCommandFactory(gui);
+            commandFactory = new CommandFactory(gui);
         }
 
         public override ICommand SelectItemCommand => commandFactory.CreateSelectItemCommand(this);

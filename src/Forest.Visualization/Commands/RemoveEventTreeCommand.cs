@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Forest.Data.Services;
@@ -11,13 +12,38 @@ namespace Forest.Visualization.Commands
     public class RemoveEventTreeCommand : ICommand
     {
         private readonly ForestGui gui;
-        private readonly EventTree eventTree;
+        private EventTree eventTree;
 
         public RemoveEventTreeCommand(ForestGui gui, EventTree eventTree)
         {
             this.eventTree = eventTree;
+            if (eventTree == null)
+            {
+                this.eventTree = gui?.SelectionManager.Selection as EventTree;
+                if (gui != null)
+                {
+                    gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
+                }
+            }
             this.gui = gui;
-            this.gui.ForestAnalysis.EventTrees.CollectionChanged += EventTreeCollectionChanged;
+            if (gui != null)
+            {
+                this.gui.ForestAnalysis.EventTrees.CollectionChanged += EventTreeCollectionChanged;
+            }
+        }
+
+        private void SelectionManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(SelectionManager.Selection):
+                    this.eventTree = gui?.SelectionManager.Selection as EventTree;
+                    if (CanExecuteChanged != null)
+                    {
+                        CanExecuteChanged.Invoke(this, EventArgs.Empty);
+                    }
+                    break;
+            }
         }
 
         private void EventTreeCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -30,14 +56,16 @@ namespace Forest.Visualization.Commands
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return this.eventTree != null;
         }
 
         public void Execute(object parameter)
         {
+            var index = gui.ForestAnalysis.EventTrees.IndexOf(eventTree);
+            
             var service = new AnalysisManipulationService(gui.ForestAnalysis);
             service.RemoveEventTree(eventTree);
-            var index = gui.ForestAnalysis.EventTrees.IndexOf(eventTree);
+            
             if (gui.SelectionManager.Selection == eventTree)
             {
                 if (index >= gui.ForestAnalysis.EventTrees.Count)

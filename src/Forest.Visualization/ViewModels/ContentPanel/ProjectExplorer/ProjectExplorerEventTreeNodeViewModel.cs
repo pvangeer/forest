@@ -1,10 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Input;
 using Forest.Data.Tree;
 using Forest.Gui;
-using Forest.Visualization.TreeView.Data;
-using Forest.Visualization.TreeView.ViewModels;
+using Forest.Visualization.Commands;
 
 namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 {
@@ -12,12 +10,12 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
     {
         private readonly EventTree eventTree;
         private readonly ForestGui gui;
-        private readonly ProjectExplorerCommandFactory commandFactory;
+        private readonly CommandFactory commandFactory;
 
         public ProjectExplorerEventTreeNodeViewModel(EventTree eventTree, ForestGui gui) : base(new ViewModelFactory(gui))
         {
             this.gui = gui;
-            this.commandFactory = new ProjectExplorerCommandFactory(gui);
+            this.commandFactory = new CommandFactory(gui);
             this.eventTree = eventTree;
             this.eventTree.PropertyChanged += EventTreePropertyChanged;
             IsExpanded = false;

@@ -64,72 +64,39 @@
                 </fluent:Backstage>
             </fluent:Ribbon.Menu>
 
-            <fluent:Ribbon.ContextualGroups>
-                <fluent:RibbonContextualTabGroup
-                    Name="EventTreeFunctionsGroup"
-                    Header="Gebeurtenissen"
-                    Background="CornflowerBlue"
-                    BorderBrush="DodgerBlue">
-                    <fluent:RibbonContextualTabGroup.Style>
-                        <Style TargetType="fluent:RibbonContextualTabGroup">
-                            <Setter Property="Visibility" Value="Visible" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding SelectedState}"
-                                             Value="{x:Static gui:ForestGuiState.GeneralInformation}">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding SelectedState}"
-                                             Value="{x:Static gui:ForestGuiState.Experts}">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding SelectedState}"
-                                             Value="{x:Static gui:ForestGuiState.Hydraulics}">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </fluent:RibbonContextualTabGroup.Style>
-                </fluent:RibbonContextualTabGroup>
-            </fluent:Ribbon.ContextualGroups>
-
             <fluent:RibbonTabItem
-                Header="Proces"
-                fluent:KeyTip.Keys="P">
-                <fluent:RibbonGroupBox Header="Algemeen">
-                    <fluent:ToggleButton
-                        Header="Projectgegevens"
-                        LargeIcon="/Forest.Visualization;component\Resources\project-information.png"
+                Header="Start"
+                fluent:KeyTip.Keys="S">
+                <fluent:RibbonGroupBox Header="Project">
+                    <fluent:Button
+                        Header="Faalpad toevoegen"
                         Size="Large"
-                        IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.GeneralInformation}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static gui:ForestGuiState.GeneralInformation}" />
-                    <fluent:ToggleButton
-                        Header="Experts"
-                        LargeIcon="/Forest.Visualization;component\Resources\experts.png"
+                        LargeIcon="/Forest.Visualization;component\Resources\add-eventtree.png"
+                        Command="{Binding AddEventTreeCommand}"/>
+                    <fluent:Button
+                        Header="Faalpad verwijderen"
                         Size="Large"
-                        IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.Experts}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static gui:ForestGuiState.Experts}" />
-                    <fluent:ToggleButton
-                        Header="Hydraulische gegevens"
-                        LargeIcon="/Forest.Visualization;component\Resources\hydraulics.png"
-                        Size="Large"
-                        IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.Hydraulics}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static gui:ForestGuiState.Hydraulics}" />
+                        LargeIcon="/Forest.Visualization;component\Resources\remove-eventtree.png"
+                        Command="{Binding RemoveEventTreeCommand}"/>
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
+
             <fluent:RibbonTabItem
-                Header="Faalpaden"
-                fluent:KeyTip.Keys="F">
-                <fluent:RibbonGroupBox Header="Gebeurtenissen">
-                    <fluent:ToggleButton
-                        Header="Faalpaden tonen"
-                        LargeIcon="/Forest.Visualization;component\Resources\add-eventtree.png"
+                Header="Faalpad"
+                fluent:KeyTip.Keys="S">
+                <fluent:RibbonGroupBox Header="Faalpad">
+                    <fluent:Button
+                        Header="Faalpad toevoegen"
                         Size="Large"
-                        IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.TreeEventsDefinition}}"
-                        Command="{Binding ChangeProcessStepCommand}"
-                        CommandParameter="{x:Static gui:ForestGuiState.TreeEventsDefinition}" />
+                        LargeIcon="/Forest.Visualization;component\Resources\add-eventtree.png"
+                        Command="{Binding AddEventTreeCommand}"/>
+                    <fluent:Button
+                        Header="Faalpad verwijderen"
+                        Size="Large"
+                        LargeIcon="/Forest.Visualization;component\Resources\remove-eventtree.png"
+                        Command="{Binding RemoveEventTreeCommand}"/>
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:Button
                         Header="Toevoegen (falen)"
                         LargeIcon="/Forest.Visualization;component\Resources\add-tree-event.png"
@@ -147,19 +114,45 @@
                         LargeIcon="/Forest.Visualization;component\Resources\remove-tree-event.png"
                         Size="Large"
                         Command="{Binding RemoveTreeEventCommand}" />
+                    <!--TODO: toggle details panel-->
                     <fluent:ToggleButton
                         Header="Knoopinformatie"
                         LargeIcon="/Forest.Visualization;component\Resources\tree-event-info.png"
                         Size="Large"
+                        IsEnabled="False"
                         IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.TreeEventsInformation}}"
                         Command="{Binding ChangeProcessStepCommand}"
                         CommandParameter="{x:Static gui:ForestGuiState.TreeEventsInformation}" />
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+
+            <fluent:RibbonTabItem
+                Header="Kansinschatting"
+                fluent:KeyTip.Keys="S">
+                <fluent:RibbonGroupBox Header="Algemeen">
+                    <fluent:ToggleButton
+                        Header="Experts"
+                        LargeIcon="/Forest.Visualization;component\Resources\experts.png"
+                        Size="Large"
+                        IsEnabled="False"
+                        IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.Experts}}"
+                        Command="{Binding ChangeProcessStepCommand}"
+                        CommandParameter="{x:Static gui:ForestGuiState.Experts}" />
+                    <fluent:ToggleButton
+                        Header="Hydraulische gegevens"
+                        LargeIcon="/Forest.Visualization;component\Resources\hydraulics.png"
+                        Size="Large"
+                        IsEnabled="False"
+                        IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.Hydraulics}}"
+                        Command="{Binding ChangeProcessStepCommand}"
+                        CommandParameter="{x:Static gui:ForestGuiState.Hydraulics}" />
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Overgangskansen">
                     <fluent:ToggleButton
                         Header="Overgangskansen"
                         LargeIcon="/Forest.Visualization;component\Resources\estimation.png"
                         Size="Large"
+                        IsEnabled="False"
                         IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.Estimation}}"
                         Command="{Binding ChangeProcessStepCommand}"
                         CommandParameter="{x:Static gui:ForestGuiState.Estimation}" />
@@ -169,6 +162,7 @@
                         Header="Resultaten"
                         LargeIcon="/Forest.Visualization;component\Resources\results.png"
                         Size="Large"
+                        IsEnabled="False"
                         IsChecked="{Binding SelectedState, Converter={StaticResource SelectedProcessToBoolConverter}, ConverterParameter={x:Static gui:ForestGuiState.Results}}"
                         Command="{Binding ChangeProcessStepCommand}"
                         CommandParameter="{x:Static gui:ForestGuiState.Results}" />

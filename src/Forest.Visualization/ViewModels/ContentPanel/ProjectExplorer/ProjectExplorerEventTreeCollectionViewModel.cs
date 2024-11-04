@@ -5,13 +5,14 @@ using System.Linq;
 using System.Windows.Input;
 using Forest.Data.Tree;
 using Forest.Gui;
+using Forest.Visualization.Commands;
 using Forest.Visualization.TreeView.Data;
 
 namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 {
     public class ProjectExplorerEventTreeCollectionViewModel : ItemsCollectionViewModelBase
     {
-        private readonly ProjectExplorerCommandFactory projectExplorerCommandFactory;
+        private readonly CommandFactory commandFactory;
         private readonly ForestGui gui;
 
         public ProjectExplorerEventTreeCollectionViewModel(ForestGui gui) : base(new ViewModelFactory(gui))
@@ -22,7 +23,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
                 gui.PropertyChanged += GuiPropertyChanged;
                 gui.ForestAnalysis.EventTrees.CollectionChanged += EventTreeCollectionChanged;
             }
-            projectExplorerCommandFactory = new ProjectExplorerCommandFactory(gui);
+            commandFactory = new CommandFactory(gui);
             RefreshChildItems();
         }
 
@@ -30,11 +31,11 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 
         public override bool IsExpandable => true;
 
-        public override ICommand ToggleIsExpandedCommand => projectExplorerCommandFactory.CreateToggleIsExpandedCommand(this);
+        public override ICommand ToggleIsExpandedCommand => commandFactory.CreateToggleIsExpandedCommand(this);
 
         public override bool CanAdd => true;
 
-        public override ICommand AddItemCommand => projectExplorerCommandFactory.CreateAddEventTreeCommand();
+        public override ICommand AddItemCommand => commandFactory.CreateAddEventTreeCommand();
 
         private void RefreshChildItems()
         {
