@@ -141,7 +141,6 @@
       <DependentUpon>ElicitationFormExportDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ribbon\IO\Export\ElicitationFormsExportViewModel.cs" />
-    <Compile Include="Ribbon\IO\Export\EventTreeExportViewModel.cs" />
     <Compile Include="Ribbon\IO\Export\ExportElicitationFormsCommand.cs" />
     <Compile Include="Ribbon\IO\Export\ExportElicitationFormsViewModel.cs" />
     <Compile Include="Ribbon\IO\Export\FolderDialogBehavior.cs" />
@@ -411,6 +410,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\EventTree\add-failing-tree-event.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Messages\alert-icon 32x32.png" />
+    <Resource Include="Resources\Messages\close-icon 32x32.png" />
+    <Resource Include="Resources\Messages\information-icon 32x32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

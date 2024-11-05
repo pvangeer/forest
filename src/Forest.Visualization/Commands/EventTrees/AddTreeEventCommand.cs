@@ -16,6 +16,9 @@ namespace Forest.Visualization.Commands.EventTrees
                 if (eventTree.MainTreeEvent == null)
                     return true;
 
+                if (Gui.SelectionManager.SelectedTreeEvent == null)
+                    return false;
+
                 var treeEventType = TreeEventType.Failing;
                 if (parameter is TreeEventType treeEventTypeCasted)
                     treeEventType = treeEventTypeCasted;

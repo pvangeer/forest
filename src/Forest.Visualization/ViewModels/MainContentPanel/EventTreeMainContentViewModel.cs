@@ -3,6 +3,7 @@ using Forest.Data;
 using Forest.Data.Services;
 using Forest.Data.Tree;
 using Forest.Gui;
+using Forest.Visualization.DataTemplates.MainContentPresenter.EventTree;
 
 namespace Forest.Visualization.ViewModels.MainContentPanel
 {
@@ -20,21 +21,21 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
             viewModelFactory = new ViewModelFactory(gui);
         }
 
-        public EventTreeGraph Graph => CreateGraph();
+        public EventTreeGraphLayout EventTreeGraphLayout => new EventTreeGraphLayout { Graph = CreateGraph() };
 
         private void EventTreePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
                 case nameof(EventTree.MainTreeEvent):
-                    OnPropertyChanged(nameof(Graph));
+                    OnPropertyChanged(nameof(EventTreeGraphLayout));
                     break;
             }
         }
 
         private void TreeEventsChanged(object sender, TreeEventsChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(Graph));
+            OnPropertyChanged(nameof(EventTreeGraphLayout));
         }
 
         private EventTreeGraph CreateGraph()

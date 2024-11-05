@@ -27,6 +27,10 @@ namespace Forest.Gui
 
         public void SetSelection(object selection)
         {
+            if (Selection is EventTree && Selection != selection)
+            {
+                SelectTreeEvent(null);
+            }
             Selection = selection;
             OnPropertyChanged(nameof(Selection));
         }
@@ -35,8 +39,8 @@ namespace Forest.Gui
         {
             Selection = null;
             SelectedTreeEvent = null;
-            OnPropertyChanged(nameof(Selection));
             OnPropertyChanged(nameof(SelectedTreeEvent));
+            OnPropertyChanged(nameof(Selection));
         }
     }
 }

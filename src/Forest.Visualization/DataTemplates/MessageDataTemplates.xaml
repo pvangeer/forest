@@ -39,15 +39,15 @@
         <DataTemplate.Triggers>
             <DataTrigger Binding="{Binding Severity}" Value="Information">
                 <Setter TargetName="SeverityImage" Property="Source"
-                        Value="/Forest.Gui;component/Resources/information-icon 32x32.png" />
+                        Value="/Forest.Visualization;component/Resources/Messages/information-icon 32x32.png" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Severity}" Value="Warning">
                 <Setter TargetName="SeverityImage" Property="Source"
-                        Value="/Forest.Gui;component/Resources/alert-icon 32x32.png" />
+                        Value="/Forest.Visualization;component/Resources/Messages/alert-icon 32x32.png" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Severity}" Value="Error">
                 <Setter TargetName="SeverityImage" Property="Source"
-                        Value="/Forest.Gui;component/Resources/close-icon 32x32.png" />
+                        Value="/Forest.Visualization;component/Resources/Messages/close-icon 32x32.png" />
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>

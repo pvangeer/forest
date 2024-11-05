@@ -3,20 +3,23 @@
                     xmlns:mainContentPanel="clr-namespace:Forest.Visualization.ViewModels.MainContentPanel"
                     xmlns:controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
                     xmlns:eventTree="clr-namespace:Forest.Visualization.DataTemplates.MainContentPresenter.EventTree">
-    <DataTemplate DataType="{x:Type mainContentPanel:EventTreeMainContentViewModel}" x:Key="EventTreeGraphDataTemplate">
-        <controls:ZoomControl ZoomDeltaMultiplier="5">
-            <controls:ZoomControl.Resources>
-                <ResourceDictionary>
-                    <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary
-                            Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/EventTree/EdgeControlTemplate.xaml" />
-                        <ResourceDictionary
-                            Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/EventTree/VertexControlTemplate.xaml" />
-                    </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
-            </controls:ZoomControl.Resources>
-            <eventTree:EventTreeGraphLayout Graph="{Binding Graph}" />
-        </controls:ZoomControl>
 
+    <DataTemplate DataType="{x:Type mainContentPanel:EventTreeMainContentViewModel}" x:Key="EventTreeGraphDataTemplate">
+        <DataTemplate.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary
+                        Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/EventTree/EdgeControlTemplate.xaml" />
+                    <ResourceDictionary
+                        Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/EventTree/VertexControlTemplate.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </DataTemplate.Resources>
+        <controls:ZoomControl 
+            ZoomDeltaMultiplier="5"
+            AnimationLength="0">
+            <ContentControl
+                Content="{Binding EventTreeGraphLayout}"/>
+        </controls:ZoomControl>
     </DataTemplate>
 </ResourceDictionary>

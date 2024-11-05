@@ -83,6 +83,8 @@ namespace Forest.Gui
 
             ChangeState(StorageState.Busy);
 
+            gui.SelectionManager.ClearSelection();
+
             var worker = new BackgroundWorker();
             worker.DoWork += OpenProjectAsync;
             worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o, e,
@@ -215,8 +217,6 @@ namespace Forest.Gui
             try
             {
                 var readProjectData = storageXml.LoadProject(fileName);
-
-                gui.SelectionManager.ClearSelection();
 
                 gui.ForestAnalysis = readProjectData.ForestAnalysis;
                 gui.VersionInfo = new VersionInfo
