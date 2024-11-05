@@ -406,5 +406,11 @@
   <ItemGroup>
     <Resource Include="Resources\ProjectExplorer\probability_estimation.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\EventTree\add-failing-tree-event.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\EventTree\add-failing-tree-event.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

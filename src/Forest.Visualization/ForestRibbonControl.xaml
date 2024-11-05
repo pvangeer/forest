@@ -97,7 +97,7 @@
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:Button
                         Header="Toevoegen (falen)"
-                        LargeIcon="/Forest.Visualization;component\Resources\add-tree-event.png"
+                        LargeIcon="/Forest.Visualization;component\Resources\EventTree\add-failing-tree-event.png"
                         Size="Large"
                         Command="{Binding AddTreeEventCommand}"
                         CommandParameter="{x:Static tree:TreeEventType.Failing}" />
