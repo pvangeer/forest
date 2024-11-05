@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Forest.Data;
 using Forest.Data.Services;
 using Forest.Data.Tree;
@@ -12,16 +13,31 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
         private readonly EventTree eventTree;
         private readonly ViewModelFactory viewModelFactory;
         private EventTreeGraph graph;
+        private readonly ForestGui gui;
 
         public EventTreeMainContentViewModel(EventTree eventTree, ForestGui gui)
         {
+            this.gui = gui;
+            gui.PropertyChanged += GuiPropertyChanged;
             this.eventTree = eventTree;
             this.eventTree.PropertyChanged += EventTreePropertyChanged;
             this.eventTree.TreeEventsChanged += TreeEventsChanged;
+            this.gui.SelectionManager.SelectedTreeEventChanged += SelectedTreeEventChanged;
             viewModelFactory = new ViewModelFactory(gui);
         }
 
         public EventTreeGraphLayout EventTreeGraphLayout => new EventTreeGraphLayout { Graph = CreateGraph() };
+
+        public bool IsDetailsPanelVisible => gui.IsShowDetailsPanel;
+
+        public TreeEventViewModel SelectedTreeEventViewModel
+        {
+            get
+            {
+                var selectedTreeEvent = gui.SelectionManager.GetSelectedTreeEvent(eventTree);
+                return selectedTreeEvent != null ? viewModelFactory.CreateTreeEventViewModel(selectedTreeEvent, eventTree) : null;
+            }
+        }
 
         private void EventTreePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -31,6 +47,11 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
                     OnPropertyChanged(nameof(EventTreeGraphLayout));
                     break;
             }
+        }
+
+        private void SelectedTreeEventChanged(object sender, EventArgs e)
+        {
+            OnPropertyChanged(nameof(SelectedTreeEventViewModel));
         }
 
         private void TreeEventsChanged(object sender, TreeEventsChangedEventArgs e)
@@ -77,6 +98,16 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
                 var lastVertex = new GraphVertex(true);
                 graph.AddVertex(lastVertex);
                 graph.AddEdge(new TreeEventConnector(vertex, lastVertex));
+            }
+        }
+
+        private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(ForestGui.IsShowDetailsPanel):
+                    OnPropertyChanged(nameof(IsDetailsPanelVisible));
+                    break;
             }
         }
     }

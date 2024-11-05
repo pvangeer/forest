@@ -2,7 +2,52 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mainContentPanel="clr-namespace:Forest.Visualization.ViewModels.MainContentPanel"
                     xmlns:controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
-                    xmlns:eventTree="clr-namespace:Forest.Visualization.DataTemplates.MainContentPresenter.EventTree">
+                    xmlns:visualization="clr-namespace:Forest.Visualization"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+
+    <DataTemplate DataType="{x:Type mainContentPanel:TreeEventViewModel}" x:Key="TreeEventDetailsDataTemplate" >
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Content="Naam" FontWeight="Bold" />
+            <TextBox
+                Grid.Column="1"
+                Grid.Row="0"
+                Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource TextBoxStyle}" />
+            <Label Grid.Column="0" Grid.Row="1" Content="Omschrijving" FontWeight="Bold" />
+            <TextBox
+                Grid.Column="1"
+                Grid.Row="1"
+                Text="{Binding Summary, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource TextBoxStyle}" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Content="Knoopinformatie"
+                FontWeight="Bold"
+                HorizontalContentAlignment="Left" />
+            <xctk:RichTextBox
+                Style="{StaticResource RichTextBoxStyle}"
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Text="{Binding Information}">
+                <xctk:RichTextBoxFormatBarManager.FormatBar>
+                    <xctk:RichTextBoxFormatBar />
+                </xctk:RichTextBoxFormatBarManager.FormatBar>
+            </xctk:RichTextBox>
+        </Grid>
+    </DataTemplate>
 
     <DataTemplate DataType="{x:Type mainContentPanel:EventTreeMainContentViewModel}" x:Key="EventTreeGraphDataTemplate">
         <DataTemplate.Resources>
@@ -15,11 +60,31 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </DataTemplate.Resources>
-        <controls:ZoomControl 
-            ZoomDeltaMultiplier="5"
-            AnimationLength="0">
-            <ContentControl
-                Content="{Binding EventTreeGraphLayout}"/>
-        </controls:ZoomControl>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <controls:ZoomControl 
+                Grid.Column="0"
+                ZoomDeltaMultiplier="5"
+                AnimationLength="0">
+                <ContentControl
+                    Content="{Binding EventTreeGraphLayout}"/>
+            </controls:ZoomControl>
+            <visualization:HidableGridSplitter
+                Grid.Column="1"
+                HideDirection="Left"
+                Visibility="{Binding IsDetailsPanelVisible, Converter={StaticResource BooleanToVisibilityConverter} }"
+                Width="5"
+                Background="{StaticResource Fluent.Ribbon.Brushes.Separator.Background}"
+                HorizontalAlignment="Stretch"
+                ResizeBehavior="BasedOnAlignment"/>
+            <ContentPresenter 
+                Grid.Column="2"
+                Content="{Binding SelectedTreeEventViewModel}"
+                ContentTemplate="{StaticResource TreeEventDetailsDataTemplate}"></ContentPresenter>
+        </Grid>
     </DataTemplate>
 </ResourceDictionary>

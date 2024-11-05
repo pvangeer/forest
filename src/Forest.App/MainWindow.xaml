@@ -3,9 +3,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:fluent="urn:fluent-ribbon"
-    xmlns:visualization="clr-namespace:Forest.Visualization;assembly=Forest.Visualization"
     xmlns:viewModels="clr-namespace:Forest.App.ViewModels"
     xmlns:converters="clr-namespace:Forest.App.Converters"
+    xmlns:ribbon="clr-namespace:Forest.Visualization.Ribbon;assembly=Forest.Visualization"
     Icon="/Forest.App;component/forest.ico"
     Title="Faalpad"
     Height="800"
@@ -73,7 +73,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <visualization:ForestRibbonControl
+        <ribbon:ForestRibbonControl
             Grid.Row="0"
             DataContext="{Binding RibbonViewModel}" />
 

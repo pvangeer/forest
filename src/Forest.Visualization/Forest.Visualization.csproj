@@ -123,7 +123,8 @@
     <Compile Include="Converters\ProbabilityToStringConverter.cs" />
     <Compile Include="Converters\Taskbar\ShouldShowPriorityMessageToBoolConverter.cs" />
     <Compile Include="Dialogs\FileDialogFactory.cs" />
-    <Compile Include="MainContentTemplateSelector.cs" />
+    <Compile Include="DataTemplates\MainContentPresenter\MainContentTemplateSelector.cs" />
+    <Compile Include="HidableGridSplitter.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenterViewModel.cs" />
     <Compile Include="Commands\CanAlwaysExecuteActionCommand.cs" />
@@ -186,7 +187,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ForestRibbonControl.xaml.cs">
+    <Compile Include="Ribbon\ForestRibbonControl.xaml.cs">
       <DependentUpon>ForestRibbonControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
@@ -309,7 +310,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ForestRibbonControl.xaml">
+    <Page Include="Ribbon\ForestRibbonControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

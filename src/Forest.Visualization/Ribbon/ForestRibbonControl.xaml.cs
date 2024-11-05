@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Forest.Visualization
+namespace Forest.Visualization.Ribbon
 {
     /// <summary>
     ///     Interaction logic for ForestRibbonControl.xaml

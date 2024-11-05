@@ -2,7 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Forest.Visualization.ViewModels.MainContentPanel;
 
-namespace Forest.Visualization
+namespace Forest.Visualization.DataTemplates.MainContentPresenter
 {
     public class MainContentTemplateSelector : DataTemplateSelector
     {
