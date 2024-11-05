@@ -42,7 +42,7 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
         {
             graph = new EventTreeGraph();
 
-            DrawNode(viewModelFactory.CreateTreeEventViewModel(eventTree.MainTreeEvent));
+            DrawNode(viewModelFactory.CreateTreeEventViewModel(eventTree.MainTreeEvent, eventTree));
 
             return graph;
         }

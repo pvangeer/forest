@@ -54,11 +54,14 @@ namespace Forest.Visualization.ViewModels
 
         public TreeEventViewModelOld SelectedTreeEvent
         {
-            get => FindTreeEventViewModel(selectionManager.SelectedTreeEvent);
+            get
+            {
+                return FindTreeEventViewModel(selectionManager.SelectedTreeEvent[EventTree]);
+            }
             set
             {
                 if (value != null)
-                    selectionManager.SelectTreeEvent(value.TreeEvent);
+                    selectionManager.SelectTreeEvent(EventTree, value.TreeEvent);
                 OnPropertyChanged();
             }
         }

@@ -16,7 +16,7 @@ namespace Forest.Visualization.Commands.EventTrees
                 if (eventTree.MainTreeEvent == null)
                     return true;
 
-                if (Gui.SelectionManager.SelectedTreeEvent == null)
+                if (Gui.SelectionManager.SelectedTreeEvent[eventTree] == null)
                     return false;
 
                 var treeEventType = TreeEventType.Failing;
@@ -24,8 +24,8 @@ namespace Forest.Visualization.Commands.EventTrees
                     treeEventType = treeEventTypeCasted;
 
                 return (treeEventType == TreeEventType.Failing &&
-                        Gui.SelectionManager.SelectedTreeEvent.FailingEvent == null) ||
-                       (treeEventType == TreeEventType.Passing && Gui.SelectionManager.SelectedTreeEvent.PassingEvent == null);
+                        Gui.SelectionManager.SelectedTreeEvent[eventTree].FailingEvent == null) ||
+                       (treeEventType == TreeEventType.Passing && Gui.SelectionManager.SelectedTreeEvent[eventTree].PassingEvent == null);
             }
 
             return false;
@@ -37,9 +37,13 @@ namespace Forest.Visualization.Commands.EventTrees
             if (parameter is TreeEventType treeEventTypeCasted)
                 treeEventType = treeEventTypeCasted;
 
-            var newTreeEvent = ManipulationService.AddTreeEvent(Gui.SelectionManager.Selection as EventTree,
-                Gui.SelectionManager.SelectedTreeEvent, treeEventType);
-            Gui.SelectionManager.SelectTreeEvent(newTreeEvent);
+            var eventTree = Gui.SelectionManager.Selection as EventTree;
+            if (eventTree == null)
+                return;
+
+            var newTreeEvent = ManipulationService.AddTreeEvent(eventTree,
+                Gui.SelectionManager.SelectedTreeEvent[eventTree], treeEventType);
+            Gui.SelectionManager.SelectTreeEvent(eventTree, newTreeEvent);
         }
     }
 }

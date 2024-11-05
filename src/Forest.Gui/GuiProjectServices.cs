@@ -95,8 +95,6 @@ namespace Forest.Gui
                     gui.OnPropertyChanged(nameof(ForestGui.ForestAnalysis));
                     gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));
                     
-                    gui.SelectionManager.SetSelection(gui.ForestAnalysis.EventTrees.FirstOrDefault());
-
                     log.Info($"Klaar met openen van project uit bestand '{gui.ProjectFilePath}'.");
                 });
             worker.WorkerSupportsCancellation = false;

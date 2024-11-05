@@ -12,7 +12,6 @@
     Width="1200"
     WindowStartupLocation="CenterScreen"
     Closing="MainWindowClosing"
-    Loaded="MainWindowLoaded"
     BorderThickness="1"
     BorderBrush="MediumBlue">
 

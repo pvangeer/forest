@@ -8,7 +8,9 @@
              xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
              xmlns:tree="clr-namespace:Forest.Data.Tree;assembly=Forest.Data"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DataContext="{d:DesignInstance Type=viewModels:RibbonViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="450" 
+             d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -18,10 +20,6 @@
             <converters:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
-
-    <UserControl.DataContext>
-        <viewModels:RibbonViewModel />
-    </UserControl.DataContext>
 
     <Grid>
         <fluent:Ribbon

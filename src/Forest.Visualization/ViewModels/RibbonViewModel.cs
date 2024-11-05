@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Windows.Input;
 using Forest.Data.Tree;
@@ -10,14 +11,11 @@ namespace Forest.Visualization.ViewModels
     {
         private readonly CommandFactory commandFactory;
 
-        public RibbonViewModel() : this(new ForestGui())
-        {
-        }
-
         public RibbonViewModel(ForestGui gui) : base(gui)
         {
             if (Gui != null)
             {
+                Gui.SelectionManager.SelectedTreeEventChanged += SelectedTreeEventChanged;
                 Gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
                 commandFactory = new CommandFactory(gui);
             }
@@ -46,7 +44,10 @@ namespace Forest.Visualization.ViewModels
 
         public ICommand AddTreeEventCommand => commandFactory.CreateAddTreeEventCommand();
 
-        public TreeEvent SelectedTreeEvent => Gui.SelectionManager.SelectedTreeEvent;
+        public TreeEvent SelectedTreeEvent =>
+            Gui.SelectionManager.Selection is EventTree selectedEventTree
+                ? Gui.SelectionManager.SelectedTreeEvent[selectedEventTree]
+                : null;
 
         public ICommand EscapeCommand => commandFactory.CreateEscapeCommand();
 
@@ -76,6 +77,11 @@ namespace Forest.Visualization.ViewModels
             }
         }
 
+        private void SelectedTreeEventChanged(object sender, EventArgs e)
+        {
+            OnPropertyChanged(nameof(SelectedTreeEvent));
+        }
+
         private void SelectionManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -83,7 +89,7 @@ namespace Forest.Visualization.ViewModels
                 case nameof(SelectionManager.SelectedTreeEvent):
                     OnPropertyChanged(nameof(SelectedTreeEvent));
                     break;
-                case nameof(SelectionManager.Selection):
+                /*case nameof(SelectionManager.Selection):
                     OnPropertyChanged(nameof(AddEventTreeCommand));
                     OnPropertyChanged(nameof(RemoveEventTreeCommand));
                     OnPropertyChanged(nameof(RemoveTreeEventCommand));
@@ -94,7 +100,7 @@ namespace Forest.Visualization.ViewModels
                     OnPropertyChanged(nameof(SelectedTreeEvent));
                     OnPropertyChanged(nameof(SaveProjectAsCommand));
                     OnPropertyChanged(nameof(SaveProjectCommand));
-                    break;
+                    break;*/
             }
         }
     }

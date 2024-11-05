@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using Forest.Data;
 using Forest.Data.Tree;
@@ -15,14 +16,16 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
         private readonly ViewModelFactory viewModelFactory;
         private TreeEventViewModel failingEventViewModel;
         private TreeEventViewModel passingEventViewModel;
+        private readonly EventTree eventTree;
 
-        public TreeEventViewModel(TreeEvent treeEvent, ForestGui gui)
+        public TreeEventViewModel(TreeEvent treeEvent, EventTree eventTree, ForestGui gui)
         {
             this.gui = gui;
+            this.eventTree = eventTree;
             viewModelFactory = new ViewModelFactory(gui);
             commandFactory = new CommandFactory(gui);
             if (gui != null)
-                gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
+                gui.SelectionManager.SelectedTreeEventChanged += SelectedTreeEventChanged;
             this.treeEvent = treeEvent;
 
             if (treeEvent != null)
@@ -67,7 +70,7 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
                     return null;
 
                 return passingEventViewModel ?? (passingEventViewModel =
-                    viewModelFactory.CreateTreeEventViewModel(treeEvent.PassingEvent));
+                    viewModelFactory.CreateTreeEventViewModel(treeEvent.PassingEvent, eventTree));
             }
         }
 
@@ -79,7 +82,7 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
                     return null;
 
                 return failingEventViewModel ?? (failingEventViewModel =
-                    viewModelFactory.CreateTreeEventViewModel(treeEvent.FailingEvent));
+                    viewModelFactory.CreateTreeEventViewModel(treeEvent.FailingEvent, eventTree));
             }
         }
 
@@ -93,28 +96,16 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
 
         public ICommand TreeEventClickedCommand => commandFactory.CreateTreeEventClickedCommand(this);
 
-        public bool IsSelected => treeEvent != null && ReferenceEquals(treeEvent, gui?.SelectionManager.SelectedTreeEvent);
+        public bool IsSelected => treeEvent != null && ReferenceEquals(treeEvent, gui?.SelectionManager.GetSelectedTreeEvent(eventTree));
 
-        private void SelectionManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(SelectionManager.SelectedTreeEvent):
-                    OnPropertyChanged(nameof(IsSelected));
-                    break;
-            }
-        }
-
-        public void FireSelectedStateChangeRecursive()
+        private void SelectedTreeEventChanged(object sender, EventArgs eventArgs)
         {
             OnPropertyChanged(nameof(IsSelected));
-            FailingEvent?.FireSelectedStateChangeRecursive();
-            PassingEvent?.FireSelectedStateChangeRecursive();
         }
 
         public void Select()
         {
-            gui.SelectionManager.SelectTreeEvent(treeEvent);
+            gui.SelectionManager.SelectTreeEvent(eventTree,treeEvent);
         }
 
         private void TreeEventPropertyChanged(object sender, PropertyChangedEventArgs e)

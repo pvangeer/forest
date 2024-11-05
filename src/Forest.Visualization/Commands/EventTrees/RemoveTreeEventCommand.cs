@@ -17,8 +17,8 @@ namespace Forest.Visualization.Commands.EventTrees
         public override void Execute(object parameter)
         {
             var eventTree = (EventTree)Gui.SelectionManager.Selection;
-            var parent = ManipulationService.RemoveTreeEvent(eventTree, Gui.SelectionManager.SelectedTreeEvent);
-            Gui.SelectionManager.SelectTreeEvent(parent ?? eventTree.MainTreeEvent);
+            var parent = ManipulationService.RemoveTreeEvent(eventTree, Gui.SelectionManager.SelectedTreeEvent[eventTree]);
+            Gui.SelectionManager.SelectTreeEvent(eventTree, parent ?? eventTree.MainTreeEvent);
         }
     }
 }

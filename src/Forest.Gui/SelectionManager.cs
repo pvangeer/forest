@@ -1,4 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq;
 using Forest.Data;
 using Forest.Data.Tree;
 
@@ -11,26 +15,63 @@ namespace Forest.Gui
         public SelectionManager(ForestGui gui)
         {
             this.gui = gui;
-            SelectedTreeEvent = gui.ForestAnalysis.EventTrees.FirstOrDefault()?.MainTreeEvent;
-            Selection = gui.ForestAnalysis.EventTrees.FirstOrDefault();
+            gui.PropertyChanged += GuiPropertyChanged;
+            InitializeSelectionManager();
         }
 
-        public TreeEvent SelectedTreeEvent { get; private set; }
+        private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(ForestGui.ForestAnalysis):
+                    InitializeSelectionManager();
+                    break;
+            }
+        }
+
+        private void InitializeSelectionManager()
+        {
+            SelectedTreeEvent = gui.ForestAnalysis.EventTrees.ToDictionary(et => et, et => et.MainTreeEvent);
+            Selection = gui.ForestAnalysis.EventTrees.FirstOrDefault();
+            gui.ForestAnalysis.EventTrees.CollectionChanged += EventTreesCollectionChanged;
+        }
+
+        private void EventTreesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action )
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (var eventTree in e.NewItems.OfType<EventTree>())
+                    {
+                        SelectedTreeEvent[eventTree] = eventTree.MainTreeEvent;
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (var eventTree in e.OldItems.OfType<EventTree>())
+                    {
+                        if (SelectedTreeEvent.ContainsKey(eventTree))
+                        {
+                            SelectedTreeEvent.Remove(eventTree);
+                        }
+                    }
+                    break;
+            }
+        }
+
+        public Dictionary<EventTree,TreeEvent> SelectedTreeEvent { get; private set; }
 
         public object Selection { get; private set; }
 
-        public void SelectTreeEvent(TreeEvent treeEvent)
+        public event EventHandler<EventArgs> SelectedTreeEventChanged;
+
+        public void SelectTreeEvent(EventTree eventTree, TreeEvent treeEvent)
         {
-            SelectedTreeEvent = treeEvent;
-            OnPropertyChanged(nameof(SelectedTreeEvent));
+            SelectedTreeEvent[eventTree] = treeEvent;
+            SelectedTreeEventChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public void SetSelection(object selection)
         {
-            if (Selection is EventTree && Selection != selection)
-            {
-                SelectTreeEvent(null);
-            }
             Selection = selection;
             OnPropertyChanged(nameof(Selection));
         }
@@ -38,9 +79,14 @@ namespace Forest.Gui
         public void ClearSelection()
         {
             Selection = null;
-            SelectedTreeEvent = null;
-            OnPropertyChanged(nameof(SelectedTreeEvent));
+            SelectedTreeEvent.Clear();
+            SelectedTreeEventChanged?.Invoke(this, EventArgs.Empty);
             OnPropertyChanged(nameof(Selection));
+        }
+
+        public TreeEvent GetSelectedTreeEvent(EventTree eventTree)
+        {
+            return SelectedTreeEvent.ContainsKey(eventTree) ? SelectedTreeEvent[eventTree] : null;
         }
     }
 }

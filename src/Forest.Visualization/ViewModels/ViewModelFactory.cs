@@ -76,9 +76,9 @@ namespace Forest.Visualization.ViewModels
             return selection;
         }
 
-        public TreeEventViewModel CreateTreeEventViewModel(TreeEvent treeEvent)
+        public TreeEventViewModel CreateTreeEventViewModel(TreeEvent treeEvent, EventTree eventTree)
         {
-            return treeEvent != null ? new TreeEventViewModel(treeEvent, gui) : null;
+            return treeEvent != null ? new TreeEventViewModel(treeEvent, eventTree, gui) : null;
         }
     }
 }
