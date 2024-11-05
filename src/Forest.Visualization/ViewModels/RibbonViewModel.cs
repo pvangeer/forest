@@ -61,6 +61,18 @@ namespace Forest.Visualization.ViewModels
                 case nameof(ForestGui.BusyIndicator):
                     OnPropertyChanged(nameof(BusyIndicator));
                     break;
+                case nameof(ForestGui.ForestAnalysis):
+                    OnPropertyChanged(nameof(AddEventTreeCommand));
+                    OnPropertyChanged(nameof(RemoveEventTreeCommand));
+                    OnPropertyChanged(nameof(RemoveTreeEventCommand));
+                    OnPropertyChanged(nameof(AddTreeEventCommand));
+                    OnPropertyChanged(nameof(EscapeCommand));
+                    OnPropertyChanged(nameof(FileNewCommand));
+                    OnPropertyChanged(nameof(OpenProjectCommand));
+                    OnPropertyChanged(nameof(SelectedTreeEvent));
+                    OnPropertyChanged(nameof(SaveProjectAsCommand));
+                    OnPropertyChanged(nameof(SaveProjectCommand));
+                    break;
             }
         }
 
@@ -70,6 +82,18 @@ namespace Forest.Visualization.ViewModels
             {
                 case nameof(SelectionManager.SelectedTreeEvent):
                     OnPropertyChanged(nameof(SelectedTreeEvent));
+                    break;
+                case nameof(SelectionManager.Selection):
+                    OnPropertyChanged(nameof(AddEventTreeCommand));
+                    OnPropertyChanged(nameof(RemoveEventTreeCommand));
+                    OnPropertyChanged(nameof(RemoveTreeEventCommand));
+                    OnPropertyChanged(nameof(AddTreeEventCommand));
+                    OnPropertyChanged(nameof(EscapeCommand));
+                    OnPropertyChanged(nameof(FileNewCommand));
+                    OnPropertyChanged(nameof(OpenProjectCommand));
+                    OnPropertyChanged(nameof(SelectedTreeEvent));
+                    OnPropertyChanged(nameof(SaveProjectAsCommand));
+                    OnPropertyChanged(nameof(SaveProjectCommand));
                     break;
             }
         }

@@ -10,12 +10,11 @@ namespace Forest.Visualization.ViewModels.ContentPanel
         {
             if (gui != null)
             {
-                ProjectExplorerViewModel = ViewModelFactory.CreateProjectExplorerViewModel();
                 gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
             }
         }
 
-        public ProjectExplorerViewModel ProjectExplorerViewModel { get; private set; }
+        public ProjectExplorerViewModel ProjectExplorerViewModel => ViewModelFactory.CreateProjectExplorerViewModel();
 
         public object SelectedContentItem => ViewModelFactory.CreateMainContentViewModel(Gui?.SelectionManager.Selection);
 
@@ -24,7 +23,6 @@ namespace Forest.Visualization.ViewModels.ContentPanel
             switch (e.PropertyName)
             {
                 case nameof(ForestGui.ForestAnalysis):
-                    ProjectExplorerViewModel = ViewModelFactory.CreateProjectExplorerViewModel();
                     OnPropertyChanged(nameof(ProjectExplorerViewModel));
                     break;
             }

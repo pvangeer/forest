@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using Forest.Data;
 using Forest.Messaging;
 using Forest.Storage;
@@ -33,9 +34,13 @@ namespace Forest.Gui
             storageXml.UnStageEventTreeProject();
             gui.ProjectFilePath = "";
 
+            gui.SelectionManager.ClearSelection();
+
             gui.ForestAnalysis = ForestAnalysisFactory.CreateStandardNewAnalysis();
             gui.OnPropertyChanged(nameof(ForestGui.ForestAnalysis));
             gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));
+
+            gui.SelectionManager.SetSelection(gui.ForestAnalysis.EventTrees.FirstOrDefault());
         }
 
         public void OpenProject()
@@ -84,9 +89,11 @@ namespace Forest.Gui
                 () =>
                 {
                     gui.ProjectFilePath = fileName;
-
+                    
                     gui.OnPropertyChanged(nameof(ForestGui.ForestAnalysis));
                     gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));
+                    
+                    gui.SelectionManager.SetSelection(gui.ForestAnalysis.EventTrees.FirstOrDefault());
 
                     log.Info($"Klaar met openen van project uit bestand '{gui.ProjectFilePath}'.");
                 });
@@ -208,6 +215,9 @@ namespace Forest.Gui
             try
             {
                 var readProjectData = storageXml.LoadProject(fileName);
+
+                gui.SelectionManager.ClearSelection();
+
                 gui.ForestAnalysis = readProjectData.ForestAnalysis;
                 gui.VersionInfo = new VersionInfo
                 {

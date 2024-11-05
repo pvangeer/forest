@@ -30,5 +30,13 @@ namespace Forest.Gui
             Selection = selection;
             OnPropertyChanged(nameof(Selection));
         }
+
+        public void ClearSelection()
+        {
+            Selection = null;
+            SelectedTreeEvent = null;
+            OnPropertyChanged(nameof(Selection));
+            OnPropertyChanged(nameof(SelectedTreeEvent));
+        }
     }
 }
