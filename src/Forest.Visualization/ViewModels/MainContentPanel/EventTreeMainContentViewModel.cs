@@ -28,7 +28,7 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
 
         public EventTreeGraphLayout EventTreeGraphLayout => new EventTreeGraphLayout { Graph = CreateGraph() };
 
-        public bool IsDetailsPanelVisible => gui.IsShowDetailsPanel;
+        public bool IsDetailsPanelVisible => gui.IsDetailsPanelVisible;
 
         public TreeEventViewModel SelectedTreeEventViewModel
         {
@@ -105,7 +105,7 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
         {
             switch (e.PropertyName)
             {
-                case nameof(ForestGui.IsShowDetailsPanel):
+                case nameof(ForestGui.IsDetailsPanelVisible):
                     OnPropertyChanged(nameof(IsDetailsPanelVisible));
                     break;
             }

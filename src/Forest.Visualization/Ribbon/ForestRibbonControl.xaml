@@ -110,12 +110,14 @@
                         LargeIcon="/Forest.Visualization;component\Resources\remove-tree-event.png"
                         Size="Large"
                         Command="{Binding RemoveTreeEventCommand}" />
-                    <!--TODO: toggle details panel-->
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Beeld">
                     <fluent:ToggleButton
-                        Header="Knoopinformatie"
+                        Header="Datails tonen"
                         LargeIcon="/Forest.Visualization;component\Resources\tree-event-info.png"
                         Size="Large"
-                        IsEnabled="False" />
+                        IsChecked="{Binding IsDetailsPanelVisible}"
+                        IsEnabled="{Binding CanShowDetailsPanel}"/>
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 

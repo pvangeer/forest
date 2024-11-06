@@ -19,7 +19,7 @@ namespace Forest.Gui
             ProjectFilePath = "";
             GuiProjectServices = new GuiProjectServices(this);
             SelectionManager = new SelectionManager(this);
-            IsShowDetailsPanel = true;
+            IsDetailsPanelVisible = true;
             LogMessageAppender.Instance.MessageCollection = this;
         }
 
@@ -43,7 +43,7 @@ namespace Forest.Gui
 
         public MessageList Messages { get; }
 
-        public bool IsShowDetailsPanel { get; set; }
+        public bool IsDetailsPanelVisible { get; set; }
 
         private void ConfigureMessaging()
         {

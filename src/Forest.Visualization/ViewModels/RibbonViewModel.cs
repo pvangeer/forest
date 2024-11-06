@@ -55,6 +55,18 @@ namespace Forest.Visualization.ViewModels
 
         public ICommand RemoveEventTreeCommand => commandFactory.CreateRemoveEventTreeCommand();
 
+        public bool IsDetailsPanelVisible
+        {
+            get => Gui.IsDetailsPanelVisible;
+            set
+            {
+                Gui.IsDetailsPanelVisible = value;
+                Gui.OnPropertyChanged(nameof(ForestGui.IsDetailsPanelVisible));
+            }
+        }
+
+        public bool CanShowDetailsPanel => Gui?.SelectionManager.Selection is EventTree;
+
         protected override void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -74,6 +86,9 @@ namespace Forest.Visualization.ViewModels
                     OnPropertyChanged(nameof(SaveProjectAsCommand));
                     OnPropertyChanged(nameof(SaveProjectCommand));
                     break;
+                case nameof(ForestGui.IsDetailsPanelVisible):
+                    OnPropertyChanged(nameof(IsDetailsPanelVisible));
+                    break;
             }
         }
 
@@ -89,18 +104,9 @@ namespace Forest.Visualization.ViewModels
                 case nameof(SelectionManager.SelectedTreeEvent):
                     OnPropertyChanged(nameof(SelectedTreeEvent));
                     break;
-                /*case nameof(SelectionManager.Selection):
-                    OnPropertyChanged(nameof(AddEventTreeCommand));
-                    OnPropertyChanged(nameof(RemoveEventTreeCommand));
-                    OnPropertyChanged(nameof(RemoveTreeEventCommand));
-                    OnPropertyChanged(nameof(AddTreeEventCommand));
-                    OnPropertyChanged(nameof(EscapeCommand));
-                    OnPropertyChanged(nameof(FileNewCommand));
-                    OnPropertyChanged(nameof(OpenProjectCommand));
-                    OnPropertyChanged(nameof(SelectedTreeEvent));
-                    OnPropertyChanged(nameof(SaveProjectAsCommand));
-                    OnPropertyChanged(nameof(SaveProjectCommand));
-                    break;*/
+                case nameof(SelectionManager.Selection):
+                    OnPropertyChanged(nameof(CanShowDetailsPanel));
+                    break;
             }
         }
     }

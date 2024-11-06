@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
+using ControlzEx.Standard;
 using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.Commands.EventTrees;

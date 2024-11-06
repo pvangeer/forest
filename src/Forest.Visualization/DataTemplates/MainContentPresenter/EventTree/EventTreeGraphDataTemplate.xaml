@@ -75,7 +75,7 @@
             </controls:ZoomControl>
             <visualization:HidableGridSplitter
                 Grid.Column="1"
-                HideDirection="Left"
+                HideDirection="Right"
                 Visibility="{Binding IsDetailsPanelVisible, Converter={StaticResource BooleanToVisibilityConverter} }"
                 Width="5"
                 Background="{StaticResource Fluent.Ribbon.Brushes.Separator.Background}"
