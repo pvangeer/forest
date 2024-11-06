@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Services;
 using Forest.Gui;
 using Forest.Visualization.Commands;
@@ -9,10 +10,10 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
     public class ProjectExplorerEstimationItemViewModel : ProjectExplorerItemViewModelBase
     {
         private readonly CommandFactory commandFactory;
-        private readonly ProbabilityEstimation estimation;
+        private readonly ProbabilityEstimationPerTreeEvent estimation;
         private readonly ForestGui gui;
 
-        public ProjectExplorerEstimationItemViewModel(ProbabilityEstimation estimation, ForestGui gui) : base(new ViewModelFactory(gui))
+        public ProjectExplorerEstimationItemViewModel(ProbabilityEstimationPerTreeEvent estimation, ForestGui gui) : base(new ViewModelFactory(gui))
         {
             this.estimation = estimation;
             this.gui = gui;
@@ -29,7 +30,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
         public override ICommand RemoveItemCommand => commandFactory.CreateCanAlwaysExecuteActionCommand(o =>
         {
             var service = new AnalysisManipulationService(gui.ForestAnalysis);
-            service.RemoveProbabilityEstimation(estimation);
+            service.RemoveProbabilityEstimationPerTreeEvent(estimation);
         });
 
         public override object GetSelectableObject()

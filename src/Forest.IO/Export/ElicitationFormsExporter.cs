@@ -87,7 +87,7 @@ namespace Forest.IO.Export
                 nodes.Add(new DotNode
                 {
                     NodeName = treeEvent.Name,
-                    Estimates = treeEventEstimate.ClassProbabilitySpecification.Where(e => e.Expert.Name == expertName).Select(s =>
+                    Estimates = treeEventEstimate.ClassProbabilitySpecifications.Where(e => e.Expert.Name == expertName).Select(s =>
                         new DotEstimate
                         {
                             WaterLevel = s.HydrodynamicCondition.WaterLevel,

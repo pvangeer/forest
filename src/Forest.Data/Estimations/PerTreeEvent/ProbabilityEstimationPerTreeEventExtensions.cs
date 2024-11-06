@@ -19,7 +19,7 @@ namespace Forest.Data.Estimations.PerTreeEvent
                     continue;
 
                 foreach (var expert in probabilityEstimation.Experts)
-                    estimationsForThisTreeEvent.ClassProbabilitySpecification.Add(new ExpertClassEstimation
+                    estimationsForThisTreeEvent.ClassProbabilitySpecifications.Add(new ExpertClassEstimation
                     {
                         Expert = expert,
                         HydrodynamicCondition = hydrodynamicCondition,
@@ -41,10 +41,10 @@ namespace Forest.Data.Estimations.PerTreeEvent
                 if (estimationsForThisTreeEvent == null)
                     continue;
 
-                var estimatesToRemove = estimationsForThisTreeEvent.ClassProbabilitySpecification.Where(e =>
+                var estimatesToRemove = estimationsForThisTreeEvent.ClassProbabilitySpecifications.Where(e =>
                     e.HydrodynamicCondition == hydrodynamicCondition).ToArray();
                 foreach (var estimationToRemove in estimatesToRemove)
-                    estimationsForThisTreeEvent.ClassProbabilitySpecification.Remove(estimationToRemove);
+                    estimationsForThisTreeEvent.ClassProbabilitySpecifications.Remove(estimationToRemove);
             }
         }
 
@@ -58,7 +58,7 @@ namespace Forest.Data.Estimations.PerTreeEvent
                     continue;
 
                 foreach (var hydraulicCondition in probabilityEstimation.HydrodynamicConditions)
-                    estimationsForThisTreeEvent.ClassProbabilitySpecification.Add(new ExpertClassEstimation
+                    estimationsForThisTreeEvent.ClassProbabilitySpecifications.Add(new ExpertClassEstimation
                     {
                         Expert = expert,
                         HydrodynamicCondition = hydraulicCondition,
@@ -78,10 +78,10 @@ namespace Forest.Data.Estimations.PerTreeEvent
                 var estimationsForThisTreeEvent = probabilityEstimation.Estimations.FirstOrDefault(e => e.TreeEvent == treeEvent);
                 if (estimationsForThisTreeEvent == null)
                     continue;
-                var estimatesToRemove = estimationsForThisTreeEvent.ClassProbabilitySpecification.Where(e =>
+                var estimatesToRemove = estimationsForThisTreeEvent.ClassProbabilitySpecifications.Where(e =>
                     e.Expert == expert).ToArray();
                 foreach (var estimationToRemove in estimatesToRemove)
-                    estimationsForThisTreeEvent.ClassProbabilitySpecification.Remove(estimationToRemove);
+                    estimationsForThisTreeEvent.ClassProbabilitySpecifications.Remove(estimationToRemove);
             }
         }
     }

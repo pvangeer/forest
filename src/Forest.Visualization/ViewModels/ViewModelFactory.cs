@@ -1,5 +1,6 @@
 ﻿using System;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.TreeView.Data;
@@ -58,7 +59,7 @@ namespace Forest.Visualization.ViewModels
             return new ProjectExplorerEventTreeNodeViewModel(eventTree, gui);
         }
 
-        public ITreeNodeViewModel CreateProjectExplorerEstimationItemViewModel(ProbabilityEstimation estimation)
+        public ITreeNodeViewModel CreateProjectExplorerEstimationItemViewModel(ProbabilityEstimationPerTreeEvent estimation)
         {
             return new ProjectExplorerEstimationItemViewModel(estimation, gui);
         }

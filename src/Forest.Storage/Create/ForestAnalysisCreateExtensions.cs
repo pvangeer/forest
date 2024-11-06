@@ -4,7 +4,7 @@ using Forest.Storage.XmlEntities;
 
 namespace Forest.Storage.Create
 {
-    internal static class ProjectCreateExtensions
+    internal static class ForestAnalysisCreateExtensions
     {
         internal static ForestAnalysisXmlEntity Create(this ForestAnalysis forestAnalysis, PersistenceRegistry registry)
         {
@@ -22,9 +22,19 @@ namespace Forest.Storage.Create
 
             AddEntriesForEventTrees(forestAnalysis, entity, registry);
 
-            // TODO: Store also probability analysis
+            AddEntriesForProbabilityEstimationsPerTreeEvent(forestAnalysis, entity, registry);
 
             return entity;
+        }
+
+        private static void AddEntriesForProbabilityEstimationsPerTreeEvent(ForestAnalysis analysis, ForestAnalysisXmlEntity entity, PersistenceRegistry registry)
+        {
+            for (var index = 0; index < analysis.ProbabilityEstimationsPerTreeEvent.Count; index++)
+            {
+                var estimation = analysis.ProbabilityEstimationsPerTreeEvent[index].Create(registry);
+                estimation.Order = index;
+                entity.ProbabilityEstimationPerTreeEventXmlEntities.Add(estimation);
+            }
         }
 
         private static void AddEntriesForEventTrees(ForestAnalysis analysis, ForestAnalysisXmlEntity entity, PersistenceRegistry registry)

@@ -10,8 +10,6 @@ namespace Forest.Storage.XmlEntities
     {
         public ForestAnalysisXmlEntity()
         {
-            Experts = new Collection<ExpertXmlEntity>();
-            HydraulicConditions = new Collection<HydrodynamicConditionXmlEntity>();
             EventTreeXmlEntities = new Collection<EventTreeXmlEntity>();
         }
 
@@ -34,14 +32,8 @@ namespace Forest.Storage.XmlEntities
         [XmlArrayItem(ElementName = "eventtree")]
         public Collection<EventTreeXmlEntity> EventTreeXmlEntities { get; set; }
 
-        [XmlArray(ElementName = "experts")]
-        [XmlArrayItem(ElementName = "expert")]
-        public Collection<ExpertXmlEntity> Experts { get; set; }
-
-        [XmlArray(ElementName = "hydraulicconditions")]
-        [XmlArrayItem(ElementName = "hydrauliccondition")]
-        public Collection<HydrodynamicConditionXmlEntity> HydraulicConditions { get; set; }
-
-        // TODO: Add probability estimations
+        [XmlArray(ElementName = "estimationsperevent")]
+        [XmlArrayItem(ElementName = "estimationperevent")]
+        public Collection<ProbabilityEstimationPerTreeEventXmlEntity> ProbabilityEstimationPerTreeEventXmlEntities { get; set; }
     }
 }

@@ -9,6 +9,9 @@ namespace Forest.Storage.XmlEntities
         [XmlElement(ElementName = "maintreeevent")]
         public TreeEventXmlEntity MainTreeEvent { get; set; }
 
+        [XmlAttribute(AttributeName = "name")]
+        public string Name { get; set; }
+
         [XmlAttribute(AttributeName = "order")]
         public long Order { get; set; }
     }

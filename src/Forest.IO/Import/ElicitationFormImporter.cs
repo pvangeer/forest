@@ -48,7 +48,7 @@ namespace Forest.IO.Import
 
                     foreach (var dotEstimate in dotFormNode.Estimates)
                     {
-                        var specification = estimations.ClassProbabilitySpecification.First(s =>
+                        var specification = estimations.ClassProbabilitySpecifications.First(s =>
                             s.Expert == expert && Math.Abs(s.HydrodynamicCondition.WaterLevel - dotEstimate.WaterLevel) < 1e-6);
                         specification.MinEstimation = (ProbabilityClass)dotEstimate.LowerEstimate;
                         specification.AverageEstimation = (ProbabilityClass)dotEstimate.BestEstimate;

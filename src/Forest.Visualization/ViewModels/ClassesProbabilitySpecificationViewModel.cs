@@ -13,7 +13,7 @@ namespace Forest.Visualization.ViewModels
         {
             // TODO: React on collection changes
             ClassesProbabilitySpecification = new ObservableCollection<ExpertClassEstimationViewModel>(
-                estimation.ClassProbabilitySpecification.Select(e => new ExpertClassEstimationViewModel(e)));
+                estimation.ClassProbabilitySpecifications.Select(e => new ExpertClassEstimationViewModel(e)));
         }
 
         public ObservableCollection<ExpertClassEstimationViewModel> ClassesProbabilitySpecification { get; }

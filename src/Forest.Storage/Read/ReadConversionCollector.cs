@@ -150,6 +150,14 @@ namespace Forest.Storage.Read
                 : Get(key);
         }
 
+        public EventTree GetReferencedEventTree(long id)
+        {
+            var key = eventTrees.Keys.FirstOrDefault(k => k.Id == id);
+            return key == null
+                ? throw new ReadReferencedObjectsFirstException(nameof(EventTree))
+                : Get(key);
+        }
+
         #region helpers
 
         private TModel Get<TEntity, TModel>(Dictionary<TEntity, TModel> collection, TEntity entity)
@@ -190,5 +198,6 @@ namespace Forest.Storage.Read
         }
 
         #endregion
+
     }
 }

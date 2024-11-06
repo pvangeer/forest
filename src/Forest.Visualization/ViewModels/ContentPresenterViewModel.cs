@@ -1,7 +1,6 @@
 using System.ComponentModel;
 using System.Linq;
 using Forest.Data;
-using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Services;
 using Forest.Gui;
 
@@ -21,7 +20,7 @@ namespace Forest.Visualization.ViewModels
                 analysisManipulationService = new AnalysisManipulationService(Gui.ForestAnalysis);
 
                 var probabilityEstimationPerTreeEvent =
-                    gui.ForestAnalysis.ProbabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().First();
+                    gui.ForestAnalysis.ProbabilityEstimationsPerTreeEvent.FirstOrDefault();
                 ExpertsViewModel =
                     new ExpertsViewModel(probabilityEstimationPerTreeEvent);
                 HydrodynamicsViewModel = new HydrodynamicsViewModel(probabilityEstimationPerTreeEvent);

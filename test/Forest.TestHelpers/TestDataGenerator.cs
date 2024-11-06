@@ -19,7 +19,7 @@ namespace Forest.TestHelpers
                 {
                     eventTree
                 },
-                ProbabilityEstimations =
+                ProbabilityEstimationsPerTreeEvent =
                 {
                     new ProbabilityEstimationPerTreeEvent
                     {
@@ -146,7 +146,7 @@ namespace Forest.TestHelpers
                     new TreeEventProbabilityEstimation(mainTreeEvent)
                     {
                         ProbabilitySpecificationType = ProbabilitySpecificationType.Classes,
-                        ClassProbabilitySpecification =
+                        ClassProbabilitySpecifications =
                         {
                             new ExpertClassEstimation
                             {
@@ -303,7 +303,7 @@ namespace Forest.TestHelpers
                     new TreeEventProbabilityEstimation(failingEvent)
                     {
                         ProbabilitySpecificationType = ProbabilitySpecificationType.Classes,
-                        ClassProbabilitySpecification =
+                        ClassProbabilitySpecifications =
                         {
                             new ExpertClassEstimation
                             {
@@ -459,7 +459,7 @@ namespace Forest.TestHelpers
                 {
                     eventTree
                 },
-                ProbabilityEstimations =
+                ProbabilityEstimationsPerTreeEvent =
                 {
                     probabilityEstimation1
                 }

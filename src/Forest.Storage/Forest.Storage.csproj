@@ -26,12 +26,15 @@
     <Compile Include="Create\FragilityCurveElementCreateExtensions.cs" />
     <Compile Include="Create\HydraulicConditionCreateExtensions.cs" />
     <Compile Include="Create\PersonCreateExtensions.cs" />
-    <Compile Include="Create\ProjectCreateExtensions.cs" />
+    <Compile Include="Create\ForestAnalysisCreateExtensions.cs" />
+    <Compile Include="Create\ProbabilityEstimationPerTreeEventCreateExtensions.cs" />
     <Compile Include="Create\TreeEventCreateExtensions.cs" />
+    <Compile Include="Create\TreeEventProbabilityEstimationCreateExtensions.cs" />
     <Compile Include="FingerprintHelper.cs" />
     <Compile Include="Migration\FileMigrationScript.cs" />
     <Compile Include="Migration\XmlMigrationException.cs" />
     <Compile Include="Migration\XmlStorageMigrationService.cs" />
+    <Compile Include="Read\ProbabilityEstimationPerTreeEventReadExtensions.cs" />
     <Compile Include="Read\ReadReferencedObjectsFirstException.cs" />
     <Compile Include="StorageXml.cs" />
     <Compile Include="ForestVersionComparer.cs" />
@@ -65,7 +68,10 @@
     <Compile Include="XmlEntities\HydrodynamicConditionXmlEntity.cs" />
     <Compile Include="XmlEntities\PersonXmlEntity.cs" />
     <Compile Include="XmlEntities\ForestAnalysisXmlEntity.cs" />
+    <Compile Include="XmlEntities\ProbabilityEstimationPerTreeEventXmlEntity.cs" />
+    <Compile Include="XmlEntities\ProbabilitySpecificationTypeServices.cs" />
     <Compile Include="XmlEntities\ProjectXmlEntity.cs" />
+    <Compile Include="XmlEntities\TreeEventProbabilityEstimationXmlEntity.cs" />
     <Compile Include="XmlEntities\TreeEventXmlEntity.cs" />
     <Compile Include="XmlEntities\VersionXmlEntity.cs" />
     <Compile Include="XmlEntities\XmlEntityBase.cs" />

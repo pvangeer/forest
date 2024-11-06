@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Experts;
 using Forest.Data.Tree;
 
@@ -11,7 +12,7 @@ namespace Forest.Data
         {
             ProjectLeader = new Person();
             EventTrees = new ObservableCollection<EventTree>();
-            ProbabilityEstimations = new ObservableCollection<ProbabilityEstimation>();
+            ProbabilityEstimationsPerTreeEvent = new ObservableCollection<ProbabilityEstimationPerTreeEvent>();
         }
 
         public string Name { get; set; }
@@ -26,6 +27,8 @@ namespace Forest.Data
 
         public ObservableCollection<EventTree> EventTrees { get; }
 
-        public ObservableCollection<ProbabilityEstimation> ProbabilityEstimations { get; }
+        public ObservableCollection<ProbabilityEstimationPerTreeEvent> ProbabilityEstimationsPerTreeEvent { get; }
+
+        public ObservableCollection<ProbabilityEstimation> ProbabilityEstimationsPerCondition { get; }
     }
 }

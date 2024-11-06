@@ -16,7 +16,7 @@ namespace Forest.Data.Estimations.PerTreeEvent
                     foreach (var waterLevel in waterLevels)
                         classCurve.Add(
                             new FragilityCurveElement(waterLevel,
-                                ExpertClassEstimationUtils.GetClassesBasedProbabilityForWaterLevel(estimation.ClassProbabilitySpecification,
+                                ExpertClassEstimationUtils.GetClassesBasedProbabilityForWaterLevel(estimation.ClassProbabilitySpecifications,
                                     waterLevel)));
 
                     return classCurve;
@@ -38,7 +38,7 @@ namespace Forest.Data.Estimations.PerTreeEvent
             IEnumerable<double> orderedWaterLevels)
         {
             if (estimation.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
-                return ExpertClassEstimationUtils.GetClassBasedUpperFragilityCurve(estimation.ClassProbabilitySpecification.ToArray(),
+                return ExpertClassEstimationUtils.GetClassBasedUpperFragilityCurve(estimation.ClassProbabilitySpecifications.ToArray(),
                     orderedWaterLevels);
 
             return estimation.GetFragilityCurve(orderedWaterLevels);
@@ -48,7 +48,7 @@ namespace Forest.Data.Estimations.PerTreeEvent
             IEnumerable<double> orderedWaterLevels)
         {
             if (estimation.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
-                return ExpertClassEstimationUtils.GetClassBasedLowerFragilityCurve(estimation.ClassProbabilitySpecification.ToArray(),
+                return ExpertClassEstimationUtils.GetClassBasedLowerFragilityCurve(estimation.ClassProbabilitySpecifications.ToArray(),
                     orderedWaterLevels);
 
             return estimation.GetFragilityCurve(orderedWaterLevels);

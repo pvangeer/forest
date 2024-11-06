@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Forest.Data.Estimations;
+using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Gui;
 using Forest.Visualization.Commands;
 using Forest.Visualization.TreeView.Data;
@@ -23,10 +24,10 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
                 Gui.PropertyChanged += GuiPropertyChanged;
 
             Items = new ObservableCollection<ITreeNodeViewModel>();
-            if (Gui?.ForestAnalysis?.ProbabilityEstimations != null)
+            if (Gui?.ForestAnalysis?.ProbabilityEstimationsPerTreeEvent != null)
             {
-                Gui.ForestAnalysis.ProbabilityEstimations.CollectionChanged += EstimationsCollectionChanged;
-                foreach (var estimation in Gui.ForestAnalysis.ProbabilityEstimations)
+                Gui.ForestAnalysis.ProbabilityEstimationsPerTreeEvent.CollectionChanged += EstimationsPerEventCollectionChanged;
+                foreach (var estimation in Gui.ForestAnalysis.ProbabilityEstimationsPerTreeEvent)
                     Items.Add(ViewModelFactory.CreateProjectExplorerEstimationItemViewModel(estimation));
             }
 
@@ -43,10 +44,10 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 
         public override ICommand AddItemCommand => CommandFactory.CreateAddProbabilityEstimationCommand();
 
-        private void EstimationsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void EstimationsPerEventCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
-                foreach (var estimation in e.NewItems.OfType<ProbabilityEstimation>())
+                foreach (var estimation in e.NewItems.OfType<ProbabilityEstimationPerTreeEvent>())
                 {
                     var viewModel = ViewModelFactory.CreateProjectExplorerEstimationItemViewModel(estimation);
                     Items.Add(viewModel);
@@ -55,7 +56,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
                 }
 
             if (e.Action == NotifyCollectionChangedAction.Remove)
-                foreach (var estimation in e.OldItems.OfType<ProbabilityEstimation>())
+                foreach (var estimation in e.OldItems.OfType<ProbabilityEstimationPerTreeEvent>())
                 {
                     var estimationToRemove = Items.FirstOrDefault(i => i.IsViewModelFor(estimation));
                     if (estimationToRemove != null)
@@ -70,7 +71,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
                 case nameof(ForestGui.ForestAnalysis):
                     Items.Clear();
                     if (Gui.ForestAnalysis != null)
-                        Gui.ForestAnalysis.ProbabilityEstimations.CollectionChanged += EstimationsCollectionChanged;
+                        Gui.ForestAnalysis.ProbabilityEstimationsPerTreeEvent.CollectionChanged += EstimationsPerEventCollectionChanged;
                     break;
             }
         }

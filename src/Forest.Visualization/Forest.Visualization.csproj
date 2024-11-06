@@ -153,8 +153,8 @@
     <Compile Include="ViewModels\MessageListViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEventTreeCollectionViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEventTreeNodeViewModel.cs" />
-    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerProbabilityEstimationCollectionViewModelBase.cs" />
-    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerProbabilityEstimationCollectionViewModel.cs" />
+    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerProbabilityEstimationPerEventCollectionViewModelBase.cs" />
+    <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerProbabilityEstimationPerEventCollectionViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEstimationItemViewModel.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\ContentPresenterViewModel.cs" />

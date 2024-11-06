@@ -16,6 +16,7 @@ namespace Forest.Storage.Create
 
             var entity = new EventTreeXmlEntity
             {
+                Name = model.Name,
                 MainTreeEvent = model.MainTreeEvent?.Create(registry)
             };
 

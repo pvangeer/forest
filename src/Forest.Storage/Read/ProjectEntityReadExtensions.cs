@@ -14,13 +14,8 @@ namespace Forest.Storage.Read
             if (collector == null)
                 throw new ArgumentNullException(nameof(collector));
 
-            // TODO: Move this to probabilityspecifications
-            var experts = entity.Experts.OrderBy(e => e.Order).Select(e => e.Read(collector));
-            var hydraulicConditions = entity.HydraulicConditions.OrderBy(e => e.Order).Select(e => e.Read(collector));
 
-            var eventTrees = entity.EventTreeXmlEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
-
-            var project = new ForestAnalysis
+            var analysis = new ForestAnalysis
             {
                 Name = entity.Name,
                 AssessmentSection = entity.AssessmentSection,
@@ -28,14 +23,22 @@ namespace Forest.Storage.Read
                 ProjectInformation = entity.ProjectInformation
             };
             var projectLeader = entity.ProjectLeader.Read(collector);
-            project.ProjectLeader.Name = projectLeader.Name;
-            project.ProjectLeader.Email = projectLeader.Email;
-            project.ProjectLeader.Telephone = projectLeader.Telephone;
+            analysis.ProjectLeader.Name = projectLeader.Name;
+            analysis.ProjectLeader.Email = projectLeader.Email;
+            analysis.ProjectLeader.Telephone = projectLeader.Telephone;
 
+            var eventTrees = entity.EventTreeXmlEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
             foreach (var eventTree in eventTrees)
-                project.EventTrees.Add(eventTree);
+                analysis.EventTrees.Add(eventTree);
 
-            return project;
+            var estimationsPerTreeEvent =
+                entity.ProbabilityEstimationPerTreeEventXmlEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
+            foreach (var estimation in estimationsPerTreeEvent)
+            {
+                analysis.ProbabilityEstimationsPerTreeEvent.Add(estimation);
+            }
+
+            return analysis;
         }
     }
 }

@@ -1,0 +1,40 @@
+﻿using Forest.Data.Estimations.PerTreeEvent;
+using System;
+using System.ComponentModel;
+
+namespace Forest.Storage.XmlEntities
+{
+    public static class ProbabilitySpecificationTypeServices
+    {
+        public static string ToStorageName(this ProbabilitySpecificationType modelProbabilitySpecificationType)
+        {
+            switch (modelProbabilitySpecificationType)
+            {
+                case ProbabilitySpecificationType.Classes:
+                    return "classes";
+                case ProbabilitySpecificationType.FixedFrequency:
+                    return "fixedprobability";
+                case ProbabilitySpecificationType.FixedValue:
+                    return "fragilitycurve";
+                default:
+                    throw new InvalidEnumArgumentException(nameof(modelProbabilitySpecificationType));
+            }
+        }
+
+        public static ProbabilitySpecificationType FromStorageName(string storageName)
+        {
+            switch (storageName)
+            {
+                case "classes":
+                    return ProbabilitySpecificationType.Classes;
+                case "fixedprobability":
+                    return ProbabilitySpecificationType.FixedFrequency;
+                case "fragilitycurve":
+                    return ProbabilitySpecificationType.FixedValue;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
+    }
+}
