@@ -33,9 +33,9 @@ namespace Forest.Data.Services
             var estimation = forestAnalysis.ProbabilityEstimationsPerTreeEvent.FirstOrDefault(e => e.EventTree == eventTree);
             if (estimation != null)
             {
-                var estimationToRemove = estimation.Estimations.FirstOrDefault(e => e.TreeEvent == selectedTreeEventToRemove);
+                var estimationToRemove = estimation.Estimates.FirstOrDefault(e => e.TreeEvent == selectedTreeEventToRemove);
                 if (estimationToRemove != null)
-                    estimation.Estimations.Remove(estimationToRemove);
+                    estimation.Estimates.Remove(estimationToRemove);
             }
 
             if (parent.FailingEvent == selectedTreeEventToRemove)
@@ -62,7 +62,7 @@ namespace Forest.Data.Services
 
             if (estimation != null)
             {
-                var treeEventProbabilityEstimation = new TreeEventProbabilityEstimation(newTreeEvent)
+                var treeEventProbabilityEstimation = new TreeEventProbabilityEstimate(newTreeEvent)
                 {
                     ProbabilitySpecificationType = ProbabilitySpecificationType.FixedValue
                 };
@@ -76,7 +76,7 @@ namespace Forest.Data.Services
                         MinEstimation = ProbabilityClass.None,
                         MaxEstimation = ProbabilityClass.None
                     });
-                estimation.Estimations.Add(treeEventProbabilityEstimation);
+                estimation.Estimates.Add(treeEventProbabilityEstimation);
             }
 
             if (eventTree.MainTreeEvent == null)

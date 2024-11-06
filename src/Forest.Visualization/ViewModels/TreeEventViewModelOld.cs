@@ -110,7 +110,7 @@ namespace Forest.Visualization.ViewModels
             {
                 var selectedType = ProbabilitySpecificationTypes.ElementAt(value).Key;
                 if (EstimationSpecification.Type != selectedType)
-                    EstimationSpecification.Estimation.ChangeProbabilityEstimationType(selectedType);
+                    EstimationSpecification.Estimate.ChangeProbabilityEstimationType(selectedType);
             }
         }
 
@@ -123,7 +123,7 @@ namespace Forest.Visualization.ViewModels
                 var estimationPerTreeEvent = probabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().First();
                 return probabilityEstimationViewModel ?? (probabilityEstimationViewModel =
                     ParentEventTreeViewModel.EstimationSpecificationViewModelFactory.CreateViewModel(TreeEvent,
-                        estimationPerTreeEvent.Estimations.ToArray(), estimationPerTreeEvent.HydrodynamicConditions));
+                        estimationPerTreeEvent.Estimates.ToArray(), estimationPerTreeEvent.HydrodynamicConditions));
             }
         }
 
@@ -223,7 +223,7 @@ namespace Forest.Visualization.ViewModels
         {
             switch (e.PropertyName)
             {
-                case nameof(TreeEventProbabilityEstimation.ProbabilitySpecificationType):
+                case nameof(TreeEventProbabilityEstimate.ProbabilitySpecificationType):
                     probabilityEstimationViewModel = null;
                     OnPropertyChanged(nameof(ProbabilityEstimationTypeIndex));
                     OnPropertyChanged(nameof(EstimationSpecification));

@@ -67,7 +67,7 @@ namespace Forest.IO.Export
                 var fileName = Path.Combine(fileLocation, prefix + expert.Name + ".xlsx");
 
                 writer.WriteForm(fileName,
-                    EventTreeToDotForm(estimationToExport.EventTree, expert.Name, hydraulicConditions, probabilityEstimation.Estimations));
+                    EventTreeToDotForm(estimationToExport.EventTree, expert.Name, hydraulicConditions, probabilityEstimation.Estimates));
                 log.Info($"Bestand '{fileName}' geëxporteerd voor expert '{expert.Name}'");
             }
 
@@ -75,7 +75,7 @@ namespace Forest.IO.Export
         }
 
         private DotForm EventTreeToDotForm(EventTree eventTree, string expertName, HydrodynamicCondition[] hydraulicConditions,
-            ObservableCollection<TreeEventProbabilityEstimation> estimates)
+            ObservableCollection<TreeEventProbabilityEstimate> estimates)
         {
             var nodes = new List<DotNode>();
             foreach (var treeEvent in eventTree.MainTreeEvent.GetAllEventsRecursive())

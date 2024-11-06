@@ -14,14 +14,14 @@ namespace Forest.Visualization.ViewModels
         private readonly ObservableCollection<FragilityCurveElementViewModel> fixedFragilityCurveViewModels;
         private readonly ObservableCollection<HydrodynamicCondition> hydrodynamicConditions;
 
-        public FixedFragilityCurveSpecificationViewModel(TreeEvent treeEvent, TreeEventProbabilityEstimation estimation,
-            ObservableCollection<HydrodynamicCondition> hydrodynamicConditions) : base(treeEvent, estimation)
+        public FixedFragilityCurveSpecificationViewModel(TreeEvent treeEvent, TreeEventProbabilityEstimate estimate,
+            ObservableCollection<HydrodynamicCondition> hydrodynamicConditions) : base(treeEvent, estimate)
         {
             this.hydrodynamicConditions = hydrodynamicConditions;
 
             fixedFragilityCurveViewModels =
                 new ObservableCollection<FragilityCurveElementViewModel>(
-                    estimation.FragilityCurve.Select(e => new FragilityCurveElementViewModel(e)));
+                    estimate.FragilityCurve.Select(e => new FragilityCurveElementViewModel(e)));
             fixedFragilityCurveViewModels.CollectionChanged += FragilityCurveViewModelsCollectionChanged;
         }
 
@@ -52,11 +52,11 @@ namespace Forest.Visualization.ViewModels
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
                 foreach (var item in e.NewItems.OfType<FragilityCurveElementViewModel>())
-                    Estimation.FragilityCurve.Add(item.FragilityCurveElement);
+                    Estimate.FragilityCurve.Add(item.FragilityCurveElement);
 
             if (e.Action == NotifyCollectionChangedAction.Remove)
                 foreach (var item in e.OldItems.OfType<FragilityCurveElementViewModel>())
-                    Estimation.FragilityCurve.Remove(item.FragilityCurveElement);
+                    Estimate.FragilityCurve.Remove(item.FragilityCurveElement);
         }
     }
 }

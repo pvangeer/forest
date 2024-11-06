@@ -11,7 +11,7 @@ namespace Forest.Data.Estimations.PerTreeEvent
         {
             Experts = new ObservableCollection<Expert>();
             HydrodynamicConditions = new ObservableCollection<HydrodynamicCondition>();
-            Estimations = new ObservableCollection<TreeEventProbabilityEstimation>();
+            Estimates = new ObservableCollection<TreeEventProbabilityEstimate>();
         }
 
         public EventTree EventTree { get; set; }
@@ -20,6 +20,6 @@ namespace Forest.Data.Estimations.PerTreeEvent
 
         public ObservableCollection<HydrodynamicCondition> HydrodynamicConditions { get; }
 
-        public ObservableCollection<TreeEventProbabilityEstimation> Estimations { get; }
+        public ObservableCollection<TreeEventProbabilityEstimate> Estimates { get; }
     }
 }

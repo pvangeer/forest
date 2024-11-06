@@ -17,12 +17,12 @@ namespace Forest.Data.Test.Estimations
             var secondTreeEvent = new TreeEvent("2");
             var treeEvent = new TreeEvent("") { FailingEvent = secondTreeEvent };
             var evenTree = new EventTree { MainTreeEvent = treeEvent };
-            var firstEstimation = new TreeEventProbabilityEstimation(treeEvent);
-            var secondEstimation = new TreeEventProbabilityEstimation(secondTreeEvent);
+            var firstEstimation = new TreeEventProbabilityEstimate(treeEvent);
+            var secondEstimation = new TreeEventProbabilityEstimate(secondTreeEvent);
             var estimation = new ProbabilityEstimationPerTreeEvent
             {
                 EventTree = evenTree,
-                Estimations =
+                Estimates =
                 {
                     firstEstimation,
                     secondEstimation
@@ -48,8 +48,8 @@ namespace Forest.Data.Test.Estimations
             var secondTreeEvent = new TreeEvent("");
             var treeEvent = new TreeEvent("") { FailingEvent = secondTreeEvent };
             var eventTree = new EventTree { MainTreeEvent = treeEvent };
-            var estimationFirstTreeEvent = new TreeEventProbabilityEstimation(treeEvent);
-            var estimationSecondTreeEvent = new TreeEventProbabilityEstimation(secondTreeEvent);
+            var estimationFirstTreeEvent = new TreeEventProbabilityEstimate(treeEvent);
+            var estimationSecondTreeEvent = new TreeEventProbabilityEstimate(secondTreeEvent);
             var estimation = new ProbabilityEstimationPerTreeEvent
             {
                 EventTree = eventTree,
@@ -58,7 +58,7 @@ namespace Forest.Data.Test.Estimations
                     new HydrodynamicCondition(1.0, (Probability)0.01, 1, 1),
                     new HydrodynamicCondition(2.0, (Probability)0.001, 1, 1)
                 },
-                Estimations =
+                Estimates =
                 {
                     estimationFirstTreeEvent,
                     estimationSecondTreeEvent
@@ -105,7 +105,7 @@ namespace Forest.Data.Test.Estimations
             {
                 MainTreeEvent = treeEvent
             };
-            var treeEventProbabilityEstimation = new TreeEventProbabilityEstimation(treeEvent)
+            var treeEventProbabilityEstimation = new TreeEventProbabilityEstimate(treeEvent)
             {
                 ProbabilitySpecificationType = ProbabilitySpecificationType.Classes,
                 ClassProbabilitySpecifications =
@@ -130,7 +130,7 @@ namespace Forest.Data.Test.Estimations
                     hydraulicCondition1,
                     hydraulicCondition2
                 },
-                Estimations =
+                Estimates =
                 {
                     treeEventProbabilityEstimation
                 }
@@ -201,7 +201,7 @@ namespace Forest.Data.Test.Estimations
             {
                 MainTreeEvent = treeEvent
             };
-            var firstEstimation = new TreeEventProbabilityEstimation(treeEvent);
+            var firstEstimation = new TreeEventProbabilityEstimate(treeEvent);
             var probabilityEstimation = new ProbabilityEstimationPerTreeEvent
             {
                 EventTree = eventTree,
@@ -210,7 +210,7 @@ namespace Forest.Data.Test.Estimations
                     new Expert(),
                     new Expert()
                 },
-                Estimations =
+                Estimates =
                 {
                     firstEstimation
                 }
@@ -246,7 +246,7 @@ namespace Forest.Data.Test.Estimations
             var hydraulicCondition2 = new HydrodynamicCondition(2.0, (Probability)0.001, 1, 1);
             var treeEvent = new TreeEvent("");
             var eventTree = new EventTree { MainTreeEvent = treeEvent };
-            var treeEventProbabilityEstimation = new TreeEventProbabilityEstimation(treeEvent)
+            var treeEventProbabilityEstimation = new TreeEventProbabilityEstimate(treeEvent)
             {
                 ProbabilitySpecificationType = ProbabilitySpecificationType.Classes,
                 ClassProbabilitySpecifications =
@@ -270,7 +270,7 @@ namespace Forest.Data.Test.Estimations
                     hydraulicConditionToRemove,
                     hydraulicCondition2
                 },
-                Estimations =
+                Estimates =
                 {
                     treeEventProbabilityEstimation
                 }

@@ -12,19 +12,19 @@ namespace Forest.Visualization.Converters
     public class CriticalPathConverter
     {
         protected static bool ExtractInput(object[] values, out HydrodynamicCondition[] hydraulicConditions,
-            out TreeEventProbabilityEstimation[] estimations,
+            out TreeEventProbabilityEstimate[] estimations,
             out CriticalPathElement[] elements, out TreeEvent[] treeEvents)
         {
             hydraulicConditions = null;
             elements = new CriticalPathElement[] { };
-            estimations = new TreeEventProbabilityEstimation[] { };
+            estimations = new TreeEventProbabilityEstimate[] { };
             treeEvents = new TreeEvent[] { };
 
             if (values.Length != 3)
                 return true;
 
             var hydrodynamicConditionViewModels = values[1] as ObservableCollection<HydrodynamicConditionViewModel>;
-            if (values[2] is ObservableCollection<TreeEventProbabilityEstimation> estimatesCollection)
+            if (values[2] is ObservableCollection<TreeEventProbabilityEstimate> estimatesCollection)
                 estimations = estimatesCollection.ToArray();
 
             if (!(values[0] is TreeEvent[] criticalPath) ||

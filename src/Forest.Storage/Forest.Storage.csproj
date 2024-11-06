@@ -36,6 +36,7 @@
     <Compile Include="Migration\XmlStorageMigrationService.cs" />
     <Compile Include="Read\ProbabilityEstimationPerTreeEventReadExtensions.cs" />
     <Compile Include="Read\ReadReferencedObjectsFirstException.cs" />
+    <Compile Include="Read\TreeEventProbabilityEstimateReadExtension.cs" />
     <Compile Include="StorageXml.cs" />
     <Compile Include="ForestVersionComparer.cs" />
     <Compile Include="ForestVersionHelper.cs" />
@@ -71,7 +72,7 @@
     <Compile Include="XmlEntities\ProbabilityEstimationPerTreeEventXmlEntity.cs" />
     <Compile Include="XmlEntities\ProbabilitySpecificationTypeServices.cs" />
     <Compile Include="XmlEntities\ProjectXmlEntity.cs" />
-    <Compile Include="XmlEntities\TreeEventProbabilityEstimationXmlEntity.cs" />
+    <Compile Include="XmlEntities\TreeEventProbabilityEstimateXmlEntity.cs" />
     <Compile Include="XmlEntities\TreeEventXmlEntity.cs" />
     <Compile Include="XmlEntities\VersionXmlEntity.cs" />
     <Compile Include="XmlEntities\XmlEntityBase.cs" />

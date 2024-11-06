@@ -7,12 +7,12 @@ namespace Forest.Storage.Create
 {
     public static class TreeEventProbabilityEstimationCreateExtensions
     {
-        public static TreeEventProbabilityEstimationXmlEntity Create(this TreeEventProbabilityEstimation model, PersistenceRegistry registry)
+        public static TreeEventProbabilityEstimateXmlEntity Create(this TreeEventProbabilityEstimate model, PersistenceRegistry registry)
         {
             if (registry == null)
                 throw new ArgumentNullException(nameof(registry));
 
-            var entity = new TreeEventProbabilityEstimationXmlEntity
+            var entity = new TreeEventProbabilityEstimateXmlEntity
             {
                 FixedProbability = model.FixedProbability,
                 ProbabilitySpecificationType = model.ProbabilitySpecificationType.ToStorageName(),
@@ -25,7 +25,7 @@ namespace Forest.Storage.Create
         }
 
 
-        private static void AddClassProbabilitySpecifications(TreeEventProbabilityEstimationXmlEntity entity, TreeEventProbabilityEstimation model, PersistenceRegistry registry)
+        private static void AddClassProbabilitySpecifications(TreeEventProbabilityEstimateXmlEntity entity, TreeEventProbabilityEstimate model, PersistenceRegistry registry)
         {
             for (var index = 0; index < model.ClassProbabilitySpecifications.Count; index++)
             {
@@ -35,7 +35,7 @@ namespace Forest.Storage.Create
             }
         }
 
-        private static void AddFragilityCurveElements(TreeEventProbabilityEstimationXmlEntity entity, TreeEventProbabilityEstimation model, PersistenceRegistry registry)
+        private static void AddFragilityCurveElements(TreeEventProbabilityEstimateXmlEntity entity, TreeEventProbabilityEstimate model, PersistenceRegistry registry)
         {
             for (var index = 0; index < model.FragilityCurve.Count; index++)
             {

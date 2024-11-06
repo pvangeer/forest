@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Forest.Storage.XmlEntities
 {
     [Serializable]
-    public class TreeEventProbabilityEstimationXmlEntity
+    public class TreeEventProbabilityEstimateXmlEntity
     {
         [XmlAttribute(AttributeName = "treeeventid")]
         public long TreeEventId { get; }

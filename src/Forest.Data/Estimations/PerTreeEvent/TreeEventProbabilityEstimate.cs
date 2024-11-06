@@ -4,9 +4,9 @@ using Forest.Data.Tree;
 
 namespace Forest.Data.Estimations.PerTreeEvent
 {
-    public class TreeEventProbabilityEstimation : Entity
+    public class TreeEventProbabilityEstimate : Entity
     {
-        public TreeEventProbabilityEstimation(TreeEvent treeEvent)
+        public TreeEventProbabilityEstimate(TreeEvent treeEvent)
         {
             TreeEvent = treeEvent;
             FixedProbability = (Probability)1;
@@ -20,7 +20,7 @@ namespace Forest.Data.Estimations.PerTreeEvent
 
         public Probability FixedProbability { get; set; }
 
-        public FragilityCurve FragilityCurve { get; set; }
+        public FragilityCurve FragilityCurve { get; }
 
         public ProbabilitySpecificationType ProbabilitySpecificationType { get; set; }
     }

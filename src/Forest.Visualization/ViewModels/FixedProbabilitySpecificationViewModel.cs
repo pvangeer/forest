@@ -6,15 +6,15 @@ namespace Forest.Visualization.ViewModels
 {
     public class FixedProbabilitySpecificationViewModel : ProbabilitySpecificationViewModelBase
     {
-        public FixedProbabilitySpecificationViewModel(TreeEvent treeEvent, TreeEventProbabilityEstimation estimation) : base(treeEvent,
-            estimation)
+        public FixedProbabilitySpecificationViewModel(TreeEvent treeEvent, TreeEventProbabilityEstimate estimate) : base(treeEvent,
+            estimate)
         {
         }
 
         public Probability FixedProbability
         {
-            get => Estimation.FixedProbability;
-            set => Estimation.FixedProbability = value;
+            get => Estimate.FixedProbability;
+            set => Estimate.FixedProbability = value;
         }
     }
 }

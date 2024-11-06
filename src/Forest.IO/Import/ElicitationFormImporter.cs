@@ -44,7 +44,7 @@ namespace Forest.IO.Import
                 foreach (var dotFormNode in dotForm.Nodes)
                 {
                     var treeEvent = probabilityEstimation.EventTree.MainTreeEvent.FindTreeEvent(n => n.Name == dotFormNode.NodeName);
-                    var estimations = probabilityEstimation.Estimations.First(e => e.TreeEvent == treeEvent);
+                    var estimations = probabilityEstimation.Estimates.First(e => e.TreeEvent == treeEvent);
 
                     foreach (var dotEstimate in dotFormNode.Estimates)
                     {

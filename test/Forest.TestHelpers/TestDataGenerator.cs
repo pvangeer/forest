@@ -141,9 +141,9 @@ namespace Forest.TestHelpers
                     hydraulicCondition35,
                     hydraulicCondition38
                 },
-                Estimations =
+                Estimates =
                 {
-                    new TreeEventProbabilityEstimation(mainTreeEvent)
+                    new TreeEventProbabilityEstimate(mainTreeEvent)
                     {
                         ProbabilitySpecificationType = ProbabilitySpecificationType.Classes,
                         ClassProbabilitySpecifications =
@@ -300,7 +300,7 @@ namespace Forest.TestHelpers
                             }
                         }
                     },
-                    new TreeEventProbabilityEstimation(failingEvent)
+                    new TreeEventProbabilityEstimate(failingEvent)
                     {
                         ProbabilitySpecificationType = ProbabilitySpecificationType.Classes,
                         ClassProbabilitySpecifications =

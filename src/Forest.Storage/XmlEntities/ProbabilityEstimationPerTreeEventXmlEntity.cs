@@ -35,6 +35,6 @@ namespace Forest.Storage.XmlEntities
 
         [XmlArray(ElementName = "estimates")]
         [XmlArrayItem(ElementName = "estimate")]
-        public Collection<TreeEventProbabilityEstimationXmlEntity> Estimations { get; set; }
+        public Collection<TreeEventProbabilityEstimateXmlEntity> Estimations { get; set; }
     }
 }

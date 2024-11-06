@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Storage.XmlEntities;
 
@@ -19,7 +20,27 @@ namespace Forest.Storage.Read
                 Name = entity.Name,
             };
 
-            // TODO: Add estimations, HC and Experts
+            var experts =
+                entity.Experts.OrderBy(e => e.Order).Select(e => e.Read(collector));
+            foreach (var expert in experts)
+            {
+                estimation.Experts.Add(expert);
+            }
+
+            var hydrodynamicCondition =
+                entity.HydrodynamicConditions.OrderBy(e => e.Order).Select(e => e.Read(collector));
+            foreach (var condition in hydrodynamicCondition)
+            {
+                estimation.HydrodynamicConditions.Add(condition);
+            }
+
+            var estimationsPerTreeEvent =
+                entity.Estimations.OrderBy(e => e.Order).Select(e => e.Read(collector));
+            foreach (var estimate in estimationsPerTreeEvent)
+            {
+                estimation.Estimates.Add(estimate);
+            }
+
             return estimation;
         }
     }

@@ -7,26 +7,26 @@ namespace Forest.Data.Estimations.PerTreeEvent
 {
     public static class TreeEventProbabilityEstimationExtensions
     {
-        public static FragilityCurve GetFragilityCurve(this TreeEventProbabilityEstimation estimation, IEnumerable<double> waterLevels)
+        public static FragilityCurve GetFragilityCurve(this TreeEventProbabilityEstimate estimate, IEnumerable<double> waterLevels)
         {
-            switch (estimation.ProbabilitySpecificationType)
+            switch (estimate.ProbabilitySpecificationType)
             {
                 case ProbabilitySpecificationType.Classes:
                     var classCurve = new FragilityCurve();
                     foreach (var waterLevel in waterLevels)
                         classCurve.Add(
                             new FragilityCurveElement(waterLevel,
-                                ExpertClassEstimationUtils.GetClassesBasedProbabilityForWaterLevel(estimation.ClassProbabilitySpecifications,
+                                ExpertClassEstimationUtils.GetClassesBasedProbabilityForWaterLevel(estimate.ClassProbabilitySpecifications,
                                     waterLevel)));
 
                     return classCurve;
                 case ProbabilitySpecificationType.FixedFrequency:
                     // TODO: Interpolate if necessary
-                    return estimation.FragilityCurve;
+                    return estimate.FragilityCurve;
                 case ProbabilitySpecificationType.FixedValue:
                     var curve = new FragilityCurve();
                     foreach (var waterLevel in waterLevels)
-                        curve.Add(new FragilityCurveElement(waterLevel, estimation.FixedProbability));
+                        curve.Add(new FragilityCurveElement(waterLevel, estimate.FixedProbability));
 
                     return curve;
                 default:
@@ -34,34 +34,34 @@ namespace Forest.Data.Estimations.PerTreeEvent
             }
         }
 
-        public static FragilityCurve GetUpperFragilityCurves(this TreeEventProbabilityEstimation estimation,
+        public static FragilityCurve GetUpperFragilityCurves(this TreeEventProbabilityEstimate estimate,
             IEnumerable<double> orderedWaterLevels)
         {
-            if (estimation.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
-                return ExpertClassEstimationUtils.GetClassBasedUpperFragilityCurve(estimation.ClassProbabilitySpecifications.ToArray(),
+            if (estimate.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
+                return ExpertClassEstimationUtils.GetClassBasedUpperFragilityCurve(estimate.ClassProbabilitySpecifications.ToArray(),
                     orderedWaterLevels);
 
-            return estimation.GetFragilityCurve(orderedWaterLevels);
+            return estimate.GetFragilityCurve(orderedWaterLevels);
         }
 
-        public static FragilityCurve GetLowerFragilityCurve(this TreeEventProbabilityEstimation estimation,
+        public static FragilityCurve GetLowerFragilityCurve(this TreeEventProbabilityEstimate estimate,
             IEnumerable<double> orderedWaterLevels)
         {
-            if (estimation.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
-                return ExpertClassEstimationUtils.GetClassBasedLowerFragilityCurve(estimation.ClassProbabilitySpecifications.ToArray(),
+            if (estimate.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
+                return ExpertClassEstimationUtils.GetClassBasedLowerFragilityCurve(estimate.ClassProbabilitySpecifications.ToArray(),
                     orderedWaterLevels);
 
-            return estimation.GetFragilityCurve(orderedWaterLevels);
+            return estimate.GetFragilityCurve(orderedWaterLevels);
         }
 
-        public static void ChangeProbabilityEstimationType(this TreeEventProbabilityEstimation estimation,
+        public static void ChangeProbabilityEstimationType(this TreeEventProbabilityEstimate estimate,
             ProbabilitySpecificationType type)
         {
-            if (estimation.ProbabilitySpecificationType == type)
+            if (estimate.ProbabilitySpecificationType == type)
                 return;
 
-            estimation.ProbabilitySpecificationType = type;
-            estimation.OnPropertyChanged(nameof(TreeEventProbabilityEstimation.ProbabilitySpecificationType));
+            estimate.ProbabilitySpecificationType = type;
+            estimate.OnPropertyChanged(nameof(TreeEventProbabilityEstimate.ProbabilitySpecificationType));
         }
     }
 }

@@ -27,9 +27,9 @@ namespace Forest.Storage.Create
 
         private static void AddEstimationsToEstimation(ProbabilityEstimationPerTreeEventXmlEntity entity, ProbabilityEstimationPerTreeEvent model, PersistenceRegistry registry)
         {
-            for (var index = 0; index < model.Estimations.Count; index++)
+            for (var index = 0; index < model.Estimates.Count; index++)
             {
-                var estimation = model.Estimations[index].Create(registry);
+                var estimation = model.Estimates[index].Create(registry);
                 estimation.Order = index;
                 entity.Estimations.Add(estimation);
             }

@@ -9,11 +9,11 @@ namespace Forest.Visualization.ViewModels
     public class ClassesProbabilitySpecificationViewModel : ProbabilitySpecificationViewModelBase
     {
         public ClassesProbabilitySpecificationViewModel([NotNull] TreeEvent treeEvent,
-            TreeEventProbabilityEstimation estimation) : base(treeEvent, estimation)
+            TreeEventProbabilityEstimate estimate) : base(treeEvent, estimate)
         {
             // TODO: React on collection changes
             ClassesProbabilitySpecification = new ObservableCollection<ExpertClassEstimationViewModel>(
-                estimation.ClassProbabilitySpecifications.Select(e => new ExpertClassEstimationViewModel(e)));
+                estimate.ClassProbabilitySpecifications.Select(e => new ExpertClassEstimationViewModel(e)));
         }
 
         public ObservableCollection<ExpertClassEstimationViewModel> ClassesProbabilitySpecification { get; }

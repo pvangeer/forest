@@ -14,7 +14,7 @@ namespace Forest.Data.Estimations.PerTreeEvent
 
             foreach (var treeEvent in probabilityEstimation.EventTree.MainTreeEvent.GetAllEventsRecursive())
             {
-                var estimationsForThisTreeEvent = probabilityEstimation.Estimations.FirstOrDefault(e => e.TreeEvent == treeEvent);
+                var estimationsForThisTreeEvent = probabilityEstimation.Estimates.FirstOrDefault(e => e.TreeEvent == treeEvent);
                 if (estimationsForThisTreeEvent == null)
                     continue;
 
@@ -37,7 +37,7 @@ namespace Forest.Data.Estimations.PerTreeEvent
 
             foreach (var treeEvent in probabilityEstimation.EventTree.MainTreeEvent.GetAllEventsRecursive())
             {
-                var estimationsForThisTreeEvent = probabilityEstimation.Estimations.FirstOrDefault(e => e.TreeEvent == treeEvent);
+                var estimationsForThisTreeEvent = probabilityEstimation.Estimates.FirstOrDefault(e => e.TreeEvent == treeEvent);
                 if (estimationsForThisTreeEvent == null)
                     continue;
 
@@ -53,7 +53,7 @@ namespace Forest.Data.Estimations.PerTreeEvent
             probabilityEstimation.Experts.Add(expert);
             foreach (var treeEvent in probabilityEstimation.EventTree.MainTreeEvent.GetAllEventsRecursive())
             {
-                var estimationsForThisTreeEvent = probabilityEstimation.Estimations.FirstOrDefault(e => e.TreeEvent == treeEvent);
+                var estimationsForThisTreeEvent = probabilityEstimation.Estimates.FirstOrDefault(e => e.TreeEvent == treeEvent);
                 if (estimationsForThisTreeEvent == null)
                     continue;
 
@@ -75,7 +75,7 @@ namespace Forest.Data.Estimations.PerTreeEvent
 
             foreach (var treeEvent in probabilityEstimation.EventTree.MainTreeEvent.GetAllEventsRecursive())
             {
-                var estimationsForThisTreeEvent = probabilityEstimation.Estimations.FirstOrDefault(e => e.TreeEvent == treeEvent);
+                var estimationsForThisTreeEvent = probabilityEstimation.Estimates.FirstOrDefault(e => e.TreeEvent == treeEvent);
                 if (estimationsForThisTreeEvent == null)
                     continue;
                 var estimatesToRemove = estimationsForThisTreeEvent.ClassProbabilitySpecifications.Where(e =>

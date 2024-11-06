@@ -17,7 +17,7 @@ namespace Forest.Visualization.ViewModels
 
         public ForestAnalysis ForestAnalysis { get; }
 
-        public ProbabilitySpecificationViewModelBase CreateViewModel(TreeEvent treeEvent, TreeEventProbabilityEstimation[] estimations,
+        public ProbabilitySpecificationViewModelBase CreateViewModel(TreeEvent treeEvent, TreeEventProbabilityEstimate[] estimations,
             ObservableCollection<HydrodynamicCondition> hydrodynamicConditions)
         {
             var estimation = estimations?.FirstOrDefault(e => e.TreeEvent == treeEvent);
