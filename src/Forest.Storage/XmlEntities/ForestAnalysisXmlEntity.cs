@@ -11,6 +11,7 @@ namespace Forest.Storage.XmlEntities
         public ForestAnalysisXmlEntity()
         {
             EventTreeXmlEntities = new Collection<EventTreeXmlEntity>();
+            ProbabilityEstimationPerTreeEventXmlEntities = new Collection<ProbabilityEstimationPerTreeEventXmlEntity>();
         }
 
         [XmlAttribute(AttributeName = "name")]

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Input;
 using Forest.Data;
 using Forest.Data.Estimations.PerTreeEvent;
-using Forest.Data.Experts;
+using Forest.Data.Estimations.PerTreeEvent.Experts;
 using log4net;
 
 namespace Forest.Visualization.Ribbon.IO.Export

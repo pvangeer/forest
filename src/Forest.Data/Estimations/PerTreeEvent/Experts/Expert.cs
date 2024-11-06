@@ -1,4 +1,4 @@
-﻿namespace Forest.Data.Experts
+﻿namespace Forest.Data.Estimations.PerTreeEvent.Experts
 {
     public class Expert : Person
     {

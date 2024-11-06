@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Forest.Data.Experts;
+using Forest.Data.Estimations.PerTreeEvent.Experts;
 using Forest.Data.Properties;
 
 namespace Forest.Visualization.ViewModels
