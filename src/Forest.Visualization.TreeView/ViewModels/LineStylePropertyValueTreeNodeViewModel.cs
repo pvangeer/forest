@@ -6,8 +6,9 @@ using Forest.Visualization.TreeView.Data;
 
 namespace Forest.Visualization.TreeView.ViewModels
 {
-    public class LineStylePropertyValueTreeNodeViewModel<TContent> : PropertyValueTreeNodeViewModelBase,
-        ILineStylePropertyTreeNodeViewModel where TContent : Entity
+    public class LineStylePropertyValueTreeNodeViewModel<TContent>
+        : PropertyValueTreeNodeViewModelBase,
+            ILineStylePropertyTreeNodeViewModel where TContent : Entity
     {
         private readonly PropertyInfo propertyInfo;
         private TContent content;

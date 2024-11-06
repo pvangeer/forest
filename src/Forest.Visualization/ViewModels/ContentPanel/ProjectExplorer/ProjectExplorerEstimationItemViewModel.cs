@@ -13,7 +13,8 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
         private readonly ProbabilityEstimationPerTreeEvent estimation;
         private readonly ForestGui gui;
 
-        public ProjectExplorerEstimationItemViewModel(ProbabilityEstimationPerTreeEvent estimation, ForestGui gui) : base(new ViewModelFactory(gui))
+        public ProjectExplorerEstimationItemViewModel(ProbabilityEstimationPerTreeEvent estimation, ForestGui gui) : base(
+            new ViewModelFactory(gui))
         {
             this.estimation = estimation;
             this.gui = gui;

@@ -37,7 +37,8 @@ namespace Forest.Visualization.Converters
                         new LineSegment(new Point(midPointX, startPoint.Y), true),
                         new LineSegment(new Point(midPointX, endPoint.Y), true),
                         new LineSegment(endPoint, true)
-                    }, false)
+                    },
+                    false)
             };
         }
 

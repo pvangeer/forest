@@ -14,10 +14,12 @@ namespace Forest.Data.Estimations.PerTreeEvent
                 case ProbabilitySpecificationType.Classes:
                     var classCurve = new FragilityCurve();
                     foreach (var waterLevel in waterLevels)
+                    {
                         classCurve.Add(
                             new FragilityCurveElement(waterLevel,
                                 ExpertClassEstimationUtils.GetClassesBasedProbabilityForWaterLevel(estimate.ClassProbabilitySpecifications,
                                     waterLevel)));
+                    }
 
                     return classCurve;
                 case ProbabilitySpecificationType.FixedFrequency:

@@ -41,6 +41,7 @@ namespace Forest.IO.Test
         {
             var estimates = new List<DotEstimate>();
             for (var i = 0; i < waterlevels.Length; i++)
+            {
                 estimates.Add(new DotEstimate
                 {
                     WaterLevel = waterlevels[i],
@@ -50,6 +51,8 @@ namespace Forest.IO.Test
                     UpperEstimate = 5,
                     Comment = "Test comment"
                 });
+            }
+
             return new DotNode
             {
                 NodeName = nodeName,

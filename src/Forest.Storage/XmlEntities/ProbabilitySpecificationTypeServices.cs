@@ -1,6 +1,6 @@
-﻿using Forest.Data.Estimations.PerTreeEvent;
-using System;
+﻿using System;
 using System.ComponentModel;
+using Forest.Data.Estimations.PerTreeEvent;
 
 namespace Forest.Storage.XmlEntities
 {
@@ -35,6 +35,5 @@ namespace Forest.Storage.XmlEntities
                     throw new ArgumentException();
             }
         }
-
     }
 }

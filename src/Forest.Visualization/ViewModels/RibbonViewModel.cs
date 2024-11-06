@@ -61,7 +61,7 @@ namespace Forest.Visualization.ViewModels
             set
             {
                 Gui.IsDetailsPanelVisible = value;
-                Gui.OnPropertyChanged(nameof(ForestGui.IsDetailsPanelVisible));
+                Gui.OnPropertyChanged();
             }
         }
 

@@ -140,13 +140,15 @@ namespace Forest.Storage
             }
             catch (DataException exception)
             {
-                throw CreateStorageWriterException(filePath, "Er is een fout opgetreden bij het opslaan",
+                throw CreateStorageWriterException(filePath,
+                    "Er is een fout opgetreden bij het opslaan",
                     exception);
             }
             catch (SystemException exception)
             {
                 if (exception is InvalidOperationException || exception is NotSupportedException)
-                    throw CreateStorageWriterException(filePath, "Het was niet mogelijk een connectie te maken",
+                    throw CreateStorageWriterException(filePath,
+                        "Het was niet mogelijk een connectie te maken",
                         exception);
 
                 throw;
@@ -160,11 +162,13 @@ namespace Forest.Storage
         /// <param name="errorMessage">The critical error message.</param>
         /// <param name="innerException">Exception that caused this exception to be thrown.</param>
         /// <returns>Returns a new <see cref="XmlStorageException" />.</returns>
-        private static XmlStorageException CreateStorageWriterException(string databaseFilePath, string errorMessage,
+        private static XmlStorageException CreateStorageWriterException(string databaseFilePath,
+            string errorMessage,
             Exception innerException)
         {
             var message = string.Format("Het is niet gelukt om het bestand weg te schrijven op locatie \"{0}\": {1}",
-                databaseFilePath, errorMessage);
+                databaseFilePath,
+                errorMessage);
             return new XmlStorageException(message, innerException);
         }
 
@@ -175,7 +179,8 @@ namespace Forest.Storage
         /// <param name="errorMessage">The critical error message.</param>
         /// <param name="innerException">Exception that caused this exception to be thrown.</param>
         /// <returns>Returns a new <see cref="XmlStorageException" />.</returns>
-        private static XmlStorageException CreateStorageReaderException(string databaseFilePath, string errorMessage,
+        private static XmlStorageException CreateStorageReaderException(string databaseFilePath,
+            string errorMessage,
             Exception innerException = null)
         {
             var message = new FileReaderErrorMessageBuilder(databaseFilePath).Build(errorMessage);

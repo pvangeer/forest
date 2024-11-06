@@ -16,7 +16,8 @@ namespace Forest.Visualization.ViewModels
     public class TreeEventViewModelOld : INotifyPropertyChanged
     {
         private static readonly Dictionary<ProbabilitySpecificationType, string> ProbabilitySpecificationTypes =
-            Enum.GetValues(typeof(ProbabilitySpecificationType)).Cast<ProbabilitySpecificationType>()
+            Enum.GetValues(typeof(ProbabilitySpecificationType))
+                .Cast<ProbabilitySpecificationType>()
                 .ToDictionary(t => t, GetEstimationSpecificationTypeDisplayName);
 
         private readonly AnalysisManipulationService analysisManipulationService;
@@ -25,7 +26,8 @@ namespace Forest.Visualization.ViewModels
         private TreeEventViewModelOld passingEventViewModel;
         private ProbabilitySpecificationViewModelBase probabilityEstimationViewModel;
 
-        public TreeEventViewModelOld([NotNull] TreeEvent treeEvent, [NotNull] EventTreeViewModelOld parentEventTreeViewModel,
+        public TreeEventViewModelOld([NotNull] TreeEvent treeEvent,
+            [NotNull] EventTreeViewModelOld parentEventTreeViewModel,
             [NotNull] AnalysisManipulationService analysisManipulationService,
             [NotNull] ObservableCollection<ProbabilityEstimation> probabilityEstimations)
         {
@@ -73,7 +75,9 @@ namespace Forest.Visualization.ViewModels
                     return null;
 
                 return passingEventViewModel ?? (passingEventViewModel =
-                    new TreeEventViewModelOld(TreeEvent.PassingEvent, ParentEventTreeViewModel, analysisManipulationService,
+                    new TreeEventViewModelOld(TreeEvent.PassingEvent,
+                        ParentEventTreeViewModel,
+                        analysisManipulationService,
                         probabilityEstimations));
             }
         }
@@ -86,7 +90,9 @@ namespace Forest.Visualization.ViewModels
                     return null;
 
                 return failingEventViewModel ?? (failingEventViewModel =
-                    new TreeEventViewModelOld(TreeEvent.FailingEvent, ParentEventTreeViewModel, analysisManipulationService,
+                    new TreeEventViewModelOld(TreeEvent.FailingEvent,
+                        ParentEventTreeViewModel,
+                        analysisManipulationService,
                         probabilityEstimations));
             }
         }
@@ -123,7 +129,8 @@ namespace Forest.Visualization.ViewModels
                 var estimationPerTreeEvent = probabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().First();
                 return probabilityEstimationViewModel ?? (probabilityEstimationViewModel =
                     ParentEventTreeViewModel.EstimationSpecificationViewModelFactory.CreateViewModel(TreeEvent,
-                        estimationPerTreeEvent.Estimates.ToArray(), estimationPerTreeEvent.HydrodynamicConditions));
+                        estimationPerTreeEvent.Estimates.ToArray(),
+                        estimationPerTreeEvent.HydrodynamicConditions));
             }
         }
 

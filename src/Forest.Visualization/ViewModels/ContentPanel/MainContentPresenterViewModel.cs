@@ -9,9 +9,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel
         public MainContentPresenterViewModel(ForestGui gui) : base(gui)
         {
             if (gui != null)
-            {
                 gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
-            }
         }
 
         public ProjectExplorerViewModel ProjectExplorerViewModel => ViewModelFactory.CreateProjectExplorerViewModel();

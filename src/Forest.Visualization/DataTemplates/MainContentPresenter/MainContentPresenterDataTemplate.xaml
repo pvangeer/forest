@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:contentPanel="clr-namespace:Forest.Visualization.ViewModels.ContentPanel"
-                    xmlns:mainContentPresenter="clr-namespace:Forest.Visualization.DataTemplates.MainContentPresenter"
-                    xmlns:visualization="clr-namespace:Forest.Visualization">
+                    xmlns:mainContentPresenter="clr-namespace:Forest.Visualization.DataTemplates.MainContentPresenter">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Forest.Visualization.TreeView;component/DataTemplates/TreeViewDataTemplate.xaml" />
@@ -11,7 +10,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <mainContentPresenter:MainContentTemplateSelector x:Key="MainContentTemplateSelector"
-                                               EventTreeDataTemplate="{StaticResource EventTreeGraphDataTemplate}" />
+                                                      EventTreeDataTemplate="{StaticResource EventTreeGraphDataTemplate}" />
 
     <DataTemplate x:Key="MainContentPresenterDataTemplate"
                   DataType="{x:Type contentPanel:MainContentPresenterViewModel}">
@@ -26,17 +25,17 @@
                 Grid.Column="0"
                 Content="{Binding ProjectExplorerViewModel}"
                 ContentTemplate="{StaticResource IPropertyCollectionTreeNodesDataTemplate}" />
-            <GridSplitter 
-                Grid.Column="1" 
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
+            <GridSplitter
+                Grid.Column="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
                 Background="{StaticResource Fluent.Ribbon.Brushes.Separator.Background}"
                 Width="10" />
             <ContentPresenter
                 Grid.Column="2"
                 Content="{Binding SelectedContentItem}"
                 ContentTemplateSelector="{StaticResource MainContentTemplateSelector}" />
-            
+
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

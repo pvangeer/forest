@@ -11,12 +11,12 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
     public class TreeEventViewModel : Entity
     {
         private readonly CommandFactory commandFactory;
+        private readonly EventTree eventTree;
         private readonly ForestGui gui;
         private readonly TreeEvent treeEvent;
         private readonly ViewModelFactory viewModelFactory;
         private TreeEventViewModel failingEventViewModel;
         private TreeEventViewModel passingEventViewModel;
-        private readonly EventTree eventTree;
 
         public TreeEventViewModel(TreeEvent treeEvent, EventTree eventTree, ForestGui gui)
         {
@@ -105,7 +105,7 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
 
         public void Select()
         {
-            gui.SelectionManager.SelectTreeEvent(eventTree,treeEvent);
+            gui.SelectionManager.SelectTreeEvent(eventTree, treeEvent);
         }
 
         private void TreeEventPropertyChanged(object sender, PropertyChangedEventArgs e)

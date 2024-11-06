@@ -179,8 +179,9 @@ namespace Forest.Storage
                 throw new ArgumentException(@"No valid value for 'searchPattern'.", nameof(searchPattern));
             try
             {
-                foreach (var logFile in Directory.GetFiles(path, searchPattern).Where(
-                             l => (DateTime.Now - File.GetCreationTime(l)).TotalDays > numberOfDaysToKeepFiles))
+                foreach (var logFile in Directory.GetFiles(path, searchPattern)
+                             .Where(
+                                 l => (DateTime.Now - File.GetCreationTime(l)).TotalDays > numberOfDaysToKeepFiles))
                     File.Delete(logFile);
             }
             catch (Exception e)

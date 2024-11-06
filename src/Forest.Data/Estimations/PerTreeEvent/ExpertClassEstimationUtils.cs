@@ -12,8 +12,10 @@ namespace Forest.Data.Estimations.PerTreeEvent
         {
             var curve = new FragilityCurve();
             foreach (var waterLevel in waterLevels)
+            {
                 curve.Add(new FragilityCurveElement(waterLevel,
                     GetClassesBasedProbabilityForWaterLevel(estimations, waterLevel, e => e.MaxEstimation)));
+            }
 
             return curve;
         }
@@ -22,20 +24,24 @@ namespace Forest.Data.Estimations.PerTreeEvent
         {
             var curve = new FragilityCurve();
             foreach (var waterLevel in waterLevels)
+            {
                 curve.Add(new FragilityCurveElement(waterLevel,
                     GetClassesBasedProbabilityForWaterLevel(estimations, waterLevel, e => e.MinEstimation)));
+            }
 
             return curve;
         }
 
-        public static Probability GetClassesBasedProbabilityForWaterLevel(IEnumerable<ExpertClassEstimation> estimations, double waterLevel,
+        public static Probability GetClassesBasedProbabilityForWaterLevel(IEnumerable<ExpertClassEstimation> estimations,
+            double waterLevel,
             Func<ExpertClassEstimation, ProbabilityClass> getProbabilityClassFunc = null)
         {
             if (getProbabilityClassFunc == null)
                 getProbabilityClassFunc = e => e.AverageEstimation;
 
             var relevantEstimations = estimations
-                .Where(e => Math.Abs(e.HydrodynamicCondition.WaterLevel - waterLevel) < 1e-8).ToArray();
+                .Where(e => Math.Abs(e.HydrodynamicCondition.WaterLevel - waterLevel) < 1e-8)
+                .ToArray();
             if (relevantEstimations.Length == 0)
                 return Probability.NaN;
 

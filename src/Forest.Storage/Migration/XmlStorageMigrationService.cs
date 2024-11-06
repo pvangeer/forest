@@ -84,7 +84,8 @@ namespace Forest.Storage.Migration
                 var versionInformation = GetVersionInformation(xmlDoc);
                 if (versionInformation == null)
                     throw new XmlStorageException(
-                        "Het gespecificeerde bestand heeft geen versie-informatie en kan niet worden gelezen.", null);
+                        "Het gespecificeerde bestand heeft geen versie-informatie en kan niet worden gelezen.",
+                        null);
 
                 return !HasCurrentVersion(versionInformation);
             }

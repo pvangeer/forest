@@ -23,7 +23,9 @@ namespace Forest.IO.Export
             this.probabilityEstimation = probabilityEstimation;
         }
 
-        public void Export(string fileLocation, string prefix, Expert[] expertsToExport,
+        public void Export(string fileLocation,
+            string prefix,
+            Expert[] expertsToExport,
             ProbabilityEstimationPerTreeEvent estimationToExport)
         {
             if (string.IsNullOrWhiteSpace(fileLocation))
@@ -74,7 +76,9 @@ namespace Forest.IO.Export
             log.Info($"{expertsToExport.Length} DOT formulieren geëxporteerd naar locatie '{fileLocation}'", true);
         }
 
-        private DotForm EventTreeToDotForm(EventTree eventTree, string expertName, HydrodynamicCondition[] hydraulicConditions,
+        private DotForm EventTreeToDotForm(EventTree eventTree,
+            string expertName,
+            HydrodynamicCondition[] hydraulicConditions,
             ObservableCollection<TreeEventProbabilityEstimate> estimates)
         {
             var nodes = new List<DotNode>();
@@ -87,15 +91,17 @@ namespace Forest.IO.Export
                 nodes.Add(new DotNode
                 {
                     NodeName = treeEvent.Name,
-                    Estimates = treeEventEstimate.ClassProbabilitySpecifications.Where(e => e.Expert.Name == expertName).Select(s =>
-                        new DotEstimate
-                        {
-                            WaterLevel = s.HydrodynamicCondition.WaterLevel,
-                            Frequency = s.HydrodynamicCondition.Probability,
-                            BestEstimate = (int)s.AverageEstimation,
-                            LowerEstimate = (int)s.MinEstimation,
-                            UpperEstimate = (int)s.MaxEstimation
-                        }).ToArray()
+                    Estimates = treeEventEstimate.ClassProbabilitySpecifications.Where(e => e.Expert.Name == expertName)
+                        .Select(s =>
+                            new DotEstimate
+                            {
+                                WaterLevel = s.HydrodynamicCondition.WaterLevel,
+                                Frequency = s.HydrodynamicCondition.Probability,
+                                BestEstimate = (int)s.AverageEstimation,
+                                LowerEstimate = (int)s.MinEstimation,
+                                UpperEstimate = (int)s.MaxEstimation
+                            })
+                        .ToArray()
                 });
             }
 

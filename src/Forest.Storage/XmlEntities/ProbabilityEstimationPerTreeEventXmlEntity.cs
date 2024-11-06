@@ -1,7 +1,4 @@
 ﻿using System;
-using Forest.Data.Estimations.PerTreeEvent;
-using Forest.Data.Probabilities;
-using Forest.Data.Tree;
 using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 

@@ -29,15 +29,15 @@ namespace Forest.App
         {
             base.OnStartup(e);
 
-            EventManager.RegisterClassHandler(typeof(DataGrid), UIElement.PreviewMouseLeftButtonDownEvent,
+            EventManager.RegisterClassHandler(typeof(DataGrid),
+                UIElement.PreviewMouseLeftButtonDownEvent,
                 new RoutedEventHandler(EventHelper.DataGridPreviewMouseLeftButtonDownEvent));
         }
     }
 
     public static class EventHelper
     {
-        internal static void DataGridPreviewMouseLeftButtonDownEvent
-            (object sender, RoutedEventArgs e)
+        internal static void DataGridPreviewMouseLeftButtonDownEvent(object sender, RoutedEventArgs e)
         {
             //throw new NotImplementedException();
             var mbe = e as MouseButtonEventArgs;
@@ -47,7 +47,9 @@ namespace Forest.App
             {
                 obj = mbe.OriginalSource as DependencyObject;
                 while (obj != null && !(obj is DataGridCell))
+                {
                     obj = VisualTreeHelper.GetParent(obj);
+                }
             }
 
             DataGridCell cell = null;

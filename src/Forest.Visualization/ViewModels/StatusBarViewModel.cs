@@ -58,11 +58,13 @@ namespace Forest.Visualization.ViewModels
             {
                 var items = e.OldItems.OfType<LogMessage>();
                 foreach (var logMessage in items)
+                {
                     if (PriorityMessage == logMessage)
                     {
                         PriorityMessage = null;
                         OnPropertyChanged(nameof(PriorityMessage));
                     }
+                }
 
                 if (!MessagesViewModel.MessageList.Any())
                 {

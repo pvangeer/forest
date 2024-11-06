@@ -41,9 +41,9 @@ namespace Forest.Gui
 
         public Func<bool> ShouldMigrateProject { get; set; }
 
-        public MessageList Messages { get; }
-
         public bool IsDetailsPanelVisible { get; set; }
+
+        public MessageList Messages { get; }
 
         private void ConfigureMessaging()
         {

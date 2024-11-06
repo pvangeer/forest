@@ -5,7 +5,7 @@
                     xmlns:visualization="clr-namespace:Forest.Visualization"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
 
-    <DataTemplate DataType="{x:Type mainContentPanel:TreeEventViewModel}" x:Key="TreeEventDetailsDataTemplate" >
+    <DataTemplate DataType="{x:Type mainContentPanel:TreeEventViewModel}" x:Key="TreeEventDetailsDataTemplate">
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -62,16 +62,16 @@
         </DataTemplate.Resources>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <controls:ZoomControl 
+            <controls:ZoomControl
                 Grid.Column="0"
                 ZoomDeltaMultiplier="5"
                 AnimationLength="0">
                 <ContentControl
-                    Content="{Binding EventTreeGraphLayout}"/>
+                    Content="{Binding EventTreeGraphLayout}" />
             </controls:ZoomControl>
             <visualization:HidableGridSplitter
                 Grid.Column="1"
@@ -80,11 +80,11 @@
                 Width="5"
                 Background="{StaticResource Fluent.Ribbon.Brushes.Separator.Background}"
                 HorizontalAlignment="Stretch"
-                ResizeBehavior="BasedOnAlignment"/>
-            <ContentPresenter 
+                ResizeBehavior="BasedOnAlignment" />
+            <ContentPresenter
                 Grid.Column="2"
                 Content="{Binding SelectedTreeEventViewModel}"
-                ContentTemplate="{StaticResource TreeEventDetailsDataTemplate}"></ContentPresenter>
+                ContentTemplate="{StaticResource TreeEventDetailsDataTemplate}" />
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

@@ -35,8 +35,10 @@ namespace Forest.Visualization.ViewModels
             EventTree.TreeEventsChanged += TreeEventsChanged;
         }
 
-        public EventTreeViewModelOld([NotNull] EventTree eventTree, AnalysisManipulationService analysisManipulationService,
-            SelectionManager selectionManager, ObservableCollection<ProbabilityEstimation> estimations)
+        public EventTreeViewModelOld([NotNull] EventTree eventTree,
+            AnalysisManipulationService analysisManipulationService,
+            SelectionManager selectionManager,
+            ObservableCollection<ProbabilityEstimation> estimations)
         {
             EventTree = eventTree;
             this.selectionManager = selectionManager;
@@ -54,10 +56,7 @@ namespace Forest.Visualization.ViewModels
 
         public TreeEventViewModelOld SelectedTreeEvent
         {
-            get
-            {
-                return FindTreeEventViewModel(selectionManager.SelectedTreeEvent[EventTree]);
-            }
+            get => FindTreeEventViewModel(selectionManager.SelectedTreeEvent[EventTree]);
             set
             {
                 if (value != null)
@@ -95,7 +94,9 @@ namespace Forest.Visualization.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void OnExportElicitationForms(string fileLocation, string prefix, Expert[] expertsToExport,
+        public void OnExportElicitationForms(string fileLocation,
+            string prefix,
+            Expert[] expertsToExport,
             ProbabilityEstimationPerTreeEvent estimationToExport)
         {
             var exporter = new ElicitationFormsExporter(estimationToExport);

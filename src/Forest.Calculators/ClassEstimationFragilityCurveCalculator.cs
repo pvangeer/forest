@@ -55,8 +55,10 @@ namespace Forest.Calculators
 
             var curve = new FragilityCurve();
             foreach (var condition in conditions)
+            {
                 curve.Add(new FragilityCurveElement(condition.WaterLevel,
                     CalculateConditionalProbability(condition.WaterLevel, criticalPathElements)));
+            }
 
             return curve;
         }

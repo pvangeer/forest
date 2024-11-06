@@ -14,7 +14,8 @@ namespace Forest.Visualization.ViewModels
         private readonly ObservableCollection<FragilityCurveElementViewModel> fixedFragilityCurveViewModels;
         private readonly ObservableCollection<HydrodynamicCondition> hydrodynamicConditions;
 
-        public FixedFragilityCurveSpecificationViewModel(TreeEvent treeEvent, TreeEventProbabilityEstimate estimate,
+        public FixedFragilityCurveSpecificationViewModel(TreeEvent treeEvent,
+            TreeEventProbabilityEstimate estimate,
             ObservableCollection<HydrodynamicCondition> hydrodynamicConditions) : base(treeEvent, estimate)
         {
             this.hydrodynamicConditions = hydrodynamicConditions;
@@ -34,8 +35,10 @@ namespace Forest.Visualization.ViewModels
             var missingWaterLevels = currentWaterLevels.Except(estimatedWaterLevels).ToArray();
             var waterLevelsToRemove = estimatedWaterLevels.Except(currentWaterLevels).ToArray();
             foreach (var waterLevel in waterLevelsToRemove)
+            {
                 fixedFragilityCurveViewModels.Remove(
                     fixedFragilityCurveViewModels.FirstOrDefault(vm => Math.Abs(vm.WaterLevel - waterLevel) < 1e-8));
+            }
 
             foreach (var waterLevel in missingWaterLevels)
             {

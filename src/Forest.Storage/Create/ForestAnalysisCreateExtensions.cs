@@ -27,7 +27,9 @@ namespace Forest.Storage.Create
             return entity;
         }
 
-        private static void AddEntriesForProbabilityEstimationsPerTreeEvent(ForestAnalysis analysis, ForestAnalysisXmlEntity entity, PersistenceRegistry registry)
+        private static void AddEntriesForProbabilityEstimationsPerTreeEvent(ForestAnalysis analysis,
+            ForestAnalysisXmlEntity entity,
+            PersistenceRegistry registry)
         {
             for (var index = 0; index < analysis.ProbabilityEstimationsPerTreeEvent.Count; index++)
             {

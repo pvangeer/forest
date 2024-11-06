@@ -82,15 +82,20 @@ namespace Forest.IO.Import
                 estimates.Add(new DotEstimate
                 {
                     WaterLevel = GetCellValueAsDoubleFromCell(cCell, workbookPart),
-                    Frequency = GetCellValueAsDouble(worksheet, FrequencyColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
+                    Frequency = GetCellValueAsDouble(worksheet,
+                        FrequencyColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
                         workbookPart),
-                    LowerEstimate = GetCellValueAsInt(worksheet, LowerEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
+                    LowerEstimate = GetCellValueAsInt(worksheet,
+                        LowerEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
                         workbookPart),
-                    BestEstimate = GetCellValueAsInt(worksheet, BestEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
+                    BestEstimate = GetCellValueAsInt(worksheet,
+                        BestEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
                         workbookPart),
-                    UpperEstimate = GetCellValueAsInt(worksheet, UpperEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
+                    UpperEstimate = GetCellValueAsInt(worksheet,
+                        UpperEstimateColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
                         workbookPart),
-                    Comment = GetCellValueAsString(worksheet, CommentColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
+                    Comment = GetCellValueAsString(worksheet,
+                        CommentColumnReference + iRow.ToString(CultureInfo.InvariantCulture),
                         workbookPart)
                 });
             }

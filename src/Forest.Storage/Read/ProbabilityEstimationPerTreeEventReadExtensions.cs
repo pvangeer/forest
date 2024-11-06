@@ -7,7 +7,8 @@ namespace Forest.Storage.Read
 {
     internal static class ProbabilityEstimationPerTreeEventReadExtensions
     {
-        internal static ProbabilityEstimationPerTreeEvent Read(this ProbabilityEstimationPerTreeEventXmlEntity entity, ReadConversionCollector collector)
+        internal static ProbabilityEstimationPerTreeEvent Read(this ProbabilityEstimationPerTreeEventXmlEntity entity,
+            ReadConversionCollector collector)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -17,29 +18,23 @@ namespace Forest.Storage.Read
             var estimation = new ProbabilityEstimationPerTreeEvent
             {
                 EventTree = collector.GetReferencedEventTree(entity.EventTreeId),
-                Name = entity.Name,
+                Name = entity.Name
             };
 
             var experts =
                 entity.Experts.OrderBy(e => e.Order).Select(e => e.Read(collector));
             foreach (var expert in experts)
-            {
                 estimation.Experts.Add(expert);
-            }
 
             var hydrodynamicCondition =
                 entity.HydrodynamicConditions.OrderBy(e => e.Order).Select(e => e.Read(collector));
             foreach (var condition in hydrodynamicCondition)
-            {
                 estimation.HydrodynamicConditions.Add(condition);
-            }
 
             var estimationsPerTreeEvent =
                 entity.Estimations.OrderBy(e => e.Order).Select(e => e.Read(collector));
             foreach (var estimate in estimationsPerTreeEvent)
-            {
                 estimation.Estimates.Add(estimate);
-            }
 
             return estimation;
         }

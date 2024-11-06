@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Forest.Data.Estimations;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Properties;
 using Forest.Data.Tree;
@@ -68,6 +67,7 @@ namespace Forest.Data.Services
                 };
                 foreach (var expert in estimation.Experts)
                 foreach (var hydraulicCondition in estimation.HydrodynamicConditions)
+                {
                     treeEventProbabilityEstimation.ClassProbabilitySpecifications.Add(new ExpertClassEstimation
                     {
                         Expert = expert,
@@ -76,6 +76,8 @@ namespace Forest.Data.Services
                         MinEstimation = ProbabilityClass.None,
                         MaxEstimation = ProbabilityClass.None
                     });
+                }
+
                 estimation.Estimates.Add(treeEventProbabilityEstimation);
             }
 
@@ -98,7 +100,8 @@ namespace Forest.Data.Services
                     break;
             }
 
-            eventTree.OnTreeEventsChanged(new TreeEventsChangedEventArgs(EventTreeModification.Add, selectedTreeEventToAddTo,
+            eventTree.OnTreeEventsChanged(new TreeEventsChangedEventArgs(EventTreeModification.Add,
+                selectedTreeEventToAddTo,
                 newTreeEvent));
 
             return newTreeEvent;

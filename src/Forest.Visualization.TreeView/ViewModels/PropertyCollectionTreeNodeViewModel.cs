@@ -12,7 +12,8 @@ namespace Forest.Visualization.TreeView.ViewModels
         private bool isExpanded;
 
         public PropertyCollectionTreeNodeViewModel(string displayName,
-            ObservableCollection<ITreeNodeViewModel> items, CollectionType collectionType)
+            ObservableCollection<ITreeNodeViewModel> items,
+            CollectionType collectionType)
         {
             DisplayName = displayName;
             Items = items;

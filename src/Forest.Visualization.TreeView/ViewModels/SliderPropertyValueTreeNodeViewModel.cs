@@ -6,14 +6,18 @@ using Forest.Visualization.TreeView.Data;
 
 namespace Forest.Visualization.TreeView.ViewModels
 {
-    public class SliderPropertyValueTreeNodeViewModel<TContent> : PropertyValueTreeNodeViewModelBase,
-        ISliderPropertyTreeNodeViewModel where TContent : Entity
+    public class SliderPropertyValueTreeNodeViewModel<TContent>
+        : PropertyValueTreeNodeViewModelBase,
+            ISliderPropertyTreeNodeViewModel where TContent : Entity
     {
         private readonly PropertyInfo propertyInfo;
         private TContent content;
 
-        public SliderPropertyValueTreeNodeViewModel(TContent content, string propertyName, string displayName,
-            double minValue, double maxValue)
+        public SliderPropertyValueTreeNodeViewModel(TContent content,
+            string propertyName,
+            string displayName,
+            double minValue,
+            double maxValue)
             : base(displayName)
         {
             MinValue = minValue;

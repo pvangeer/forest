@@ -11,9 +11,11 @@ namespace Forest.Visualization.Converters
 {
     public class CriticalPathConverter
     {
-        protected static bool ExtractInput(object[] values, out HydrodynamicCondition[] hydraulicConditions,
+        protected static bool ExtractInput(object[] values,
+            out HydrodynamicCondition[] hydraulicConditions,
             out TreeEventProbabilityEstimate[] estimations,
-            out CriticalPathElement[] elements, out TreeEvent[] treeEvents)
+            out CriticalPathElement[] elements,
+            out TreeEvent[] treeEvents)
         {
             hydraulicConditions = null;
             elements = new CriticalPathElement[] { };
@@ -35,7 +37,8 @@ namespace Forest.Visualization.Converters
             return false;
             var orderedWaterLevels = hydrodynamicConditionViewModels.Select(h => h.WaterLevel).Distinct().ToArray();
 
-            hydraulicConditions = hydrodynamicConditionViewModels.Select(vm => vm.HydrodynamicCondition).OrderBy(c => c.WaterLevel)
+            hydraulicConditions = hydrodynamicConditionViewModels.Select(vm => vm.HydrodynamicCondition)
+                .OrderBy(c => c.WaterLevel)
                 .ToArray();
             var allElements = new List<CriticalPathElement>();
             for (var i = 0; i < criticalPath.Length; i++)

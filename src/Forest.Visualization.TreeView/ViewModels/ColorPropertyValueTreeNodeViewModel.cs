@@ -6,8 +6,9 @@ using Forest.Data;
 
 namespace Forest.Visualization.TreeView.ViewModels
 {
-    public class ColorPropertyValueTreeNodeViewModel<TContent> : PropertyValueTreeNodeViewModelBase,
-        IColorPropertyTreeNodeViewModel where TContent : Entity
+    public class ColorPropertyValueTreeNodeViewModel<TContent>
+        : PropertyValueTreeNodeViewModelBase,
+            IColorPropertyTreeNodeViewModel where TContent : Entity
     {
         private readonly PropertyInfo propertyInfo;
         private TContent content;

@@ -87,14 +87,15 @@ namespace Forest.Gui
 
             var worker = new BackgroundWorker();
             worker.DoWork += OpenProjectAsync;
-            worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o, e,
+            worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o,
+                e,
                 () =>
                 {
                     gui.ProjectFilePath = fileName;
-                    
+
                     gui.OnPropertyChanged(nameof(ForestGui.ForestAnalysis));
                     gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));
-                    
+
                     log.Info($"Klaar met openen van project uit bestand '{gui.ProjectFilePath}'.");
                 });
             worker.WorkerSupportsCancellation = false;
@@ -175,7 +176,8 @@ namespace Forest.Gui
             ChangeState(StorageState.Busy);
             var worker = new BackgroundWorker();
             worker.DoWork += StageAndStoreProjectAsync;
-            worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o, e,
+            worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o,
+                e,
                 () =>
                 {
                     gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));

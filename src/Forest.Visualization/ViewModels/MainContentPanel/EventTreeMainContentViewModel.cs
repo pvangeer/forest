@@ -11,9 +11,9 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
     public class EventTreeMainContentViewModel : Entity
     {
         private readonly EventTree eventTree;
+        private readonly ForestGui gui;
         private readonly ViewModelFactory viewModelFactory;
         private EventTreeGraph graph;
-        private readonly ForestGui gui;
 
         public EventTreeMainContentViewModel(EventTree eventTree, ForestGui gui)
         {

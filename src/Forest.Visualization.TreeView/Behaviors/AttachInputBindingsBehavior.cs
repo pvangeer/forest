@@ -6,7 +6,8 @@ namespace Forest.Visualization.TreeView.Behaviors
     public class AttachInputBindingsBehavior
     {
         public static readonly DependencyProperty InputBindingsProperty =
-            DependencyProperty.RegisterAttached("InputBindings", typeof(InputBindingCollection),
+            DependencyProperty.RegisterAttached("InputBindings",
+                typeof(InputBindingCollection),
                 typeof(AttachInputBindingsBehavior),
                 new FrameworkPropertyMetadata(new InputBindingCollection(),
                     (sender, e) =>

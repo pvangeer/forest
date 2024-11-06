@@ -9,7 +9,7 @@
              xmlns:tree="clr-namespace:Forest.Data.Tree;assembly=Forest.Data"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels:RibbonViewModel, IsDesignTimeCreatable=True}"
-             d:DesignHeight="450" 
+             d:DesignHeight="450"
              d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -117,7 +117,7 @@
                         LargeIcon="/Forest.Visualization;component\Resources\tree-event-info.png"
                         Size="Large"
                         IsChecked="{Binding IsDetailsPanelVisible}"
-                        IsEnabled="{Binding CanShowDetailsPanel}"/>
+                        IsEnabled="{Binding CanShowDetailsPanel}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 

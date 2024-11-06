@@ -34,9 +34,7 @@ namespace Forest.Storage.Read
             var estimationsPerTreeEvent =
                 entity.ProbabilityEstimationPerTreeEventXmlEntities.OrderBy(e => e.Order).Select(e => e.Read(collector));
             foreach (var estimation in estimationsPerTreeEvent)
-            {
                 analysis.ProbabilityEstimationsPerTreeEvent.Add(estimation);
-            }
 
             return analysis;
         }

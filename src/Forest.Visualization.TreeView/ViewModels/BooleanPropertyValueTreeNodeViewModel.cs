@@ -5,8 +5,9 @@ using Forest.Data;
 
 namespace Forest.Visualization.TreeView.ViewModels
 {
-    public class BooleanPropertyValueTreeNodeViewModel<TContent> : PropertyValueTreeNodeViewModelBase,
-        IBooleanPropertyTreeNodeViewModel where TContent : Entity
+    public class BooleanPropertyValueTreeNodeViewModel<TContent>
+        : PropertyValueTreeNodeViewModelBase,
+            IBooleanPropertyTreeNodeViewModel where TContent : Entity
     {
         private readonly PropertyInfo propertyInfo;
         private TContent content;

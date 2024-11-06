@@ -118,9 +118,13 @@ namespace Forest.IO.Export
 
                 AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++);
                 // TODO: merge all cells above table
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++,
+                AddRow(sheetData,
+                    StyleSheetLibrary.DefaultStyleIndex,
+                    rowNumber++,
                     ConstructCell(node.NodeName, CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex));
-                AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++,
+                AddRow(sheetData,
+                    StyleSheetLibrary.DefaultStyleIndex,
+                    rowNumber++,
                     ConstructCell("Waterstand", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                     ConstructCell("Frequentie", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                     ConstructCell("Onder", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
@@ -132,14 +136,19 @@ namespace Forest.IO.Export
                 var styleIndex = StyleSheetLibrary.TableBodyStyleNormalIndex;
                 foreach (var estimate in estimates)
                 {
-                    AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, rowNumber++,
+                    AddRow(sheetData,
+                        StyleSheetLibrary.DefaultStyleIndex,
+                        rowNumber++,
                         ConstructCell(estimate.WaterLevel, CellValues.Number, styleIndex),
                         ConstructCell(estimate.Frequency, CellValues.Number, styleIndex),
-                        ConstructCell(estimate.LowerEstimate == 0 ? double.NaN : estimate.LowerEstimate, CellValues.Number,
+                        ConstructCell(estimate.LowerEstimate == 0 ? double.NaN : estimate.LowerEstimate,
+                            CellValues.Number,
                             styleIndex),
-                        ConstructCell(estimate.BestEstimate == 0 ? double.NaN : estimate.BestEstimate, CellValues.Number,
+                        ConstructCell(estimate.BestEstimate == 0 ? double.NaN : estimate.BestEstimate,
+                            CellValues.Number,
                             styleIndex),
-                        ConstructCell(estimate.UpperEstimate == 0 ? double.NaN : estimate.UpperEstimate, CellValues.Number,
+                        ConstructCell(estimate.UpperEstimate == 0 ? double.NaN : estimate.UpperEstimate,
+                            CellValues.Number,
                             styleIndex),
                         ConstructCell(double.NaN, CellValues.Number, styleIndex),
                         ConstructCell("", CellValues.String, styleIndex));
@@ -186,50 +195,67 @@ namespace Forest.IO.Export
 
         private void WriteElicitationCodeInformation(SheetData sheetData, MergeCells mergeCells)
         {
-            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 11,
+            AddRow(sheetData,
+                StyleSheetLibrary.DefaultStyleIndex,
+                11,
                 ConstructCell("Code", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                 ConstructCell("Faalkans", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                 ConstructCell("", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                 ConstructCell("Omschrijving", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                 ConstructCell("", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex));
-            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 12,
+            AddRow(sheetData,
+                StyleSheetLibrary.DefaultStyleIndex,
+                12,
                 ConstructCell(1, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell(0.999, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell("999/1000", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell("Virtually certain", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
-            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 13,
+            AddRow(sheetData,
+                StyleSheetLibrary.DefaultStyleIndex,
+                13,
                 ConstructCell(2, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                 ConstructCell(0.99, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                 ConstructCell("99/100", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                 ConstructCell("Very Likely", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                 ConstructCell("", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex));
-            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 14,
+            AddRow(sheetData,
+                StyleSheetLibrary.DefaultStyleIndex,
+                14,
                 ConstructCell(3, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell(0.9, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell("9/10", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell("Likely", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
-            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 15,
-                ConstructCell(StyleSheetLibrary.TableHeaderStyleIndex, CellValues.Number,
+            AddRow(sheetData,
+                StyleSheetLibrary.DefaultStyleIndex,
+                15,
+                ConstructCell(StyleSheetLibrary.TableHeaderStyleIndex,
+                    CellValues.Number,
                     StyleSheetLibrary.TableAlternateBodyStyleIndex),
                 ConstructCell(0.5, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                 ConstructCell("5/10", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                 ConstructCell("Neutral", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                 ConstructCell("", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex));
-            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 16,
+            AddRow(sheetData,
+                StyleSheetLibrary.DefaultStyleIndex,
+                16,
                 ConstructCell(5, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell(0.1, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell("1/10", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell("Unlikely", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell("", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
-            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 17,
+            AddRow(sheetData,
+                StyleSheetLibrary.DefaultStyleIndex,
+                17,
                 ConstructCell(6, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                 ConstructCell(0.01, CellValues.Number, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                 ConstructCell("1/100", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                 ConstructCell("Very Unlikely", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex),
                 ConstructCell("", CellValues.String, StyleSheetLibrary.TableAlternateBodyStyleIndex));
-            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 18,
+            AddRow(sheetData,
+                StyleSheetLibrary.DefaultStyleIndex,
+                18,
                 ConstructCell(7, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell(0.001, CellValues.Number, StyleSheetLibrary.TableBodyStyleNormalIndex),
                 ConstructCell("1/1000", CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex),
@@ -251,11 +277,15 @@ namespace Forest.IO.Export
 
         private void WriteExpertInformation(DotForm form, SheetData sheetData)
         {
-            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 7,
+            AddRow(sheetData,
+                StyleSheetLibrary.DefaultStyleIndex,
+                7,
                 ConstructCell("Expert:", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                 ConstructCell(form.ExpertName, CellValues.String, StyleSheetLibrary.TableBodyStyleNormalIndex));
 
-            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 8,
+            AddRow(sheetData,
+                StyleSheetLibrary.DefaultStyleIndex,
+                8,
                 ConstructCell("Datum:", CellValues.String, StyleSheetLibrary.TableHeaderStyleIndex),
                 new Cell
                 {
@@ -268,7 +298,9 @@ namespace Forest.IO.Export
 
         private void WriteEventHeader(DotForm form, SheetData sheetData, MergeCells mergeCells)
         {
-            AddRow(sheetData, 0, 5,
+            AddRow(sheetData,
+                0,
+                5,
                 ConstructCell("Gebeurtenis:", CellValues.String, StyleSheetLibrary.TitleStyleIndex),
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                 ConstructCell("Faalpad", CellValues.String, StyleSheetLibrary.TitleStyleIndex),
@@ -285,7 +317,9 @@ namespace Forest.IO.Export
         private void WriteHeader(SheetData sheetData, MergeCells mergeCells)
         {
             sheetData.Append(new Row());
-            AddRow(sheetData, StyleSheetLibrary.TitleStyleIndex, 2,
+            AddRow(sheetData,
+                StyleSheetLibrary.TitleStyleIndex,
+                2,
                 ConstructCell("DOT Formulier", CellValues.String, StyleSheetLibrary.TitleStyleIndex),
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex),
@@ -295,7 +329,9 @@ namespace Forest.IO.Export
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex),
                 EmptyCell(StyleSheetLibrary.TitleStyleIndex));
             mergeCells.Append(new MergeCell { Reference = new StringValue("C2:I2") });
-            AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 3,
+            AddRow(sheetData,
+                StyleSheetLibrary.DefaultStyleIndex,
+                3,
                 ConstructCell("DOT = Deskundigen Oordeel Toets op Maat", CellValues.String));
             AddRow(sheetData, StyleSheetLibrary.DefaultStyleIndex, 4);
         }
@@ -343,7 +379,9 @@ namespace Forest.IO.Export
         private void AddRow(SheetData sheetData, uint styleIndex, uint rowNumber, params Cell[] cells)
         {
             while (cells.Length < 8)
+            {
                 cells = cells.Concat(new[] { EmptyCell(StyleSheetLibrary.DefaultStyleIndex) }).ToArray();
+            }
 
             var cellsToWrite = new[] { EmptyCell(StyleSheetLibrary.RightBorderStyleIndex), EmptyCell(styleIndex) }
                 .Concat(cells)

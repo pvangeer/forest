@@ -19,6 +19,10 @@ namespace Forest.Gui
             InitializeSelectionManager();
         }
 
+        public Dictionary<EventTree, TreeEvent> SelectedTreeEvent { get; private set; }
+
+        public object Selection { get; private set; }
+
         private void GuiPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -38,29 +42,22 @@ namespace Forest.Gui
 
         private void EventTreesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            switch (e.Action )
+            switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
                     foreach (var eventTree in e.NewItems.OfType<EventTree>())
-                    {
                         SelectedTreeEvent[eventTree] = eventTree.MainTreeEvent;
-                    }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (var eventTree in e.OldItems.OfType<EventTree>())
                     {
                         if (SelectedTreeEvent.ContainsKey(eventTree))
-                        {
                             SelectedTreeEvent.Remove(eventTree);
-                        }
                     }
+
                     break;
             }
         }
-
-        public Dictionary<EventTree,TreeEvent> SelectedTreeEvent { get; private set; }
-
-        public object Selection { get; private set; }
 
         public event EventHandler<EventArgs> SelectedTreeEventChanged;
 

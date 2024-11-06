@@ -5,14 +5,20 @@ using Forest.Data;
 
 namespace Forest.Visualization.TreeView.ViewModels
 {
-    public class DoubleUpDownPropertyValueTreeNodeViewModel<TContent> : PropertyValueTreeNodeViewModelBase,
-        IDoubleUpDownPropertyTreeNodeViewModel where TContent : Entity
+    public class DoubleUpDownPropertyValueTreeNodeViewModel<TContent>
+        : PropertyValueTreeNodeViewModelBase,
+            IDoubleUpDownPropertyTreeNodeViewModel where TContent : Entity
     {
         private readonly PropertyInfo propertyInfo;
         private TContent content;
 
-        public DoubleUpDownPropertyValueTreeNodeViewModel(TContent content, string propertyName, string displayName,
-            double minValue, double maxValue, double increment, string stringFormat)
+        public DoubleUpDownPropertyValueTreeNodeViewModel(TContent content,
+            string propertyName,
+            string displayName,
+            double minValue,
+            double maxValue,
+            double increment,
+            string stringFormat)
             : base(displayName)
         {
             MinValue = minValue;

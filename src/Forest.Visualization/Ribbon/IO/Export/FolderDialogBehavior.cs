@@ -49,7 +49,8 @@ namespace Forest.Visualization.Ribbon.IO.Export
 
         public static readonly DependencyProperty FolderName =
             DependencyProperty.RegisterAttached("FolderName",
-                typeof(string), typeof(FolderDialogBehavior));
+                typeof(string),
+                typeof(FolderDialogBehavior));
 
         public static string GetFolderName(DependencyObject obj)
         {

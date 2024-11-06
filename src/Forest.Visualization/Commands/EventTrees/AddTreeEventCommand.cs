@@ -42,7 +42,8 @@ namespace Forest.Visualization.Commands.EventTrees
                 return;
 
             var newTreeEvent = ManipulationService.AddTreeEvent(eventTree,
-                Gui.SelectionManager.SelectedTreeEvent[eventTree], treeEventType);
+                Gui.SelectionManager.SelectedTreeEvent[eventTree],
+                treeEventType);
             Gui.SelectionManager.SelectTreeEvent(eventTree, newTreeEvent);
         }
     }

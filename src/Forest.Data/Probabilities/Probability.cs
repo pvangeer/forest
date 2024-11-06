@@ -24,8 +24,13 @@ using System.Globalization;
 
 namespace Forest.Data.Probabilities
 {
-    public struct Probability : IEquatable<Probability>, IEquatable<double>, IFormattable, IComparable, IComparable<Probability>,
-        IComparable<double>
+    public struct Probability
+        : IEquatable<Probability>,
+            IEquatable<double>,
+            IFormattable,
+            IComparable,
+            IComparable<Probability>,
+            IComparable<double>
     {
         private static readonly double ToStringPrecision = 1e-100;
 

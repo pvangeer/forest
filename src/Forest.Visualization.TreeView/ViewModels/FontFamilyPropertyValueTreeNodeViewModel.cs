@@ -6,8 +6,9 @@ using Forest.Data;
 
 namespace Forest.Visualization.TreeView.ViewModels
 {
-    public class FontFamilyPropertyValueTreeNodeViewModel<TContent> : PropertyValueTreeNodeViewModelBase,
-        IFontFamilyPropertyTreeNodeViewModel where TContent : Entity
+    public class FontFamilyPropertyValueTreeNodeViewModel<TContent>
+        : PropertyValueTreeNodeViewModelBase,
+            IFontFamilyPropertyTreeNodeViewModel where TContent : Entity
     {
         private readonly PropertyInfo propertyInfo;
         private TContent content;

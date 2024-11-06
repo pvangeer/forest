@@ -39,7 +39,8 @@ namespace Forest.Calculators.Test
                         new FragilityCurveElement(3.2, (Probability)0.0028),
                         new FragilityCurveElement(3.5, (Probability)0.0226),
                         new FragilityCurveElement(3.8, (Probability)0.0406)
-                    }, true)
+                    },
+                    true)
             };
 
             var interpolatedValues =
@@ -79,7 +80,8 @@ namespace Forest.Calculators.Test
                         new FragilityCurveElement(3.2, (Probability)0.0028),
                         new FragilityCurveElement(3.5, (Probability)0.0226),
                         new FragilityCurveElement(3.8, (Probability)0.0406)
-                    }, true)
+                    },
+                    true)
             };
 
             var probability =
@@ -112,7 +114,8 @@ namespace Forest.Calculators.Test
                         new FragilityCurveElement(3.2, (Probability)0.0028),
                         new FragilityCurveElement(3.5, (Probability)0.0226),
                         new FragilityCurveElement(3.8, (Probability)0.0406)
-                    }, false)
+                    },
+                    false)
             };
 
             var probability =

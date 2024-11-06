@@ -15,7 +15,7 @@ namespace Forest.Storage.Create
             var entity = new ProbabilityEstimationPerTreeEventXmlEntity
             {
                 Name = model.Name,
-                EventTreeId = model.EventTree.Create(registry).Id,
+                EventTreeId = model.EventTree.Create(registry).Id
             };
 
             AddExpertsToEstimation(entity, model, registry);
@@ -25,7 +25,9 @@ namespace Forest.Storage.Create
             return entity;
         }
 
-        private static void AddEstimationsToEstimation(ProbabilityEstimationPerTreeEventXmlEntity entity, ProbabilityEstimationPerTreeEvent model, PersistenceRegistry registry)
+        private static void AddEstimationsToEstimation(ProbabilityEstimationPerTreeEventXmlEntity entity,
+            ProbabilityEstimationPerTreeEvent model,
+            PersistenceRegistry registry)
         {
             for (var index = 0; index < model.Estimates.Count; index++)
             {
@@ -35,7 +37,9 @@ namespace Forest.Storage.Create
             }
         }
 
-        private static void AddHydrodynamicConditionsToEstimation(ProbabilityEstimationPerTreeEventXmlEntity entity, ProbabilityEstimationPerTreeEvent model, PersistenceRegistry registry)
+        private static void AddHydrodynamicConditionsToEstimation(ProbabilityEstimationPerTreeEventXmlEntity entity,
+            ProbabilityEstimationPerTreeEvent model,
+            PersistenceRegistry registry)
         {
             for (var index = 0; index < model.HydrodynamicConditions.Count; index++)
             {
@@ -45,7 +49,9 @@ namespace Forest.Storage.Create
             }
         }
 
-        private static void AddExpertsToEstimation(ProbabilityEstimationPerTreeEventXmlEntity entity, ProbabilityEstimationPerTreeEvent model, PersistenceRegistry registry)
+        private static void AddExpertsToEstimation(ProbabilityEstimationPerTreeEventXmlEntity entity,
+            ProbabilityEstimationPerTreeEvent model,
+            PersistenceRegistry registry)
         {
             for (var index = 0; index < model.Experts.Count; index++)
             {
