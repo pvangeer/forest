@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using Forest.Data.Estimations.PerTreeEvent;
 
-namespace Forest.Storage.XmlEntities
+namespace Forest.Storage
 {
     public static class ProbabilitySpecificationTypeServices
     {

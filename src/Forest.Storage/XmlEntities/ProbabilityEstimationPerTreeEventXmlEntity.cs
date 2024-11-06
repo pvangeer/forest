@@ -5,12 +5,13 @@ using System.Xml.Serialization;
 namespace Forest.Storage.XmlEntities
 {
     [Serializable]
-    public class ProbabilityEstimationPerTreeEventXmlEntity
+    public class ProbabilityEstimationPerTreeEventXmlEntity : XmlEntityBase
     {
         public ProbabilityEstimationPerTreeEventXmlEntity()
         {
             Experts = new Collection<ExpertXmlEntity>();
             HydrodynamicConditions = new Collection<HydrodynamicConditionXmlEntity>();
+            Estimations = new Collection<TreeEventProbabilityEstimateXmlEntity>();
         }
 
         [XmlAttribute(AttributeName = "name")]
@@ -27,11 +28,11 @@ namespace Forest.Storage.XmlEntities
         [XmlArrayItem(ElementName = "hydrauliccondition")]
         public Collection<HydrodynamicConditionXmlEntity> HydrodynamicConditions { get; set; }
 
-        [XmlAttribute(AttributeName = "order")]
-        public long Order { get; set; }
-
         [XmlArray(ElementName = "estimates")]
         [XmlArrayItem(ElementName = "estimate")]
         public Collection<TreeEventProbabilityEstimateXmlEntity> Estimations { get; set; }
+
+        [XmlAttribute(AttributeName = "order")]
+        public long Order { get; set; }
     }
 }

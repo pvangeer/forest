@@ -18,6 +18,7 @@ namespace Forest.Storage.Read
 
             var eventTree = new EventTree
             {
+                Name = entity.Name,
                 MainTreeEvent = entity.MainTreeEvent?.Read(collector)
             };
 

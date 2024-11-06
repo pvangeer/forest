@@ -14,7 +14,7 @@ namespace Forest.Storage.Create
 
             var entity = new ProbabilityEstimationPerTreeEventXmlEntity
             {
-                Name = model.Name,
+                Name = model.Name.DeepClone(),
                 EventTreeId = model.EventTree.Create(registry).Id
             };
 

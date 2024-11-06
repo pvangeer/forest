@@ -50,7 +50,7 @@
     <Compile Include="Read\HydraulicConditionEntityReadExtensions.cs" />
     <Compile Include="Read\PersonEntityReadExtensions.cs" />
     <Compile Include="Read\ReadConversionCollector.cs" />
-    <Compile Include="Read\ProjectEntityReadExtensions.cs" />
+    <Compile Include="Read\ForestAnalysisXmlEntityReadExtensions.cs" />
     <Compile Include="Read\TreeEventEntityReadExtensions.cs" />
     <Compile Include="ReferenceEqualityComparer.cs" />
     <Compile Include="FileReaderErrorMessageBuilder.cs" />
@@ -70,7 +70,7 @@
     <Compile Include="XmlEntities\PersonXmlEntity.cs" />
     <Compile Include="XmlEntities\ForestAnalysisXmlEntity.cs" />
     <Compile Include="XmlEntities\ProbabilityEstimationPerTreeEventXmlEntity.cs" />
-    <Compile Include="XmlEntities\ProbabilitySpecificationTypeServices.cs" />
+    <Compile Include="ProbabilitySpecificationTypeServices.cs" />
     <Compile Include="XmlEntities\ProjectXmlEntity.cs" />
     <Compile Include="XmlEntities\TreeEventProbabilityEstimateXmlEntity.cs" />
     <Compile Include="XmlEntities\TreeEventXmlEntity.cs" />

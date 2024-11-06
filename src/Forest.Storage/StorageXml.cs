@@ -30,7 +30,7 @@ namespace Forest.Storage
             versionInfo = newVersionInfo;
         }
 
-        public void StageEventTreeProject(ForestAnalysis forestAnalysis)
+        public void StageAnalysis(ForestAnalysis forestAnalysis)
         {
             if (forestAnalysis == null)
                 throw new ArgumentNullException(nameof(forestAnalysis));
@@ -38,7 +38,7 @@ namespace Forest.Storage
             stagedForestAnalysisXmlEntity = forestAnalysis.Create(new PersistenceRegistry());
         }
 
-        public void UnStageEventTreeProject()
+        public void UnStageAnalysis()
         {
             stagedForestAnalysisXmlEntity = null;
         }
@@ -64,7 +64,7 @@ namespace Forest.Storage
             }
             finally
             {
-                UnStageEventTreeProject();
+                UnStageAnalysis();
                 UnStageVersionInformation();
             }
         }

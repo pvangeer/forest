@@ -5,7 +5,7 @@ using Forest.Storage.XmlEntities;
 
 namespace Forest.Storage.Read
 {
-    internal static class ProjectEntityReadExtensions
+    internal static class ForestAnalysisXmlEntityReadExtensions
     {
         internal static ForestAnalysis Read(this ForestAnalysisXmlEntity entity, ReadConversionCollector collector)
         {

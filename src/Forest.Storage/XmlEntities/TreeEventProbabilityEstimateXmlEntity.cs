@@ -5,8 +5,14 @@ using System.Xml.Serialization;
 namespace Forest.Storage.XmlEntities
 {
     [Serializable]
-    public class TreeEventProbabilityEstimateXmlEntity
+    public class TreeEventProbabilityEstimateXmlEntity : XmlEntityBase
     {
+        public TreeEventProbabilityEstimateXmlEntity()
+        {
+            ClassProbabilitySpecifications = new ObservableCollection<ExpertClassEstimationXmlEntity>();
+            FragilityCurve = new ObservableCollection<FragilityCurveElementXmlEntity>();
+        }
+
         [XmlAttribute(AttributeName = "treeeventid")]
         public long TreeEventId { get; }
 

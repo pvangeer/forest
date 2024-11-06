@@ -5,7 +5,6 @@ using System.Xml.Serialization;
 namespace Forest.Storage.XmlEntities
 {
     [Serializable]
-    [XmlRoot(ElementName = "analysis", IsNullable = false)]
     public class ForestAnalysisXmlEntity : XmlEntityBase
     {
         public ForestAnalysisXmlEntity()

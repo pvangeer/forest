@@ -31,7 +31,7 @@ namespace Forest.Gui
 
         private void CreateNewProject()
         {
-            storageXml.UnStageEventTreeProject();
+            storageXml.UnStageAnalysis();
             gui.ProjectFilePath = "";
 
             gui.SelectionManager.ClearSelection();
@@ -45,7 +45,7 @@ namespace Forest.Gui
 
         public void OpenProject()
         {
-            storageXml.UnStageEventTreeProject();
+            storageXml.UnStageAnalysis();
             storageXml.UnStageVersionInformation();
 
             HandleUnsavedChanges(() =>
@@ -139,13 +139,13 @@ namespace Forest.Gui
 
         public void SaveProject()
         {
-            storageXml.UnStageEventTreeProject();
+            storageXml.UnStageAnalysis();
             SaveProject(null);
         }
 
         public void SaveProjectAs()
         {
-            storageXml.UnStageEventTreeProject();
+            storageXml.UnStageAnalysis();
             SaveProjectAs(null);
         }
 
@@ -174,6 +174,11 @@ namespace Forest.Gui
         private void StageProjectAndStore(Action followingAction = null)
         {
             ChangeState(StorageState.Busy);
+            /*StageAndStoreProjectAsync(null, null);
+            gui.OnPropertyChanged(nameof(ForestGui.ProjectFilePath));
+            log.Info($"ForestAnalysis is opgeslagen in bestand '{gui.ProjectFilePath}'.");
+            followingAction?.Invoke();*/
+
             var worker = new BackgroundWorker();
             worker.DoWork += StageAndStoreProjectAsync;
             worker.RunWorkerCompleted += (o, e) => BackgroundWorkerAsyncFinished(o,
@@ -234,7 +239,7 @@ namespace Forest.Gui
 
         public bool HandleUnsavedChanges(Action followingAction)
         {
-            storageXml.StageEventTreeProject(gui.ForestAnalysis);
+            storageXml.StageAnalysis(gui.ForestAnalysis);
             storageXml.StageVersionInformation(gui.VersionInfo);
             if (storageXml.HasStagedProjectChanges())
             {
@@ -264,7 +269,7 @@ namespace Forest.Gui
         private void StageAndStoreProjectCore()
         {
             if (!storageXml.HasStagedEventTreeProject)
-                storageXml.StageEventTreeProject(gui.ForestAnalysis);
+                storageXml.StageAnalysis(gui.ForestAnalysis);
 
             storageXml.SaveProjectAs(gui.ProjectFilePath);
         }

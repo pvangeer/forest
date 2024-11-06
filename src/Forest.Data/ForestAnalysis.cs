@@ -13,6 +13,7 @@ namespace Forest.Data
             ProjectLeader = new Person();
             EventTrees = new ObservableCollection<EventTree>();
             ProbabilityEstimationsPerTreeEvent = new ObservableCollection<ProbabilityEstimationPerTreeEvent>();
+            ProbabilityEstimationsPerCondition = new ObservableCollection<ProbabilityEstimation>();
         }
 
         public string Name { get; set; }

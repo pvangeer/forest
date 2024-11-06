@@ -16,7 +16,7 @@ namespace Forest.Storage.Create
 
             var entity = new EventTreeXmlEntity
             {
-                Name = model.Name,
+                Name = model.Name.DeepClone(),
                 MainTreeEvent = model.MainTreeEvent?.Create(registry)
             };
 
