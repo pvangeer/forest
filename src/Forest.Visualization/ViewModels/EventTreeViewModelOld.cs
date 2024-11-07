@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Forest.Data;
 using Forest.Data.Estimations;
 using Forest.Data.Estimations.PerTreeEvent;
@@ -13,7 +12,7 @@ using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.IO.Export;
 using Forest.IO.Import;
-using Forest.Visualization.ViewModels.MainContentPanel;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree;
 
 namespace Forest.Visualization.ViewModels
 {
@@ -91,8 +90,6 @@ namespace Forest.Visualization.ViewModels
         public IEnumerable<TreeEventViewModelOld> AllTreeEvents => GetAllEventsRecursive(MainTreeEventViewModel);
 
         public EstimationSpecificationViewModelFactory EstimationSpecificationViewModelFactory { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnExportElicitationForms(string fileLocation,
             string prefix,
@@ -187,12 +184,6 @@ namespace Forest.Visualization.ViewModels
         {
             OnPropertyChanged(nameof(AllTreeEvents));
             OnPropertyChanged(nameof(Graph));
-        }
-
-        [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private static IEnumerable<TreeEventViewModelOld> GetAllEventsRecursive(TreeEventViewModelOld treeEventViewModel)

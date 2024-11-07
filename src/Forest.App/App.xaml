@@ -96,6 +96,8 @@
                 <ResourceDictionary
                     Source="/Forest.Visualization;component/DataTemplates/General/GeneralStyles.xaml" />
                 <ResourceDictionary
+                    Source="/Forest.Visualization;component/DataTemplates/General/TabControlStyles.xaml" />
+                <ResourceDictionary
                     Source="/Forest.Visualization.TreeView;component/Theming/DeltaresColorTheme.xaml" />
                 <ResourceDictionary
                     Source="/Forest.Visualization.TreeView;component/Theming/TreeViewStyles.xaml" />

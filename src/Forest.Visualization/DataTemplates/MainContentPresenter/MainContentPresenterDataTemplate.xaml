@@ -7,10 +7,13 @@
         <ResourceDictionary Source="/Forest.Visualization.TreeView;component/DataTemplates/TreeViewDataTemplate.xaml" />
         <ResourceDictionary
             Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/EventTree/EventTreeGraphDataTemplate.xaml" />
+        <ResourceDictionary
+            Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/ProbabilityPerTreeEventDataTemplate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <mainContentPresenter:MainContentTemplateSelector x:Key="MainContentTemplateSelector"
-                                                      EventTreeDataTemplate="{StaticResource EventTreeGraphDataTemplate}" />
+                                                      EventTreeDataTemplate="{StaticResource EventTreeGraphDataTemplate}"
+                                                      ProbabilityPerTreeEventDataTemplate="{StaticResource ProbabilityPerTreeEventDataTemplate}" />
 
     <DataTemplate x:Key="MainContentPresenterDataTemplate"
                   DataType="{x:Type contentPanel:MainContentPresenterViewModel}">

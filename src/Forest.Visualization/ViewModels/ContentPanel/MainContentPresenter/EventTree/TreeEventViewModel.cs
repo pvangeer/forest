@@ -6,19 +6,19 @@ using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.Commands;
 
-namespace Forest.Visualization.ViewModels.MainContentPanel
+namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree
 {
     public class TreeEventViewModel : Entity
     {
         private readonly CommandFactory commandFactory;
-        private readonly EventTree eventTree;
+        private readonly Data.Tree.EventTree eventTree;
         private readonly ForestGui gui;
         private readonly TreeEvent treeEvent;
         private readonly ViewModelFactory viewModelFactory;
         private TreeEventViewModel failingEventViewModel;
         private TreeEventViewModel passingEventViewModel;
 
-        public TreeEventViewModel(TreeEvent treeEvent, EventTree eventTree, ForestGui gui)
+        public TreeEventViewModel(TreeEvent treeEvent, Data.Tree.EventTree eventTree, ForestGui gui)
         {
             this.gui = gui;
             this.eventTree = eventTree;

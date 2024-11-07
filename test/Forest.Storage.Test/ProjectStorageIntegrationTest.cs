@@ -18,14 +18,14 @@ namespace Forest.Storage.Test
                 VersionInformation = new VersionXmlEntity
                 {
                     Creator = "test",
-                    Created = "some date" 
+                    Created = "some date"
                 },
                 ForestAnalysis = ForestAnalysisFactory.CreateStandardNewAnalysis().Create(new PersistenceRegistry())
             };
 
             var serializer = new XmlSerializer(typeof(ProjectXmlEntity));
 
-            string filePath = @"C:\Test\test.xml";
+            var filePath = @"C:\Test\test.xml";
             using (var writer = XmlWriter.Create(filePath))
             {
                 serializer.Serialize(writer, project);

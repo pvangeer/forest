@@ -1,11 +1,9 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using Forest.Data;
 using Forest.Data.Estimations.PerTreeEvent.Experts;
-using Forest.Data.Properties;
 
-namespace Forest.Visualization.ViewModels
+namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent
 {
-    public class ExpertViewModel : INotifyPropertyChanged
+    public class ExpertViewModel : Entity
     {
         public ExpertViewModel()
         {
@@ -47,14 +45,6 @@ namespace Forest.Visualization.ViewModels
         {
             get => Expert.Telephone;
             set => Expert.Telephone = value;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

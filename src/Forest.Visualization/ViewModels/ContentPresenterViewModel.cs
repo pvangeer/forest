@@ -3,6 +3,7 @@ using System.Linq;
 using Forest.Data;
 using Forest.Data.Services;
 using Forest.Gui;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent;
 
 namespace Forest.Visualization.ViewModels
 {

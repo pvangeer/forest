@@ -8,7 +8,7 @@ using Forest.Visualization.Commands.Project;
 using Forest.Visualization.Commands.ProjectExplorer;
 using Forest.Visualization.TreeView.Commands;
 using Forest.Visualization.TreeView.Data;
-using Forest.Visualization.ViewModels.MainContentPanel;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree;
 
 namespace Forest.Visualization.Commands
 {

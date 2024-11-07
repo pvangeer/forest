@@ -4,7 +4,7 @@ using System.Linq;
 using Forest.Data;
 using Forest.Data.Estimations.PerTreeEvent;
 
-namespace Forest.Visualization.ViewModels
+namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent
 {
     public class ExpertsViewModel : Entity
     {

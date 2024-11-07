@@ -4,8 +4,9 @@ using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.TreeView.Data;
 using Forest.Visualization.ViewModels.ContentPanel;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent;
 using Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer;
-using Forest.Visualization.ViewModels.MainContentPanel;
 
 namespace Forest.Visualization.ViewModels
 {
@@ -70,15 +71,25 @@ namespace Forest.Visualization.ViewModels
 
         public object CreateMainContentViewModel(object selection)
         {
-            if (selection is EventTree eventTree)
-                return new EventTreeMainContentViewModel(eventTree, gui);
-
-            return selection;
+            switch (selection)
+            {
+                case EventTree eventTree:
+                    return new EventTreeMainContentViewModel(eventTree, gui);
+                case ProbabilityEstimationPerTreeEvent estimation:
+                    return new ProbabilityPerTreeEventMainContentViewModel(estimation, gui);
+                default:
+                    return selection;
+            }
         }
 
         public TreeEventViewModel CreateTreeEventViewModel(TreeEvent treeEvent, EventTree eventTree)
         {
             return treeEvent != null ? new TreeEventViewModel(treeEvent, eventTree, gui) : null;
+        }
+
+        public ExpertsViewModel CreateExpertsViewModel(ProbabilityEstimationPerTreeEvent estimation)
+        {
+            return new ExpertsViewModel(estimation);
         }
     }
 }

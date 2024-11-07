@@ -2,20 +2,19 @@
 using System.ComponentModel;
 using Forest.Data;
 using Forest.Data.Services;
-using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.DataTemplates.MainContentPresenter.EventTree;
 
-namespace Forest.Visualization.ViewModels.MainContentPanel
+namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree
 {
     public class EventTreeMainContentViewModel : Entity
     {
-        private readonly EventTree eventTree;
+        private readonly Data.Tree.EventTree eventTree;
         private readonly ForestGui gui;
         private readonly ViewModelFactory viewModelFactory;
         private EventTreeGraph graph;
 
-        public EventTreeMainContentViewModel(EventTree eventTree, ForestGui gui)
+        public EventTreeMainContentViewModel(Data.Tree.EventTree eventTree, ForestGui gui)
         {
             this.gui = gui;
             gui.PropertyChanged += GuiPropertyChanged;
@@ -43,7 +42,7 @@ namespace Forest.Visualization.ViewModels.MainContentPanel
         {
             switch (e.PropertyName)
             {
-                case nameof(EventTree.MainTreeEvent):
+                case nameof(Data.Tree.EventTree.MainTreeEvent):
                     OnPropertyChanged(nameof(EventTreeGraphLayout));
                     break;
             }

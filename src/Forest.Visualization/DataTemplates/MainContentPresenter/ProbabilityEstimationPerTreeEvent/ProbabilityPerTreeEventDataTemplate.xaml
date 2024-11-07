@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mainContentPanel="clr-namespace:Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary
+            Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/ExpertsDataTemplate.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate x:Key="ProbabilityPerTreeEventDataTemplate"
+                  DataType="{x:Type mainContentPanel:ProbabilityPerTreeEventMainContentViewModel}">
+        <TabControl>
+            <TabItem
+                Header="Experts"
+                Content="{Binding ExpertsViewModel}"
+                ContentTemplate="{StaticResource ExpertsDataTemplate}" />
+            <TabItem
+                Header="Hydrodynamics"
+                Content="{Binding HydrodynamicsViewModel}"
+                ContentTemplate="{StaticResource ExpertsDataTemplate}" />
+            <TabItem
+                Header="Probability estimations"
+                Content="{Binding ProbabilityEstimationsViewModel}"
+                ContentTemplate="{StaticResource ExpertsDataTemplate}" />
+            <TabItem
+                Header="Results"
+                Content="{Binding ResultsPerTreeEventViewModel}"
+                ContentTemplate="{StaticResource ExpertsDataTemplate}" />
+        </TabControl>
+    </DataTemplate>
+</ResourceDictionary>
