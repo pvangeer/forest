@@ -3,11 +3,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:fluent="urn:fluent-ribbon"
-    xmlns:viewModels="clr-namespace:Forest.App.ViewModels"
-    xmlns:converters="clr-namespace:Forest.App.Converters"
     xmlns:ribbon="clr-namespace:Forest.Visualization.Ribbon;assembly=Forest.Visualization"
+    xmlns:converters="clr-namespace:Forest.Visualization.Converters;assembly=Forest.Visualization"
+    xmlns:app="clr-namespace:Forest.App"
     Icon="/Forest.App;component/forest.ico"
-    Title="Faalpad"
+    Title="Forest"
     Height="800"
     Width="1200"
     WindowStartupLocation="CenterScreen"
@@ -16,7 +16,7 @@
     BorderBrush="MediumBlue">
 
     <Window.DataContext>
-        <viewModels:MainWindowViewModel />
+        <app:MainWindowViewModel />
     </Window.DataContext>
 
     <Window.Resources>

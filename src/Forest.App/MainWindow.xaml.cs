@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
-using Forest.App.ViewModels;
 
 namespace Forest.App
 {

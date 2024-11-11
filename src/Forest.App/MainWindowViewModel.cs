@@ -1,5 +1,4 @@
-﻿using Forest.App.Properties;
-using Forest.Data;
+﻿using Forest.Data;
 using Forest.Gui;
 using Forest.Visualization;
 using Forest.Visualization.Dialogs;
@@ -8,24 +7,25 @@ using Forest.Visualization.ViewModels.ContentPanel;
 using Forest.Visualization.ViewModels.Ribbon;
 using Forest.Visualization.ViewModels.StatusBar;
 
-namespace Forest.App.ViewModels
+namespace Forest.App
 {
     public class MainWindowViewModel : Entity
     {
         private readonly ForestGui gui;
 
-        public MainWindowViewModel() : this(new ForestGui())
+        public MainWindowViewModel()
         {
-        }
+            gui = new ForestGui
+            {
+                GuiProjectServices =
+                {
+                    SaveProjectFileNameFunc = FileDialogFactory.AskUserForFileNameToSaveToFunc(),
+                    OpenProjectFileNameFunc = FileDialogFactory.AskUserForFileNameToOpenFunc()
+                },
+                ShouldMigrateProject = FileDialogFactory.ShouldMigrateProject,
+                ShouldSaveOpenChanges = FileDialogFactory.ShouldSaveOpenChanges
+            };
 
-        public MainWindowViewModel([NotNull] ForestGui gui)
-        {
-            this.gui = gui;
-
-            gui.GuiProjectServices.SaveProjectFileNameFunc = FileDialogFactory.AskUserForFileNameToSaveToFunc();
-            gui.GuiProjectServices.OpenProjectFileNameFunc = FileDialogFactory.AskUserForFileNameToOpenFunc();
-            gui.ShouldMigrateProject = FileDialogFactory.ShouldMigrateProject;
-            gui.ShouldSaveOpenChanges = FileDialogFactory.ShouldSaveOpenChanges;
             var viewModelFactory = new ViewModelFactory(gui);
 
             MainContentPresenterViewModel = viewModelFactory.CreateMainContentPresenterViewModel();
