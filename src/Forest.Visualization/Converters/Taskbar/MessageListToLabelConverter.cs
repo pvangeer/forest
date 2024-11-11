@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using Forest.Visualization.ViewModels;
+using Forest.Visualization.ViewModels.StatusBar;
 
 namespace Forest.Visualization.Converters.Taskbar
 {

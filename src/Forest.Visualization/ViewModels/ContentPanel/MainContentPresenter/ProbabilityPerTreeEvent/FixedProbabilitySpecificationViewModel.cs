@@ -1,13 +1,11 @@
 ﻿using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Probabilities;
-using Forest.Data.Tree;
 
-namespace Forest.Visualization.ViewModels
+namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent
 {
     public class FixedProbabilitySpecificationViewModel : ProbabilitySpecificationViewModelBase
     {
-        public FixedProbabilitySpecificationViewModel(TreeEvent treeEvent, TreeEventProbabilityEstimate estimate) : base(treeEvent,
-            estimate)
+        public FixedProbabilitySpecificationViewModel(TreeEventProbabilityEstimate estimate, ViewModelFactory factory) : base(estimate, factory)
         {
         }
 

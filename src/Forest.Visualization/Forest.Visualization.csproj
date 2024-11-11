@@ -106,12 +106,14 @@
     <Compile Include="Commands\CanAlwaysExecuteActionCommand.cs" />
     <Compile Include="Commands\EventTrees\AddEventTreeCommand.cs" />
     <Compile Include="Commands\ProbabilityEstimations\AddProbabilityEstimationPerTreeEventCommand.cs" />
+    <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\EstimationPerTreeEventSpecificationViewModel.cs" />
+    <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\TreeEventEstimationViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerItemViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ItemsCollectionViewModelBase.cs" />
     <Compile Include="Commands\EventTrees\RemoveEventTreeCommand.cs" />
     <Compile Include="Commands\ProjectExplorer\SelectItemCommand.cs" />
-    <Compile Include="ViewModels\HydrodynamicsViewModel.cs" />
+    <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\HydrodynamicsViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ExpertsViewModel.cs" />
     <Compile Include="GuiViewModelBase.cs" />
     <Compile Include="Ribbon\IO\Export\ElicitationFormExportDialog.xaml.cs">
@@ -127,13 +129,13 @@
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\EventTree\EventTreeMainContentViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\EventTree\GraphVertex.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ProbabilityPerTreeEventMainContentViewModel.cs" />
-    <Compile Include="ViewModels\MessageListViewModel.cs" />
+    <Compile Include="ViewModels\StatusBar\MessageListViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEventTreeCollectionViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEventTreeNodeViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerProbabilityEstimationPerEventCollectionViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerProbabilityEstimationPerEventCollectionViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEstimationItemViewModel.cs" />
-    <Compile Include="ViewModels\StatusBarViewModel.cs" />
+    <Compile Include="ViewModels\StatusBar\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\ContentPresenterViewModel.cs" />
     <Compile Include="Converters\BooleanToBrushConverter.cs" />
     <Compile Include="Converters\BusyIndicatorToEnabledConverter.cs" />
@@ -147,7 +149,7 @@
     <Compile Include="Converters\SelectedItemToMainTreeEventViewModelConverter.cs" />
     <Compile Include="Converters\SelectedPropertyToColorConverter.cs" />
     <Compile Include="DataTemplates\MainTabItems\Estimation\EnumerationExtension.cs" />
-    <Compile Include="DataTemplates\MainTabItems\EstimationContentTemplateSelector.cs" />
+    <Compile Include="DataTemplates\MainContentPresenter\ProbabilityEstimationPerTreeEvent\EstimationContentTemplateSelector.cs" />
     <Compile Include="DataTemplates\MainTabItems\Estimation\StringToProbabilityClassValidationRule.cs" />
     <Compile Include="DataTemplates\MainContentPresenter\EventTree\EventTreeGraphLayout.cs" />
     <Compile Include="DataTemplates\MainTabItems\RichTextFormatter.cs" />
@@ -167,19 +169,18 @@
     <Compile Include="Ribbon\ForestRibbonControl.xaml.cs">
       <DependentUpon>ForestRibbonControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ClassesProbabilitySpecificationViewModel.cs" />
-    <Compile Include="ViewModels\EstimationSpecificationViewModelFactory.cs" />
+    <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ClassesProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\EventTree\EventTreeGraph.cs" />
     <Compile Include="ViewModels\EventTreeViewModelOld.cs" />
-    <Compile Include="ViewModels\ExpertClassEstimationViewModel.cs" />
+    <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ExpertClassEstimationViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ExpertViewModel.cs" />
-    <Compile Include="ViewModels\FixedFragilityCurveSpecificationViewModel.cs" />
-    <Compile Include="ViewModels\FixedProbabilitySpecificationViewModel.cs" />
+    <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\FixedFragilityCurveSpecificationViewModel.cs" />
+    <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\FixedProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\FragilityCurveElementViewModel.cs" />
     <Compile Include="ViewModels\FragilityCurveViewModel.cs" />
-    <Compile Include="ViewModels\HydrodynamicConditionViewModel.cs" />
+    <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\HydrodynamicConditionViewModel.cs" />
     <Compile Include="ViewModels\ProbabilitySpecificationViewModelBase.cs" />
-    <Compile Include="ViewModels\RibbonViewModel.cs" />
+    <Compile Include="ViewModels\Ribbon\RibbonViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\EventTree\TreeEventConnector.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\EventTree\TreeEventViewModel.cs" />
     <Compile Include="ViewModels\TreeEventViewModelOld.cs" />
@@ -231,6 +232,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DataTemplates\MainContentPresenter\ProbabilityEstimationPerTreeEvent\EstimationSpecificationPerTreeEventDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataTemplates\MainContentPresenter\ProbabilityEstimationPerTreeEvent\ExpertsDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -243,15 +248,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DataTemplates\MainTabItems\Estimation\ClassEstimationTemplate.xaml">
+    <Page Include="DataTemplates\MainContentPresenter\ProbabilityEstimationPerTreeEvent\ClassEstimationTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DataTemplates\MainTabItems\Estimation\FixedFragilityCurveEstimationTemplate.xaml">
+    <Page Include="DataTemplates\MainContentPresenter\ProbabilityEstimationPerTreeEvent\FixedFragilityCurveEstimationTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DataTemplates\MainTabItems\Estimation\FixedValueEstimationTemplate.xaml">
+    <Page Include="DataTemplates\MainContentPresenter\ProbabilityEstimationPerTreeEvent\FixedValueEstimationTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -267,7 +272,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DataTemplates\MainTabItems\HydraulicsDataTemplate.xaml">
+    <Page Include="DataTemplates\MainContentPresenter\ProbabilityEstimationPerTreeEvent\HydrodynamicsDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -283,7 +288,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DataTemplates\MainTabItems\TreeEventsListViewItemDataTemplate.xaml">
+    <Page Include="DataTemplates\MainContentPresenter\ProbabilityEstimationPerTreeEvent\TreeEventsListViewItemDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -383,11 +388,7 @@
   <ItemGroup>
     <Resource Include="Resources\forest.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataTemplates\MainTabItems\EventTree\" />
-    <Folder Include="ViewModels\Ribbon\" />
-    <Folder Include="ViewModels\StatusBar\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\ProjectExplorer\probability_estimation.ico" />
   </ItemGroup>

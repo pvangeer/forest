@@ -13,6 +13,7 @@ using Forest.Gui;
 using Forest.IO.Export;
 using Forest.IO.Import;
 using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent;
 
 namespace Forest.Visualization.ViewModels
 {
@@ -88,8 +89,6 @@ namespace Forest.Visualization.ViewModels
         }
 
         public IEnumerable<TreeEventViewModelOld> AllTreeEvents => GetAllEventsRecursive(MainTreeEventViewModel);
-
-        public EstimationSpecificationViewModelFactory EstimationSpecificationViewModelFactory { get; set; }
 
         public void OnExportElicitationForms(string fileLocation,
             string prefix,

@@ -5,7 +5,7 @@ using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.Commands;
 
-namespace Forest.Visualization.ViewModels
+namespace Forest.Visualization.ViewModels.Ribbon
 {
     public class RibbonViewModel : GuiViewModelBase
     {

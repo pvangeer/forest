@@ -1,6 +1,6 @@
 ﻿using Forest.Data.Hydrodynamics;
 
-namespace Forest.Visualization.ViewModels
+namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent
 {
     public class HydrodynamicConditionViewModel : FragilityCurveElementViewModel
     {

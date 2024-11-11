@@ -3,22 +3,21 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using Forest.Data.Estimations.PerTreeEvent;
-using Forest.Data.Hydrodynamics;
 using Forest.Data.Probabilities;
-using Forest.Data.Tree;
 
-namespace Forest.Visualization.ViewModels
+namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent
 {
     public class FixedFragilityCurveSpecificationViewModel : ProbabilitySpecificationViewModelBase
     {
         private readonly ObservableCollection<FragilityCurveElementViewModel> fixedFragilityCurveViewModels;
-        private readonly ObservableCollection<HydrodynamicCondition> hydrodynamicConditions;
+        private readonly ProbabilityEstimationPerTreeEvent parentEstimation;
 
-        public FixedFragilityCurveSpecificationViewModel(TreeEvent treeEvent,
+        public FixedFragilityCurveSpecificationViewModel(
             TreeEventProbabilityEstimate estimate,
-            ObservableCollection<HydrodynamicCondition> hydrodynamicConditions) : base(treeEvent, estimate)
+            ProbabilityEstimationPerTreeEvent parentEstimation,
+            ViewModelFactory factory) : base(estimate, factory)
         {
-            this.hydrodynamicConditions = hydrodynamicConditions;
+            this.parentEstimation = parentEstimation;
 
             fixedFragilityCurveViewModels =
                 new ObservableCollection<FragilityCurveElementViewModel>(
@@ -31,7 +30,7 @@ namespace Forest.Visualization.ViewModels
         private ObservableCollection<FragilityCurveElementViewModel> FixedFragilityCurveViewModels()
         {
             var estimatedWaterLevels = fixedFragilityCurveViewModels.Select(vm => vm.WaterLevel).ToArray();
-            var currentWaterLevels = hydrodynamicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w).ToArray();
+            var currentWaterLevels = parentEstimation.HydrodynamicConditions.Select(hc => hc.WaterLevel).Distinct().OrderBy(w => w).ToArray();
             var missingWaterLevels = currentWaterLevels.Except(estimatedWaterLevels).ToArray();
             var waterLevelsToRemove = estimatedWaterLevels.Except(currentWaterLevels).ToArray();
             foreach (var waterLevel in waterLevelsToRemove)

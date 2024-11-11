@@ -5,7 +5,7 @@ using Forest.Calculators;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
-using Forest.Visualization.ViewModels;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent;
 
 namespace Forest.Visualization.Converters
 {

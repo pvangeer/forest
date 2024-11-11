@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Visualization.ViewModels;
 
-namespace Forest.Visualization.DataTemplates.MainTabItems
+namespace Forest.Visualization.DataTemplates.MainContentPresenter.ProbabilityEstimationPerTreeEvent
 {
     public class EstimationContentTemplateSelector : DataTemplateSelector
     {

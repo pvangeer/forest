@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels">
+                    xmlns:probabilityPerTreeEvent="clr-namespace:Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent">
 
     <DataTemplate x:Key="FixedValueEstimationTemplate"
-                  DataType="{x:Type viewModels:FixedProbabilitySpecificationViewModel}">
+                  DataType="{x:Type probabilityPerTreeEvent:FixedProbabilitySpecificationViewModel}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />

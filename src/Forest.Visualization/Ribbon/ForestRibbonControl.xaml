@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fluent="urn:fluent-ribbon"
              xmlns:converters="clr-namespace:Forest.Visualization.Converters"
-             xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
              xmlns:tree="clr-namespace:Forest.Data.Tree;assembly=Forest.Data"
+             xmlns:ribbon="clr-namespace:Forest.Visualization.ViewModels.Ribbon"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=viewModels:RibbonViewModel, IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance Type=ribbon:RibbonViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="450"
              d:DesignWidth="800">
     <UserControl.Resources>

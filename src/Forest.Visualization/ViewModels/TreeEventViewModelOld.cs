@@ -127,10 +127,11 @@ namespace Forest.Visualization.ViewModels
             get
             {
                 var estimationPerTreeEvent = probabilityEstimations.OfType<ProbabilityEstimationPerTreeEvent>().First();
-                return probabilityEstimationViewModel ?? (probabilityEstimationViewModel =
+                return null;
+                /*probabilityEstimationViewModel ?? (probabilityEstimationViewModel =
                     ParentEventTreeViewModel.EstimationSpecificationViewModelFactory.CreateViewModel(TreeEvent,
                         estimationPerTreeEvent.Estimates.ToArray(),
-                        estimationPerTreeEvent.HydrodynamicConditions));
+                        estimationPerTreeEvent.HydrodynamicConditions));*/
             }
         }
 

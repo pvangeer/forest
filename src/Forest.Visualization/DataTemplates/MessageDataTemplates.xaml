@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:messaging="clr-namespace:Forest.Messaging;assembly=Forest.Messaging"
-                    xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels">
+                    xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
+                    xmlns:statusBar="clr-namespace:Forest.Visualization.ViewModels.StatusBar">
 
     <DataTemplate x:Key="MessageTemplate" DataType="messaging:LogMessage">
         <Grid Background="AliceBlue" Margin="0,1,0,1">
@@ -52,7 +53,7 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
-    <DataTemplate x:Key="PopupErrorMessageTemplate" DataType="{x:Type viewModels:StatusBarViewModel}">
+    <DataTemplate x:Key="PopupErrorMessageTemplate" DataType="{x:Type statusBar:StatusBarViewModel}">
         <Border BorderThickness="1" BorderBrush="CornflowerBlue">
             <Grid>
                 <Grid.RowDefinitions>
@@ -75,7 +76,7 @@
         </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="MessageListTemplate" DataType="viewModels:MessageListViewModel">
+    <DataTemplate x:Key="MessageListTemplate" DataType="statusBar:MessageListViewModel">
         <Grid
             MinWidth="300"
             MinHeight="50">

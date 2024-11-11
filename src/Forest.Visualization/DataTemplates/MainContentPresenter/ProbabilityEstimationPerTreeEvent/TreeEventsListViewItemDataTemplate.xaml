@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewModels1="clr-namespace:Forest.Visualization.ViewModels"
-                    xmlns:converters="clr-namespace:Forest.Visualization.Converters">
+                    xmlns:converters="clr-namespace:Forest.Visualization.Converters"
+                    xmlns:probabilityPerTreeEvent="clr-namespace:Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent">
 
     <converters:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
 
-    <DataTemplate x:Key="ListViewItemTreeEventViewModelDataTemplate" DataType="viewModels1:TreeEventViewModelOld">
+    <DataTemplate x:Key="ListViewItemTreeEventViewModelDataTemplate" DataType="{x:Type probabilityPerTreeEvent:TreeEventEstimationViewModel}">
         <Border
             BorderBrush="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource SelectedPropertyToBrushConverter}}"
             BorderThickness="1"

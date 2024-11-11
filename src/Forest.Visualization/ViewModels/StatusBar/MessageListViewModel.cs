@@ -6,7 +6,7 @@ using Forest.Data.Properties;
 using Forest.Messaging;
 using Forest.Visualization.Commands.Taskbar;
 
-namespace Forest.Visualization.ViewModels
+namespace Forest.Visualization.ViewModels.StatusBar
 {
     public class MessageListViewModel : INotifyPropertyChanged
     {

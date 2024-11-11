@@ -1,21 +1,15 @@
 ﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Forest.Data.Estimations.PerTreeEvent;
-using Forest.Data.Properties;
-using Forest.Data.Tree;
 
 namespace Forest.Visualization.ViewModels
 {
-    public class ProbabilitySpecificationViewModelBase : INotifyPropertyChanged
+    public class ProbabilitySpecificationViewModelBase : ViewModelBase
     {
-        public ProbabilitySpecificationViewModelBase([NotNull] TreeEvent treeEvent, [NotNull] TreeEventProbabilityEstimate estimate)
+        public ProbabilitySpecificationViewModelBase(TreeEventProbabilityEstimate estimate, ViewModelFactory factory) : base(factory)
         {
             Estimate = estimate;
-            TreeEvent = treeEvent;
-            TreeEvent.PropertyChanged += TreeEventPropertyChanged;
+            Estimate.PropertyChanged += EstimationPropertyChanged;
         }
-
-        public TreeEvent TreeEvent { get; }
 
         public TreeEventProbabilityEstimate Estimate { get; }
 
@@ -23,19 +17,13 @@ namespace Forest.Visualization.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void TreeEventPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void EstimationPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnTreeEventPropertyChanged(e.PropertyName);
+            OnEstimationPropertyChanged(e.PropertyName);
         }
 
-        protected virtual void OnTreeEventPropertyChanged(string propertyName)
+        protected virtual void OnEstimationPropertyChanged(string propertyName)
         {
-        }
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -3,7 +3,8 @@
                     xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
                     xmlns:fluent="urn:fluent-ribbon"
                     xmlns:components="clr-namespace:Forest.Gui;assembly=Forest.Gui"
-                    xmlns:taskbar="clr-namespace:Forest.Visualization.Converters.Taskbar">
+                    xmlns:taskbar="clr-namespace:Forest.Visualization.Converters.Taskbar"
+                    xmlns:statusBar="clr-namespace:Forest.Visualization.ViewModels.StatusBar">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MessageDataTemplates.xaml" />
@@ -13,7 +14,7 @@
     <taskbar:ShouldShowPriorityMessageToBoolConverter x:Key="ShouldShowPriorityMessageToBoolConverter" />
     <taskbar:MessageListToLabelConverter x:Key="MessageListToLabelConverter" />
 
-    <DataTemplate x:Key="StatusBarDataTemplate" DataType="{x:Type viewModels:StatusBarViewModel}">
+    <DataTemplate x:Key="StatusBarDataTemplate" DataType="{x:Type statusBar:StatusBarViewModel}">
         <fluent:StatusBar
             Background="{StaticResource ApplicationBorderColorBrush}">
             <fluent:StatusBarItem HorizontalAlignment="Left">

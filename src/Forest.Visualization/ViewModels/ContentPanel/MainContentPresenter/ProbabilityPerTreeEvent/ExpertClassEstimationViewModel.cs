@@ -1,12 +1,11 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using Forest.Data;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Estimations.PerTreeEvent.Experts;
 using Forest.Data.Hydrodynamics;
 
-namespace Forest.Visualization.ViewModels
+namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent
 {
-    public class ExpertClassEstimationViewModel : INotifyPropertyChanged
+    public class ExpertClassEstimationViewModel : Entity
     {
         private readonly ExpertClassEstimation estimation;
 
@@ -49,11 +48,9 @@ namespace Forest.Visualization.ViewModels
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public bool IsViewModelFor(ExpertClassEstimation otherEstimation)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return Equals(otherEstimation, estimation);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using Forest.Data.Estimations.PerTreeEvent;
+using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.TreeView.Data;
@@ -7,6 +9,8 @@ using Forest.Visualization.ViewModels.ContentPanel;
 using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree;
 using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent;
 using Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer;
+using Forest.Visualization.ViewModels.Ribbon;
+using Forest.Visualization.ViewModels.StatusBar;
 
 namespace Forest.Visualization.ViewModels
 {
@@ -90,6 +94,41 @@ namespace Forest.Visualization.ViewModels
         public ExpertsViewModel CreateExpertsViewModel(ProbabilityEstimationPerTreeEvent estimation)
         {
             return new ExpertsViewModel(estimation);
+        }
+
+        public HydrodynamicsViewModel CreateHydrodynamicsViewModel(ProbabilityEstimationPerTreeEvent estimation)
+        {
+            return new HydrodynamicsViewModel(estimation);
+        }
+
+        public ClassesProbabilitySpecificationViewModel CreateClassesProbabilitySpecificationViewModel(TreeEventProbabilityEstimate estimation)
+        {
+            return new ClassesProbabilitySpecificationViewModel(estimation, this);
+        }
+
+        public FixedFragilityCurveSpecificationViewModel CreateFragilityCurveSpecificationTypeViewModel(TreeEventProbabilityEstimate estimation, ProbabilityEstimationPerTreeEvent parentEstimation)
+        {
+            return new FixedFragilityCurveSpecificationViewModel(estimation, parentEstimation, this);
+        }
+
+        public ExpertClassEstimationViewModel CreateExpertClassEstimationViewModel(ExpertClassEstimation expertClassEstimation)
+        {
+            return new ExpertClassEstimationViewModel(expertClassEstimation);
+        }
+
+        public FixedProbabilitySpecificationViewModel CreateFixedProbabilitySpecificationTypeViewModel(TreeEventProbabilityEstimate estimation)
+        {
+            return new FixedProbabilitySpecificationViewModel(estimation, this);
+        }
+
+        public EstimationPerTreeEventSpecificationViewModel CreateEstimationPerTreeEventSpecificationViewModel(ProbabilityEstimationPerTreeEvent estimation)
+        {
+            return new EstimationPerTreeEventSpecificationViewModel(estimation, gui, this);
+        }
+
+        public TreeEventEstimationViewModel CreateTreeEventEstimationViewModel(TreeEventProbabilityEstimate estimation, ProbabilityEstimationPerTreeEvent parentEstimation)
+        {
+            return new TreeEventEstimationViewModel(estimation, parentEstimation, gui, this);
         }
     }
 }

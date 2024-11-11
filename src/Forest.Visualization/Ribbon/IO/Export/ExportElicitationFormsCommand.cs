@@ -12,6 +12,7 @@ namespace Forest.Visualization.Ribbon.IO.Export
 
         public bool CanExecute(object parameter)
         {
+            // TODO: Change this.
             return parameter is EventTreeViewModelOld eventTreeViewModel && eventTreeViewModel.SelectedEstimationHasExperts();
         }
 

@@ -18,6 +18,10 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Prob
 
         public ExpertsViewModel ExpertsViewModel => ViewModelFactory.CreateExpertsViewModel(estimation);
 
+        public HydrodynamicsViewModel HydrodynamicsViewModel => ViewModelFactory.CreateHydrodynamicsViewModel(estimation);
+
+        public EstimationPerTreeEventSpecificationViewModel ProbabilityEstimationsViewModel => ViewModelFactory.CreateEstimationPerTreeEventSpecificationViewModel(estimation);
+
         private void EstimationPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)

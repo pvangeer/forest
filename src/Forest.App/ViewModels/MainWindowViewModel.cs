@@ -5,6 +5,8 @@ using Forest.Visualization;
 using Forest.Visualization.Dialogs;
 using Forest.Visualization.ViewModels;
 using Forest.Visualization.ViewModels.ContentPanel;
+using Forest.Visualization.ViewModels.Ribbon;
+using Forest.Visualization.ViewModels.StatusBar;
 
 namespace Forest.App.ViewModels
 {

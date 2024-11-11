@@ -5,6 +5,10 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary
             Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/ExpertsDataTemplate.xaml" />
+        <ResourceDictionary
+            Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/HydrodynamicsDataTemplate.xaml" />
+        <ResourceDictionary
+            Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/EstimationSpecificationPerTreeEventDataTemplate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="ProbabilityPerTreeEventDataTemplate"
@@ -17,11 +21,11 @@
             <TabItem
                 Header="Hydrodynamics"
                 Content="{Binding HydrodynamicsViewModel}"
-                ContentTemplate="{StaticResource ExpertsDataTemplate}" />
+                ContentTemplate="{StaticResource HydrodynamicsDataTemplate}" />
             <TabItem
                 Header="Probability estimations"
                 Content="{Binding ProbabilityEstimationsViewModel}"
-                ContentTemplate="{StaticResource ExpertsDataTemplate}" />
+                ContentTemplate="{StaticResource EstimationPerEventTreeDataTemplate}" />
             <TabItem
                 Header="Results"
                 Content="{Binding ResultsPerTreeEventViewModel}"

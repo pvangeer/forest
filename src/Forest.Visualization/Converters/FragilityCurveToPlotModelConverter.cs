@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Data;
 using Forest.Visualization.ViewModels;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
