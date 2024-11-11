@@ -5,7 +5,8 @@
 
     <converters:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
 
-    <DataTemplate x:Key="ListViewItemTreeEventViewModelDataTemplate" DataType="{x:Type probabilityPerTreeEvent:TreeEventEstimationViewModel}">
+    <DataTemplate x:Key="ListViewItemTreeEventViewModelDataTemplate"
+                  DataType="{x:Type probabilityPerTreeEvent:TreeEventEstimationViewModel}">
         <Border
             BorderBrush="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource SelectedPropertyToBrushConverter}}"
             BorderThickness="1"

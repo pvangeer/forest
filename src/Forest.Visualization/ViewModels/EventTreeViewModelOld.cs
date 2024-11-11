@@ -13,7 +13,6 @@ using Forest.Gui;
 using Forest.IO.Export;
 using Forest.IO.Import;
 using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree;
-using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent;
 
 namespace Forest.Visualization.ViewModels
 {

@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Windows.Input;
-using Forest.Visualization.ViewModels;
 using Forest.Visualization.ViewModels.StatusBar;
 
 namespace Forest.Visualization.Commands.Taskbar

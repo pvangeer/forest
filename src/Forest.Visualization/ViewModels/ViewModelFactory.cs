@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using Forest.Data.Estimations.PerTreeEvent;
-using Forest.Data.Hydrodynamics;
 using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.TreeView.Data;
@@ -106,7 +104,8 @@ namespace Forest.Visualization.ViewModels
             return new ClassesProbabilitySpecificationViewModel(estimation, this);
         }
 
-        public FixedFragilityCurveSpecificationViewModel CreateFragilityCurveSpecificationTypeViewModel(TreeEventProbabilityEstimate estimation, ProbabilityEstimationPerTreeEvent parentEstimation)
+        public FixedFragilityCurveSpecificationViewModel CreateFragilityCurveSpecificationTypeViewModel(TreeEventProbabilityEstimate estimation,
+            ProbabilityEstimationPerTreeEvent parentEstimation)
         {
             return new FixedFragilityCurveSpecificationViewModel(estimation, parentEstimation, this);
         }
@@ -126,7 +125,8 @@ namespace Forest.Visualization.ViewModels
             return new EstimationPerTreeEventSpecificationViewModel(estimation, gui, this);
         }
 
-        public TreeEventEstimationViewModel CreateTreeEventEstimationViewModel(TreeEventProbabilityEstimate estimation, ProbabilityEstimationPerTreeEvent parentEstimation)
+        public TreeEventEstimationViewModel CreateTreeEventEstimationViewModel(TreeEventProbabilityEstimate estimation,
+            ProbabilityEstimationPerTreeEvent parentEstimation)
         {
             return new TreeEventEstimationViewModel(estimation, parentEstimation, gui, this);
         }

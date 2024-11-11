@@ -1,9 +1,8 @@
-﻿using Forest.Data.Estimations.PerTreeEvent;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ComponentModel;
-using System.Windows.Markup;
+using System.Linq;
+using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Tree;
 using Forest.Gui;
 
@@ -15,11 +14,15 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Prob
             Enum.GetValues(typeof(ProbabilitySpecificationType))
                 .Cast<ProbabilitySpecificationType>()
                 .ToDictionary(t => t, GetEstimationSpecificationTypeDisplayName);
-        private readonly TreeEventProbabilityEstimate estimation;
-        private readonly ProbabilityEstimationPerTreeEvent parentEstimation;
-        private readonly ForestGui gui;
 
-        public TreeEventEstimationViewModel(TreeEventProbabilityEstimate estimation, ProbabilityEstimationPerTreeEvent parentEstimation, ForestGui gui, ViewModelFactory viewModelFactory) : base(viewModelFactory)
+        private readonly TreeEventProbabilityEstimate estimation;
+        private readonly ForestGui gui;
+        private readonly ProbabilityEstimationPerTreeEvent parentEstimation;
+
+        public TreeEventEstimationViewModel(TreeEventProbabilityEstimate estimation,
+            ProbabilityEstimationPerTreeEvent parentEstimation,
+            ForestGui gui,
+            ViewModelFactory viewModelFactory) : base(viewModelFactory)
         {
             this.gui = gui;
             gui.SelectionManager.SelectedTreeEventChanged += (sender, args) => OnPropertyChanged(nameof(IsSelected));
@@ -105,7 +108,10 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Prob
             }
         }
 
-        public TreeEvent GetTreeEvent() => estimation.TreeEvent;
+        public TreeEvent GetTreeEvent()
+        {
+            return estimation.TreeEvent;
+        }
 
         public bool IsViewModelFor(TreeEvent otherTreeEvent)
         {

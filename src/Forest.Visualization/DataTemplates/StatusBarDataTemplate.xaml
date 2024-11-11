@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewModels="clr-namespace:Forest.Visualization.ViewModels"
                     xmlns:fluent="urn:fluent-ribbon"
                     xmlns:components="clr-namespace:Forest.Gui;assembly=Forest.Gui"
                     xmlns:taskbar="clr-namespace:Forest.Visualization.Converters.Taskbar"
