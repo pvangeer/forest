@@ -50,12 +50,12 @@ namespace Forest.TestHelpers
 
         private static TreeEvent CreateEventTree(string treeName, int numberTreeEvents)
         {
-            var mainTreeEvent = new TreeEvent("First element");
+            var mainTreeEvent = new TreeEvent("First element", TreeEventType.MainEvent);
 
             var currentTreeEvent = mainTreeEvent;
             for (var i = 0; i < numberTreeEvents - 1; i++)
             {
-                var falseEvent = new TreeEvent("")
+                var falseEvent = new TreeEvent("", TreeEventType.Failing)
                 {
                     Name = string.Format("Event no. {0}", i + 1)
                 };
@@ -116,8 +116,8 @@ namespace Forest.TestHelpers
             var hydraulicCondition35 = new HydrodynamicCondition(3.5, (Probability)3.33E-04, double.NaN, double.NaN);
             var hydraulicCondition38 = new HydrodynamicCondition(3.8, (Probability)1.00E-04, double.NaN, double.NaN);
 
-            var failingEvent = new TreeEvent("Knoop 2");
-            var mainTreeEvent = new TreeEvent("Knoop 1")
+            var failingEvent = new TreeEvent("Knoop 2", TreeEventType.Failing);
+            var mainTreeEvent = new TreeEvent("Knoop 1", TreeEventType.MainEvent)
             {
                 FailingEvent = failingEvent
             };

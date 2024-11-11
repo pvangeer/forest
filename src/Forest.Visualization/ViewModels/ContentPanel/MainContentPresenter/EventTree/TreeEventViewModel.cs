@@ -98,6 +98,8 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Even
 
         public bool IsSelected => treeEvent != null && ReferenceEquals(treeEvent, gui?.SelectionManager.GetSelectedTreeEvent(eventTree));
 
+        public TreeEventType TreeEventType => treeEvent.Type;
+
         private void SelectedTreeEventChanged(object sender, EventArgs eventArgs)
         {
             OnPropertyChanged(nameof(IsSelected));

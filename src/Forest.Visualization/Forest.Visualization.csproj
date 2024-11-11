@@ -102,6 +102,8 @@
     <Compile Include="Dialogs\FileDialogFactory.cs" />
     <Compile Include="DataTemplates\MainContentPresenter\MainContentTemplateSelector.cs" />
     <Compile Include="IsProneToExportConverter.cs" />
+    <Compile Include="Converters\TreeEventTypeToDisplayNameConverter.cs" />
+    <Compile Include="Converters\TreeEventTypeToVisibilityConverter.cs" />
     <Compile Include="Utils\HidableGridSplitter.cs" />
     <Compile Include="Utils\FrameworkElementExtensions.cs" />
     <Compile Include="ViewModelBase.cs" />

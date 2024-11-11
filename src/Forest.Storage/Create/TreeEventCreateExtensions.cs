@@ -18,7 +18,8 @@ namespace Forest.Storage.Create
             {
                 Name = model.Name.DeepClone(),
                 Summary = model.Summary.DeepClone(),
-                Information = model.Information.DeepClone()
+                Information = model.Information.DeepClone(),
+                TreeEventType = model.Type.ToStorageName()
             };
 
             if (model.FailingEvent != null)

@@ -4,7 +4,7 @@ using Forest.Data.Estimations.PerTreeEvent;
 
 namespace Forest.Storage
 {
-    public static class ProbabilitySpecificationTypeServices
+    public static class ProbabilitySpecificationTypeUtils
     {
         public static string ToStorageName(this ProbabilitySpecificationType modelProbabilitySpecificationType)
         {

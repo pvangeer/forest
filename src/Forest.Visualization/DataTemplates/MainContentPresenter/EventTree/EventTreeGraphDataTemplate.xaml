@@ -74,7 +74,11 @@
                 Grid.Column="0"
                 ZoomDeltaMultiplier="5"
                 AnimationLength="0">
+                <controls:ZoomControl.InputBindings>
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding CanvasClickedCommand}" />
+                </controls:ZoomControl.InputBindings>
                 <ContentControl
+                    Background="Transparent"
                     Content="{Binding EventTreeGraphLayout}">
                     <ContentControl.Style>
                         <Style TargetType="ContentControl">

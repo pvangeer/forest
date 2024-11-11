@@ -14,8 +14,8 @@ namespace Forest.Data.Test.Estimations
         [Test]
         public void AddExpertDoesNotChangesClassEstimatesNoHydraulicConditions()
         {
-            var secondTreeEvent = new TreeEvent("2");
-            var treeEvent = new TreeEvent("") { FailingEvent = secondTreeEvent };
+            var secondTreeEvent = new TreeEvent("2", TreeEventType.Failing);
+            var treeEvent = new TreeEvent("", TreeEventType.MainEvent) { FailingEvent = secondTreeEvent };
             var evenTree = new EventTree { MainTreeEvent = treeEvent };
             var firstEstimation = new TreeEventProbabilityEstimate(treeEvent);
             var secondEstimation = new TreeEventProbabilityEstimate(secondTreeEvent);
@@ -45,8 +45,8 @@ namespace Forest.Data.Test.Estimations
         [Test]
         public void AddExpertChangesClassEstimatesWithHydraulicConditions()
         {
-            var secondTreeEvent = new TreeEvent("");
-            var treeEvent = new TreeEvent("") { FailingEvent = secondTreeEvent };
+            var secondTreeEvent = new TreeEvent("", TreeEventType.Failing);
+            var treeEvent = new TreeEvent("", TreeEventType.MainEvent) { FailingEvent = secondTreeEvent };
             var eventTree = new EventTree { MainTreeEvent = treeEvent };
             var estimationFirstTreeEvent = new TreeEventProbabilityEstimate(treeEvent);
             var estimationSecondTreeEvent = new TreeEventProbabilityEstimate(secondTreeEvent);
@@ -100,7 +100,7 @@ namespace Forest.Data.Test.Estimations
             var otherExpert = new Expert();
             var hydraulicCondition1 = new HydrodynamicCondition(1.0, (Probability)0.01, 1, 1);
             var hydraulicCondition2 = new HydrodynamicCondition(2.0, (Probability)0.001, 1, 1);
-            var treeEvent = new TreeEvent("");
+            var treeEvent = new TreeEvent("", TreeEventType.MainEvent);
             var eventTree = new EventTree
             {
                 MainTreeEvent = treeEvent
@@ -160,7 +160,7 @@ namespace Forest.Data.Test.Estimations
         [Test]
         public void RemoveExpertDoesNotChangeClassEstimatesNoHydraulicConditions()
         {
-            var treeEvent = new TreeEvent("");
+            var treeEvent = new TreeEvent("", TreeEventType.MainEvent);
             var expertToRemove = new Expert();
             var otherExpert = new Expert();
             var eventTree = new EventTree { MainTreeEvent = treeEvent };
@@ -182,7 +182,7 @@ namespace Forest.Data.Test.Estimations
         [Test]
         public void AddHydraulicConditionDoesNotChangesClassEstimatesNoExperts()
         {
-            var treeEvent = new TreeEvent("");
+            var treeEvent = new TreeEvent("", TreeEventType.MainEvent);
             var eventTree = new EventTree { MainTreeEvent = treeEvent };
             var estimation = new ProbabilityEstimationPerTreeEvent { EventTree = eventTree };
 
@@ -196,7 +196,7 @@ namespace Forest.Data.Test.Estimations
         [Test]
         public void AddHydraulicConditionChangesClassEstimatesWithExperts()
         {
-            var treeEvent = new TreeEvent("");
+            var treeEvent = new TreeEvent("", TreeEventType.MainEvent);
             var eventTree = new EventTree
             {
                 MainTreeEvent = treeEvent
@@ -244,7 +244,7 @@ namespace Forest.Data.Test.Estimations
             var expert2 = new Expert();
             var hydraulicConditionToRemove = new HydrodynamicCondition(1.0, (Probability)0.01, 1, 1);
             var hydraulicCondition2 = new HydrodynamicCondition(2.0, (Probability)0.001, 1, 1);
-            var treeEvent = new TreeEvent("");
+            var treeEvent = new TreeEvent("", TreeEventType.MainEvent);
             var eventTree = new EventTree { MainTreeEvent = treeEvent };
             var treeEventProbabilityEstimation = new TreeEventProbabilityEstimate(treeEvent)
             {
@@ -301,7 +301,7 @@ namespace Forest.Data.Test.Estimations
         [Test]
         public void RemoveHydraulicConditionDoesNotChangeClassEstimatesNoExperts()
         {
-            var treeEvent = new TreeEvent("");
+            var treeEvent = new TreeEvent("", TreeEventType.MainEvent);
             var eventTree = new EventTree { MainTreeEvent = treeEvent };
             var hydraulicConditionToRemove = new HydrodynamicCondition(1.0, (Probability)0.01, 1, 1);
             var hydraulicCondition2 = new HydrodynamicCondition(2.0, (Probability)0.001, 1, 1);

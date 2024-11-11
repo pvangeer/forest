@@ -55,7 +55,7 @@ namespace Forest.Data.Services
 
         public TreeEvent AddTreeEvent(EventTree eventTree, TreeEvent selectedTreeEventToAddTo, TreeEventType type)
         {
-            var newTreeEvent = new TreeEvent("Nieuwe gebeurtenis");
+            var newTreeEvent = new TreeEvent("Nieuwe gebeurtenis", type);
 
             var estimation = forestAnalysis.ProbabilityEstimationsPerTreeEvent.FirstOrDefault(e => e.EventTree == eventTree);
 
@@ -83,6 +83,7 @@ namespace Forest.Data.Services
 
             if (eventTree.MainTreeEvent == null)
             {
+                newTreeEvent.Type = TreeEventType.MainEvent;
                 eventTree.MainTreeEvent = newTreeEvent;
                 eventTree.OnPropertyChanged(nameof(eventTree.MainTreeEvent));
                 return newTreeEvent;

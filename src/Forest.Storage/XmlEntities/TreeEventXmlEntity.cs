@@ -16,6 +16,9 @@ namespace Forest.Storage.XmlEntities
         [XmlAttribute(AttributeName = "name")]
         public string Name { get; set; }
 
+        [XmlAttribute(AttributeName = "type")]
+        public string TreeEventType { get; set; }
+
         [XmlElement(ElementName = "failingevent")]
         public TreeEventXmlEntity FailingEvent { get; set; }
 

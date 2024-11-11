@@ -61,6 +61,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TreeEventTypeUtils.cs" />
     <Compile Include="VersionInfo.cs" />
     <Compile Include="XmlEntities\EventTreeXmlEntity.cs" />
     <Compile Include="XmlEntities\ExpertClassEstimationXmlEntity.cs" />
@@ -70,7 +71,7 @@
     <Compile Include="XmlEntities\PersonXmlEntity.cs" />
     <Compile Include="XmlEntities\ForestAnalysisXmlEntity.cs" />
     <Compile Include="XmlEntities\ProbabilityEstimationPerTreeEventXmlEntity.cs" />
-    <Compile Include="ProbabilitySpecificationTypeServices.cs" />
+    <Compile Include="ProbabilitySpecificationTypeUtils.cs" />
     <Compile Include="XmlEntities\ProjectXmlEntity.cs" />
     <Compile Include="XmlEntities\TreeEventProbabilityEstimateXmlEntity.cs" />
     <Compile Include="XmlEntities\TreeEventXmlEntity.cs" />

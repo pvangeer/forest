@@ -30,7 +30,7 @@ namespace Forest.Calculators.Test
 
             var criticalPathElements = new[]
             {
-                new CriticalPathElement(new TreeEvent(""),
+                new CriticalPathElement(new TreeEvent("", TreeEventType.MainEvent),
                     new FragilityCurve
                     {
                         new FragilityCurveElement(2.3, (Probability)0.001),
@@ -71,7 +71,7 @@ namespace Forest.Calculators.Test
 
             var criticalPathElements = new[]
             {
-                new CriticalPathElement(new TreeEvent(""),
+                new CriticalPathElement(new TreeEvent("", TreeEventType.MainEvent),
                     new FragilityCurve
                     {
                         new FragilityCurveElement(2.3, (Probability)0.001),
@@ -105,7 +105,7 @@ namespace Forest.Calculators.Test
 
             var criticalPathElements = new[]
             {
-                new CriticalPathElement(new TreeEvent(""),
+                new CriticalPathElement(new TreeEvent("", TreeEventType.MainEvent),
                     new FragilityCurve
                     {
                         new FragilityCurveElement(2.3, (Probability)0.001),

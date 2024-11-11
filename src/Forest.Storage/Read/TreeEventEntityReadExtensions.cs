@@ -16,7 +16,7 @@ namespace Forest.Storage.Read
             if (collector.Contains(entity))
                 return collector.Get(entity);
 
-            var treeEvent = new TreeEvent(entity.Name)
+            var treeEvent = new TreeEvent(entity.Name, TreeEventTypeUtils.FromStorageName(entity.TreeEventType))
             {
                 Summary = entity.Summary,
                 Information = entity.Information

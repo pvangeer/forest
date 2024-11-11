@@ -108,5 +108,13 @@ namespace Forest.Visualization.Commands
         {
             return new TreeEventClickedCommand(treeEventViewModel);
         }
+
+        public ICommand CreateClearTreeEventSelectionCommand(EventTree eventTree)
+        {
+            return new CanAlwaysExecuteActionCommand
+            {
+                ExecuteAction = (o) => gui.SelectionManager.SelectTreeEvent(eventTree, null)
+            };
+        }
     }
 }

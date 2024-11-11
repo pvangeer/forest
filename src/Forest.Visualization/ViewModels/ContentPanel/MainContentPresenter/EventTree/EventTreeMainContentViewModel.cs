@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows.Input;
 using Forest.Data;
 using Forest.Data.Services;
 using Forest.Gui;
+using Forest.Visualization.Commands;
 using Forest.Visualization.DataTemplates.MainContentPresenter.EventTree;
 
 namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree
@@ -13,10 +15,12 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Even
         private readonly ForestGui gui;
         private readonly ViewModelFactory viewModelFactory;
         private EventTreeGraph graph;
+        private readonly CommandFactory commandFactory;
 
         public EventTreeMainContentViewModel(Data.Tree.EventTree eventTree, ForestGui gui)
         {
             this.gui = gui;
+            this.commandFactory = new CommandFactory(gui);
             gui.PropertyChanged += GuiPropertyChanged;
             this.eventTree = eventTree;
             this.eventTree.PropertyChanged += EventTreePropertyChanged;
@@ -47,6 +51,8 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Even
                 gui.OnPropertyChanged(nameof(ForestGui.IsSaveToImage));
             }
         }
+
+        public ICommand CanvasClickedCommand => commandFactory.CreateClearTreeEventSelectionCommand(this.eventTree);
 
         private void EventTreePropertyChanged(object sender, PropertyChangedEventArgs e)
         {

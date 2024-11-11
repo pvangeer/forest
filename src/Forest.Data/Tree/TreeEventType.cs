@@ -3,6 +3,7 @@
     public enum TreeEventType
     {
         Failing,
-        Passing
+        Passing,
+        MainEvent
     }
 }

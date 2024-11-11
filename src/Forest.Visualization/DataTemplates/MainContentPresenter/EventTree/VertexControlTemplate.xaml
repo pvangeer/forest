@@ -7,7 +7,8 @@
     xmlns:wpfExtensionsAttachedBehaviours="clr-namespace:WPFExtensions.AttachedBehaviours;assembly=WPFExtensions"
     xmlns:fluent="urn:fluent-ribbon"
     xmlns:converters="clr-namespace:Forest.Visualization.Converters"
-    xmlns:mainContentPanel="clr-namespace:Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree">
+    xmlns:mainContentPanel="clr-namespace:Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree"
+    xmlns:visualization="clr-namespace:Forest.Visualization">
 
     <converters:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
 
@@ -32,67 +33,152 @@
                                         FalseBrush="{StaticResource UnSelectedBorderBrush}"
                                         TrueBrush="{StaticResource SelectedBorderBrush}" />
 
+    <converters:TreeEventTypeToDisplayNameConverter x:Key="TreeEventTypeToDisplayNameConverter" />
+    <visualization:TreeEventTypeToVisibilityConverter x:Key="TreeEventTypeToVisibilityConverter" />
     <DataTemplate x:Key="TreeEventDataTemplate" DataType="{x:Type mainContentPanel:TreeEventViewModel}">
-        <Grid Width="200" IsSharedSizeScope="True">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" SharedSizeGroup="eventSharedHeightGroup" />
-            </Grid.RowDefinitions>
-            <Border
-                BorderBrush="{Binding IsSelected, Converter={StaticResource BooleanToBrushConverter}}"
-                BorderThickness="1"
-                CornerRadius="8"
-                MaxWidth="300">
-                <Border.InputBindings>
-                    <MouseBinding MouseAction="LeftClick" Command="{Binding TreeEventClickedCommand}" />
-                </Border.InputBindings>
-                <Grid MinWidth="120" MaxWidth="320" Background="Transparent">
+            <Grid IsSharedSizeScope="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" SharedSizeGroup="eventSharedHeightGroup" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid
+                    Width="30"
+                    Visibility="{Binding TreeEventType, Converter={StaticResource TreeEventTypeToVisibilityConverter}}"
+                    Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1"/>
+                        <RowDefinition Height="Auto" SharedSizeGroup="descriptionHeightGroup"/>
                         <RowDefinition Height="1" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <TextBlock
-                        Name="TitleTextBlock"
-                        TextWrapping="Wrap"
-                        Grid.Row="0"
-                        Text="{Binding Name}"
-                        Padding="5,2,5,3"
-                        VerticalAlignment="Bottom"
-                        FontWeight="Bold"
-                        FontSize="14" />
-                    <Border
                         Grid.Row="1"
-                        Height="1"
-                        Background="DimGray" />
-                    <TextBlock
-                        Name="DescriptionTextBlock"
-                        TextWrapping="Wrap"
-                        Grid.Row="2"
-                        Text="{Binding Summary}"
-                        VerticalAlignment="Top"
+                        TextAlignment="Left"
+                        VerticalAlignment="Bottom"
                         Padding="5,2,5,3"
-                        FontSize="10" />
+                        Text="{Binding TreeEventType, Converter={StaticResource TreeEventTypeToDisplayNameConverter}}"/>
+                    <Border 
+                        Grid.Row="2"
+                        Height="1"
+                        Background="DimGray"/>
                 </Grid>
-                <Border.Style>
-                    <Style>
-                        <Setter Property="Border.Background" Value="Transparent" />
-                        <Style.Triggers>
-                            <Trigger Property="Border.IsMouseOver" Value="True">
-                                <Setter Property="Border.Background" Value="LightGray" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
-            </Border>
-        </Grid>
+                <Border
+                    Grid.Column="1"
+                    BorderBrush="{Binding IsSelected, Converter={StaticResource BooleanToBrushConverter}}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Width="200">
+                    <Border.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding TreeEventClickedCommand}" />
+                    </Border.InputBindings>
+                    <Grid Width="200" Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" SharedSizeGroup="descriptionHeightGroup"/>
+                            <RowDefinition Height="1" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                            Grid.Row="0"
+                            Name="TitleTextBlock"
+                            TextWrapping="Wrap"
+                            Text="{Binding Name}"
+                            Padding="5,2,5,3"
+                            VerticalAlignment="Bottom"
+                            FontWeight="Bold"
+                            FontSize="14" />
+                        <Border
+                            Grid.Row="1"
+                            Height="1"
+                            Background="DimGray" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Name="DescriptionTextBlock"
+                            TextWrapping="Wrap"
+                            Text="{Binding Summary}"
+                            VerticalAlignment="Top"
+                            Padding="5,2,5,3"
+                            FontSize="10" />
+                    </Grid>
+                    <Border.Style>
+                        <Style>
+                            <Setter Property="Border.Background" Value="Transparent" />
+                            <Style.Triggers>
+                                <Trigger Property="Border.IsMouseOver" Value="True">
+                                    <Setter Property="Border.Background" Value="LightGray" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+            </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="FailingEndpointTemplate" DataType="mainContentPanel:GraphVertex">
-        <Image Source="/Forest.Visualization;component\Resources\cross_red.png" Width="32" />
+        <Grid IsSharedSizeScope="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" SharedSizeGroup="imageHeight"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="*" SharedSizeGroup="imageHeight"/>
+            </Grid.RowDefinitions>
+            <TextBlock 
+                Grid.Row="0"
+                Grid.Column="0"
+                Padding="5,2,5,3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Text="Ja"/>
+            <Border
+                Grid.Column="0"
+                Grid.Row="1"
+                Height="1"
+                Background="DimGray"/>
+            <Image 
+                Grid.Column="1"
+                Grid.Row="0"
+                Grid.RowSpan="3"
+                VerticalAlignment="Center"
+                Source="/Forest.Visualization;component\Resources\cross_red.png" Width="32" />
+        </Grid>
+        
     </DataTemplate>
 
     <DataTemplate x:Key="PassingEndpointTemplate" DataType="mainContentPanel:GraphVertex">
-        <Image Source="/Forest.Visualization;component\Resources\check_green.png" Width="32" />
+        <Grid IsSharedSizeScope="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" SharedSizeGroup="imageHeight"/>
+                <RowDefinition Height="1"/>
+                <RowDefinition Height="*" SharedSizeGroup="imageHeight"/>
+            </Grid.RowDefinitions>
+            <TextBlock 
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Padding="5,2,5,3"
+                Text="Nee"/>
+            <Border
+                Grid.Column="0"
+                Grid.Row="1"
+                Height="1"
+                Background="DimGray"/>
+            <Image 
+                Grid.Column="1"
+                Grid.Row="0"
+                Grid.RowSpan="3"
+                VerticalAlignment="Center"
+                Source="/Forest.Visualization;component\Resources\check_green.png" Width="32" />
+        </Grid>
     </DataTemplate>
 
     <Style TargetType="{x:Type graphSharpControls:VertexControl}">

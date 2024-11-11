@@ -13,7 +13,7 @@ namespace Forest.Storage.Read
             var estimate = new TreeEventProbabilityEstimate(collector.GetReferencedTreeEvent(entity.TreeEventId))
             {
                 FixedProbability = double.IsNaN(entity.FixedProbability) ? Probability.NaN : new Probability(entity.FixedProbability),
-                ProbabilitySpecificationType = ProbabilitySpecificationTypeServices.FromStorageName(entity.ProbabilitySpecificationType)
+                ProbabilitySpecificationType = ProbabilitySpecificationTypeUtils.FromStorageName(entity.ProbabilitySpecificationType)
             };
 
             var classEstimations = entity.ClassProbabilitySpecifications.OrderBy(e => e.Order).Select(e => e.Read(collector));
