@@ -10,6 +10,7 @@ namespace Forest.Visualization.ViewModels.Ribbon
     public class RibbonViewModel : GuiViewModelBase
     {
         private readonly CommandFactory commandFactory;
+        private ICommand saveCanvasCommand;
 
         public RibbonViewModel(ForestGui gui) : base(gui)
         {
@@ -31,7 +32,6 @@ namespace Forest.Visualization.ViewModels.Ribbon
             }
         }
 
-
         public ICommand FileNewCommand => commandFactory.CreateNewProjectCommand();
 
         public ICommand SaveProjectCommand => commandFactory.CreateSaveProjectCommand();
@@ -43,6 +43,9 @@ namespace Forest.Visualization.ViewModels.Ribbon
         public ICommand RemoveTreeEventCommand => commandFactory.CreateRemoveTreeEventCommand();
 
         public ICommand AddTreeEventCommand => commandFactory.CreateAddTreeEventCommand();
+
+        public ICommand SaveImageCommand =>
+            saveCanvasCommand ?? (saveCanvasCommand = commandFactory.CreateSaveImageCommand());
 
         public TreeEvent SelectedTreeEvent =>
             Gui.SelectionManager.Selection is EventTree selectedEventTree

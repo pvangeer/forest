@@ -3,7 +3,9 @@
                     xmlns:controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
                     xmlns:visualization="clr-namespace:Forest.Visualization"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:mainContentPanel="clr-namespace:Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree">
+                    xmlns:mainContentPanel="clr-namespace:Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree"
+                    xmlns:utils="clr-namespace:Forest.Visualization.Utils"
+                    xmlns:behaviors="clr-namespace:Forest.Visualization.Behaviors">
 
     <DataTemplate DataType="{x:Type mainContentPanel:TreeEventViewModel}" x:Key="TreeEventDetailsDataTemplate">
         <Grid Grid.Column="2">
@@ -49,6 +51,8 @@
         </Grid>
     </DataTemplate>
 
+    <visualization:IsProneToExportConverter x:Key="IsProneToExportConverter" />
+
     <DataTemplate DataType="{x:Type mainContentPanel:EventTreeMainContentViewModel}" x:Key="EventTreeGraphDataTemplate">
         <DataTemplate.Resources>
             <ResourceDictionary>
@@ -71,9 +75,27 @@
                 ZoomDeltaMultiplier="5"
                 AnimationLength="0">
                 <ContentControl
-                    Content="{Binding EventTreeGraphLayout}" />
+                    Content="{Binding EventTreeGraphLayout}">
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Style.Triggers>
+                                <DataTrigger Value="True">
+                                    <DataTrigger.Binding>
+                                        <Binding Path="IsSaveToImage"/>
+                                    </DataTrigger.Binding>
+                                    <Setter Property="behaviors:SaveToImageBehavior.SaveToImage" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding IsSaveToImage}"
+                                    Value="False">
+                                    <Setter Property="behaviors:SaveToImageBehavior.SaveToImage" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
             </controls:ZoomControl>
-            <visualization:HidableGridSplitter
+            <utils:HidableGridSplitter
                 Grid.Column="1"
                 HideDirection="Right"
                 Visibility="{Binding IsDetailsPanelVisible, Converter={StaticResource BooleanToVisibilityConverter} }"

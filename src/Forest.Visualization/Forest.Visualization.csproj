@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\SaveToImageBehavior.cs" />
     <Compile Include="BusyOverlayViewModel.cs" />
     <Compile Include="Commands\EventTrees\AddTreeEventCommand.cs" />
     <Compile Include="Commands\CommandFactory.cs" />
@@ -100,7 +101,9 @@
     <Compile Include="Converters\Taskbar\ShouldShowPriorityMessageToBoolConverter.cs" />
     <Compile Include="Dialogs\FileDialogFactory.cs" />
     <Compile Include="DataTemplates\MainContentPresenter\MainContentTemplateSelector.cs" />
-    <Compile Include="HidableGridSplitter.cs" />
+    <Compile Include="IsProneToExportConverter.cs" />
+    <Compile Include="Utils\HidableGridSplitter.cs" />
+    <Compile Include="Utils\FrameworkElementExtensions.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenterViewModel.cs" />
     <Compile Include="Commands\CanAlwaysExecuteActionCommand.cs" />
@@ -388,7 +391,9 @@
   <ItemGroup>
     <Resource Include="Resources\forest.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\image.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ProjectExplorer\probability_estimation.ico" />
   </ItemGroup>

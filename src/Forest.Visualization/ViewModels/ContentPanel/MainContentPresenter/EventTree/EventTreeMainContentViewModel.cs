@@ -38,6 +38,16 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Even
             }
         }
 
+        public bool IsSaveToImage
+        {
+            get => gui.IsSaveToImage;
+            set
+            {
+                gui.IsSaveToImage = value;
+                gui.OnPropertyChanged(nameof(ForestGui.IsSaveToImage));
+            }
+        }
+
         private void EventTreePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -106,6 +116,9 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Even
             {
                 case nameof(ForestGui.IsDetailsPanelVisible):
                     OnPropertyChanged(nameof(IsDetailsPanelVisible));
+                    break;
+                case nameof(ForestGui.IsSaveToImage):
+                    OnPropertyChanged(nameof(IsSaveToImage)); 
                     break;
             }
         }

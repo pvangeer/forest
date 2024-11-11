@@ -118,6 +118,11 @@
                         Size="Large"
                         IsChecked="{Binding IsDetailsPanelVisible}"
                         IsEnabled="{Binding CanShowDetailsPanel}" />
+                    <fluent:Button
+                        Header="Afbeelding opslaan"
+                        Size="Large"
+                        LargeIcon="/Forest.Visualization;component\Resources\image.ico"
+                        Command="{Binding SaveImageCommand}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
 

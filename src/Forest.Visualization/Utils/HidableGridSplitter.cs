@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Forest.Visualization
+namespace Forest.Visualization.Utils
 {
     /// <summary>
     ///     Grid splitter that show or hides the following row when the visibility of the splitter is changed.

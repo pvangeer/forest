@@ -33,7 +33,7 @@ namespace Forest.Visualization.Commands
                         gui.OnPropertyChanged(nameof(ForestGui.IsSaveToImage));
                     }
                 },
-                () => false); // TODO: Check whether there is something to export
+                () => gui.SelectionManager.Selection is EventTree);
         }
 
         public ICommand CreateEscapeCommand()
