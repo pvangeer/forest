@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 
 namespace Forest.Storage.XmlEntities
@@ -7,12 +6,6 @@ namespace Forest.Storage.XmlEntities
     [Serializable]
     public class TreeEventXmlEntity : XmlEntityBase
     {
-        public TreeEventXmlEntity()
-        {
-            ClassesProbabilitySpecifications = new Collection<ExpertClassEstimationXmlEntity>();
-            FixedFragilityCurveElements = new Collection<FragilityCurveElementXmlEntity>();
-        }
-
         [XmlAttribute(AttributeName = "name")]
         public string Name { get; set; }
 
@@ -30,16 +23,5 @@ namespace Forest.Storage.XmlEntities
 
         [XmlAttribute(AttributeName = "information")]
         public string Information { get; set; }
-
-        [XmlAttribute(AttributeName = "discussion")]
-        public string Discussion { get; set; }
-
-        [XmlArray(ElementName = "classprobabilityspecifications")]
-        [XmlArrayItem(ElementName = "specification")]
-        public Collection<ExpertClassEstimationXmlEntity> ClassesProbabilitySpecifications { get; }
-
-        [XmlArray(ElementName = "fragilitycurve")]
-        [XmlArrayItem(ElementName = "fragilitycurveelement")]
-        public Collection<FragilityCurveElementXmlEntity> FixedFragilityCurveElements { get; }
     }
 }
