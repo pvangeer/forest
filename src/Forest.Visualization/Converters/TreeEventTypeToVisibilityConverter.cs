@@ -1,8 +1,8 @@
-using Forest.Data.Tree;
 using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using Forest.Data.Tree;
 
 namespace Forest.Visualization
 {
@@ -11,7 +11,6 @@ namespace Forest.Visualization
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is TreeEventType type)
-            {
                 switch (type)
                 {
                     case TreeEventType.MainEvent:
@@ -20,7 +19,7 @@ namespace Forest.Visualization
                     case TreeEventType.Failing:
                         return Visibility.Visible;
                 }
-            }
+
             return Visibility.Collapsed;
         }
 

@@ -12,7 +12,7 @@ namespace Forest.Visualization.Commands.EventTrees
         public override bool CanExecute(object parameter)
         {
             if (Gui.SelectionManager.Selection is EventTree eventTree)
-            { 
+            {
                 var treeEventType = TreeEventType.MainEvent;
                 if (parameter is TreeEventType treeEventTypeCasted)
                     treeEventType = treeEventTypeCasted;

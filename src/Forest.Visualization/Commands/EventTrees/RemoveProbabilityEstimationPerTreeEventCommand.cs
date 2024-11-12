@@ -21,16 +21,12 @@ namespace Forest.Visualization.Commands.EventTrees
             {
                 this.estimation = gui?.SelectionManager.Selection as ProbabilityEstimationPerTreeEvent;
                 if (gui != null)
-                {
                     gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
-                }
             }
-            
+
             this.gui = gui;
             if (gui != null)
-            {
                 gui.ForestAnalysis.ProbabilityEstimationsPerTreeEvent.CollectionChanged += EstimationsCollectionChanged;
-            }
         }
 
         public bool CanExecute(object parameter)

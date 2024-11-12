@@ -12,16 +12,16 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Even
 {
     public class EventTreeMainContentViewModel : Entity
     {
+        private readonly CommandFactory commandFactory;
         private readonly EventTree eventTree;
         private readonly ForestGui gui;
         private readonly ViewModelFactory viewModelFactory;
         private EventTreeGraph graph;
-        private readonly CommandFactory commandFactory;
 
         public EventTreeMainContentViewModel(EventTree eventTree, ForestGui gui)
         {
             this.gui = gui;
-            this.commandFactory = new CommandFactory(gui);
+            commandFactory = new CommandFactory(gui);
             gui.PropertyChanged += GuiPropertyChanged;
             this.eventTree = eventTree;
             this.eventTree.PropertyChanged += EventTreePropertyChanged;
@@ -49,11 +49,11 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Even
             set
             {
                 gui.IsSaveToImage = value;
-                gui.OnPropertyChanged(nameof(ForestGui.IsSaveToImage));
+                gui.OnPropertyChanged();
             }
         }
 
-        public ICommand CanvasClickedCommand => commandFactory.CreateClearTreeEventSelectionCommand(this.eventTree);
+        public ICommand CanvasClickedCommand => commandFactory.CreateClearTreeEventSelectionCommand(eventTree);
 
         public string Name
         {
@@ -61,7 +61,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Even
             set
             {
                 eventTree.Name = value;
-                eventTree.OnPropertyChanged(nameof(EventTree.Name));
+                eventTree.OnPropertyChanged();
             }
         }
 
@@ -69,7 +69,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Even
         {
             switch (e.PropertyName)
             {
-                case nameof(Data.Tree.EventTree.MainTreeEvent):
+                case nameof(EventTree.MainTreeEvent):
                     OnPropertyChanged(nameof(EventTreeGraphLayout));
                     break;
             }
@@ -135,7 +135,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Even
                     OnPropertyChanged(nameof(IsDetailsPanelVisible));
                     break;
                 case nameof(ForestGui.IsSaveToImage):
-                    OnPropertyChanged(nameof(IsSaveToImage)); 
+                    OnPropertyChanged(nameof(IsSaveToImage));
                     break;
             }
         }

@@ -6,7 +6,9 @@ namespace Forest.Visualization.Behaviors
     public static class SaveToImageBehavior
     {
         public static readonly DependencyProperty SaveToImageProperty =
-            DependencyProperty.RegisterAttached("SaveToImage", typeof(bool), typeof(SaveToImageBehavior),
+            DependencyProperty.RegisterAttached("SaveToImage",
+                typeof(bool),
+                typeof(SaveToImageBehavior),
                 new UIPropertyMetadata(false, OnSaveToImage));
 
         public static void SetSaveToImage(DependencyObject obj, bool value)

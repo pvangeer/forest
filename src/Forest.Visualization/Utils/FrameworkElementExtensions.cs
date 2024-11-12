@@ -9,7 +9,7 @@ namespace Forest.Visualization.Utils
 {
     public static class FrameworkElementExtensions
     {
-        const double ScreenDpi = 96.0;
+        private const double ScreenDpi = 96.0;
 
         public static void SaveToFile(this FrameworkElement frameworkElement, double scalingFactor = 10.0)
         {

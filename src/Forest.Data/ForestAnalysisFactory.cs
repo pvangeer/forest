@@ -1,6 +1,4 @@
-﻿using Forest.Data.Services;
-
-namespace Forest.Data
+﻿namespace Forest.Data
 {
     public static class ForestAnalysisFactory
     {

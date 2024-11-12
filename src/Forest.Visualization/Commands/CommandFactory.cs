@@ -114,14 +114,13 @@ namespace Forest.Visualization.Commands
         {
             return new CanAlwaysExecuteActionCommand
             {
-                ExecuteAction = (o) => gui.SelectionManager.SelectTreeEvent(eventTree, null)
+                ExecuteAction = o => gui.SelectionManager.SelectTreeEvent(eventTree, null)
             };
         }
 
         public ICommand CreateRemoveEstimationPerTreeEventCommand(ProbabilityEstimationPerTreeEvent estimation)
         {
             return new RemoveProbabilityEstimationPerTreeEventCommand(gui, estimation);
-
         }
     }
 }

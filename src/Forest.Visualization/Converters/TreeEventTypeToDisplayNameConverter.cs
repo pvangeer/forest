@@ -10,7 +10,6 @@ namespace Forest.Visualization.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is TreeEventType type)
-            {
                 switch (type)
                 {
                     case TreeEventType.MainEvent:
@@ -20,7 +19,7 @@ namespace Forest.Visualization.Converters
                     case TreeEventType.Failing:
                         return "Ja";
                 }
-            }
+
             return "";
         }
 

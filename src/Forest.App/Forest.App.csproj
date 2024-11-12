@@ -85,7 +85,6 @@
     <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Configuration.ConfigurationManager.4.5.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
     <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
@@ -179,10 +178,6 @@
     <Resource Include="forest.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Forest.Calculators\Forest.Calculators.csproj">
-      <Project>{A7090218-547D-412B-A4F5-F80C8B4890F3}</Project>
-      <Name>Forest.Calculators</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Forest.Data\Forest.Data.csproj">
       <Project>{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}</Project>
       <Name>Forest.Data</Name>
@@ -191,17 +186,9 @@
       <Project>{5ACE288D-CC7F-47D4-8A2A-2764101BC5E6}</Project>
       <Name>Forest.Gui</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Forest.IO\Forest.IO.csproj">
-      <Project>{64AC0A2F-B6D4-45C8-812B-AAC0BAEC1D11}</Project>
-      <Name>Forest.IO</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Forest.Messaging\Forest.Messaging.csproj">
       <Project>{7F6BB180-3B8C-4761-8BB6-E7562FB37895}</Project>
       <Name>Forest.Messaging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Forest.Storage\Forest.Storage.csproj">
-      <Project>{A5C2B4E5-1758-4B14-800E-E3F2AA64EA64}</Project>
-      <Name>Forest.Storage</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forest.Visualization.TreeView\Forest.Visualization.TreeView.csproj">
       <Project>{140124e3-8d13-4122-bf1e-c78743bd45e0}</Project>

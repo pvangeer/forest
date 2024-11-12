@@ -120,9 +120,7 @@ namespace Forest.Data.Services
         public void RemoveProbabilityEstimationPerTreeEvent(ProbabilityEstimationPerTreeEvent estimation)
         {
             if (estimation == null || !forestAnalysis.ProbabilityEstimationsPerTreeEvent.Contains(estimation))
-            {
                 return;
-            }
 
             forestAnalysis.ProbabilityEstimationsPerTreeEvent.Remove(estimation);
         }
