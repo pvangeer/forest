@@ -3,21 +3,22 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Forest.Data;
 using Forest.Data.Services;
+using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.Commands;
 using Forest.Visualization.DataTemplates.MainContentPresenter.EventTree;
 
-namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree
+namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTreeEditing
 {
     public class EventTreeMainContentViewModel : Entity
     {
-        private readonly Data.Tree.EventTree eventTree;
+        private readonly EventTree eventTree;
         private readonly ForestGui gui;
         private readonly ViewModelFactory viewModelFactory;
         private EventTreeGraph graph;
         private readonly CommandFactory commandFactory;
 
-        public EventTreeMainContentViewModel(Data.Tree.EventTree eventTree, ForestGui gui)
+        public EventTreeMainContentViewModel(EventTree eventTree, ForestGui gui)
         {
             this.gui = gui;
             this.commandFactory = new CommandFactory(gui);
@@ -53,6 +54,16 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Even
         }
 
         public ICommand CanvasClickedCommand => commandFactory.CreateClearTreeEventSelectionCommand(this.eventTree);
+
+        public string Name
+        {
+            get => eventTree.Name;
+            set
+            {
+                eventTree.Name = value;
+                eventTree.OnPropertyChanged(nameof(EventTree.Name));
+            }
+        }
 
         private void EventTreePropertyChanged(object sender, PropertyChangedEventArgs e)
         {

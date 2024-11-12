@@ -67,12 +67,12 @@
                     <fluent:Button
                         Header="Faalpad toevoegen"
                         Size="Large"
-                        LargeIcon="/Forest.Visualization;component\Resources\add-eventtree.png"
+                        LargeIcon="/Forest.Visualization;component\Resources\EventTree\add-eventtree.png"
                         Command="{Binding AddEventTreeCommand}" />
                     <fluent:Button
                         Header="Faalpad verwijderen"
                         Size="Large"
-                        LargeIcon="/Forest.Visualization;component\Resources\remove-eventtree.png"
+                        LargeIcon="/Forest.Visualization;component\Resources\EventTree\remove-eventtree.png"
                         Command="{Binding RemoveEventTreeCommand}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
@@ -84,37 +84,37 @@
                     <fluent:Button
                         Header="Faalpad toevoegen"
                         Size="Large"
-                        LargeIcon="/Forest.Visualization;component\Resources\add-eventtree.png"
+                        LargeIcon="/Forest.Visualization;component\Resources\EventTree\add-eventtree.png"
                         Command="{Binding AddEventTreeCommand}" />
                     <fluent:Button
                         Header="Faalpad verwijderen"
                         Size="Large"
-                        LargeIcon="/Forest.Visualization;component\Resources\remove-eventtree.png"
+                        LargeIcon="/Forest.Visualization;component\Resources\EventTree\remove-eventtree.png"
                         Command="{Binding RemoveEventTreeCommand}" />
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Gebeurtenissen">
                     <fluent:Button
-                        Header="Toevoegen (falen)"
+                        Header="Toevoegen (Ja)"
                         LargeIcon="/Forest.Visualization;component\Resources\EventTree\add-failing-tree-event.png"
                         Size="Large"
                         Command="{Binding AddTreeEventCommand}"
                         CommandParameter="{x:Static tree:TreeEventType.Failing}" />
                     <fluent:Button
-                        Header="Toevoegen (niet falen)"
-                        LargeIcon="/Forest.Visualization;component\Resources\add-tree-event.png"
+                        Header="Toevoegen (Nee)"
+                        LargeIcon="/Forest.Visualization;component\Resources\EventTree\add-passing-tree-event.png"
                         Size="Large"
                         Command="{Binding AddTreeEventCommand}"
                         CommandParameter="{x:Static tree:TreeEventType.Passing}" />
                     <fluent:Button
                         Header="Verwijderen"
-                        LargeIcon="/Forest.Visualization;component\Resources\remove-tree-event.png"
+                        LargeIcon="/Forest.Visualization;component\Resources\EventTree\remove-tree-event.png"
                         Size="Large"
                         Command="{Binding RemoveTreeEventCommand}" />
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="Beeld">
                     <fluent:ToggleButton
                         Header="Datails tonen"
-                        LargeIcon="/Forest.Visualization;component\Resources\tree-event-info.png"
+                        LargeIcon="/Forest.Visualization;component\Resources\EventTree\tree-event-information.png"
                         Size="Large"
                         IsChecked="{Binding IsDetailsPanelVisible}"
                         IsEnabled="{Binding CanShowDetailsPanel}" />

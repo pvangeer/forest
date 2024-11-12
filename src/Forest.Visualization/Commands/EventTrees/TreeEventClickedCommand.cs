@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTreeEditing;
 
 namespace Forest.Visualization.Commands.EventTrees
 {

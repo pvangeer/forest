@@ -11,15 +11,11 @@ namespace Forest.Data
 
         public static ForestAnalysis CreateStandardNewAnalysis()
         {
-            var analysis = new ForestAnalysis
+            return new ForestAnalysis
             {
                 Name = "Nieuw project",
                 AssessmentSection = "1-1"
             };
-
-            var service = new AnalysisManipulationService(analysis);
-            service.AddProbabilityEstimationPerTreeEvent(service.AddEventTree());
-            return analysis;
         }
     }
 }

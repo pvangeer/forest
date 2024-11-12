@@ -4,7 +4,7 @@ using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.TreeView.Data;
 using Forest.Visualization.ViewModels.ContentPanel;
-using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTreeEditing;
 using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent;
 using Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer;
 using Forest.Visualization.ViewModels.Ribbon;
@@ -19,11 +19,6 @@ namespace Forest.Visualization.ViewModels
         public ViewModelFactory(ForestGui gui)
         {
             this.gui = gui;
-        }
-
-        private EventTreeViewModelOld CreateEventTreeMainViewModel(EventTree eventTree)
-        {
-            throw new NotImplementedException();
         }
 
         public ITreeNodeViewModel CreateProjectExplorerEventTreeCollectionViewModel()

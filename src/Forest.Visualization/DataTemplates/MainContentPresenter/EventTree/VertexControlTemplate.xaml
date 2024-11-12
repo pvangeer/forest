@@ -7,8 +7,8 @@
     xmlns:wpfExtensionsAttachedBehaviours="clr-namespace:WPFExtensions.AttachedBehaviours;assembly=WPFExtensions"
     xmlns:fluent="urn:fluent-ribbon"
     xmlns:converters="clr-namespace:Forest.Visualization.Converters"
-    xmlns:mainContentPanel="clr-namespace:Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree"
-    xmlns:visualization="clr-namespace:Forest.Visualization">
+    xmlns:visualization="clr-namespace:Forest.Visualization"
+    xmlns:eventTreeEditing="clr-namespace:Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTreeEditing">
 
     <converters:SelectedPropertyToColorConverter x:Key="SelectedPropertyToBrushConverter" />
 
@@ -35,7 +35,7 @@
 
     <converters:TreeEventTypeToDisplayNameConverter x:Key="TreeEventTypeToDisplayNameConverter" />
     <visualization:TreeEventTypeToVisibilityConverter x:Key="TreeEventTypeToVisibilityConverter" />
-    <DataTemplate x:Key="TreeEventDataTemplate" DataType="{x:Type mainContentPanel:TreeEventViewModel}">
+    <DataTemplate x:Key="TreeEventDataTemplate" DataType="{x:Type eventTreeEditing:TreeEventViewModel}">
             <Grid IsSharedSizeScope="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" SharedSizeGroup="eventSharedHeightGroup" />
@@ -116,7 +116,7 @@
             </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="FailingEndpointTemplate" DataType="mainContentPanel:GraphVertex">
+    <DataTemplate x:Key="FailingEndpointTemplate" DataType="eventTreeEditing:GraphVertex">
         <Grid IsSharedSizeScope="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30"/>
@@ -144,12 +144,12 @@
                 Grid.Row="0"
                 Grid.RowSpan="3"
                 VerticalAlignment="Center"
-                Source="/Forest.Visualization;component\Resources\cross_red.png" Width="32" />
+                Source="/Forest.Visualization;component\Resources\EventTree\cross_red.png" Width="32" />
         </Grid>
         
     </DataTemplate>
 
-    <DataTemplate x:Key="PassingEndpointTemplate" DataType="mainContentPanel:GraphVertex">
+    <DataTemplate x:Key="PassingEndpointTemplate" DataType="eventTreeEditing:GraphVertex">
         <Grid IsSharedSizeScope="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30"/>
@@ -177,7 +177,7 @@
                 Grid.Row="0"
                 Grid.RowSpan="3"
                 VerticalAlignment="Center"
-                Source="/Forest.Visualization;component\Resources\check_green.png" Width="32" />
+                Source="/Forest.Visualization;component\Resources\EventTree\check_green.png" Width="32" />
         </Grid>
     </DataTemplate>
 

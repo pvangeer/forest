@@ -20,7 +20,7 @@
 // All rights reserved.
 
 using System;
-using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTreeEditing;
 using GraphSharp.Algorithms.Layout;
 using GraphSharp.Algorithms.Layout.Simple.Tree;
 using GraphSharp.Algorithms.OverlapRemoval;

@@ -1,6 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
-using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTreeEditing;
 using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent;
 
 namespace Forest.Visualization.DataTemplates.MainContentPresenter

@@ -33,7 +33,7 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Background="{StaticResource Fluent.Ribbon.Brushes.Separator.Background}"
-                Width="10" />
+                Width="5" />
             <ContentPresenter
                 Grid.Column="2"
                 Content="{Binding SelectedContentItem}"

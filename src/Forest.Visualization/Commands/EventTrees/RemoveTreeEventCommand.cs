@@ -11,7 +11,7 @@ namespace Forest.Visualization.Commands.EventTrees
 
         public override bool CanExecute(object parameter)
         {
-            return Gui.SelectionManager.Selection is EventTree;
+            return Gui.SelectionManager.Selection is EventTree eventTree && Gui.SelectionManager.SelectedTreeEvent[eventTree] != null;
         }
 
         public override void Execute(object parameter)

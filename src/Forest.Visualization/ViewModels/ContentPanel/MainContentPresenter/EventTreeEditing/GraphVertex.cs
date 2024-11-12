@@ -1,4 +1,4 @@
-﻿namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree
+﻿namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTreeEditing
 {
     public class GraphVertex
     {

@@ -12,16 +12,16 @@ namespace Forest.Visualization.Commands.EventTrees
         public override bool CanExecute(object parameter)
         {
             if (Gui.SelectionManager.Selection is EventTree eventTree)
-            {
-                if (eventTree.MainTreeEvent == null)
+            { 
+                var treeEventType = TreeEventType.MainEvent;
+                if (parameter is TreeEventType treeEventTypeCasted)
+                    treeEventType = treeEventTypeCasted;
+
+                if (eventTree.MainTreeEvent == null && treeEventType != TreeEventType.Passing)
                     return true;
 
                 if (Gui.SelectionManager.SelectedTreeEvent[eventTree] == null)
                     return false;
-
-                var treeEventType = TreeEventType.Failing;
-                if (parameter is TreeEventType treeEventTypeCasted)
-                    treeEventType = treeEventTypeCasted;
 
                 return (treeEventType == TreeEventType.Failing &&
                         Gui.SelectionManager.SelectedTreeEvent[eventTree].FailingEvent == null) ||

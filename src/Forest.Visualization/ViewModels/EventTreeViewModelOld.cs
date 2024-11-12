@@ -12,7 +12,7 @@ using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.IO.Export;
 using Forest.IO.Import;
-using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTreeEditing;
 
 namespace Forest.Visualization.ViewModels
 {

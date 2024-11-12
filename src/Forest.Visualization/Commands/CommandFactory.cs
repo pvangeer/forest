@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Tree;
 using Forest.Gui;
 using Forest.Visualization.Commands.EventTrees;
@@ -8,7 +9,7 @@ using Forest.Visualization.Commands.Project;
 using Forest.Visualization.Commands.ProjectExplorer;
 using Forest.Visualization.TreeView.Commands;
 using Forest.Visualization.TreeView.Data;
-using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTreeEditing;
 
 namespace Forest.Visualization.Commands
 {
@@ -115,6 +116,12 @@ namespace Forest.Visualization.Commands
             {
                 ExecuteAction = (o) => gui.SelectionManager.SelectTreeEvent(eventTree, null)
             };
+        }
+
+        public ICommand CreateRemoveEstimationPerTreeEventCommand(ProbabilityEstimationPerTreeEvent estimation)
+        {
+            return new RemoveProbabilityEstimationPerTreeEventCommand(gui, estimation);
+
         }
     }
 }

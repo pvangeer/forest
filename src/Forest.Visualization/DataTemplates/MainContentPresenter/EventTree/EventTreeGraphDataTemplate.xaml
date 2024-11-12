@@ -3,11 +3,11 @@
                     xmlns:controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
                     xmlns:visualization="clr-namespace:Forest.Visualization"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:mainContentPanel="clr-namespace:Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTree"
                     xmlns:utils="clr-namespace:Forest.Visualization.Utils"
-                    xmlns:behaviors="clr-namespace:Forest.Visualization.Behaviors">
+                    xmlns:behaviors="clr-namespace:Forest.Visualization.Behaviors"
+                    xmlns:eventTreeEditing="clr-namespace:Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTreeEditing">
 
-    <DataTemplate DataType="{x:Type mainContentPanel:TreeEventViewModel}" x:Key="TreeEventDetailsDataTemplate">
+    <DataTemplate DataType="{x:Type eventTreeEditing:TreeEventViewModel}" x:Key="TreeEventDetailsDataTemplate">
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -19,13 +19,21 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Grid.Row="0" Content="Naam" FontWeight="Bold" />
+            <Label 
+                Grid.Column="0" 
+                Grid.Row="0" 
+                Content="Naam" 
+                FontWeight="Bold" />
             <TextBox
                 Grid.Column="1"
                 Grid.Row="0"
                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource TextBoxStyle}" />
-            <Label Grid.Column="0" Grid.Row="1" Content="Omschrijving" FontWeight="Bold" />
+            <Label 
+                Grid.Column="0" 
+                Grid.Row="1" 
+                Content="Omschrijving" 
+                FontWeight="Bold" />
             <TextBox
                 Grid.Column="1"
                 Grid.Row="1"
@@ -53,7 +61,7 @@
 
     <visualization:IsProneToExportConverter x:Key="IsProneToExportConverter" />
 
-    <DataTemplate DataType="{x:Type mainContentPanel:EventTreeMainContentViewModel}" x:Key="EventTreeGraphDataTemplate">
+    <DataTemplate DataType="{x:Type eventTreeEditing:EventTreeMainContentViewModel}" x:Key="EventTreeGraphDataTemplate">
         <DataTemplate.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -65,52 +73,84 @@
             </ResourceDictionary>
         </DataTemplate.Resources>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="10" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <controls:ZoomControl
-                Grid.Column="0"
-                ZoomDeltaMultiplier="5"
-                AnimationLength="0">
-                <controls:ZoomControl.InputBindings>
-                    <MouseBinding MouseAction="LeftClick" Command="{Binding CanvasClickedCommand}" />
-                </controls:ZoomControl.InputBindings>
-                <ContentControl
-                    Background="Transparent"
-                    Content="{Binding EventTreeGraphLayout}">
-                    <ContentControl.Style>
-                        <Style TargetType="ContentControl">
-                            <Style.Triggers>
-                                <DataTrigger Value="True">
-                                    <DataTrigger.Binding>
-                                        <Binding Path="IsSaveToImage"/>
-                                    </DataTrigger.Binding>
-                                    <Setter Property="behaviors:SaveToImageBehavior.SaveToImage" Value="True" />
-                                </DataTrigger>
-                                <DataTrigger
-                                    Binding="{Binding IsSaveToImage}"
-                                    Value="False">
-                                    <Setter Property="behaviors:SaveToImageBehavior.SaveToImage" Value="False" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ContentControl.Style>
-                </ContentControl>
-            </controls:ZoomControl>
-            <utils:HidableGridSplitter
-                Grid.Column="1"
-                HideDirection="Right"
-                Visibility="{Binding IsDetailsPanelVisible, Converter={StaticResource BooleanToVisibilityConverter} }"
-                Width="5"
-                Background="{StaticResource Fluent.Ribbon.Brushes.Separator.Background}"
-                HorizontalAlignment="Stretch"
-                ResizeBehavior="BasedOnAlignment" />
-            <ContentPresenter
-                Grid.Column="2"
-                Content="{Binding SelectedTreeEventViewModel}"
-                ContentTemplate="{StaticResource TreeEventDetailsDataTemplate}" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid 
+                Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label 
+                    Grid.Column="0" 
+                    Grid.Row="0" 
+                    Content="Naam" 
+                    FontWeight="Bold"/>
+                <TextBox
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    VerticalContentAlignment="Center"
+                    Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource TextBoxStyle}" />
+            </Grid>
+            <Border 
+                Grid.Row="1" 
+                Height="5" 
+                Background="{StaticResource Fluent.Ribbon.Brushes.Separator.Background}"/>
+            <Grid 
+                Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <controls:ZoomControl
+                    Grid.Column="0"
+                    ZoomDeltaMultiplier="5"
+                    AnimationLength="0">
+                    <controls:ZoomControl.InputBindings>
+                        <MouseBinding 
+                            MouseAction="LeftClick" 
+                            Command="{Binding CanvasClickedCommand}" />
+                    </controls:ZoomControl.InputBindings>
+                    <ContentControl
+                        Background="Transparent"
+                        Content="{Binding EventTreeGraphLayout}">
+                        <ContentControl.Style>
+                            <Style TargetType="ContentControl">
+                                <Style.Triggers>
+                                    <DataTrigger Value="True">
+                                        <DataTrigger.Binding>
+                                            <Binding Path="IsSaveToImage"/>
+                                        </DataTrigger.Binding>
+                                        <Setter Property="behaviors:SaveToImageBehavior.SaveToImage" Value="True" />
+                                    </DataTrigger>
+                                    <DataTrigger
+                                        Binding="{Binding IsSaveToImage}"
+                                        Value="False">
+                                        <Setter Property="behaviors:SaveToImageBehavior.SaveToImage" Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                    </ContentControl>
+                </controls:ZoomControl>
+                <utils:HidableGridSplitter
+                    Grid.Column="1"
+                    HideDirection="Right"
+                    Visibility="{Binding IsDetailsPanelVisible, Converter={StaticResource BooleanToVisibilityConverter} }"
+                    Width="5"
+                    Background="{StaticResource Fluent.Ribbon.Brushes.Separator.Background}"
+                    HorizontalAlignment="Stretch"
+                    ResizeBehavior="BasedOnAlignment" />
+                <ContentPresenter
+                    Grid.Column="2"
+                    Content="{Binding SelectedTreeEventViewModel}"
+                    ContentTemplate="{StaticResource TreeEventDetailsDataTemplate}" />
+            </Grid>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

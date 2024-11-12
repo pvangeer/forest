@@ -1,7 +1,6 @@
 ﻿using System.Windows.Input;
 using Forest.Data.Estimations;
 using Forest.Data.Estimations.PerTreeEvent;
-using Forest.Data.Services;
 using Forest.Gui;
 using Forest.Visualization.Commands;
 
@@ -28,11 +27,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
         public override string IconSourceString =>
             "pack://application:,,,/Forest.Visualization;component/Resources/ProjectExplorer/probability_estimation.ico";
 
-        public override ICommand RemoveItemCommand => commandFactory.CreateCanAlwaysExecuteActionCommand(o =>
-        {
-            var service = new AnalysisManipulationService(gui.ForestAnalysis);
-            service.RemoveProbabilityEstimationPerTreeEvent(estimation);
-        });
+        public override ICommand RemoveItemCommand => commandFactory.CreateRemoveEstimationPerTreeEventCommand(estimation);
 
         public override object GetSelectableObject()
         {
