@@ -33,6 +33,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forest.TestHelpers", "test\Forest.TestHelpers\Forest.TestHelpers.csproj", "{24D09D6E-5221-4612-8A93-06F2EAA35401}"
 EndProject
 Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "Forest.Setup", "src\Forest.Setup\Forest.Setup.wixproj", "{6C9A9D70-DD9C-4380-B915-6B1AB23E00DF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{349CD8FE-3AF9-4EA5-9EA0-5318FB20E123} = {349CD8FE-3AF9-4EA5-9EA0-5318FB20E123}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forest.Visualization", "src\Forest.Visualization\Forest.Visualization.csproj", "{354E5594-846B-499E-BCE6-2E8DE93B928C}"
 EndProject

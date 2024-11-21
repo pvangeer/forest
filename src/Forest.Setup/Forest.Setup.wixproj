@@ -4,17 +4,7 @@
     <Platforms>x64</Platforms>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="Start_493x312.bmp" />
     <Content Include="Forest.ico" />
-    <Content Include="Variables.wxi" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Forest.Data\Forest.Data.csproj" />
-    <ProjectReference Include="..\Forest.Calculations\Forest.Calculations.csproj" />
-    <ProjectReference Include="..\Forest.IO\Forest.IO.csproj" />
-    <ProjectReference Include="..\Forest.Messaging\Forest.Messaging.csproj" />
-    <ProjectReference Include="..\Forest.Storage\Forest.Storage.csproj" />
-    <ProjectReference Include="..\Forest.Gui\Forest.Gui.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Installer UI\**" />

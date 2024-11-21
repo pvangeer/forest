@@ -1,31 +1,31 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Package
-    Name="Stakeholderanalyse"
+    Name="Forest"
     Language="1033"
     Manufacturer="Pieter van Geer"
-    Version="23.2.4"
-    UpgradeCode="81d0955d-b5a5-417b-a115-05e931d45854"
+    Version="24.1.1"
+    UpgradeCode="BAC17F57-E11D-4CC3-859C-B98125C431B5"
     Compressed="yes">
 
     <MediaTemplate EmbedCab="yes" />
 
-    <MajorUpgrade DowngradeErrorMessage="Er is reeds een nieuwere versie van Stakeholderanalyse geinstalleerd. Het installatieproces wordt nu gestopt."/>
+    <MajorUpgrade DowngradeErrorMessage="Er is reeds een nieuwere versie van Forest geinstalleerd. Het installatieproces wordt nu gestopt."/>
 
-    <Icon Id="StakeholderAnalysis.ico" SourceFile="Logo.ico" />
-    <Property Id="ARPPRODUCTICON" Value="StakeholderAnalysis.ico" />
+    <Icon Id="Forest.ico" SourceFile="Forest.ico" />
+    <Property Id="ARPPRODUCTICON" Value="Forest.ico" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFiles64Folder">
-        <Directory Id="APPLICATIONROOTDIRECTORY" Name="StakeholderAnalysis" />
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="APPLICATIONROOTDIRECTORY" Name="Forest" />
       </Directory>
     </Directory>
 
     <Directory Id="ProgramMenuFolder">
-      <Directory Id="ApplicationProgramsFolder" Name="Stakeholderanalyse" />
+      <Directory Id="ApplicationProgramsFolder" Name="Forest" />
     </Directory>
 
-    <Feature Id="StakeholderAnalysis">
-      <ComponentGroupRef Id="StakeholderAnalysis.Binaries" />
+    <Feature Id="Forest">
+      <ComponentGroupRef Id="Forest.Binaries" />
       <ComponentRef Id="ApplicationShortcut" />
     </Feature>
 

@@ -6,55 +6,210 @@
               KeyPath="yes"
               Source="$(var.SolutionDir)\bin\$(var.Configuration)\ControlzEx.dll" />
       </Component>
+      <Component Id="DocumentFormat.OpenXml" Guid="*">
+        <File Id="DocumentFormat.OpenXml.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\DocumentFormat.OpenXml.dll" />
+      </Component>
       <Component Id="Fluent" Guid="*">
         <File Id="Fluent.File"
               KeyPath="yes"
               Source="$(var.SolutionDir)\bin\$(var.Configuration)\Fluent.dll" />
+      </Component>
+      <Component Id="FluentXml" Guid="*">
+        <File Id="Fluent.Xml.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Fluent.xml" />
+      </Component>
+      <Component Id="Forest.App" Guid="*">
+        <File Id="Forest.App.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Forest.App.exe" />
+      </Component>
+      <Component Id="Forest.App.Config" Guid="*">
+        <File Id="Forest.App.Config.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Forest.App.exe.config" />
+      </Component>
+      <Component Id="Forest.Calculators" Guid="*">
+        <File Id="Forest.Calculators.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Forest.Calculators.dll" />
+      </Component>
+      <Component Id="Forest.Data" Guid="*">
+        <File Id="Forest.Data.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Forest.Data.dll" />
+      </Component>
+      <Component Id="Forest.Gui" Guid="*">
+        <File Id="Forest.Gui.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Forest.Gui.dll" />
+      </Component>
+      <Component Id="Forest.IO" Guid="*">
+        <File Id="Forest.IO.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Forest.IO.dll" />
+      </Component>
+      <Component Id="Forest.Messaging" Guid="*">
+        <File Id="Forest.Messaging.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Forest.Messaging.dll" />
+      </Component>
+      <Component Id="Forest.Storage" Guid="*">
+        <File Id="Forest.Storage.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Forest.Storage.dll" />
+      </Component>
+      <Component Id="Forest.Visualization" Guid="*">
+        <File Id="Forest.Visualization.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Forest.Visualization.dll" />
+      </Component>
+      <Component Id="Forest.Visualization.TreeView" Guid="*">
+        <File Id="Forest.Visualization.TreeView.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Forest.Visualization.TreeView.dll" />
+      </Component>
+      <Component Id="GraphSharp.Controls" Guid="*">
+        <File Id="GraphSharp.Controls.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\GraphSharp.Controls.dll" />
+      </Component>
+      <Component Id="GraphSharp" Guid="*">
+        <File Id="GraphSharp.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\GraphSharp.dll" />
       </Component>
       <Component Id="Log4Net" Guid="*">
         <File Id="Log4Net.File"
               KeyPath="yes"
               Source="$(var.SolutionDir)\bin\$(var.Configuration)\log4net.dll" />
       </Component>
-      <Component Id="Microsoft.Xaml.Behaviors" Guid="*">
-        <File Id="Microsoft.Xaml.Behaviors.File"
+      <Component Id="Microsoft.WindowsAPICodePack" Guid="*">
+        <File Id="Microsoft.WindowsAPICodePack.File"
               KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Microsoft.Xaml.Behaviors.dll" />
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Microsoft.WindowsAPICodePack.dll" />
       </Component>
-      <Component Id="StakeholderAnalysis.App" Guid="*">
-        <File Id="StakeholderAnalysis.App.File"
+      <Component Id="Microsoft.WindowsAPICodePackXml" Guid="*">
+        <File Id="Microsoft.WindowsAPICodePack.Xml.File"
               KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.App.exe" />
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Microsoft.WindowsAPICodePack.xml" />
       </Component>
-      <Component Id="StakeholderAnalysis.App.config" Guid="*">
-        <File Id="StakeholderAnalysis.App.config.File"
+      <Component Id="Microsoft.WindowsAPICodePack.Shell" Guid="*">
+        <File Id="Microsoft.WindowsAPICodePack.Shell.File"
               KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.App.exe.config" />
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Microsoft.WindowsAPICodePack.Shell.dll" />
       </Component>
-      <Component Id="StakeholderAnalysis.Data" Guid="*">
-        <File Id="StakeholderAnalysis.Data.File"
+      <Component Id="Microsoft.WindowsAPICodePackShellXml" Guid="*">
+        <File Id="Microsoft.WindowsAPICodePack.Shell.Xml.File"
               KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.Data.dll" />
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Microsoft.WindowsAPICodePack.Shell.xml" />
       </Component>
-      <Component Id="StakeholderAnalysis.Gui" Guid="*">
-        <File Id="StakeholderAnalysis.Gui.File"
+      <Component Id="OxyPlot" Guid="*">
+        <File Id="OxyPlot.File"
               KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.Gui.dll" />
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\OxyPlot.dll" />
       </Component>
-      <Component Id="StakeholderAnalysis.Messaging" Guid="*">
-        <File Id="StakeholderAnalysis.Messaging.File"
+      <Component Id="OxyPlot.Xml" Guid="*">
+        <File Id="OxyPlot.Xml.File"
               KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.Messaging.dll" />
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\OxyPlot.xml" />
       </Component>
-      <Component Id="StakeholderAnalysis.Storage" Guid="*">
-        <File Id="StakeholderAnalysis.Storage.File"
+      <Component Id="OxyPlot.Wpf" Guid="*">
+        <File Id="OxyPlot.Wpf.File"
               KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.Storage.dll" />
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\OxyPlot.Wpf.dll" />
       </Component>
-      <Component Id="StakeholderAnalysis.Visualization" Guid="*">
-        <File Id="StakeholderAnalysis.Visualization.File"
+      <Component Id="OxyPlot.Wpf.Xml" Guid="*">
+        <File Id="OxyPlot.Wpf.Xml.File"
               KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\StakeholderAnalysis.Visualization.dll" />
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\OxyPlot.Wpf.xml" />
+      </Component>
+      <Component Id="PresentationFramework" Guid="*">
+        <File Id="PresentationFramework.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\PresentationFramework.dll" />
+      </Component>
+      <Component Id="QuickGraph.Data" Guid="*">
+        <File Id="QuickGraph.Data.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.Data.dll" />
+      </Component>
+      <Component Id="QuickGraph.Data.Xml" Guid="*">
+        <File Id="QuickGraph.Data.Xml.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.Data.xml" />
+      </Component>
+      <Component Id="QuickGraph" Guid="*">
+        <File Id="QuickGraph.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.dll" />
+      </Component>
+      <Component Id="QuickGraph.Xml" Guid="*">
+        <File Id="QuickGraph.Xml.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.xml" />
+      </Component>
+      <Component Id="QuickGraph.Graphviz" Guid="*">
+        <File Id="QuickGraph.Graphviz.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.Graphviz.dll" />
+      </Component>
+      <Component Id="QuickGraph.Graphviz.Xml" Guid="*">
+        <File Id="QuickGraph.Graphviz.Xml.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.Graphviz.xml" />
+      </Component>
+      <Component Id="QuickGraph.Serialization" Guid="*">
+        <File Id="QuickGraph.Serialization.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.Serialization.dll" />
+      </Component>
+      <Component Id="QuickGraph.Serialization.Xml" Guid="*">
+        <File Id="QuickGraph.Serialization.Xml.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.Serialization.xml" />
+      </Component>
+      <Component Id="System.Configuration.ConfigurationManager" Guid="*">
+        <File Id="System.Configuration.ConfigurationManager.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\System.Configuration.ConfigurationManager.dll" />
+      </Component>
+      <Component Id="System.Diagnostics.DiagnosticSource" Guid="*">
+        <File Id="System.Diagnostics.DiagnosticSource.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\System.Diagnostics.DiagnosticSource.dll" />
+      </Component>
+      <Component Id="System.IO.Packaging" Guid="*">
+        <File Id="System.IO.Packaging.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\System.IO.Packaging.dll" />
+      </Component>
+      <Component Id="System.Security.AccessControl" Guid="*">
+        <File Id="System.Security.AccessControl.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\System.Security.AccessControl.dll" />
+      </Component>
+      <Component Id="System.Security.Permissions" Guid="*">
+        <File Id="System.Security.Permissions.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\System.Security.Permissions.dll" />
+      </Component>
+      <Component Id="System.Security.Principal.Windows" Guid="*">
+        <File Id="System.Security.Principal.Windows.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\System.Security.Principal.Windows.dll" />
+      </Component>
+      <Component Id="System.Windows.Interactivity" Guid="*">
+        <File Id="System.Windows.Interactivity.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\System.Windows.Interactivity.dll" />
+      </Component>
+      <Component Id="WPFExtensions" Guid="*">
+        <File Id="WPFExtensions.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\WPFExtensions.dll" />
       </Component>
       <Component Id="Xceed.Wpf.AvalonDock" Guid="*">
         <File Id="Xceed.Wpf.AvalonDock.File"
@@ -76,6 +231,11 @@
               KeyPath="yes"
               Source="$(var.SolutionDir)\bin\$(var.Configuration)\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
       </Component>
+      <Component Id="Xceed.Wpf.DataGrid" Guid="*">
+        <File Id="Xceed.Wpf.DataGrid.File"
+              KeyPath="yes"
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Xceed.Wpf.DataGrid.dll" />
+      </Component>
       <Component Id="Xceed.Wpf.Toolkit" Guid="*">
         <File Id="Xceed.Wpf.Toolkit.File"
               KeyPath="yes"
@@ -85,23 +245,55 @@
   </Fragment>
 
   <Fragment>
-    <ComponentGroup Id="StakeholderAnalysis.Binaries">
+    <ComponentGroup Id="Forest.Binaries">
       <ComponentRef Id="ControlzEx" />
+      <ComponentRef Id="DocumentFormat.OpenXml"/>
+      <ComponentRef Id="FluentXml" />
       <ComponentRef Id="Fluent" />
+      <ComponentRef Id="Forest.App" />
+      <ComponentRef Id="Forest.App.Config" />
+      <ComponentRef Id="Forest.Calculators" />
+      <ComponentRef Id="Forest.Data" />
+      <ComponentRef Id="Forest.Gui" />
+      <ComponentRef Id="Forest.IO" />
+      <ComponentRef Id="Forest.Messaging" />
+      <ComponentRef Id="Forest.Storage" />
+      <ComponentRef Id="Forest.Visualization" />
+      <ComponentRef Id="Forest.Visualization.TreeView" />
+      <ComponentRef Id="GraphSharp.Controls" />
+      <ComponentRef Id="GraphSharp" />
       <ComponentRef Id="Log4Net" />
-      <ComponentRef Id="Microsoft.Xaml.Behaviors" />
-      <ComponentRef Id="StakeholderAnalysis.App" />
-      <ComponentRef Id="StakeholderAnalysis.App.config" />
-      <ComponentRef Id="StakeholderAnalysis.Data" />
-      <ComponentRef Id="StakeholderAnalysis.Gui" />
-      <ComponentRef Id="StakeholderAnalysis.Messaging" />
-      <ComponentRef Id="StakeholderAnalysis.Storage" />
-      <ComponentRef Id="StakeholderAnalysis.Visualization" />
+      <ComponentRef Id="Microsoft.WindowsAPICodePack" />
+      <ComponentRef Id="Microsoft.WindowsAPICodePackXml" />
+      <ComponentRef Id="Microsoft.WindowsAPICodePack.Shell" />
+      <ComponentRef Id="Microsoft.WindowsAPICodePackShellXml" />
+      <ComponentRef Id="OxyPlot" />
+      <ComponentRef Id="OxyPlot.Xml" />
+      <ComponentRef Id="OxyPlot.Wpf" />
+      <ComponentRef Id="OxyPlot.Wpf.Xml" />
+      <ComponentRef Id="PresentationFramework" />
+      <ComponentRef Id="QuickGraph.Data" />
+      <ComponentRef Id="QuickGraph.Data.Xml" />
+      <ComponentRef Id="QuickGraph" />
+      <ComponentRef Id="QuickGraph.Xml" />
+      <ComponentRef Id="QuickGraph.Graphviz" />
+      <ComponentRef Id="QuickGraph.Graphviz.Xml" />
+      <ComponentRef Id="QuickGraph.Serialization" />
+      <ComponentRef Id="QuickGraph.Serialization.Xml" />
+      <ComponentRef Id="System.Configuration.ConfigurationManager" />
+      <ComponentRef Id="System.Diagnostics.DiagnosticSource" />
+      <ComponentRef Id="System.IO.Packaging" />
+      <ComponentRef Id="System.Security.AccessControl" />
+      <ComponentRef Id="System.Security.Permissions" />
+      <ComponentRef Id="System.Security.Principal.Windows" />
+      <ComponentRef Id="System.Windows.Interactivity" />
+      <ComponentRef Id="WPFExtensions" />
+      <ComponentRef Id="Xceed.Wpf.DataGrid" />
+      <ComponentRef Id="Xceed.Wpf.Toolkit" />
       <ComponentRef Id="Xceed.Wpf.AvalonDock" />
       <ComponentRef Id="Xceed.Wpf.AvalonDock.Themes.Aero" />
       <ComponentRef Id="Xceed.Wpf.AvalonDock.Themes.Metro" />
       <ComponentRef Id="Xceed.Wpf.AvalonDock.Themes.VS2010" />
-      <ComponentRef Id="Xceed.Wpf.Toolkit" />
     </ComponentGroup>
   </Fragment>
 </Wix>
