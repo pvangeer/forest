@@ -1,10 +1,11 @@
 <Project Sdk="WixToolset.Sdk/4.0.0">
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  <PropertyGroup>
     <Cultures>nl-NL</Cultures>
-    <Platforms>x64</Platforms>
+    <Platforms>x64;ARM64</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Forest.ico" />
+    <Content Include="Variables.wxi" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Installer UI\**" />

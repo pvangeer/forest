@@ -1,6 +1,6 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Fragment>
-    <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+    <DirectoryRef Id="INSTALLFOLDER">
       <Component Id="ControlzEx" Guid="*">
         <File Id="ControlsEx.File"
               KeyPath="yes"

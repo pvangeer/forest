@@ -1,4 +1,5 @@
-﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+﻿<?include Variables.wxi?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Package
     Name="Forest"
     Language="1033"
@@ -15,8 +16,8 @@
     <Property Id="ARPPRODUCTICON" Value="Forest.ico" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramFilesFolder">
-        <Directory Id="APPLICATIONROOTDIRECTORY" Name="Forest" />
+      <Directory Id="$(var.PlatformProgramFilesFolder)">
+        <Directory Id="INSTALLFOLDER" Name="Forest" />
       </Directory>
     </Directory>
 

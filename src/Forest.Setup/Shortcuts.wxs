@@ -9,7 +9,7 @@
                   Description="Programma om foutenbomen en faalpadanalyses mee uit te voeren"
                   Target="[#Forest.App.File]"
                   Icon="Forest.ico"
-                  WorkingDirectory="APPLICATIONROOTDIRECTORY" />
+                  WorkingDirectory="INSTALLFOLDER" />
         <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall" />
         <RegistryValue Root="HKCU" Key="Software\Pieter\Forest" Name="installed" Type="integer" Value="1"
                        KeyPath="yes" />
