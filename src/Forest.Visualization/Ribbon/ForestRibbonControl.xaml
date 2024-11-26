@@ -14,10 +14,6 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
             <converters:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
@@ -25,10 +21,11 @@
     <Grid>
         <fluent:Ribbon
             IsEnabled="{Binding BusyIndicator, Converter={StaticResource BusyIndicatorToEnabledConverter}}"
+            AutomaticStateManagement="False"
             Focusable="True">
             <!--Backstage-->
             <fluent:Ribbon.Menu>
-                <fluent:Backstage>
+                <fluent:Backstage Background="{StaticResource Deltares.Brushes.LightBlue}">
                     <fluent:BackstageTabControl>
                         <fluent:Button Header="Nieuw bestand"
                                        Icon="/Forest.Visualization;component\Resources\document.png"

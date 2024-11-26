@@ -23,11 +23,8 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml" />
                 <ResourceDictionary
                     Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/MainContentPresenterDataTemplate.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/DataTemplates/General/GeneralStyles.xaml" />
                 <ResourceDictionary
                     Source="/Forest.Visualization;component/DataTemplates/StatusBarDataTemplate.xaml" />
                 <ResourceDictionary

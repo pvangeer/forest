@@ -9,42 +9,40 @@
     <Application.Resources>
         <ResourceDictionary>
 
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Fluent;Component/Themes/generic.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;Component/Theming/ForestTheme.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;Component/Styles/TextBoxStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;Component/Styles/CheckBoxStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;Component/Styles/ButtonStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;Component/Styles/DataGridStyles.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;Component/Styles/ComboBoxFlatStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;Component/Styles/TabControlFlatStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;Component/Styles/SpinnerStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;Component/Styles/TabControlStyles.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;Component/Styles/MenuItemStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;Component/DataTemplates/General/AssessmentSections.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization.TreeView;Component/Theming/TreeViewStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
             <xctk:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
             <converters:ProbabilityToStringConverter x:Key="ProbabilityToStringConverter" />
             <export:ExportElicitationFormsCommand x:Key="ExportElicitationFormsCommand" />
             <import:ImportElicitationFormsCommand x:Key="ImportElicitationFormsCommand" />
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/Theming/ForestTheme.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/Styles/TextBoxStyle.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/Styles/CheckBoxStyle.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/Styles/ButtonStyle.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/Styles/DataGridStyles.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/Styles/ComboBoxFlatStyle.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/Styles/TabControlFlatStyle.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/Styles/SpinnerStyle.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/Styles/TabControlStyles.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/Styles/MenuItemStyle.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/DataTemplates/General/AssessmentSections.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/DataTemplates/General/GeneralStyles.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization.TreeView;component/Theming/DeltaresColorTheme.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization.TreeView;component/Theming/TreeViewStyles.xaml" />
-            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
