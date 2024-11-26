@@ -15,6 +15,8 @@ namespace Forest.Visualization.Ribbon.IO.Export
 
         public string Name => Expert.Name;
 
+        public string Email => Expert.Email;
+
         public bool IsChecked
         {
             get => isChecked;

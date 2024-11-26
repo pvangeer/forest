@@ -7,7 +7,6 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/MessageDataTemplates.xaml" />
-        <ResourceDictionary Source="/Forest.Visualization;component/DataTemplates/General/SpinnerStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <taskbar:ShouldShowPriorityMessageToBoolConverter x:Key="ShouldShowPriorityMessageToBoolConverter" />

@@ -8,95 +8,38 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="BackgroundEditableColor">AliceBlue</Color>
-            <Color x:Key="BackgroundColor">White</Color>
-            <Color x:Key="SelectedElementBorderColor">Red</Color>
-            <Color x:Key="ApplicationBorderColor">RoyalBlue</Color>
-
-            <SolidColorBrush Color="{StaticResource SelectedElementBorderColor}"
-                             x:Key="SelectedElementBorderColorBrush" />
-            <SolidColorBrush Color="{StaticResource BackgroundColor}" x:Key="BackgroundColorBrush" />
-            <SolidColorBrush Color="{StaticResource BackgroundEditableColor}" x:Key="BackgroundEditableColorBrush" />
-            <SolidColorBrush Color="{StaticResource ApplicationBorderColor}" x:Key="ApplicationBorderColorBrush" />
 
             <xctk:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
             <converters:ProbabilityToStringConverter x:Key="ProbabilityToStringConverter" />
-
-            <Style x:Key="TextBoxStyle" TargetType="TextBox">
-                <Setter Property="Background" Value="{StaticResource BackgroundEditableColorBrush}" />
-                <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="Margin" Value="1" />
-            </Style>
-
-            <Style x:Key="RichTextBoxStyle" TargetType="RichTextBox">
-                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-                <Setter Property="Background" Value="{StaticResource BackgroundEditableColorBrush}" />
-                <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="Margin" Value="4" />
-            </Style>
-
-            <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
-                <Setter Property="HorizontalAlignment" Value="Stretch" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="MinWidth" Value="15" />
-                <Setter Property="SnapsToDevicePixels" Value="True" />
-                <Setter Property="TextElement.Foreground" Value="Black" />
-                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="Background" Value="Transparent" />
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background">
-                            <Setter.Value>
-                                <SolidColorBrush Color="RoyalBlue" Opacity="0.5" />
-                            </Setter.Value>
-                        </Setter>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-
-            <Style x:Key="ColumnElementStyle" TargetType="TextBlock">
-                <Setter Property="Margin" Value="5,5,5,5" />
-            </Style>
-
-            <Style x:Key="DataGridStyle" TargetType="DataGrid">
-                <Setter Property="Background" Value="{StaticResource BackgroundColorBrush}" />
-                <Setter Property="RowBackground" Value="AliceBlue" />
-                <Setter Property="GridLinesVisibility" Value="Vertical" />
-                <Setter Property="VerticalGridLinesBrush" Value="LightGray" />
-                <Setter Property="AlternatingRowBackground" Value="LightSteelBlue" />
-            </Style>
-
-            <Style BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="Button" />
-
-            <Style x:Key="ErrorTextTemplate" TargetType="TextBox">
-                <Style.Triggers>
-                    <Trigger Property="Validation.HasError" Value="true">
-                        <Setter Property="Background" Value="Red" />
-                        <Setter Property="ToolTip"
-                                Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-                                Path=(Validation.Errors)[0].ErrorContent}" />
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-
             <export:ExportElicitationFormsCommand x:Key="ExportElicitationFormsCommand" />
             <import:ImportElicitationFormsCommand x:Key="ImportElicitationFormsCommand" />
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary
-                    Source="/Forest.Visualization;component/DataTemplates/General/ComboBoxFlatStyle.xaml" />
+                    Source="/Forest.Visualization;component/Theming/ForestTheme.xaml" />
                 <ResourceDictionary
-                    Source="/Forest.Visualization;component/DataTemplates/General/TabControlFlatStyle.xaml" />
+                    Source="/Forest.Visualization;component/Styles/TextBoxStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/Styles/CheckBoxStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/Styles/ButtonStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/Styles/DataGridStyles.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/Styles/ComboBoxFlatStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/Styles/TabControlFlatStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/Styles/SpinnerStyle.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/Styles/TabControlStyles.xaml" />
+                <ResourceDictionary
+                    Source="/Forest.Visualization;component/Styles/MenuItemStyle.xaml" />
                 <ResourceDictionary
                     Source="/Forest.Visualization;component/DataTemplates/General/AssessmentSections.xaml" />
                 <ResourceDictionary
-                    Source="/Forest.Visualization;component/DataTemplates/General/SpinnerStyle.xaml" />
-                <ResourceDictionary
                     Source="/Forest.Visualization;component/DataTemplates/General/GeneralStyles.xaml" />
-                <ResourceDictionary
-                    Source="/Forest.Visualization;component/DataTemplates/General/TabControlStyles.xaml" />
                 <ResourceDictionary
                     Source="/Forest.Visualization.TreeView;component/Theming/DeltaresColorTheme.xaml" />
                 <ResourceDictionary

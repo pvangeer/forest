@@ -47,7 +47,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate TargetType="ToggleButton" x:Key="ComboBoxTransparantToggleButtonTemplate">
+    <ControlTemplate TargetType="ToggleButton" x:Key="ComboBoxTransparentToggleButtonTemplate">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -88,14 +88,14 @@
     </ControlTemplate>
 
     <Style x:Key="ComboBoxFlatStyle" TargetType="{x:Type ComboBox}">
-        <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
-        <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="TextElement.Foreground" Value="Black" />
-        <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Control.Template">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
                     <Grid>
@@ -159,22 +159,22 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ComboBoxFlatTransparantStyle" TargetType="{x:Type ComboBox}">
-        <Setter Property="UIElement.SnapsToDevicePixels" Value="True" />
-        <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+    <Style x:Key="ComboBoxFlatTransparentStyle" TargetType="{x:Type ComboBox}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="TextElement.Foreground" Value="Black" />
-        <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Control.Template">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
                     <Grid Background="Transparent">
                         <ToggleButton Name="ToggleButton" Grid.Column="2"
                                       ClickMode="Press" Focusable="False"
                                       IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                      Template="{StaticResource ComboBoxTransparantToggleButtonTemplate}" />
+                                      Template="{StaticResource ComboBoxTransparentToggleButtonTemplate}" />
 
                         <ContentPresenter Name="ContentSite" Margin="5, 3, 23, 3" IsHitTestVisible="False"
                                           HorizontalAlignment="Left" VerticalAlignment="Center"

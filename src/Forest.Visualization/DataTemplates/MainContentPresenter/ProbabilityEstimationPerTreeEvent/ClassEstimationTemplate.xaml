@@ -37,7 +37,7 @@
                                           ItemsSource="{Binding Source={estimation:Enumeration {x:Type data:ProbabilityClass}}}"
                                           DisplayMemberPath="Description"
                                           SelectedValuePath="Value"
-                                          Style="{StaticResource ComboBoxFlatTransparantStyle}">
+                                          Style="{StaticResource ComboBoxFlatTransparentStyle}">
                                     <ComboBox.SelectedValue>
                                         <Binding Path="AverageEstimation" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
@@ -60,7 +60,7 @@
                                           ItemsSource="{Binding Source={estimation:Enumeration {x:Type data:ProbabilityClass}}}"
                                           DisplayMemberPath="Description"
                                           SelectedValuePath="Value"
-                                          Style="{StaticResource ComboBoxFlatTransparantStyle}">
+                                          Style="{StaticResource ComboBoxFlatTransparentStyle}">
                                     <ComboBox.SelectedValue>
                                         <Binding Path="MinEstimation" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
@@ -83,7 +83,7 @@
                                           ItemsSource="{Binding Source={estimation:Enumeration {x:Type data:ProbabilityClass}}}"
                                           DisplayMemberPath="Description"
                                           SelectedValuePath="Value"
-                                          Style="{StaticResource ComboBoxFlatTransparantStyle}">
+                                          Style="{StaticResource ComboBoxFlatTransparentStyle}">
                                     <ComboBox.SelectedValue>
                                         <Binding Path="MaxEstimation" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>

@@ -7,13 +7,14 @@
     xmlns:converters="clr-namespace:Forest.Visualization.Converters;assembly=Forest.Visualization"
     xmlns:app="clr-namespace:Forest.App"
     Icon="/Forest.App;component/forest.ico"
+    IsIconVisible="False"
     Title="Forest"
     Height="800"
     Width="1200"
     WindowStartupLocation="CenterScreen"
     Closing="MainWindowClosing"
-    BorderThickness="1"
-    BorderBrush="MediumBlue">
+    Loaded="MainWindowLoaded"
+    BorderThickness="0">
 
     <Window.DataContext>
         <app:MainWindowViewModel />

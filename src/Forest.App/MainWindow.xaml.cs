@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Forest.App
@@ -22,6 +23,11 @@ namespace Forest.App
         {
             if (DataContext is MainWindowViewModel viewModel)
                 e.Cancel = !viewModel.ForcedClosingMainWindow();
+        }
+
+        private void MainWindowLoaded(object sender, RoutedEventArgs e)
+        {
+            this.TitleBar.QuickAccessToolBar = null;
         }
     }
 }
