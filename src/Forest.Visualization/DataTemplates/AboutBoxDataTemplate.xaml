@@ -1,0 +1,76 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ribbon="clr-namespace:Forest.Visualization.ViewModels.Ribbon">
+
+
+    <DataTemplate x:Key="AboutBoxDataTemplate" DataType="{x:Type ribbon:AboutBoxViewModel}">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                <Image
+                Source="pack://application:,,,/Forest.Visualization;Component/Resources/forest.ico"
+                Height="200" Width="200" />
+                <TextBlock
+                Text="Forest"
+                FontSize="45"
+                VerticalAlignment="Center"
+                FontWeight="Bold"
+                Foreground="{StaticResource Deltares.Brushes.DarkGreen}"
+                FontFamily="Franka" />
+            </StackPanel>
+            <Rectangle HorizontalAlignment="Stretch"
+                   Fill="{StaticResource Deltares.Brushes.DarkGreen}" Height="2"
+                   StrokeThickness="0" />
+            <Grid Margin="{StaticResource DefaultItemHeightThickness}">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock" x:Key="AboutTextBlockStyle">
+                        <Setter Property="FontSize" Value="12" />
+                        <Setter Property="Foreground" Value="Black"/><!--TODO: Should follow from theme already.-->
+                        <Setter Property="Margin" Value="10" />
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="150" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Auteur"
+                       Style="{StaticResource AboutTextBlockStyle}" HorizontalAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="Pieter van Geer"
+                       Style="{StaticResource AboutTextBlockStyle}" />
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Organisatie"
+                       Style="{StaticResource AboutTextBlockStyle}" HorizontalAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="Deltares"
+                       Style="{StaticResource AboutTextBlockStyle}" />
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Versie"
+                       Style="{StaticResource AboutTextBlockStyle}" HorizontalAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Version}"
+                       Style="{StaticResource AboutTextBlockStyle}" />
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Meer informatie"
+                       Style="{StaticResource AboutTextBlockStyle}" HorizontalAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="3"
+                       Style="{StaticResource AboutTextBlockStyle}">
+                <Hyperlink
+                    CommandParameter="mailto:Pieter.vanGeer@deltares.nl?subject=Informatie%20over%20Stakeholderanalyse%20applicatie"
+                    Command="{Binding ExecuteHyperlinkCommand}">
+                    Pieter.vanGeer@deltares.nl
+                </Hyperlink>
+                </TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="4"
+                       Style="{StaticResource AboutTextBlockStyle}">
+                <Hyperlink
+                    CommandParameter="tel:+31883358339"
+                    Command="{Binding ExecuteHyperlinkCommand}">
+                    +31 (0)88 335 8339
+                </Hyperlink>
+                </TextBlock>
+            </Grid>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

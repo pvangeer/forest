@@ -35,11 +35,11 @@ namespace Forest.Storage
             }
         }
 
-        public static int Year => 23;
+        public static int Year => 24;
 
-        public static int MajorVersion => 2;
+        public static int MajorVersion => 1;
 
-        public static int MinorVersion => 4;
+        public static int MinorVersion => 1;
 
         public string DateCreated { get; set; }
 

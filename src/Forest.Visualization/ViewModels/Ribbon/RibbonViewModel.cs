@@ -11,7 +11,6 @@ namespace Forest.Visualization.ViewModels.Ribbon
     {
         private readonly CommandFactory commandFactory;
         private ICommand saveCanvasCommand;
-
         public RibbonViewModel(ForestGui gui) : base(gui)
         {
             if (Gui != null)
@@ -19,8 +18,12 @@ namespace Forest.Visualization.ViewModels.Ribbon
                 Gui.SelectionManager.SelectedTreeEventChanged += SelectedTreeEventChanged;
                 Gui.SelectionManager.PropertyChanged += SelectionManagerPropertyChanged;
                 commandFactory = new CommandFactory(gui);
+
+                AboutBoxViewModel = ViewModelFactory.CreateAboutBoxViewModel();
             }
         }
+
+        public AboutBoxViewModel AboutBoxViewModel { get; }
 
         public StorageState BusyIndicator
         {

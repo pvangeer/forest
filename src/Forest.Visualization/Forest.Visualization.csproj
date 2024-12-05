@@ -156,6 +156,7 @@
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\EventTreeEditing\EventTreeMainContentViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\EventTreeEditing\GraphVertex.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ProbabilityPerTreeEventMainContentViewModel.cs" />
+    <Compile Include="ViewModels\Ribbon\AboutBoxViewModel.cs" />
     <Compile Include="ViewModels\StatusBar\MessageListViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEventTreeCollectionViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\ProjectExplorer\ProjectExplorerEventTreeNodeViewModel.cs" />
@@ -223,6 +224,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="DataTemplates\AboutBoxDataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataTemplates\BusyOverlayDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -381,6 +386,10 @@
       <Project>{7F6BB180-3B8C-4761-8BB6-E7562FB37895}</Project>
       <Name>Forest.Messaging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Forest.Storage\Forest.Storage.csproj">
+      <Project>{A5C2B4E5-1758-4B14-800E-E3F2AA64EA64}</Project>
+      <Name>Forest.Storage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forest.Visualization.TreeView\Forest.Visualization.TreeView.csproj">
       <Project>{140124E3-8D13-4122-BF1E-C78743BD45E0}</Project>
       <Name>Forest.Visualization.TreeView</Name>
@@ -453,6 +462,8 @@
   <ItemGroup>
     <Resource Include="Resources\EventTree\tree-event-information.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\info_regular.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

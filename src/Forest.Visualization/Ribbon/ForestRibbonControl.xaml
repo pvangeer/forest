@@ -14,6 +14,9 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Forest.Visualization;Component/DataTemplates/AboutBoxDataTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
             <converters:BusyIndicatorToEnabledConverter x:Key="BusyIndicatorToEnabledConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
@@ -25,7 +28,7 @@
             Focusable="True">
             <!--Backstage-->
             <fluent:Ribbon.Menu>
-                <fluent:Backstage Background="{StaticResource Deltares.Brushes.LightBlue}">
+                <fluent:Backstage Background="{StaticResource Deltares.Brushes.LightBlue}"><!--TODO: Should follow from theme automatically. Theme broken?-->
                     <fluent:BackstageTabControl>
                         <fluent:Button Header="Nieuw bestand"
                                        Icon="/Forest.Visualization;component\Resources\document.png"
@@ -50,6 +53,15 @@
                                        fluent:KeyTip.Keys="O"
                                        CanAddToQuickAccessToolBar="False"
                                        Command="{Binding OpenProjectCommand}" />
+                        
+                        <fluent:SeparatorTabItem />
+
+                        <fluent:BackstageTabItem
+                            Header="Over">
+                            <ContentPresenter
+                                Content="{Binding Path=AboutBoxViewModel}"
+                                ContentTemplate="{StaticResource AboutBoxDataTemplate}" />
+                        </fluent:BackstageTabItem>
 
                         <fluent:SeparatorTabItem />
 

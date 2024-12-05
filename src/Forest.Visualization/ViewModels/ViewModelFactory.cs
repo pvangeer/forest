@@ -124,5 +124,10 @@ namespace Forest.Visualization.ViewModels
         {
             return new TreeEventEstimationViewModel(estimation, parentEstimation, gui, this);
         }
+
+        public AboutBoxViewModel CreateAboutBoxViewModel()
+        {
+            return new AboutBoxViewModel(this);
+        }
     }
 }
