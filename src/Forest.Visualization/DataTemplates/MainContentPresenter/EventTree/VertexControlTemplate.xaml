@@ -34,7 +34,7 @@
                                         TrueBrush="{StaticResource SelectedBorderBrush}" />
 
     <converters:TreeEventTypeToDisplayNameConverter x:Key="TreeEventTypeToDisplayNameConverter" />
-    <visualization:TreeEventTypeToVisibilityConverter x:Key="TreeEventTypeToVisibilityConverter" />
+    <converters:TreeEventTypeToVisibilityConverter x:Key="TreeEventTypeToVisibilityConverter" />
     <DataTemplate x:Key="TreeEventDataTemplate" DataType="{x:Type eventTreeEditing:TreeEventViewModel}">
         <Grid IsSharedSizeScope="True">
             <Grid.RowDefinitions>

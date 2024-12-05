@@ -1,9 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:Forest.Visualization"
-                    xmlns:gui="clr-namespace:Forest.Gui;assembly=Forest.Gui">
+                    xmlns:gui="clr-namespace:Forest.Gui;assembly=Forest.Gui"
+                    xmlns:viewModels1="clr-namespace:Forest.Visualization.ViewModels">
 
-    <DataTemplate x:Key="BusyOverlayDataTemplate" DataType="{x:Type viewModels:BusyOverlayViewModel}">
+    <DataTemplate x:Key="BusyOverlayDataTemplate" DataType="{x:Type viewModels1:BusyOverlayViewModel}">
         <Grid Grid.Row="1" ZIndex="2">
             <Grid.Style>
                 <Style TargetType="Grid">

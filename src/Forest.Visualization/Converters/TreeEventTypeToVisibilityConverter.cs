@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using Forest.Data.Tree;
 
-namespace Forest.Visualization
+namespace Forest.Visualization.Converters
 {
     public class TreeEventTypeToVisibilityConverter : IValueConverter
     {

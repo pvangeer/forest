@@ -1,7 +1,6 @@
 using Forest.Data;
-using Forest.Visualization.ViewModels;
 
-namespace Forest.Visualization
+namespace Forest.Visualization.ViewModels
 {
     public class ViewModelBase : Entity
     {

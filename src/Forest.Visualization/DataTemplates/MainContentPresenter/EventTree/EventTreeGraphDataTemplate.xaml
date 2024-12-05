@@ -5,7 +5,8 @@
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:utils="clr-namespace:Forest.Visualization.Utils"
                     xmlns:behaviors="clr-namespace:Forest.Visualization.Behaviors"
-                    xmlns:eventTreeEditing="clr-namespace:Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTreeEditing">
+                    xmlns:eventTreeEditing="clr-namespace:Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTreeEditing"
+                    xmlns:converters="clr-namespace:Forest.Visualization.Converters">
 
     <DataTemplate DataType="{x:Type eventTreeEditing:TreeEventViewModel}" x:Key="TreeEventDetailsDataTemplate">
         <Grid Grid.Column="2">
@@ -59,7 +60,7 @@
         </Grid>
     </DataTemplate>
 
-    <visualization:IsProneToExportConverter x:Key="IsProneToExportConverter" />
+    <converters:IsProneToExportConverter x:Key="IsProneToExportConverter" />
 
     <DataTemplate DataType="{x:Type eventTreeEditing:EventTreeMainContentViewModel}" x:Key="EventTreeGraphDataTemplate">
         <DataTemplate.Resources>

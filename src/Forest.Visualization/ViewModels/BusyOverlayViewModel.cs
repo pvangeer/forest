@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using Forest.Gui;
 
-namespace Forest.Visualization
+namespace Forest.Visualization.ViewModels
 {
     public class BusyOverlayViewModel : GuiViewModelBase
     {
