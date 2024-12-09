@@ -83,7 +83,7 @@ namespace Forest.IO.Export
             WriteEventHeader(form, sheetData, mergeCells);
             WriteExpertInformation(form, sheetData);
             WriteElicitationCodeInformation(sheetData, mergeCells);
-            AddImage(form.GetFileStream, worksheetPart);
+            //AddImage(form.GetFileStream, worksheetPart);
             var rowNumber = WriteNodes(form, sheetData, dataValidations);
             WriteSheetBottom(sheetData, rowNumber);
 
@@ -422,7 +422,8 @@ namespace Forest.IO.Export
                 };
         }
 
-        private static void AddImage(Func<FileStream> fileStreamFunc, WorksheetPart worksheetPart)
+        //TODO: Fix this code if really necessary
+        /*private static void AddImage(Func<FileStream> fileStreamFunc, WorksheetPart worksheetPart)
         {
             if (fileStreamFunc == null)
                 return;
@@ -565,6 +566,6 @@ namespace Forest.IO.Export
             worksheetDrawing.Save(drawingsPart);
 
             worksheetPart.Worksheet.Append(drawing);
-        }
+        }*/
     }
 }

@@ -13,14 +13,6 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
-    <AssemblyTitle>Forest.Data</AssemblyTitle>
-    <Company>Microsoft</Company>
-    <Product>Forest.Data</Product>
-    <Copyright>Copyright © Microsoft 2018</Copyright>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DefineConstants>DEBUG;TRACE;DEVELOPMENT</DefineConstants>
@@ -29,6 +21,10 @@
     <DebugType>none</DebugType>
     <DefineConstants>TRACE;DEVELOPMENT</DefineConstants>
     <AllowedReferenceRelatedFileExtensions>none</AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -42,4 +38,25 @@
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Operations\plus-grey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Forest.Data\Forest.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Operations\collapsed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Operations\expanded.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Operations\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Operations\remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.1" />
+  </ItemGroup>
 </Project>

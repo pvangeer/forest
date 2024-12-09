@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <ApplicationIcon>forest.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="forest.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Forest.Data\Forest.Data.csproj" />
+    <ProjectReference Include="..\Forest.Gui\Forest.Gui.csproj" />
+    <ProjectReference Include="..\Forest.Visualization\Forest.Visualization.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="forest.ico" />
+  </ItemGroup>
+
+</Project>

@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interactivity;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Microsoft.Xaml.Behaviors;
 
 namespace Forest.Visualization.Ribbon.IO.Export
 {

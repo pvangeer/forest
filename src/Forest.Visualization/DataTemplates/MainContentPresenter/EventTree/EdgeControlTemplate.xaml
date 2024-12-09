@@ -7,8 +7,6 @@
     xmlns:graphSharpConverters="clr-namespace:GraphSharp.Converters;assembly=GraphSharp.Controls"
     xmlns:converters="clr-namespace:Forest.Visualization.Converters">
 
-    <graphSharpConverters:EdgeRouteToPathConverter x:Key="RouteToPathConverter" />
-
     <converters:EventTypeToColorConverter x:Key="EventTypeToColorConverter" />
 
     <converters:RouteToPathConverterManual x:Key="RouteToPathConverterManual" />

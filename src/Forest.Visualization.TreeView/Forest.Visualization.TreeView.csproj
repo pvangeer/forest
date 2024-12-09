@@ -1,169 +1,47 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
     <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
     <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-    <Configuration Condition="$(Configuration) == ''">Debug</Configuration>
     <Platform Condition="'$(Platform)' == ''">x64</Platform>
     <OutputType Condition="$(OutputType) == ''">Library</OutputType>
     <OutputPath Condition="$(OutputPath) == ''">$(SolutionDir)\bin\$(Configuration)\</OutputPath>
     <OutDir>$(OutputPath)</OutDir>
     <PlatformTarget>x64</PlatformTarget>
-    <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <DefineConstants>DEBUG;TRACE;DEVELOPMENT</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
     <DefineConstants>TRACE;DEVELOPMENT</DefineConstants>
     <AllowedReferenceRelatedFileExtensions>none</AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-
   <PropertyGroup>
-    <ProjectGuid>{140124E3-8D13-4122-BF1E-C78743BD45E0}</ProjectGuid>
     <OutputType>library</OutputType>
-    <RootNamespace>Forest.Visualization.TreeView</RootNamespace>
-    <AssemblyName>Forest.Visualization.TreeView</AssemblyName>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;DEVELOPMENT</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE;DEVELOPMENT</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <Optimize>true</Optimize>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.DataGrid, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.Toolkit, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Extended.Wpf.Toolkit.3.3.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Behaviors\AttachInputBindingsBehavior.cs" />
-    <Compile Include="Converters\HasItemsToVisibilityConverter.cs" />
-    <Compile Include="Converters\LineStyleToDashArrayConverter.cs" />
-    <Compile Include="Converters\SourceStringToVisibilityConverter.cs" />
-    <Compile Include="Data\ISelectable.cs" />
-    <Compile Include="Commands\ToggleIsExpandedCommand.cs" />
-    <Compile Include="ViewModels\BooleanPropertyValueTreeNodeViewModel.cs" />
-    <Compile Include="Data\CollectionType.cs" />
-    <Compile Include="ViewModels\ColorPropertyValueTreeNodeViewModel.cs" />
-    <Compile Include="ViewModels\ContextMenuItemViewModel.cs" />
-    <Compile Include="ViewModels\DoubleUpDownPropertyValueTreeNodeViewModel.cs" />
-    <Compile Include="ViewModels\FontFamilyPropertyValueTreeNodeViewModel.cs" />
-    <Compile Include="ViewModels\IBooleanPropertyTreeNodeViewModel.cs" />
-    <Compile Include="ViewModels\IColorPropertyTreeNodeViewModel.cs" />
-    <Compile Include="ViewModels\IDoubleUpDownPropertyTreeNodeViewModel.cs" />
-    <Compile Include="Data\IExpandable.cs" />
-    <Compile Include="ViewModels\IFontFamilyPropertyTreeNodeViewModel.cs" />
-    <Compile Include="ViewModels\ILineStylePropertyTreeNodeViewModel.cs" />
-    <Compile Include="Data\ISliderPropertyTreeNodeViewModel.cs" />
-    <Compile Include="Data\IStringPropertyTreeNodeViewModel.cs" />
-    <Compile Include="Data\ITreeNodeCollectionViewModel.cs" />
-    <Compile Include="Data\ITreeNodeViewModel.cs" />
-    <Compile Include="Data\LineStyle.cs" />
-    <Compile Include="ViewModels\LineStylePropertyValueTreeNodeViewModel.cs" />
-    <Compile Include="ViewModels\PropertyCollectionTreeNodeViewModel.cs" />
-    <Compile Include="DataTemplates\PropertyValueTreeNodeTemplateSelector.cs" />
-    <Compile Include="ViewModels\PropertyValueTreeNodeViewModelBase.cs" />
-    <Compile Include="ViewModels\SliderPropertyValueTreeNodeViewModel.cs" />
-    <Compile Include="ViewModels\StringPropertyValueTreeNodeViewModel.cs" />
-    <Page Include="DataTemplates\TreeViewDataTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Theming\DeltaresColorTheme.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Theming\TreeViewStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Operations\plus-grey.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Forest.Data\Forest.Data.csproj">
-      <Project>{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}</Project>
-      <Name>Forest.Data</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Forest.Data\Forest.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Operations\collapsed.png" />
@@ -177,5 +55,7 @@
   <ItemGroup>
     <Resource Include="Resources\Operations\remove.png" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.1" />
+  </ItemGroup>
 </Project>

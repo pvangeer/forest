@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forest.Gui", "src\Forest.Gu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forest.Visualization.TreeView", "src\Forest.Visualization.TreeView\Forest.Visualization.TreeView.csproj", "{140124E3-8D13-4122-BF1E-C78743BD45E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forest.Application", "src\Forest.Application\Forest.Application.csproj", "{26039240-A0DC-4DD0-86AB-FAAD9E528CD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -109,6 +111,10 @@ Global
 		{140124E3-8D13-4122-BF1E-C78743BD45E0}.Debug|x64.Build.0 = Debug|x64
 		{140124E3-8D13-4122-BF1E-C78743BD45E0}.Release|x64.ActiveCfg = Release|x64
 		{140124E3-8D13-4122-BF1E-C78743BD45E0}.Release|x64.Build.0 = Release|x64
+		{26039240-A0DC-4DD0-86AB-FAAD9E528CD2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{26039240-A0DC-4DD0-86AB-FAAD9E528CD2}.Debug|x64.Build.0 = Debug|Any CPU
+		{26039240-A0DC-4DD0-86AB-FAAD9E528CD2}.Release|x64.ActiveCfg = Release|Any CPU
+		{26039240-A0DC-4DD0-86AB-FAAD9E528CD2}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,6 +135,7 @@ Global
 		{354E5594-846B-499E-BCE6-2E8DE93B928C} = {93BD55D2-78AD-41AC-9584-315A803C25F8}
 		{5ACE288D-CC7F-47D4-8A2A-2764101BC5E6} = {93BD55D2-78AD-41AC-9584-315A803C25F8}
 		{140124E3-8D13-4122-BF1E-C78743BD45E0} = {93BD55D2-78AD-41AC-9584-315A803C25F8}
+		{26039240-A0DC-4DD0-86AB-FAAD9E528CD2} = {93BD55D2-78AD-41AC-9584-315A803C25F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0977DE7D-5323-406A-99E2-717CCC3723D2}

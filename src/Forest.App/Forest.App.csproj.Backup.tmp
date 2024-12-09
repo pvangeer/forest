@@ -13,6 +13,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>forest.ico</ApplicationIcon>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
     <Resource Include="forest.ico" />
@@ -34,7 +35,7 @@
     <PackageReference Include="OxyPlot.Core" Version="2.2.0" />
     <PackageReference Include="OxyPlot.Wpf" Version="2.1.2" />
     <PackageReference Include="QuickGraph" Version="3.6.61119.7" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
     <PackageReference Include="System.Security.AccessControl" Version="6.0.0" />
     <PackageReference Include="System.Security.Permissions" Version="8.0.0" />
     <PackageReference Include="WPFExtensions" Version="1.0.0" />

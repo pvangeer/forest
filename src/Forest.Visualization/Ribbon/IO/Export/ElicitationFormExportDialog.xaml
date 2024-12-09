@@ -1,8 +1,8 @@
 ﻿<Window x:Class="Forest.Visualization.Ribbon.IO.Export.ElicitationFormExportDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:export1="clr-namespace:Forest.Visualization.Ribbon.IO.Export"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         BorderBrush="{StaticResource ApplicationBorderColorBrush}"
         BorderThickness="1"
         WindowStyle="None"
@@ -84,9 +84,9 @@
                         Margin="5"
                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                         VerticalAlignment="Center">
-                        <i:Interaction.Behaviors>
+                        <b:Interaction.Behaviors>
                             <export1:FolderDialogBehavior FolderName="{Binding ExportLocation, Mode=TwoWay}" />
-                        </i:Interaction.Behaviors>
+                        </b:Interaction.Behaviors>
                     </Button>
                     <TextBlock
                         Grid.Row="1"

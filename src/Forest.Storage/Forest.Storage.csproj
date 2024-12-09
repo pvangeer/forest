@@ -1,155 +1,60 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
     <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
     <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-    <Configuration Condition="$(Configuration) == ''">Debug</Configuration>
     <Platform Condition="'$(Platform)' == ''">x64</Platform>
     <OutputType Condition="$(OutputType) == ''">Library</OutputType>
     <OutputPath Condition="$(OutputPath) == ''">$(SolutionDir)\bin\$(Configuration)\</OutputPath>
     <OutDir>$(OutputPath)</OutDir>
     <PlatformTarget>x64</PlatformTarget>
-    <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <AssemblyTitle>Forest.Storage</AssemblyTitle>
+    <Company>Microsoft</Company>
+    <Product>Forest.Storage</Product>
+    <Copyright>Copyright © Microsoft 2018</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <DefineConstants>DEBUG;TRACE;DEVELOPMENT</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
     <DefineConstants>TRACE;DEVELOPMENT</DefineConstants>
     <AllowedReferenceRelatedFileExtensions>none</AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <ProjectGuid>{A5C2B4E5-1758-4B14-800E-E3F2AA64EA64}</ProjectGuid>
-    <RootNamespace>Forest.Storage</RootNamespace>
-    <AssemblyName>Forest.Storage</AssemblyName>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;DEVELOPMENT</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE;DEVELOPMENT</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <Optimize>true</Optimize>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.DirectoryServices.AccountManagement" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BackupFileWriter.cs" />
-    <Compile Include="ColorConversionExtensions.cs" />
-    <Compile Include="Create\EventTreeCreateExtensions.cs" />
-    <Compile Include="Create\ExpertClassEstimationCreateExtensions.cs" />
-    <Compile Include="Create\ExpertCreateExtensions.cs" />
-    <Compile Include="Create\FragilityCurveElementCreateExtensions.cs" />
-    <Compile Include="Create\HydraulicConditionCreateExtensions.cs" />
-    <Compile Include="Create\PersonCreateExtensions.cs" />
-    <Compile Include="Create\ForestAnalysisCreateExtensions.cs" />
-    <Compile Include="Create\ProbabilityEstimationPerTreeEventCreateExtensions.cs" />
-    <Compile Include="Create\TreeEventCreateExtensions.cs" />
-    <Compile Include="Create\TreeEventProbabilityEstimationCreateExtensions.cs" />
-    <Compile Include="FingerprintHelper.cs" />
-    <Compile Include="Migration\FileMigrationScript.cs" />
-    <Compile Include="Migration\XmlMigrationException.cs" />
-    <Compile Include="Migration\XmlStorageMigrationService.cs" />
-    <Compile Include="Read\ProbabilityEstimationPerTreeEventReadExtensions.cs" />
-    <Compile Include="Read\ReadReferencedObjectsFirstException.cs" />
-    <Compile Include="Read\TreeEventProbabilityEstimateReadExtension.cs" />
-    <Compile Include="StorageXml.cs" />
-    <Compile Include="ForestVersionComparer.cs" />
-    <Compile Include="ForestVersionHelper.cs" />
-    <Compile Include="StringExtensions.cs" />
-    <Compile Include="Create\PersistenceRegistry.cs" />
-    <Compile Include="DoubleConversionExtensions.cs" />
-    <Compile Include="Read\EventTreeEntitiesReadExtensions.cs" />
-    <Compile Include="Read\ExpertClassEstimationEntityReadExtensions.cs" />
-    <Compile Include="Read\ExpertEntitiesReadExtensions.cs" />
-    <Compile Include="Read\FragilityCurveElementEntityReadExtensions.cs" />
-    <Compile Include="Read\HydraulicConditionEntityReadExtensions.cs" />
-    <Compile Include="Read\PersonEntityReadExtensions.cs" />
-    <Compile Include="Read\ReadConversionCollector.cs" />
-    <Compile Include="Read\ForestAnalysisXmlEntityReadExtensions.cs" />
-    <Compile Include="Read\TreeEventEntityReadExtensions.cs" />
-    <Compile Include="ReferenceEqualityComparer.cs" />
-    <Compile Include="FileReaderErrorMessageBuilder.cs" />
-    <Compile Include="IOUtils.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="TreeEventTypeUtils.cs" />
-    <Compile Include="VersionInfo.cs" />
-    <Compile Include="XmlEntities\EventTreeXmlEntity.cs" />
-    <Compile Include="XmlEntities\ExpertClassEstimationXmlEntity.cs" />
-    <Compile Include="XmlEntities\ExpertXmlEntity.cs" />
-    <Compile Include="XmlEntities\FragilityCurveElementXmlEntity.cs" />
-    <Compile Include="XmlEntities\HydrodynamicConditionXmlEntity.cs" />
-    <Compile Include="XmlEntities\PersonXmlEntity.cs" />
-    <Compile Include="XmlEntities\ForestAnalysisXmlEntity.cs" />
-    <Compile Include="XmlEntities\ProbabilityEstimationPerTreeEventXmlEntity.cs" />
-    <Compile Include="ProbabilitySpecificationTypeUtils.cs" />
-    <Compile Include="XmlEntities\ProjectXmlEntity.cs" />
-    <Compile Include="XmlEntities\TreeEventProbabilityEstimateXmlEntity.cs" />
-    <Compile Include="XmlEntities\TreeEventXmlEntity.cs" />
-    <Compile Include="XmlEntities\VersionXmlEntity.cs" />
-    <Compile Include="XmlEntities\XmlEntityBase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\TellTheStoryDatabaseSchema.sql" />
-  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Forest.Data\Forest.Data.csproj">
-      <Project>{2F5CE516-BF3B-4B33-951F-2DC8BCF08E43}</Project>
-      <Name>Forest.Data</Name>
-    </ProjectReference>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.0" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="9.0.0" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.0" />
+    <PackageReference Include="System.ServiceModel.Http" Version="8.1.0" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="6.0.0" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="8.1.0" />
+    <PackageReference Include="System.ServiceModel.Security" Version="6.0.0" />
+    <PackageReference Include="System.ServiceModel.Federation" Version="8.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <ProjectReference Include="..\Forest.Data\Forest.Data.csproj" />
   </ItemGroup>
-  <ItemGroup />
 </Project>
