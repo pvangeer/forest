@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
-                    xmlns:visualization="clr-namespace:Forest.Visualization"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:utils="clr-namespace:Forest.Visualization.Utils"
                     xmlns:behaviors="clr-namespace:Forest.Visualization.Behaviors"
