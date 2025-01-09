@@ -11,7 +11,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassEstimationFragilityCurveCalculator.cs" />
+    <Compile Include="EstimationFragilityCurveCalculator.cs" />
     <Compile Include="CriticalPathCalculator.cs" />
     <Compile Include="CriticalPathElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

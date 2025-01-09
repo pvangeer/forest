@@ -112,7 +112,6 @@
     <Compile Include="Commands\EventTrees\RemoveEventTreeCommand.cs" />
     <Compile Include="Commands\ProjectExplorer\SelectItemCommand.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\HydrodynamicsViewModel.cs" />
-    <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ExpertsViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\EventTreeEditing\EventTreeMainContentViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\EventTreeEditing\GraphVertex.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ProbabilityPerTreeEventMainContentViewModel.cs" />
@@ -159,7 +158,6 @@
     </Compile>
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\EventTreeEditing\EventTreeGraph.cs" />
     <Compile Include="ViewModels\EventTreeViewModelOld.cs" />
-    <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ExpertViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\FixedFragilityCurveSpecificationViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\FixedProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\FragilityCurveElementViewModel.cs" />
@@ -204,10 +202,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataTemplates\MainContentPresenter\ProbabilityEstimationPerTreeEvent\EstimationSpecificationPerTreeEventDataTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\MainContentPresenter\ProbabilityEstimationPerTreeEvent\ExpertsDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -347,9 +341,6 @@
     <Resource Include="Resources\folder_open_regular.ico" />
     <Resource Include="Resources\save_edit_regular.ico" />
     <Resource Include="Resources\save_regular.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\experts.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\hydraulics.png" />

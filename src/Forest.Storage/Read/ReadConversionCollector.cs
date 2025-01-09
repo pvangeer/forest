@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Forest.Data.Estimations.PerTreeEvent;
-using Forest.Data.Estimations.PerTreeEvent.Experts;
 using Forest.Data.Hydrodynamics;
 using Forest.Data.Probabilities;
 using Forest.Data.Tree;
@@ -13,8 +12,6 @@ namespace Forest.Storage.Read
     internal class ReadConversionCollector
     {
         private readonly Dictionary<EventTreeXmlEntity, EventTree> eventTrees = CreateDictionary<EventTreeXmlEntity, EventTree>();
-
-        private readonly Dictionary<ExpertXmlEntity, Expert> experts = CreateDictionary<ExpertXmlEntity, Expert>();
 
         private readonly Dictionary<FragilityCurveElementXmlEntity, FragilityCurveElement> fragilityCurveElements =
             CreateDictionary<FragilityCurveElementXmlEntity, FragilityCurveElement>();
@@ -29,11 +26,6 @@ namespace Forest.Storage.Read
         internal void Collect(PersonXmlEntity entity, Person model)
         {
             Collect(persons, entity, model);
-        }
-
-        internal void Collect(ExpertXmlEntity entity, Expert model)
-        {
-            Collect(experts, entity, model);
         }
 
         internal void Collect(HydrodynamicConditionXmlEntity entity, HydrodynamicCondition model)
@@ -61,11 +53,6 @@ namespace Forest.Storage.Read
             return Contains(persons, entity);
         }
 
-        internal bool Contains(ExpertXmlEntity entity)
-        {
-            return Contains(experts, entity);
-        }
-
         internal bool Contains(HydrodynamicConditionXmlEntity entity)
         {
             return Contains(hydraulicConditions, entity);
@@ -91,11 +78,6 @@ namespace Forest.Storage.Read
             return Get(persons, entity);
         }
 
-        internal Expert Get(ExpertXmlEntity entity)
-        {
-            return Get(experts, entity);
-        }
-
         internal HydrodynamicCondition Get(HydrodynamicConditionXmlEntity entity)
         {
             return Get(hydraulicConditions, entity);
@@ -114,22 +96,6 @@ namespace Forest.Storage.Read
         internal TreeEvent Get(TreeEventXmlEntity entity)
         {
             return Get(treeEvents, entity);
-        }
-
-        public Expert GetReferencedExpert(long id)
-        {
-            var key = experts.Keys.FirstOrDefault(k => k.Id == id);
-            return key == null
-                ? throw new ReadReferencedObjectsFirstException(nameof(Expert))
-                : Get(key);
-        }
-
-        public HydrodynamicCondition GetReferencedHydraulicCondition(long id)
-        {
-            var key = hydraulicConditions.Keys.FirstOrDefault(k => k.Id == id);
-            return key == null
-                ? throw new ReadReferencedObjectsFirstException(nameof(HydrodynamicCondition))
-                : Get(key);
         }
 
         public EventTree GetReferencedEventTree(long id)

@@ -21,7 +21,7 @@ namespace Forest.Storage.Test.XmlEntities
 
             Stream stream = new MemoryStream();
 
-            var serializer = new XmlSerializer(typeof(ExpertXmlEntity));
+            var serializer = new XmlSerializer(typeof(FragilityCurveElementXmlEntity));
             serializer.Serialize(stream, entity);
             serializer.Serialize(Console.Out, entity);
 

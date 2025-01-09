@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Forest.Calculators.Test
 {
     [TestFixture]
-    public class ClassEstimationFragilityCurveCalculatorTest
+    public class EstimationFragilityCurveCalculatorTest
     {
         [Test]
         public void LogTest()
@@ -44,7 +44,7 @@ namespace Forest.Calculators.Test
             };
 
             var interpolatedValues =
-                ClassEstimationFragilityCurveCalculator.CalculateCombinedProbabilityFragilityCurve(hydraulicConditions,
+                EstimationFragilityCurveCalculator.CalculateCombinedProbabilityFragilityCurve(hydraulicConditions,
                     criticalPathElements);
 
             Assert.AreEqual(6, interpolatedValues.Count);
@@ -85,7 +85,7 @@ namespace Forest.Calculators.Test
             };
 
             var probability =
-                ClassEstimationFragilityCurveCalculator.CalculateProbability(hydraulicConditions, criticalPathElements);
+                EstimationFragilityCurveCalculator.CalculateProbability(hydraulicConditions, criticalPathElements);
 
             Assert.AreEqual(1.48e-4, probability, 1e-6);
         }
@@ -119,7 +119,7 @@ namespace Forest.Calculators.Test
             };
 
             var probability =
-                ClassEstimationFragilityCurveCalculator.CalculateProbability(hydraulicConditions, criticalPathElements);
+                EstimationFragilityCurveCalculator.CalculateProbability(hydraulicConditions, criticalPathElements);
 
             Assert.AreEqual(0.0332517, probability, 1e-6);
         }

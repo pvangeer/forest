@@ -32,7 +32,7 @@ namespace Forest.Visualization.Converters
             for (var i = 0; i < pathElements.Length; i++)
             {
                 var curve = new FragilityCurveViewModel(
-                    ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics,
+                    EstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics,
                         pathElements.Take(i + 1).ToArray()));
 
                 plotModel.Series.Add(new LineSeries

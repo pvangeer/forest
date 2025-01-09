@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Forest.Data;
-using Forest.Data.Estimations.PerTreeEvent.Experts;
+using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Hydrodynamics;
 using Forest.Data.Probabilities;
 using Forest.Data.Tree;
@@ -13,7 +13,6 @@ namespace Forest.Storage.Create
     public class PersistenceRegistry
     {
         private readonly Dictionary<EventTree, EventTreeXmlEntity> eventTrees = CreateDictionary<EventTree, EventTreeXmlEntity>();
-        private readonly Dictionary<Expert, ExpertXmlEntity> experts = CreateDictionary<Expert, ExpertXmlEntity>();
 
         private readonly Dictionary<FragilityCurveElement, FragilityCurveElementXmlEntity> fragilityCurveElements =
             CreateDictionary<FragilityCurveElement, FragilityCurveElementXmlEntity>();
@@ -30,11 +29,6 @@ namespace Forest.Storage.Create
         internal void Register(ForestAnalysis model, ProjectXmlEntity entity)
         {
             Register(projects, model, entity);
-        }
-
-        internal void Register(Expert model, ExpertXmlEntity entity)
-        {
-            Register(experts, model, entity);
         }
 
         internal void Register(Person model, PersonXmlEntity entity)
@@ -71,11 +65,6 @@ namespace Forest.Storage.Create
             return ContainsValue(projects, model);
         }
 
-        internal bool Contains(Expert model)
-        {
-            return ContainsValue(experts, model);
-        }
-
         internal bool Contains(Person model)
         {
             return ContainsValue(persons, model);
@@ -108,11 +97,6 @@ namespace Forest.Storage.Create
         public ProjectXmlEntity Get(ForestAnalysis model)
         {
             return Get(projects, model);
-        }
-
-        public ExpertXmlEntity Get(Expert model)
-        {
-            return Get(experts, model);
         }
 
         public PersonXmlEntity Get(Person model)

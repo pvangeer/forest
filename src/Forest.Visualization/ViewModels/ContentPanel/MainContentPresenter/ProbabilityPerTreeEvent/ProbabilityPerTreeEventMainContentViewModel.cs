@@ -16,8 +16,6 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Prob
 
         public string Name => estimation.Name;
 
-        public ExpertsViewModel ExpertsViewModel => ViewModelFactory.CreateExpertsViewModel(estimation);
-
         public HydrodynamicsViewModel HydrodynamicsViewModel => ViewModelFactory.CreateHydrodynamicsViewModel(estimation);
 
         public EstimationPerTreeEventSpecificationViewModel ProbabilityEstimationsViewModel =>

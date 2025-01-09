@@ -5,7 +5,7 @@ using Forest.Data.Probabilities;
 
 namespace Forest.Calculators
 {
-    public static class ClassEstimationFragilityCurveCalculator
+    public static class EstimationFragilityCurveCalculator
     {
         public static Probability CalculateProbability(HydrodynamicCondition[] conditions, CriticalPathElement[] treeEventCurves)
         {

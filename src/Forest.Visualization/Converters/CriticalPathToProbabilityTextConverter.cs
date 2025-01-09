@@ -16,7 +16,7 @@ namespace Forest.Visualization.Converters
             return !hydraulics.Any() || !curves.Any()
                 ? "NaN"
                 : string.Format("1/{0}",
-                    (int)(1.0 / ClassEstimationFragilityCurveCalculator.CalculateProbability(hydraulics, curves)));
+                    (int)(1.0 / EstimationFragilityCurveCalculator.CalculateProbability(hydraulics, curves)));
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

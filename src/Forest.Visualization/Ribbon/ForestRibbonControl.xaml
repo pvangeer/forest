@@ -161,13 +161,6 @@
                 <fluent:RibbonGroupBox Header="Algemeen"
                                        CanAddToQuickAccessToolBar="False">
                     <fluent:ToggleButton
-                        Header="Experts"
-                        LargeIcon="/Forest.Visualization;component\Resources\experts.png"
-                        Size="Large"
-                        CanAddToQuickAccessToolBar="False"
-                        IsEnabled="False" />
-                    <!--TODO: Make tabcontrol in main page to switch-->
-                    <fluent:ToggleButton
                         Header="Hydraulische gegevens"
                         LargeIcon="/Forest.Visualization;component\Resources\hydraulics.png"
                         Size="Large"

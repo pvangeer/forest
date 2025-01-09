@@ -18,7 +18,6 @@ namespace Forest.Storage.Create
                 EventTreeId = model.EventTree.Create(registry).Id
             };
 
-            AddExpertsToEstimation(entity, model, registry);
             AddHydrodynamicConditionsToEstimation(entity, model, registry);
             AddEstimationsToEstimation(entity, model, registry);
 
@@ -46,18 +45,6 @@ namespace Forest.Storage.Create
                 var condition = model.HydrodynamicConditions[index].Create(registry);
                 condition.Order = index;
                 entity.HydrodynamicConditions.Add(condition);
-            }
-        }
-
-        private static void AddExpertsToEstimation(ProbabilityEstimationPerTreeEventXmlEntity entity,
-            ProbabilityEstimationPerTreeEvent model,
-            PersistenceRegistry registry)
-        {
-            for (var index = 0; index < model.Experts.Count; index++)
-            {
-                var expert = model.Experts[index].Create(registry);
-                expert.Order = index;
-                entity.Experts.Add(expert);
             }
         }
     }

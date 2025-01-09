@@ -54,7 +54,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="XmlEntities\ExpertXmlEntityTest.cs" />
     <Compile Include="XmlEntities\FragilityCurveElementXmlEntityTest.cs" />
   </ItemGroup>
   <ItemGroup>

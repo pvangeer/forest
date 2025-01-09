@@ -83,11 +83,6 @@ namespace Forest.Visualization.ViewModels
             return treeEvent != null ? new TreeEventViewModel(treeEvent, eventTree, gui) : null;
         }
 
-        public ExpertsViewModel CreateExpertsViewModel(ProbabilityEstimationPerTreeEvent estimation)
-        {
-            return new ExpertsViewModel(estimation);
-        }
-
         public HydrodynamicsViewModel CreateHydrodynamicsViewModel(ProbabilityEstimationPerTreeEvent estimation)
         {
             return new HydrodynamicsViewModel(estimation);

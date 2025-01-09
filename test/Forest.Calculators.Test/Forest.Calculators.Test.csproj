@@ -44,7 +44,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassEstimationFragilityCurveCalculatorTest.cs" />
+    <Compile Include="EstimationFragilityCurveCalculatorTest.cs" />
     <Compile Include="CriticalPathCalculatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

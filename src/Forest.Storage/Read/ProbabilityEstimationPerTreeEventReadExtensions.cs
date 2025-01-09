@@ -21,11 +21,6 @@ namespace Forest.Storage.Read
                 Name = entity.Name
             };
 
-            var experts =
-                entity.Experts.OrderBy(e => e.Order).Select(e => e.Read(collector));
-            foreach (var expert in experts)
-                estimation.Experts.Add(expert);
-
             var hydrodynamicCondition =
                 entity.HydrodynamicConditions.OrderBy(e => e.Order).Select(e => e.Read(collector));
             foreach (var condition in hydrodynamicCondition)

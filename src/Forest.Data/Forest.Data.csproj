@@ -12,6 +12,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Estimations\PerTreeEvent\Person.cs" />
     <Compile Include="Estimations\PerTreeEvent\ProbabilityEstimationPerTreeEvent.cs" />
     <Compile Include="Estimations\ProbabilityEstimation.cs" />
     <Compile Include="Estimations\PerTreeEvent\TreeEventProbabilityEstimate.cs" />
@@ -20,11 +21,9 @@
     <Compile Include="Tree\EventTree.cs" />
     <Compile Include="Services\EventTreeModification.cs" />
     <Compile Include="ForestAnalysisFactory.cs" />
-    <Compile Include="Estimations\PerTreeEvent\Experts\Expert.cs" />
     <Compile Include="Probabilities\FragilityCurve.cs" />
     <Compile Include="Probabilities\FragilityCurveElement.cs" />
     <Compile Include="Hydrodynamics\HydrodynamicCondition.cs" />
-    <Compile Include="Estimations\PerTreeEvent\Experts\Person.cs" />
     <Compile Include="ForestAnalysis.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\AnalysisManipulationService.cs" />

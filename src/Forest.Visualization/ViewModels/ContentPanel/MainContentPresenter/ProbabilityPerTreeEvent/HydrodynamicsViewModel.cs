@@ -17,25 +17,25 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Prob
             foreach (var condition in probabilityEstimationPerTreeEvent.HydrodynamicConditions)
                 Hydrodynamics.Add(new HydrodynamicConditionViewModel(condition));
 
-            Hydrodynamics.CollectionChanged += ExpertsViewModelCollectionChanged;
+            Hydrodynamics.CollectionChanged += HydrodynamicsViewModelCollectionChanged;
         }
 
         public ObservableCollection<HydrodynamicConditionViewModel> Hydrodynamics { get; }
 
-        private void ExpertsViewModelCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void HydrodynamicsViewModelCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    foreach (var expertViewModel in e.NewItems.OfType<HydrodynamicConditionViewModel>())
-                        estimationObject.AddHydrodynamicCondition(expertViewModel.HydrodynamicCondition);
+                    foreach (var hydrodynamicConditionViewModel in e.NewItems.OfType<HydrodynamicConditionViewModel>())
+                        estimationObject.AddHydrodynamicCondition(hydrodynamicConditionViewModel.HydrodynamicCondition);
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    foreach (var expertViewModel in e.OldItems.OfType<HydrodynamicConditionViewModel>())
-                        estimationObject.AddHydrodynamicCondition(expertViewModel.HydrodynamicCondition);
+                    foreach (var hydrodynamicConditionsViewModel in e.OldItems.OfType<HydrodynamicConditionViewModel>())
+                        estimationObject.AddHydrodynamicCondition(hydrodynamicConditionsViewModel.HydrodynamicCondition);
                     break;
                 case NotifyCollectionChangedAction.Reset:
-                    estimationObject.Experts.Clear();
+                    estimationObject.HydrodynamicConditions.Clear();
                     break;
             }
         }

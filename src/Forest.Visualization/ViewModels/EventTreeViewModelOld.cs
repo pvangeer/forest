@@ -5,7 +5,6 @@ using System.Linq;
 using Forest.Data;
 using Forest.Data.Estimations;
 using Forest.Data.Estimations.PerTreeEvent;
-using Forest.Data.Estimations.PerTreeEvent.Experts;
 using Forest.Data.Properties;
 using Forest.Data.Services;
 using Forest.Data.Tree;
@@ -86,12 +85,6 @@ namespace Forest.Visualization.ViewModels
         }
 
         public IEnumerable<TreeEventViewModelOld> AllTreeEvents => GetAllEventsRecursive(MainTreeEventViewModel);
-
-        public bool SelectedEstimationHasExperts()
-        {
-            var selectedEstimation = selectionManager.Selection as ProbabilityEstimationPerTreeEvent;
-            return selectedEstimation != null && selectedEstimation.Experts.Any();
-        }
 
         public ProbabilityEstimationPerTreeEvent GetSelectedEstimationPerTreeEvent()
         {

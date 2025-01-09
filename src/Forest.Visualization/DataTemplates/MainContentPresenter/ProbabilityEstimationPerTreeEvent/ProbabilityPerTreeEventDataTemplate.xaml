@@ -4,8 +4,6 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary
-            Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/ExpertsDataTemplate.xaml" />
-        <ResourceDictionary
             Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/HydrodynamicsDataTemplate.xaml" />
         <ResourceDictionary
             Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/EstimationSpecificationPerTreeEventDataTemplate.xaml" />
@@ -14,10 +12,6 @@
     <DataTemplate x:Key="ProbabilityPerTreeEventDataTemplate"
                   DataType="{x:Type mainContentPanel:ProbabilityPerTreeEventMainContentViewModel}">
         <TabControl>
-            <TabItem
-                Header="Experts"
-                Content="{Binding ExpertsViewModel}"
-                ContentTemplate="{StaticResource ExpertsDataTemplate}" />
             <TabItem
                 Header="Hydrodynamica"
                 Content="{Binding HydrodynamicsViewModel}"

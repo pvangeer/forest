@@ -21,9 +21,7 @@ namespace Forest.Visualization.ViewModels
                 analysisManipulationService = new AnalysisManipulationService(Gui.ForestAnalysis);
 
                 var probabilityEstimationPerTreeEvent =
-                    gui.ForestAnalysis.ProbabilityEstimationsPerTreeEvent.FirstOrDefault();
-                ExpertsViewModel =
-                    new ExpertsViewModel(probabilityEstimationPerTreeEvent);
+                    gui.ForestAnalysis.ProbabilityEstimationsPerTreeEvent.FirstOrDefault(); 
                 HydrodynamicsViewModel = new HydrodynamicsViewModel(probabilityEstimationPerTreeEvent);
             }
         }
@@ -87,8 +85,6 @@ namespace Forest.Visualization.ViewModels
         public EventTreeViewModelOld EventTreeViewModel { get; set; }
 
         public TreeEventViewModelOld SelectedTreeEvent => EventTreeViewModel.SelectedTreeEvent;
-
-        public ExpertsViewModel ExpertsViewModel { get; }
 
         public HydrodynamicsViewModel HydrodynamicsViewModel { get; }
 
