@@ -126,21 +126,6 @@
               KeyPath="yes"
               Source="$(var.SolutionDir)\bin\$(var.Configuration)\OxyPlot.Wpf.xml" />
       </Component>
-      <Component Id="PresentationFramework" Guid="*">
-        <File Id="PresentationFramework.File"
-              KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\PresentationFramework.dll" />
-      </Component>
-      <Component Id="QuickGraph.Data" Guid="*">
-        <File Id="QuickGraph.Data.File"
-              KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.Data.dll" />
-      </Component>
-      <Component Id="QuickGraph.Data.Xml" Guid="*">
-        <File Id="QuickGraph.Data.Xml.File"
-              KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.Data.xml" />
-      </Component>
       <Component Id="QuickGraph" Guid="*">
         <File Id="QuickGraph.File"
               KeyPath="yes"
@@ -150,26 +135,6 @@
         <File Id="QuickGraph.Xml.File"
               KeyPath="yes"
               Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.xml" />
-      </Component>
-      <Component Id="QuickGraph.Graphviz" Guid="*">
-        <File Id="QuickGraph.Graphviz.File"
-              KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.Graphviz.dll" />
-      </Component>
-      <Component Id="QuickGraph.Graphviz.Xml" Guid="*">
-        <File Id="QuickGraph.Graphviz.Xml.File"
-              KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.Graphviz.xml" />
-      </Component>
-      <Component Id="QuickGraph.Serialization" Guid="*">
-        <File Id="QuickGraph.Serialization.File"
-              KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.Serialization.dll" />
-      </Component>
-      <Component Id="QuickGraph.Serialization.Xml" Guid="*">
-        <File Id="QuickGraph.Serialization.Xml.File"
-              KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.Serialization.xml" />
       </Component>
       <Component Id="System.Configuration.ConfigurationManager" Guid="*">
         <File Id="System.Configuration.ConfigurationManager.File"
@@ -271,15 +236,8 @@
       <ComponentRef Id="OxyPlot.Xml" />
       <ComponentRef Id="OxyPlot.Wpf" />
       <ComponentRef Id="OxyPlot.Wpf.Xml" />
-      <ComponentRef Id="PresentationFramework" />
-      <ComponentRef Id="QuickGraph.Data" />
-      <ComponentRef Id="QuickGraph.Data.Xml" />
       <ComponentRef Id="QuickGraph" />
       <ComponentRef Id="QuickGraph.Xml" />
-      <ComponentRef Id="QuickGraph.Graphviz" />
-      <ComponentRef Id="QuickGraph.Graphviz.Xml" />
-      <ComponentRef Id="QuickGraph.Serialization" />
-      <ComponentRef Id="QuickGraph.Serialization.Xml" />
       <ComponentRef Id="System.Configuration.ConfigurationManager" />
       <ComponentRef Id="System.Diagnostics.DiagnosticSource" />
       <ComponentRef Id="System.IO.Packaging" />

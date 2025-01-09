@@ -17,6 +17,5 @@ namespace Forest.Visualization.Commands
             ExecuteAction?.Invoke(parameter);
         }
 
-        public event EventHandler CanExecuteChanged;
     }
 }

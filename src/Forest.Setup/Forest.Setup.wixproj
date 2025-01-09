@@ -1,7 +1,8 @@
-<Project Sdk="WixToolset.Sdk/4.0.0">
+﻿<Project Sdk="WixToolset.Sdk/4.0.0">
   <PropertyGroup>
     <Cultures>nl-NL</Cultures>
     <Platforms>x64;ARM64</Platforms>
+    <OutputPath Condition="$(OutputPath) == ''">$(SolutionDir)\bin\setup\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Forest.ico" />

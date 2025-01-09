@@ -3,7 +3,6 @@
   <Import Project="$(SolutionDir)\build\Forest.targets" />
   <PropertyGroup>
     <ProjectGuid>{140124E3-8D13-4122-BF1E-C78743BD45E0}</ProjectGuid>
-    <OutputType>library</OutputType>
     <RootNamespace>Forest.Visualization.TreeView</RootNamespace>
     <AssemblyName>Forest.Visualization.TreeView</AssemblyName>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
