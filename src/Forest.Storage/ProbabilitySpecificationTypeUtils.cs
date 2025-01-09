@@ -10,8 +10,6 @@ namespace Forest.Storage
         {
             switch (modelProbabilitySpecificationType)
             {
-                case ProbabilitySpecificationType.Classes:
-                    return "classes";
                 case ProbabilitySpecificationType.FixedFrequency:
                     return "fixedprobability";
                 case ProbabilitySpecificationType.FixedValue:
@@ -25,8 +23,6 @@ namespace Forest.Storage
         {
             switch (storageName)
             {
-                case "classes":
-                    return ProbabilitySpecificationType.Classes;
                 case "fixedprobability":
                     return ProbabilitySpecificationType.FixedFrequency;
                 case "fragilitycurve":

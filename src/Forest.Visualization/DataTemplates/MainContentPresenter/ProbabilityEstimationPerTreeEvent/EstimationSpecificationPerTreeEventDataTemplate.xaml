@@ -55,8 +55,6 @@
                                         <ResourceDictionary
                                             Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/FixedValueEstimationTemplate.xaml" />
                                         <ResourceDictionary
-                                            Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/ClassEstimationTemplate.xaml" />
-                                        <ResourceDictionary
                                             Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/FixedFragilityCurveEstimationTemplate.xaml" />
                                     </ResourceDictionary.MergedDictionaries>
                                 </ResourceDictionary>
@@ -99,31 +97,6 @@
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
-                    <!--<StackPanel Grid.Row="1" Orientation="Vertical">
-                        <TextBlock
-                                   Margin="5"
-                                   Text="DOT formulieren"
-                                   FontWeight="Bold" />
-                        <Button
-                                   Content="Exporteren..."
-                                   Margin="5"
-                                   Padding="15,5,15,5"
-                                   Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                                   BorderBrush="DarkGray"
-                                   Command="{StaticResource ExportElicitationFormsCommand}"
-                                   CommandParameter="{Binding Path=.}"
-                                   VerticalAlignment="Center" />
-                        <Button
-                                   Content="Importeren..."
-                                   Margin="5"
-                                   Padding="15,5,15,5"
-                                   BorderBrush="DarkGray"
-                                   Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                                   Command="{StaticResource ImportElicitationFormsCommand}"
-                                   CommandParameter="{Binding Path=.}"
-                                   VerticalAlignment="Center" />
-                    </StackPanel>-->
-                    <!--TODO: Move buttons to ribbon-->
                 </Grid>
             </Border>
             <GridSplitter Grid.Column="1" Width="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />

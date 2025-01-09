@@ -93,20 +93,10 @@ namespace Forest.Visualization.ViewModels
             return new HydrodynamicsViewModel(estimation);
         }
 
-        public ClassesProbabilitySpecificationViewModel CreateClassesProbabilitySpecificationViewModel(TreeEventProbabilityEstimate estimation)
-        {
-            return new ClassesProbabilitySpecificationViewModel(estimation, this);
-        }
-
         public FixedFragilityCurveSpecificationViewModel CreateFragilityCurveSpecificationTypeViewModel(TreeEventProbabilityEstimate estimation,
             ProbabilityEstimationPerTreeEvent parentEstimation)
         {
             return new FixedFragilityCurveSpecificationViewModel(estimation, parentEstimation, this);
-        }
-
-        public ExpertClassEstimationViewModel CreateExpertClassEstimationViewModel(ExpertClassEstimation expertClassEstimation)
-        {
-            return new ExpertClassEstimationViewModel(expertClassEstimation);
         }
 
         public FixedProbabilitySpecificationViewModel CreateFixedProbabilitySpecificationTypeViewModel(TreeEventProbabilityEstimate estimation)

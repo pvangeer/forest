@@ -19,7 +19,6 @@
     <Compile Include="BackupFileWriter.cs" />
     <Compile Include="ColorConversionExtensions.cs" />
     <Compile Include="Create\EventTreeCreateExtensions.cs" />
-    <Compile Include="Create\ExpertClassEstimationCreateExtensions.cs" />
     <Compile Include="Create\ExpertCreateExtensions.cs" />
     <Compile Include="Create\FragilityCurveElementCreateExtensions.cs" />
     <Compile Include="Create\HydraulicConditionCreateExtensions.cs" />
@@ -42,7 +41,6 @@
     <Compile Include="Create\PersistenceRegistry.cs" />
     <Compile Include="DoubleConversionExtensions.cs" />
     <Compile Include="Read\EventTreeEntitiesReadExtensions.cs" />
-    <Compile Include="Read\ExpertClassEstimationEntityReadExtensions.cs" />
     <Compile Include="Read\ExpertEntitiesReadExtensions.cs" />
     <Compile Include="Read\FragilityCurveElementEntityReadExtensions.cs" />
     <Compile Include="Read\HydraulicConditionEntityReadExtensions.cs" />
@@ -62,7 +60,6 @@
     <Compile Include="TreeEventTypeUtils.cs" />
     <Compile Include="VersionInfo.cs" />
     <Compile Include="XmlEntities\EventTreeXmlEntity.cs" />
-    <Compile Include="XmlEntities\ExpertClassEstimationXmlEntity.cs" />
     <Compile Include="XmlEntities\ExpertXmlEntity.cs" />
     <Compile Include="XmlEntities\FragilityCurveElementXmlEntity.cs" />
     <Compile Include="XmlEntities\HydrodynamicConditionXmlEntity.cs" />

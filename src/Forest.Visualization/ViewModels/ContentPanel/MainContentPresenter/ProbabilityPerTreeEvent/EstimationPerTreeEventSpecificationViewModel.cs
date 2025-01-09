@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Tree;
@@ -15,6 +16,15 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Prob
         {
             this.gui = gui;
             this.estimation = estimation;
+            estimation.Estimates.CollectionChanged += EstimatesCollectionchanged;
+        }
+
+        private void EstimatesCollectionchanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add || e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                OnPropertyChanged(nameof(AllTreeEvents));
+            }
         }
 
         public IEnumerable<TreeEventEstimationViewModel> AllTreeEvents => GetAllEventsRecursive();

@@ -56,8 +56,6 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Prob
             {
                 switch (estimation.ProbabilitySpecificationType)
                 {
-                    case ProbabilitySpecificationType.Classes:
-                        return ViewModelFactory.CreateClassesProbabilitySpecificationViewModel(estimation);
                     case ProbabilitySpecificationType.FixedFrequency:
                         return ViewModelFactory.CreateFragilityCurveSpecificationTypeViewModel(estimation, parentEstimation);
                     case ProbabilitySpecificationType.FixedValue:
@@ -97,12 +95,10 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Prob
         {
             switch (t)
             {
-                case ProbabilitySpecificationType.Classes:
-                    return "Klassen";
                 case ProbabilitySpecificationType.FixedValue:
                     return "Vaste kans";
                 case ProbabilitySpecificationType.FixedFrequency:
-                    return "Vaste freqeuentielijn";
+                    return "Freqeuentielijn";
                 default:
                     throw new InvalidEnumArgumentException();
             }

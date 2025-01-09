@@ -28,11 +28,9 @@
     <Compile Include="ForestAnalysis.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\AnalysisManipulationService.cs" />
-    <Compile Include="Estimations\PerTreeEvent\ExpertClassEstimationUtils.cs" />
     <Compile Include="Tree\TreeEventExtensions.cs" />
     <Compile Include="Tree\TreeEventType.cs" />
     <Compile Include="Services\TreeEventsChangedEventArgs.cs" />
-    <Compile Include="Estimations\PerTreeEvent\ExpertClassEstimation.cs" />
     <Compile Include="Probabilities\Probability.cs" />
     <Compile Include="Estimations\PerTreeEvent\ProbabilityClass.cs" />
     <Compile Include="Estimations\PerTreeEvent\ProbabilitySpecificationType.cs" />

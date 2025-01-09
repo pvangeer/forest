@@ -9,7 +9,6 @@ namespace Forest.Storage.XmlEntities
     {
         public TreeEventProbabilityEstimateXmlEntity()
         {
-            ClassProbabilitySpecifications = new ObservableCollection<ExpertClassEstimationXmlEntity>();
             FragilityCurve = new ObservableCollection<FragilityCurveElementXmlEntity>();
         }
 
@@ -21,10 +20,6 @@ namespace Forest.Storage.XmlEntities
 
         [XmlAttribute(AttributeName = "fixedprobability")]
         public double FixedProbability { get; set; }
-
-        [XmlArray(ElementName = "probabilityspecifications")]
-        [XmlArrayItem(ElementName = "classprobabilityspecification")]
-        public ObservableCollection<ExpertClassEstimationXmlEntity> ClassProbabilitySpecifications { get; }
 
         [XmlArray(ElementName = "fragilitycurve")]
         [XmlArrayItem(ElementName = "fragilitycurveelement")]

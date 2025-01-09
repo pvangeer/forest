@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Properties;
@@ -29,12 +30,15 @@ namespace Forest.Data.Services
             if (parent == null)
                 throw new ArgumentNullException();
 
-            var estimation = forestAnalysis.ProbabilityEstimationsPerTreeEvent.FirstOrDefault(e => e.EventTree == eventTree);
-            if (estimation != null)
+            var removedTreeEvents = GetAllTreeNodes(selectedTreeEventToRemove);
+            foreach (var estimation in forestAnalysis.ProbabilityEstimationsPerTreeEvent.Where(e => e.EventTree == eventTree))
             {
-                var estimationToRemove = estimation.Estimates.FirstOrDefault(e => e.TreeEvent == selectedTreeEventToRemove);
-                if (estimationToRemove != null)
-                    estimation.Estimates.Remove(estimationToRemove);
+                foreach (var eventProbabilityEstimation in estimation.Estimates
+                             .Where(e => removedTreeEvents.Any(te => te == e.TreeEvent))
+                             .ToList())
+                {
+                    estimation.Estimates.Remove(eventProbabilityEstimation);
+                }
             }
 
             if (parent.FailingEvent == selectedTreeEventToRemove)
@@ -57,28 +61,12 @@ namespace Forest.Data.Services
         {
             var newTreeEvent = new TreeEvent("Nieuwe gebeurtenis", type);
 
-            var estimation = forestAnalysis.ProbabilityEstimationsPerTreeEvent.FirstOrDefault(e => e.EventTree == eventTree);
-
-            if (estimation != null)
+            foreach (var estimation in forestAnalysis.ProbabilityEstimationsPerTreeEvent.Where(e => e.EventTree == eventTree))
             {
-                var treeEventProbabilityEstimation = new TreeEventProbabilityEstimate(newTreeEvent)
+                estimation.Estimates.Add(new TreeEventProbabilityEstimate(newTreeEvent)
                 {
                     ProbabilitySpecificationType = ProbabilitySpecificationType.FixedValue
-                };
-                foreach (var expert in estimation.Experts)
-                foreach (var hydraulicCondition in estimation.HydrodynamicConditions)
-                {
-                    treeEventProbabilityEstimation.ClassProbabilitySpecifications.Add(new ExpertClassEstimation
-                    {
-                        Expert = expert,
-                        HydrodynamicCondition = hydraulicCondition,
-                        AverageEstimation = ProbabilityClass.None,
-                        MinEstimation = ProbabilityClass.None,
-                        MaxEstimation = ProbabilityClass.None
-                    });
-                }
-
-                estimation.Estimates.Add(treeEventProbabilityEstimation);
+                });
             }
 
             if (eventTree.MainTreeEvent == null)
@@ -110,11 +98,23 @@ namespace Forest.Data.Services
 
         public void AddProbabilityEstimationPerTreeEvent(EventTree eventTree)
         {
-            forestAnalysis.ProbabilityEstimationsPerTreeEvent.Add(new ProbabilityEstimationPerTreeEvent
+            var probabilityEstimation = new ProbabilityEstimationPerTreeEvent
             {
                 Name = "Nieuwe faalkansinschatting",
                 EventTree = eventTree
-            });
+            };
+            if (eventTree.MainTreeEvent != null)
+            {
+                foreach (var treeEvent in GetAllTreeNodes(eventTree.MainTreeEvent))
+                {
+                    probabilityEstimation.Estimates.Add(new TreeEventProbabilityEstimate(treeEvent)
+                    {
+                        ProbabilitySpecificationType = ProbabilitySpecificationType.FixedValue
+                    });
+                }
+            }
+            
+            forestAnalysis.ProbabilityEstimationsPerTreeEvent.Add(probabilityEstimation);
         }
 
         public void RemoveProbabilityEstimationPerTreeEvent(ProbabilityEstimationPerTreeEvent estimation)
@@ -147,6 +147,26 @@ namespace Forest.Data.Services
             foreach (var estimation in estimationsToRemove)
                 RemoveProbabilityEstimationPerTreeEvent(estimation);
             forestAnalysis.EventTrees.Remove(eventTree);
+        }
+
+        private static IEnumerable<TreeEvent> GetAllTreeNodes(TreeEvent treeEvent)
+        {
+            yield return treeEvent;
+            if (treeEvent.FailingEvent != null)
+            {
+                foreach (var node in GetAllTreeNodes(treeEvent.FailingEvent))
+                {
+                    yield return node;
+                }
+            }
+
+            if (treeEvent.PassingEvent != null)
+            {
+                foreach (var node in GetAllTreeNodes(treeEvent.PassingEvent))
+                {
+                    yield return node;
+                }
+            }
         }
     }
 }

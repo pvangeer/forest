@@ -16,10 +16,6 @@ namespace Forest.Storage.Read
                 ProbabilitySpecificationType = ProbabilitySpecificationTypeUtils.FromStorageName(entity.ProbabilitySpecificationType)
             };
 
-            var classEstimations = entity.ClassProbabilitySpecifications.OrderBy(e => e.Order).Select(e => e.Read(collector));
-            foreach (var expertClassEstimation in classEstimations)
-                estimate.ClassProbabilitySpecifications.Add(expertClassEstimation);
-
             var fragilityCurveElements = entity.FragilityCurve.OrderBy(e => e.Order).Select(e => e.Read(collector));
             foreach (var element in fragilityCurveElements)
                 estimate.FragilityCurve.Add(element);

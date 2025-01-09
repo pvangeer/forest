@@ -131,7 +131,6 @@
     <Compile Include="Converters\CriticalPathConverter.cs" />
     <Compile Include="Converters\CriticalPathToPlotModelConverter.cs" />
     <Compile Include="Converters\CriticalPathToProbabilityTextConverter.cs" />
-    <Compile Include="Converters\EstimationtoBackgroundConverter.cs" />
     <Compile Include="Converters\EventTypeToColorConverter.cs" />
     <Compile Include="Converters\FragilityCurveToPlotModelConverter.cs" />
     <Compile Include="Converters\RouteToPathConverterManual.cs" />
@@ -158,10 +157,8 @@
     <Compile Include="Ribbon\ForestRibbonControl.xaml.cs">
       <DependentUpon>ForestRibbonControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ClassesProbabilitySpecificationViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\EventTreeEditing\EventTreeGraph.cs" />
     <Compile Include="ViewModels\EventTreeViewModelOld.cs" />
-    <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ExpertClassEstimationViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ExpertViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\FixedFragilityCurveSpecificationViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\FixedProbabilitySpecificationViewModel.cs" />
@@ -217,14 +214,6 @@
     <Page Include="DataTemplates\MainContentPresenter\ProbabilityEstimationPerTreeEvent\ProbabilityPerTreeEventDataTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataTemplates\MainTabItems\EstimationDataTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="DataTemplates\MainContentPresenter\ProbabilityEstimationPerTreeEvent\ClassEstimationTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="DataTemplates\MainContentPresenter\ProbabilityEstimationPerTreeEvent\FixedFragilityCurveEstimationTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>

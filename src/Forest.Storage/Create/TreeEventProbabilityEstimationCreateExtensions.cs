@@ -18,23 +18,10 @@ namespace Forest.Storage.Create
             };
 
             AddFragilityCurveElements(entity, model, registry);
-            AddClassProbabilitySpecifications(entity, model, registry);
 
             return entity;
         }
 
-
-        private static void AddClassProbabilitySpecifications(TreeEventProbabilityEstimateXmlEntity entity,
-            TreeEventProbabilityEstimate model,
-            PersistenceRegistry registry)
-        {
-            for (var index = 0; index < model.ClassProbabilitySpecifications.Count; index++)
-            {
-                var classEstimationXmlEntity = model.ClassProbabilitySpecifications[index].Create(registry);
-                classEstimationXmlEntity.Order = index;
-                entity.ClassProbabilitySpecifications.Add(classEstimationXmlEntity);
-            }
-        }
 
         private static void AddFragilityCurveElements(TreeEventProbabilityEstimateXmlEntity entity,
             TreeEventProbabilityEstimate model,

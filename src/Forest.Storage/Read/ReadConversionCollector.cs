@@ -14,9 +14,6 @@ namespace Forest.Storage.Read
     {
         private readonly Dictionary<EventTreeXmlEntity, EventTree> eventTrees = CreateDictionary<EventTreeXmlEntity, EventTree>();
 
-        private readonly Dictionary<ExpertClassEstimationXmlEntity, ExpertClassEstimation> expertClassEstimations =
-            CreateDictionary<ExpertClassEstimationXmlEntity, ExpertClassEstimation>();
-
         private readonly Dictionary<ExpertXmlEntity, Expert> experts = CreateDictionary<ExpertXmlEntity, Expert>();
 
         private readonly Dictionary<FragilityCurveElementXmlEntity, FragilityCurveElement> fragilityCurveElements =
@@ -59,11 +56,6 @@ namespace Forest.Storage.Read
             Collect(treeEvents, entity, model);
         }
 
-        internal void Collect(ExpertClassEstimationXmlEntity entity, ExpertClassEstimation model)
-        {
-            Collect(expertClassEstimations, entity, model);
-        }
-
         internal bool Contains(PersonXmlEntity entity)
         {
             return Contains(persons, entity);
@@ -94,11 +86,6 @@ namespace Forest.Storage.Read
             return Contains(treeEvents, entity);
         }
 
-        internal bool Contains(ExpertClassEstimationXmlEntity entity)
-        {
-            return Contains(expertClassEstimations, entity);
-        }
-
         internal Person Get(PersonXmlEntity entity)
         {
             return Get(persons, entity);
@@ -127,11 +114,6 @@ namespace Forest.Storage.Read
         internal TreeEvent Get(TreeEventXmlEntity entity)
         {
             return Get(treeEvents, entity);
-        }
-
-        internal ExpertClassEstimation Get(ExpertClassEstimationXmlEntity entity)
-        {
-            return Get(expertClassEstimations, entity);
         }
 
         public Expert GetReferencedExpert(long id)

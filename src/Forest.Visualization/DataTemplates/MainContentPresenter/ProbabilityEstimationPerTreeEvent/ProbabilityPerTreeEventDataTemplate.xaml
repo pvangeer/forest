@@ -19,17 +19,13 @@
                 Content="{Binding ExpertsViewModel}"
                 ContentTemplate="{StaticResource ExpertsDataTemplate}" />
             <TabItem
-                Header="Hydrodynamics"
+                Header="Hydrodynamica"
                 Content="{Binding HydrodynamicsViewModel}"
                 ContentTemplate="{StaticResource HydrodynamicsDataTemplate}" />
             <TabItem
-                Header="Probability estimations"
+                Header="Kansinschatting"
                 Content="{Binding ProbabilityEstimationsViewModel}"
                 ContentTemplate="{StaticResource EstimationPerEventTreeDataTemplate}" />
-            <TabItem
-                Header="Results"
-                Content="{Binding ResultsPerTreeEventViewModel}"
-                ContentTemplate="{StaticResource ExpertsDataTemplate}" />
         </TabControl>
     </DataTemplate>
 </ResourceDictionary>

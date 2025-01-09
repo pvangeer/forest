@@ -19,8 +19,6 @@ namespace Forest.Visualization.DataTemplates.MainContentPresenter.ProbabilityEst
 
             switch (probabilitySpecification.Type)
             {
-                case ProbabilitySpecificationType.Classes:
-                    return contentPresenter.Resources["ClassEstimationTemplate"] as DataTemplate;
                 case ProbabilitySpecificationType.FixedValue:
                     return contentPresenter.Resources["FixedValueEstimationTemplate"] as DataTemplate;
                 case ProbabilitySpecificationType.FixedFrequency:

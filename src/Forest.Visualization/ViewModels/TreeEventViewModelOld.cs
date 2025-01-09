@@ -178,8 +178,6 @@ namespace Forest.Visualization.ViewModels
         {
             switch (t)
             {
-                case ProbabilitySpecificationType.Classes:
-                    return "Klassen";
                 case ProbabilitySpecificationType.FixedValue:
                     return "Vaste kans";
                 case ProbabilitySpecificationType.FixedFrequency:

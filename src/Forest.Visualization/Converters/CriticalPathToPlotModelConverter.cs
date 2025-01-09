@@ -29,42 +29,6 @@ namespace Forest.Visualization.Converters
                 Position = AxisPosition.Left
             });
 
-            var orderedWaterLevels = hydraulics.Select(h => h.WaterLevel).Distinct().ToArray();
-            var lowerElements = pathElements.Select(p =>
-                {
-                    var estimation = estimations.FirstOrDefault(e => e.TreeEvent == p.Element);
-                    return new CriticalPathElement(p.Element, estimation.GetLowerFragilityCurve(orderedWaterLevels), p.ElementFails);
-                })
-                .ToArray();
-            var lowerCurve = ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics, lowerElements);
-
-            var upperCurves = pathElements.Select(p =>
-                {
-                    var estimation = estimations.FirstOrDefault(e => e.TreeEvent == p.Element);
-                    return new CriticalPathElement(p.Element, estimation.GetUpperFragilityCurves(orderedWaterLevels), p.ElementFails);
-                })
-                .ToArray();
-            var upperCurve = ClassEstimationFragilityCurveCalculator.CalculateCombinedFragilityCurve(hydraulics, upperCurves);
-
-            var polygonDatas = new List<PolygonData>();
-            for (var i = 0; i < orderedWaterLevels.Length; i++)
-            {
-                polygonDatas.Add(new PolygonData(lowerCurve[i].Probability,
-                    lowerCurve[i].WaterLevel,
-                    upperCurve[i].Probability,
-                    upperCurve[i].WaterLevel));
-            }
-
-            plotModel.Series.Add(new AreaSeries
-            {
-                ItemsSource = polygonDatas,
-                DataFieldX = nameof(PolygonData.X1),
-                DataFieldY = nameof(PolygonData.Y1),
-                DataFieldX2 = nameof(PolygonData.X2),
-                DataFieldY2 = nameof(PolygonData.Y2),
-                Color = OxyColors.AliceBlue
-            });
-
             for (var i = 0; i < pathElements.Length; i++)
             {
                 var curve = new FragilityCurveViewModel(

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Forest.Data.Probabilities;
 
 namespace Forest.Data.Estimations.PerTreeEvent
@@ -11,17 +10,6 @@ namespace Forest.Data.Estimations.PerTreeEvent
         {
             switch (estimate.ProbabilitySpecificationType)
             {
-                case ProbabilitySpecificationType.Classes:
-                    var classCurve = new FragilityCurve();
-                    foreach (var waterLevel in waterLevels)
-                    {
-                        classCurve.Add(
-                            new FragilityCurveElement(waterLevel,
-                                ExpertClassEstimationUtils.GetClassesBasedProbabilityForWaterLevel(estimate.ClassProbabilitySpecifications,
-                                    waterLevel)));
-                    }
-
-                    return classCurve;
                 case ProbabilitySpecificationType.FixedFrequency:
                     // TODO: Interpolate if necessary
                     return estimate.FragilityCurve;
@@ -34,26 +22,6 @@ namespace Forest.Data.Estimations.PerTreeEvent
                 default:
                     throw new NotImplementedException();
             }
-        }
-
-        public static FragilityCurve GetUpperFragilityCurves(this TreeEventProbabilityEstimate estimate,
-            IEnumerable<double> orderedWaterLevels)
-        {
-            if (estimate.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
-                return ExpertClassEstimationUtils.GetClassBasedUpperFragilityCurve(estimate.ClassProbabilitySpecifications.ToArray(),
-                    orderedWaterLevels);
-
-            return estimate.GetFragilityCurve(orderedWaterLevels);
-        }
-
-        public static FragilityCurve GetLowerFragilityCurve(this TreeEventProbabilityEstimate estimate,
-            IEnumerable<double> orderedWaterLevels)
-        {
-            if (estimate.ProbabilitySpecificationType == ProbabilitySpecificationType.Classes)
-                return ExpertClassEstimationUtils.GetClassBasedLowerFragilityCurve(estimate.ClassProbabilitySpecifications.ToArray(),
-                    orderedWaterLevels);
-
-            return estimate.GetFragilityCurve(orderedWaterLevels);
         }
 
         public static void ChangeProbabilityEstimationType(this TreeEventProbabilityEstimate estimate,
