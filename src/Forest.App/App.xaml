@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:converters="clr-namespace:Forest.Visualization.Converters;assembly=Forest.Visualization"
-             xmlns:import="clr-namespace:Forest.Visualization.Ribbon.IO.Import;assembly=Forest.Visualization"
-             xmlns:export="clr-namespace:Forest.Visualization.Ribbon.IO.Export;assembly=Forest.Visualization"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -39,8 +37,6 @@
 
             <xctk:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
             <converters:ProbabilityToStringConverter x:Key="ProbabilityToStringConverter" />
-            <export:ExportElicitationFormsCommand x:Key="ExportElicitationFormsCommand" />
-            <import:ImportElicitationFormsCommand x:Key="ImportElicitationFormsCommand" />
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
         </ResourceDictionary>

@@ -119,16 +119,6 @@
     <Compile Include="Commands\ProjectExplorer\SelectItemCommand.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\HydrodynamicsViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ExpertsViewModel.cs" />
-    <Compile Include="Ribbon\IO\Export\ElicitationFormExportDialog.xaml.cs">
-      <DependentUpon>ElicitationFormExportDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Ribbon\IO\Export\ElicitationFormsExportViewModel.cs" />
-    <Compile Include="Ribbon\IO\Export\ExportElicitationFormsCommand.cs" />
-    <Compile Include="Ribbon\IO\Export\ExportElicitationFormsViewModel.cs" />
-    <Compile Include="Ribbon\IO\Export\FolderDialogBehavior.cs" />
-    <Compile Include="Ribbon\IO\Export\PerformExportElicitationFormsCommand.cs" />
-    <Compile Include="Ribbon\IO\Export\SelectFileLocationCommand.cs" />
-    <Compile Include="Ribbon\IO\Import\ImportElicitationFormsCommand.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\EventTreeEditing\EventTreeMainContentViewModel.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\EventTreeEditing\GraphVertex.cs" />
     <Compile Include="ViewModels\ContentPanel\MainContentPresenter\ProbabilityPerTreeEvent\ProbabilityPerTreeEventMainContentViewModel.cs" />
@@ -294,10 +284,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ribbon\IO\Export\ElicitationFormExportDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Styles\ButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -355,10 +341,6 @@
     <ProjectReference Include="..\Forest.Gui\Forest.Gui.csproj">
       <Project>{5ACE288D-CC7F-47D4-8A2A-2764101BC5E6}</Project>
       <Name>Forest.Gui</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Forest.IO\Forest.IO.csproj">
-      <Project>{64ac0a2f-b6d4-45c8-812b-aac0baec1d11}</Project>
-      <Name>Forest.IO</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forest.Messaging\Forest.Messaging.csproj">
       <Project>{7F6BB180-3B8C-4761-8BB6-E7562FB37895}</Project>

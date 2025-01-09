@@ -71,18 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorExtensions.cs" />
-    <Compile Include="Export\ElicitationFormsExporter.cs" />
-    <Compile Include="Export\ElicitationFormWriter.cs" />
     <Compile Include="HydraulicConditionsWaterLevelComparer.cs" />
-    <Compile Include="Import\DotEstimate.cs" />
-    <Compile Include="Import\DotForm.cs" />
-    <Compile Include="Import\DotFormValidation\DotFormValidationResult.cs" />
-    <Compile Include="Import\DotFormValidation\DotFormValidator.cs" />
-    <Compile Include="Import\DotNode.cs" />
-    <Compile Include="Import\ElicitationFormImporter.cs" />
-    <Compile Include="Import\ElicitationFormReader.cs" />
-    <Compile Include="Import\DotFormValidation\ExpertValidationResult.cs" />
-    <Compile Include="Import\DotFormValidation\NodeValidationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StyleSheetLibrary.cs" />
   </ItemGroup>

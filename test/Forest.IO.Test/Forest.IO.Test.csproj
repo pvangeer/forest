@@ -108,12 +108,6 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Forest.IO\Forest.IO.csproj">
-      <Project>{64AC0A2F-B6D4-45C8-812B-AAC0BAEC1D11}</Project>
-      <Name>Forest.IO</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

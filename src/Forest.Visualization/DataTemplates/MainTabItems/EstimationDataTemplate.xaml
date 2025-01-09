@@ -110,24 +110,6 @@
                                     Margin="5"
                                     Text="DOT formulieren"
                                     FontWeight="Bold" />
-                                <Button
-                                    Content="Exporteren..."
-                                    Margin="5"
-                                    Padding="15,5,15,5"
-                                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                                    BorderBrush="DarkGray"
-                                    Command="{StaticResource ExportElicitationFormsCommand}"
-                                    CommandParameter="{Binding Path=.}"
-                                    VerticalAlignment="Center" />
-                                <Button
-                                    Content="Importeren..."
-                                    Margin="5"
-                                    Padding="15,5,15,5"
-                                    BorderBrush="DarkGray"
-                                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                                    Command="{StaticResource ImportElicitationFormsCommand}"
-                                    CommandParameter="{Binding Path=.}"
-                                    VerticalAlignment="Center" />
                             </StackPanel>
                         </Grid>
                     </Border>

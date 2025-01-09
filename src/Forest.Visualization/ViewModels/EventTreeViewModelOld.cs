@@ -10,8 +10,6 @@ using Forest.Data.Properties;
 using Forest.Data.Services;
 using Forest.Data.Tree;
 using Forest.Gui;
-using Forest.IO.Export;
-using Forest.IO.Import;
 using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.EventTreeEditing;
 
 namespace Forest.Visualization.ViewModels
@@ -88,25 +86,6 @@ namespace Forest.Visualization.ViewModels
         }
 
         public IEnumerable<TreeEventViewModelOld> AllTreeEvents => GetAllEventsRecursive(MainTreeEventViewModel);
-
-        public void OnExportElicitationForms(string fileLocation,
-            string prefix,
-            Expert[] expertsToExport,
-            ProbabilityEstimationPerTreeEvent estimationToExport)
-        {
-            var exporter = new ElicitationFormsExporter(estimationToExport);
-            exporter.Export(fileLocation, prefix, expertsToExport, estimationToExport);
-        }
-
-        public void OnImportElicitationForms(string[] fileLocations)
-        {
-            var estimationToImportTo = selectionManager.Selection as ProbabilityEstimationPerTreeEvent;
-            if (estimationToImportTo == null)
-                return;
-            var importer = new ElicitationFormImporter(estimationToImportTo);
-            foreach (var fileLocation in fileLocations)
-                importer.Import(fileLocation);
-        }
 
         public bool SelectedEstimationHasExperts()
         {
