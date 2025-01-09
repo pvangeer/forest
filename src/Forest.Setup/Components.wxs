@@ -16,15 +16,16 @@
               KeyPath="yes"
               Source="$(var.SolutionDir)\bin\$(var.Configuration)\Fluent.dll" />
       </Component>
-      <Component Id="FluentXml" Guid="*">
-        <File Id="Fluent.Xml.File"
-              KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Fluent.xml" />
-      </Component>
       <Component Id="Forest.App" Guid="*">
         <File Id="Forest.App.File"
               KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Forest.App.exe" />
+              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Forest.App.exe">
+          <Shortcut Name="Forest" 
+                    Directory="DesktopFolder" 
+                    Advertise="yes" 
+                    WorkingDirectory="INSTALLFOLDER"
+                    Icon="Forest.ico"/>
+        </File>
       </Component>
       <Component Id="Forest.App.Config" Guid="*">
         <File Id="Forest.App.Config.File"
@@ -91,50 +92,25 @@
               KeyPath="yes"
               Source="$(var.SolutionDir)\bin\$(var.Configuration)\Microsoft.WindowsAPICodePack.dll" />
       </Component>
-      <Component Id="Microsoft.WindowsAPICodePackXml" Guid="*">
-        <File Id="Microsoft.WindowsAPICodePack.Xml.File"
-              KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Microsoft.WindowsAPICodePack.xml" />
-      </Component>
       <Component Id="Microsoft.WindowsAPICodePack.Shell" Guid="*">
         <File Id="Microsoft.WindowsAPICodePack.Shell.File"
               KeyPath="yes"
               Source="$(var.SolutionDir)\bin\$(var.Configuration)\Microsoft.WindowsAPICodePack.Shell.dll" />
-      </Component>
-      <Component Id="Microsoft.WindowsAPICodePackShellXml" Guid="*">
-        <File Id="Microsoft.WindowsAPICodePack.Shell.Xml.File"
-              KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\Microsoft.WindowsAPICodePack.Shell.xml" />
       </Component>
       <Component Id="OxyPlot" Guid="*">
         <File Id="OxyPlot.File"
               KeyPath="yes"
               Source="$(var.SolutionDir)\bin\$(var.Configuration)\OxyPlot.dll" />
       </Component>
-      <Component Id="OxyPlot.Xml" Guid="*">
-        <File Id="OxyPlot.Xml.File"
-              KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\OxyPlot.xml" />
-      </Component>
       <Component Id="OxyPlot.Wpf" Guid="*">
         <File Id="OxyPlot.Wpf.File"
               KeyPath="yes"
               Source="$(var.SolutionDir)\bin\$(var.Configuration)\OxyPlot.Wpf.dll" />
       </Component>
-      <Component Id="OxyPlot.Wpf.Xml" Guid="*">
-        <File Id="OxyPlot.Wpf.Xml.File"
-              KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\OxyPlot.Wpf.xml" />
-      </Component>
       <Component Id="QuickGraph" Guid="*">
         <File Id="QuickGraph.File"
               KeyPath="yes"
               Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.dll" />
-      </Component>
-      <Component Id="QuickGraph.Xml" Guid="*">
-        <File Id="QuickGraph.Xml.File"
-              KeyPath="yes"
-              Source="$(var.SolutionDir)\bin\$(var.Configuration)\QuickGraph.xml" />
       </Component>
       <Component Id="System.Configuration.ConfigurationManager" Guid="*">
         <File Id="System.Configuration.ConfigurationManager.File"
@@ -213,7 +189,6 @@
     <ComponentGroup Id="Forest.Binaries">
       <ComponentRef Id="ControlzEx" />
       <ComponentRef Id="DocumentFormat.OpenXml"/>
-      <ComponentRef Id="FluentXml" />
       <ComponentRef Id="Fluent" />
       <ComponentRef Id="Forest.App" />
       <ComponentRef Id="Forest.App.Config" />
@@ -229,15 +204,10 @@
       <ComponentRef Id="GraphSharp" />
       <ComponentRef Id="Log4Net" />
       <ComponentRef Id="Microsoft.WindowsAPICodePack" />
-      <ComponentRef Id="Microsoft.WindowsAPICodePackXml" />
       <ComponentRef Id="Microsoft.WindowsAPICodePack.Shell" />
-      <ComponentRef Id="Microsoft.WindowsAPICodePackShellXml" />
       <ComponentRef Id="OxyPlot" />
-      <ComponentRef Id="OxyPlot.Xml" />
       <ComponentRef Id="OxyPlot.Wpf" />
-      <ComponentRef Id="OxyPlot.Wpf.Xml" />
       <ComponentRef Id="QuickGraph" />
-      <ComponentRef Id="QuickGraph.Xml" />
       <ComponentRef Id="System.Configuration.ConfigurationManager" />
       <ComponentRef Id="System.Diagnostics.DiagnosticSource" />
       <ComponentRef Id="System.IO.Packaging" />

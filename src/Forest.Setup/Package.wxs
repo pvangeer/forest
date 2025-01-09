@@ -15,11 +15,9 @@
     <Icon Id="Forest.ico" SourceFile="Forest.ico" />
     <Property Id="ARPPRODUCTICON" Value="Forest.ico" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="$(var.PlatformProgramFilesFolder)">
-        <Directory Id="INSTALLFOLDER" Name="Forest" />
-      </Directory>
-    </Directory>
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="INSTALLFOLDER" Name="Forest" />
+    </StandardDirectory>
 
     <Directory Id="ProgramMenuFolder">
       <Directory Id="ApplicationProgramsFolder" Name="Forest" />
