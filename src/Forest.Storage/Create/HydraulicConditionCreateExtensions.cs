@@ -18,8 +18,6 @@ namespace Forest.Storage.Create
             {
                 Probability = model.Probability,
                 WaterLevel = model.WaterLevel,
-                WaveHeight = model.WaveHeight,
-                WavePeriod = model.WavePeriod
             };
 
             registry.Register(model, entity);

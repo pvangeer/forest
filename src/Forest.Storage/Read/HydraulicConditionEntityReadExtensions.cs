@@ -21,8 +21,6 @@ namespace Forest.Storage.Read
             {
                 Probability = double.IsNaN(entity.Probability) ? Probability.NaN : (Probability)entity.Probability,
                 WaterLevel = entity.WaterLevel,
-                WavePeriod = entity.WavePeriod,
-                WaveHeight = entity.WaveHeight
             };
 
             collector.Collect(entity, condition);

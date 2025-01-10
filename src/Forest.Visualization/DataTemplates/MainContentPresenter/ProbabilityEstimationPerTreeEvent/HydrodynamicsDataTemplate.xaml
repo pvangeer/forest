@@ -25,14 +25,6 @@
                         Header="Kans"
                         Binding="{Binding Probability, Converter={StaticResource ProbabilityToStringConverter}}"
                         ElementStyle="{StaticResource ColumnElementStyle}" />
-                    <DataGridTextColumn
-                        Header="Golfhoogte"
-                        Binding="{Binding WaveHeight}"
-                        ElementStyle="{StaticResource ColumnElementStyle}" />
-                    <DataGridTextColumn
-                        Header="Golfperiode"
-                        Binding="{Binding WavePeriod}"
-                        ElementStyle="{StaticResource ColumnElementStyle}" />
                 </DataGrid.Columns>
             </DataGrid>
             <GridSplitter

@@ -20,12 +20,12 @@ namespace Forest.Calculators.Test
         {
             var hydraulicConditions = new[]
             {
-                new HydrodynamicCondition(2.3, (Probability)3.33E-02, double.NaN, double.NaN),
-                new HydrodynamicCondition(2.6, (Probability)1.00E-02, double.NaN, double.NaN),
-                new HydrodynamicCondition(2.9, (Probability)3.33E-03, double.NaN, double.NaN),
-                new HydrodynamicCondition(3.2, (Probability)1.00E-03, double.NaN, double.NaN),
-                new HydrodynamicCondition(3.5, (Probability)3.33E-04, double.NaN, double.NaN),
-                new HydrodynamicCondition(3.8, (Probability)1.00E-04, double.NaN, double.NaN)
+                new HydrodynamicCondition(2.3, (Probability)3.33E-02),
+                new HydrodynamicCondition(2.6,(Probability) 1.00E-02),
+                new HydrodynamicCondition(2.9, (Probability)3.33E-03),
+                new HydrodynamicCondition(3.2,(Probability) 1.00E-03),
+                new HydrodynamicCondition(3.5,(Probability) 3.33E-04),
+                new HydrodynamicCondition(3.8,(Probability) 1.00E-04)
             };
 
             var criticalPathElements = new[]
@@ -61,12 +61,12 @@ namespace Forest.Calculators.Test
         {
             var hydraulicConditions = new[]
             {
-                new HydrodynamicCondition(2.3, (Probability)3.33E-02, double.NaN, double.NaN),
-                new HydrodynamicCondition(2.6, (Probability)1.00E-02, double.NaN, double.NaN),
-                new HydrodynamicCondition(2.9, (Probability)3.33E-03, double.NaN, double.NaN),
-                new HydrodynamicCondition(3.2, (Probability)1.00E-03, double.NaN, double.NaN),
-                new HydrodynamicCondition(3.5, (Probability)3.33E-04, double.NaN, double.NaN),
-                new HydrodynamicCondition(3.8, (Probability)1.00E-04, double.NaN, double.NaN)
+                new HydrodynamicCondition(2.3,(Probability) 3.33E-02),
+                new HydrodynamicCondition(2.6,(Probability) 1.00E-02),
+                new HydrodynamicCondition(2.9,(Probability) 3.33E-03),
+                new HydrodynamicCondition(3.2,(Probability) 1.00E-03),
+                new HydrodynamicCondition(3.5,(Probability) 3.33E-04),
+                new HydrodynamicCondition(3.8,(Probability) 1.00E-04)
             };
 
             var criticalPathElements = new[]
@@ -95,12 +95,12 @@ namespace Forest.Calculators.Test
         {
             var hydraulicConditions = new[]
             {
-                new HydrodynamicCondition(2.3, (Probability)3.33E-02, double.NaN, double.NaN),
-                new HydrodynamicCondition(2.6, (Probability)1.00E-02, double.NaN, double.NaN),
-                new HydrodynamicCondition(2.9, (Probability)3.33E-03, double.NaN, double.NaN),
-                new HydrodynamicCondition(3.2, (Probability)1.00E-03, double.NaN, double.NaN),
-                new HydrodynamicCondition(3.5, (Probability)3.33E-04, double.NaN, double.NaN),
-                new HydrodynamicCondition(3.8, (Probability)1.00E-04, double.NaN, double.NaN)
+                new HydrodynamicCondition(2.3,(Probability) 3.33E-02),
+                new HydrodynamicCondition(2.6,(Probability) 1.00E-02),
+                new HydrodynamicCondition(2.9,(Probability) 3.33E-03),
+                new HydrodynamicCondition(3.2,(Probability) 1.00E-03),
+                new HydrodynamicCondition(3.5,(Probability) 3.33E-04),
+                new HydrodynamicCondition(3.8,(Probability) 1.00E-04)
             };
 
             var criticalPathElements = new[]
