@@ -7,12 +7,12 @@ namespace Forest.Calculators
 {
     public static class EstimationFragilityCurveCalculator
     {
-        public static Probability CalculateProbability(HydrodynamicCondition[] conditions, CriticalPathElement[] treeEventCurves)
+        public static Probability CalculateProbability(FragilityCurveElement[] conditions, CriticalPathElement[] treeEventCurves)
         {
             return CalculateProbability(CalculateCombinedProbabilityFragilityCurve(conditions, treeEventCurves));
         }
 
-        public static FragilityCurve CalculateCombinedProbabilityFragilityCurve(HydrodynamicCondition[] conditions,
+        public static FragilityCurve CalculateCombinedProbabilityFragilityCurve(FragilityCurveElement[] conditions,
             CriticalPathElement[] treeEventCurves)
         {
             var curve = new FragilityCurve();
@@ -38,7 +38,7 @@ namespace Forest.Calculators
             return curve;
         }
 
-        public static FragilityCurve CalculateCombinedFragilityCurve(HydrodynamicCondition[] conditions,
+        public static FragilityCurve CalculateCombinedFragilityCurve(FragilityCurveElement[] conditions,
             CriticalPathElement[] criticalPathElements)
         {
             var curve = new FragilityCurve();

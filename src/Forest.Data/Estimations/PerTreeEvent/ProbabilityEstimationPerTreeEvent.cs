@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using Forest.Data.Hydrodynamics;
+using Forest.Data.Probabilities;
 using Forest.Data.Tree;
 
 namespace Forest.Data.Estimations.PerTreeEvent
@@ -8,13 +8,13 @@ namespace Forest.Data.Estimations.PerTreeEvent
     {
         public ProbabilityEstimationPerTreeEvent()
         {
-            HydrodynamicConditions = new ObservableCollection<HydrodynamicCondition>();
+            HydrodynamicConditions = new ObservableCollection<FragilityCurveElement>();
             Estimates = new ObservableCollection<TreeEventProbabilityEstimate>();
         }
 
         public EventTree EventTree { get; set; }
 
-        public ObservableCollection<HydrodynamicCondition> HydrodynamicConditions { get; }
+        public ObservableCollection<FragilityCurveElement> HydrodynamicConditions { get; }
 
         public ObservableCollection<TreeEventProbabilityEstimate> Estimates { get; }
     }

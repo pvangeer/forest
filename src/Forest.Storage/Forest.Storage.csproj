@@ -20,7 +20,6 @@
     <Compile Include="ColorConversionExtensions.cs" />
     <Compile Include="Create\EventTreeCreateExtensions.cs" />
     <Compile Include="Create\FragilityCurveElementCreateExtensions.cs" />
-    <Compile Include="Create\HydraulicConditionCreateExtensions.cs" />
     <Compile Include="Create\PersonCreateExtensions.cs" />
     <Compile Include="Create\ForestAnalysisCreateExtensions.cs" />
     <Compile Include="Create\ProbabilityEstimationPerTreeEventCreateExtensions.cs" />
@@ -41,7 +40,6 @@
     <Compile Include="DoubleConversionExtensions.cs" />
     <Compile Include="Read\EventTreeEntitiesReadExtensions.cs" />
     <Compile Include="Read\FragilityCurveElementEntityReadExtensions.cs" />
-    <Compile Include="Read\HydraulicConditionEntityReadExtensions.cs" />
     <Compile Include="Read\PersonEntityReadExtensions.cs" />
     <Compile Include="Read\ReadConversionCollector.cs" />
     <Compile Include="Read\ForestAnalysisXmlEntityReadExtensions.cs" />
@@ -59,7 +57,6 @@
     <Compile Include="VersionInfo.cs" />
     <Compile Include="XmlEntities\EventTreeXmlEntity.cs" />
     <Compile Include="XmlEntities\FragilityCurveElementXmlEntity.cs" />
-    <Compile Include="XmlEntities\HydrodynamicConditionXmlEntity.cs" />
     <Compile Include="XmlEntities\PersonXmlEntity.cs" />
     <Compile Include="XmlEntities\ForestAnalysisXmlEntity.cs" />
     <Compile Include="XmlEntities\ProbabilityEstimationPerTreeEventXmlEntity.cs" />

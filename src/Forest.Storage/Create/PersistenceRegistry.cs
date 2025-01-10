@@ -17,9 +17,6 @@ namespace Forest.Storage.Create
         private readonly Dictionary<FragilityCurveElement, FragilityCurveElementXmlEntity> fragilityCurveElements =
             CreateDictionary<FragilityCurveElement, FragilityCurveElementXmlEntity>();
 
-        private readonly Dictionary<HydrodynamicCondition, HydrodynamicConditionXmlEntity> hydraulicConditions =
-            CreateDictionary<HydrodynamicCondition, HydrodynamicConditionXmlEntity>();
-
         private readonly Dictionary<Person, PersonXmlEntity> persons = CreateDictionary<Person, PersonXmlEntity>();
         private readonly Dictionary<ForestAnalysis, ProjectXmlEntity> projects = CreateDictionary<ForestAnalysis, ProjectXmlEntity>();
         private readonly Dictionary<TreeEvent, TreeEventXmlEntity> treeEvents = CreateDictionary<TreeEvent, TreeEventXmlEntity>();
@@ -34,11 +31,6 @@ namespace Forest.Storage.Create
         internal void Register(Person model, PersonXmlEntity entity)
         {
             Register(persons, model, entity);
-        }
-
-        internal void Register(HydrodynamicCondition model, HydrodynamicConditionXmlEntity entity)
-        {
-            Register(hydraulicConditions, model, entity);
         }
 
         internal void Register(FragilityCurveElement model, FragilityCurveElementXmlEntity entity)
@@ -70,11 +62,6 @@ namespace Forest.Storage.Create
             return ContainsValue(persons, model);
         }
 
-        internal bool Contains(HydrodynamicCondition model)
-        {
-            return ContainsValue(hydraulicConditions, model);
-        }
-
         internal bool Contains(FragilityCurveElement model)
         {
             return ContainsValue(fragilityCurveElements, model);
@@ -102,11 +89,6 @@ namespace Forest.Storage.Create
         public PersonXmlEntity Get(Person model)
         {
             return Get(persons, model);
-        }
-
-        public HydrodynamicConditionXmlEntity Get(HydrodynamicCondition model)
-        {
-            return Get(hydraulicConditions, model);
         }
 
         public FragilityCurveElementXmlEntity Get(FragilityCurveElement model)

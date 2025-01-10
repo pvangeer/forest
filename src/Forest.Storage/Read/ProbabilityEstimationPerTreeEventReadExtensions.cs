@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Forest.Data.Estimations.PerTreeEvent;
+using Forest.Data.Hydrodynamics;
+using Forest.Data.Probabilities;
 using Forest.Storage.XmlEntities;
 
 namespace Forest.Storage.Read
@@ -24,7 +26,7 @@ namespace Forest.Storage.Read
             var hydrodynamicCondition =
                 entity.HydrodynamicConditions.OrderBy(e => e.Order).Select(e => e.Read(collector));
             foreach (var condition in hydrodynamicCondition)
-                estimation.HydrodynamicConditions.Add(condition);
+                estimation.HydrodynamicConditions.Add(new FragilityCurveElement(condition.WaterLevel, condition.Probability));
 
             var estimationsPerTreeEvent =
                 entity.Estimations.OrderBy(e => e.Order).Select(e => e.Read(collector));

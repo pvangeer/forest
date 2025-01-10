@@ -16,9 +16,6 @@ namespace Forest.Storage.Read
         private readonly Dictionary<FragilityCurveElementXmlEntity, FragilityCurveElement> fragilityCurveElements =
             CreateDictionary<FragilityCurveElementXmlEntity, FragilityCurveElement>();
 
-        private readonly Dictionary<HydrodynamicConditionXmlEntity, HydrodynamicCondition> hydraulicConditions =
-            CreateDictionary<HydrodynamicConditionXmlEntity, HydrodynamicCondition>();
-
         private readonly Dictionary<PersonXmlEntity, Person> persons = CreateDictionary<PersonXmlEntity, Person>();
         private readonly Dictionary<TreeEventXmlEntity, TreeEvent> treeEvents = CreateDictionary<TreeEventXmlEntity, TreeEvent>();
 
@@ -26,11 +23,6 @@ namespace Forest.Storage.Read
         internal void Collect(PersonXmlEntity entity, Person model)
         {
             Collect(persons, entity, model);
-        }
-
-        internal void Collect(HydrodynamicConditionXmlEntity entity, HydrodynamicCondition model)
-        {
-            Collect(hydraulicConditions, entity, model);
         }
 
         internal void Collect(FragilityCurveElementXmlEntity entity, FragilityCurveElement model)
@@ -53,11 +45,6 @@ namespace Forest.Storage.Read
             return Contains(persons, entity);
         }
 
-        internal bool Contains(HydrodynamicConditionXmlEntity entity)
-        {
-            return Contains(hydraulicConditions, entity);
-        }
-
         internal bool Contains(FragilityCurveElementXmlEntity entity)
         {
             return Contains(fragilityCurveElements, entity);
@@ -76,11 +63,6 @@ namespace Forest.Storage.Read
         internal Person Get(PersonXmlEntity entity)
         {
             return Get(persons, entity);
-        }
-
-        internal HydrodynamicCondition Get(HydrodynamicConditionXmlEntity entity)
-        {
-            return Get(hydraulicConditions, entity);
         }
 
         internal FragilityCurveElement Get(FragilityCurveElementXmlEntity entity)
