@@ -5,12 +5,13 @@ using Forest.Calculators;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Data.Probabilities;
 using Forest.Data.Tree;
-using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent;
+using Forest.Visualization.ViewModels;
 
 namespace Forest.Visualization.Converters
 {
     public class CriticalPathConverter
     {
+        // TODO: This needs to be refactored. Part of this code should be done by the calculator.
         protected static bool ExtractInput(object[] values,
             out FragilityCurveElement[] hydraulicConditions,
             out TreeEventProbabilityEstimate[] estimations,
@@ -25,7 +26,7 @@ namespace Forest.Visualization.Converters
             if (values.Length != 3)
                 return true;
 
-            var hydrodynamicConditionViewModels = values[1] as ObservableCollection<HydrodynamicConditionViewModel>;
+            var hydrodynamicConditionViewModels = values[1] as ObservableCollection<FragilityCurveElementViewModel>;
             if (values[2] is ObservableCollection<TreeEventProbabilityEstimate> estimatesCollection)
                 estimations = estimatesCollection.ToArray();
 
@@ -33,11 +34,9 @@ namespace Forest.Visualization.Converters
                 hydrodynamicConditionViewModels == null || estimations == null)
                 return true;
 
-            // TODO: Temp, since this needs to be refactored
-            return false;
             var orderedWaterLevels = hydrodynamicConditionViewModels.Select(h => h.WaterLevel).Distinct().ToArray();
 
-            hydraulicConditions = hydrodynamicConditionViewModels.Select(vm => vm.HydrodynamicCondition)
+            hydraulicConditions = hydrodynamicConditionViewModels.Select(vm => vm.FragilityCurveElement)
                 .OrderBy(c => c.WaterLevel)
                 .ToArray();
             var allElements = new List<CriticalPathElement>();

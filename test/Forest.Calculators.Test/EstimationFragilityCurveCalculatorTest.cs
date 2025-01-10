@@ -1,5 +1,4 @@
 ﻿using System;
-using Forest.Data.Hydrodynamics;
 using Forest.Data.Probabilities;
 using Forest.Data.Tree;
 using NUnit.Framework;
@@ -20,12 +19,12 @@ namespace Forest.Calculators.Test
         {
             var hydraulicConditions = new[]
             {
-                new HydrodynamicCondition(2.3, (Probability)3.33E-02),
-                new HydrodynamicCondition(2.6,(Probability) 1.00E-02),
-                new HydrodynamicCondition(2.9, (Probability)3.33E-03),
-                new HydrodynamicCondition(3.2,(Probability) 1.00E-03),
-                new HydrodynamicCondition(3.5,(Probability) 3.33E-04),
-                new HydrodynamicCondition(3.8,(Probability) 1.00E-04)
+                new FragilityCurveElement(2.3, (Probability)3.33E-02),
+                new FragilityCurveElement(2.6,(Probability) 1.00E-02),
+                new FragilityCurveElement(2.9, (Probability)3.33E-03),
+                new FragilityCurveElement(3.2,(Probability) 1.00E-03),
+                new FragilityCurveElement(3.5,(Probability) 3.33E-04),
+                new FragilityCurveElement(3.8,(Probability) 1.00E-04)
             };
 
             var criticalPathElements = new[]
@@ -61,12 +60,12 @@ namespace Forest.Calculators.Test
         {
             var hydraulicConditions = new[]
             {
-                new HydrodynamicCondition(2.3,(Probability) 3.33E-02),
-                new HydrodynamicCondition(2.6,(Probability) 1.00E-02),
-                new HydrodynamicCondition(2.9,(Probability) 3.33E-03),
-                new HydrodynamicCondition(3.2,(Probability) 1.00E-03),
-                new HydrodynamicCondition(3.5,(Probability) 3.33E-04),
-                new HydrodynamicCondition(3.8,(Probability) 1.00E-04)
+                new FragilityCurveElement(2.3,(Probability) 3.33E-02),
+                new FragilityCurveElement(2.6,(Probability) 1.00E-02),
+                new FragilityCurveElement(2.9,(Probability) 3.33E-03),
+                new FragilityCurveElement(3.2,(Probability) 1.00E-03),
+                new FragilityCurveElement(3.5,(Probability) 3.33E-04),
+                new FragilityCurveElement(3.8,(Probability) 1.00E-04)
             };
 
             var criticalPathElements = new[]
@@ -95,12 +94,12 @@ namespace Forest.Calculators.Test
         {
             var hydraulicConditions = new[]
             {
-                new HydrodynamicCondition(2.3,(Probability) 3.33E-02),
-                new HydrodynamicCondition(2.6,(Probability) 1.00E-02),
-                new HydrodynamicCondition(2.9,(Probability) 3.33E-03),
-                new HydrodynamicCondition(3.2,(Probability) 1.00E-03),
-                new HydrodynamicCondition(3.5,(Probability) 3.33E-04),
-                new HydrodynamicCondition(3.8,(Probability) 1.00E-04)
+                new FragilityCurveElement(2.3,(Probability) 3.33E-02),
+                new FragilityCurveElement(2.6,(Probability) 1.00E-02),
+                new FragilityCurveElement(2.9,(Probability) 3.33E-03),
+                new FragilityCurveElement(3.2,(Probability) 1.00E-03),
+                new FragilityCurveElement(3.5,(Probability) 3.33E-04),
+                new FragilityCurveElement(3.8,(Probability) 1.00E-04)
             };
 
             var criticalPathElements = new[]

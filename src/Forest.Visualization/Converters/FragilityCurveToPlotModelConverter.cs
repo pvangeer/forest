@@ -16,7 +16,7 @@ namespace Forest.Visualization.Converters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is ObservableCollection<HydrodynamicConditionViewModel> conditions))
+            if (!(value is ObservableCollection<FragilityCurveElementViewModel> conditions))
                 return null;
 
             return CreatePlotModel(conditions);

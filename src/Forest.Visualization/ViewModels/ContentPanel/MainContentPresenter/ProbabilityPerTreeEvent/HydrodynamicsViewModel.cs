@@ -13,26 +13,26 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Prob
         public HydrodynamicsViewModel(ProbabilityEstimationPerTreeEvent probabilityEstimationPerTreeEvent)
         {
             estimationObject = probabilityEstimationPerTreeEvent;
-            Hydrodynamics = new ObservableCollection<HydrodynamicConditionViewModel>();
+            Hydrodynamics = new ObservableCollection<FragilityCurveElementViewModel>();
             foreach (var condition in probabilityEstimationPerTreeEvent.HydrodynamicConditions)
-                Hydrodynamics.Add(new HydrodynamicConditionViewModel(condition));
+                Hydrodynamics.Add(new FragilityCurveElementViewModel(condition));
 
             Hydrodynamics.CollectionChanged += HydrodynamicsViewModelCollectionChanged;
         }
 
-        public ObservableCollection<HydrodynamicConditionViewModel> Hydrodynamics { get; }
+        public ObservableCollection<FragilityCurveElementViewModel> Hydrodynamics { get; }
 
         private void HydrodynamicsViewModelCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    foreach (var hydrodynamicConditionViewModel in e.NewItems.OfType<HydrodynamicConditionViewModel>())
-                        estimationObject.AddHydrodynamicCondition(hydrodynamicConditionViewModel.HydrodynamicCondition);
+                    foreach (var hydrodynamicConditionViewModel in e.NewItems.OfType<FragilityCurveElementViewModel>())
+                        estimationObject.AddHydrodynamicCondition(hydrodynamicConditionViewModel.FragilityCurveElement);
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    foreach (var hydrodynamicConditionsViewModel in e.OldItems.OfType<HydrodynamicConditionViewModel>())
-                        estimationObject.AddHydrodynamicCondition(hydrodynamicConditionsViewModel.HydrodynamicCondition);
+                    foreach (var hydrodynamicConditionsViewModel in e.OldItems.OfType<FragilityCurveElementViewModel>())
+                        estimationObject.AddHydrodynamicCondition(hydrodynamicConditionsViewModel.FragilityCurveElement);
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     estimationObject.HydrodynamicConditions.Clear();

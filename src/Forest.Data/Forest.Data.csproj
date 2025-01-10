@@ -23,7 +23,6 @@
     <Compile Include="ForestAnalysisFactory.cs" />
     <Compile Include="Probabilities\FragilityCurve.cs" />
     <Compile Include="Probabilities\FragilityCurveElement.cs" />
-    <Compile Include="Hydrodynamics\HydrodynamicCondition.cs" />
     <Compile Include="ForestAnalysis.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\AnalysisManipulationService.cs" />

@@ -7,6 +7,11 @@ namespace Forest.Visualization.ViewModels
 {
     public class FragilityCurveElementViewModel : INotifyPropertyChanged
     {
+        public FragilityCurveElementViewModel() : this(new FragilityCurveElement(0, (Probability)(1 / 1000.0)))
+        {
+
+        }
+
         public FragilityCurveElementViewModel(FragilityCurveElement element)
         {
             FragilityCurveElement = element;
