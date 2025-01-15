@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using Forest.Data.Probabilities;
 using Forest.Data.Properties;
 
-namespace Forest.Visualization.ViewModels
+namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent
 {
     public class FragilityCurveElementViewModel : INotifyPropertyChanged
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Forest.Data.Estimations.PerTreeEvent;
 
-namespace Forest.Visualization.ViewModels
+namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent
 {
     public class ProbabilitySpecificationViewModelBase : ViewModelBase
     {

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Forest.Data.Estimations.PerTreeEvent;
 using Forest.Visualization.ViewModels;
+using Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent;
 
 namespace Forest.Visualization.DataTemplates.MainContentPresenter.ProbabilityEstimationPerTreeEvent
 {
