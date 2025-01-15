@@ -17,15 +17,9 @@ namespace Forest.Storage.Create
             CreateDictionary<FragilityCurveElement, FragilityCurveElementXmlEntity>();
 
         private readonly Dictionary<Person, PersonXmlEntity> persons = CreateDictionary<Person, PersonXmlEntity>();
-        private readonly Dictionary<ForestAnalysis, ProjectXmlEntity> projects = CreateDictionary<ForestAnalysis, ProjectXmlEntity>();
         private readonly Dictionary<TreeEvent, TreeEventXmlEntity> treeEvents = CreateDictionary<TreeEvent, TreeEventXmlEntity>();
 
         #region Register Methods
-
-        internal void Register(ForestAnalysis model, ProjectXmlEntity entity)
-        {
-            Register(projects, model, entity);
-        }
 
         internal void Register(Person model, PersonXmlEntity entity)
         {
@@ -51,11 +45,6 @@ namespace Forest.Storage.Create
 
         #region Contains Methods
 
-        internal bool Contains(ForestAnalysis model)
-        {
-            return ContainsValue(projects, model);
-        }
-
         internal bool Contains(Person model)
         {
             return ContainsValue(persons, model);
@@ -79,11 +68,6 @@ namespace Forest.Storage.Create
         #endregion
 
         #region Get Methods
-
-        public ProjectXmlEntity Get(ForestAnalysis model)
-        {
-            return Get(projects, model);
-        }
 
         public PersonXmlEntity Get(Person model)
         {

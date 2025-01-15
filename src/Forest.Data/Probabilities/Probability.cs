@@ -1,8 +1,8 @@
 ﻿// Copyright (C) Stichting Deltares 2018. All rights reserved.
 //
-// This file is part of AssemblyTool.
+// This file is part of Forest.
 //
-// AssemblyTool is free software: you can redistribute it and/or modify
+// Forest is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
@@ -58,16 +58,16 @@ namespace Forest.Data.Probabilities
         ///     [0-1].
         /// </summary>
         /// <param name="probability">The probability to validate</param>
-        /// <exception cref="AssemblyToolKernelException">Thrown in case <paramref name="probability" /> is NaN</exception>
-        /// <exception cref="AssemblyToolKernelException">Thrown in case <paramref name="probability" /> is smaller than 0</exception>
-        /// <exception cref="AssemblyToolKernelException">Thrown in case <paramref name="probability" /> exceeds 1</exception>
+        /// <exception cref="ProbabilityException">Thrown in case <paramref name="probability" /> is NaN</exception>
+        /// <exception cref="ProbabilityException">Thrown in case <paramref name="probability" /> is smaller than 0</exception>
+        /// <exception cref="ProbabilityException">Thrown in case <paramref name="probability" /> exceeds 1</exception>
         private static void ValidateProbabilityValue(double probability)
         {
             if (!double.IsNaN(probability) && probability < 0)
-                throw new ArgumentException("Probability should not be smaller than 0.");
+                throw new ProbabilityException("Probability should not be smaller than 0.");
 
             if (!double.IsNaN(probability) && probability > 1)
-                throw new ArgumentException("Probability should not be greater than 1.");
+                throw new ProbabilityException("Probability should not be greater than 1.");
         }
 
         public static bool operator ==(Probability left, Probability right)
@@ -212,7 +212,7 @@ namespace Forest.Data.Probabilities
             if (obj is double)
                 return CompareTo((double)obj);
 
-            throw new ArgumentException("Argument must be double or Probability");
+            throw new ProbabilityException("Argument must be double or Probability");
         }
 
         public int CompareTo(Probability other)
