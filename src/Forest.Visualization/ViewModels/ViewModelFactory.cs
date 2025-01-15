@@ -72,7 +72,7 @@ namespace Forest.Visualization.ViewModels
                 case EventTree eventTree:
                     return new EventTreeMainContentViewModel(eventTree, gui);
                 case ProbabilityEstimationPerTreeEvent estimation:
-                    return new ProbabilityPerTreeEventMainContentViewModel(estimation, gui);
+                    return new EstimationPerTreeEventSpecificationViewModel(estimation, gui, this);
                 default:
                     return selection;
             }
@@ -83,15 +83,9 @@ namespace Forest.Visualization.ViewModels
             return treeEvent != null ? new TreeEventViewModel(treeEvent, eventTree, gui) : null;
         }
 
-        public HydrodynamicsViewModel CreateHydrodynamicsViewModel(ProbabilityEstimationPerTreeEvent estimation)
+        public FragilityCurveSpecificationViewModel CreateFragilityCurveSpecificationTypeViewModel(TreeEventProbabilityEstimate estimation)
         {
-            return new HydrodynamicsViewModel(estimation);
-        }
-
-        public FixedFragilityCurveSpecificationViewModel CreateFragilityCurveSpecificationTypeViewModel(TreeEventProbabilityEstimate estimation,
-            ProbabilityEstimationPerTreeEvent parentEstimation)
-        {
-            return new FixedFragilityCurveSpecificationViewModel(estimation, parentEstimation, this);
+            return new FragilityCurveSpecificationViewModel(estimation, this);
         }
 
         public FixedProbabilitySpecificationViewModel CreateFixedProbabilitySpecificationTypeViewModel(TreeEventProbabilityEstimate estimation)

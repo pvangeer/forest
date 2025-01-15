@@ -16,7 +16,7 @@ namespace Forest.Visualization.DataTemplates.MainContentPresenter
             {
                 case EventTreeMainContentViewModel _:
                     return EventTreeDataTemplate;
-                case ProbabilityPerTreeEventMainContentViewModel _:
+                case EstimationPerTreeEventSpecificationViewModel _:
                     return ProbabilityPerTreeEventDataTemplate;
             }
 

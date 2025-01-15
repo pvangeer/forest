@@ -9,7 +9,6 @@ namespace Forest.Storage.XmlEntities
     {
         public ProbabilityEstimationPerTreeEventXmlEntity()
         {
-            HydrodynamicConditions = new Collection<FragilityCurveElementXmlEntity>();
             Estimations = new Collection<TreeEventProbabilityEstimateXmlEntity>();
         }
 
@@ -18,10 +17,6 @@ namespace Forest.Storage.XmlEntities
 
         [XmlAttribute(AttributeName = "eventtreeid")]
         public long EventTreeId { get; set; }
-
-        [XmlArray(ElementName = "hydraulicconditions")]
-        [XmlArrayItem(ElementName = "hydrauliccondition")]
-        public Collection<FragilityCurveElementXmlEntity> HydrodynamicConditions { get; set; }
 
         [XmlArray(ElementName = "estimates")]
         [XmlArrayItem(ElementName = "estimate")]

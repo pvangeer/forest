@@ -8,13 +8,10 @@ namespace Forest.Data.Estimations.PerTreeEvent
     {
         public ProbabilityEstimationPerTreeEvent()
         {
-            HydrodynamicConditions = new ObservableCollection<FragilityCurveElement>();
             Estimates = new ObservableCollection<TreeEventProbabilityEstimate>();
         }
 
         public EventTree EventTree { get; set; }
-
-        public ObservableCollection<FragilityCurveElement> HydrodynamicConditions { get; }
 
         public ObservableCollection<TreeEventProbabilityEstimate> Estimates { get; }
     }

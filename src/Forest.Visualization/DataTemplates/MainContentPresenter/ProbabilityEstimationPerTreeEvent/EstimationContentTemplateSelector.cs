@@ -23,7 +23,7 @@ namespace Forest.Visualization.DataTemplates.MainContentPresenter.ProbabilityEst
                 case ProbabilitySpecificationType.FixedValue:
                     return contentPresenter.Resources["FixedValueEstimationTemplate"] as DataTemplate;
                 case ProbabilitySpecificationType.FixedFrequency:
-                    return contentPresenter.Resources["FixedFragilityCurveEstimationTemplate"] as DataTemplate;
+                    return contentPresenter.Resources["FragilityCurveEstimationTemplate"] as DataTemplate;
                 default:
                     throw new NotImplementedException();
             }

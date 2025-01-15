@@ -8,12 +8,12 @@
         <ResourceDictionary
             Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/EventTree/EventTreeGraphDataTemplate.xaml" />
         <ResourceDictionary
-            Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/ProbabilityPerTreeEventDataTemplate.xaml" />
+            Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/EstimationSpecificationPerTreeEventDataTemplate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <mainContentPresenter:MainContentTemplateSelector x:Key="MainContentTemplateSelector"
                                                       EventTreeDataTemplate="{StaticResource EventTreeGraphDataTemplate}"
-                                                      ProbabilityPerTreeEventDataTemplate="{StaticResource ProbabilityPerTreeEventDataTemplate}" />
+                                                      ProbabilityPerTreeEventDataTemplate="{StaticResource EstimationPerEventTreeDataTemplate}" />
 
     <DataTemplate x:Key="MainContentPresenterDataTemplate"
                   DataType="{x:Type contentPanel:MainContentPresenterViewModel}">

@@ -16,7 +16,6 @@
     <Compile Include="Estimations\PerTreeEvent\ProbabilityEstimationPerTreeEvent.cs" />
     <Compile Include="Estimations\ProbabilityEstimation.cs" />
     <Compile Include="Estimations\PerTreeEvent\TreeEventProbabilityEstimate.cs" />
-    <Compile Include="Estimations\PerTreeEvent\ProbabilityEstimationPerTreeEventExtensions.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Probabilities\ProbabilityException.cs" />
     <Compile Include="Tree\EventTree.cs" />

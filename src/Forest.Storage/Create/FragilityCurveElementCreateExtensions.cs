@@ -17,7 +17,7 @@ namespace Forest.Storage.Create
             var entity = new FragilityCurveElementXmlEntity
             {
                 Probability = model.Probability,
-                WaterLevel = model.WaterLevel
+                WaterLevel = model.WaterLevel,
             };
 
             registry.Register(model, entity);

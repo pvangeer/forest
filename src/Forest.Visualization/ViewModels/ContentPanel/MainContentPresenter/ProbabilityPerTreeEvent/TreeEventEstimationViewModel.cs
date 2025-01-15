@@ -57,7 +57,7 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Prob
                 switch (estimation.ProbabilitySpecificationType)
                 {
                     case ProbabilitySpecificationType.FixedFrequency:
-                        return ViewModelFactory.CreateFragilityCurveSpecificationTypeViewModel(estimation, parentEstimation);
+                        return ViewModelFactory.CreateFragilityCurveSpecificationTypeViewModel(estimation);
                     case ProbabilitySpecificationType.FixedValue:
                         return ViewModelFactory.CreateFixedProbabilitySpecificationTypeViewModel(estimation);
                     default:

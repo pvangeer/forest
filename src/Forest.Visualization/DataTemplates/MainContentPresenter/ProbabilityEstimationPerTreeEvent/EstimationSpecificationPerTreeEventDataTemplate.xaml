@@ -55,7 +55,7 @@
                                         <ResourceDictionary
                                             Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/FixedValueEstimationTemplate.xaml" />
                                         <ResourceDictionary
-                                            Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/FixedFragilityCurveEstimationTemplate.xaml" />
+                                            Source="/Forest.Visualization;component/DataTemplates/MainContentPresenter/ProbabilityEstimationPerTreeEvent/FragilityCurveEstimationTemplate.xaml" />
                                     </ResourceDictionary.MergedDictionaries>
                                 </ResourceDictionary>
                             </ContentPresenter.Resources>

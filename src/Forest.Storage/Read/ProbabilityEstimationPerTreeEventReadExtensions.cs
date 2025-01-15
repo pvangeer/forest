@@ -22,11 +22,6 @@ namespace Forest.Storage.Read
                 Name = entity.Name
             };
 
-            var hydrodynamicCondition =
-                entity.HydrodynamicConditions.OrderBy(e => e.Order).Select(e => e.Read(collector));
-            foreach (var condition in hydrodynamicCondition)
-                estimation.HydrodynamicConditions.Add(new FragilityCurveElement(condition.WaterLevel, condition.Probability));
-
             var estimationsPerTreeEvent =
                 entity.Estimations.OrderBy(e => e.Order).Select(e => e.Read(collector));
             foreach (var estimate in estimationsPerTreeEvent)

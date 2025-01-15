@@ -11,11 +11,10 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Prob
             Estimate.PropertyChanged += EstimationPropertyChanged;
         }
 
+        // TODO: Should not be public!
         public TreeEventProbabilityEstimate Estimate { get; }
 
         public ProbabilitySpecificationType Type => Estimate.ProbabilitySpecificationType;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private void EstimationPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
