@@ -154,41 +154,6 @@
                         Command="{Binding SaveImageCommand}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
-
-            <fluent:RibbonTabItem
-                Header="Kansinschatting"
-                fluent:KeyTip.Keys="S">
-                <fluent:RibbonGroupBox Header="Algemeen"
-                                       CanAddToQuickAccessToolBar="False">
-                    <fluent:ToggleButton
-                        Header="Hydraulische gegevens"
-                        LargeIcon="/Forest.Visualization;component\Resources\hydraulics.png"
-                        Size="Large"
-                        CanAddToQuickAccessToolBar="False"
-                        IsEnabled="False" />
-                    <!--TODO: Make tabcontrol in main page to switch-->
-                </fluent:RibbonGroupBox>
-                <fluent:RibbonGroupBox Header="Overgangskansen"
-                                       CanAddToQuickAccessToolBar="False">
-                    <fluent:ToggleButton
-                        Header="Overgangskansen"
-                        LargeIcon="/Forest.Visualization;component\Resources\estimation.png"
-                        Size="Large"
-                        CanAddToQuickAccessToolBar="False"
-                        IsEnabled="False" />
-                    <!--TODO: Make tabcontrol in main page to switch-->
-                </fluent:RibbonGroupBox>
-                <fluent:RibbonGroupBox Header="Resultaten"
-                                       CanAddToQuickAccessToolBar="False">
-                    <fluent:ToggleButton
-                        Header="Resultaten"
-                        LargeIcon="/Forest.Visualization;component\Resources\results.png"
-                        Size="Large"
-                        CanAddToQuickAccessToolBar="False"
-                        IsEnabled="False" />
-                    <!--TODO: Make tabcontrol in main page to switch-->
-                </fluent:RibbonGroupBox>
-            </fluent:RibbonTabItem>
         </fluent:Ribbon>
     </Grid>
 </UserControl>

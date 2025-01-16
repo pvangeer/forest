@@ -12,21 +12,10 @@ using OxyPlot.Series;
 
 namespace Forest.Visualization.Converters
 {
-    public class HydrodynamicsToPlotModelConverter : FragilityCurveToPlotModelConverter
-    {
-        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (!(value is ObservableCollection<FragilityCurveElementViewModel> conditions))
-                return null;
-
-            return CreatePlotModel(conditions);
-        }
-    }
-
     public class FragilityCurveToPlotModelConverter : IValueConverter
     {
         private NotifyCollectionChangedEventHandler conditionCollectionChangedHandler;
-        private PropertyChangedEventHandler hydraulicConditionPropertyChangedHandler;
+        private PropertyChangedEventHandler fragilityCurveElementPropertyChangedHandler;
 
         public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -66,27 +55,27 @@ namespace Forest.Visualization.Converters
 
             conditionCollectionChangedHandler =
                 (o, e) => ConditionsCollectionChanged(fragilityCurveElementViewModels, plotModel);
-            hydraulicConditionPropertyChangedHandler = (o, e) => HydraulicConditionPropertyChanged(plotModel);
+            fragilityCurveElementPropertyChangedHandler = (o, e) => FragilityCurveElementPropertyChanged(plotModel);
 
             fragilityCurveElementViewModels.CollectionChanged += conditionCollectionChangedHandler;
-            foreach (var condition in fragilityCurveElementViewModels)
-                condition.PropertyChanged += hydraulicConditionPropertyChangedHandler;
+            foreach (var element in fragilityCurveElementViewModels)
+                element.PropertyChanged += fragilityCurveElementPropertyChangedHandler;
 
             return plotModel;
         }
 
-        private void HydraulicConditionPropertyChanged(PlotModel plotModel)
+        private void FragilityCurveElementPropertyChanged(PlotModel plotModel)
         {
             plotModel.InvalidatePlot(true);
         }
 
-        private void ConditionsCollectionChanged<T>(ObservableCollection<T> conditions, PlotModel plotModel)
+        private void ConditionsCollectionChanged<T>(ObservableCollection<T> elements, PlotModel plotModel)
             where T : FragilityCurveElementViewModel
         {
-            foreach (var hydraulicConditionViewModel in conditions)
+            foreach (var element in elements)
             {
-                hydraulicConditionViewModel.PropertyChanged -= hydraulicConditionPropertyChangedHandler;
-                hydraulicConditionViewModel.PropertyChanged += hydraulicConditionPropertyChangedHandler;
+                element.PropertyChanged -= fragilityCurveElementPropertyChangedHandler;
+                element.PropertyChanged += fragilityCurveElementPropertyChangedHandler;
             }
 
             plotModel.InvalidatePlot(true);

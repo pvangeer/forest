@@ -305,16 +305,7 @@
     <Resource Include="Resources\save_regular.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\hydraulics.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\EventTree\add-eventtree.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\estimation.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\results.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\EventTree\remove-eventtree.png" />

@@ -17,7 +17,7 @@ namespace Forest.Calculators.Test
         [Test]
         public void CalculateCombinedProbabilityFragilityCurveTest()
         {
-            var hydraulicConditions = new[]
+            var elements = new[]
             {
                 new FragilityCurveElement(2.3, (Probability)3.33E-02),
                 new FragilityCurveElement(2.6,(Probability) 1.00E-02),
@@ -43,7 +43,7 @@ namespace Forest.Calculators.Test
             };
 
             var interpolatedValues =
-                EstimationFragilityCurveCalculator.CalculateCombinedProbabilityFragilityCurve(hydraulicConditions,
+                EstimationFragilityCurveCalculator.CalculateCombinedProbabilityFragilityCurve(elements,
                     criticalPathElements);
 
             Assert.AreEqual(6, interpolatedValues.Count);
@@ -58,7 +58,7 @@ namespace Forest.Calculators.Test
         [Test]
         public void CalculateProbabilityWorks()
         {
-            var hydraulicConditions = new[]
+            var elements = new[]
             {
                 new FragilityCurveElement(2.3,(Probability) 3.33E-02),
                 new FragilityCurveElement(2.6,(Probability) 1.00E-02),
@@ -84,7 +84,7 @@ namespace Forest.Calculators.Test
             };
 
             var probability =
-                EstimationFragilityCurveCalculator.CalculateProbability(hydraulicConditions, criticalPathElements);
+                EstimationFragilityCurveCalculator.CalculateProbability(elements, criticalPathElements);
 
             Assert.AreEqual(1.48e-4, probability, 1e-6);
         }
@@ -92,7 +92,7 @@ namespace Forest.Calculators.Test
         [Test]
         public void CalculateProbabilityWorksWithPassingElement()
         {
-            var hydraulicConditions = new[]
+            var elements = new[]
             {
                 new FragilityCurveElement(2.3,(Probability) 3.33E-02),
                 new FragilityCurveElement(2.6,(Probability) 1.00E-02),
@@ -118,7 +118,7 @@ namespace Forest.Calculators.Test
             };
 
             var probability =
-                EstimationFragilityCurveCalculator.CalculateProbability(hydraulicConditions, criticalPathElements);
+                EstimationFragilityCurveCalculator.CalculateProbability(elements, criticalPathElements);
 
             Assert.AreEqual(0.0332517, probability, 1e-6);
         }
