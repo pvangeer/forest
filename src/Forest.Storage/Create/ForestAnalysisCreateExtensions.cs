@@ -24,6 +24,7 @@ namespace Forest.Storage.Create
 
             AddEntriesForProbabilityEstimationsPerTreeEvent(forestAnalysis, entity, registry);
 
+            registry.Register(entity);
             return entity;
         }
 

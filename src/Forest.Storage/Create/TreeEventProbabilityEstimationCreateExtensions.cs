@@ -19,6 +19,8 @@ namespace Forest.Storage.Create
 
             AddFragilityCurveElements(entity, model, registry);
 
+            registry.Register(entity);
+
             return entity;
         }
 

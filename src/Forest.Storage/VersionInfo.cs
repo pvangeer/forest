@@ -29,9 +29,10 @@ namespace Forest.Storage
                     // No user principal. Not possible to retrieve the display name of the user.
                 }
 
+                var userName = WindowsIdentity.GetCurrent().Name.Split('\\').Last();
                 return userPrincipal == null
-                    ? $"({WindowsIdentity.GetCurrent().Name.Split('\\').Last()})"
-                    : $"{UserPrincipal.Current.DisplayName} ({WindowsIdentity.GetCurrent().Name.Split('\\').Last()})";
+                    ? $"{userName}"
+                    : $"{UserPrincipal.Current.DisplayName} ({userName})";
             }
         }
 

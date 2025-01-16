@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using Forest.Data.Probabilities;
+﻿using Forest.Data.Probabilities;
 using Forest.Data.Tree;
 
 namespace Forest.Data.Estimations.PerTreeEvent

@@ -20,6 +20,8 @@ namespace Forest.Storage.Create
 
             AddEstimationsToEstimation(entity, model, registry);
 
+            registry.Register(entity);
+
             return entity;
         }
 

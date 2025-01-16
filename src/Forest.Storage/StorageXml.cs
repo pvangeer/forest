@@ -131,7 +131,8 @@ namespace Forest.Storage
 
                 var serializer = new XmlSerializer(typeof(ProjectXmlEntity));
 
-                using (var writer = XmlWriter.Create(filePath))
+                var settings = new XmlWriterSettings { Indent = true };
+                using (var writer = XmlWriter.Create(filePath, settings))
                 {
                     serializer.Serialize(writer, projectXmlEntity);
                 }

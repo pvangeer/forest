@@ -20,7 +20,17 @@ namespace Forest.Visualization.Converters
             if (!(value is string str))
                 return value;
 
-            if (!double.TryParse(str, out var probabilityValue))
+            if (str.Contains("/"))
+            {
+                var parts = str.Split('/');
+                if (parts.Length != 2)
+                    return value;
+                if (!double.TryParse(parts[0],out var firstNumber) || !double.TryParse(parts[1],out var secondNumber))
+                    return value;
+                return (Probability)(firstNumber / secondNumber);
+            }
+
+            if (!double.TryParse(str, NumberStyles.Float, CultureInfo.InvariantCulture, out var probabilityValue))
                 return value;
 
             return (Probability)probabilityValue;

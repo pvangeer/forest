@@ -39,12 +39,11 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Prob
 
         public int ProbabilityEstimationTypeIndex
         {
-            get => ProbabilitySpecificationTypes.Keys.ToList().IndexOf(EstimationSpecification.Type);
+            get => ProbabilitySpecificationTypes.Keys.ToList().IndexOf(estimation.ProbabilitySpecificationType);
             set
             {
-                var selectedType = ProbabilitySpecificationTypes.ElementAt(value).Key;
-                if (EstimationSpecification.Type != selectedType)
-                    EstimationSpecification.Estimate.ChangeProbabilityEstimationType(selectedType);
+                estimation.ProbabilitySpecificationType = ProbabilitySpecificationTypes.ElementAt(value).Key;
+                estimation.OnPropertyChanged(nameof(TreeEventProbabilityEstimate.ProbabilitySpecificationType));
             }
         }
 

@@ -19,7 +19,19 @@ namespace Forest.Storage.Create
         private readonly Dictionary<Person, PersonXmlEntity> persons = CreateDictionary<Person, PersonXmlEntity>();
         private readonly Dictionary<TreeEvent, TreeEventXmlEntity> treeEvents = CreateDictionary<TreeEvent, TreeEventXmlEntity>();
 
+        private int idCount;
+
         #region Register Methods
+
+        public PersistenceRegistry()
+        {
+            Reset();
+        }
+
+        public void Reset()
+        {
+            idCount = 1;
+        }
 
         internal void Register(Person model, PersonXmlEntity entity)
         {
@@ -41,6 +53,11 @@ namespace Forest.Storage.Create
             Register(treeEvents, model, entity);
         }
 
+        internal void Register<TEntity>(TEntity entity) where TEntity : XmlEntityBase
+        {
+            entity.Id = idCount;
+            idCount += 1;
+        }
         #endregion
 
         #region Contains Methods
@@ -106,7 +123,7 @@ namespace Forest.Storage.Create
             return collection.Keys.Contains(model, new ReferenceEqualityComparer<TModel>());
         }
 
-        private void Register<TModel, TEntity>(Dictionary<TModel, TEntity> collection, TModel model, TEntity entity)
+        private void Register<TModel, TEntity>(Dictionary<TModel, TEntity> collection, TModel model, TEntity entity) where TEntity : XmlEntityBase
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -114,6 +131,8 @@ namespace Forest.Storage.Create
                 throw new ArgumentNullException(nameof(model));
 
             collection[model] = entity;
+            entity.Id = idCount;
+            idCount += 1;
         }
 
         private TEntity Get<TModel, TEntity>(Dictionary<TModel, TEntity> collection, TModel model)

@@ -2,24 +2,23 @@
 using System.Collections.Specialized;
 using System.Linq;
 using Forest.Data.Estimations.PerTreeEvent;
+using Forest.Data.Probabilities;
 
 namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.ProbabilityPerTreeEvent
 {
     public class FragilityCurveSpecificationViewModel : ProbabilitySpecificationViewModelBase
     {
-        private readonly ObservableCollection<FragilityCurveElementViewModel> fragilityCurveViewModels;
-
         public FragilityCurveSpecificationViewModel(
             TreeEventProbabilityEstimate estimate,
             ViewModelFactory factory) : base(estimate, factory)
         {
-            fragilityCurveViewModels =
+            FragilityCurve =
                 new ObservableCollection<FragilityCurveElementViewModel>(
                     estimate.FragilityCurve.Select(e => new FragilityCurveElementViewModel(e)));
-            fragilityCurveViewModels.CollectionChanged += FragilityCurveViewModelsCollectionChanged;
+            FragilityCurve.CollectionChanged += FragilityCurveViewModelsCollectionChanged;
         }
 
-        public ObservableCollection<FragilityCurveElementViewModel> FragilityCurve => fragilityCurveViewModels;
+        public ObservableCollection<FragilityCurveElementViewModel> FragilityCurve {get; }
 
         private void FragilityCurveViewModelsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
