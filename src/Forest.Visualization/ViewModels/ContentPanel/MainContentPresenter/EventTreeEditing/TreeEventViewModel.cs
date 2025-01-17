@@ -114,35 +114,29 @@ namespace Forest.Visualization.ViewModels.ContentPanel.MainContentPresenter.Even
         {
             switch (e.PropertyName)
             {
-                case nameof(treeEvent.PassingEvent):
+                case nameof(TreeEvent.PassingEvent):
                     passingEventViewModel = null;
-                    if (PassingEvent == null)
-                        // TODO: Shouldn't this be done by the command?
-                        Select();
                     OnPropertyChanged(nameof(PassingEvent));
                     OnPropertyChanged(nameof(IsEndPointEvent));
                     OnPropertyChanged(nameof(HasTrueEventOnly));
                     OnPropertyChanged(nameof(HasFalseEventOnly));
                     OnPropertyChanged(nameof(HasTwoEvents));
                     break;
-                case nameof(treeEvent.FailingEvent):
+                case nameof(TreeEvent.FailingEvent):
                     failingEventViewModel = null;
-                    if (FailingEvent == null)
-                        // TODO: Shouldn't this be done by the command?
-                        Select();
                     OnPropertyChanged(nameof(FailingEvent));
                     OnPropertyChanged(nameof(IsEndPointEvent));
                     OnPropertyChanged(nameof(HasTrueEventOnly));
                     OnPropertyChanged(nameof(HasFalseEventOnly));
                     OnPropertyChanged(nameof(HasTwoEvents));
                     break;
-                case nameof(treeEvent.Name):
+                case nameof(TreeEvent.Name):
                     OnPropertyChanged(nameof(Name));
                     break;
-                case nameof(treeEvent.Summary):
+                case nameof(TreeEvent.Summary):
                     OnPropertyChanged(nameof(Summary));
                     break;
-                case nameof(treeEvent.Information):
+                case nameof(TreeEvent.Information):
                     OnPropertyChanged(nameof(Information));
                     break;
             }

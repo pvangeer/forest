@@ -40,7 +40,6 @@ namespace Forest.Visualization.ViewModels.ContentPanel.ProjectExplorer
 
         public bool CanOpen => false;
 
-        // TODO: Remove and always open view on selection change.
         public ICommand OpenViewCommand => null;
 
         public ObservableCollection<ContextMenuItemViewModel> ContextMenuItems { get; protected set; }
