@@ -53,6 +53,19 @@
                     </Setter.Value>
                 </Setter>
             </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Image Width="16"
+                                   Height="16"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Source="pack://application:,,,/Forest.Visualization.TreeView;component/Resources/Operations/plus-blue.png" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
         </Style.Triggers>
         <Setter Property="Template">
             <Setter.Value>
@@ -68,6 +81,21 @@
     </Style>
 
     <Style x:Key="RemoveButtonStyle" TargetType="Button">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Image Width="16"
+                                   Height="16"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Source="pack://application:,,,/Forest.Visualization.TreeView;component/Resources/Operations/remove-red.png" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
